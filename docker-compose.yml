@@ -6,6 +6,7 @@ services:
     volumes:
       - ./site:/site:ro
       - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./deploy/lp1-site.inc:/etc/nginx/conf.d/lp1-site.inc:ro
       - /docker/lp-secrets:/etc/nginx/secrets:ro
     labels:
       - traefik.enable=true
@@ -13,3 +14,8 @@ services:
       - traefik.http.routers.lp1stg.entrypoints=websecure
       - traefik.http.routers.lp1stg.tls.certresolver=letsencrypt
       - traefik.http.services.lp1stg.loadbalancer.server.port=80
+      - traefik.http.routers.lp1prod.rule=Host(`refi.excelentfinance.com`)
+      - traefik.http.routers.lp1prod.entrypoints=websecure
+      - traefik.http.routers.lp1prod.tls.certresolver=letsencrypt
+      - traefik.http.routers.lp1prod.service=lp1stg
+      - traefik.http.routers.lp1stg.service=lp1stg
