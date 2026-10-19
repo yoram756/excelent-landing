@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בדיקת מחזור משכנתא ללא עלות | אקסלנט, יורם פלד</title>
+<meta name="description" content="בודקים את ההחזר, המסלולים והאפשרות לשיפור לפי התמונה הכוללת, כולל העלויות. בדיקה ראשונית ללא עלות עם יורם פלד, אקסלנט יועצי משכנתאות ופיננסים.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#601810">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="המשכנתא שלכם עדיין מתאימה לחיים שלכם?">
+<meta property="og:description" content="בדיקה ראשונית ללא עלות. בודקים את התמונה הכוללת, ולפעמים המסקנה היא להשאיר את הקיים.">
+<meta property="og:image" content="assets/yoram/hero.webp">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Secular+One&family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/yoram/hero.webp">
+<style>
+:root{
+  --burg:#601810;--burg-d:#4A120C;--burg-l:#7A2418;
+  --gold:#D8C040;--gold-d:#6E5410;--gold-m:#B89028;
+  --cream:#F6F0E4;--warm:#FFFDF8;--sand:#EDE3D0;
+  --char:#1F2420;--char-2:#454A45;
+  --wa:#0E7A4E;
+  --m:max(16px,min(4vw,56px));
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;color-scheme:light}
+body{margin:0;background:var(--cream);color:var(--char);font-family:"Assistant",system-ui,sans-serif;font-size:18px;line-height:1.7;overflow-x:clip}
+img{display:block;max-inline-size:100%;block-size:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold-m);outline-offset:3px}
+h1,h2,h3{margin:0;font-weight:400;font-family:"Secular One",system-ui,sans-serif;line-height:1.12;text-wrap:balance}
+p{margin:0}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.wrap{max-inline-size:1200px;margin-inline:auto;padding-inline:var(--m)}
+.sec{padding-block:clamp(56px,9vh,104px)}
+.sec h2{font-size:clamp(28px,3.2vw,44px);color:var(--burg)}
+.lede{font-size:clamp(18px,1.5vw,21px);margin-block-start:12px;max-inline-size:74ch;color:var(--char-2)}
+.skip{position:absolute;inset-inline-start:var(--m);inset-block-start:8px;z-index:30;background:var(--char);color:#fff;padding:10px 14px;transform:translateY(-200%)}
+.skip:focus{transform:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-block-size:54px;padding-inline:26px;font-family:inherit;font-weight:800;font-size:18px;text-decoration:none;border:0;cursor:pointer;line-height:1.3;text-align:center}
+.btn-gold{background:var(--gold);color:var(--burg-d)}
+.btn-gold:hover{background:#E6CF55}
+.btn-burg{background:var(--burg);color:var(--cream)}
+.btn-burg:hover{background:var(--burg-l)}
+.btn-line{background:transparent;color:inherit;box-shadow:inset 0 0 0 2px currentColor}
+.btn-wa{background:var(--wa);color:#fff}
+.link{background:none;border:0;padding:0;font:inherit;font-weight:700;text-decoration:underline;text-underline-offset:4px;cursor:pointer;color:inherit;min-block-size:44px}
+
+/* hero */
+.hero{background:var(--burg);color:var(--cream)}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,5vw,72px);align-items:end;padding-block:20px 0}
+.hero .top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.hero .logo{inline-size:150px}
+.hero .call{font-weight:700;font-size:16px;text-decoration:none;min-block-size:44px;display:inline-flex;align-items:center;gap:6px}
+.hero .txt{padding-block:24px clamp(40px,7vh,80px)}
+.hero h1{color:var(--gold);font-size:clamp(36px,4.6vw,66px)}
+.hero .sub{font-size:clamp(18px,1.5vw,21px);margin-block:18px 26px;max-inline-size:44ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.incl{margin-block-start:22px;padding:16px 18px;background:rgba(0,0,0,.18);font-size:16px;line-height:1.6;max-inline-size:52ch}
+.incl b{color:var(--gold)}
+.mini{display:none}
+.portrait{margin:0;position:relative;align-self:stretch;min-block-size:420px}
+.portrait img{position:absolute;inset:0;inline-size:100%;block-size:100%;object-fit:cover;object-position:50% 72%}
+.portrait figcaption{position:absolute;inset-block-end:0;inset-inline:0;padding:40px 18px 14px;background:linear-gradient(to top,rgba(31,20,16,.85),rgba(31,20,16,0));color:#fff;font-size:15px;line-height:1.4}
+.portrait figcaption b{display:block;font-family:"Secular One",sans-serif;font-weight:400;font-size:21px}
+
+/* goal chooser */
+.goals{background:var(--warm)}
+.goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-block-start:26px}
+.gbtn{position:relative;font:inherit;text-align:start;background:var(--cream);border:2px solid transparent;padding:16px 14px 14px;cursor:pointer;min-block-size:96px;display:flex;flex-direction:column;gap:4px;line-height:1.35;color:var(--char)}
+.gbtn b{font-weight:800;font-size:17px}
+.gbtn span{font-size:14px;color:var(--char-2)}
+.gbtn:hover{border-color:var(--sand)}
+.gbtn[aria-pressed="true"]{background:var(--burg);color:var(--cream);border-color:var(--burg)}
+.gbtn[aria-pressed="true"] span{color:#EBDCD0}
+.gbtn .tag{position:absolute;inset-block-start:8px;inset-inline-end:10px;font-size:12px;font-weight:800;background:var(--gold);color:var(--burg-d);padding:1px 8px}
+.goal-note{margin-block-start:14px;font-size:15px;color:var(--char-2);min-block-size:1.7em}
+
+
+/* centered section headings */
+.sec > .wrap > h2,.sec .wrap > h2{text-align:center;margin-inline:auto}
+.sec .wrap > .lede{text-align:center;margin-inline:auto}
+.compare .edu{display:block;inline-size:fit-content;margin-inline:auto}
+.score{justify-content:center}
+.reviews .src{text-align:center}
+.faq .wrap > p:last-child{text-align:center}
+.goal-note{text-align:center}
+.hero .call{white-space:nowrap}
+.lede,.hero .sub,.sec .wrap > h2{text-wrap:pretty}
+@media (max-width:359px){.hero .logo{inline-size:100px}.hero .call{font-size:14px}}
+@media (max-height:520px) and (orientation:landscape){
+  .hero .wrap{padding-block:10px 0;align-items:start}
+  .hero .txt{padding-block:6px 18px}
+  .hero h1{font-size:30px}
+  .hero .sub{font-size:16px;margin-block:8px 12px}
+  .portrait{min-block-size:0}
+  .incl{display:none}
+}
+.rates{list-style:none;margin:26px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.rates li{border:1px solid rgba(216,192,64,.45);padding:16px 14px;text-align:center;display:flex;flex-direction:column;gap:4px}
+.rates b{font-family:"Secular One",sans-serif;font-weight:400;font-size:clamp(30px,3vw,40px);color:var(--gold);line-height:1}
+.rates span{font-size:15px;color:#EBDCD0;line-height:1.35}
+.rates-note{text-align:center;font-size:14px;color:#E3D3C6;margin-block-start:10px}
+.trust{margin-block-start:18px;font-size:15px;font-weight:700;color:var(--gold)}
+.why{margin-block-start:8px;font-size:15px;color:var(--char-2);background:#FBF6E6;padding:8px 12px;border-inline-start:3px solid var(--gold-m)}
+.why span{font-weight:800;color:var(--burg)}
+.need{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-block-start:24px}
+.need > div{background:var(--warm);padding:16px 18px;border-block-start:3px solid var(--gold-m)}
+.need b{display:block;font-weight:800;color:var(--burg);font-size:17px;margin-block-end:4px}
+.need p{font-size:16px;color:var(--char-2)}
+footer img{margin-inline-start:auto}
+/* explain */
+.dims{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-block-start:34px}
+.dims article{border-block-start:3px solid var(--gold-m);padding-block-start:14px}
+.dims h3{font-size:22px;color:var(--char);margin-block-end:6px}
+.dims p{font-size:16px;color:var(--char-2)}
+.notfit{margin-block-start:40px;display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.notfit > div{background:var(--warm);padding:22px 24px}
+.notfit h3{font-size:22px;color:var(--burg);margin-block-end:8px}
+.notfit ul{margin:0;padding-inline-start:20px;display:grid;gap:6px;font-size:16px}
+
+/* compare */
+.compare{background:var(--warm)}
+.edu{display:inline-block;margin-block-start:14px;font-size:14px;font-weight:800;background:var(--sand);padding:4px 10px}
+.tbl-wrap{overflow-x:auto;margin-block-start:26px}
+table{border-collapse:collapse;inline-size:100%;min-inline-size:640px;font-size:16px}
+th,td{padding:14px 12px;text-align:start;border-block-end:1px solid var(--sand);vertical-align:top}
+thead th{font-weight:800;font-size:15px;color:var(--char-2)}
+tbody th{font-weight:800}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.hl td,tr.hl th{background:#FBF6E6}
+.verdict{font-size:15px;color:var(--char-2)}
+.assume{margin-block-start:18px;font-size:14px;color:var(--char-2);max-inline-size:90ch}
+
+/* proof */
+.me{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.me figure{margin:0}
+.me figure img{inline-size:100%;aspect-ratio:4/3;object-fit:cover;object-position:40% 40%}
+.me h2{margin-block-end:12px}
+.me p{margin-block-start:12px;max-inline-size:58ch}
+.maxims{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px}
+.sign{margin-block-start:22px;font-family:"Secular One",sans-serif;font-size:clamp(22px,2vw,28px);color:var(--gold-d)}
+.maxims li{font-family:"Secular One",sans-serif;font-size:22px;color:var(--burg);padding-inline-start:16px;border-inline-start:4px solid var(--gold-m);line-height:1.3}
+.reviews{background:var(--burg);color:var(--cream)}
+.reviews h2{color:var(--gold)}
+.score{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;margin-block-start:14px;font-size:16px;color:#EBDCD0}
+.score b{font-family:"Secular One",sans-serif;font-weight:400;font-size:40px;color:var(--gold);line-height:1}
+.quotes{display:grid;grid-template-columns:repeat(2,1fr);gap:28px 48px;margin-block-start:34px}
+.quotes figure{margin:0;display:flex;flex-direction:column;gap:10px}
+.quotes blockquote{margin:0;font-size:19px;line-height:1.6}
+.quotes blockquote::before{content:"״";display:block;font-family:"Secular One",sans-serif;font-size:48px;line-height:.6;color:var(--gold);margin-block-end:6px}
+.quotes figcaption{font-size:14px;color:#E7D3C8;font-weight:700}
+.reviews .src{margin-block-start:28px;font-size:14px;color:#E3D3C6}
+
+/* service + commercial */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);margin-block-start:32px}
+.split > div{background:var(--warm);padding:24px 26px}
+.split h3{font-size:24px;color:var(--burg);margin-block-end:6px}
+.split .tagline{font-size:15px;font-weight:800;color:var(--gold-d);margin-block-end:10px}
+.split ol,.split ul{margin:0;padding-inline-start:22px;display:grid;gap:8px;font-size:16px}
+.who-does{margin-block-start:28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;font-size:16px}
+.who-does h3{font-size:20px;margin-block-end:6px}
+.who-does ul{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+.money{background:var(--char);color:var(--cream)}
+.money h2{color:var(--gold)}
+.money-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-block-start:30px}
+.money-grid h3{font-size:20px;color:var(--gold);margin-block-end:6px}
+.money-grid p{font-size:16px;color:#DCD6CA}
+
+/* quiz */
+.quiz{background:var(--sand)}
+.qcard{background:var(--warm);padding:clamp(20px,4vw,44px);margin-block-start:26px}
+.prog{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:700;color:var(--char-2)}
+.bar{flex:1;block-size:8px;background:var(--sand);position:relative;overflow:hidden}
+.bar i{position:absolute;inset-block:0;inset-inline-start:0;background:var(--burg);transition:inline-size .2s ease}
+.step{margin-block-start:22px}
+.step h3{font-size:clamp(22px,2.2vw,28px);color:var(--char)}
+.hint{font-size:15px;color:var(--char-2);margin-block-start:6px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-block-start:18px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.opt label{display:flex;align-items:center;gap:10px;min-block-size:52px;padding:10px 14px;background:var(--cream);border:2px solid transparent;cursor:pointer;line-height:1.35}
+.opt label::before{content:"";flex:none;inline-size:18px;block-size:18px;border:2px solid var(--char-2);border-radius:50%}
+.opt input[type=checkbox]+label::before{border-radius:2px}
+.opt input:checked+label{border-color:var(--burg);background:#F7E9E4;font-weight:700}
+.opt input:checked+label::before{background:var(--burg);border-color:var(--burg);box-shadow:inset 0 0 0 3px #F7E9E4}
+.opt input:focus-visible+label{outline:3px solid var(--gold-m);outline-offset:2px}
+.nav{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-block-start:26px}
+.nav .btn{min-inline-size:150px}
+.route{margin-block-start:16px;padding:12px 14px;background:#FBF6E6;border-inline-start:4px solid var(--gold-m);font-size:16px}
+.err{color:#A3261A;font-weight:700;font-size:15px;margin-block-start:10px}
+.sum dl{margin:18px 0 0;display:grid;grid-template-columns:auto 1fr auto;gap:0 14px;font-size:16px}
+.sum dt,.sum dd{padding-block:10px;border-block-end:1px solid var(--sand);margin:0}
+.sum dt{font-weight:700}
+.sum dd.miss{color:#8A6A10;font-weight:700}
+.sum .edit{font-size:15px}
+.sum h4{margin:22px 0 6px;font-size:18px}
+.sum .next{margin-block-start:8px}
+.after{margin-block-start:16px;background:var(--cream);padding:14px 16px;display:grid;gap:8px;font-size:16px}
+.after[hidden],.step[hidden]{display:none}
+.copy{font:inherit;font-weight:700;background:none;border:1px solid var(--burg);color:var(--burg);min-block-size:44px;padding-inline:12px;cursor:pointer}
+.privacy{font-size:14px;color:var(--char-2);margin-block-start:14px}
+.is-hidden{display:none!important}
+.bar[data-progress="0"] i{inline-size:0%}
+.bar[data-progress="8"] i{inline-size:8%}
+.bar[data-progress="17"] i{inline-size:17%}
+.bar[data-progress="25"] i{inline-size:25%}
+.bar[data-progress="33"] i{inline-size:33%}
+.bar[data-progress="42"] i{inline-size:42%}
+.bar[data-progress="50"] i{inline-size:50%}
+.bar[data-progress="58"] i{inline-size:58%}
+.bar[data-progress="67"] i{inline-size:67%}
+.bar[data-progress="75"] i{inline-size:75%}
+.bar[data-progress="83"] i{inline-size:83%}
+.bar[data-progress="92"] i{inline-size:92%}
+.bar[data-progress="100"] i{inline-size:100%}
+.step fieldset{border:0;margin:0;padding:0}
+.step legend{padding:0}
+.tag{font-style:normal}
+.faq-cta{margin-block-start:32px}
+.footer-note{margin-block-start:12px}
+.money-option{margin-block-start:18px}
+.send-wa{margin-block-start:22px}
+.copy-buffer{position:fixed;inset-block-start:0;inset-inline-start:0;inline-size:1px;block-size:1px;opacity:0}
+.lead-form{margin-block-start:30px;padding:clamp(18px,3vw,28px);background:var(--warm);border:1px solid var(--sand);max-inline-size:760px}
+.lead-form h4{margin:0 0 6px;font-size:22px;color:var(--burg)}
+.lead-form .form-intro{margin-block-end:18px;color:var(--char-2);font-size:16px}
+.lead-form .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lead-form .field{display:grid;gap:5px}
+.lead-form label{font-weight:700}
+.lead-form input[type="text"],.lead-form input[type="tel"]{min-block-size:50px;padding:10px 12px;border:1px solid #777;background:#fff;font:inherit;color:var(--char);inline-size:100%}
+.lead-form input[type="checkbox"]{inline-size:20px;block-size:20px;flex:none;accent-color:var(--burg)}
+.lead-form .consent{display:flex;align-items:flex-start;gap:10px;margin-block-start:14px;line-height:1.45}
+.lead-form .consent label{font-weight:600}
+.lead-form .field-error{min-block-size:1.35em;color:#8A1C12;font-size:14px}
+.lead-form .form-status{margin-block-start:12px;font-weight:700}
+.lead-form .form-status[data-state="error"]{color:#8A1C12}
+.lead-form .form-status[data-state="success"]{color:#17643A}
+.lead-form .submit-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-block-start:16px}
+.lead-form button[disabled]{opacity:.65;cursor:wait}
+.lead-form .hp-field{position:absolute;inline-size:1px;block-size:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.lead-form .form-privacy{margin-block-start:12px;font-size:14px;color:var(--char-2)}
+
+/* faq */
+.faq-list{margin-block-start:26px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;align-items:start}
+.faq-list details{margin:0}
+.faq details{background:var(--warm);margin-block-end:8px}
+.faq summary{min-block-size:64px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-inline:20px;font-weight:700;cursor:pointer;list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:26px;font-weight:400;color:var(--burg);flex:none}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 20px 20px;max-inline-size:62ch;font-size:17px}
+
+footer{background:var(--burg-d);color:var(--cream);padding-block:44px 110px;font-size:15px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:end}
+footer img{inline-size:140px}
+footer .small{color:#E3D3C6;line-height:1.7}
+
+.sticky{position:fixed;inset-inline:0;inset-block-end:0;z-index:20;display:none;padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));background:var(--cream);transition:translate .2s ease}
+.sticky .btn{inline-size:100%}
+.sticky.off{translate:0 110%}
+
+@media (prefers-reduced-motion:no-preference){
+  .hero .txt > *{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  .hero .txt > *:nth-child(2){animation-delay:.06s}.hero .txt > *:nth-child(3){animation-delay:.12s}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@keyframes rise{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+
+@media (max-width:1000px){
+  .dims,.money-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .lead-form .form-grid{grid-template-columns:1fr}
+  .hero .wrap{grid-template-columns:1fr;gap:0}
+  .hero .logo{inline-size:120px}
+  .hero .txt{padding-block:14px 26px}
+  .hero h1{font-size:clamp(32px,9vw,44px)}
+  .hero .sub{margin-block:12px 18px}
+  .portrait{display:none}
+  .mini{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;margin-block-start:18px;padding-block:16px;border-block:1px solid rgba(216,192,64,.3)}
+  .mini img{inline-size:96px;block-size:96px;border-radius:50%;object-fit:cover;padding:3px;background:var(--burg);box-shadow:0 0 0 2px var(--gold)}
+  .mini p{display:flex;flex-direction:column;gap:2px;line-height:1.25}
+  .mini b{font-weight:800;font-size:19px;color:var(--cream)}
+  .mini span{font-size:14px;color:#E3D0C4}
+  .need{grid-template-columns:1fr}
+  .faq-list{grid-template-columns:1fr}
+  .hero .txt{padding-block-end:32px}
+  .incl{font-size:15px}
+  .goal-grid{grid-template-columns:1fr 1fr}
+  .dims,.notfit,.split,.who-does,.money-grid,.quotes,.me{grid-template-columns:1fr}
+  .rates{grid-template-columns:1fr 1fr}
+  .sum dl{grid-template-columns:1fr auto}
+  .sum dd:not(.edit-cell){grid-column:1}
+  .sticky{display:block}
+  body{padding-block-end:76px}
+  footer{padding-block-end:40px}
+}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "איך יודעים אם כדאי למחזר?", "acceptedAnswer": {"@type": "Answer", "text": "משווים את סך התשלומים החזוי בין הקיים לחדש, כולל עמלת פירעון מוקדם ועלויות המעבר, ובודקים שההחזר מתאים להכנסה. אם ההבדל קטן או שלילי, ממליצים להשאיר."}}, {"@type": "Question", "name": "מה עם עמלת הפירעון המוקדם?", "acceptedAnswer": {"@type": "Answer", "text": "הבנק מחויב להציג את הסכום הכולל לפירעון, כולל עמלות. העמלה מופיעה בדוח יתרות לסילוק, ואנחנו מכניסים אותה לחישוב לפני כל המלצה."}}, {"@type": "Question", "name": "למה לא לפנות ישר לבנק שלי?", "acceptedAnswer": {"@type": "Answer", "text": "אפשר. הבנק מציע את המסלולים שלו. אנחנו בודקים את התמונה הכוללת ומשווים בין כמה הצעות, ואומרים גם כשעדיף לא לגעת."}}, {"@type": "Question", "name": "אילו מסמכים צריך?", "acceptedAnswer": {"@type": "Answer", "text": "בשלב הראשון מספיק דוח יתרות לסילוק, מאתר הבנק או מהאפליקציה. אם תחליטו להמשיך, נגיד מה עוד הבנק יבקש."}}, {"@type": "Question", "name": "כמה עולה השירות?", "acceptedAnswer": {"@type": "Answer", "text": "הבדיקה הראשונית ללא עלות. ליווי מלא כרוך בתשלום לפי היקף ומורכבות התיק, ואת העלות אנחנו מציגים מראש, לפני כל התחייבות."}}, {"@type": "Question", "name": "מי מטפל בי?", "acceptedAnswer": {"@type": "Answer", "text": "יורם פלד, בעלים ומנהל אקסלנט, יחד עם הצוות. בשעות הפעילות, ימים א' עד ה'."}}]}</script>
+</head>
+<body>
+<a class="skip" href="#check">דילוג לבדיקה</a>
+<main>
+
+<section class="hero" aria-labelledby="h1">
+  <div class="wrap">
+    <div class="top">
+      <a class="call" href="https://wa.me/972552783459" target="_blank" rel="noopener" data-ev="wa_header">וואטסאפ <span class="ltr">055-2783459</span></a>
+      <img class="logo" src="assets/official/logo_dark_noslogan.png" alt="אקסלנט יועצי משכנתאות ופיננסים" width="695" height="305">
+    </div>
+    <div class="txt">
+      <h1 id="h1">המשכנתא שלכם עדיין מתאימה לחיים שלכם?</h1>
+      <div class="mini"><img src="assets/yoram/avatar.webp" alt="" width="96" height="96"><p><b>יורם פלד</b><span>בעלים ומנהל, אקסלנט</span></p></div>
+      <p class="sub">15 שנה שאנחנו באקסלנט מוצאים במשכנתאות את מה שהבנק לא מספר לכם. בודקים את ההחזר, המסלולים והעלויות לפי התמונה הכוללת, ואומרים לכם בדיוק מה כדאי. גם כשהתשובה היא להשאיר.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="#check" data-ev="hero_cta">לבדיקה ראשונית ללא עלות</a>
+        <button type="button" class="link" id="noDoc" data-ev="hero_nodoc">אין לי דוח משכנתא? עזרו לי להתחיל</button>
+      </div>
+      <p class="trust">ציון מושלם 5.0 בגוגל, 9.89 במידרג, מלווים משכנתאות מאז 2011</p>
+      <p class="incl"><b>מה כוללת הבדיקה הראשונית:</b> עוברים על דוח יתרות לסילוק ועל המטרה שלכם, ואומרים אם יש טעם לבדוק לעומק או שעדיף להשאיר. <b>מה יידרש להמשך:</b> אם כדאי להתקדם, תכנון חלופות ובחינת הצעות נעשים בליווי בתשלום, שמוצג לכם מראש.</p>
+    </div>
+    <figure class="portrait">
+      <img src="assets/yoram/hero.webp" alt="יורם פלד במשרד, מדבר בטלפון ומחייך" width="900" height="1200" fetchpriority="high">
+      <figcaption><b>יורם פלד</b>בעלים ומנהל, אקסלנט יועצי משכנתאות ופיננסים</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec goals" aria-labelledby="h-goals">
+  <div class="wrap">
+    <h2 id="h-goals">מה הכי חשוב לכם לשפר?</h2>
+    <p class="lede">בחרו מטרה ראשית, ואם תרצו גם משנית. הבחירה נשמרת לבדיקה, כך שלא תצטרכו לענות שוב.</p>
+    <div class="goal-grid" role="group" aria-label="מטרות לשיפור">
+      <button type="button" class="gbtn" data-goal="monthly" aria-pressed="false"><b>תשלום חודשי</b><span>יותר אוויר בחודש</span></button>
+      <button type="button" class="gbtn" data-goal="total" aria-pressed="false"><b>עלות כוללת</b><span>לשלם פחות לאורך השנים</span></button>
+      <button type="button" class="gbtn" data-goal="term" aria-pressed="false"><b>קיצור התקופה</b><span>לסיים מוקדם יותר</span></button>
+      <button type="button" class="gbtn" data-goal="risk" aria-pressed="false"><b>חשיפה למדד או לריבית</b><span>פחות הפתעות בתשלום</span></button>
+      <button type="button" class="gbtn" data-goal="loans" aria-pressed="false"><b>הלוואות נוספות</b><span>לסדר את התמונה כולה</span></button>
+      <button type="button" class="gbtn" data-goal="mix" aria-pressed="false"><b>תמהיל מתאים</b><span>מסלולים שמתאימים לתוכניות שלכם</span></button>
+    </div>
+    <p class="goal-note" id="goalNote" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-what">
+  <div class="wrap">
+    <h2 id="h-what">מה זה מחזור, ומה באמת בודקים</h2>
+    <p class="lede">מחזור משכנתא הוא פירעון המשכנתא הקיימת באמצעות משכנתא חדשה, בתנאים אחרים: ריבית, מסלולים, תקופה או סכום. לא תמיד צריך להחליף הכול. לפעמים נכון לשמור מסלולים טובים ולשנות רק חלק.</p>
+    <div class="dims">
+      <article><h3>תזרים</h3><p>כמה יוצא מהחשבון כל חודש, והאם זה מתאים להכנסה שלכם היום ובשנים הקרובות.</p></article>
+      <article><h3>עלות כוללת</h3><p>כמה תשלמו עד סוף המשכנתא, כולל ריבית ועלויות המעבר. החזר חודשי נמוך יותר לא מוכיח חיסכון.</p></article>
+      <article><h3>תקופה</h3><p>הארכת התקופה מקטינה את ההחזר, אבל עשויה להגדיל את העלות הכוללת. קיצור עושה את ההפך.</p></article>
+      <article><h3>סיכון</h3><p>כמה מהמשכנתא צמודה למדד או לריבית משתנה. צמצום החשיפה מקטין הפתעות, אבל לא מבטיח הגנה מלאה מאינפלציה.</p></article>
+    </div>
+    <div class="notfit">
+      <div>
+        <h3>מתי שינוי עשוי לא להתאים</h3>
+        <ul>
+          <li>כשעמלת הפירעון המוקדם ועלויות המעבר גבוהות מהתועלת.</li>
+          <li>כשהדבר היחיד שמשתנה הוא הארכת התקופה, והעלות הכוללת עולה.</li>
+          <li>כשהמסלולים הקיימים כבר טובים מהמוצע היום.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>מה ההבדל בין מושגים שמתבלבלים בהם</h3>
+        <ul>
+          <li>ריבית בהצעה היא לא הצעה מחייבת. רק אישור עקרוני ותנאים חתומים קובעים.</li>
+          <li>תחזית סך התשלומים היא הערכה, לא חיסכון מובטח.</li>
+          <li>איחוד הלוואות הוא לא מחזור, ודורש בדיקה משלו.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec compare" aria-labelledby="h-cmp">
+  <div class="wrap">
+    <h2 id="h-cmp">איך נראית השוואה הוגנת</h2>
+    <p class="lede">אותה משכנתא, שלוש דרכים. שימו לב שההחזר הנמוך ביותר הוא דווקא היקר ביותר בסך הכול.</p>
+    <span class="edu">דוגמה לימודית. לא לקוח אמיתי ולא הצעה.</span>
+    <div class="tbl-wrap" tabindex="0" role="region" aria-label="טבלת השוואה לימודית">
+      <table>
+        <thead><tr><th scope="col">אפשרות</th><th scope="col">החזר חודשי</th><th scope="col">תקופה</th><th scope="col">סך תשלומים חזוי, כולל עלויות מעבר</th><th scope="col">מה זה אומר</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">להשאיר את הקיים</th><td class="num">5,368 ₪</td><td>20 שנה</td><td class="num">1,288,424 ₪</td><td class="verdict">נקודת הייחוס</td></tr>
+          <tr class="hl"><th scope="row">מחזור באותה תקופה</th><td class="num">5,104 ₪</td><td>20 שנה</td><td class="num">1,233,075 ₪</td><td class="verdict">פחות בחודש וגם פחות בסך הכול, אחרי עלויות המעבר</td></tr>
+          <tr><th scope="row">מחזור עם הארכה</th><td class="num">4,239 ₪</td><td>28 שנה</td><td class="num">1,432,192 ₪</td><td class="verdict">הכי קל בחודש, אבל יקר יותר בסך הכול</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="assume">הנחות הדוגמה: יתרה של 800,000 ₪, מסלול אחד לא צמוד בריבית קבועה ובלוח שפיצר. ריבית קיימת 5.2%, ריבית חדשה 4.6%. עלויות מעבר משוערות של 8,000 ₪ (עמלת פירעון מוקדם ועמלות). בלי מדד ובלי שינויי ריבית. המספרים להמחשה בלבד. אצלכם התוצאה תלויה בדוח, במסלולים, בעמלות ובהצעות שיתקבלו בפועל.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-me">
+  <div class="wrap me">
+    <figure><img src="assets/yoram/desk.webp" alt="יורם פלד ליד שולחן העבודה במשרד" width="1000" height="750" loading="lazy"></figure>
+    <div>
+      <h2 id="h-me">יורם פלד. מי שאנשים שמבינים בכסף מביאים למשכנתא שלהם</h2>
+      <p>בעלים ומנהל אקסלנט יועצי משכנתאות ופיננסים מאז 2011. עובדי בנק ישראל, רואי חשבון, עורכי דין, כלכלנים ואנשי שוק ההון בוחרים בנו כשמדובר בכסף שלהם. לא כי הם לא מבינים, אלא כי הם מבינים בדיוק כמה זה שווה.</p><p>כל בדיקה מתחילה בשאלה מה טוב למשפחה שמולי, ורק אחר כך במספרים. ובמספרים, אנחנו לא מוותרים על שקל.</p>
+      <p>בליווי אנחנו עומדים מולכם מול הבנקים, מתמקחים על כל מסלול, ומתאמים עם עורכי הדין והשמאים כשהתיק צריך אותם. אנחנו גוף ייעוץ עצמאי, ולא עובדים בשביל אף בנק. רק בשבילכם.</p>
+      <ul class="maxims">
+        <li>בודקים את התמונה הכוללת</li>
+        <li>לא כל הקטנת החזר היא עסקה טובה</li>
+      </ul>
+      <p class="sign">אקסלנט. קודם אנשים, אחר כך יועצים.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec reviews" aria-labelledby="h-rev">
+  <div class="wrap">
+    <h2 id="h-rev">הלקוחות אומרים את זה טוב יותר מאיתנו</h2>
+    <ul class="rates" aria-label="דירוגים">
+      <li><b>5.0</b><span>ציון מושלם בגוגל, 62 ביקורות</span></li>
+      <li><b>5.0</b><span>ציון מושלם ב BizReviews, 74 חוות דעת</span></li>
+      <li><b>9.89</b><span>בתוצאות ובחוויית לקוח במידרג</span></li>
+      <li><b>2011</b><span>מלווים משכנתאות מאז</span></li>
+    </ul>
+    <p class="rates-note">גוגל ו BizReviews נבדקו ב 18.10.2026.</p>
+    <div class="quotes">
+      <figure><blockquote>בסוף התהליך קיבלנו הצעה שהוזילה את המשכנתא במאות אלפי שקלים.</blockquote><figcaption>משה, ירושלים. מחזור משכנתא. BizReviews, 01.09.2025</figcaption></figure>
+      <figure><blockquote>אין ספק שבלי העזרה של יורם לא היינו מקבלים את הריביות והתנאים שקיבלנו.</blockquote><figcaption>חנה, באר שבע. BizReviews, 11.11.2025</figcaption></figure>
+      <figure><blockquote>יורם היה לצידי בכל שעה, מול הבנקים השונים, העירייה, החברה המשכנת.</blockquote><figcaption>ד.ע, נתיבות. BizReviews, 01.01.2023</figcaption></figure>
+      <figure><blockquote>הידע הרחב שלו, דרך החשיבה המקצועית והבהירות שהציג, סייעו לי להימנע מקבלת החלטות שגויות.</blockquote><figcaption>גיא, אשקלון. BizReviews, 09.09.2025</figcaption></figure>
+    </div>
+    <p class="src">ציטוטים מתוך חוות דעת שלקוחות פרסמו ב BizReviews, בלי עריכה. תוצאה של לקוח אחד לא מעידה על תוצאה אצלכם.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-proc">
+  <div class="wrap">
+    <h2 id="h-proc">מה חינם, ומה ליווי</h2>
+    <div class="split">
+      <div>
+        <h3>בדיקה ראשונית</h3>
+        <p class="tagline">ללא עלות וללא התחייבות</p>
+        <ol>
+          <li>פונים אלינו ועונים על כמה שאלות קצרות.</li>
+          <li>שולחים דוח יתרות לסילוק. אין לכם? נעזור להשיג אותו.</li>
+          <li>מקבלים תשובה: יש טעם לבדוק לעומק, או שעדיף להשאיר.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>ליווי מלא</h3>
+        <p class="tagline">בתשלום, לפי המקרה, עם עלות שמוצגת מראש</p>
+        <ol>
+          <li>תכנון חלופות לפי המטרה והתזרים שלכם.</li>
+          <li>בחינת הצעות מכמה בנקים והסבר ברור של כל אחת.</li>
+          <li>אתם מחליטים. אם ממשיכים, מלווים את הביצוע עד הסוף.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="who-does">
+      <div><h3>מה נדרש מכם</h3><ul><li>דוח יתרות לסילוק עדכני מהבנק.</li><li>תשובות לשאלות הבדיקה.</li><li>בהמשך, מסמכים לפי מה שהבנק יבקש.</li></ul></div>
+      <div><h3>במה אנחנו מטפלים</h3><ul><li>ניתוח הדוח והמסלולים.</li><li>מול הבנקים, ובתיאום עם עורכי דין ושמאים כשצריך.</li><li>הסבר של כל הצעה לפני שמחליטים.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec money" aria-labelledby="h-money">
+  <div class="wrap">
+    <h2 id="h-money">כסף, בלי אותיות קטנות</h2>
+    <div class="money-grid">
+      <div><h3>חינם</h3><p>הבדיקה הראשונית והשיחה עליה.</p></div>
+      <div><h3>בתשלום</h3><p>ליווי מלא, לפי היקף ומורכבות התיק. העלות מוצגת לפני כל התחייבות.</p></div>
+      <div><h3>הוצאות נוספות אפשריות</h3><p>עמלת פירעון מוקדם בבנק הקיים, עמלות פתיחת תיק, שמאות ועורך דין, לפי המקרה.</p></div>
+      <div><h3>כשלא כדאי</h3><p>אומרים לכם להשאיר את הקיים. על הבדיקה הראשונית לא משלמים.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec quiz" id="check" aria-labelledby="h-quiz">
+  <div class="wrap">
+    <h2 id="h-quiz">בואו נבדוק מה המשכנתא שלכם מסתירה</h2>
+    <p class="lede">בדיקה ראשונית ללא עלות, אצל מי שעושה את זה כבר 15 שנה. שני חלקים קצרים, אפשר לחזור ולשנות, ולפני השליחה תראו בדיוק מה נמסר.</p>
+    <div class="need">
+      <div><b>מה נדרש מכם</b><p>שתי דקות ותשובות בקירוב. בלי מסמכים ובלי מספרים מדויקים בשלב הזה.</p></div>
+      <div><b>למה אנחנו שואלים</b><p>כל תשובה עוזרת לנו להבין את התיק שלכם מראש, כך שהשיחה הראשונה כבר עוסקת בפתרון ולא בשאלות.</p></div>
+    </div>
+    <div class="qcard" id="quizCard">
+      <div class="prog"><span id="progTxt">חלק 1 מתוך 2</span><div class="bar" id="progBar" data-progress="0" aria-hidden="true"><i></i></div></div>
+      <form id="quiz" novalidate>
+        <div id="steps"></div>
+        <p class="err" id="err" role="alert" hidden></p>
+        <div class="nav">
+          <button type="button" class="btn btn-burg" id="next">המשך</button>
+          <button type="button" class="btn btn-line" id="back">חזרה</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" aria-labelledby="h-faq">
+  <div class="wrap">
+    <h2 id="h-faq">שאלות שעולות לפני שמתחילים</h2>
+    <div class="faq-list">
+      <details name="faq"><summary>איך יודעים אם כדאי למחזר?</summary><p>משווים את סך התשלומים החזוי בין הקיים לחדש, כולל עמלת פירעון מוקדם ועלויות המעבר, ובודקים שההחזר מתאים להכנסה. אם ההבדל קטן או שלילי, ממליצים להשאיר.</p></details>
+      <details name="faq"><summary>מה עם עמלת הפירעון המוקדם?</summary><p>הבנק מחויב להציג את הסכום הכולל לפירעון, כולל עמלות. העמלה מופיעה בדוח יתרות לסילוק, ואנחנו מכניסים אותה לחישוב לפני כל המלצה.</p></details>
+      <details name="faq"><summary>למה לא לפנות ישר לבנק שלי?</summary><p>אפשר. הבנק מציע את המסלולים שלו. אנחנו בודקים את התמונה הכוללת ומשווים בין כמה הצעות, ואומרים גם כשעדיף לא לגעת.</p></details>
+      <details name="faq"><summary>אילו מסמכים צריך?</summary><p>בשלב הראשון מספיק דוח יתרות לסילוק, מאתר הבנק או מהאפליקציה. אם תחליטו להמשיך, נגיד מה עוד הבנק יבקש.</p></details>
+      <details name="faq"><summary>כמה עולה השירות?</summary><p>הבדיקה הראשונית ללא עלות. ליווי מלא כרוך בתשלום לפי היקף ומורכבות התיק, ואת העלות אנחנו מציגים מראש, לפני כל התחייבות.</p></details>
+      <details name="faq"><summary>מי מטפל בי?</summary><p>יורם פלד, בעלים ומנהל אקסלנט, יחד עם הצוות. בשעות הפעילות, ימים א' עד ה'.</p></details>
+    </div>
+    <p class="faq-cta"><a class="btn btn-burg" href="#check" data-ev="faq_cta">לבדיקה ראשונית ללא עלות</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="small"><p>אקסלנט יועצי משכנתאות ופיננסים, מאז 2011<br>ז'בוטינסקי 7, מגדל אביב, רמת גן<br>וואטסאפ וטלפון: <span class="ltr">055-2783459</span></p>
+      <p class="footer-note">אקסלנט היא גוף ייעוץ עצמאי ואינה מייצגת בנק.<br><a href="privacy.html">מדיניות פרטיות</a> · <a href="accessibility.html">הצהרת נגישות</a></p></div>
+    <img src="assets/official/logo_dark_noslogan.png" alt="אקסלנט יועצי משכנתאות ופיננסים" width="695" height="305" loading="lazy">
+  </div>
+</footer>
+
+<aside class="sticky" id="sticky" aria-label="לבדיקה ראשונית"><a class="btn btn-gold" href="#check" data-ev="sticky_cta">לבדיקה ראשונית ללא עלות</a></aside>
+
+<script>
+/* ===== content: questions (editable without touching logic) ===== */
+var Q=[
+ {id:'has',w:'כך נדע אם זה מחזור או ייעוץ לקנייה, ונכוון אתכם נכון.',part:1,t:'יש לכם היום משכנתא?',o:[['yes','כן, משכנתא אחת'],['multi','כן, יותר ממשכנתא אחת'],['selling','יש, ואנחנו בתהליך מכירה או פירעון'],['none','אין, אנחנו לפני קנייה']]},
+ {id:'goal',w:'המטרה קובעת מה בודקים קודם: תזרים, עלות כוללת, תקופה או סיכון.',part:1,t:'מה המטרה העיקרית?',h:'אפשר לבחור גם מטרה משנית. אם כבר בחרתם למעלה, זה כאן.',multi:2,o:[['monthly','תשלום חודשי נמוך יותר'],['total','עלות כוללת נמוכה יותר'],['term','קיצור התקופה'],['risk','פחות חשיפה למדד או לריבית'],['loans','טיפול בהלוואות נוספות'],['mix','תמהיל שמתאים לתוכניות שלנו']]},
+ {id:'bal',w:'גודל היתרה מראה כמה משמעותי יכול להיות שינוי, ואילו מסלולים רלוונטיים לכם.',part:1,t:'מה יתרת המשכנתא בקירוב?',h:'יתרת החוב היא כמה נשאר לפרוע היום. סך התשלומים העתידיים גבוה ממנה, כי כולל ריבית והצמדה.',o:[['b1','עד 300 אלף ₪'],['b2','מעל 300 אלף ועד 600 אלף ₪'],['b3','מעל 600 אלף ועד מיליון ₪'],['b4','מעל מיליון ועד 1.5 מיליון ₪'],['b5','מעל 1.5 מיליון ₪'],['na','לא יודע']]},
+ {id:'pay',w:'ההחזר מראה כמה מרווח יש לכם היום, ואם כדאי לבדוק הקטנה או דווקא קיצור.',part:1,t:'מה ההחזר החודשי היום?',o:[['p1','עד 3,000 ₪'],['p2','מעל 3,000 ועד 5,000 ₪'],['p3','מעל 5,000 ועד 8,000 ₪'],['p4','מעל 8,000 ועד 12,000 ₪'],['p5','מעל 12,000 ₪'],['na','לא יודע']]},
+ {id:'left',w:'ככל שנשארו יותר שנים, לשינוי נכון יש יותר זמן להשפיע.',part:1,t:'כמה זמן נשאר לתשלום?',o:[['l1','עד 10 שנים'],['l2','מעל 10 ועד 20 שנה'],['l3','מעל 20 שנה'],['na','לא יודע']]},
+ {id:'when',w:'כך נדע כמה מהר לחזור אליכם ולתאם.',part:1,t:'מתי תרצו לפעול?',o:[['week','השבוע'],['month','החודש'],['later','בהמשך, יש לנו מועד'],['none','אין מועד מסוים']]},
+ {id:'ask',w:'כדי שהצעד הבא יתאים למה שאתם באמת רוצים, בלי לחץ.',part:1,t:'מה אתם מבקשים כרגע?',o:[['info','מידע כללי'],['check','בדיקה אישית'],['call','שיחת טלפון קצרה'],['meet','פגישה']]},
+ {id:'doc',w:'הדוח מראה את המסלולים, הריביות והעמלות שלכם בפועל. בלעדיו אפשר רק להעריך.',part:2,t:'יש לכם דוח יתרות לסילוק עדכני?',h:'מורידים אותו מאתר הבנק או מהאפליקציה, באזור המשכנתאות.',o:[['have','יש, ואשמח לשלוח'],['old','יש, אבל לא עדכני'],['help','אין, צריך עזרה להשיג'],['what','לא בטוח מה זה']]},
+ {id:'loans',w:'לפעמים החיסכון הגדול נמצא דווקא בהלוואות שליד המשכנתא.',part:2,t:'יש הלוואות נוספות מלבד המשכנתא?',o:[['n','אין'],['s','יש, עד 50 אלף ₪ בסך הכול'],['m','יש, מעל 50 אלף ועד 200 אלף ₪'],['l','יש, מעל 200 אלף ועד 500 אלף ₪'],['xl','יש, מעל 500 אלף ₪'],['na','לא יודע']]},
+ {id:'income',w:'שינוי בהכנסה משנה איזה החזר נכון לכם בשנים הבאות.',part:2,t:'צפוי שינוי בהכנסה בשנים הקרובות?',o:[['down','כן, ירידה'],['up','כן, עלייה'],['no','לא צפוי'],['na','לא יודע']]},
+ {id:'plan',w:'אם מתוכננת מכירה או פירעון, בונים אסטרטגיה אחרת ונמנעים מעמלות מיותרות.',part:2,t:'מתוכננים מכירה של הנכס או פירעון גדול?',o:[['sell','כן, מכירה'],['repay','כן, פירעון גדול'],['no','לא'],['na','עוד לא יודע']]},
+ {id:'strain',w:'כך נדע לתעדף אתכם ולבנות פתרון שמתאים למצב, בדיסקרטיות מלאה.',part:2,t:'יש קושי בתשלומים היום?',o:[['late','כן, כבר קשה לשלם בזמן'],['tight','יש לחץ, אבל משלמים'],['no','לא'],['skip','מעדיף לא לענות']]}
+];
+var KEY='exc_refi_lp1';
+var A={};try{A=JSON.parse(sessionStorage.getItem(KEY)||'{}')||{};}catch(e){A={};}
+function save(){try{sessionStorage.setItem(KEY,JSON.stringify(A));}catch(e){}}
+function label(q,v){for(var i=0;i<q.o.length;i++)if(q.o[i][0]===v)return q.o[i][1];return v;}
+function qById(id){for(var i=0;i<Q.length;i++)if(Q[i].id===id)return Q[i];}
+function track(name,extra){window.dataLayer=window.dataLayer||[];var e={event:name,lp:'refi_lp1'};if(extra)for(var k in extra)e[k]=extra[k];window.dataLayer.push(e);}
+
+/* ===== goal chooser above the quiz ===== */
+var gbtns=document.querySelectorAll('.gbtn'),gnote=document.getElementById('goalNote');
+function goals(){return Array.isArray(A.goal)?A.goal:[];}
+function paintGoals(){var g=goals();gbtns.forEach(function(b){var i=g.indexOf(b.dataset.goal);b.setAttribute('aria-pressed',i>-1?'true':'false');var t=b.querySelector('.tag');if(t)t.remove();if(i>-1){var s=document.createElement('em');s.className='tag';s.textContent=i===0?'ראשית':'משנית';b.appendChild(s);}});
+ gnote.textContent=g.length?('נבחר: '+g.map(function(v){return label(qById('goal'),v);}).join(', ')+'. ממשיכים לבדיקה למטה.'):'';}
+function toggleGoal(v){var g=goals().slice(),i=g.indexOf(v);if(i>-1)g.splice(i,1);else{if(g.length>=2)g.pop();g.push(v);}A.goal=g;save();paintGoals();track('goal_select',{goal_count:g.length});}
+gbtns.forEach(function(b){b.addEventListener('click',function(){toggleGoal(b.dataset.goal);});});
+paintGoals();
+
+/* ===== quiz ===== */
+var steps=document.getElementById('steps'),idx=0,err=document.getElementById('err');
+var part1=Q.filter(function(q){return q.part===1;}),part2=Q.filter(function(q){return q.part===2;});
+var SUM=Q.length; /* index of summary */
+function render(){
+  err.hidden=true;steps.innerHTML='';
+  var back=document.getElementById('back'),next=document.getElementById('next');
+  back.disabled=idx===0;back.classList.toggle('is-hidden',idx===0);
+  var pct=Math.round(idx/SUM*100);document.getElementById('progBar').setAttribute('data-progress',String(pct));
+  document.getElementById('progTxt').textContent=idx<part1.length?('חלק 1 מתוך 2, שאלה '+(idx+1)+' מתוך '+part1.length):idx<SUM?('חלק 2 מתוך 2, שאלה '+(idx-part1.length+1)+' מתוך '+part2.length):'סיכום לפני שליחה';
+  if(idx===part1.length&&A.has==='none'){}
+  if(idx>=SUM){renderSummary();next.classList.add('is-hidden');return;}
+  next.classList.remove('is-hidden');next.textContent=idx===SUM-1?'לסיכום':'המשך';
+  var q=Q[idx],d=document.createElement('div');d.className='step';
+  var fs=document.createElement('fieldset');
+  var lg=document.createElement('legend');lg.innerHTML='<h3>'+q.t+'</h3>';fs.appendChild(lg);
+  if(q.h){var h=document.createElement('p');h.className='hint';h.textContent=q.h;fs.appendChild(h);}
+  if(q.w){var wy=document.createElement('p');wy.className='why';wy.innerHTML='<span>למה זה עוזר לנו:</span> ';wy.appendChild(document.createTextNode(q.w));fs.appendChild(wy);}
+  if(idx===part1.length){var p=document.createElement('p');p.className='hint';p.textContent='חלק 2 עוזר לנו להגיע מוכנים. אפשר לדלג עליו ולשלוח כבר עכשיו.';fs.insertBefore(p,lg.nextSibling);}
+  var g=document.createElement('div');g.className='opts';
+  q.o.forEach(function(o,i){var w=document.createElement('div');w.className='opt';var id='q_'+q.id+'_'+i;
+    var inp=document.createElement('input');inp.type=q.multi?'checkbox':'radio';inp.name=q.id;inp.id=id;inp.value=o[0];
+    var cur=A[q.id];inp.checked=q.multi?(Array.isArray(cur)&&cur.indexOf(o[0])>-1):cur===o[0];
+    inp.addEventListener('change',function(){if(q.multi){var arr=Array.isArray(A[q.id])?A[q.id].slice():[];var j=arr.indexOf(o[0]);if(inp.checked){if(j<0)arr.push(o[0]);if(arr.length>q.multi){var rm=arr.shift();var other=steps.querySelector('input[value="'+rm+'"]');if(other)other.checked=false;}}else if(j>-1)arr.splice(j,1);A[q.id]=arr;paintGoals();}else{A[q.id]=o[0];}save();showRoute(d,q);});
+    var lb=document.createElement('label');lb.htmlFor=id;lb.textContent=o[1];w.appendChild(inp);w.appendChild(lb);g.appendChild(w);});
+  fs.appendChild(g);d.appendChild(fs);steps.appendChild(d);showRoute(d,q);
+  if(idx===part1.length){var sk=document.createElement('button');sk.type='button';sk.className='link';sk.textContent='לדלג על חלק 2 ולעבור לסיכום';sk.addEventListener('click',function(){go(SUM);});d.appendChild(sk);}
+  track('quiz_step',{step:idx+1});
+}
+function routeFor(q){var v=A[q.id];
+  if(q.id==='has'&&v==='none')return 'בלי משכנתא קיימת אין מה למחזר. אפשר להמשיך, ונבדוק איתכם ייעוץ משכנתא לקנייה במקום.';
+  if(q.id==='goal'&&Array.isArray(v)&&v[0]==='monthly')return 'הקטנת ההחזר אפשרית לפעמים רק בהארכת התקופה, שעשויה להגדיל את העלות הכוללת. בבדיקה נראה לכם את שני הצדדים.';
+  if(q.id==='goal'&&Array.isArray(v)&&v.indexOf('loans')>-1)return 'איחוד הלוואות אינו מחזור, ודורש בדיקה מותאמת. נבדוק את שניהם יחד.';
+  if(q.id==='doc'&&(v==='help'||v==='what'))return 'אין בעיה. אחרי השליחה נסביר בדיוק איך מורידים את הדוח.';
+  if(q.id==='strain'&&v==='late')return 'נעדיף לדבר איתכם קודם. במצב כזה עושים בדיקה מקצועית מותאמת, בלי לחץ ובלי הבטחות.';
+  return '';}
+function showRoute(d,q){var r=d.querySelector('.route');var t=routeFor(q);if(!t){if(r)r.remove();return;}if(!r){r=document.createElement('p');r.className='route';r.setAttribute('aria-live','polite');d.appendChild(r);}r.textContent=t;}
+function go(n){idx=Math.max(0,Math.min(SUM,n));render();var c=document.getElementById('quizCard');if(c.getBoundingClientRect().top<0)c.scrollIntoView({behavior:'smooth',block:'start'});}
+document.getElementById('back').addEventListener('click',function(){go(idx-1);});
+document.getElementById('next').addEventListener('click',function(){
+  var q=Q[idx];
+  if(q&&(q.id==='has'||q.id==='ask')&&!A[q.id]){err.textContent='כדי שנדע איך לעזור, בחרו תשובה אחת.';err.hidden=false;return;}
+  go(idx+1);});
+
+function answerText(q){var v=A[q.id];if(v==null||(Array.isArray(v)&&!v.length))return null;
+  if(Array.isArray(v))return v.map(function(x,i){return label(q,x)+(v.length>1?(i===0?' (ראשית)':' (משנית)'):'');}).join(', ');return label(q,v);}
+function nextStep(){
+  if(A.has==='none')return 'שיחה קצרה על ייעוץ משכנתא לקנייה. לא מחזור.';
+  if(A.strain==='late'||A.loans==='l'||A.loans==='xl')return 'שיחה עם יורם לבדיקה מקצועית מותאמת, כולל ההלוואות הנוספות.';
+  if(A.ask==='info')return 'נשלח לכם הסבר קצר, ואם תרצו נמשיך לבדיקה אישית.';
+  if(A.doc==='help'||A.doc==='what')return 'נסביר איך מורידים את הדוח, ואז בדיקה ראשונית.';
+  if(A.ask==='meet'||A.ask==='call')return 'תיאום שיחה, ובדיקת הדוח לפניה.';
+  return 'שלחו את דוח יתרות לסילוק באותה שיחה, ונחזור עם תשובה לבדיקה הראשונית.';}
+var MONEY=['bal','pay','loans','income','strain'];
+function message(){var inc=document.getElementById('incMoney'),withMoney=inc&&inc.checked;var t='שלום, אשמח לבדיקה ראשונית למחזור משכנתא.';
+  Q.forEach(function(q){if(!withMoney&&MONEY.indexOf(q.id)>-1)return;var a=answerText(q);if(a)t+='\n'+q.t.replace('?','')+': '+a;});
+  if(!withMoney&&MONEY.some(function(k){return A[k]!=null;}))t+='\nאת הנתונים הכספיים אמסור בשיחה.';
+  return t+'\n(LP1'+(window.__tag?' '+window.__tag:'')+')';}
+function renderSummary(){
+  var d=document.createElement('div');d.className='step sum';
+  d.innerHTML='<h3>זה מה שנמסר</h3><p class="hint">אפשר לערוך כל תשובה. בוחרים אם לשלוח בוואטסאפ או לבקש שנחזור אליכם.</p>';
+  var dl=document.createElement('dl'),miss=[];
+  Q.forEach(function(q,i){var a=answerText(q);var dt=document.createElement('dt');dt.textContent=q.t;var dd=document.createElement('dd');
+    if(a)dd.textContent=a;else{dd.textContent='לא נענה';dd.className='miss';miss.push(q.t);}
+    var de=document.createElement('dd');de.className='edit-cell';var eb=document.createElement('button');eb.type='button';eb.className='link edit';eb.textContent='עריכה';eb.setAttribute('aria-label','עריכה: '+q.t);eb.addEventListener('click',function(){go(i);});de.appendChild(eb);
+    dl.appendChild(dt);dl.appendChild(dd);dl.appendChild(de);});
+  d.appendChild(dl);
+  var m=document.createElement('div');m.innerHTML='<h4>מה חסר</h4>';var mp=document.createElement('p');mp.textContent=miss.length?(miss.length+' תשובות חסרות. זה בסדר, נשאל בשיחה.'):'לא חסר כלום.';m.appendChild(mp);d.appendChild(m);
+  var n=document.createElement('div');n.innerHTML='<h4>מה מוצע להמשך</h4>';var np=document.createElement('p');np.className='next';np.textContent=nextStep();n.appendChild(np);d.appendChild(n);
+  var a=document.createElement('a');a.className='btn btn-wa send-wa';a.id='sendWa';a.target='_blank';a.rel='noopener';a.textContent='שלחו לנו את הסיכום בוואטסאפ';
+  var ck=document.createElement('div');ck.className='opt money-option';ck.innerHTML='<input type="checkbox" id="incMoney"><label for="incMoney">לצרף להודעה גם את הטווחים הכספיים ואת מצב התשלומים</label>';d.appendChild(ck);
+  var ckh=document.createElement('p');ckh.className='hint';ckh.textContent='בלי הסימון, ההודעה כוללת רק את המטרה, הדחיפות ומצב הדוח, והשאר נאסף בשיחה.';d.appendChild(ckh);
+  function setHref(){a.href='https://wa.me/972552783459?text='+encodeURIComponent(message());}
+  ck.querySelector('input').addEventListener('change',setHref);
+  a.addEventListener('click',function(){track('wa_click',{answered:Q.length-miss.length});af.hidden=false;});
+  d.appendChild(a);
+  var af=document.createElement('div');af.className='after';af.hidden=true;
+  af.innerHTML='<p>נפתח וואטסאפ עם הסיכום. הפנייה נקלטת אצלנו רק אחרי שתלחצו שם שלח. יש לכם את הדוח? צרפו אותו באותה שיחה.</p><p>לא נפתח? שלחו את הסיכום ל <span class="ltr">055-2783459</span> <button type="button" class="copy">העתקת הסיכום</button></p>';
+  af.querySelector('.copy').addEventListener('click',function(){var b=this,txt=message();function ok(){b.textContent='הועתק';}function sel(){var ta=document.createElement('textarea');ta.className='copy-buffer';ta.value=txt;ta.setAttribute('readonly','');document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){}ta.remove();}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,sel);else sel();});
+  d.appendChild(af);
+  var form=document.createElement('form');form.className='lead-form';form.noValidate=true;form.setAttribute('aria-labelledby','lp1ContactTitle');
+  form.innerHTML='<h4 id="lp1ContactTitle">מעדיפים שנחזור אליכם?</h4><p class="form-intro">השאירו שם וטלפון, ונחזור אליכם בנוגע לבדיקה.</p><div class="form-grid"><div class="field"><label for="lp1FirstName">שם פרטי</label><input id="lp1FirstName" name="first_name" type="text" autocomplete="given-name" minlength="2" maxlength="40" required aria-describedby="lp1FirstNameError"><span class="field-error" id="lp1FirstNameError" aria-live="polite"></span></div><div class="field"><label for="lp1Phone">טלפון נייד</label><input id="lp1Phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="lp1PhoneError"><span class="field-error" id="lp1PhoneError" aria-live="polite"></span></div></div><label class="consent" for="lp1ServiceConsent"><input id="lp1ServiceConsent" name="service_consent" type="checkbox" required aria-describedby="lp1ServiceError"><span>אני מבקש שאקסלנט תחזור אליי בנוגע לבדיקה</span></label><span class="field-error" id="lp1ServiceError" aria-live="polite"></span><label class="consent" for="lp1MarketingConsent"><input id="lp1MarketingConsent" name="marketing_consent" type="checkbox"><span>אשמח לקבל עדכונים ותוכן שיווקי</span></label><div class="hp-field" aria-hidden="true"><label for="lp1Website">אין למלא שדה זה</label><input id="lp1Website" name="website" type="text" tabindex="-1" autocomplete="off"></div><div class="submit-row"><button class="btn btn-burg" id="lp1Submit" type="submit">שליחת בקשת חזרה</button><a class="link" href="#sendWa">אפשר גם בוואטסאפ</a></div><p class="form-status" id="lp1FormStatus" role="status" aria-live="polite"></p><p class="form-privacy">בקשת החזרה מיועדת לטיפול בפנייה. הסכמה לעדכונים שיווקיים היא רשות ונשמרת בנפרד. <a href="privacy.html">למדיניות הפרטיות</a>.</p>';
+  var formButton=form.querySelector('#lp1Submit'),formStatus=form.querySelector('#lp1FormStatus'),formName=form.querySelector('#lp1FirstName'),formPhone=form.querySelector('#lp1Phone'),serviceConsent=form.querySelector('#lp1ServiceConsent'),marketingConsent=form.querySelector('#lp1MarketingConsent'),honeypot=form.querySelector('#lp1Website');
+  var idempotencyKey=newRequestKey(),retryKeyAfterEdit=false,requestComplete=false;
+  function newRequestKey(){return window.crypto&&crypto.randomUUID?crypto.randomUUID():'lp1-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);}
+  function clearFieldError(input,errorId){input.removeAttribute('aria-invalid');form.querySelector('#'+errorId).textContent='';}
+  function setFieldError(input,errorId,message){input.setAttribute('aria-invalid','true');form.querySelector('#'+errorId).textContent=message;}
+  function normalizeMobile(value){var v=value.trim().replace(/[ ()-]/g,'');if(/^05\d{8}$/.test(v))return '972'+v.slice(1);if(/^\+?9725\d{8}$/.test(v))return v.replace(/^\+/, '');return null;}
+  function markChanged(){if(retryKeyAfterEdit&&!requestComplete){idempotencyKey=newRequestKey();retryKeyAfterEdit=false;}}
+  form.addEventListener('input',markChanged);form.addEventListener('change',markChanged);
+  form.addEventListener('submit',async function(ev){ev.preventDefault();if(requestComplete||formButton.disabled)return;
+    var name=formName.value.trim().replace(/\s+/g,' '),nameLength=Array.from(name).length,mobile=normalizeMobile(formPhone.value),valid=true;
+    clearFieldError(formName,'lp1FirstNameError');clearFieldError(formPhone,'lp1PhoneError');serviceConsent.removeAttribute('aria-invalid');form.querySelector('#lp1ServiceError').textContent='';
+    if(nameLength<2||nameLength>40){setFieldError(formName,'lp1FirstNameError','יש להזין שם פרטי באורך 2 עד 40 תווים.');valid=false;}
+    if(!mobile){setFieldError(formPhone,'lp1PhoneError','יש להזין מספר נייד ישראלי תקין, למשל 05XXXXXXXX.');valid=false;}
+    if(!serviceConsent.checked){serviceConsent.setAttribute('aria-invalid','true');form.querySelector('#lp1ServiceError').textContent='יש לאשר בקשת חזרה כדי לשלוח את הטופס.';valid=false;}
+    if(!valid){formStatus.dataset.state='error';formStatus.textContent='יש לבדוק את הפרטים שסומנו ולנסות שוב.';return;}
+    if(honeypot.value){formStatus.dataset.state='error';formStatus.textContent='לא הצלחנו לשלוח את הבקשה. אפשר לנסות שוב או להשתמש בוואטסאפ.';return;}
+    var includeMoney=!!(document.getElementById('incMoney')&&document.getElementById('incMoney').checked),answers={};
+    Q.forEach(function(q){if(!includeMoney&&MONEY.indexOf(q.id)>-1)return;var value=A[q.id];answers[q.id]=value==null?null:Array.isArray(value)?value.slice():value;});
+    var sentAt=new Date().toISOString(),payload={idempotency_key:idempotencyKey,source:'LP1 טופס',first_name:name,phone:mobile,answers:answers,money_included:includeMoney,service_request:true,service_request_at:sentAt,marketing_consent:!!marketingConsent.checked,marketing_consent_at:marketingConsent.checked?sentAt:null,website:honeypot.value};
+    formButton.disabled=true;formButton.textContent='שולחים…';formStatus.removeAttribute('data-state');formStatus.textContent='שומרים את הבקשה…';
+    try{var response=await fetch('/api/lead',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});var result=null;try{result=await response.json();}catch(parseError){}
+      var requestId=result&&(result.request_id||result.requestId||result.id);if(!response.ok||!requestId)throw new Error('save_failed');
+      requestComplete=true;formStatus.dataset.state='success';formStatus.textContent='הבקשה נשמרה. נחזור אליכם בנוגע לבדיקה. מספר פנייה: '+String(requestId);formButton.textContent='הבקשה נשלחה';form.querySelectorAll('input').forEach(function(input){input.disabled=true;});track('form_submit_ok',{request_id:String(requestId)});
+    }catch(err){retryKeyAfterEdit=true;formStatus.dataset.state='error';formStatus.textContent='לא הצלחנו לשמור את הבקשה. אפשר לנסות שוב או לעבור לוואטסאפ.';formButton.disabled=false;formButton.textContent='שליחת בקשת חזרה';}
+  });
+  d.appendChild(form);
+  var pv=document.createElement('p');pv.className='privacy';pv.textContent='התשובות נשארות בדפדפן עד סגירת הלשונית. אם תשלחו בקשת חזרה, שם, טלפון והתשובות שנבחרו יישמרו לצורך טיפול. מידע כספי נשלח רק אם סימנתם לצרף אותו, ואינו נכלל בכתובת הדף או באירועי מדידה.';d.appendChild(pv);
+  steps.appendChild(d);setHref();track('quiz_summary',{missing:miss.length});
+}
+(function(){var qs=new URLSearchParams(location.search);window.__tag=(qs.get('utm_content')||qs.get('utm_campaign')||'').replace(/[^\w\-]/g,'').slice(0,24);})();
+document.getElementById('noDoc').addEventListener('click',function(){A.doc='help';save();go(Q.findIndex(function(q){return q.id==='has';}));document.getElementById('check').scrollIntoView({behavior:'smooth'});});
+render();
+/* sticky: hide while the check is on screen */
+var st=document.getElementById('sticky');
+if('IntersectionObserver' in window){var vis={};var io=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.id||'h']=e.isIntersecting;});st.classList.toggle('off',!!(vis.check||vis.top));},{threshold:.05});document.querySelector('.hero').id='top';io.observe(document.getElementById('top'));io.observe(document.getElementById('check'));}
+document.querySelectorAll('[data-ev]').forEach(function(el){el.addEventListener('click',function(){track(el.dataset.ev);});});
+track('lp_view');
+</script>
+</body>
+</html>
