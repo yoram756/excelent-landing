@@ -295,3 +295,14 @@ footer p+p{margin-block-start:6px}
 .doc + footer, body.sub footer{padding-block-end:44px}
 
 #h-club .sub2{display:block;font-weight:600;font-size:.62em;color:var(--ink-2);margin-block-start:6px}
+
+/* real case */
+.case{margin-block-start:26px;background:var(--card);border:1px solid var(--line);border-top:3px solid var(--gold);border-radius:var(--r);padding:clamp(18px,3vw,28px)}
+.case-facts{margin:0;display:grid;grid-template-columns:1fr 1.6fr 1.2fr;gap:20px 32px}
+.case-facts dt{font-size:15px;color:var(--ink-3);font-weight:600}
+.case-facts dd{margin:6px 0 0;font-size:19px;font-weight:600;color:var(--ink)}
+.case-facts .res dd{font-size:24px;font-weight:800;color:var(--burg);line-height:1.3}
+.moments{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-block-start:28px}
+.moments img{border-radius:var(--r);aspect-ratio:4/3;object-fit:cover;width:100%}
+.learn-h{margin-block-start:44px;font-size:22px}
+@media (max-width:760px){.case-facts{grid-template-columns:1fr}.moments{grid-template-columns:1fr 1fr}}
