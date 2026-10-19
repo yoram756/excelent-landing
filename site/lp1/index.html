@@ -182,6 +182,13 @@ tr.hl td,tr.hl th{background:#FBF6E6}
 .step h3{font-size:clamp(22px,2.2vw,28px);color:var(--char)}
 .hint{font-size:15px;color:var(--char-2);margin-block-start:6px}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-block-start:18px}
+@media (max-width:480px){.opts{grid-template-columns:1fr}}
+.skipq{display:block;margin-block-start:12px;font-size:15px;color:var(--char-2)}
+.quick{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between;margin-block-end:14px;padding:10px 12px;background:#FBF6E6;border-inline-start:3px solid var(--gold-m);font-size:15px}
+.quick .link{min-block-size:36px}
+.quick[hidden]{display:none}
+.sum details{margin-block:18px}
+.sum summary{cursor:pointer;font-weight:700;min-block-size:44px;display:flex;align-items:center}
 .opt{position:relative}
 .opt input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
 .opt label{display:flex;align-items:center;gap:10px;min-block-size:52px;padding:10px 14px;background:var(--cream);border:2px solid transparent;cursor:pointer;line-height:1.35}
@@ -487,6 +494,7 @@ footer .small{color:#E3D3C6;line-height:1.7}
     <div class="qcard" id="quizCard">
       <div class="prog"><span id="progTxt">חלק 1 מתוך 2</span><div class="bar" id="progBar" data-progress="0" aria-hidden="true"><i></i></div></div>
       <form id="quiz" novalidate>
+        <p class="quick" id="quick"><span>מעדיפים לענות בשיחה עם יורם?</span><button type="button" class="link" id="quickBtn">לדלג על השאלות ולהשאיר פרטים</button></p>
         <div id="steps"></div>
         <p class="err" id="err" role="alert" hidden></p>
         <div class="nav">
@@ -528,7 +536,7 @@ footer .small{color:#E3D3C6;line-height:1.7}
 /* ===== content: questions (editable without touching logic) ===== */
 var Q=[
  {id:'has',w:'כך נדע אם זה מחזור או ייעוץ לקנייה, ונכוון אתכם נכון.',part:1,t:'יש לכם היום משכנתא?',o:[['yes','כן, משכנתא אחת'],['multi','כן, יותר ממשכנתא אחת'],['selling','יש, ואנחנו בתהליך מכירה או פירעון'],['none','אין, אנחנו לפני קנייה']]},
- {id:'goal',w:'המטרה קובעת מה בודקים קודם: תזרים, עלות כוללת, תקופה או סיכון.',part:1,t:'מה המטרה העיקרית?',h:'אפשר לבחור גם מטרה משנית. אם כבר בחרתם למעלה, זה כאן.',multi:2,o:[['monthly','תשלום חודשי נמוך יותר'],['total','עלות כוללת נמוכה יותר'],['term','קיצור התקופה'],['risk','פחות חשיפה למדד או לריבית'],['loans','טיפול בהלוואות נוספות'],['mix','תמהיל שמתאים לתוכניות שלנו']]},
+ {id:'goal',w:'המטרה קובעת מה בודקים קודם: תזרים, עלות כוללת, תקופה או סיכון.',part:1,t:'מה המטרה העיקרית?',h:'אפשר לבחור עד שתיים. הראשונה שתבחרו היא המטרה העיקרית.',multi:2,o:[['monthly','תשלום חודשי נמוך יותר'],['total','עלות כוללת נמוכה יותר'],['term','קיצור התקופה'],['risk','פחות חשיפה למדד או לריבית'],['loans','טיפול בהלוואות נוספות'],['mix','תמהיל שמתאים לתוכניות שלנו']]},
  {id:'bal',w:'גודל היתרה מראה כמה משמעותי יכול להיות שינוי, ואילו מסלולים רלוונטיים לכם.',part:1,t:'מה יתרת המשכנתא בקירוב?',h:'יתרת החוב היא כמה נשאר לפרוע היום. סך התשלומים העתידיים גבוה ממנה, כי כולל ריבית והצמדה.',o:[['b1','עד 300 אלף ₪'],['b2','מעל 300 אלף ועד 600 אלף ₪'],['b3','מעל 600 אלף ועד מיליון ₪'],['b4','מעל מיליון ועד 1.5 מיליון ₪'],['b5','מעל 1.5 מיליון ₪'],['na','לא יודע']]},
  {id:'pay',w:'ההחזר מראה כמה מרווח יש לכם היום, ואם כדאי לבדוק הקטנה או דווקא קיצור.',part:1,t:'מה ההחזר החודשי היום?',o:[['p1','עד 3,000 ₪'],['p2','מעל 3,000 ועד 5,000 ₪'],['p3','מעל 5,000 ועד 8,000 ₪'],['p4','מעל 8,000 ועד 12,000 ₪'],['p5','מעל 12,000 ₪'],['na','לא יודע']]},
  {id:'left',w:'ככל שנשארו יותר שנים, לשינוי נכון יש יותר זמן להשפיע.',part:1,t:'כמה זמן נשאר לתשלום?',o:[['l1','עד 10 שנים'],['l2','מעל 10 ועד 20 שנה'],['l3','מעל 20 שנה'],['na','לא יודע']]},
@@ -567,6 +575,7 @@ function render(){
   var pct=Math.round(idx/SUM*100);document.getElementById('progBar').setAttribute('data-progress',String(pct));
   document.getElementById('progTxt').textContent=idx<part1.length?('חלק 1 מתוך 2, שאלה '+(idx+1)+' מתוך '+part1.length):idx<SUM?('חלק 2 מתוך 2, שאלה '+(idx-part1.length+1)+' מתוך '+part2.length):'סיכום לפני שליחה';
   if(idx===part1.length&&A.has==='none'){}
+  document.getElementById('quick').hidden=idx>=SUM;
   if(idx>=SUM){renderSummary();next.classList.add('is-hidden');return;}
   next.classList.remove('is-hidden');next.textContent=idx===SUM-1?'לסיכום':'המשך';
   var q=Q[idx],d=document.createElement('div');d.className='step';
@@ -579,9 +588,10 @@ function render(){
   q.o.forEach(function(o,i){var w=document.createElement('div');w.className='opt';var id='q_'+q.id+'_'+i;
     var inp=document.createElement('input');inp.type=q.multi?'checkbox':'radio';inp.name=q.id;inp.id=id;inp.value=o[0];
     var cur=A[q.id];inp.checked=q.multi?(Array.isArray(cur)&&cur.indexOf(o[0])>-1):cur===o[0];
-    inp.addEventListener('change',function(){if(q.multi){var arr=Array.isArray(A[q.id])?A[q.id].slice():[];var j=arr.indexOf(o[0]);if(inp.checked){if(j<0)arr.push(o[0]);if(arr.length>q.multi){var rm=arr.shift();var other=steps.querySelector('input[value="'+rm+'"]');if(other)other.checked=false;}}else if(j>-1)arr.splice(j,1);A[q.id]=arr;paintGoals();}else{A[q.id]=o[0];}save();showRoute(d,q);});
+    inp.addEventListener('change',function(){if(q.multi){var arr=Array.isArray(A[q.id])?A[q.id].slice():[];var j=arr.indexOf(o[0]);if(inp.checked){if(j<0)arr.push(o[0]);if(arr.length>q.multi){var rm=arr.shift();var other=steps.querySelector('input[value="'+rm+'"]');if(other)other.checked=false;}}else if(j>-1)arr.splice(j,1);A[q.id]=arr;paintGoals();}else{A[q.id]=o[0];}save();showRoute(d,q);if(!q.multi&&!routeFor(q)){clearTimeout(window.__adv);window.__adv=setTimeout(function(){if(Q[idx]===q)go(idx+1);},350);}});
     var lb=document.createElement('label');lb.htmlFor=id;lb.textContent=o[1];w.appendChild(inp);w.appendChild(lb);g.appendChild(w);});
   fs.appendChild(g);d.appendChild(fs);steps.appendChild(d);showRoute(d,q);
+  var sq=document.createElement('button');sq.type='button';sq.className='link skipq';sq.textContent='לדלג על השאלה, נדבר על זה בשיחה';sq.addEventListener('click',function(){delete A[q.id];save();track('quiz_skip_q',{step:idx+1});go(idx+1);});d.appendChild(sq);
   if(idx===part1.length){var sk=document.createElement('button');sk.type='button';sk.className='link';sk.textContent='לדלג על חלק 2 ולעבור לסיכום';sk.addEventListener('click',function(){go(SUM);});d.appendChild(sk);}
   track('quiz_step',{step:idx+1});
 }
@@ -595,9 +605,10 @@ function routeFor(q){var v=A[q.id];
 function showRoute(d,q){var r=d.querySelector('.route');var t=routeFor(q);if(!t){if(r)r.remove();return;}if(!r){r=document.createElement('p');r.className='route';r.setAttribute('aria-live','polite');d.appendChild(r);}r.textContent=t;}
 function go(n){idx=Math.max(0,Math.min(SUM,n));render();var c=document.getElementById('quizCard');if(c.getBoundingClientRect().top<0)c.scrollIntoView({behavior:'smooth',block:'start'});}
 document.getElementById('back').addEventListener('click',function(){go(idx-1);});
+document.getElementById('quickBtn').addEventListener('click',function(){track('quiz_quick_exit',{step:idx+1});go(SUM);var f=document.getElementById('lp1FirstName');if(f)setTimeout(function(){f.scrollIntoView({behavior:'smooth',block:'center'});f.focus({preventScroll:true});},150);});
 document.getElementById('next').addEventListener('click',function(){
   var q=Q[idx];
-  if(q&&(q.id==='has'||q.id==='ask')&&!A[q.id]){err.textContent='כדי שנדע איך לעזור, בחרו תשובה אחת.';err.hidden=false;return;}
+  
   go(idx+1);});
 
 function answerText(q){var v=A[q.id];if(v==null||(Array.isArray(v)&&!v.length))return null;
@@ -616,14 +627,14 @@ function message(){var inc=document.getElementById('incMoney'),withMoney=inc&&in
   return t+'\n(LP1'+(window.__tag?' '+window.__tag:'')+')';}
 function renderSummary(){
   var d=document.createElement('div');d.className='step sum';
-  d.innerHTML='<h3>זה מה שנמסר</h3><p class="hint">אפשר לערוך כל תשובה. בוחרים אם לשלוח בוואטסאפ או לבקש שנחזור אליכם.</p>';
+  d.innerHTML='<h3>כמעט סיימנו. איך נוח לכם שנמשיך?</h3><p class="hint">שולחים בוואטסאפ, או משאירים שם וטלפון ויורם חוזר אליכם. מה שלא עניתם, נשאל בשיחה.</p>';
   var dl=document.createElement('dl'),miss=[];
   Q.forEach(function(q,i){var a=answerText(q);var dt=document.createElement('dt');dt.textContent=q.t;var dd=document.createElement('dd');
     if(a)dd.textContent=a;else{dd.textContent='לא נענה';dd.className='miss';miss.push(q.t);}
     var de=document.createElement('dd');de.className='edit-cell';var eb=document.createElement('button');eb.type='button';eb.className='link edit';eb.textContent='עריכה';eb.setAttribute('aria-label','עריכה: '+q.t);eb.addEventListener('click',function(){go(i);});de.appendChild(eb);
     dl.appendChild(dt);dl.appendChild(dd);dl.appendChild(de);});
-  d.appendChild(dl);
-  var m=document.createElement('div');m.innerHTML='<h4>מה חסר</h4>';var mp=document.createElement('p');mp.textContent=miss.length?(miss.length+' תשובות חסרות. זה בסדר, נשאל בשיחה.'):'לא חסר כלום.';m.appendChild(mp);d.appendChild(m);
+  var det=document.createElement('details');var dsm=document.createElement('summary');dsm.textContent='התשובות שלכם ('+(Q.length-miss.length)+' מתוך '+Q.length+'), לצפייה ועריכה';det.appendChild(dsm);det.appendChild(dl);
+  var m=document.createElement('div');m.innerHTML='<h4>מה חסר</h4>';var mp=document.createElement('p');mp.textContent=miss.length?(miss.length+' תשובות חסרות. זה בסדר, נשאל בשיחה.'):'לא חסר כלום.';m.appendChild(mp);det.appendChild(m);
   var n=document.createElement('div');n.innerHTML='<h4>מה מוצע להמשך</h4>';var np=document.createElement('p');np.className='next';np.textContent=nextStep();n.appendChild(np);d.appendChild(n);
   var a=document.createElement('a');a.className='btn btn-wa send-wa';a.id='sendWa';a.target='_blank';a.rel='noopener';a.textContent='שלחו לנו את הסיכום בוואטסאפ';
   var ck=document.createElement('div');ck.className='opt money-option';ck.innerHTML='<input type="checkbox" id="incMoney"><label for="incMoney">לצרף להודעה גם את הטווחים הכספיים ואת מצב התשלומים</label>';d.appendChild(ck);
@@ -657,7 +668,7 @@ function renderSummary(){
     if(honeypot.value){formStatus.dataset.state='error';formStatus.textContent='לא הצלחנו לשלוח את הבקשה. אפשר לנסות שוב או להשתמש בוואטסאפ.';return;}
     var includeMoney=!!(document.getElementById('incMoney')&&document.getElementById('incMoney').checked),answers={};
     Q.forEach(function(q){if(!includeMoney&&MONEY.indexOf(q.id)>-1)return;var value=A[q.id];answers[q.id]=value==null?null:Array.isArray(value)?value.slice():value;});
-    var sentAt=new Date().toISOString(),payload={idempotency_key:idempotencyKey,source:'LP1 טופס',first_name:name,phone:mobile,answers:answers,money_included:includeMoney,service_request:true,service_request_at:sentAt,marketing_consent:!!marketingConsent.checked,marketing_consent_at:marketingConsent.checked?sentAt:null,website:honeypot.value};
+    var sentAt=new Date().toISOString(),payload={idempotency_key:idempotencyKey,source:'קליטת LP1',product:'LP1',first_name:name,phone:mobile,answers:answers,money_included:includeMoney,service_request:true,service_request_at:sentAt,marketing_consent:!!marketingConsent.checked,marketing_consent_at:marketingConsent.checked?sentAt:null,website:honeypot.value};
     formButton.disabled=true;formButton.textContent='שולחים…';formStatus.removeAttribute('data-state');formStatus.textContent='שומרים את הבקשה…';
     try{var response=await fetch('/api/lead',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});var result=null;try{result=await response.json();}catch(parseError){}
       var requestId=result&&(result.request_id||result.requestId||result.id);if(!response.ok||!requestId)throw new Error('save_failed');
@@ -665,6 +676,7 @@ function renderSummary(){
     }catch(err){retryKeyAfterEdit=true;formStatus.dataset.state='error';formStatus.textContent='לא הצלחנו לשמור את הבקשה. אפשר לנסות שוב או לעבור לוואטסאפ.';formButton.disabled=false;formButton.textContent='שליחת בקשת חזרה';}
   });
   d.appendChild(form);
+  d.appendChild(det);
   var pv=document.createElement('p');pv.className='privacy';pv.textContent='התשובות נשארות בדפדפן עד סגירת הלשונית. אם תשלחו בקשת חזרה, שם, טלפון והתשובות שנבחרו יישמרו לצורך טיפול. מידע כספי נשלח רק אם סימנתם לצרף אותו, ואינו נכלל בכתובת הדף או באירועי מדידה.';d.appendChild(pv);
   steps.appendChild(d);setHref();track('quiz_summary',{missing:miss.length});
 }
