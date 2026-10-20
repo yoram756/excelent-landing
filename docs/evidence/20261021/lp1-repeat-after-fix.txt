@@ -1,0 +1,45 @@
+Command: node --test tests/funnel/lp1-adapter.test.js tests/funnel/atomic.test.js
+Exit code: 0
+✔ atomic store refuses implicit production use and persists intake across reopen (55.2583ms)
+✔ 16 simultaneous intake processes create one enrollment and one CRM event (598.7572ms)
+✔ a replay with changed contents rolls back and aliases cannot silently merge people (23.6316ms)
+✔ 16 simultaneous workers across campaigns and channels reserve exactly one contact (809.6183ms)
+✔ a crashed reservation is recovered with fencing and the stale worker cannot dispatch (137.0699ms)
+✔ a crash after dispatch began becomes unknown and blocks all channels after restart (145.4512ms)
+✔ timeout never triggers fallback; confirmed failure blocks the current milestone (25.6283ms)
+✔ optout after reservation revokes preflight and stops every campaign despite fresh intake (26.6034ms)
+✔ concurrent optout and preflight have a durable serial order, never a second contact (155.1318ms)
+✔ recipient preferences are read again before dispatch and original horizon cannot renew (22.4142ms)
+✔ reply, booking and handoff pause all enrollments for this contact (27.1328ms)
+✔ a confirmed mock delivery imposes one shared cooldown across campaigns (24.1948ms)
+✔ CRM projection retries are ordered and acknowledge only a current lease and remote receipt (124.8372ms)
+✔ CRM claims by competing processes expose one current lease for one event (265.0103ms)
+✔ feedback is saved and read after reopen without undoing optout, even when empty (33.5465ms)
+✔ full synthetic journey persists questionnaire, CRM, reply, meeting, cancellation, handoff and paid events (35.1624ms)
+✔ competitor feedback stops all campaigns and is distinct from an unsolicited invitation (22.5139ms)
+✔ partial storage failure rolls back subject, enrollment, inbox, event and projection together (23.3702ms)
+✔ invalid cadence fails closed even at night and with no marketing grants (18.043ms)
+✔ a blocked CRM enrollment does not starve independent enrollment projections (24.6808ms)
+✔ a competitor stop and feedback save roll back together on a projection write failure (21.3327ms)
+✔ stale cancellation and cancellation of another meeting cannot clear the current booking (24.771ms)
+✔ late booking replay cannot revive an already cancelled meeting at the same timestamp (23.3243ms)
+✔ intake rejects personal text in attribution before storing any data (16.5183ms)
+✔ actual LP1 Validate output maps explicit email-only proof into durable intake and CRM outbox (32.4122ms)
+✔ generic legacy checkbox, missing proof and forged client output never invent grants (2.0047ms)
+✔ receipt is bound to product, request id, recipient and explicit campaign mapping (1.0092ms)
+✔ all seven grant combinations plus callback-only retain exact independent choices (1.3932ms)
+✔ unknown, missing, truthy and contradictory grants fail closed (0.6979ms)
+✔ original server receipt anchors the horizon even after an eighteen-month processing delay (2.8463ms)
+✔ equivalent receipt timestamps replay but changing enrollment origin conflicts (3.1365ms)
+✔ long request ids are not truncated into collisions and financial answers never cross this adapter (1.7311ms)
+✔ future server dates and malformed or inconsistent enrollment clocks cannot enter the store (1.9324ms)
+✔ repeat LP1 form can withdraw grants atomically without renewing the horizon or reviving withdrawn channels (6.0327ms)
+✔ repeat-form withdrawal rolls back its consent and reservation changes when audit persistence fails (4.9849ms)
+ℹ tests 35
+ℹ suites 0
+ℹ pass 35
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2818.7289

@@ -40,3 +40,18 @@ test('future server dates and malformed or inconsistent enrollment clocks cannot
  const v=validate();v.contact_permissions.receivedAt='2030-01-01T00:00:00Z';assert.throws(()=>adapt(v,options()));
  const s=new Store(':memory:',{sandbox:true});try{const a=adapt(validate(),options());for(const start of ['bad','2030-01-01T00:00:00Z','2000-01-01T00:00:00Z'])assert.throws(()=>s.ingest({...a,enrolledAt:start}));assert.equal(s.snapshot().subjects.length,0);}finally{s.close();}
 });
+test('repeat LP1 form can withdraw grants atomically without renewing the horizon or reviving withdrawn channels',()=>{
+ const first=validate({...body,marketing_consent:true,marketing_channels:['email','whatsapp','sms']});first.contact_permissions.receivedAt='2026-10-18T09:00:00.000Z';const now='2026-10-20T09:00:00.000Z',s=new Store(':memory:',{sandbox:true});try{
+  const e=s.ingest(adapt(first,{campaign,now})),r=s.reserve({enrollmentId:e.enrollmentId,workerId:'before-withdrawal',now});assert.equal(r.status,'RESERVED');
+  const next=validate({...body,idempotency_key:'test-lp1-repeat-002',marketing_channels:[]});next.contact_permissions.receivedAt=now;const changed=s.ingest(adapt(next,{campaign,now}));assert.equal(changed.enrollmentId,e.enrollmentId);assert.equal(s.snapshot().enrollments[0].started_at,first.contact_permissions.receivedAt);assert.deepEqual(JSON.parse(s.snapshot().enrollments[0].consent).grants,{email:false,sms:false,whatsapp:false});assert.throws(()=>s.beginDispatch({...r,now}),e=>e.code==='STALE');
+  assert.equal(s.snapshot().events.at(-1).type,'channel_withdrawal');assert.equal(s.snapshot().projections.length,2);
+  const broaden=validate({...body,idempotency_key:'test-lp1-repeat-003',marketing_consent:true,marketing_channels:['email','whatsapp','sms']});broaden.contact_permissions.receivedAt=now;s.ingest(adapt(broaden,{campaign,now}));assert.deepEqual(JSON.parse(s.snapshot().enrollments[0].consent).grants,{email:false,sms:false,whatsapp:false});
+ }finally{s.close();}
+});
+test('repeat-form withdrawal rolls back its consent and reservation changes when audit persistence fails',()=>{
+ const first=validate({...body,marketing_consent:true,marketing_channels:['email','whatsapp','sms']});first.contact_permissions.receivedAt='2026-10-18T09:00:00.000Z';const now='2026-10-20T09:00:00.000Z',s=new Store(':memory:',{sandbox:true});try{
+  const e=s.ingest(adapt(first,{campaign,now}));s.reserve({enrollmentId:e.enrollmentId,workerId:'before',now});const next=validate({...body,idempotency_key:'test-lp1-rollback-002',marketing_channels:[]});next.contact_permissions.receivedAt=now;const mapped=adapt(next,{campaign,now});
+  s.db.exec("CREATE TRIGGER reject_repeat BEFORE INSERT ON projections BEGIN SELECT RAISE(ABORT,'injected repeat-audit failure'); END;");assert.throws(()=>s.ingest(mapped),/injected/);assert.equal(s.snapshot().outbox[0].state,'reserved');assert.equal(JSON.parse(s.snapshot().enrollments[0].consent).grants.email,true);assert.equal(s.snapshot().events.length,1);
+  s.db.exec('DROP TRIGGER reject_repeat');const result=s.ingest(mapped);assert.equal(result.consentRestricted,true);assert.equal(s.snapshot().outbox[0].state,'suppressed');
+ }finally{s.close();}
+});

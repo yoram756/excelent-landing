@@ -106,8 +106,13 @@ class Store{
    let subject=byPhone;
    if(!subject){const subjectId=randomUUID();this.run('INSERT INTO subjects(id,phone,email) VALUES(?,?,?)',subjectId,p,m||null);subject=this.get('SELECT * FROM subjects WHERE id=?',subjectId);}
    const existing=this.get('SELECT * FROM enrollments WHERE subject_id=? AND campaign_id=?',subject.id,campaign.id);
-   // A new form submission cannot renew a horizon, replace consent, or undo suppression.
-   if(existing)return {subjectId:subject.id,enrollmentId:existing.id,existing:true,suppressed:!!subject.stop_reason};
+   // A repeated form may restrict consent, but never broaden it, renew the
+   // horizon, replace the original receipt or undo global suppression.
+   if(existing){
+    const current=JSON.parse(existing.consent),withdrawn=CHANNELS.filter(ch=>current.grants[ch]===true&&consent.grants[ch]===false),requiresConsentReview=CHANNELS.some(ch=>current.grants[ch]!==true&&consent.grants[ch]===true);
+    if(withdrawn.length){this.restrictConsent(existing,withdrawn,at);this.event(eventId,existing.id,'channel_withdrawal',at,{channels:withdrawn,sourceRequestId:consent.origin?.requestId||eventId});}
+    return {subjectId:subject.id,enrollmentId:existing.id,existing:true,suppressed:!!subject.stop_reason,consentRestricted:withdrawn.length>0,requiresConsentReview};
+   }
    const enrollmentId=randomUUID();
    this.run('INSERT INTO enrollments(id,subject_id,campaign_id,started_at,consent,campaign,attribution) VALUES(?,?,?,?,?,?,?)',enrollmentId,subject.id,campaign.id,start,encode(consent),encode(campaign),encode(attribution));
    this.event(eventId,enrollmentId,'entered',start,attribution);
@@ -118,6 +123,12 @@ class Store{
   // First stop is retained permanently. No method in this module clears it.
   this.run('UPDATE subjects SET stop_reason=COALESCE(stop_reason,?),stopped_at=COALESCE(stopped_at,?) WHERE id=?',reason,at,subjectId);
   this.run("UPDATE outbox SET state='suppressed',updated_at=?,note=? WHERE subject_id=? AND state IN ('queued','reserved')",at,reason,subjectId);
+ }
+ restrictConsent(enrollment,channels,at){
+  const consent=JSON.parse(enrollment.consent);for(const ch of channels)consent.grants[ch]=false;
+  this.run('UPDATE enrollments SET consent=? WHERE id=?',encode(consent),enrollment.id);
+  this.run("UPDATE outbox SET state='suppressed',updated_at=?,note='channel_withdrawal' WHERE enrollment_id=? AND state IN ('queued','reserved')",at,enrollment.id);
+  return consent.grants;
  }
  record({eventId,enrollmentId,type,referenceId=null,now}){
   if(!STAGES.includes(type))fail('Unsupported lifecycle event');
@@ -147,13 +158,10 @@ class Store{
  withdraw({eventId,enrollmentId,channels,now}){
   const at=iso(now);if(!Array.isArray(channels)||!channels.length||channels.some(ch=>!CHANNELS.includes(ch)))fail('Invalid withdrawal');
   return this.tx(()=>this.once(eventId,{enrollmentId,channels:[...new Set(channels)].sort()},at,()=>{
-   const e=this.enrollment(enrollmentId),consent=JSON.parse(e.consent);if(at<e.started_at)fail('Withdrawal precedes enrollment');
-   for(const ch of channels)consent.grants[ch]=false;
-   this.run('UPDATE enrollments SET consent=? WHERE id=?',encode(consent),enrollmentId);
-   // A withdrawal invalidates reservations before a dispatcher may change channels.
-   this.run("UPDATE outbox SET state='suppressed',updated_at=?,note='channel_withdrawal' WHERE enrollment_id=? AND state IN ('queued','reserved')",at,enrollmentId);
+   const e=this.enrollment(enrollmentId);if(at<e.started_at)fail('Withdrawal precedes enrollment');
+   const grants=this.restrictConsent(e,channels,at);
    this.event(eventId,enrollmentId,'channel_withdrawal',at,{channels});
-   return {enrollmentId,grants:consent.grants};
+   return {enrollmentId,grants};
   }));
  }
  saveFeedback({eventId,enrollmentId,answers,now}){
