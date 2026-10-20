@@ -6,11 +6,12 @@ const fs=require('fs');const path=require('path');const crypto=require('crypto')
 const CAMPAIGN=process.env.CAMPAIGN||'refi';
 const CFG=JSON.parse(fs.readFileSync(path.join(__dirname,'../../campaigns',CAMPAIGN+'.json'),'utf8'));
 const CFGS=JSON.stringify(CFG);
+const BIZS=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8');
 const MODE=process.argv[2]||'test';if(!['test','pilot','live'].includes(MODE))throw new Error('mode must be test, pilot or live');
 const GO_LIVE=process.argv[3]||'2026-10-20T07:00:00Z';
 const PILOT=MODE==='pilot'?(process.argv[4]||''):'';
 if(MODE==='pilot'&&!/^972\d{9}(,972\d{9})*$/.test(PILOT))throw new Error('pilot needs internal phones like 9725XXXXXXXX');
-const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8').split('__CONFIG__').join(CFGS);
+const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS);
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
@@ -87,6 +88,6 @@ cal.nodes.push(monday('Set meeting stage',[1400,100],'={{ JSON.stringify({query:
 // Final guard: no run of two closing braces inside an expression body.
 for(const w of [engine,go,cal])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal]])for(const n of w.nodes)if(JSON.stringify(n).includes('__CONFIG__'))throw new Error('config not injected in '+n.name);
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 console.log('built',MODE,fs.readdirSync(out).join(' '));

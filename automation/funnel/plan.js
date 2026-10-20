@@ -3,6 +3,7 @@
 // MODE: 'test' handles only items named TEST and never calls Gambot; 'pilot' sends only to listed
 // internal phones; 'live' handles real leads only.
 const CFG = __CONFIG__;
+const BIZ = __BUSINESS__;
 const MODE = '__MODE__';
 // pilot: real sends, but only to the internal phones listed here (injected by the build)
 const PILOT = '__PILOT__'.split(',').filter(Boolean);
@@ -89,8 +90,8 @@ for(const it of items){
     st.reply=cvn.time;const t=cvn.text.trim();
     if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set(C.status,{label:'הסר'});set(C.next,{});notify='ביקש הסרה מהודעות: "'+t.slice(0,80)+'"';}
     else if(/^פחות/.test(t)){status='פחות';set(C.status,{label:'פחות'});notify='ביקש לקבל פחות הודעות';}
-    else if(cvn.dir!=='incoming'){status='ענה';set(C.status,{label:'ענה'});notify='יש שיחה ידנית פעילה עם הליד ב 055-9881245, ולכן ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
-    else{status='ענה';set(C.status,{label:'ענה'});heat+=10;set(C.heat,String(heat));notify='ענה בוואטסאפ ל 055-9881245: "'+t.slice(0,120)+'". ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
+    else if(cvn.dir!=='incoming'){status='ענה';set(C.status,{label:'ענה'});notify='יש שיחה ידנית פעילה עם הליד במספר השליחה '+BIZ.phones.sender.number+', ולכן ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+BIZ.phones.contact.number+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
+    else{status='ענה';set(C.status,{label:'ענה'});heat+=10;set(C.heat,String(heat));notify='ענה בוואטסאפ למספר השליחה '+BIZ.phones.sender.number+': "'+t.slice(0,120)+'". ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+BIZ.phones.contact.number+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
     set(C.state,{text:JSON.stringify(st)});
   }
   if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}

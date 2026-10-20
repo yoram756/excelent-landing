@@ -1,0 +1,12 @@
+// Identity guard: names and phone numbers in client facing material must match config/business.json.
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('fs');const path=require('path');
+const ROOT=path.resolve(__dirname,'../..');const BIZ=require(ROOT+'/config/business.json');
+const walk=(d,out=[])=>{for(const f of fs.readdirSync(d)){if(['node_modules','.git','dist'].includes(f))continue;const p=path.join(d,f);const st=fs.statSync(p);if(st.isDirectory())walk(p,out);else if(/\.(html|js|json|md)$/.test(f))out.push(p);}return out;};
+const digits=s=>s.replace(/\D/g,'');
+const clientFacing=walk(ROOT+'/site').concat(walk(ROOT+'/campaigns'));
+const all=walk(ROOT).filter(p=>!p.includes('/tests/')&&!p.endsWith('business.json'));
+test('the private number never appears anywhere',()=>{for(const f of all){const t=digits(fs.readFileSync(f,'utf8'));for(const x of BIZ.phones.forbidden)assert.ok(!t.includes(x.e164)&&!t.includes('0'+x.e164.slice(3)),'forbidden number in '+path.relative(ROOT,f));}});
+test('client facing pages and campaigns never show the backup or sending number',()=>{for(const f of clientFacing){const raw=fs.readFileSync(f,'utf8');for(const k of ['backup','sender']){const n=BIZ.phones[k];assert.ok(!raw.includes(n.number)&&!raw.includes(n.e164)&&!raw.includes('0'+n.e164.slice(3)),k+' number in '+path.relative(ROOT,f));}}});
+test('client facing pages show the contact number',()=>{const idx=fs.readFileSync(ROOT+'/site/lp1v2/index.html','utf8')+fs.readFileSync(ROOT+'/site/lp1v2/assets/v2.js','utf8');assert.ok(idx.includes(BIZ.phones.contact.number)||idx.includes(BIZ.phones.contact.e164));});
+test('the owner is only named with an approved name',()=>{for(const f of clientFacing.concat(walk(ROOT+'/automation/funnel'))){const raw=fs.readFileSync(f,'utf8');for(const m of raw.matchAll(/יורם(?: (\S+))?/g)){const two=m[1]?'יורם '+m[1].replace(/[^֐-׿]/g,''):'יורם';const surname=m[1]&&/^[֐-׿]+$/.test(m[1].replace(/[^֐-׿]/g,''))&&/^(פלד|אקסלנט|חדד)$/.test(m[1].replace(/[^֐-׿]/g,''));if(surname)assert.ok(BIZ.owner.allowedNames.includes(two),'name "'+two+'" in '+path.relative(ROOT,f));}assert.ok(!/נריה/.test(raw),'name נריה in '+path.relative(ROOT,f));}});
+test('pilot and alert phones are only the contact and backup numbers',()=>{const ok=[BIZ.phones.contact.e164,BIZ.phones.backup.e164];for(const p of BIZ.pilotPhones.concat(BIZ.internalAlerts.whatsappTo))assert.ok(ok.includes(p),p);assert.equal(BIZ.internalAlerts.whatsappTo[0],BIZ.phones.contact.e164,'the contact number is first');});

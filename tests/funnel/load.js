@@ -3,7 +3,7 @@ const fs=require('fs');const path=require('path');
 const SRC=path.resolve(__dirname,'../../automation/funnel');
 const cfg=(id='refi')=>fs.readFileSync(path.resolve(__dirname,'../../campaigns/'+id+'.json'),'utf8');
 function planner(mode='test',goLive='2026-10-20T07:00:00Z',pilot='',campaign='refi'){
-  const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__CONFIG__',cfg(campaign)).replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot);
+  const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__CONFIG__',cfg(campaign)).replace('__BUSINESS__',fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8')).replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot);
   return ({items,convos=[],now,shabbat=[],convosDown=false})=>{
     const $=n=>({first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?(convosDown?{error:'down'}:{data:{items:convos}}):n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
     return new Function('$',code)($).map(x=>x.json);

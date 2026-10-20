@@ -3,7 +3,7 @@
 Landing pages for אקסלנט (site/), the refinance lead funnel sources for n8n (automation/funnel/), and their tests (tests/).
 
 ## Language and style
-- Replies to נריה and יורם in Hebrew only. No bold, no asterisks, no dashes between words.
+- Replies to יורם in Hebrew only. The owner is יורם (also יורם פלד or יורם אקסלנט). Never call him by another name. No bold, no asterisks, no dashes between words.
 
 ## How work is reported (binding)
 - Every requirement gets exactly one status: PASS, FAIL, BLOCKED or NOT TESTED.
@@ -24,7 +24,15 @@ Landing pages for אקסלנט (site/), the refinance lead funnel sources for n8
 - Test webhook paths are secret and are filled in at deploy time. Never commit them.
 - Test leads: names start with TEST, phones 0500000040 and up. Delete them after tests.
 
+## Identity and phone numbers (binding)
+- Single source: config/business.json. Code, campaigns and pages take names and numbers from it, never from memory or old docs.
+- 055-2783459 is the only contact number for leads and clients (reply, call back, follow up).
+- 054-8180280 is backup only: copy of internal alerts and approved tests. Never a client facing number.
+- 055-9881245 is the technical Gambot sending number. Do not change or disconnect it.
+- The private number listed under phones.forbidden in config/business.json never appears in business material.
+- Fix a name or number only on an explicit instruction from יורם. Contradictions are reported, not guessed. Real lead data is never overwritten to fix test data.
+- tests/funnel/identity.test.js enforces this on every run.
+
 ## Production rules
 - Server changes: git pull on the VPS, nginx config test in a throwaway container, then restart. Show the command first.
-- Business WhatsApp for leads is 055-2783459; automated messages go out from Gambot 055-9881245. Never use 050-2234052.
 - Do not touch excelentfinance.com (main site), n8n settings, OpenClaw or Hermes.
