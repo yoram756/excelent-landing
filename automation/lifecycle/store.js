@@ -2,6 +2,7 @@
 // Requires Node >=22.13 and a local SQLite filesystem supporting file locks.
 const {DatabaseSync}=require('node:sqlite');
 const {randomUUID,randomBytes,createHash}=require('node:crypto');
+const fs=require('node:fs'),nodePath=require('node:path');
 const {plan,validateCampaign}=require('./policy');
 const feedback=require('./feedback');
 const {summarize,attribution:normalizeAttribution}=require('./insights');
@@ -20,11 +21,13 @@ const fail=(reason,code='INVALID')=>{const e=Error(reason);e.code=code;throw e;}
 class Store{
  constructor(path,{sandbox=false}={}){
   if(sandbox!==true)fail('Only explicitly isolated sandbox databases are supported');
+  if(path!==':memory:'&&(typeof path!=='string'||!nodePath.isAbsolute(path)||!path.endsWith('.sqlite')))fail('Absolute .sqlite runtime path required; recovery staging files cannot be opened');
+  if(path!==':memory:'&&!fs.existsSync(path)&&['-wal','-shm','-journal'].some(suffix=>fs.lstatSync(path+suffix,{throwIfNoEntry:false})))fail('Runtime path has existing SQLite sidecars');
   this.db=new DatabaseSync(path);
   try{
    this.db.exec('PRAGMA busy_timeout=10000; PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;');
    const version=this.db.prepare('PRAGMA user_version').get().user_version;
-   if(version!==0&&version!==1)fail('Unsupported database schema');
+   if(![0,1,2].includes(version))fail('Unsupported database schema');
    this.tx(()=>{
     this.db.exec(`
      CREATE TABLE IF NOT EXISTS subjects(
@@ -60,12 +63,14 @@ class Store{
      CREATE TABLE IF NOT EXISTS feedback_links(
       token_hash TEXT PRIMARY KEY, enrollment_id TEXT NOT NULL REFERENCES enrollments(id),
       csrf TEXT NOT NULL, expires_at TEXT NOT NULL);
-     PRAGMA user_version=1;
+     CREATE TABLE IF NOT EXISTS runtime_control(key TEXT PRIMARY KEY,value TEXT NOT NULL);
+     PRAGMA user_version=2;
     `);
    });
   }catch(e){this.db.close();throw e;}
  }
  close(){this.db.close();}
+ restorePending(){return this.get("SELECT value FROM runtime_control WHERE key='restore_pending'")?.value==='1';}
  tx(fn){this.db.exec('BEGIN IMMEDIATE');try{const result=fn();this.db.exec('COMMIT');return result;}catch(e){this.db.exec('ROLLBACK');throw e;}}
  get(sql,...args){return this.db.prepare(sql).get(...args);}
  all(sql,...args){return this.db.prepare(sql).all(...args);}
@@ -85,17 +90,17 @@ class Store{
  enrollment(enrollmentId){const row=this.get('SELECT * FROM enrollments WHERE id=?',enrollmentId);if(!row)fail('Unknown enrollment','NOT_FOUND');return row;}
  // Trusted adapter only: submitted addresses are contact-deduplication keys, not proof
  // of a person's identity. Different email/phone pairs are never silently merged.
- ingest({eventId,campaign,receipt,attribution={},now}){
-  const at=iso(now),p=phone(receipt?.recipients?.phone),m=email(receipt?.recipients?.email);
-  if(!id(campaign?.id)||receipt?.version!=='lifecycle-consent-v1'||receipt.campaignId!==campaign.id||iso(receipt.receivedAt)>at||!/^972\d{9}$/.test(p)||m&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m))fail('Invalid identity or campaign consent');
+ ingest({eventId,campaign,receipt,attribution={},enrolledAt=null,now}){
+  const at=iso(now),start=enrolledAt===null?at:iso(enrolledAt),p=phone(receipt?.recipients?.phone),m=email(receipt?.recipients?.email);
+  if(start>at||!id(campaign?.id)||receipt?.version!=='lifecycle-consent-v1'||receipt.campaignId!==campaign.id||iso(receipt.receivedAt)>start||!/^972\d{9}$/.test(p)||m&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m))fail('Invalid identity or campaign consent');
   if(!receipt.grants||CHANNELS.some(ch=>typeof receipt.grants[ch]!=='boolean')||Object.keys(receipt.grants).some(ch=>!CHANNELS.includes(ch))||receipt.grants.email&&!m)fail('Explicit channel grants required');
   if(Object.keys(attribution).some(k=>!['source','adSetId','adId'].includes(k))||Object.values(attribution).some(v=>typeof v!=='string'||v.length>160))fail('Invalid attribution');
   const safeAttribution=normalizeAttribution(attribution);
   if(Object.entries(attribution).some(([k,v])=>safeAttribution[k]!==v))fail('Only known sources and platform or synthetic ad identifiers are allowed');
   const consent={...receipt,receivedAt:iso(receipt.receivedAt),recipients:{phone:p,email:m||null}};
   // Validate configuration before persisting anything, including configurations with no consent.
-  const invalid=validateCampaign(campaign,at);if(invalid)fail('Invalid campaign configuration: '+invalid);
-  return this.tx(()=>this.once(eventId,{kind:'intake',campaign,receipt:consent,attribution},at,()=>{
+  const invalid=validateCampaign(campaign,start);if(invalid)fail('Invalid campaign configuration: '+invalid);
+  return this.tx(()=>this.once(eventId,{kind:'intake',campaign,receipt:consent,attribution,...(enrolledAt===null?{}:{enrolledAt:start})},at,()=>{
    const byPhone=this.get('SELECT * FROM subjects WHERE phone=?',p),byEmail=m?this.get('SELECT * FROM subjects WHERE email=?',m):null;
    if(byPhone&&byPhone.email!==(m||null)||byEmail&&byEmail.phone!==p)fail('Recipient alias conflict requires human verification','IDENTITY_CONFLICT');
    let subject=byPhone;
@@ -104,8 +109,8 @@ class Store{
    // A new form submission cannot renew a horizon, replace consent, or undo suppression.
    if(existing)return {subjectId:subject.id,enrollmentId:existing.id,existing:true,suppressed:!!subject.stop_reason};
    const enrollmentId=randomUUID();
-   this.run('INSERT INTO enrollments(id,subject_id,campaign_id,started_at,consent,campaign,attribution) VALUES(?,?,?,?,?,?,?)',enrollmentId,subject.id,campaign.id,at,encode(consent),encode(campaign),encode(attribution));
-   this.event(eventId,enrollmentId,'entered',at,attribution);
+   this.run('INSERT INTO enrollments(id,subject_id,campaign_id,started_at,consent,campaign,attribution) VALUES(?,?,?,?,?,?,?)',enrollmentId,subject.id,campaign.id,start,encode(consent),encode(campaign),encode(attribution));
+   this.event(eventId,enrollmentId,'entered',start,attribution);
    return {subjectId:subject.id,enrollmentId,existing:false,suppressed:!!subject.stop_reason};
   }));
  }
@@ -190,6 +195,7 @@ class Store{
  reserve({enrollmentId,workerId,now,leaseMs=60000}){
   const at=iso(now);if(!id(workerId)||!Number.isInteger(leaseMs)||leaseMs<1000||leaseMs>300000)fail('Invalid worker lease');
   return this.tx(()=>{
+   if(this.restorePending())return {status:'BLOCKED',reason:'restore_reconciliation_required',dispatchEnabled:false};
    this.recover(at);
    const draft=this.preview(enrollmentId,at);if(draft.status!=='DRAFT')return draft;
    const e=this.enrollment(enrollmentId),token=randomUUID(),until=new Date(Date.parse(at)+leaseMs).toISOString();
@@ -203,6 +209,7 @@ class Store{
  beginDispatch({key,token,fence,now}){
   const at=iso(now);
   return this.tx(()=>{
+   if(this.restorePending())fail('Restored database requires reconciliation','RESTORE_PENDING');
    const r=this.owned(key,token,fence);if(r.state!=='reserved'||r.lease_until<=at)fail('Reservation expired or revoked','STALE');
    const draft=this.preview(r.enrollment_id,at,key);
    if(draft.status!=='DRAFT'||draft.key!==key||draft.channel!==r.channel){this.run("UPDATE outbox SET state='suppressed',updated_at=?,note=? WHERE key=?",at,'preflight:'+draft.reason,key);return {status:'STOP',reason:draft.reason,dispatchEnabled:false};}
@@ -223,6 +230,7 @@ class Store{
  claimProjection({workerId,now,leaseMs=60000}){
   const at=iso(now);if(!id(workerId)||!Number.isInteger(leaseMs)||leaseMs<1000||leaseMs>300000)fail('Invalid projection lease');
   return this.tx(()=>{
+   if(this.restorePending())return null;
    const row=this.get("SELECT p.*,e.seq,e.enrollment_id,e.type,e.at,e.detail FROM projections p JOIN events e ON e.id=p.event_id WHERE p.state!='acked' AND (p.state='queued' OR p.lease_until<=?) AND NOT EXISTS (SELECT 1 FROM events prior JOIN projections pp ON pp.event_id=prior.id WHERE prior.enrollment_id=e.enrollment_id AND prior.seq<e.seq AND pp.state!='acked') ORDER BY e.seq LIMIT 1",at);
    if(!row)return null;
    // Per-enrollment ordering: a later update must not overtake an unresolved one.
@@ -234,6 +242,7 @@ class Store{
  acknowledgeProjection({eventId,token,receipt,now}){
   const at=iso(now);if(typeof receipt!=='string'||!receipt.trim()||receipt.length>200)fail('CRM acknowledgement required');
   return this.tx(()=>{
+   if(this.restorePending())fail('Restored database requires reconciliation','RESTORE_PENDING');
    const row=this.get('SELECT * FROM projections WHERE event_id=? AND token=?',eventId,token);
    if(!row||row.state!=='reserved'||row.lease_until<=at)fail('Stale projection lease','STALE');
    this.run("UPDATE projections SET state='acked',receipt=?,lease_until=NULL WHERE event_id=?",receipt,eventId);

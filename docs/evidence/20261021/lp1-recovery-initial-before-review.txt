@@ -1,0 +1,58 @@
+Command: node --test tests/funnel/lp1-adapter.test.js tests/funnel/backup.test.js tests/funnel/atomic.test.js tests/funnel/atomic-mutation.test.js
+Exit code: 0
+✔ regressions detect removed shared pause, removed optout and unsafe unknown retry (2617.4872ms)
+ℹ shared_pause: broken implementation rejected
+ℹ optout: broken implementation rejected
+ℹ unknown_retry: broken implementation rejected
+ℹ adapter_grants: broken implementation rejected
+ℹ enrollment_anchor: broken implementation rejected
+ℹ restore_gate: broken implementation rejected
+✔ atomic store refuses implicit production use and persists intake across reopen (71.244ms)
+✔ 16 simultaneous intake processes create one enrollment and one CRM event (722.9906ms)
+✔ a replay with changed contents rolls back and aliases cannot silently merge people (25.0487ms)
+✔ 16 simultaneous workers across campaigns and channels reserve exactly one contact (798.6135ms)
+✔ a crashed reservation is recovered with fencing and the stale worker cannot dispatch (147.2568ms)
+✔ a crash after dispatch began becomes unknown and blocks all channels after restart (143.4005ms)
+✔ timeout never triggers fallback; confirmed failure blocks the current milestone (27.5495ms)
+✔ optout after reservation revokes preflight and stops every campaign despite fresh intake (26.4058ms)
+✔ concurrent optout and preflight have a durable serial order, never a second contact (144.3273ms)
+✔ recipient preferences are read again before dispatch and original horizon cannot renew (21.7538ms)
+✔ reply, booking and handoff pause all enrollments for this contact (21.7335ms)
+✔ a confirmed mock delivery imposes one shared cooldown across campaigns (23.2851ms)
+✔ CRM projection retries are ordered and acknowledge only a current lease and remote receipt (123.2423ms)
+✔ CRM claims by competing processes expose one current lease for one event (296.2686ms)
+✔ feedback is saved and read after reopen without undoing optout, even when empty (23.5061ms)
+✔ full synthetic journey persists questionnaire, CRM, reply, meeting, cancellation, handoff and paid events (26.5735ms)
+✔ competitor feedback stops all campaigns and is distinct from an unsolicited invitation (19.3609ms)
+✔ partial storage failure rolls back subject, enrollment, inbox, event and projection together (17.5636ms)
+✔ invalid cadence fails closed even at night and with no marketing grants (14.7734ms)
+✔ a blocked CRM enrollment does not starve independent enrollment projections (19.0496ms)
+✔ a competitor stop and feedback save roll back together on a projection write failure (20.1633ms)
+✔ stale cancellation and cancellation of another meeting cannot clear the current booking (21.7817ms)
+✔ late booking replay cannot revive an already cancelled meeting at the same timestamp (19.253ms)
+✔ intake rejects personal text in attribution before storing any data (14.6866ms)
+✔ live WAL backup preserves optout, feedback, consent, events and inbox across offline restore (155.7256ms)
+✔ snapshot itself is quarantined before manifest publication, not just after a restore completes (74.4628ms)
+✔ inflight attempts remain unknown and inherited contact/CRM leases are revoked on restore (149.1015ms)
+✔ post-snapshot optout is not invented; the restored copy remains blocked until reconciliation (184.3776ms)
+✔ checksum and manifest mismatch fail before creating a recovery destination (168.441ms)
+✔ truncated backup fails checksum and existing targets are never overwritten (85.4265ms)
+✔ recovery paths reject traversal, URI filenames and a source path outside the explicit root (27.802ms)
+✔ schema one migrates atomically without losing intake, and recovery requires schema two (135.147ms)
+✔ actual LP1 Validate output maps explicit email-only proof into durable intake and CRM outbox (45.4718ms)
+✔ generic legacy checkbox, missing proof and forged client output never invent grants (2.9785ms)
+✔ receipt is bound to product, request id, recipient and explicit campaign mapping (1.0237ms)
+✔ all seven grant combinations plus callback-only retain exact independent choices (2.4268ms)
+✔ unknown, missing, truthy and contradictory grants fail closed (1.0471ms)
+✔ original server receipt anchors the horizon even after an eighteen-month processing delay (3.6114ms)
+✔ equivalent receipt timestamps replay but changing enrollment origin conflicts (7.6068ms)
+✔ long request ids are not truncated into collisions and financial answers never cross this adapter (0.7834ms)
+✔ future server dates and malformed or inconsistent enrollment clocks cannot enter the store (1.5626ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 42
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2946.2495

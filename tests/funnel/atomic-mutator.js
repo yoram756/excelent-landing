@@ -1,10 +1,14 @@
 // Test-only loader: mutate code in memory in a child process, never on disk.
 const Module=require('node:module'),fs=require('node:fs'),path=require('node:path');
-const target=path.resolve(__dirname,'../../automation/lifecycle/store.js'),original=Module._extensions['.js'];
+const original=Module._extensions['.js'];
 const mutations={
- shared_pause:["state[flag]=related.some(x=>x[flag]===true)","state[flag]=state[flag]===true"],
- optout:["if(['optout','competitor_chosen','paid'].includes(type))this.stopSubject(e.subject_id,type,at);","if(['competitor_chosen','paid'].includes(type))this.stopSubject(e.subject_id,type,at);"],
- unknown_retry:["UPDATE outbox SET state='unknown',updated_at=?","UPDATE outbox SET state='queued',updated_at=?"]
+ shared_pause:['store.js',"state[flag]=related.some(x=>x[flag]===true)","state[flag]=state[flag]===true"],
+ optout:['store.js',"if(['optout','competitor_chosen','paid'].includes(type))this.stopSubject(e.subject_id,type,at);","if(['competitor_chosen','paid'].includes(type))this.stopSubject(e.subject_id,type,at);"],
+ unknown_retry:['store.js',"UPDATE outbox SET state='unknown',updated_at=?","UPDATE outbox SET state='queued',updated_at=?"],
+ adapter_grants:['lp1-adapter.js','[ch,p.grants[ch]]','[ch,true]'],
+ enrollment_anchor:['store.js','start=enrolledAt===null?at:iso(enrolledAt)','start=at'],
+ restore_gate:['store.js',"if(this.restorePending())return {status:'BLOCKED'","if(false)return {status:'BLOCKED'"]
 };
 if(!Object.hasOwn(mutations,process.env.ATOMIC_MUTATION||''))throw Error('Explicit known test mutation required');
-Module._extensions['.js']=function(module,filename){if(filename!==target)return original(module,filename);const [before,after]=mutations[process.env.ATOMIC_MUTATION],source=fs.readFileSync(filename,'utf8');if(!source.includes(before))throw Error('Mutation target changed');module._compile(source.replace(before,after),filename);};
+const [file,before,after]=mutations[process.env.ATOMIC_MUTATION],target=path.resolve(__dirname,'../../automation/lifecycle',file);
+Module._extensions['.js']=function(module,filename){if(filename!==target)return original(module,filename);const source=fs.readFileSync(filename,'utf8');if(!source.includes(before))throw Error('Mutation target changed');module._compile(source.replace(before,after),filename);};

@@ -1,0 +1,343 @@
+Command: node --test tests/funnel/lp1-adapter.test.js tests/funnel/backup.test.js tests/funnel/atomic.test.js tests/funnel/atomic-mutation.test.js
+Exit code: 1
+✖ regressions detect removed shared pause, removed optout and unsafe unknown retry (3976.5195ms)
+ℹ shared_pause: broken implementation rejected
+ℹ optout: broken implementation rejected
+ℹ unknown_retry: broken implementation rejected
+ℹ adapter_grants: broken implementation rejected
+ℹ enrollment_anchor: broken implementation rejected
+✔ atomic store refuses implicit production use and persists intake across reopen (55.2353ms)
+✔ 16 simultaneous intake processes create one enrollment and one CRM event (775.2359ms)
+✔ a replay with changed contents rolls back and aliases cannot silently merge people (23.6553ms)
+✔ 16 simultaneous workers across campaigns and channels reserve exactly one contact (962.0386ms)
+✔ a crashed reservation is recovered with fencing and the stale worker cannot dispatch (152.715ms)
+✔ a crash after dispatch began becomes unknown and blocks all channels after restart (150.351ms)
+✔ timeout never triggers fallback; confirmed failure blocks the current milestone (24.507ms)
+✔ optout after reservation revokes preflight and stops every campaign despite fresh intake (25.3674ms)
+✔ concurrent optout and preflight have a durable serial order, never a second contact (139.1679ms)
+✔ recipient preferences are read again before dispatch and original horizon cannot renew (23.2714ms)
+✔ reply, booking and handoff pause all enrollments for this contact (26.1757ms)
+✔ a confirmed mock delivery imposes one shared cooldown across campaigns (23.6841ms)
+✔ CRM projection retries are ordered and acknowledge only a current lease and remote receipt (122.5973ms)
+✔ CRM claims by competing processes expose one current lease for one event (279.8245ms)
+✔ feedback is saved and read after reopen without undoing optout, even when empty (33.5532ms)
+✔ full synthetic journey persists questionnaire, CRM, reply, meeting, cancellation, handoff and paid events (32.0093ms)
+✔ competitor feedback stops all campaigns and is distinct from an unsolicited invitation (28.642ms)
+✔ partial storage failure rolls back subject, enrollment, inbox, event and projection together (19.6269ms)
+✔ invalid cadence fails closed even at night and with no marketing grants (16.3564ms)
+✔ a blocked CRM enrollment does not starve independent enrollment projections (29.9413ms)
+✔ a competitor stop and feedback save roll back together on a projection write failure (31.0968ms)
+✔ stale cancellation and cancellation of another meeting cannot clear the current booking (40.917ms)
+✔ late booking replay cannot revive an already cancelled meeting at the same timestamp (32.6368ms)
+✔ intake rejects personal text in attribution before storing any data (23.2222ms)
+✖ live WAL backup preserves optout, feedback, consent, events and inbox across offline restore (110.1587ms)
+✖ snapshot itself is quarantined before manifest publication, not just after a restore completes (91.6473ms)
+✖ inflight attempts remain unknown and inherited contact/CRM leases are revoked on restore (233.0689ms)
+✖ post-snapshot optout is not invented; the restored copy remains blocked until reconciliation (65.8523ms)
+✖ checksum and manifest mismatch fail before creating a recovery destination (83.4171ms)
+✖ truncated backup fails checksum and existing targets are never overwritten (78.067ms)
+✔ recovery paths reject traversal, URI filenames and a source path outside the explicit root (33.0767ms)
+✖ schema one migrates atomically without losing intake, and recovery requires schema two (70.0318ms)
+✔ crash after VACUUM leaves only a non-runtime staging file, never an unblocked published snapshot (279.5991ms)
+✖ existing destination sidecars are preserved and reject both backup and restore (193.7546ms)
+✖ unexpected backup-source sidecars are rejected without altering their contents (69.1981ms)
+✖ a checksum-valid source without quarantine cannot be accepted as a recovery snapshot (58.0558ms)
+✖ crash at the beginning of restore copying cannot publish an empty runtime database (204.3359ms)
+✔ actual LP1 Validate output maps explicit email-only proof into durable intake and CRM outbox (42.1632ms)
+✔ generic legacy checkbox, missing proof and forged client output never invent grants (1.5429ms)
+✔ receipt is bound to product, request id, recipient and explicit campaign mapping (0.7249ms)
+✔ all seven grant combinations plus callback-only retain exact independent choices (1.8082ms)
+✔ unknown, missing, truthy and contradictory grants fail closed (0.9439ms)
+✔ original server receipt anchors the horizon even after an eighteen-month processing delay (4.6415ms)
+✔ equivalent receipt timestamps replay but changing enrollment origin conflicts (3.6172ms)
+✔ long request ids are not truncated into collisions and financial answers never cross this adapter (0.7481ms)
+✔ future server dates and malformed or inconsistent enrollment clocks cannot enter the store (2.0089ms)
+ℹ tests 47
+ℹ suites 0
+ℹ pass 35
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4113.5763
+
+✖ failing tests:
+
+test at tests\funnel\atomic-mutation.test.js:2:1
+✖ regressions detect removed shared pause, removed optout and unsafe unknown retry (3976.5195ms)
+  AssertionError [ERR_ASSERTION]: restore_gate unmodified baseline must pass before a mutation can prove anything: ✖ post-snapshot optout is not invented; the restored copy remains blocked until reconciliation (82.7129ms)
+  ℹ tests 1
+  ℹ suites 0
+  ℹ pass 0
+  ℹ fail 1
+  ℹ cancelled 0
+  ℹ skipped 0
+  ℹ todo 0
+  ℹ duration_ms 192.5814
+  
+  ✖ failing tests:
+  
+  test at tests\funnel\backup.test.js:20:1
+  ✖ post-snapshot optout is not invented; the restored copy remains blocked until reconciliation (82.7129ms)
+    Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-wnnPX8\.lp1-recovery-495fe1b1-7e7b-476f-81cd-f96839e600fb.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-wnnPX8\snapshot.sqlite'
+        at Object.linkSync (node:fs:1975:11)
+        at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+        at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:21:44)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1402:25)
+        at Test.start (node:internal/test_runner/test:1262:17)
+        at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+      errno: -4048,
+      code: 'EPERM',
+      syscall: 'link',
+      path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-wnnPX8\\.lp1-recovery-495fe1b1-7e7b-476f-81cd-f96839e600fb.partial',
+      dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-wnnPX8\\snapshot.sqlite'
+    }
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\atomic-mutation.test.js:7:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\backup.test.js:6:1
+✖ live WAL backup preserves optout, feedback, consent, events and inbox across offline restore (110.1587ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-sICCMK\.lp1-recovery-9d6740e9-a2c9-4d03-8c4e-d86fb004866e.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-sICCMK\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:8:76)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-sICCMK\\.lp1-recovery-9d6740e9-a2c9-4d03-8c4e-d86fb004866e.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-sICCMK\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:12:1
+✖ snapshot itself is quarantined before manifest publication, not just after a restore completes (91.6473ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-ZoqPDR\.lp1-recovery-9f9a0867-2b1f-4e87-8139-abb9e9ea11ae.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-ZoqPDR\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:13:42)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-ZoqPDR\\.lp1-recovery-9f9a0867-2b1f-4e87-8139-abb9e9ea11ae.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-ZoqPDR\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:15:1
+✖ inflight attempts remain unknown and inherited contact/CRM leases are revoked on restore (233.0689ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-szEgno\.lp1-recovery-5db9f897-d566-4336-928e-f8c008fb560d.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-szEgno\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:17:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-szEgno\\.lp1-recovery-5db9f897-d566-4336-928e-f8c008fb560d.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-szEgno\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:20:1
+✖ post-snapshot optout is not invented; the restored copy remains blocked until reconciliation (65.8523ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-tStnac\.lp1-recovery-47fded82-39a8-4a4a-807d-0904bfd95021.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-tStnac\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:21:44)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-tStnac\\.lp1-recovery-47fded82-39a8-4a4a-807d-0904bfd95021.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-tStnac\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:24:1
+✖ checksum and manifest mismatch fail before creating a recovery destination (83.4171ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-OihmCW\.lp1-recovery-a0234b11-7776-4343-9b05-13a8bc1bdff7.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-OihmCW\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:25:48)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-OihmCW\\.lp1-recovery-a0234b11-7776-4343-9b05-13a8bc1bdff7.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-OihmCW\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:27:1
+✖ truncated backup fails checksum and existing targets are never overwritten (78.067ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-lItIZi\.lp1-recovery-ec4c67bb-7fa8-4f84-bd2b-ca7874309359.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-lItIZi\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:28:48)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-lItIZi\\.lp1-recovery-ec4c67bb-7fa8-4f84-bd2b-ca7874309359.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-lItIZi\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:33:1
+✖ schema one migrates atomically without losing intake, and recovery requires schema two (70.0318ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-LV8qB2\.lp1-recovery-5ac1125e-1531-4396-b2cf-182772d9e848.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-LV8qB2\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:35:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-LV8qB2\\.lp1-recovery-5ac1125e-1531-4396-b2cf-182772d9e848.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-LV8qB2\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:42:1
+✖ existing destination sidecars are preserved and reject both backup and restore (193.7546ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-EoSJTP\.lp1-recovery-28dccb2c-fccb-4754-a758-e3aaa9163450.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-EoSJTP\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:43:48)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-EoSJTP\\.lp1-recovery-28dccb2c-fccb-4754-a758-e3aaa9163450.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-EoSJTP\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:47:1
+✖ unexpected backup-source sidecars are rejected without altering their contents (69.1981ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-b9iwFi\.lp1-recovery-5eca7d39-8efe-47eb-b1ce-075299da7fbe.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-b9iwFi\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:48:48)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-b9iwFi\\.lp1-recovery-5eca7d39-8efe-47eb-b1ce-075299da7fbe.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-b9iwFi\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:50:1
+✖ a checksum-valid source without quarantine cannot be accepted as a recovery snapshot (58.0558ms)
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-6XIwPr\.lp1-recovery-1cae949d-bae7-48f4-8176-000aae26cb3f.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-recovery-6XIwPr\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:51:48)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-6XIwPr\\.lp1-recovery-1cae949d-bae7-48f4-8176-000aae26cb3f.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-recovery-6XIwPr\\snapshot.sqlite'
+  }
+
+test at tests\funnel\backup.test.js:54:1
+✖ crash at the beginning of restore copying cannot publish an empty runtime database (204.3359ms)
+  AssertionError [ERR_ASSERTION]: node:fs:1975
+    binding.link(
+            ^
+  
+  Error: EPERM: operation not permitted, link 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-restore-crash-ibFEIi\.lp1-recovery-a2c52a69-cfc8-4ee4-82f6-cc05ae8eab58.partial' -> 'C:\Users\User\AppData\Local\Packages\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\AC\Temp\excelent-restore-crash-ibFEIi\snapshot.sqlite'
+      at Object.linkSync (node:fs:1975:11)
+      at backup (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\automation\lifecycle\backup.js:45:18)
+      at Object.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\recovery-crash-worker.js:7:82)
+      at Module._compile (node:internal/modules/cjs/loader:1929:14)
+      at Object..js (node:internal/modules/cjs/loader:2060:10)
+      at Module.load (node:internal/modules/cjs/loader:1651:32)
+      at Module._load (node:internal/modules/cjs/loader:1443:12)
+      at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)
+      at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+      at node:internal/main/run_main_module:33:47 {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'link',
+    path: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-restore-crash-ibFEIi\\.lp1-recovery-a2c52a69-cfc8-4ee4-82f6-cc05ae8eab58.partial',
+    dest: 'C:\\Users\\User\\AppData\\Local\\Packages\\sandbox.{c51fa27c-3458-412a-97ae-a6474fa40114}\\AC\\Temp\\excelent-restore-crash-ibFEIi\\snapshot.sqlite'
+  }
+  
+  Node.js v24.21.0
+  
+  
+  1 !== 73
+  
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\backup.test.js:56:198)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 73,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
