@@ -1,0 +1,34 @@
+{
+  "scope": "Synthetic sandbox only; no live provider, CRM bridge, production deployment or production storage recovery",
+  "status": "PASS",
+  "workflowRun": 39501257397,
+  "job": 118899032316,
+  "url": "https://github.com/yoram756/excelent-landing/actions/runs/39501257397",
+  "codeCommit": "09c14b50ea1524ea8114b6f4b53057c5e7c5a0f3",
+  "localCodeCommit": "6fea6f8d01896720ee82b361cf7b09ec9c2574d9",
+  "identicalTree": "4e3b321be9410dd6a6382116b33b292e6cbc7c98",
+  "conclusion": "success",
+  "logicHttp": {
+    "passed": 222,
+    "failed": 0
+  },
+  "browserAccessibility": {
+    "passed": 55,
+    "failed": 0
+  },
+  "mutationProofs": {
+    "count": 6,
+    "method": "Unmodified selected regression must pass, then mutated implementation must fail with AssertionError; filesystem errors do not count"
+  },
+  "environment": "GitHub Actions Linux; Node 22",
+  "localBackupStatus": "BLOCKED: Windows sandbox hard-link EPERM; not bypassed",
+  "logExcerpt": [
+    "2026-10-20T21:33:29.3867312Z # adapter_grants: broken implementation rejected",
+    "2026-10-20T21:33:29.3868719Z # enrollment_anchor: broken implementation rejected",
+    "2026-10-20T21:33:29.3869705Z # restore_gate: broken implementation rejected",
+    "2026-10-20T21:33:40.5081623Z # tests 222",
+    "2026-10-20T21:33:40.5082248Z # pass 222",
+    "2026-10-20T21:33:40.5082572Z # fail 0",
+    "2026-10-20T21:34:07.2294205Z 55/55"
+  ]
+}

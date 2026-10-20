@@ -1,0 +1,45 @@
+{
+  "reviewer": "Independent read-only qa_reviewer required by CLAUDE.md",
+  "reviewedCodeCommit": "09c14b50ea1524ea8114b6f4b53057c5e7c5a0f3",
+  "workflowRun": 39501257397,
+  "scope": "Synthetic sandbox only; no live provider, CRM bridge, production deployment or production storage recovery",
+  "checks": [
+    {
+      "requirement": "LP1 receipt adapter",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Original enrollment horizon",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Repeated form restriction and atomic rollback",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Sandbox backup, crashes, checksum and sidecars",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Persistent restored queue quarantine and lease revocation",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Six baseline-positive mutation proofs",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Independent CI log verification 222 + 55",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Local Windows backup hard links",
+      "status": "BLOCKED"
+    },
+    {
+      "requirement": "Live providers, CRM bridge, commercial activation and production hosting recovery",
+      "status": "NOT TESTED"
+    }
+  ],
+  "note": "Sandbox acceptance does not establish complete commercial funnel operation."
+}
