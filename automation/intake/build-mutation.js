@@ -31,6 +31,13 @@ if (A.has) cv.dropdown_mm88dkb2 = { labels: [L.has] };
 cv.boolean_mm8848pn = { checked: 'true' };
 cv.date_mm88hmw2 = dt(v.service_request_at);
 if (v.marketing_consent) { cv.boolean_mm88mzry = { checked: 'true' }; cv.date_mm88qwfm = dt(v.marketing_consent_at); }
+if (v.email) cv.fn_email = { email:v.email, text:v.email };
+if (v.contact_permissions) {
+  cv.long_text_mm8ag9s = { text:JSON.stringify(v.contact_permissions) };
+  // A modern form can withdraw WhatsApp consent while keeping email/SMS consent.
+  cv.boolean_mm88mzry = { checked:v.contact_permissions.grants.whatsapp?'true':'false' };
+  if (!v.contact_permissions.grants.whatsapp) cv.date_mm88qwfm = {};
+}
 if (v.channel === 'וואטסאפ') cv.boolean_mm88aae4 = { checked: 'true' };
 if (recent) {
   return [{ json: { mode: 'update', itemId: recent.id, query: 'mutation($item: ID!, $vals: JSON!){ change_multiple_column_values(board_id: 5106246268, item_id: $item, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { item: String(recent.id), vals: JSON.stringify(cv) } } }];

@@ -41,6 +41,17 @@ for (const field of ['service_request_at','marketing_consent_at']) {
   if (b[field] != null && !Number.isFinite(Date.parse(b[field]))) return fail('bad_consent_date');
 }
 const key = String(b.idempotency_key||''); if (!/^[A-Za-z0-9-]{8,80}$/.test(key)) return fail('bad_key');
+const email = String(b.email||'').trim();
+if (email && (email.length>254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email))) return fail('bad_email');
+let contactPermissions = null;
+if (b.marketing_channels !== undefined) {
+  const channels=b.marketing_channels;
+  if (!Array.isArray(channels) || channels.length>3 || channels.some(c=>!['whatsapp','email','sms'].includes(c)) || new Set(channels).size!==channels.length) return fail('bad_marketing_channels');
+  if (channels.includes('whatsapp') !== (b.marketing_consent===true)) return fail('conflicting_whatsapp_consent');
+  if (channels.includes('email') && !email) return fail('email_required_for_marketing');
+  contactPermissions={version:'lp1-channels-20261020',source:'LP1 callback form',receivedAt:new Date().toISOString(),requestId:key,phone,email:email||null,
+    grants:Object.fromEntries(['whatsapp','email','sms'].map(c=>[c,channels.includes(c)]))};
+}
 const answers = b.answers && typeof b.answers==='object' ? b.answers : {};
 const clean = {};
 for (const [k,v] of Object.entries(answers)) {
@@ -65,4 +76,5 @@ const readable = Object.keys(P.labels).filter(q => clean[q]!=null).map(q => `${P
 return [{ json: { ok:true, duplicate:false, key, product, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),
   answers: clean, goalNames: (Array.isArray(clean.goal)?clean.goal:(clean.goal?[clean.goal]:[])).map(x=>P.labels.goal.o[x]), labels: Object.fromEntries(Object.keys(clean).map(q=>[q, lab(q, clean[q])])), readable,
   money_included: b.money_included===true, service_request_at: b.service_request_at || new Date().toISOString(),
+  email:email||null, contact_permissions:contactPermissions,
   marketing_consent: b.marketing_consent===true, marketing_consent_at: b.marketing_consent===true ? (b.marketing_consent_at || new Date().toISOString()) : null, score } }];

@@ -15,3 +15,33 @@ test('partial lookup cannot create and a normalized exact phone updates the exis
  assert.throws(()=>run({data:{items_page_by_column_values:{items:[],cursor:'more'}}}),/incomplete/);
  const r=run({data:{items_page_by_column_values:{cursor:null,items:[{id:'123',created_at:new Date().toISOString(),column_values:[{id:'refi_phone',text:'+972 50-000-0040'}]}]}}});assert.equal(r.mode,'update');assert.equal(r.itemId,'123');
 });
+
+test('channel receipt binds choices to recipient and server receipt time',()=>{
+ const r=validate({...base,email:'test@example.invalid',marketing_consent:true,marketing_channels:['whatsapp','email','sms'],marketing_consent_at:'2000-01-01T00:00:00Z'});
+ assert.equal(r.email,'test@example.invalid');assert.deepEqual(r.contact_permissions.grants,{whatsapp:true,email:true,sms:true});
+ assert.equal(r.contact_permissions.phone,'972500000040');assert.equal(r.contact_permissions.requestId,base.idempotency_key);
+ assert.equal(r.contact_permissions.version,'lp1-channels-20261020');assert.ok(Date.now()-Date.parse(r.contact_permissions.receivedAt)<5000);
+});
+test('email-only consent cannot authorize WhatsApp or SMS',()=>{
+ const r=validate({...base,email:'test@example.invalid',marketing_channels:['email']});
+ assert.equal(r.ok,true);assert.equal(r.marketing_consent,false);assert.deepEqual(r.contact_permissions.grants,{whatsapp:false,email:true,sms:false});
+});
+test('empty choices preserve callback request without marketing permission',()=>{
+ const r=validate({...base,marketing_channels:[]});assert.equal(r.ok,true);assert.deepEqual(r.contact_permissions.grants,{whatsapp:false,email:false,sms:false});
+});
+test('legacy generic consent never invents channel-specific proof',()=>{
+ const r=validate({...base,marketing_consent:true});assert.equal(r.contact_permissions,null);assert.equal(r.email,null);
+});
+test('invalid or contradictory channel payloads are rejected',()=>{
+ for(const b of [{marketing_channels:'email'},{marketing_channels:['push']},{marketing_channels:['sms','sms']},{marketing_channels:['whatsapp']},{marketing_channels:[],marketing_consent:true},{marketing_channels:['email']}]) assert.equal(validate({...base,...b}).ok,false);
+});
+test('invalid email and header injection are rejected; optional email stays optional',()=>{
+ for(const email of ['bad','a@b','a@b.co\r\nBcc: other@example.invalid','a'.repeat(255)+'@b.co'])assert.equal(validate({...base,email}).ok,false);
+ assert.equal(validate({...base,email:''}).ok,true);
+});
+test('modern consent and email persist in the mutation and clear prior WhatsApp opt-in',()=>{
+ const v=validate({...base,email:'test@example.invalid',marketing_channels:['email']});
+ const r=new Function('$input','$','$getWorkflowStaticData',read('build-mutation'))({first:()=>({json:{data:{items_page_by_column_values:{items:[],cursor:null}}}})},()=>({first:()=>({json:v})}),()=>({}))[0].json;
+ const c=JSON.parse(r.variables.vals);assert.equal(c.fn_email.email,v.email);assert.equal(c.boolean_mm88mzry.checked,'false');assert.deepEqual(c.date_mm88qwfm,{});
+ assert.deepEqual(JSON.parse(c.long_text_mm8ag9s.text),v.contact_permissions);
+});

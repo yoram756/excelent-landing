@@ -119,6 +119,17 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
    const res=await p.evaluate(async()=>{const r=await axe.run(document,{runOnly:['wcag2a','wcag2aa','wcag21aa']});return r.violations.map(v=>v.id+':'+v.nodes.length+':'+v.nodes.slice(0,2).map(n=>n.target.join(' ')).join(','));});
    ok('axe '+u,res.length===0,res.join(' | '));}
   await b.close();}
+ // Each optional channel has its own unchecked choice; email-only is never WA consent.
+ {const {b,p}=await fresh(390);await get('/__mode?m=ok');await p.click('#quickBtn');
+  ok('all channel choices are unchecked',!(await p.isChecked('#fMarketing'))&&!(await p.isChecked('#fEmailMarketing'))&&!(await p.isChecked('#fSmsMarketing')));
+  await p.fill('#fName','TEST ערוצים');await p.fill('#fPhone','0500000009');await p.check('#fService');await p.check('#fEmailMarketing');await p.click('#fSubmit');
+  ok('email opt-in requires an email address',(await p.locator('#fEmailErr').textContent()).includes('יש להזין'));
+  ok('missing email cannot send intake',JSON.parse(await get('/__log')).length===0);
+  await p.fill('#fEmail','invalid');await p.click('#fSubmit');ok('invalid email is explained',(await p.locator('#fEmailErr').textContent()).includes('תקינה'));
+  await p.fill('#fEmail','test@example.invalid');await p.click('#fSubmit');await p.waitForTimeout(700);
+  const req=JSON.parse(await get('/__log'))[0]?.body;
+  ok('email address is submitted',req?.email==='test@example.invalid');ok('email-only consent remains separate',req?.marketing_channels?.join(',')==='email'&&req?.marketing_consent===false);
+  ok('email-only callback is saved',(await p.locator('#fStatus').getAttribute('data-state'))==='success');await b.close();}
  for(const r of R)console.log((r.pass?'PASS':'FAIL'),r.name,r.pass?'':(r.info||''));
  console.log(R.filter(r=>r.pass).length+'/'+R.length);process.exitCode=R.every(r=>r.pass)&&R.length>0?0:1;
 })();

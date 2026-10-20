@@ -75,6 +75,11 @@ for(const it of items){
   let next=dateVal(col(cv,'next').value);const last=dateVal(col(cv,'last').value);
   let token=col(cv,'token').text||'';const stage=col(cv,'stage').text||'';
   const mkt=checked(col(cv,'consentMarketing').value);const svc=checked(col(cv,'consentService').value);
+  const permissionRule=CFG.contactPermissions;
+  const needsChannelProof=permissionRule&&Date.parse(it.created_at)>=Date.parse(permissionRule.requiredAfter);
+  let channelProof=null;try{channelProof=JSON.parse(cv[permissionRule?.column]?.text||'null');}catch(e){}
+  const proofAt=Date.parse(channelProof?.receivedAt);
+  const whatsappAllowed=!needsChannelProof||(channelProof?.version===permissionRule.version&&channelProof?.phone===phone&&channelProof?.grants?.whatsapp===true&&Number.isFinite(proofAt)&&proofAt>=Date.parse(permissionRule.requiredAfter)&&proofAt<=now);
   // Score explanations also exist for callback-only leads. A configured campaign
   // must find actual questionnaire answer lines before selecting the quiz path.
   const quizText=(col(cv,'quizDone').text||'').trim();
@@ -88,6 +93,7 @@ for(const it of items){
   const set=(k,v)=>{cols[k]=v;changed=true;};
 
   if(!status){
+    if(!whatsappAllowed)continue;
     // Do not enroll a lead already handled by a person, even with no funnel status.
     if(HUMAN.includes(stage)||(col(cv,'firstReply').text||'').trim())continue;
     if(!(mkt||svc))continue;
@@ -113,6 +119,7 @@ for(const it of items){
     set(C.state,{text:JSON.stringify(st)});
   }
   if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
+  if(!whatsappAllowed){set(C.status,{label:'נעצר'});set(C.next,{});out.push({itemId:it.id,phone,cols,send:null,notify:'אין אישור WhatsApp מתועד לערוץ זה; הסדרה נעצרה.'});continue;}
   // manual handling wins: no automatic message while a person handles the lead
   if(HUMAN.includes(stage)||(col(cv,'firstReply').text||'').trim()){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
 
@@ -148,7 +155,7 @@ for(const it of items){
     if(code){
       if(!fixed)nStep=code;
       const vars=(CFG.templates[code].vars||['first']).map(v=>v==='when'?whenText(meeting):v==='link'?token+DEST[code]:first);
-      send={to:phone,templateId:T[code],variables:vars};
+      send={to:phone,from:BIZ.phones.gambot_sender.e164,templateId:T[code],variables:vars};
       if(DEST[code]&&CFG.templates[code].linkMode!=='body')send.buttonVariables=[token+DEST[code]];
       set(C.last,toDate(now));
     }

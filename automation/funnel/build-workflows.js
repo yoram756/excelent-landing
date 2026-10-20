@@ -43,6 +43,7 @@ const tag=MODE==='live'?'':' (מצב בדיקה)';const PFX='משפך '+CFG.name
 
 // 1. Engine
 const engineCols=['firstReply','phone','stage','meeting','consentMarketing','consentService','quizDone','heat','status','path','step','next','last','token','state'].map(k=>COLS[k]);
+if(CFG.contactPermissions)engineCols.push(CFG.contactPermissions.column);
 const engine={name:PFX+'מנוע הודעות'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
  {id:id(),name:'Every 5 min',type:'n8n-nodes-base.scheduleTrigger',typeVersion:1.2,position:[0,0],parameters:{rule:{interval:[{field:'minutes',minutesInterval:5}]}}},
  hook('Run test',[0,200],'__TEST_PATH__engine'),

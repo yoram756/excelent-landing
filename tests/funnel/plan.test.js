@@ -11,6 +11,22 @@ const cols=r=>JSON.parse(r.colsJson);
 test('new form lead gets M1 and a token',()=>{const [r]=plan({items:[item({cols:base})],now:NOW});
   assert.equal(r.send.templateId,T.M1);assert.equal(r.send.to,'972500000040');assert.deepEqual(r.send.variables,['דני']);
   const c=cols(r);assert.equal(c.fn_status.label,'פעיל');assert.match(c.fn_token,/^[a-f0-9]{32}$/);assert.equal(c.fn_path,'B');assert.equal(c.fn_step,'M1');});
+
+test('WhatsApp sender is explicitly the existing owner-selected number',()=>{
+ for(const mode of ['test','live']){const [r]=planner(mode)({items:[item({name:mode==='live'?'ליד בדיקה':'TEST פנימי',cols:base})],now:NOW});assert.equal(r.send.from,'972559881245');}
+});
+
+test('new cohort requires recipient-bound explicit WhatsApp proof',()=>{
+ const now='2026-10-21T09:00:00Z',created='2026-10-21T08:00:00Z';
+ const proof={version:'lp1-channels-20261020',phone:'972500000040',receivedAt:created,grants:{whatsapp:true,email:false,sms:false}};
+ const run=p=>plan({items:[item({created,cols:{...base,...(p?{long_text_mm8ag9s:JSON.stringify(p)}:{})}})],now});
+ assert.equal(run(null).length,0);assert.equal(run({...proof,grants:{email:true}}).length,0);assert.equal(run({...proof,phone:'972500000041'}).length,0);
+ assert.equal(run({...proof,receivedAt:'2030-01-01'}).length,0);assert.equal(run(proof)[0].send.from,'972559881245');
+});
+test('withdrawn channel proof stops an active WhatsApp series before stale pending reconciliation',()=>{
+ const [r]=plan({items:[item({created:'2026-10-21T08:00:00Z',cols:active({fn_path:'B',fn_step:'M1',fn_next:due,fn_opens:JSON.stringify({pending:{key:'old',at:1}}),long_text_mm8ag9s:JSON.stringify({version:'lp1-channels-20261020',phone:'972500000040',receivedAt:'2026-10-21T08:00:00Z',grants:{whatsapp:false,email:true}})})})],now:'2026-10-21T09:00:00Z'});
+ assert.equal(r.send,null);assert.equal(r.reconcile,false);assert.equal(r.cols.fn_status.label,'נעצר');assert.deepEqual(r.cols.fn_next,{});
+});
 test('landing page lead with submitted questionnaire answers starts at M7',()=>{const [r]=plan({items:[item({cols:{...base,long_text_mm88xzfe:'מוצר: מחזור משכנתא (LP1)\nיש לכם היום משכנתא? כן, משכנתא אחת'}})],now:NOW});assert.equal(r.send.templateId,T.M7);assert.equal(cols(r).fn_path,'D');});
 test('callback score explanation and product metadata do not pretend a questionnaire was answered',()=>{const [r]=plan({items:[item({cols:{...base,long_text_mm88pfdv:'גרסה heat-1.1, שלמות 1/4\nחסר: intent, timing, docs',long_text_mm88xzfe:'מוצר: מחזור משכנתא (LP1)\nמידע כספי צורף: לא\n'}})],now:NOW});assert.equal(r.send.templateId,T.M1);assert.equal(cols(r).fn_path,'B');});
 test('a submitted unknown answer qualifies even when financial details were skipped',()=>{const [r]=plan({items:[item({cols:{...base,long_text_mm88xzfe:'מוצר: מחזור משכנתא (LP1)\nיש לכם דוח יתרות לסילוק עדכני? לא בטוח מה זה'}})],now:NOW});assert.equal(r.send.templateId,T.M7);});
