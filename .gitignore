@@ -2,3 +2,7 @@ node_modules/
 tests/out/
 automation/funnel/dist/engine-pilot.json
 automation/funnel/dist/engine-live.json
+automation/lifecycle/runtime/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm

@@ -11,6 +11,16 @@ function addMonths(iso,months){
 const phone=v=>String(v||'').replace(/\D/g,'').replace(/^0/,'972');
 const mail=v=>String(v||'').trim().toLowerCase();
 const outcome=(status,reason,extra={})=>({status,reason,dispatchEnabled:false,...extra});
+function validateCampaign(campaign,enrolledAt){
+  if(!Number.isInteger(campaign?.maxMonths)||campaign.maxMonths<1||campaign.maxMonths>18)return 'invalid_horizon';
+  if(!Number.isFinite(campaign.minimumGapDays)||campaign.minimumGapDays<1||!Number.isInteger(campaign.maxTouchesPer30Days)||campaign.maxTouchesPer30Days<1||campaign.maxTouchesPer30Days>4||!Array.isArray(campaign.milestones)||!campaign.milestones.length||!Array.isArray(campaign.preferredChannels)||!campaign.preferredChannels.length||new Set(campaign.preferredChannels).size!==campaign.preferredChannels.length||campaign.preferredChannels.some(ch=>!CHANNELS.includes(ch)))return 'invalid_contact_policy';
+  try{new Intl.DateTimeFormat('en-GB',{timeZone:campaign.timezone}).format(new Date(enrolledAt));}catch(e){return 'invalid_timezone';}
+  if(typeof campaign.timezone!=='string'||!campaign.timezone)return 'invalid_timezone';
+  if(campaign.milestones.some(m=>!m?.offset||Object.keys(m.offset).length!==1||!['days','months'].includes(Object.keys(m.offset)[0])||!Number.isSafeInteger(Object.values(m.offset)[0])||Object.values(m.offset)[0]<1||Object.values(m.offset)[0]>18*31||typeof m.topic!=='string'||!m.topic.trim()||! /^[A-Za-z0-9_-]{1,80}$/.test(m.id||'')))return 'invalid_milestones';
+  const start=timestamp(enrolledAt),expiry=timestamp(addMonths(enrolledAt,campaign.maxMonths));
+  if(campaign.milestones.some(m=>{const at=m.offset.months?timestamp(addMonths(enrolledAt,m.offset.months)):start+m.offset.days*DAY;return !Number.isFinite(at)||at<=start||at>=expiry;})||new Set(campaign.milestones.map(m=>m.id)).size!==campaign.milestones.length)return 'invalid_milestones';
+  return null;
+}
 function plan({lead,campaign,ledger,now}){
   const at=timestamp(now),start=timestamp(lead?.enrolledAt);
   if(!Number.isFinite(at)||!Number.isFinite(start)||start>at||! /^[A-Za-z0-9_-]{1,80}$/.test(lead?.id||'')||! /^[A-Za-z0-9_-]{1,80}$/.test(campaign?.id||''))return outcome('BLOCKED','invalid_identity_or_clock');
@@ -18,8 +28,7 @@ function plan({lead,campaign,ledger,now}){
   if(lead.globalOptOutAt)return outcome('STOP','global_optout',{cancelQueued:true,feedbackInvitationAllowed:false});
   if(lead.competitorChosenAt)return outcome('STOP','competitor_chosen',{cancelQueued:true,feedbackInvitationAllowed:false});
   if(lead.paidAt)return outcome('STOP','converted',{cancelQueued:true});
-  if(!Number.isInteger(campaign.maxMonths)||campaign.maxMonths<1||campaign.maxMonths>18)return outcome('BLOCKED','invalid_horizon');
-  if(!Number.isFinite(campaign.minimumGapDays)||campaign.minimumGapDays<1||!Number.isInteger(campaign.maxTouchesPer30Days)||campaign.maxTouchesPer30Days<1||campaign.maxTouchesPer30Days>4||!Array.isArray(campaign.milestones)||!campaign.milestones.length||!Array.isArray(campaign.preferredChannels)||campaign.preferredChannels.some(ch=>!CHANNELS.includes(ch)))return outcome('BLOCKED','invalid_contact_policy');
+  const invalid=validateCampaign(campaign,lead.enrolledAt);if(invalid)return outcome('BLOCKED',invalid);
   const expiresAt=addMonths(lead.enrolledAt,campaign.maxMonths);
   if(at>=Date.parse(expiresAt))return outcome('STOP','horizon_complete',{expiresAt,cancelQueued:true});
   if(lead.humanHandling||lead.meetingActive||lead.incomingReplyPending)return outcome('WAIT','human_handling');
@@ -41,9 +50,7 @@ function plan({lead,campaign,ledger,now}){
   const p={};try{new Intl.DateTimeFormat('en-GB',{timeZone:campaign.timezone,weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false}).formatToParts(new Date(at)).forEach(x=>p[x.type]=x.value);}catch(e){return outcome('BLOCKED','invalid_timezone');}
   const minutes=Number(p.hour)%24*60+Number(p.minute);
   if(['Fri','Sat'].includes(p.weekday)||minutes<540||minutes>=1200)return outcome('WAIT','contact_hours');
-  if(campaign.milestones.some(m=>!m?.offset||Object.keys(m.offset).length!==1||!['days','months'].includes(Object.keys(m.offset)[0])||!Number.isInteger(Object.values(m.offset)[0])||Object.values(m.offset)[0]<1||typeof m.topic!=='string'||!m.topic.trim()))return outcome('BLOCKED','invalid_milestones');
   const all=campaign.milestones.map(m=>({...m,at:m.offset.months?timestamp(addMonths(lead.enrolledAt,m.offset.months)):start+m.offset.days*DAY}));
-  if(all.some(m=>!m.id||!Number.isFinite(m.at)||m.at<=start||m.at>=Date.parse(expiresAt))||new Set(all.map(m=>m.id)).size!==all.length)return outcome('BLOCKED','invalid_milestones');
   const prefix=campaign.id+':'+lead.id+':'+new Date(start).toISOString()+':';
   const due=all.filter(m=>m.at<=at).sort((a,b)=>a.at-b.at);
   if(!due.length)return outcome('WAIT','no_due_content',{expiresAt});
@@ -55,4 +62,4 @@ function plan({lead,campaign,ledger,now}){
   if(!channel)return outcome('BLOCKED','no_preferred_authorized_channel');
   return outcome('DRAFT','eligible_preview',{key,channel,milestone:m.id,topic:m.topic,cta:m.cta,expiresAt,skippedMilestones:due.slice(0,-1).map(m=>m.id),requiresAtomicReservation:true,requiresSuppressionRecheck:true});
 }
-module.exports={plan,addMonths};
+module.exports={plan,addMonths,validateCampaign};

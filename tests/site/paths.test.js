@@ -130,6 +130,14 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   const req=JSON.parse(await get('/__log'))[0]?.body;
   ok('email address is submitted',req?.email==='test@example.invalid');ok('email-only consent remains separate',req?.marketing_channels?.join(',')==='email'&&req?.marketing_consent===false);
   ok('email-only callback is saved',(await p.locator('#fStatus').getAttribute('data-state'))==='success');await b.close();}
+ // Isolated feedback view: responsive layout, voluntary fields and accessibility.
+ {const {b,p}=await open(390,844);await p.setContent(require('../../automation/lifecycle/feedback-page').render({csrf:'synthetic-csrf'}));
+  ok('feedback mobile has no horizontal overflow',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+  ok('feedback answers are all optional',await p.locator('select,textarea').count()===5&&await p.locator('[required]').count()===0);
+  ok('feedback removal does not require questionnaire',await p.locator('form').first().locator('select,textarea').count()===0);
+  ok('feedback explains no automatic re-enrollment',(await p.locator('#privacy-note').textContent()).includes('אינו מחדש קשר'));
+  await p.addScriptTag({path:require.resolve('axe-core/axe.min.js')});const a=await p.evaluate(async()=>{const r=await axe.run(document,{runOnly:['wcag2a','wcag2aa','wcag21aa']});return r.violations.map(x=>x.id);});ok('axe voluntary feedback',a.length===0,a.join(','));
+  await p.screenshot({path:require('path').join(__dirname,'../out/feedback-mobile.png'),fullPage:true});await b.close();}
  for(const r of R)console.log((r.pass?'PASS':'FAIL'),r.name,r.pass?'':(r.info||''));
  console.log(R.filter(r=>r.pass).length+'/'+R.length);process.exitCode=R.every(r=>r.pass)&&R.length>0?0:1;
 })();

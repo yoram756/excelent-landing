@@ -1,0 +1,305 @@
+Command: npm run test:funnel
+Exit code: 1
+✔ corrupt planner state fails closed rather than forgetting pending sends (60.5511ms)
+✔ opt-out takes priority over pending send reconciliation (3.7398ms)
+✔ paid and human-handled leads never reconcile stale pending advancement (4.903ms)
+✔ Calendly 12-hour PM is converted to Israel afternoon (5.0097ms)
+✔ Calendly noon and midnight are distinct (7.5154ms)
+✔ invalid Calendly date, time and unsupported timezone never write (4.8097ms)
+✔ Calendly conflicting phone and email never select the first lead (1.7442ms)
+✔ Calendly duplicate phone owners never receive a booking (1.5428ms)
+✔ Calendly cancellation clears date and cannot cancel a newer meeting (5.9458ms)
+✔ Calendly cannot downgrade a paying client (1.8086ms)
+✔ Calendly parse does not acknowledge a failed or unattempted write (2.8345ms)
+✔ regressions detect removed shared pause, removed optout and unsafe unknown retry (2515.4667ms)
+ℹ shared_pause: broken implementation rejected
+ℹ optout: broken implementation rejected
+ℹ unknown_retry: broken implementation rejected
+✔ atomic store refuses implicit production use and persists intake across reopen (77.2504ms)
+✔ 16 simultaneous intake processes create one enrollment and one CRM event (1038.7251ms)
+✔ a replay with changed contents rolls back and aliases cannot silently merge people (27.9747ms)
+✔ 16 simultaneous workers across campaigns and channels reserve exactly one contact (1254.6559ms)
+✔ a crashed reservation is recovered with fencing and the stale worker cannot dispatch (152.1774ms)
+✔ a crash after dispatch began becomes unknown and blocks all channels after restart (147.3267ms)
+✔ timeout never triggers fallback; confirmed failure blocks the current milestone (21.8239ms)
+✔ optout after reservation revokes preflight and stops every campaign despite fresh intake (22.3285ms)
+✔ concurrent optout and preflight have a durable serial order, never a second contact (147.2369ms)
+✔ recipient preferences are read again before dispatch and original horizon cannot renew (23.1046ms)
+✔ reply, booking and handoff pause all enrollments for this contact (26.3571ms)
+✔ a confirmed mock delivery imposes one shared cooldown across campaigns (24.3433ms)
+✔ CRM projection retries are ordered and acknowledge only a current lease and remote receipt (135.5857ms)
+✔ CRM claims by competing processes expose one current lease for one event (329.8194ms)
+✔ feedback is saved and read after reopen without undoing optout, even when empty (24.8712ms)
+✔ full synthetic journey persists questionnaire, CRM, reply, meeting, cancellation, handoff and paid events (28.3767ms)
+✔ competitor feedback stops all campaigns and is distinct from an unsolicited invitation (19.9074ms)
+✔ partial storage failure rolls back subject, enrollment, inbox, event and projection together (19.5745ms)
+✔ invalid cadence fails closed even at night and with no marketing grants (16.5883ms)
+✔ a blocked CRM enrollment does not starve independent enrollment projections (20.1908ms)
+✔ a competitor stop and feedback save roll back together on a projection write failure (21.49ms)
+✔ stale cancellation and cancellation of another meeting cannot clear the current booking (23.6722ms)
+✔ late booking replay cannot revive an already cancelled meeting at the same timestamp (23.1096ms)
+✔ intake rejects personal text in attribution before storing any data (17.6253ms)
+✔ every connection points at an existing node (3.7798ms)
+✔ no expression contains a run of closing braces (n8n breaks on it) (0.4276ms)
+✔ test build never contains a live engine (0.2458ms)
+✔ test build physically disables the WhatsApp HTTP node (0.2487ms)
+✔ no secret test path is baked into the build (0.2595ms)
+✔ rebuilding gives identical files (no churn in git) (412.6215ms)
+✔ Monday pagination requests the next cursor and stops on terminal/error responses (2.1484ms)
+✔ runtime probe has only manual trigger, Crypto and computation, with no credentials (243.0046ms)
+✔ isolated intake probe has no messaging endpoints or automatic triggers (210.5906ms)
+✔ acceptance exports are manual only and sandbox transport cannot call messaging providers (1202.262ms)
+✔ successful final Monday write acknowledges mail once (1.606ms)
+✔ GraphQL partial failure does not acknowledge Calendly mail (0.8524ms)
+✔ missing or wrong write target does not acknowledge Calendly mail (0.332ms)
+✔ campaign consolidation config is complete and consistent (2.8012ms)
+✔ campaign refi config is complete and consistent (0.3311ms)
+✔ a second campaign runs on the same engine with its own messages (49.8419ms)
+✔ consolidation with an approved id would send its own first message (18.1378ms)
+✔ building a campaign does not touch the shared engine code and writes separate workflows (351.181ms)
+✔ refinance link templates match the approved v2 inventory and use body variables (6.6061ms)
+✖ real loopback GET renders a voluntary RTL form and never removes a contact (111.471ms)
+✖ removal commits before optional feedback and remains after invalid feedback (45.3824ms)
+✖ empty feedback is accepted once and an identical network retry is idempotent (38.4663ms)
+✖ competitor feedback stops contact and stores voluntary answers without renewed consent (41.2396ms)
+✖ wrong CSRF and cross-origin submissions cannot change anything (23.6214ms)
+✖ expired, invalid and unknown links cannot disclose a lead or change preferences (9.0317ms)
+✖ unsupported methods and media types never perform GET side effects (7.7312ms)
+✔ links are stored as hashes and rendered values are escaped (20.2249ms)
+✔ owner beyond item 500 is found after complete pagination (20.7498ms)
+✔ partial pages and GraphQL failure never permit attribution (1.9408ms)
+✔ repeated cursors, repeated items and unexpected extra pages fail closed (1.3239ms)
+✔ missing and malformed stored click state never writes or awards heat (6.6016ms)
+✔ human-handled lead with blank funnel status never enrolls (40.2478ms)
+✔ planner fails closed if its secure random source is unavailable (7.8291ms)
+✔ new tokens require a valid expiry and revocation prevents attribution (5.3639ms)
+✔ an unsubscribed lead cannot earn click heat (0.9569ms)
+✔ every phone key used by profiles and alerts exists (3.8012ms)
+✔ every campaign has its own identity block (0.8643ms)
+✔ refinance uses the Excelent finance profile and 055-2783459 (0.328ms)
+✔ a campaign without approved identity cannot be built for pilot or live (594.9803ms)
+✔ pilot phones must be approved test phones of the campaign (428.1767ms)
+✔ the refinance landing page shows only the Excelent contact number (8.8283ms)
+✔ finance profile campaigns never use the Negev identity or the 050 number (1.0526ms)
+✔ the funnel code never hard codes a phone number or a name (3.3673ms)
+✔ the engine tells Yoram the campaign contact number, not the sending number, for call backs (42.4892ms)
+✔ every phone has an owner listed among the people, and people own only existing phones (0.6011ms)
+✔ Neria and Yoram are separate people with separate phones (0.2889ms)
+✔ form source cannot impersonate a received WhatsApp message (10.4722ms)
+✔ money requires explicit boolean consent and marketing is independent (1.9006ms)
+✔ invalid dates and inherited answer names are rejected (1.7813ms)
+✔ same idempotency key returns the saved id, not a new create (0.8371ms)
+✔ Monday lookup failure cannot fall back to create (5.2709ms)
+✔ partial GraphQL save failure never returns success (1.5407ms)
+✔ phone lookup declares the required non-null list and sends one unformatted number (2.1168ms)
+✔ partial lookup cannot create and a normalized exact phone updates the existing item (3.0959ms)
+✔ channel receipt binds choices to recipient and server receipt time (1.2215ms)
+✔ email-only consent cannot authorize WhatsApp or SMS (0.9907ms)
+✔ empty choices preserve callback request without marketing permission (0.7795ms)
+✔ legacy generic consent never invents channel-specific proof (0.8594ms)
+✔ invalid or contradictory channel payloads are rejected (2.445ms)
+✔ invalid email and header injection are rejected; optional email stays optional (2.0826ms)
+✔ modern consent and email persist in the mutation and clear prior WhatsApp opt-in (1.2894ms)
+✔ 18-month synthetic timelines across consent combinations and campaign identities preserve contact invariants (15467.2091ms)
+ℹ {"timelines":189,"evaluations":111321,"draftCandidates":1449,"scope":"Pure lifecycle policy; synthetic acknowledgments and ledgers only"}
+✔ lifecycle preview produces one authorized-channel draft and cannot enable dispatch (34.6095ms)
+✔ global optout and competitor stop every channel ahead of malformed ledgers and fresh consent (0.3092ms)
+✔ eighteen calendar months are clamped safely across month ends and leap years (0.6457ms)
+✔ consent is bound to campaign, recipient, channel and server chronology (1.5941ms)
+✔ email withdrawal cannot fall back to another unapproved channel (1.5571ms)
+✔ unknown sends and incomplete ledgers block a second contact across channels (2.1535ms)
+✔ human response, active meeting and the preferred future date pause commercial contact (1.8237ms)
+✔ one shared contact cap applies across channels and campaigns (2.6418ms)
+✔ missed months never produce a catchup burst or replay an acknowledged milestone (1.5625ms)
+✔ acknowledged current content never exposes skipped older messages after cooldown (1.7368ms)
+✔ night and weekend previews wait without broadening provider hours (1.5134ms)
+✔ malformed cadence fails closed (0.7912ms)
+✔ equivalent enrollment timestamps use one stable idempotency key (1.5168ms)
+✔ malformed or conflicting ledger rows never permit a draft (1.1299ms)
+✔ exit feedback is voluntary and cannot grant consent or reopen the lead (1.6184ms)
+✔ insights deduplicate events and count distinct enrollments without leaking PII (2.4884ms)
+✔ unknown attribution and missing denominator remain unknown; partial exports are rejected (0.4462ms)
+✔ exit coverage and meeting conversion use actual cohort intersections (0.4604ms)
+✔ aggregate attribution never reflects contact details supplied in source or ad fields (0.3119ms)
+✔ token link goes to its destination and counts the open (9.3582ms)
+✔ quiz link carries the token (6.2247ms)
+✔ reaching 70 notifies Yoram (1.5615ms)
+✔ repeat open of the same link adds no more heat (1.5863ms)
+✔ a phone number in the link is never used to identify a lead (3.4443ms)
+✔ the template example value is never treated as a real token (1.3307ms)
+✔ an unknown token is not attributed and does not trust its destination letter (1.4615ms)
+✔ corrupt link state never changes heat or engagement (1.5157ms)
+✔ a token shared by two items is never attributed (2.3719ms)
+✔ each destination letter goes to its own correct address (5.1546ms)
+✔ repeat clicks do not inflate heat beyond the cap (5.9099ms)
+✔ links never contain a phone number (4.3058ms)
+✔ unknown code still redirects to the quiz (1.6445ms)
+✔ Calendly booking is parsed and matched by phone (36.5697ms)
+✔ Calendly cancel sets cancelled (4.3981ms)
+✔ acknowledged email is processed once (1.394ms)
+✔ booking from unknown person is returned unmatched (1.9173ms)
+✔ a cancel from an unknown person creates nothing (1.7821ms)
+✔ new form lead gets M1 and a token (48.0435ms)
+✔ WhatsApp sender is explicitly the existing owner-selected number (10.8192ms)
+✔ new cohort requires recipient-bound explicit WhatsApp proof (4.6611ms)
+✔ withdrawn channel proof stops an active WhatsApp series before stale pending reconciliation (1.9422ms)
+✔ landing page lead with submitted questionnaire answers starts at M7 (1.265ms)
+✔ callback score explanation and product metadata do not pretend a questionnaire was answered (1.035ms)
+✔ a submitted unknown answer qualifies even when financial details were skipped (0.8395ms)
+✔ lead without any consent is not contacted (0.6684ms)
+✔ lead created before go live is not contacted (0.6675ms)
+✔ lead without phone is skipped (9.1411ms)
+✔ M2 carries the personal link code (3.1454ms)
+✔ nothing is sent before the due time (no double send) (0.9088ms)
+✔ second message in the same day is postponed for C path (1.984ms)
+✔ no sends on Shabbat (1.8571ms)
+✔ no sends at night (1.9015ms)
+✔ a reply stops the series and notifies (1.0592ms)
+✔ a reply that was already handled is not handled again (0.7714ms)
+✔ remove request stops everything (0.7966ms)
+✔ less request moves to פחות (0.634ms)
+✔ booking sends M10 with the meeting time (0.8873ms)
+✔ reminder a day before, then an hour before (0.9189ms)
+✔ cancelled meeting sends M11 once, second no show goes to long funnel (2.327ms)
+✔ after a meeting M12 is scheduled two days later (1.8468ms)
+✔ paying client stops all messages (0.7474ms)
+✔ not relevant stops the funnel (0.7057ms)
+✔ test mode never touches real leads (0.524ms)
+✔ live mode never touches TEST items (0.6445ms)
+✔ live mode marks sends as live, test mode as not live (1.2734ms)
+✔ failed send keeps position and retries in 30 minutes (1.3261ms)
+✔ three failed sends stop the lead (1.3944ms)
+✔ successful send advances (2.347ms)
+✔ filling the quiz on the same day still sends M7 right away (2.1968ms)
+✔ a second item with the same phone does not start a second series (1.4722ms)
+✔ two new items with the same phone: only the first starts (2.6991ms)
+✔ when Gambot conversations cannot be read, nothing is sent (12.5137ms)
+✔ a manual message in the chat after our last send stops the series (0.7858ms)
+✔ our own send a few seconds later is not mistaken for a manual chat (0.6947ms)
+✔ every send is reserved in Monday first, with a unique key (55.8747ms)
+✔ a lead with a pending send is never planned again, only reconciled (3.4336ms)
+✔ unknown send result keeps the pending send (no blind resend) (2.0389ms)
+✔ Gambot refusal clears the pending send and retries later (1.8705ms)
+✔ reconcile: message found in Gambot applies the update, no resend (1.3254ms)
+✔ reconcile: not found yet and recent, waits (0.8974ms)
+✔ reconcile: Gambot history unreadable, waits (1.5463ms)
+✔ reconcile: confirmed absent after 10 minutes, released for retry (1.586ms)
+✔ Monday update failing after a send cannot cause a second send (2.6313ms)
+✔ manual stage stops automatic messages (1.6366ms)
+✔ a recorded human first reply stops automatic messages (0.8626ms)
+✔ pilot touches only the listed internal phone and sends live (3.462ms)
+✔ new link tokens are cryptographic-length and never contain numbers from phone (1.1863ms)
+✔ callback consent alone cannot send a MARKETING acknowledgment or followup (3.0386ms)
+✔ callback consent permits a verified UTILITY booking confirmation (3.4986ms)
+✔ two new leads never get the same token, and an existing token is never reused (57.3826ms)
+✔ SLA callback-only waits a full 60 business minutes (40.3046ms)
+✔ SLA questionnaire unknown answer is due at 30 minutes (7.5784ms)
+✔ SLA score metadata alone remains callback-only (1.1428ms)
+✔ SLA opening starts at 08:30 Israel and never sends reminders outside hours (4.5373ms)
+✔ SLA carries remaining minutes across Thursday weekend and Israel DST change (52.4886ms)
+✔ SLA after-hours requests start counting on the next business opening (14.1334ms)
+✔ SLA handled, replied, future and stale leads do not alert (1.4439ms)
+✔ SLA new service request resets elapsed time for a repeated submission (2.879ms)
+✔ SLA incomplete lookup fails closed and planning does not mark delivery (5.0615ms)
+✔ SLA acknowledgment follows confirmed notification; failures remain retryable (2.0719ms)
+ℹ tests 198
+ℹ suites 0
+ℹ pass 191
+ℹ fail 7
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16972.5247
+
+✖ failing tests:
+
+test at tests\funnel\feedback-http.test.js:14:1
+✖ real loopback GET renders a voluntary RTL form and never removes a contact (111.471ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55407
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55407
+    }
+  }
+
+test at tests\funnel\feedback-http.test.js:17:1
+✖ removal commits before optional feedback and remains after invalid feedback (45.3824ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55409
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55409
+    }
+  }
+
+test at tests\funnel\feedback-http.test.js:22:1
+✖ empty feedback is accepted once and an identical network retry is idempotent (38.4663ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55411
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55411
+    }
+  }
+
+test at tests\funnel\feedback-http.test.js:25:1
+✖ competitor feedback stops contact and stores voluntary answers without renewed consent (41.2396ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55413
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55413
+    }
+  }
+
+test at tests\funnel\feedback-http.test.js:28:1
+✖ wrong CSRF and cross-origin submissions cannot change anything (23.6214ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55415
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55415
+    }
+  }
+
+test at tests\funnel\feedback-http.test.js:31:1
+✖ expired, invalid and unknown links cannot disclose a lead or change preferences (9.0317ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55417
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55417
+    }
+  }
+
+test at tests\funnel\feedback-http.test.js:34:1
+✖ unsupported methods and media types never perform GET side effects (7.7312ms)
+  [TypeError: fetch failed] {
+    [cause]: Error: connect EACCES 127.0.0.1:55419
+        at TCPConnectWrap.afterConnect [as oncomplete] (node:net:2021:16) {
+      errno: -4092,
+      code: 'EACCES',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 55419
+    }
+  }

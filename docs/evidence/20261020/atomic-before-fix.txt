@@ -1,0 +1,53 @@
+Command: node --test tests/funnel/atomic.test.js
+Exit code: 1
+✔ atomic store refuses implicit production use and persists intake across reopen (53.4662ms)
+✔ 16 simultaneous intake processes create one enrollment and one CRM event (545.0317ms)
+✔ a replay with changed contents rolls back and aliases cannot silently merge people (22.9258ms)
+✔ 16 simultaneous workers across campaigns and channels reserve exactly one contact (535.5412ms)
+✔ a crashed reservation is recovered with fencing and the stale worker cannot dispatch (140.1641ms)
+✔ a crash after dispatch began becomes unknown and blocks all channels after restart (130.5291ms)
+✔ timeout never triggers fallback; confirmed failure blocks the current milestone (28.9544ms)
+✔ optout after reservation revokes preflight and stops every campaign despite fresh intake (27.4817ms)
+✔ concurrent optout and preflight have a durable serial order, never a second contact (133.2333ms)
+✔ recipient preferences are read again before dispatch and original horizon cannot renew (26.1304ms)
+✖ reply, booking and handoff pause all enrollments for this contact (27.9375ms)
+✔ a confirmed mock delivery imposes one shared cooldown across campaigns (27.2689ms)
+✔ CRM projection retries are ordered and acknowledge only a current lease and remote receipt (120.2482ms)
+✔ CRM claims by competing processes expose one current lease for one event (270.2366ms)
+✔ feedback is saved and read after reopen without undoing optout, even when empty (30.4983ms)
+✔ full synthetic journey persists questionnaire, CRM, reply, meeting, cancellation, handoff and paid events (35.6324ms)
+✔ competitor feedback stops all campaigns and is distinct from an unsolicited invitation (28.4003ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2296.1264
+
+✖ failing tests:
+
+test at tests\funnel\atomic.test.js:74:1
+✖ reply, booking and handoff pause all enrollments for this contact (27.9375ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'eligible_preview'
+  - 'human_handling'
+  
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\atomic.test.js:76:101)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'eligible_preview',
+    expected: 'human_handling',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
