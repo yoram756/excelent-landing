@@ -1,0 +1,72 @@
+{
+  "sourceCommit": "6f33ec1b0d9a7c0c3981e06b5610a6f402051afb",
+  "tree": "7e787e12c3ee5ec3380e134cf5a6f871c0158fda",
+  "runId": 39489519211,
+  "jobs": [
+    {
+      "id": 118858638598,
+      "name": "integration-tests",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 39489519211,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install Chromium for browser tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Validate funnel logic, accessibility and browser flows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "scope": "145 logic checks and 50 browser/accessibility checks with mock API; not provider delivery"
+}

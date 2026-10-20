@@ -1,0 +1,231 @@
+Browser tab: 6, Title: "▶️ TEST LP1 channel readiness NO DELIVERY 20261020 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2650?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+0 AXWebArea ▶️ TEST LP1 channel readiness NO DELIVERY 20261020 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2650?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	1 container n8n-app
+		2 container
+			3 container
+				4 container
+					5 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					6 text /
+					7 container
+						8 text TEST LP1 channel readiness NO DELIVERY 20261020
+					9 button More actions
+					10 button (disabled) Publish
+					11 button More actions
+				12 radio button Description: Editor, Value: 0
+				13 radio button Description: Executions, Value: 1
+				14 radio button Description: Evaluations, Value: 0
+			15 container side-menu
+				16 menu bar
+					17 (collapsed) Add new item, Secondary Actions: Expand
+						18 button Add new item
+				19 button Open command palette
+				20 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				21 container
+					22 Description: n8n Assistant, ID: instance-ai
+					23 Description: Overview, ID: home
+				24 Description: Templates, ID: templates
+				25 Description: Insights, ID: insights
+				26 Description: Help, ID: help
+				27 Description: Settings, ID: settings
+			28 container
+				29 heading Executions, Value: 2
+					30 text Executions
+				31 checkbox Description: Auto refresh, Value: 1, ID: v-1-983
+				32 text Auto refresh
+				33 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-1-984, Secondary Actions: Expand
+				34 container
+					35 link Description: Oct 20, 22:53:03 Succeededin 1.855s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2650?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					36 link Description: Oct 20, 22:47:52 Succeededin 2.297s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2646?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					37 link Description: Oct 20, 22:44:36 Succeededin 1.383s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2642?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					38 link Description: Oct 20, 22:44:29 Succeededin 1.161s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2641?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					39 link Description: Oct 20, 22:42:25 Succeededin 1.16s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2640?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					40 link Description: Oct 20, 22:18:04 Succeededin 1.064s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2624?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					41 link Description: Oct 20, 22:17:29 Succeededin 1.179s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2623?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					42 link Description: Oct 20, 21:37:05 Succeededin 1.629s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2598?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					43 link Description: Oct 20, 21:35:40 Succeededin 1.539s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2596?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					44 link Description: Oct 20, 21:35:39 Succeededin 1.247s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2595?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				45 text Which executions is this workflow saving?
+				46 container
+					47 text Oct 20, 22:53:03 Succeeded in 1.855s  | 12KB  | ID#2650  |
+					184 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/history/e6b3a1f2-3a24-4da4-b455-202e78ea7c9f
+					49 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/debug/2650
+					50 button Delete this execution
+				51 container
+					52 container
+						53 container
+							185 image
+								242 container Edge from 61db2b97-5ca2-4182-afbd-7d5f97f54aaa to 7b07d505-1f7e-47e1-b74d-1559482083e2
+							186 image
+								243 container Edge from 7b07d505-1f7e-47e1-b74d-1559482083e2 to 317c7551-5eda-481b-8f3b-913ce2fb5b6d
+							187 image
+								244 container Edge from 317c7551-5eda-481b-8f3b-913ce2fb5b6d to 176c5a47-8812-484f-9a66-8d5351d3df34
+							188 image
+								245 container Edge from 176c5a47-8812-484f-9a66-8d5351d3df34 to d600a36a-11ef-48cb-b7b9-ec48bcfd019d
+							189 image
+								246 container Edge from d600a36a-11ef-48cb-b7b9-ec48bcfd019d to d7ea3936-e62e-42ab-8d0b-58aabf2228a6
+							190 image
+								247 container Edge from d7ea3936-e62e-42ab-8d0b-58aabf2228a6 to 12bb6927-a423-40aa-898e-3cdb77305d98
+							191 image
+								248 container Edge from 12bb6927-a423-40aa-898e-3cdb77305d98 to 0509d217-e452-41fe-bffc-85432ba2aa57
+							249 text 1 item
+							250 text 1 item
+							251 text 1 item
+							252 text 1 item
+							253 text 1 item
+							254 text 1 item
+							255 text 1 item
+							192 container
+								193 button Add to chat
+								194 button More actions
+								256 text Manual READ ONLY
+							195 container
+								196 button Add to chat
+								197 button More actions
+								257 container
+									258 text Numbers READ ONLY GET: https://api.gambot.co.il/api/v1/numbers
+							198 container
+								199 button Add to chat
+								200 button More actions
+								259 container
+									260 text Connections READ ONLY GET: https://api.gambot.co.il/api/v1/connections
+							201 container
+								202 button Add to chat
+								203 button More actions
+								261 container
+									262 text Gmail profile READ ONLY GET: https://gmail.googleapis.com/gmail/v1/users/me/profile
+							204 container
+								205 button Add to chat
+								206 button More actions
+								263 container
+									264 text SMS balance READ ONLY POST: https://my.textme.co.il/api
+							207 container
+								208 button Add to chat
+								209 button More actions
+								265 text Synthetic SMS fixture NO DELIVERY
+							210 container
+								211 button Add to chat
+								212 button More actions
+								266 container
+									267 text SMS SANDBOX no delivery POST: https://my.textme.co.il/api/test
+							213 container
+								268 text 1 item
+								214 button Add to chat
+								215 button More actions
+								269 text Readiness summary NO SEND
+						82 image
+						83 image
+						84 container
+							85 button Zoom to Fit
+							86 button Zoom In
+							87 button Zoom Out
+					88 container
+						89 container
+							90 text Logs Success in 1.855s
+							91 outline
+								92 row (selectable, collapsed) Manual READ ONLY, Secondary Actions: Expand
+									93 text Manual READ ONLY
+								94 row (selectable, collapsed) Numbers READ ONLY, Secondary Actions: Expand
+									95 text Numbers READ ONLY
+								96 row (selectable, collapsed) Connections READ ONLY, Secondary Actions: Expand
+									97 text Connections READ ONLY
+								98 row (selectable, collapsed) Gmail profile READ ONLY, Secondary Actions: Expand
+									99 text Gmail profile READ ONLY
+								216 row (selectable, collapsed) SMS balance READ ONLY, Secondary Actions: Expand
+									270 text SMS balance READ ONLY
+								217 row (selectable, collapsed) Synthetic SMS fixture NO DELIVERY, Secondary Actions: Expand
+									271 text Synthetic SMS fixture NO DELIVERY
+								218 row (selectable, collapsed) SMS SANDBOX no delivery, Secondary Actions: Expand
+									272 text SMS SANDBOX no delivery
+								219 row (selected, collapsed) Readiness summary NO SEND, Secondary Actions: Expand
+									273 text Readiness summary NO SEND
+						100 container
+							101 text Readiness summary NO SEND Success in 12ms
+							102 button Input
+							103 button Output
+							104 button Actions
+							105 button Collapse panel
+						106 container
+							107 text OUTPUT
+							108 container
+								109 text field (settable)
+								110 radio button Description: Schema, Value: 0
+								111 radio button Description: Table, Value: 1
+								112 radio button Description: JSON, Value: 0
+							113 text 1 item
+							114 table
+								115 row
+									220 cell
+										221 container
+											274 text observedAt
+											222 button Collapse rows
+									223 cell
+										224 container
+											275 text noDelivery
+											225 button Collapse rows
+									124 cell
+										125 container
+											126 text numbers
+											127 button Collapse rows
+									226 cell
+										227 container
+											276 text gambotMailConnections
+											228 button Collapse rows
+									229 cell
+										230 container
+											277 text gmail
+											231 button Collapse rows
+									232 cell
+										233 container
+											278 text sms
+											234 button Collapse rows
+									235 cell
+										236 container
+											279 text noCustomerMessages
+											237 button Collapse rows
+								156 row
+									157 cell
+										158 text 2026-10-20T19:53:05.208Z
+									159 cell
+										160 text true
+									161 cell
+										238 text 0
+										280 container
+											281 text id : 1138723472651617
+										282 container
+											283 text number : +972 55-988-1245
+										284 container
+											285 text status : active
+									177 cell
+										178 text 0
+									286 cell
+										287 container
+											288 text profileAvailable : true
+										289 container
+											290 text email : office@kho.org.il
+									181 cell
+										239 text balanceResponseKeys
+										291 container
+											292 text 0 : status
+										293 container
+											294 text 1 : message
+										295 container
+											296 text 2 : balance
+										297 container
+											298 text 3 : interantional_balance
+										299 container
+											300 text balanceStatus : 0
+										301 container
+											302 text positiveBalance : true
+										240 text sandboxResponseKeys
+										303 container
+											304 text 0 : status
+										305 container
+											306 text 1 : message
+										307 container
+											308 text sandboxStatus : 515
+										309 container
+											310 text sandboxMessage : Unverified source For more information see : D3U.co.il/li/pmYra
+									183 cell
+										241 text true
+
+The focused UI element is 219 row (selected, collapsed) Readiness summary NO SEND, Secondary Actions: Expand

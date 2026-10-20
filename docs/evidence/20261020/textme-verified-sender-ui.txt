@@ -1,0 +1,169 @@
+Browser tab: 148905401, Title: "המשתמש שלי", URL: "https://my.textme.co.il/my-profile".
+0 AXWebArea המשתמש שלי, URL: my.textme.co.il/my-profile
+	1 container app
+		2 container
+			3 container
+				4 button הודעות
+					5 text הודעות
+				6 button דו"חות
+					7 text דו"חות
+				8 button רשימות תפוצה
+					9 text רשימות תפוצה
+				10 button הגדרות
+					11 text הגדרות
+				12 button מידע
+					13 text מידע
+				14 button קרדיטים
+					15 text קרדיטים
+				16 text office@kho.org.il
+				17 button
+				18 button
+				19 button
+				20 link Description: רכישת חבילה, Value: manage.textme.co.il/api/textme/manage/login?user=office@kho.org.il
+				21 button
+			22 container
+				23 button 󰍜
+					185 text 󰍜
+				25 content list
+					26 list
+						27 (selected) טקסט
+							28 text טקסט
+						29 קולי
+							30 text קולי
+						31 whatsapp
+							32 text whatsapp
+						33 ניוזלטר
+							34 text ניוזלטר
+						35 דפי נחיתה
+							36 text דפי נחיתה
+			46 container
+				47 text המשתמש שלי
+				48 container
+					49 text שם משתמש
+					50 text field שם משתמש, Value: office@kho.org.il, ID: input-157
+				51 container
+					52 text מספר לקוח
+					53 text field מספר לקוח, Value: 118617, ID: input-159
+					54 button help
+						55 text help
+				56 button עדכון סיסמא
+				57 button אימות דו שלבי באמצעות SMS
+				58 button אימות דו שלבי באמצעות מאמת GOOGLE
+					59 text אימות דו שלבי באמצעות מאמת GOOGLE
+					60 image
+				61 container
+					62 text בחר מספר שולח
+					63 button help
+						64 text help
+					65 container
+						66 radio button (settable, integer) Description: שם שולח טקסטואלי, Value: 0, ID: input-179
+						67 text שם שולח טקסטואלי
+					68 text פעולות:
+					72 container
+						73 combo box (collapsed) Secondary Actions: Expand
+							74 container
+								75 text שם שולח טקסטואלי
+								76 text field (disabled) שם שולח טקסטואלי, ID: input-197
+					77 container
+						78 radio button (settable, integer) Description: מספר שולח מאומת, Value: 1, ID: input-202
+						79 text מספר שולח מאומת
+					80 text פעולות:
+					168 button
+					169 button
+					170 button
+					81 container
+						82 combo box (expanded) Secondary Actions: Collapse
+							83 container
+								84 text מספר מאומת
+								85 text field (settable) מספר מאומת, ID: input-220
+							186 list list-220
+								187 Value: 0559881245, ID: list-item-307-0
+									188 text 0559881245
+						171 text בחר מספר מאומת
+				86 container
+					87 switch (settable, boolean) Description: הפעלת שירות בדיקת כתובות IP מורשות, Value: 0, ID: input-233
+				88 container
+					89 text הפעלת שירות בדיקת כתובות IP מורשות
+				90 container
+					91 switch (settable, boolean) Description: הפעלת שירות Sms To Mail, Value: 0, ID: input-133
+				92 container
+					93 text הפעלת שירות Sms To Mail
+				94 container
+					95 switch (settable, boolean) Description: הפעלת שירות Mail To SMS help, Value: 0, ID: input-141
+				96 container
+					97 text הפעלת שירות Mail To SMS
+					98 button help
+						99 text help
+				100 text שעות הרשאת שליחת קמפיין
+				101 container
+					102 container
+						103 checkbox (settable, integer) Description: ראשון, Value: 1, ID: input-244
+					104 text ראשון
+					105 container
+						106 text משעה
+						107 pop up button (collapsed) משעה, Value: 09:00, ID: input-247, Secondary Actions: Expand
+					108 container
+						109 text עד שעה
+						110 pop up button (collapsed) עד שעה, Value: 20:00, ID: input-250, Secondary Actions: Expand
+					111 container
+						112 checkbox (settable, integer) Description: שני, Value: 1, ID: input-252
+					113 text שני
+					114 container
+						115 text משעה
+						116 pop up button (collapsed) משעה, Value: 09:00, ID: input-255, Secondary Actions: Expand
+					117 container
+						118 text עד שעה
+						119 pop up button (collapsed) עד שעה, Value: 20:00, ID: input-258, Secondary Actions: Expand
+					120 container
+						121 checkbox (settable, integer) Description: שלישי, Value: 1, ID: input-260
+					122 text שלישי
+					123 container
+						124 text משעה
+						125 pop up button (collapsed) משעה, Value: 09:00, ID: input-263, Secondary Actions: Expand
+					126 container
+						127 text עד שעה
+						128 pop up button (collapsed) עד שעה, Value: 20:00, ID: input-266, Secondary Actions: Expand
+					129 container
+						130 checkbox (settable, integer) Description: רביעי, Value: 1, ID: input-268
+					131 text רביעי
+					132 container
+						133 text משעה
+						134 pop up button (collapsed) משעה, Value: 09:00, ID: input-271, Secondary Actions: Expand
+					135 container
+						136 text עד שעה
+						137 pop up button (collapsed) עד שעה, Value: 20:00, ID: input-274, Secondary Actions: Expand
+					138 container
+						139 checkbox (settable, integer) Description: חמישי, Value: 1, ID: input-276
+					140 text חמישי
+					141 container
+						142 text משעה
+						143 pop up button (collapsed) משעה, Value: 09:00, ID: input-279, Secondary Actions: Expand
+					144 container
+						145 text עד שעה
+						146 pop up button (collapsed) עד שעה, Value: 20:00, ID: input-282, Secondary Actions: Expand
+					147 container
+						148 checkbox (settable, integer) Description: שישי, Value: 1, ID: input-284
+					149 text שישי
+					150 container
+						151 text משעה
+						152 pop up button (collapsed) משעה, Value: 09:00, ID: input-287, Secondary Actions: Expand
+					153 container
+						154 text עד שעה
+						155 pop up button (collapsed) עד שעה, Value: 13:00, ID: input-290, Secondary Actions: Expand
+					156 container
+						157 checkbox (settable, integer) Description: שבת, Value: 0, ID: input-292
+					158 text שבת
+					159 container
+						160 text משעה
+						161 pop up button (disabled, collapsed) משעה, ID: input-295, Secondary Actions: Expand
+					162 container
+						163 text עד שעה
+						164 pop up button (disabled, collapsed) עד שעה, ID: input-298, Secondary Actions: Expand
+					165 button סמן הכל
+					166 button בטל הכל
+				167 button שמור
+	43 container Support chat
+		44 AXWebArea about:blank
+	45 button (expanded) Description: Close chat, Secondary Actions: Collapse
+
+The focused UI element is 85 text field (settable) מספר מאומת, ID: input-220

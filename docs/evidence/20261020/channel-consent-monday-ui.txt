@@ -1,0 +1,339 @@
+Browser tab: 15, Title: "▶️ TEST LP1 channel consent private Monday NO DELIVERY - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/t07Q6DWyy63x2mtf/executions/2658?projectId=LmaRyBnHRyfXp2Py".
+0 AXWebArea ▶️ TEST LP1 channel consent private Monday NO DELIVERY - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/t07Q6DWyy63x2mtf/executions/2658?projectId=LmaRyBnHRyfXp2Py
+	1 container n8n-app
+		2 container
+			3 container
+				4 container
+					5 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					6 text /
+					7 container
+						8 text TEST LP1 channel consent private Monday NO DELIVERY
+					9 button More actions
+					10 button (disabled) Publish
+					11 button More actions
+				12 radio button Description: Editor, Value: 0
+				13 radio button Description: Executions, Value: 1
+				14 radio button Description: Evaluations, Value: 0
+			15 container side-menu
+				16 menu bar
+					17 (collapsed) Add new item, Secondary Actions: Expand
+						18 button Add new item
+				19 button Open command palette
+				20 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				21 container
+					22 Description: n8n Assistant, ID: instance-ai
+					23 Description: Overview, ID: home
+				24 Description: Templates, ID: templates
+				25 Description: Insights, ID: insights
+				26 Description: Help, ID: help
+				27 Description: Settings, ID: settings
+			28 container
+				29 heading Executions, Value: 2
+					30 text Executions
+				31 checkbox Description: Auto refresh, Value: 1, ID: v-0-226
+				32 text Auto refresh
+				33 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-0-227, Secondary Actions: Expand
+				34 link Description: Oct 20, 23:04:14 Succeededin 7.185s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/t07Q6DWyy63x2mtf/executions/2658?projectId=LmaRyBnHRyfXp2Py
+				35 text Which executions is this workflow saving?
+				36 container
+					37 text Oct 20, 23:04:14 Succeeded in 7.185s  | 75KB  | ID#2658  | 
+					38 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/t07Q6DWyy63x2mtf/history/c2378012-f742-449b-adbd-df6529e311b7
+					39 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/t07Q6DWyy63x2mtf/debug/2658
+					40 button Delete this execution
+				41 container
+					42 container
+						43 container
+							44 image
+								45 container Edge from 016e798a-83b3-4b0c-b2d6-cedfde90a409 to 525a79dd-34ef-4830-82cf-4b7c18d47067
+							46 image
+								47 container Edge from 525a79dd-34ef-4830-82cf-4b7c18d47067 to 24852033-3f21-44d8-a7f1-1142c935adc6
+							48 image
+								49 container Edge from 24852033-3f21-44d8-a7f1-1142c935adc6 to 6c0f78f3-689e-49f8-a5cb-f043ad3a2c46
+							50 image
+								51 container Edge from 6c0f78f3-689e-49f8-a5cb-f043ad3a2c46 to 40cb4fa1-96a5-4a48-afa2-534e43f1bcb3
+							52 image
+								53 container Edge from 40cb4fa1-96a5-4a48-afa2-534e43f1bcb3 to 4ad594fb-fa80-41fe-a519-c76cf79e7c51
+							54 image
+								55 container Edge from 4ad594fb-fa80-41fe-a519-c76cf79e7c51 to 07a55990-52e3-446f-b202-b6bec2cdb0ab
+							56 image
+								57 container Edge from 07a55990-52e3-446f-b202-b6bec2cdb0ab to 200a1232-5929-4b2b-8972-3966b479442a
+							58 image
+								59 container Edge from 200a1232-5929-4b2b-8972-3966b479442a to 84e09da3-3f5a-425b-a5aa-401f2858273e
+							60 image
+								61 container Edge from 84e09da3-3f5a-425b-a5aa-401f2858273e to 0c900a1e-7ccf-478c-983b-63f1ece2e9d0
+							62 image
+								63 container Edge from 0c900a1e-7ccf-478c-983b-63f1ece2e9d0 to b88bae2c-5918-4b09-b0ba-4a6cea5d42b2
+							64 image
+								65 container Edge from b88bae2c-5918-4b09-b0ba-4a6cea5d42b2 to 7dce7a15-97c4-4832-bb47-2279002f1a94
+							66 image
+								67 container Edge from 7dce7a15-97c4-4832-bb47-2279002f1a94 to 68874fcb-4d13-4fec-b61c-0f137ec1ec97
+							68 image
+								69 container Edge from 68874fcb-4d13-4fec-b61c-0f137ec1ec97 to 066f39fe-dbc1-4298-8b47-93e22729d8f7
+							70 image
+								71 container Edge from 066f39fe-dbc1-4298-8b47-93e22729d8f7 to d02e5951-b832-468b-90d0-dff0760ede90
+							72 image
+								73 container Edge from d02e5951-b832-468b-90d0-dff0760ede90 to b24e93ab-7480-4339-852a-775158aab584
+							74 image
+								75 container Edge from b24e93ab-7480-4339-852a-775158aab584 to 5dad3615-26f4-42f5-ad01-a360f9cc7c50
+							76 image
+								77 container Edge from 5dad3615-26f4-42f5-ad01-a360f9cc7c50 to 94d5a536-46ca-4830-a1a6-c18f8deeae1a
+							78 image
+								79 container Edge from 94d5a536-46ca-4830-a1a6-c18f8deeae1a to 54ac3f74-5882-4aaa-9ccd-f56117378503
+							80 image
+								81 container Edge from 54ac3f74-5882-4aaa-9ccd-f56117378503 to 49f23d7c-fe6e-4400-a35d-43b0dc178c4e
+							82 image
+								83 container Edge from 49f23d7c-fe6e-4400-a35d-43b0dc178c4e to 3e09787c-fd8b-4e4d-bfe5-81b45ee10b0a
+							84 image
+								85 container Edge from 3e09787c-fd8b-4e4d-bfe5-81b45ee10b0a to cd43d30c-e585-4033-924c-69219380fab0
+							86 image
+								87 container Edge from cd43d30c-e585-4033-924c-69219380fab0 to 6b5fe0a5-3f11-4a09-bc40-265eaa961655
+							88 image
+								89 container Edge from 6b5fe0a5-3f11-4a09-bc40-265eaa961655 to 9b4c5681-ccbc-46a4-a268-65076ec9c987
+							90 image
+								91 container Edge from 9b4c5681-ccbc-46a4-a268-65076ec9c987 to d36607a3-e141-44b1-8eab-e0d7c1323384
+							92 image
+								93 container Edge from d36607a3-e141-44b1-8eab-e0d7c1323384 to 689a5dfc-3ed8-4cc1-8119-c3f00b9eaca3
+							94 text 1 item
+							95 text 1 item
+							96 text 1 item
+							97 text 1 item
+							98 text 1 item
+							99 text 1 item
+							100 text 1 item
+							101 text 1 item
+							102 text 1 item
+							103 text 1 item
+							104 text 1 item
+							105 text 1 item
+							106 text 1 item
+							107 text 1 item
+							108 text 1 item
+							109 text 1 item
+							110 text 1 item
+							111 text 1 item
+							112 text 1 item
+							113 text 1 item
+							114 text 1 item
+							115 text 1 item
+							116 text 1 item
+							117 text 1 item
+							118 text 1 item
+							119 container
+								120 button Add to chat
+								121 button More actions
+								122 text Manual only
+							123 container
+								124 button Add to chat
+								125 button More actions
+								126 container
+									127 text Inspect private sandbox POST: https://api.monday.com/v2
+							128 container
+								129 button Add to chat
+								130 button More actions
+								131 text Guard sandbox ownership
+							132 container
+								133 button Add to chat
+								134 button More actions
+								135 text Prepare exact fixture reset
+							136 container
+								137 button Add to chat
+								138 button More actions
+								139 container
+									140 text Reset retained synthetic fixture POST: https://api.monday.com/v2
+							141 container
+								142 button Add to chat
+								143 button More actions
+								144 text Restore fixture input
+							145 container
+								146 button Add to chat
+								147 button More actions
+								148 text Validate
+							149 container
+								150 button Add to chat
+								151 button More actions
+								152 text Find query
+							153 container
+								154 button Add to chat
+								155 button More actions
+								156 container
+									157 text Find by phone POST: https://api.monday.com/v2
+							158 container
+								159 button Add to chat
+								160 button More actions
+								161 text Build mutation
+							162 container
+								163 button Add to chat
+								164 button More actions
+								165 container
+									166 text Save to Monday sandbox POST: https://api.monday.com/v2
+							167 container
+								168 button Add to chat
+								169 button More actions
+								170 text Check save
+							171 container
+								172 button Add to chat
+								173 button More actions
+								174 container
+									175 text Read intake POST: https://api.monday.com/v2
+							176 container
+								177 button Add to chat
+								178 button More actions
+								179 text Verify grants and prepare withdrawal
+							180 container
+								181 button Add to chat
+								182 button More actions
+								183 text Validate email only
+							184 container
+								185 button Add to chat
+								186 button More actions
+								187 text Find query email only
+							188 container
+								189 button Add to chat
+								190 button More actions
+								191 container
+									192 text Find by phone email only POST: https://api.monday.com/v2
+							193 container
+								194 button Add to chat
+								195 button More actions
+								196 text Build mutation email only
+							197 container
+								198 button Add to chat
+								199 button More actions
+								200 container
+									201 text Save email only POST: https://api.monday.com/v2
+							202 container
+								203 button Add to chat
+								204 button More actions
+								205 text Check save email only
+							206 container
+								207 button Add to chat
+								208 button More actions
+								209 container
+									210 text Read withdrawal POST: https://api.monday.com/v2
+							211 container
+								212 button Add to chat
+								213 button More actions
+								214 text Verify withdrawal and prepare archive
+							215 container
+								216 button Add to chat
+								217 button More actions
+								218 container
+									219 text Archive synthetic item POST: https://api.monday.com/v2
+							220 container
+								221 button Add to chat
+								222 button More actions
+								223 text Verify archive
+							224 container
+								225 button Add to chat
+								226 button More actions
+								227 container
+									228 text Read empty sandbox POST: https://api.monday.com/v2
+							229 container
+								230 text 1 item
+								231 button Add to chat
+								232 button More actions
+								233 text Confirm channel acceptance
+						234 image
+						235 image
+						236 container
+							237 button Zoom to Fit
+							238 button Zoom In
+							239 button Zoom Out
+					240 container
+						241 container
+							242 text Logs Success in 7.185s
+							243 outline
+								244 row (selectable, collapsed) Build mutation email only, Secondary Actions: Expand
+									245 text Build mutation email only
+								246 row (selectable, collapsed) Save email only, Secondary Actions: Expand
+									247 text Save email only
+								248 row (selectable, collapsed) Check save email only, Secondary Actions: Expand
+									249 text Check save email only
+								250 row (selectable, collapsed) Read withdrawal, Secondary Actions: Expand
+									251 text Read withdrawal
+								252 row (selectable, collapsed) Verify withdrawal and prepare archive, Secondary Actions: Expand
+									253 text Verify withdrawal and prepare archive
+								254 row (selectable, collapsed) Archive synthetic item, Secondary Actions: Expand
+									255 text Archive synthetic item
+								256 row (selectable, collapsed) Verify archive, Secondary Actions: Expand
+									257 text Verify archive
+								258 row (selectable, collapsed) Read empty sandbox, Secondary Actions: Expand
+									259 text Read empty sandbox
+								260 row (selected, collapsed) Confirm channel acceptance, Secondary Actions: Expand
+									261 text Confirm channel acceptance
+						262 container
+							263 text Confirm channel acceptance Success in 10ms
+							264 button Input
+							265 button Output
+							266 button Actions
+							267 button Collapse panel
+						268 container
+							269 text OUTPUT
+							270 container
+								271 text field (settable)
+								272 radio button Description: Schema, Value: 0
+								273 radio button Description: Table, Value: 1
+								274 radio button Description: JSON, Value: 0
+							275 text 1 item
+							276 table
+								277 row
+									278 cell
+										279 container
+											280 text passed
+											281 button Collapse rows
+									282 cell
+										283 container
+											284 text board
+											285 button Collapse rows
+									286 cell
+										287 container
+											288 text itemId
+											289 button Collapse rows
+									290 cell
+										291 container
+											292 text archived
+											293 button Collapse rows
+									294 cell
+										295 container
+											296 text activeItemsAfter
+											297 button Collapse rows
+									298 cell
+										299 container
+											300 text checks
+											301 button Collapse rows
+									302 cell
+										303 container
+											304 text scope
+											305 button Collapse rows
+								306 row
+									307 cell
+										308 text true
+									309 cell
+										310 text 5106403803
+									311 cell
+										312 text 3298396395
+									313 cell
+										314 text true
+									315 cell
+										316 text 0
+									317 cell
+										318 container
+											319 text 0 : optional-email-save-readback
+										320 container
+											321 text 1 : recipient-bound-server-consent
+										322 container
+											323 text 2 : three-channel-grants
+										324 container
+											325 text 3 : same-item-update
+										326 container
+											327 text 4 : WhatsApp-withdrawal-clears-checkbox-and-date
+										328 container
+											329 text 5 : email-preserved-independently
+										330 container
+											331 text 6 : SMS-withdrawal
+										332 container
+											333 text 7 : archive-empty-readback
+									334 cell
+										335 text Actual private Monday transport only; synthetic fixture; no messages, calendar, ads or production lead writes
+
+The focused UI element is 34 link Description: Oct 20, 23:04:14 Succeededin 7.185s, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/t07Q6DWyy63x2mtf/executions/2658?projectId=LmaRyBnHRyfXp2Py

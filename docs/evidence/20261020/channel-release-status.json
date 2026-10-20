@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-20",
+  "site": {
+    "host": "https://refi.excelentfinance.com/",
+    "initialCommit": "39f0e7a",
+    "deployedCommit": "b7fbd76967cf60d3b79cb9cd6a7f8b413d44af77",
+    "codeAndProbeCommit": "6f33ec1b0d9a7c0c3981e06b5610a6f402051afb",
+    "worktreeCleanAfter": true,
+    "backup": "/docker/lp-release-backups/lp1-before-channels-20261020.tar.gz",
+    "applicationFilesChanged": [
+      "site/lp1v2/index.html",
+      "site/lp1v2/assets/v2.js",
+      "site/lp1v2/privacy.html"
+    ],
+    "scriptUrl": "assets/v2.js?v=channels-20261020",
+    "publicFormReadback": true,
+    "publicFormSubmitted": false,
+    "privacyReadback": true,
+    "dockerOrNginxConfigurationChanged": false
+  },
+  "intake": {
+    "workflow": "8W7MymUCLpPnilJs",
+    "version": "6c55390c-9470-46b3-bd3b-936a6a4bf925",
+    "active": true,
+    "whatsappNodesDisabledAndDisconnected": true
+  },
+  "monday": {
+    "board": "5106403803",
+    "execution": "2658",
+    "item": "3298396395",
+    "syntheticOnly": true,
+    "archived": true,
+    "activeItemsAfter": 0
+  },
+  "sms": {
+    "verifiedSender": "0559881245",
+    "verificationUi": "PASS",
+    "sandboxEndpoint": "https://my.textme.co.il/api/test",
+    "previousExecution": "2650",
+    "previousSource": "Excellent",
+    "previousStatus": 515,
+    "verifiedSourceExecution": "2657",
+    "verifiedSourceStatus": 5,
+    "verifiedSourceMessage": "No permission to send SMS at this time",
+    "realLeadDelivery": "NOT TESTED",
+    "sendingHoursChanged": false
+  },
+  "email": {
+    "profileRead": "PASS",
+    "provider": "Gmail in n8n",
+    "sendAndDelivery": "NOT TESTED"
+  },
+  "whatsapp": {
+    "thisStageSends": 0,
+    "latestInstruction": "Reading and drafting only",
+    "commercialEngineActivated": false,
+    "campaignTarget": "0552783459",
+    "providerConnectedNumber": "0559881245",
+    "campaignRouting": "BLOCKED"
+  },
+  "adsChanged": false,
+  "overall": "BLOCKED"
+}

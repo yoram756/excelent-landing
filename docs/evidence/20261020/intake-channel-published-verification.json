@@ -1,0 +1,18 @@
+{
+  "workflowId": "8W7MymUCLpPnilJs",
+  "active": true,
+  "versionId": "6c55390c-9470-46b3-bd3b-936a6a4bf925",
+  "nodeCount": 18,
+  "sourceMatches": [
+    "Validate",
+    "Find query",
+    "Build mutation",
+    "Check save"
+  ],
+  "semanticReadbackMatched": true,
+  "webhookSettingsAndCredentialsPreserved": true,
+  "whatsappDisabledAndDisconnected": true,
+  "productionTestLeadCreated": false,
+  "sourceCommit": "69d6b17358d4d515907dec08e414d9a69a2bee95",
+  "sandboxEvidenceExecution": "2658"
+}
