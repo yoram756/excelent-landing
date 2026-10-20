@@ -42,9 +42,30 @@ const convos={};let convosOk=false;
 try{if(Array.isArray($('Convos').first().json.data.items))convosOk=true;for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}
 const mdata=$('Items').first().json.data;
 const meId=mdata.me.id;
-const items=mdata.boards[0].items_page.items;
+const page=mdata.boards[0].items_page;
+if (page.cursor) throw new Error('Monday list exceeds one 500-item page: refuse sends until paginated lookup is configured');
+const items=page.items;
 const col=(cv,k)=>cv[C[k]]||{};
-const rand=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<10;i++)s+=a[Math.floor(Math.random()*a.length)];return s;};
+// Personal links are bearer tokens. Never use Math.random for identity tokens.
+function secureBytes(size) {
+  const out = new Uint8Array(size);
+  if (globalThis.crypto && typeof globalThis.crypto.getRandomValues === 'function') {
+    globalThis.crypto.getRandomValues(out); return out;
+  }
+  try {
+    const nodeCrypto = require('node:crypto');
+    if (typeof nodeCrypto.randomBytes === 'function') return nodeCrypto.randomBytes(size);
+  } catch (e) {}
+  // Fail closed rather than silently generating guessable identifiers.
+  throw new Error('Secure CSPRNG unavailable in this n8n Code runtime; no lead may enter automated sends');
+}
+const rand=()=>{
+  const a='abcdefghjkmnpqrstuvwxyz23456789';
+  const cutoff=Math.floor(256/a.length)*a.length;
+  let s='';
+  while(s.length<20)for(const b of secureBytes(32)){if(b<cutoff)s+=a[b%a.length];if(s.length===20)break;}
+  return s;
+};
 const dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;return Date.parse(j.date+'T'+(j.time||'00:00:00')+'Z');}catch(e){return null;}};
 const toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};
 const checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};
