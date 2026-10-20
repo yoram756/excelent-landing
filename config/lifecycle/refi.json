@@ -1,0 +1,25 @@
+{
+  "id": "refi",
+  "version": "lifecycle-draft-20261020",
+  "status": "draft-no-delivery",
+  "maxMonths": 18,
+  "minimumGapDays": 7,
+  "maxTouchesPer30Days": 2,
+  "preferredChannels": ["email", "whatsapp", "sms"],
+  "timezone": "Asia/Jerusalem",
+  "milestones": [
+    {"id":"day2","offset":{"days":2},"topic":"מה חסר להשלמת הבדיקה הראשונית","cta":"השלמת הנתונים הידועים בלבד"},
+    {"id":"day14","offset":{"days":14},"topic":"איך משווים הצעות לפי המטרה שלכם","cta":"בחירת הנושא שחשוב לבדוק"},
+    {"id":"month1","offset":{"months":1},"topic":"רשימת מסמכים לקראת שיחה","cta":"עיון ברשימה"},
+    {"id":"month2","offset":{"months":2},"topic":"מה חשוב להבין בדוח יתרות לסילוק","cta":"שאלה ליועץ"},
+    {"id":"month3","offset":{"months":3},"topic":"האם חל שינוי בתוכניות המשפחה","cta":"עדכון המטרה לפי רצונכם"},
+    {"id":"month4","offset":{"months":4},"topic":"מה כוללת הצעת ליווי ומה כדאי לשאול","cta":"עיון בתהליך העבודה"},
+    {"id":"month6","offset":{"months":6},"topic":"בדיקה תקופתית של הנתונים שכבר מסרתם","cta":"עדכון נתונים שהשתנו"},
+    {"id":"month8","offset":{"months":8},"topic":"היכרות עם שיקולי תקופה, החזר ועלות כוללת","cta":"בחירת שאלה לשיחה"},
+    {"id":"month10","offset":{"months":10},"topic":"איך מתכוננים לשיחה יעילה עם יועץ","cta":"שמירת רשימת השאלות"},
+    {"id":"month12","offset":{"months":12},"topic":"סיכום שנה והאם הבקשה עדיין רלוונטית","cta":"עדכון העדפת הקשר"},
+    {"id":"month14","offset":{"months":14},"topic":"תוכניות מכירה, קנייה או שינוי מימון","cta":"סימון צורך חדש רק אם קיים"},
+    {"id":"month16","offset":{"months":16},"topic":"מה יעזור לכם לקבל החלטה בנוחות","cta":"שאלה או בקשת שיחה לפי בחירתכם"},
+    {"id":"month17","offset":{"months":17},"topic":"סיכום הקשר לפני סיום תקופת הטיפוח","cta":"עדכון העדפות, ללא חידוש אוטומטי"}
+  ]
+}

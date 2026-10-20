@@ -1,0 +1,37 @@
+{
+  "scope": "Pure lifecycle policy; synthetic acknowledgments and ledgers only",
+  "actualDelivery": false,
+  "persistentConcurrencyTested": false,
+  "productionAcceptanceClaimed": false,
+  "timelines": 189,
+  "evaluations": 111321,
+  "draftCandidates": 1449,
+  "unresolvedDeliveryProbes": 2898,
+  "queuedSuppressionProbes": 2898,
+  "byChannel": {
+    "whatsapp": 414,
+    "email": 828,
+    "sms": 207
+  },
+  "byTerminalReason": {
+    "horizon_complete": 252,
+    "global_optout": 27132,
+    "competitor_chosen": 27132
+  },
+  "invariants": [
+    "recipient-and-campaign-consent",
+    "single-channel-per-touch",
+    "shared-seven-day-minimum-gap",
+    "at-most-two-touches-per-30-days",
+    "monotonic-content-no-catchup",
+    "stable-no-repeat-key",
+    "pending-and-unknown-block",
+    "optout-cancels-queued",
+    "withdrawal-cancels-queued",
+    "competitor-stops",
+    "human-pause",
+    "18-calendar-month-expiry",
+    "dispatch-always-disabled"
+  ],
+  "passed": true
+}
