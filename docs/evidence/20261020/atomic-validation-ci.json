@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-20T21:00:00Z",
+  "repository": "yoram756/excelent-landing",
+  "codeCommit": "119ad87217e09c4c33b47998fd6b52a04eb8f102",
+  "matchingLocalCommit": "33110933fbbcbf183554e30999e95244b6abb3a7",
+  "matchingTree": "3545fd79874ede4094dd6012b3407c6b5636a1c1",
+  "runId": 39496177697,
+  "jobId": 118881684549,
+  "conclusion": "success",
+  "logic": {
+    "tests": 198,
+    "passed": 198,
+    "failed": 0
+  },
+  "browser": {
+    "passed": 55,
+    "total": 55,
+    "scope": "Mock landing API and locally rendered feedback form; no customer messaging"
+  },
+  "selectedLogLines": [
+    "2026-10-20T20:56:23.2656105Z # Subtest: real loopback GET renders a voluntary RTL form and never removes a contact",
+    "2026-10-20T20:56:23.2659592Z # Subtest: removal commits before optional feedback and remains after invalid feedback",
+    "2026-10-20T20:56:23.2666621Z # Subtest: wrong CSRF and cross-origin submissions cannot change anything",
+    "2026-10-20T20:56:34.2498668Z # tests 198",
+    "2026-10-20T20:56:34.2499277Z # pass 198",
+    "2026-10-20T20:56:34.2499572Z # fail 0",
+    "2026-10-20T20:57:01.1948295Z PASS feedback mobile has no horizontal overflow ",
+    "2026-10-20T20:57:01.1948680Z PASS feedback answers are all optional ",
+    "2026-10-20T20:57:01.1949084Z PASS feedback removal does not require questionnaire ",
+    "2026-10-20T20:57:01.1949519Z PASS feedback explains no automatic re-enrollment ",
+    "2026-10-20T20:57:01.1949878Z PASS axe voluntary feedback ",
+    "2026-10-20T20:57:01.1950141Z 55/55"
+  ]
+}

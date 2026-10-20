@@ -1,0 +1,359 @@
+Browser tab: 148905448, Title: "מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה", URL: "https://adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0".
+1 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה, URL: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0
+	2 container
+		3 container ads_pe_container
+			4 container
+				5 link Description: מנהל המודעות Meta ​, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797
+				6 container nux_jewel_nav_anchor
+					7 button Pressable
+				8 container כלים
+					9 content list
+						10 container
+							11 button סקירת החשבון, ID: js_8b
+							12 text סקירת החשבון
+						13 container
+							14 button קמפיינים
+							15 text קמפיינים
+						16 container
+							17 button דוחות של ביצועי מודעות
+							18 text דוחות של ביצועי מודעות
+						19 container
+							20 link Description: קהלים, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797&business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+							21 text קהלים
+						22 container
+							23 button הגדרות פרסום, ID: ecosystem_nav_advertising_preferences_context_id
+							24 text הגדרות פרסום
+						25 container
+							26 link Description: חיובים ותשלומים, Value: adsmanager.facebook.com/adsmanager/billing_hub/accounts/details?nav_entry_point=ads_ecosystem_navigation_menu&placement=ads_manager&asset_id=287081049104797&business_id=745355029428233&payment_account_id=287081049104797&session_id=REDACTED
+							27 text חיובים ותשלומים
+						28 container
+							29 link Description: מנהל האירועים, Value: eventsmanager.facebook.com/events_manager2/overview?business_id=745355029428233&act=287081049104797&nav_source=ads_ecosystem_nav
+							30 text מנהל האירועים
+						31 container
+							32 button כל הכלים, ID: ecosystem_nav_all_tools_context_id
+							33 text כל הכלים
+				34 container
+					35 button המסייע העסקי של Meta AI
+				36 container
+					37 button עזרה
+					38 text עזרה
+				39 button הגדרות העסק ​
+					40 text הגדרות העסק
+					41 image
+				42 button חיפוש ​
+					43 text חיפוש
+					44 image
+				45 button דיווח על בעיה ​
+					46 text דיווח על בעיה
+					47 image
+			48 container
+				49 container
+					50 button סגירה
+						51 image
+					52 button Description: הצגת התרשימים (Ctrl+Y), ID: insights_tray_button
+					53 button עריכה (Ctrl+U)
+					54 button הצג היסטוריה (Ctrl+I)
+					55 button צמצם את התצוגה
+				56 container campaign_structure_tree_root
+					57 container
+						58 text חיפוש
+						59 container
+							60 image
+							61 combo box (collapsed, settable) חיפוש, ID: js_e2, Secondary Actions: Expand
+					62 table grid
+						63 container
+							64 row קמפיין
+								65 cell Description: קמפיין, ID: ads_campaign_structure_item_120252891592490603
+									66 image
+									67 text EXC_Refi_WA_R1_2026-10
+							68 row סדרת מודעות
+								69 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252926489540603
+									551 image
+									71 text ‏מטורגט-איגור 20.10
+							72 row מודעה
+								73 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489570603
+									74 image
+									75 text R1_Img_Balance
+							76 row מודעה
+								77 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489550603
+									78 image
+									79 text R1_Img_Bank
+							80 row מודעה
+								81 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489560603
+									82 image
+									83 text R1_Video
+							84 row סדרת מודעות
+								85 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252891592500603
+									544 image
+									87 text EXC_Refi_IL_18-65_WA_R1
+							88 row מודעה
+								89 cell Description: מודעה, ID: ads_campaign_structure_item_120252891592510603
+									90 image
+									91 text R1_Video
+							92 row מודעה
+								93 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718060603
+									94 image
+									95 text R1_Img_Balance
+							96 row מודעה
+								97 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718070603
+									98 image
+									99 text R1_Img_Bank
+				100 container
+					101 button פתיחה ​
+						102 text פתיחה
+						103 image
+					104 link Description: EXC_Refi_WA_R1_2026-10, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+					105 image
+					106 image
+					107 heading EXC_Refi_IL_18-65_WA_R1, Value: 4
+						108 text EXC_Refi_IL_18-65_WA_R1
+					109 image
+					110 link Description: 3 מודעות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+					111 container cpgn_temp_save_as_template_nux_e8
+						112 text פעיל
+						113 container
+							114 switch (settable, boolean) הפעלה/כיבוי, Value: 1, ID: js_ea
+						115 pop up button (collapsed) תפריט הפעולות ​, Secondary Actions: Expand
+							116 text תפריט הפעולות
+							117 image
+					118 tab group
+						119 tab (selected, settable, boolean) Description: ערוך, Value: 1
+						120 tab (selectable, settable, boolean) Description: בדוק, Value: 0
+					121 container
+						636 container
+							637 image
+							638 heading תקציב ולוח זמנים, Value: 3
+								639 text תקציב ולוח זמנים
+							640 container
+								641 container js_na
+									642 text אסטרטגיית תקציב
+								643 text תקציב הקמפיין מחלק את התקציב היומי של ₪80.00 בין סדרות המודעות. כדי לבצע עדכונים צריך לעבור אל 
+								644 link Description: הקמפיין שלך, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+								645 text . אפשר להגדיר מגבלות הוצאה בכל סדרת מודעות. 
+								646 link Description: מידע על מגבלות הוצאה, Value: facebook.com/business/help/454681230514942
+							647 container
+								648 container js_nf
+									649 text מגבלות הוצאות על סדרת מודעות
+								650 container
+									651 checkbox (settable, integer) Description: הגדרה של מגבלת הוצאות עליונה ותחתונה לסדרת המודעות., Value: 0, ID: js_nj
+									652 image
+								653 text הגדרה של מגבלת הוצאות עליונה ותחתונה לסדרת המודעות.
+							654 container
+								655 text לוח זמנים
+								656 text תאריך התחלה
+								657 heading תאריך התחלה, Value: 4
+									658 text תאריך התחלה
+								659 container
+									660 text בחר תאריך ושעה
+									661 container
+										662 text בורר התאריכים
+										663 image
+										664 text field (disabled) בחר תאריך ושעה בורר התאריכים, Value: 19 באוקטובר 2026, ID: js_o7
+									665 text הזנת שעה
+									666 container
+										667 image
+										668 container בחר תאריך ושעה הזנת שעה, ID: js_ob
+											669 stepper (disabled, settable, integer) Description: שעות, Value: 0, ID: js_of
+											670 text :
+											671 stepper (disabled, settable, integer) Description: דקות, Value: 41, ID: js_og
+										672 text PDT
+								673 text תאריך סיום
+								674 table
+									675 row מתמשך
+										676 cell (selected) מתמשך
+											677 container
+												678 container
+													679 radio button (settable, integer) Description: מתמשך, Value: 1
+												680 text מתמשך
+												681 text פועל עד הכיבוי.
+									682 row הגדרת תאריך סיום
+										683 cell (selectable) הגדרת תאריך סיום
+											684 container
+												685 container
+													686 radio button (settable, integer) Description: הגדרת תאריך סיום, Value: 0
+												687 text הגדרת תאריך סיום
+												688 text סיום בתאריך שבחרת.
+							689 link Description: הסתרת ההגדרות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+							690 container
+								691 container js_pp
+									692 text תזמון סדרת המודעות
+								693 container js_v9
+									694 image
+									695 heading הפעלת מודעות בשעות פעילות ספציפיות יכולה להגדיל את מספר ההמרות ב-22.8% ​, Value: 4
+										696 text הפעלת מודעות בשעות פעילות ספציפיות יכולה להגדיל את מספר ההמרות ב-22.8%
+										697 image
+									698 container
+										699 text בעזרת תזמון של סדרת מודעות, נציג את המודעות שלך כשהעסק כנראה פתוח וזמין להודעות, מה שיכול לעזור לך ליצור קשר עם יותר לקוחות פוטנציאליים.
+										700 button להחיל עכשיו
+											701 text להחיל עכשיו
+								702 container
+									703 checkbox (settable, integer) Description: תזמון המודעות., Value: 0, ID: js_xj
+									704 image
+								705 text תזמון המודעות.
+						706 container
+							707 image
+							708 heading בקרות קהל , Value: 3
+								709 text בקרות קהל 
+							710 text הגדרת קריטריונים בנוגע למיקומים שאפשר להציג בהם מודעות של הקמפיין הזה. 
+							711 link Description: מידע נוסף, Value: facebook.com/business/help/793748385630490
+							712 container
+								713 container
+									714 text לא הוגדרו הגדרות פרסום לא הוגדרו הגדרות פרסום
+								715 container
+									716 text שימוש בקהל שמור
+									717 image
+								718 container
+									719 text מיקומים
+									720 pop up button מידע נוסף
+									721 container מיקומים
+										722 text מיקום כלול:
+										723 content list
+											724 container
+												725 AXListMarker • 
+												726 text ‏ישראל‏: ‏קו רוחב ‏31.25‏ קו אורך ‏34.79‏ ‏באר שבע‏ (+‏17‏ ‏ק"מ‏) Southern District; קו רוחב ‏31.90‏ קו אורך ‏35.01‏ ‏מודיעין-מכבים-רעות‏ (+‏17‏ ‏ק"מ‏), קו רוחב ‏32.32‏ קו אורך ‏34.85‏ ‏נתניה‏ (+‏17‏ ‏ק"מ‏) Central District; קו רוחב ‏32.09‏ קו אורך ‏34.83‏ ‏בני ברק‏ (+‏17‏ ‏ק"מ‏) Tel Aviv; קו רוחב ‏31.77‏ קו אורך ‏35.21‏ ‏ירושלים‏ (+‏17‏ ‏ק"מ‏) Jerusalem‏
+										727 container
+											728 link Description: עריכה, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+											729 button עריכה, ID: js_yh
+								730 image
+								731 container
+									732 text יש עוד משימה אחת לבדיקה.
+									733 button עיון בדרישות
+										734 text עיון בדרישות
+								735 link Description: הצגת אפשרויות נוספות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+						736 container
+							737 image
+							738 heading קהל +Advantage , Value: 3
+								739 text קהל +Advantage 
+							740 text נציג מודעות באופן אוטומטי לאנשים שהכי סביר שיגיבו. נציג מודעות לאנשים שתואמים להצעה שלך, וגם לקהלים אחרים אם נחליט שסביר להניח שזה ישפר את הביצועים.
+							741 link Description: מידע על קהלים, Value: facebook.com/business/help/793748385630490
+							742 container
+								747 text אין לכלול את הקהלים המותאמים אישית האלה
+								748 pop up button מידע נוסף
+								749 container אין לכלול את הקהלים המותאמים אישית האלה
+									750 container CREATE_AUDIENCE
+										751 pop up button (collapsed) צור חדש, Secondary Actions: Expand
+											752 text צור חדש
+											753 image
+										754 container js_10v
+											755 image
+											756 combo box (collapsed, settable) Secondary Actions: Expand
+								757 container
+									758 text גיל
+									759 pop up button מידע נוסף
+									760 container גיל
+										761 container
+											762 text גיל
+											763 text גיל מינימלי
+											764 combo box (collapsed) גיל גיל מינימלי 18, Value: 18 ​, ID: js_zr, Secondary Actions: Expand
+												765 container
+													766 text 18
+													767 image
+											768 text גיל מרבי
+											769 combo box (collapsed) גיל גיל מרבי 65+, Value: 65+ ​, ID: js_zx, Secondary Actions: Expand
+												770 container
+													771 text 65+
+													772 image
+								773 container
+									774 text מין
+									775 pop up button מידע נוסף
+									776 container מין
+										777 container
+											778 text מין
+											779 Description: מין, ID: js_105
+												780 container
+													781 container
+														782 radio button (settable, integer) Description: הכול, Value: 1, ID: js_109
+													783 text הכול
+												784 container
+													785 container
+														786 radio button (settable, integer) Description: גברים, Value: 0, ID: js_10f
+													787 text גברים
+												788 container
+													789 container
+														790 radio button (settable, integer) Description: נשים, Value: 0, ID: js_10l
+													791 text נשים
+								792 container
+									793 text מיקוד מפורט
+									794 pop up button מידע נוסף
+									795 container מיקוד מפורט
+										796 container DETAILED
+											797 text הכללת אנשים שמתאימים ל-
+											798 container
+												799 container js_10x
+													800 image
+													801 combo box (collapsed, settable) Secondary Actions: Expand
+												802 container
+													803 button עיון
+														804 text עיון
+								746 link Description: button, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+						606 container
+							607 image
+							608 heading שקיפות המודעה, Value: 3
+								609 text שקיפות המודעה
+							610 text ציון פרטים על המפרסם ועל המשלם יגביר את השקיפות עבור הקהל שלך. השם, המיקום ופרטי ההתחברות שלהם יוצגו באופן ציבורי ב
+							611 link Description: ספריית המודעות של Meta, Value: facebook.com/ads/library/
+							612 text  בזמן שהמודעות פועלות, ובמקרים מסוימים, למשך זמן ממושך יותר. 
+							613 link Description: מידע על שקיפות, Value: facebook.com/business/help/721913190475838
+							614 container
+								615 image
+								616 heading ניתן למנוע הפרעות במודעות על ידי השלמת 0 משימות, Value: 4
+									617 text ניתן למנוע הפרעות במודעות על ידי השלמת 0 משימות
+								618 container
+									619 text תידרש בקרוב השלמת 0 משימות כדי להציג מודעות ב:  ישראל . תהיה אפשרות להציג מודעות בסדרת המודעות הזו אחרי בחירת מפרסם ומשלם שאומתו בכל מיקום שנדרש.
+									620 link Description: מידע על דרישות האימות, Value: facebook.com/business/help/983527276402621
+							621 container
+								622 text המיקומים שנבחרו
+								623 image
+								624 container המיקומים שנבחרו
+									625 container
+										626 container js_up
+											627 text מפרסם (לא חובה)
+										628 text מפרסם (נדרש אימות)
+										629 combo box (collapsed) מפרסם (נדרש אימות) בחירת המפרסם, Value: בחירת המפרסם ​, ID: js_uu, Secondary Actions: Expand
+											630 container
+												631 text בחירת המפרסם
+												632 image
+									633 container
+										634 switch (disabled, settable, boolean) Description: המפרסם והמשלם שונים, Value: 0, ID: js_uz
+									635 text המפרסם והמשלם שונים
+						306 container
+							307 container
+								308 text EXC_Refi_IL_18-65_WA_R1 פעילים  •  היום התחילה שיחת הודעות
+								309 image
+								310 text — עלות לתוצאה
+								311 image
+								312 text — סכום ההוצאה
+								313 image
+								314 text ₪62.09
+							315 container
+								316 image
+								317 heading הגדרות החשבון, Value: 4
+									318 text הגדרות החשבון
+								319 text לא נקבעו הגדרות
+								320 button (collapsed) הרחבה של הגדרות החשבון ​, Secondary Actions: Expand
+									321 text הרחבה של הגדרות החשבון
+									322 image
+							323 container
+								324 heading קטגוריית מודעות מיוחדות, Value: 3
+									325 text קטגוריית מודעות מיוחדות
+								326 text דיור and מוצרים ושירותים פיננסיים
+								327 link Description: ראה את דרישות הקטגוריה, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0#
+							590 container campaignReachEstimatesSection
+								591 container
+									592 image
+									593 text גודל הקהלים עשוי להשפיע על חלוקת התקציב
+									594 text הקהלים שלך שונים בגודלם באופן משמעותי. קרוב לוודאי שסדרות המודעות עם הקהלים הגדולים ביותר יקבלו את התקציב הגבוה ביותר.
+									595 link Description: מידע נוסף, Value: facebook.com/business/help/153514848493595
+								596 container
+									597 heading גודל הקהל המשוער ​, Value: 3
+										598 container
+											599 text גודל הקהל המשוער
+											600 image
+									601 container
+										602 text 4,400,000  -  5,100,000
+									603 image
+									604 text ההערכות לא כוללות את אפשרויות קהל Advantage+‎
+									605 text ועשויים להשתנות באופן משמעותי עם הזמן.
+		805 text נמצאו 0 תוצאות
+
+The focused UI element is 1 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה, URL: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&date=2026-10-20_2026-10-21%2Ctoday&insights_date=2026-10-20_2026-10-21%2Ctoday&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&nav_source=no_referrer&current_step=0

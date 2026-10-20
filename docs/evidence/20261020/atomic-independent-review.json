@@ -1,0 +1,31 @@
+{
+  "scope": "Read-only independent review required by CLAUDE.md and .claude/agents/qa-reviewer.md",
+  "localTargetedTests": {
+    "passed": 44,
+    "total": 44,
+    "exitCode": 0
+  },
+  "checkedFixes": [
+    "Cancelled meeting reference cannot be revived at the same timestamp",
+    "Stale or unrelated cancellation cannot clear current meeting",
+    "Free text attribution is rejected or redacted",
+    "Atomic intake rollback, cross-process locks, fencing, persistent optout and unresolved-send blocking",
+    "All 8 HTTP tests and 55 browser checks independently verified in CI logs"
+  ],
+  "ci": {
+    "run": 39496177697,
+    "job": 118881684549,
+    "logicPassed": 198,
+    "browserPassed": 55,
+    "conclusion": "success"
+  },
+  "notTested": [
+    "No live provider transport in new layer",
+    "No new Monday adapter",
+    "No deployment or complete commercial acceptance"
+  ],
+  "localBlockers": [
+    "Bash scripts/verify.sh E_ACCESSDENIED",
+    "Loopback socket EACCES; full tests passed independently in GitHub"
+  ]
+}

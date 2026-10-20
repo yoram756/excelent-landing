@@ -1,0 +1,227 @@
+Browser tab: 16, Title: "▶️ קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs".
+0 AXWebArea ▶️ קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs
+	1 container n8n-app
+		2 container
+			3 container
+				4 container
+					5 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					6 text /
+					7 container
+						8 text קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)
+					9 button More actions
+					10 button (disabled) Published
+					11 button More actions
+				12 radio button Description: Editor, Value: 1
+				13 radio button Description: Executions, Value: 0
+				14 radio button Description: Evaluations, Value: 0
+			15 container side-menu
+				16 menu bar
+					17 (collapsed) Add new item, Secondary Actions: Expand
+						18 button Add new item
+				19 button Open command palette
+				20 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				21 container
+					22 Description: n8n Assistant, ID: instance-ai
+					23 Description: Overview, ID: home
+				24 Description: Templates, ID: templates
+				25 Description: Insights, ID: insights
+				26 Description: Help, ID: help
+				27 Description: Settings, ID: settings
+			28 container content
+				29 container
+					30 container
+						31 container
+							32 image
+								33 container Edge from f4290c7f-2477-4ab9-937b-2a94763a2be5 to 014e1610-a2e4-41aa-b56e-9b9225d948bf
+							34 image
+								35 container Edge from 014e1610-a2e4-41aa-b56e-9b9225d948bf to 235ac134-a036-413c-aaec-0361a41c88af
+							36 image
+								37 container Edge from 235ac134-a036-413c-aaec-0361a41c88af to 89a4b35e-0f84-4792-821d-96f6410c7a86
+							38 image
+								39 container Edge from 235ac134-a036-413c-aaec-0361a41c88af to 4224f3e5-dcfb-4a2c-bc0b-6475c806b0c9
+							40 image
+								41 container Edge from 89a4b35e-0f84-4792-821d-96f6410c7a86 to a67c2cb6-19f8-4b01-b991-3c4bfed885ea
+							42 image
+								43 container Edge from a67c2cb6-19f8-4b01-b991-3c4bfed885ea to 8bb1ca13-6a5d-4f6a-9ef8-4d4ff28f1653
+							44 image
+								45 container Edge from 8bb1ca13-6a5d-4f6a-9ef8-4d4ff28f1653 to 460cc01b-6821-4848-8f21-c92a48909f37
+							46 image
+								47 container Edge from 460cc01b-6821-4848-8f21-c92a48909f37 to e0fc1ba6-261d-4c26-afd8-b658bdd91c39
+							48 image
+								49 container Edge from e0fc1ba6-261d-4c26-afd8-b658bdd91c39 to f83c6d46-48da-4932-b9cd-99401214148f
+							50 image
+								51 container Edge from f83c6d46-48da-4932-b9cd-99401214148f to 307699a7-48bc-418d-966c-7b4c309f9ef6
+							52 image
+								53 container Edge from f83c6d46-48da-4932-b9cd-99401214148f to d7ce41c1-7ff6-425d-982d-4302e6e049b9
+							54 image
+								55 container Edge from 1f08a06f-ef1f-43f9-83ca-290996f50be3 to 0a9c83e4-bd93-493a-a4d8-0ae945628275
+							56 image
+								57 container Edge from 0a9c83e4-bd93-493a-a4d8-0ae945628275 to 6574b013-588a-4223-8759-4743f134fe59
+							58 image
+								59 container Edge from 6574b013-588a-4223-8759-4743f134fe59 to ee81d4c4-68ce-42dc-98e8-9cbbb57a8f43
+							60 image
+								61 container Edge from 307699a7-48bc-418d-966c-7b4c309f9ef6 to 1f08a06f-ef1f-43f9-83ca-290996f50be3
+							62 container
+								63 text POST
+								64 button Execute step
+								65 button Deactivate
+								66 button Delete
+								67 button Add to chat
+								68 button More actions
+								69 text Lead webhook
+								70 container
+									71 button Execute workflow
+							72 container
+								73 button Execute step
+								74 button Deactivate
+								75 button Delete
+								76 button Add to chat
+								77 button More actions
+								78 text Validate
+							79 container
+								80 text true
+								81 text false
+								82 button Execute step
+								83 button Deactivate
+								84 button Delete
+								85 button Add to chat
+								86 button More actions
+								87 text Needs save?
+							88 container
+								89 button Execute step
+								90 button Deactivate
+								91 button Delete
+								92 button Add to chat
+								93 button More actions
+								94 text Reply early
+							95 container
+								96 button Execute step
+								97 button Deactivate
+								98 button Delete
+								99 button Add to chat
+								100 button More actions
+								101 text Find query
+							102 container
+								103 button Execute step
+								104 button Deactivate
+								105 button Delete
+								106 button Add to chat
+								107 button More actions
+								108 container
+									109 text Find by phone POST: https://api.monday.com/v2
+							110 container
+								111 button Execute step
+								112 button Deactivate
+								113 button Delete
+								114 button Add to chat
+								115 button More actions
+								116 text Build mutation
+							117 container
+								118 button Execute step
+								119 button Deactivate
+								120 button Delete
+								121 button Add to chat
+								122 button More actions
+								123 container
+									124 text Save to Monday POST: https://api.monday.com/v2
+							125 container
+								126 button Execute step
+								127 button Deactivate
+								128 button Delete
+								129 button Add to chat
+								130 button More actions
+								131 text Check save
+							132 container
+								133 text true
+								134 text false
+								135 button Execute step
+								136 button Deactivate
+								137 button Delete
+								138 button Add to chat
+								139 button More actions
+								140 text Saved?
+							141 container
+								142 button Execute step
+								143 button Deactivate
+								144 button Delete
+								145 button Add to chat
+								146 button More actions
+								147 text Reply saved
+							148 container
+								149 button Execute step
+								150 button Deactivate
+								151 button Delete
+								152 button Add to chat
+								153 button More actions
+								154 text Reply failed
+							155 container
+								156 button Execute step
+								157 button Deactivate
+								158 button Delete
+								159 button Add to chat
+								160 button More actions
+								161 text Alert query
+							162 container
+								163 button Execute step
+								164 button Deactivate
+								165 button Delete
+								166 button Add to chat
+								167 button More actions
+								168 container
+									169 text Who am I POST: https://api.monday.com/v2
+							170 container
+								171 button Execute step
+								172 button Deactivate
+								173 button Delete
+								174 button Add to chat
+								175 button More actions
+								176 container
+									177 text Alert Yoram POST: https://api.monday.com/v2
+							178 container
+								179 button Execute step
+								180 button Deactivate
+								181 button Delete
+								182 button Add to chat
+								183 button More actions
+								184 container
+									185 text Email alert send: message
+							186 container
+								187 button (disabled) Execute step
+								188 button Activate
+								189 button Delete
+								190 button Add to chat
+								191 button More actions
+								192 container
+									193 text WhatsApp recipients (Deactivated)
+							194 container
+								195 button (disabled) Execute step
+								196 button Activate
+								197 button Delete
+								198 button Add to chat
+								199 button More actions
+								200 container
+									201 text WhatsApp alert (Deactivated) POST: https://api.gambot.co.il/api/v1/messages/send-template
+							202 button Add 18 nodes to chat
+						203 image
+						204 image
+						205 container
+							206 button Zoom to Fit
+							207 button Zoom In
+							208 button Zoom Out
+							209 button Tidy Up
+								210 image
+					211 button Execute workflow
+					212 button Open nodes panel
+					213 button Command bar
+					214 button Add sticky note
+					215 button Open side panel
+					216 button n8n AI
+						217 image
+				218 container
+					219 container
+						220 text Logs
+						221 button Actions
+						222 button Collapse panel
+						223 text Nothing to display yet. Execute the workflow to see execution logs.
+
+The focused UI element is 0 AXWebArea ▶️ קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs
