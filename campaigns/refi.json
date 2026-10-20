@@ -318,5 +318,18 @@
   },
   "groups": {
     "meetings": "group_mm883gr6"
+  },
+  "identity": {
+    "profile": "excelent_finance",
+    "nameInMessages": "יורם פלד",
+    "contactPhone": "excelent_contact",
+    "testPhones": [
+      "excelent_contact",
+      "backup"
+    ],
+    "approved": true,
+    "approvedBy": "יורם",
+    "approvedAt": "2026-10-20",
+    "source": "הנחיות יורם בשיחה מ 20.10.2026"
   }
 }

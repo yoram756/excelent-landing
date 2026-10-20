@@ -25,13 +25,15 @@ Landing pages for אקסלנט (site/), the refinance lead funnel sources for n8
 - Test leads: names start with TEST, phones 0500000040 and up. Delete them after tests.
 
 ## Identity and phone numbers (binding)
-- Single source: config/business.json. Code, campaigns and pages take names and numbers from it, never from memory or old docs.
-- 055-2783459 is the only contact number for leads and clients (reply, call back, follow up).
-- 054-8180280 is backup only: copy of internal alerts and approved tests. Never a client facing number.
+- Single source: config/business.json holds the phone numbers, their roles and the business profiles. Each campaign file chooses its profile, name and contact phone explicitly in its identity block. Nothing is inherited from another campaign.
+- Excelent mortgage and finance campaigns (profile excelent_finance): name יורם / יורם פלד / יורם אקסלנט, contact for clients 055-2783459.
+- 054-8180280 is backup: copy of internal alerts and approved tests. Never a client facing number.
 - 055-9881245 is the technical Gambot sending number. Do not change or disconnect it.
-- The private number listed under phones.forbidden in config/business.json never appears in business material.
-- Fix a name or number only on an explicit instruction from יורם. Contradictions are reported, not guessed. Real lead data is never overwritten to fix test data.
-- tests/funnel/identity.test.js enforces this on every run.
+- 050-2234052 belongs to יורם: tests, backup, West Negev real estate (with the name יורם חדד) only when a campaign sets it explicitly, and personal use. Never block it globally, never use it as a contact number unless the campaign defines it.
+- יורם חדד is a known identity of יורם. Never replace one name with another automatically. The two approved sellers templates in Gambot stay as they are.
+- Private chats and family contacts never enter the lead system. A test number never becomes a published business number because it was used in a test.
+- Pilot and live builds refuse a campaign without an approved identity or with a pilot phone outside its approved test phones. tests/funnel/identity.test.js enforces this.
+- Fix a name or number only on an explicit instruction from יורם. Contradictions are reported, not guessed.
 
 ## Production rules
 - Server changes: git pull on the VPS, nginx config test in a throwaway container, then restart. Show the command first.

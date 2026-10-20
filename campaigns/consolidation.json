@@ -208,5 +208,13 @@
     "costPerPayingClient": null,
     "costPerMeeting": null
   },
-  "notes": "טיוטה להוכחת התשתית. מסרים, שאלון ויעדים טרם הוגדרו עסקית. אין להפעיל לפני אישור יורם."
+  "notes": "טיוטה להוכחת התשתית. מסרים, שאלון ויעדים טרם הוגדרו עסקית. אין להפעיל לפני אישור יורם.",
+  "identity": {
+    "profile": null,
+    "nameInMessages": null,
+    "contactPhone": null,
+    "testPhones": [],
+    "approved": false,
+    "note": "טרם נקבעו זהות ופרטי קשר לקמפיין. לא נלקחים אוטומטית מקמפיין אחר."
+  }
 }

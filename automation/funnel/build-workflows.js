@@ -11,6 +11,16 @@ const MODE=process.argv[2]||'test';if(!['test','pilot','live'].includes(MODE))th
 const GO_LIVE=process.argv[3]||'2026-10-20T07:00:00Z';
 const PILOT=MODE==='pilot'?(process.argv[4]||''):'';
 if(MODE==='pilot'&&!/^972\d{9}(,972\d{9})*$/.test(PILOT))throw new Error('pilot needs internal phones like 9725XXXXXXXX');
+// identity gate: every campaign declares its own approved identity; nothing is inherited from another campaign
+const BIZ0=JSON.parse(fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8'));
+const ID=CFG.identity;
+if(!ID)throw new Error('campaign '+CFG.id+' has no identity block');
+if(MODE!=='test'){
+  if(ID.approved!==true)throw new Error('campaign '+CFG.id+': identity not approved by the owner, only test builds are allowed');
+  const prof=BIZ0.profiles[ID.profile];if(!prof)throw new Error('unknown profile '+ID.profile);
+  if(!prof.allowedContactPhones.includes(ID.contactPhone))throw new Error('contact phone not allowed for profile');
+  if(MODE==='pilot'){const ok=ID.testPhones.map(k=>BIZ0.phones[k].e164);for(const ph of PILOT.split(','))if(!ok.includes(ph))throw new Error('pilot phone '+ph+' is not an approved test phone of '+CFG.id);}
+}
 const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS);
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};

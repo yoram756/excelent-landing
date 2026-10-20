@@ -5,7 +5,7 @@
  },
  "nodes": [
   {
-   "id": "11599f86-7f9f-b80f-9211-ba10f199243b",
+   "id": "ae370d6e-f196-b2f0-5606-10004aa6bbeb",
    "name": "Link",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -13,7 +13,7 @@
     0,
     0
    ],
-   "webhookId": "eb8ef043-cef3-e366-7fd6-50f88088a4fc",
+   "webhookId": "5c894e8f-905c-ff7c-632e-ded337d6a8fb",
    "parameters": {
     "httpMethod": "GET",
     "path": "go",
@@ -22,7 +22,7 @@
    }
   },
   {
-   "id": "653edcca-3040-96f2-091e-5564c679520e",
+   "id": "a62cf73e-326d-f2fa-3492-5c973d37606f",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -61,7 +61,7 @@
    }
   },
   {
-   "id": "4fb696ef-9269-38dc-b122-bd178c3461b4",
+   "id": "b8821b55-2632-fc18-c09b-b0e43cc5687e",
    "name": "Resolve",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -70,11 +70,11 @@
     0
    ],
    "parameters": {
-    "jsCode": "// n8n Code node \"Resolve link\" in the go redirect workflow. Source of truth: this file.\n// c = 10 char personal token + 1 letter destination, or a phone number as fallback.\nconst CFG = {\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת, גיל 25 עד 55, כל הארץ\",\"status\":\"internal-test\",\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88pfdv\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\"},\"M2\":{\"id\":\"2866421103739060\",\"name\":\"exc_refi_m02_quiz\",\"dest\":\"q\"},\"M3\":{\"id\":\"2306286663247344\",\"name\":\"exc_refi_m03_reviews\",\"dest\":\"b\"},\"M4\":{\"id\":\"991655264017502\",\"name\":\"exc_refi_m04_call\",\"dest\":\"c\"},\"M5\":{\"id\":\"1861514208308620\",\"name\":\"exc_refi_m05_case\",\"dest\":\"q\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\"},\"M7\":{\"id\":\"1695504292330742\",\"name\":\"exc_refi_m07_thanks\",\"dest\":\"c\"},\"M8\":{\"id\":\"1456261889708463\",\"name\":\"exc_refi_m08_remind\",\"dest\":\"c\"},\"M9\":{\"id\":\"1825910702064350\",\"name\":\"exc_refi_m09_wait\",\"dest\":\"c\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"]},\"M10R\":{\"id\":\"4090685337891850\",\"name\":\"exc_refi_m10r_reminder\",\"vars\":[\"first\",\"when\"],\"dest\":\"c\"},\"M11\":{\"id\":\"1462992419096031\",\"name\":\"exc_refi_m11_noshow\",\"dest\":\"c\"},\"M12\":{\"id\":\"1152794754084561\",\"name\":\"exc_refi_m12_google\",\"dest\":\"g\"},\"M13\":{\"id\":\"1022323597539469\",\"name\":\"exc_refi_m13_midrag\",\"dest\":\"m\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\"},\"M15\":{\"id\":\"1150212394355928\",\"name\":\"exc_refi_m15_offer\",\"dest\":\"c\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"linkByStep\":{\"M2\":\"q\",\"M3\":\"b\",\"M4\":\"c\",\"M5\":\"q\",\"M7\":\"c\",\"M8\":\"c\",\"M9\":\"c\",\"R1\":\"c\",\"R2\":\"c\",\"M10\":\"c\",\"M11\":\"c\",\"M12\":\"g\",\"M13\":\"m\",\"M15\":\"c\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"}};\nconst DEST = CFG.links, BY_STEP = CFG.linkByStep, C = CFG.columns;\nconst raw = String(($('Link').first().json.query || {}).c || '').trim().toLowerCase();\nconst items = $('Items').first().json.data.boards[0].items_page.items;\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d; };\nlet token = '', dest = '', lead = null;\nconst m = raw.match(/^([a-z0-9]{10})([qcgmb])$/);\nif (m) { token = m[1]; dest = m[2]; }\nfor (const it of items) {\n  const cv = {}; for (const c of it.column_values) cv[c.id] = c;\n  if (token && cv[C.token]?.text === token) { lead = { it, cv }; break; }\n  if (!token && raw.replace(/\\D/g, '').length >= 9 && norm(cv[C.phone]?.text) === norm(raw)) { lead = { it, cv }; break; }\n}\nif (lead && !dest) dest = BY_STEP[lead.cv[C.step]?.text] || 'q';\nif (!dest) dest = 'q';\nlet url = DEST[dest];\nif (dest === 'q' && lead) url = url.replace('#check', '&t=' + (lead.cv[C.token]?.text || '') + '#check');\nconst out = { url, found: !!lead, dest };\nif (lead) {\n  let st = {}; try { st = JSON.parse(lead.cv[C.state]?.text || '{}') || {}; } catch (e) {}\n  st.opens = st.opens || {};\n  const firstOfType = !st.opens[dest];\n  st.opens[dest] = (st.opens[dest] || 0) + 1;\n  const openPoints = Object.keys(st.opens).length * 5;\n  let heat = Number(lead.cv[C.heat]?.text || 0);\n  const before = heat;\n  if (firstOfType && openPoints <= 15) heat += 5;\n  const cols = { [C.state]: { text: JSON.stringify(st) } };\n  if (heat !== before) cols[C.heat] = String(heat);\n  out.itemId = lead.it.id; out.colsJson = JSON.stringify(cols);\n  out.notify = before < CFG.handoff.heatAtLeast && heat >= CFG.handoff.heatAtLeast && (lead.cv[C.path]?.text || '') !== 'E';\n  out.notifyText = 'משפך מחזור: הליד הגיע לציון חום ' + heat + ' ומוכן לשיחה. פתח קישור: ' + dest;\n  out.meId = $('Items').first().json.data.me.id;\n}\nreturn [{ json: out }];\n"
+    "jsCode": "// n8n Code node \"Resolve link\" in the go redirect workflow. Source of truth: this file.\n// c = 10 char personal token + 1 letter destination, or a phone number as fallback.\nconst CFG = {\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת, גיל 25 עד 55, כל הארץ\",\"status\":\"internal-test\",\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88pfdv\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\"},\"M2\":{\"id\":\"2866421103739060\",\"name\":\"exc_refi_m02_quiz\",\"dest\":\"q\"},\"M3\":{\"id\":\"2306286663247344\",\"name\":\"exc_refi_m03_reviews\",\"dest\":\"b\"},\"M4\":{\"id\":\"991655264017502\",\"name\":\"exc_refi_m04_call\",\"dest\":\"c\"},\"M5\":{\"id\":\"1861514208308620\",\"name\":\"exc_refi_m05_case\",\"dest\":\"q\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\"},\"M7\":{\"id\":\"1695504292330742\",\"name\":\"exc_refi_m07_thanks\",\"dest\":\"c\"},\"M8\":{\"id\":\"1456261889708463\",\"name\":\"exc_refi_m08_remind\",\"dest\":\"c\"},\"M9\":{\"id\":\"1825910702064350\",\"name\":\"exc_refi_m09_wait\",\"dest\":\"c\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"]},\"M10R\":{\"id\":\"4090685337891850\",\"name\":\"exc_refi_m10r_reminder\",\"vars\":[\"first\",\"when\"],\"dest\":\"c\"},\"M11\":{\"id\":\"1462992419096031\",\"name\":\"exc_refi_m11_noshow\",\"dest\":\"c\"},\"M12\":{\"id\":\"1152794754084561\",\"name\":\"exc_refi_m12_google\",\"dest\":\"g\"},\"M13\":{\"id\":\"1022323597539469\",\"name\":\"exc_refi_m13_midrag\",\"dest\":\"m\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\"},\"M15\":{\"id\":\"1150212394355928\",\"name\":\"exc_refi_m15_offer\",\"dest\":\"c\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"linkByStep\":{\"M2\":\"q\",\"M3\":\"b\",\"M4\":\"c\",\"M5\":\"q\",\"M7\":\"c\",\"M8\":\"c\",\"M9\":\"c\",\"R1\":\"c\",\"R2\":\"c\",\"M10\":\"c\",\"M11\":\"c\",\"M12\":\"g\",\"M13\":\"m\",\"M15\":\"c\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"}};\nconst DEST = CFG.links, BY_STEP = CFG.linkByStep, C = CFG.columns;\nconst raw = String(($('Link').first().json.query || {}).c || '').trim().toLowerCase();\nconst items = $('Items').first().json.data.boards[0].items_page.items;\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d; };\nlet token = '', dest = '', lead = null;\nconst m = raw.match(/^([a-z0-9]{10})([qcgmb])$/);\nif (m) { token = m[1]; dest = m[2]; }\nfor (const it of items) {\n  const cv = {}; for (const c of it.column_values) cv[c.id] = c;\n  if (token && cv[C.token]?.text === token) { lead = { it, cv }; break; }\n  if (!token && raw.replace(/\\D/g, '').length >= 9 && norm(cv[C.phone]?.text) === norm(raw)) { lead = { it, cv }; break; }\n}\nif (lead && !dest) dest = BY_STEP[lead.cv[C.step]?.text] || 'q';\nif (!dest) dest = 'q';\nlet url = DEST[dest];\nif (dest === 'q' && lead) url = url.replace('#check', '&t=' + (lead.cv[C.token]?.text || '') + '#check');\nconst out = { url, found: !!lead, dest };\nif (lead) {\n  let st = {}; try { st = JSON.parse(lead.cv[C.state]?.text || '{}') || {}; } catch (e) {}\n  st.opens = st.opens || {};\n  const firstOfType = !st.opens[dest];\n  st.opens[dest] = (st.opens[dest] || 0) + 1;\n  const openPoints = Object.keys(st.opens).length * 5;\n  let heat = Number(lead.cv[C.heat]?.text || 0);\n  const before = heat;\n  if (firstOfType && openPoints <= 15) heat += 5;\n  const cols = { [C.state]: { text: JSON.stringify(st) } };\n  if (heat !== before) cols[C.heat] = String(heat);\n  out.itemId = lead.it.id; out.colsJson = JSON.stringify(cols);\n  out.notify = before < CFG.handoff.heatAtLeast && heat >= CFG.handoff.heatAtLeast && (lead.cv[C.path]?.text || '') !== 'E';\n  out.notifyText = 'משפך מחזור: הליד הגיע לציון חום ' + heat + ' ומוכן לשיחה. פתח קישור: ' + dest;\n  out.meId = $('Items').first().json.data.me.id;\n}\nreturn [{ json: out }];\n"
    }
   },
   {
-   "id": "2a7cac04-c01c-1bd8-d998-5834dc9d04ec",
+   "id": "d65ac77e-3458-99aa-504f-230efc41e3f2",
    "name": "Redirect",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -91,7 +91,7 @@
    }
   },
   {
-   "id": "2f9dc9eb-5156-0d79-ac80-9251c401b719",
+   "id": "9d12ea50-6285-b2e0-265a-78f6981be41a",
    "name": "Found?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -108,7 +108,7 @@
      },
      "conditions": [
       {
-       "id": "64eb8be3-ae1f-bcee-fab9-4fe635a14b85",
+       "id": "abc3200e-8782-a114-8c4a-8047beb56ed1",
        "leftValue": "={{ $('Resolve').item.json.found }}",
        "rightValue": true,
        "operator": {
@@ -124,7 +124,7 @@
    }
   },
   {
-   "id": "dfac7992-2038-1112-5278-b4558cfd8395",
+   "id": "08cc8b50-2343-ef22-3980-7083b1221830",
    "name": "Update opens",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -162,7 +162,7 @@
    }
   },
   {
-   "id": "9abaf031-da5f-0ac9-96ad-ecf7c9113d2a",
+   "id": "827be4a0-1835-57e4-2597-5d3ee5fd09da",
    "name": "Hot?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -179,7 +179,7 @@
      },
      "conditions": [
       {
-       "id": "a15f7529-8219-c218-81fd-156fd78e8dab",
+       "id": "1ccad9d5-8c8f-0142-0ab0-87124025f3ae",
        "leftValue": "={{ $('Resolve').item.json.notify }}",
        "rightValue": true,
        "operator": {
@@ -195,7 +195,7 @@
    }
   },
   {
-   "id": "2169a2b6-1615-87d4-f15d-cb8ecc792b63",
+   "id": "be199ba4-87ee-d848-7ef4-f0fce1b7b8d2",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
