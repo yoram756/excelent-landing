@@ -1,0 +1,72 @@
+{
+  "commit": "741d1e2900e498b993a4c9ebe9b8a670685a2453",
+  "tree": "b401edf575e572804d37cdbf7b21b2897e2e334e",
+  "runId": 39492816019,
+  "jobs": [
+    {
+      "id": 118870107495,
+      "name": "integration-tests",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 39492816019,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Install Chromium for browser tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Validate funnel logic, accessibility and browser flows",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run actions/setup-node@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "scope": "164 logic tests including pure synthetic lifecycle simulation; 50 browser/accessibility checks with mocked lead API. No provider delivery or production acceptance."
+}
