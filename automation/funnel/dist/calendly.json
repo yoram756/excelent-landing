@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "1619241e-8b3b-45a4-be8f-de58de355cbc",
+   "id": "5935e5cc-0629-4280-ba41-a3361c14c4bf",
    "name": "Every 5 min",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "id": "b252a042-433e-4758-8d1d-95e579ea692e",
+   "id": "e4df93a6-b321-49f1-a047-d5a95aef0e3a",
    "name": "Calendly mails",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -55,7 +55,7 @@
    }
   },
   {
-   "id": "d02de3f3-9916-4519-bd77-c90f2567b966",
+   "id": "7ceec611-d4a3-4bdc-8bf6-124dc910a29f",
    "name": "Run test",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -63,7 +63,7 @@
     0,
     200
    ],
-   "webhookId": "73e7c6d4-3719-4355-a737-fee3fdcbc292",
+   "webhookId": "45c8630c-174a-481d-9e6e-88ddc8d4d2c8",
    "parameters": {
     "httpMethod": "POST",
     "path": "__TEST_PATH__calendly",
@@ -72,7 +72,7 @@
    }
   },
   {
-   "id": "a9f2e4d8-1e12-48d6-bace-f91378026319",
+   "id": "bd409bec-d538-45bc-8982-9ebd0678ada3",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -108,7 +108,7 @@
    }
   },
   {
-   "id": "4809f02b-fb45-444a-9b75-8b84f3953824",
+   "id": "8c8c1c99-d639-40b0-9382-c5079e7d21ce",
    "name": "Match bookings",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -121,7 +121,7 @@
    }
   },
   {
-   "id": "0938c327-aca7-4169-8375-2b495878a600",
+   "id": "d6fee51d-3816-40f1-b92a-b396c82a39e3",
    "name": "Matched?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -138,7 +138,7 @@
      },
      "conditions": [
       {
-       "id": "a1166daa-b0f0-4c5e-b0ff-080e500b4e0b",
+       "id": "3fe406ad-86a2-4f88-b163-b9942bc54500",
        "leftValue": "={{ $json.matched }}",
        "rightValue": true,
        "operator": {
@@ -154,7 +154,7 @@
    }
   },
   {
-   "id": "055e36d0-ad88-4293-b114-b70e7b451de1",
+   "id": "62aa1f5e-3c1e-49d4-b1fb-205a296d2320",
    "name": "Update lead",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -189,7 +189,7 @@
    }
   },
   {
-   "id": "79d03459-8924-44d3-90b7-27e4fcb4a97b",
+   "id": "69d23f90-c239-434f-8e85-189da9ee7b17",
    "name": "Create lead",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -220,6 +220,56 @@
     "sendBody": true,
     "specifyBody": "json",
     "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){ create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",g:\"group_mm883gr6\",n:($json.name||\"פגישה מהיומן\"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{refi_phone:$json.phone?{phone:$json.phone,countryShortName:\"IL\"}:undefined,refi_source:{label:\"יומן\"} }))} }) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "16340845-59a1-45d3-904a-e2b6fcc92218",
+   "name": "Wait for board automation",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    1200,
+    100
+   ],
+   "webhookId": "d4f83893-96a7-4621-a209-06ab07e552cc",
+   "parameters": {
+    "amount": 15,
+    "unit": "seconds"
+   }
+  },
+  {
+   "id": "04fd1672-3b5a-441a-ae6c-aa6f60928148",
+   "name": "Set meeting stage",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1400,
+    100
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.data.create_item.id),v:JSON.stringify({refi_stage:JSON.parse($('Match bookings').item.json.colsJson).refi_stage})} }) }}",
     "options": {}
    }
   }
@@ -292,6 +342,28 @@
     [
      {
       "node": "Create lead",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Create lead": {
+   "main": [
+    [
+     {
+      "node": "Wait for board automation",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait for board automation": {
+   "main": [
+    [
+     {
+      "node": "Set meeting stage",
       "type": "main",
       "index": 0
      }

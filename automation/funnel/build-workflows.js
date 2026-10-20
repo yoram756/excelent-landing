@@ -66,7 +66,10 @@ const cal={name:'משפך מחזור: פגישות מ Calendly',settings:{execut
  ifTrue('Matched?',[800,0],'={{ $json.matched }}'),
  monday('Update lead',[1000,-100],update('$json')),
  monday('Create lead',[1000,100],'={{ JSON.stringify({query:"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){ create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){ id } }",variables:{b:"'+BOARD+'",g:"group_mm883gr6",n:($json.name||"פגישה מהיומן"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{refi_phone:$json.phone?{phone:$json.phone,countryShortName:"IL"}:undefined,refi_source:{label:"יומן"}}))}}) }}')],
- connections:{'Every 5 min':L('Calendly mails'),'Calendly mails':L('Items'),'Run test':L('Items'),'Items':L('Match bookings'),'Match bookings':L('Matched?'),'Matched?':L('Update lead','Create lead')}};
+ connections:{'Every 5 min':L('Calendly mails'),'Calendly mails':L('Items'),'Run test':L('Items'),'Items':L('Match bookings'),'Match bookings':L('Matched?'),'Matched?':L('Update lead','Create lead'),'Create lead':L('Wait for board automation'),'Wait for board automation':L('Set meeting stage')}};
+// A board automation sets new items to "ליד חדש"; set the meeting stage again after it ran.
+cal.nodes.push({id:id(),name:'Wait for board automation',type:'n8n-nodes-base.wait',typeVersion:1.1,position:[1200,100],webhookId:id(),parameters:{amount:15,unit:'seconds'}});
+cal.nodes.push(monday('Set meeting stage',[1400,100],'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }",variables:{b:"'+BOARD+'",i:String($json.data.create_item.id),v:JSON.stringify({refi_stage:JSON.parse($(\'Match bookings\').item.json.colsJson).refi_stage})}}) }}'));
 
 // Final guard: no run of two closing braces inside an expression body.
 for(const w of [engine,go,cal])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
