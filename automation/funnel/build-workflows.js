@@ -2,8 +2,11 @@
 // Usage: node automation/funnel/build-workflows.js <test|live>
 // The test webhook paths are placeholders (__TEST_PATH__) filled in at deploy time, so no secret lands in git.
 const fs=require('fs');const path=require('path');const crypto=require('crypto');
-const MODE=process.argv[2]||'test';if(!['test','live'].includes(MODE))throw new Error('mode must be test or live');
+// Usage: build-workflows.js test | pilot <go-live ISO> <phone,phone> | live <go-live ISO>
+const MODE=process.argv[2]||'test';if(!['test','pilot','live'].includes(MODE))throw new Error('mode must be test, pilot or live');
 const GO_LIVE=process.argv[3]||'2026-10-20T07:00:00Z';
+const PILOT=MODE==='pilot'?(process.argv[4]||''):'';
+if(MODE==='pilot'&&!/^972\d{9}(,972\d{9})*$/.test(PILOT))throw new Error('pilot needs internal phones like 9725XXXXXXXX');
 const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8');
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
@@ -24,24 +27,30 @@ const L=(...names)=>({main:names.map(n=>n?[{node:n,type:'main',index:0}]:[])});
 const tag=MODE==='live'?'':' (מצב בדיקה)';
 
 // 1. Engine
-const engineCols=['refi_phone','refi_stage','refi_meeting','boolean_mm88mzry','boolean_mm8848pn','long_text_mm88pfdv','numeric_mm883h9v','fn_status','fn_path','fn_step','fn_next','fn_last','fn_token','fn_opens'];
+const engineCols=['refi_first_reply','refi_phone','refi_stage','refi_meeting','boolean_mm88mzry','boolean_mm8848pn','long_text_mm88pfdv','numeric_mm883h9v','fn_status','fn_path','fn_step','fn_next','fn_last','fn_token','fn_opens'];
 const engine={name:'משפך מחזור: מנוע הודעות'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
  {id:id(),name:'Every 5 min',type:'n8n-nodes-base.scheduleTrigger',typeVersion:1.2,position:[0,0],parameters:{rule:{interval:[{field:'minutes',minutesInterval:5}]}}},
  hook('Run test',[0,200],'__TEST_PATH__engine'),
  {id:id(),name:'Shabbat',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[200,0],onError:'continueRegularOutput',parameters:{method:'GET',url:'https://www.hebcal.com/shabbat?cfg=json&geonameid=281184&M=on',options:{timeout:10000}}},
  monday('Items',[400,0],itemsQuery(engineCols)),
  {id:id(),name:'Convos',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[600,0],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'GET',url:'https://api.gambot.co.il/api/v1/conversations?pageNumber=1&pageSize=100',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',options:{timeout:20000}}},
- code('Plan',[800,0],src('plan.js').replace('__MODE__',MODE).replace('__GO_LIVE__',GO_LIVE)),
+ code('Plan',[800,0],src('plan.js').replace('__MODE__',MODE).replace('__GO_LIVE__',GO_LIVE).replace('__PILOT__',PILOT)),
+ ifTrue('Route',[900,0],'={{ $json.reconcile }}'),
+ {id:id(),name:'Gambot history',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[1000,-300],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'GET',url:'={{ "https://api.gambot.co.il/api/v1/conversations/" + $json.phone + "/messages?pageSize=20" }}',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',options:{response:{response:{neverError:true}},timeout:20000}}},
+ code('Reconcile',[1200,-300],src('reconcile.js'),'runOnceForEachItem'),
+ monday('Update item (reconciled)',[1400,-300],update('$json')),
  ifTrue('Has send?',[1000,0],'={{ $json.hasSend }}'),
- ifTrue('Live?',[1200,-100],'={{ $json.live }}'),
- {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[1400,-200],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'POST',url:'https://api.gambot.co.il/api/v1/messages/send-template',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:'={{ JSON.stringify($json.send) }}',options:{response:{response:{neverError:true}},timeout:30000,batching:{batch:{batchSize:1,batchInterval:1500}}}}},
- code('Simulated send',[1400,0],"return {json:{success:true,simulated:true,templateId:$json.send.templateId,to:$json.send.to}};",'runOnceForEachItem'),
+ monday('Reserve send',[1100,-100],'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v){id}}",variables:{b:"'+BOARD+'",i:String($json.itemId),v:$json.reserveJson}}) }}',{onError:'continueRegularOutput'}),
+ ifTrue('Reserved?',[1150,-100],'={{ !!($json.data && $json.data.change_multiple_column_values && $json.data.change_multiple_column_values.id) }}'),
+ ifTrue('Live?',[1200,-100],"={{ $('Has send?').item.json.live }}"),
+ {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[1400,-200],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'POST',url:'https://api.gambot.co.il/api/v1/messages/send-template',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:30000,batching:{batch:{batchSize:1,batchInterval:1500}}}}},
+ code('Simulated send',[1400,0],"const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};",'runOnceForEachItem'),
  code('After send',[1600,-100],src('after-send.js'),'runOnceForEachItem'),
  monday('Update item (sent)',[1800,-100],update('$json')),
  monday('Update item',[1200,150],update("$('Has send?').item.json")),
  ifTrue('Notify?',[1400,150],"={{ $('Has send?').item.json.hasNotify }}",'n8n-nodes-base.filter'),
  monday('Notify Yoram',[1600,150],notify("$('Has send?').item.json"))],
- connections:{'Every 5 min':L('Shabbat'),'Run test':L('Shabbat'),'Shabbat':L('Items'),'Items':L('Convos'),'Convos':L('Plan'),'Plan':L('Has send?'),'Has send?':L('Live?','Update item'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('After send'),'Simulated send':L('After send'),'After send':L('Update item (sent)'),'Update item':L('Notify?'),'Notify?':L('Notify Yoram')}};
+ connections:{'Every 5 min':L('Shabbat'),'Run test':L('Shabbat'),'Shabbat':L('Items'),'Items':L('Convos'),'Convos':L('Plan'),'Plan':L('Route'),'Route':L('Gambot history','Has send?'),'Gambot history':L('Reconcile'),'Reconcile':L('Update item (reconciled)'),'Has send?':L('Reserve send','Update item'),'Reserve send':L('Reserved?'),'Reserved?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('After send'),'Simulated send':L('After send'),'After send':L('Update item (sent)'),'Update item':L('Notify?'),'Notify?':L('Notify Yoram')}};
 
 // 2. Personal links (go)
 const goCols=['refi_phone','fn_token','fn_step','fn_opens','numeric_mm883h9v','fn_path'];

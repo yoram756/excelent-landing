@@ -2,6 +2,10 @@
 // MODE is injected by build-workflow.js: 'test' handles only items named TEST and never calls Gambot;
 // 'live' handles real leads only and sends real WhatsApp templates.
 const MODE = '__MODE__';
+// pilot: real sends, but only to the internal phones listed here (injected by the build)
+const PILOT = '__PILOT__'.split(',').filter(Boolean);
+// stages that mean a person is handling the lead: automation does not send
+const HUMAN = ['נוצר קשר','בטיפול','התקבל','נבדק','דוח התקבל'];
 const GO_LIVE = Date.parse('__GO_LIVE__');
 let testBody={};try{testBody=$('Run test').first().json.body||{};}catch(e){}
 const T = {M1:'2146929776251168',M2:'2866421103739060',M3:'2306286663247344',M4:'991655264017502',M5:'1861514208308620',M6:'922497660829094',M7:'1695504292330742',M8:'1456261889708463',M9:'1825910702064350',M10:'1517902547031884',M10R:'4090685337891850',M11:'1462992419096031',M12:'1152794754084561',M13:'1022323597539469',M14:'1665753921818083',M15:'1150212394355928'};
@@ -43,8 +47,10 @@ for(const it of items){const cv={};for(const c of it.column_values)cv[c.id]=c;co
 for(const it of items){
   const cv={};for(const c of it.column_values)cv[c.id]=c;
   const isTest=/^TEST/.test(it.name||'');
-  if(MODE==='test'?!isTest:isTest)continue;
   const phone=norm(cv.refi_phone?.text);if(!phone)continue;
+  if(MODE==='test'){if(!isTest)continue;}
+  else if(MODE==='pilot'){if(!PILOT.includes(phone))continue;}
+  else if(isTest)continue;
   let status=cv.fn_status?.text||'';let path=cv.fn_path?.text||'';let step=cv.fn_step?.text||'';
   let next=dateVal(cv.fn_next?.value);const last=dateVal(cv.fn_last?.value);
   let token=cv.fn_token?.text||'';const stage=cv.refi_stage?.text||'';
@@ -54,6 +60,8 @@ for(const it of items){
   let heat=Number(cv.numeric_mm883h9v?.text||0);
   let st={};try{st=JSON.parse(cv.fn_opens?.text||'{}')||{};}catch(e){st={};}
   const first=(it.name||'').replace(/^TEST\s*/,'').trim().split(/\s+/)[0]||'שלום';
+  // a send whose result is not confirmed yet: check Gambot before anything else, never send blindly again
+  if(st.pending){out.push({itemId:it.id,phone,reconcile:true,pendingJson:JSON.stringify(st.pending),stJson:JSON.stringify(st),cols:{},send:null,notify:null});continue;}
   const cols={};let send=null;let notify=null;let changed=false;
   const set=(k,v)=>{cols[k]=v;changed=true;};
 
@@ -80,6 +88,8 @@ for(const it of items){
     set('fn_opens',{text:JSON.stringify(st)});
   }
   if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
+  // manual handling wins: no automatic message while a person handles the lead
+  if(HUMAN.includes(stage)||(cv.refi_first_reply?.text||'').trim()){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
 
   if(stage==='פגישה נקבעה'&&meeting&&meeting>now&&!(path==='E'&&st.mt===meeting)){path='E';step='BOOK';next=now;st.mt=meeting;set('fn_opens',{text:JSON.stringify(st)});}
   else if(stage==='פגישה התקיימה'&&path!=='G'&&path!=='L'){path='G';step='MET';next=atLocal((meeting&&meeting<now?meeting:now),2,10,0);}
@@ -119,6 +129,14 @@ for(const it of items){
   if(nPath!==(cv.fn_path?.text||''))set('fn_path',nPath);
   if(nStep!==(cv.fn_step?.text||''))set('fn_step',nStep);
   if(nNext!==dateVal(cv.fn_next?.value))set('fn_next',nNext?toDate(nNext):{});
-  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});
+  let reserveJson=null;
+  if(send){
+    const key=it.id+':'+code+':'+now;
+    const adv={...cols};delete adv.fn_opens;
+    reserveJson=JSON.stringify({fn_opens:{text:JSON.stringify({...st,pending:{key,tpl:send.templateId,code,at:now,adv}})}});
+    send.key=key;
+    set('fn_opens',{text:JSON.stringify({...st,lastKey:key})});
+  }
+  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});
 }
-return out.map(o=>({json:{...o,hasSend:!!o.send,live:MODE==='live',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));
+return out.map(o=>({json:{...o,hasSend:!!o.send,reconcile:!!o.reconcile,live:MODE!=='test',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));

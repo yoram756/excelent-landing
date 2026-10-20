@@ -4,7 +4,7 @@
 set -u
 cd "$(dirname "$0")/.."
 [ -d node_modules ] || npm install --no-audit --no-fund >/dev/null 2>&1
-changed=$(git status --porcelain -uall 2>/dev/null | awk '{print $2}')
+changed=$( { git status --porcelain -uall 2>/dev/null | awk '{print $2}'; git diff --name-only @{u}..HEAD 2>/dev/null; } | sort -u )
 run_funnel=1; run_site=1
 if [ "${1:-}" = "--changed" ]; then
   run_funnel=0; run_site=0

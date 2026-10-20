@@ -1,8 +1,8 @@
 // Loads the n8n Code node sources with a fake $() so the funnel logic can be tested outside n8n.
 const fs=require('fs');const path=require('path');
 const SRC=path.resolve(__dirname,'../../automation/funnel');
-function planner(mode='test',goLive='2026-10-20T07:00:00Z'){
-  const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__MODE__',mode).replace('__GO_LIVE__',goLive);
+function planner(mode='test',goLive='2026-10-20T07:00:00Z',pilot=''){
+  const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot);
   return ({items,convos=[],now,shabbat=[],convosDown=false})=>{
     const $=n=>({first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?(convosDown?{error:'down'}:{data:{items:convos}}):n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
     return new Function('$',code)($).map(x=>x.json);
@@ -22,3 +22,5 @@ function calendly({body,mails=[],items,store={}}){const code=require('fs').readF
   const $=n=>({first:()=>({json:n==='Run test'?{body}:{data:{boards:[{items_page:{items}}]}}}),all:()=>mails.map(j=>({json:j}))});
   return new Function('$','$getWorkflowStaticData',code)($,()=>store).map(x=>x.json);}
 module.exports.goLink=goLink;module.exports.calendly=calendly;
+function reconcile(planOut,gambot){const code=require('fs').readFileSync(SRC+'/reconcile.js','utf8');return new Function('$','$json',code)(()=>({item:{json:planOut}}),gambot).json;}
+module.exports.reconcile=reconcile;
