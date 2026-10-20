@@ -192,13 +192,6 @@
     "m": "https://www.midrag.co.il/SpCard/Sp/94658",
     "b": "https://www.bizreviews.co.il/provider/peled-yoram"
   },
-  "linkByStep": {
-    "A2": "q",
-    "A3": "c",
-    "B2": "c",
-    "B3": "c",
-    "F1": "g"
-  },
   "handoff": {
     "heatAtLeast": 70,
     "onReply": true,
@@ -216,5 +209,6 @@
     "testPhones": [],
     "approved": false,
     "note": "טרם נקבעו זהות ופרטי קשר לקמפיין. לא נלקחים אוטומטית מקמפיין אחר."
-  }
+  },
+  "linkTokenExamples": []
 }

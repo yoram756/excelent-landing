@@ -285,22 +285,6 @@
     "m": "https://www.midrag.co.il/SpCard/Sp/94658",
     "b": "https://www.bizreviews.co.il/provider/peled-yoram"
   },
-  "linkByStep": {
-    "M2": "q",
-    "M3": "b",
-    "M4": "c",
-    "M5": "q",
-    "M7": "c",
-    "M8": "c",
-    "M9": "c",
-    "R1": "c",
-    "R2": "c",
-    "M10": "c",
-    "M11": "c",
-    "M12": "g",
-    "M13": "m",
-    "M15": "c"
-  },
   "handoff": {
     "heatAtLeast": 70,
     "onReply": true,
@@ -331,5 +315,8 @@
     "approvedBy": "יורם",
     "approvedAt": "2026-10-20",
     "source": "הנחיות יורם בשיחה מ 20.10.2026"
-  }
+  },
+  "linkTokenExamples": [
+    "a1b2c3d4e5q"
+  ]
 }

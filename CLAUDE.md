@@ -27,7 +27,7 @@ Landing pages for אקסלנט (site/), the refinance lead funnel sources for n8
 ## Identity and phone numbers (binding)
 - Single source: config/business.json holds the phone numbers, their roles and the business profiles. Each campaign file chooses its profile, name and contact phone explicitly in its identity block. Nothing is inherited from another campaign.
 - Excelent mortgage and finance campaigns (profile excelent_finance): name יורם / יורם פלד / יורם אקסלנט, contact for clients 055-2783459.
-- 054-8180280 is backup: copy of internal alerts and approved tests. Never a client facing number.
+- 054-8180280 belongs to נריה חדד, a separate person and business partner: copy of internal alerts and approved tests. Never a client facing number. Addressing נריה by name on his own number is correct. People and their phones are listed under people in config/business.json; a test message uses the name of the person who owns the test phone.
 - 055-9881245 is the technical Gambot sending number. Do not change or disconnect it.
 - 050-2234052 belongs to יורם: tests, backup, West Negev real estate (with the name יורם חדד) only when a campaign sets it explicitly, and personal use. Never block it globally, never use it as a contact number unless the campaign defines it.
 - יורם חדד is a known identity of יורם. Never replace one name with another automatically. The two approved sellers templates in Gambot stay as they are.

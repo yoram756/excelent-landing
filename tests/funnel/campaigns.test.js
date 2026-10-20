@@ -1,7 +1,7 @@
 const test=require('node:test');const assert=require('node:assert/strict');const {execFileSync}=require('child_process');const path=require('path');const fs=require('fs');
 const {planner,item}=require('./load');
 const NOW='2026-10-20T09:00:00Z';const base={refi_phone:'0500000040',boolean_mm88mzry:{checked:'true'}};
-const REQ=['id','name','service','goal','status','board','columns','stages','templates','entry','sequences','meeting','rules','links','linkByStep','handoff','kpiTargets'];
+const REQ=['id','name','service','goal','status','board','columns','stages','templates','entry','sequences','meeting','rules','links','handoff','kpiTargets'];
 for(const f of fs.readdirSync(path.resolve(__dirname,'../../campaigns')).filter(f=>f.endsWith('.json'))){
   const c=require('../../campaigns/'+f);
   test('campaign '+c.id+' config is complete and consistent',()=>{

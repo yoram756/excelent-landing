@@ -52,6 +52,7 @@ const checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse
 const out=[];
 // phones already in the funnel: a second item with the same phone never starts its own series
 const owner={};
+const usedTokens=new Set(items.map(it=>(it.column_values.find(c=>c.id===C.token)||{}).text).filter(Boolean));
 for(const it of items){const cv={};for(const c of it.column_values)cv[c.id]=c;const ph=norm(col(cv,'phone').text);if(ph&&col(cv,'status').text&&!owner[ph])owner[ph]=it.id;}
 for(const it of items){
   const cv={};for(const c of it.column_values)cv[c.id]=c;
@@ -79,7 +80,7 @@ for(const it of items){
     if(owner[phone]&&owner[phone]!==it.id)continue;
     owner[phone]=it.id;
     if(Date.parse(it.created_at)<GO_LIVE)continue;
-    token=rand();status='פעיל';
+    do{token=rand();}while(usedTokens.has(token));usedTokens.add(token);status='פעיל';
     if(quiz){path=CFG.entry.quizDone.path;step=CFG.entry.quizDone.step;}else{path=CFG.entry.default.path;step=CFG.entry.default.step;}
     next=now;st.mkt=mkt;
     set(C.status,{label:'פעיל'});set(C.token,token);
