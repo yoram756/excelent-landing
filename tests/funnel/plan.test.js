@@ -45,3 +45,4 @@ test('failed send keeps position and retries in 30 minutes',()=>{const [r]=plan(
 test('three failed sends stop the lead',()=>{const [r]=plan({items:[item({cols:active({fn_path:'B',fn_step:'M1',fn_next:due,fn_opens:JSON.stringify({fails:2})})})],now:NOW});
   const c=JSON.parse(afterSend(r,{success:false}).colsJson);assert.equal(c.fn_status.label,'נעצר');});
 test('successful send advances',()=>{const [r]=plan({items:[item({cols:active({fn_path:'B',fn_step:'M1',fn_next:due})})],now:NOW});const c=JSON.parse(afterSend(r,{success:true}).colsJson);assert.equal(c.fn_step,'M2');});
+test('filling the quiz on the same day still sends M7 right away',()=>{const [r]=plan({items:[item({cols:active({fn_path:'C',fn_step:'M2',fn_next:{date:'2026-10-20',time:'12:00:00'},fn_last:{date:'2026-10-20',time:'08:30:00'},long_text_mm88pfdv:'פירוט'})})],now:NOW});assert.equal(r.send&&r.send.templateId,T.M7);assert.equal(cols(r).fn_path,'D');});

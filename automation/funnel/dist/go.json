@@ -5,7 +5,7 @@
  },
  "nodes": [
   {
-   "id": "3e0f61e0-ad22-4675-86a6-1f539f63a020",
+   "id": "7580a279-5dbd-43be-9b1a-b707406c8140",
    "name": "Link",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -13,7 +13,7 @@
     0,
     0
    ],
-   "webhookId": "c10dc72d-a3dc-4f9a-8ab3-601a4c1b4ee4",
+   "webhookId": "18eb5896-3dba-4702-98f1-b7b6f0087c22",
    "parameters": {
     "httpMethod": "GET",
     "path": "go",
@@ -22,7 +22,7 @@
    }
   },
   {
-   "id": "53eb24cf-77d2-4e4d-a95b-687a98a38406",
+   "id": "360acdc2-19e6-4d7b-9ba5-9557b323d486",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -58,7 +58,7 @@
    }
   },
   {
-   "id": "07e2e939-b39c-40dd-b60a-6589f6688b11",
+   "id": "b28e6472-956e-4bad-90be-d0e43865a695",
    "name": "Resolve",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -71,7 +71,7 @@
    }
   },
   {
-   "id": "98ebbed5-fd1a-4255-b3d2-e23d06058b2c",
+   "id": "e3c00f69-fb18-4ac9-a326-fd177345e052",
    "name": "Redirect",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -88,7 +88,7 @@
    }
   },
   {
-   "id": "2ab397b3-60f9-4e2f-858a-d4e8471d7f22",
+   "id": "0a7a12b3-886f-4a9c-acd8-72ff710f2735",
    "name": "Found?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -105,7 +105,7 @@
      },
      "conditions": [
       {
-       "id": "d6f57fa3-b51e-43b5-9651-fe44e69348d2",
+       "id": "4f649b60-9b98-4929-9dd1-8ad8dc94cc0f",
        "leftValue": "={{ $('Resolve').item.json.found }}",
        "rightValue": true,
        "operator": {
@@ -121,7 +121,7 @@
    }
   },
   {
-   "id": "b23354d3-d99d-4908-92e5-7b2320191f2f",
+   "id": "b831cd1c-df5c-4452-a2e8-04d83d0dd6fd",
    "name": "Update opens",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -156,7 +156,7 @@
    }
   },
   {
-   "id": "f93d9fda-f764-40f2-9aa1-c8ff548ee616",
+   "id": "e72ebec4-4ab0-489a-bccc-c1d848bf7801",
    "name": "Hot?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -173,7 +173,7 @@
      },
      "conditions": [
       {
-       "id": "778a4c43-85e4-47de-8cba-c47069dc3c54",
+       "id": "732915b0-7a5f-4275-a489-9566aef24d2a",
        "leftValue": "={{ $('Resolve').item.json.notify }}",
        "rightValue": true,
        "operator": {
@@ -189,7 +189,7 @@
    }
   },
   {
-   "id": "cf8661d2-cab7-40cd-bc50-8257bf44d35e",
+   "id": "8fb020a9-4a52-49f7-84fe-ff9119e24f30",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,

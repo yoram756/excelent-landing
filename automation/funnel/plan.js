@@ -101,7 +101,7 @@ for(const it of items){
     else if(path==='G'&&step==='M13'){code='M14';nNext=now+11*D;}
     else if(path==='G'&&step==='M14'){code='M15';nPath='L';nNext=now+14*D;}
     else if(path==='L'){nNext=now+14*D;}
-    if(code&&sameDay&&['C','D','G'].includes(path)&&!['M2','M3'].includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}
+    if(code&&sameDay&&['C','D','G'].includes(path)&&!['M2','M3','M7'].includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}
     if(code){
       if(!fixed)nStep=code;
       const vars=['M10','M10R'].includes(code)?[first,whenText(meeting)]:[first];

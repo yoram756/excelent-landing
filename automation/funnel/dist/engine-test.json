@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "a138ecc1-052c-42c8-8d8a-312e839c5e41",
+   "id": "8921178e-f4b8-4c75-b6de-3907f2f9e6e4",
    "name": "Every 5 min",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "id": "28c0c0d6-07db-4414-90b9-94448d003188",
+   "id": "c4212c23-2bc5-4f55-8440-1fd1e569a3cd",
    "name": "Run test",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -34,7 +34,7 @@
     0,
     200
    ],
-   "webhookId": "1607f768-19ad-40f5-8c90-88f1d8c89190",
+   "webhookId": "2922ba65-a635-4a28-8189-1282c9083705",
    "parameters": {
     "httpMethod": "POST",
     "path": "__TEST_PATH__engine",
@@ -43,7 +43,7 @@
    }
   },
   {
-   "id": "f38c19d0-10ee-4a25-9594-94cc58a588f6",
+   "id": "d2ffac85-ad80-4775-8d0d-6397fa0e0283",
    "name": "Shabbat",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -61,7 +61,7 @@
    }
   },
   {
-   "id": "525a4496-7df8-456f-adf3-66c7e83c6f07",
+   "id": "2dd929ca-8641-4285-8cf1-e8058ea2f499",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -96,7 +96,7 @@
    }
   },
   {
-   "id": "3957d942-4995-4255-9dd8-4ced70a4c8a4",
+   "id": "1d1d74f8-5008-49b5-b338-d9edbd6b0958",
    "name": "Convos",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -122,7 +122,7 @@
    }
   },
   {
-   "id": "db019f80-c352-43e3-88be-4a11c8283156",
+   "id": "130c1f29-e1e2-40fc-b448-c832437e5d18",
    "name": "Plan",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -131,11 +131,11 @@
     0
    ],
    "parameters": {
-    "jsCode": "// Funnel engine planner. Runs inside the n8n Code node \"Plan\" (source of truth: this file).\n// MODE is injected by build-workflow.js: 'test' handles only items named TEST and never calls Gambot;\n// 'live' handles real leads only and sends real WhatsApp templates.\nconst MODE = 'test';\nconst GO_LIVE = Date.parse('2026-10-20T07:00:00Z');\nlet testBody={};try{testBody=$('Run test').first().json.body||{};}catch(e){}\nconst T = {M1:'2146929776251168',M2:'2866421103739060',M3:'2306286663247344',M4:'991655264017502',M5:'1861514208308620',M6:'922497660829094',M7:'1695504292330742',M8:'1456261889708463',M9:'1825910702064350',M10:'1517902547031884',M10R:'4090685337891850',M11:'1462992419096031',M12:'1152794754084561',M13:'1022323597539469',M14:'1665753921818083',M15:'1150212394355928'};\nconst DEST = {M2:'q',M3:'b',M4:'c',M5:'q',M7:'c',M8:'c',M9:'c',M10R:'c',M11:'c',M12:'g',M13:'m',M15:'c'};\nconst H = 3600000, D = 86400000;\nconst now = (MODE==='test'&&testBody.now)?Date.parse(testBody.now):Date.now();\n\nfunction parts(ts){const o={};new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false}).formatToParts(new Date(ts)).forEach(p=>o[p.type]=p.value);o.hour=o.hour==='24'?'00':o.hour;return o;}\nfunction offset(ts){const p=parts(ts);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ts/60000)*60000;}\nfunction atLocal(ts,days,hh,mm){const p=parts(ts+days*D);const guess=Date.UTC(+p.year,+p.month-1,+p.day,hh,mm);return guess-offset(guess);}\nfunction dayKey(ts){const p=parts(ts);return p.year+p.month+p.day;}\nconst HEB_DAYS={Sun:'ראשון',Mon:'שני',Tue:'שלישי',Wed:'רביעי',Thu:'חמישי',Fri:'שישי',Sat:'שבת'};\nfunction whenText(ts){const p=parts(ts);return 'יום '+HEB_DAYS[p.weekday]+' '+(+p.day)+'.'+(+p.month)+' בשעה '+p.hour+':'+p.minute;}\n\nlet candles=null,havdalah=null;\ntry{const items=($('Shabbat').first().json.items)||[];for(const it of items){if(it.category==='candles'&&!candles)candles=Date.parse(it.date);if(it.category==='havdalah'&&!havdalah)havdalah=Date.parse(it.date);}}catch(e){}\nfunction windowOpen(ts){const p=parts(ts);const mins=(+p.hour)*60+(+p.minute);\n  if(candles&&havdalah&&ts>=candles&&ts<havdalah)return false;\n  if(p.weekday==='Fri'){if(mins<510)return false;if(candles&&dayKey(candles)===dayKey(ts))return ts<candles;return mins<840;}\n  if(p.weekday==='Sat'){if(havdalah&&dayKey(havdalah)===dayKey(ts))return ts>=havdalah&&mins<1350;return mins>=1200&&mins<1350;}\n  return mins>=510&&mins<1200;}\nconst open=windowOpen(now);\n\nconst norm=s=>{let d=String(s||'').replace(/\\D/g,'');if(d.startsWith('0'))d='972'+d.slice(1);return d.length>=11?d:'';};\nconst convos={};\ntry{for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}\nconst mdata=$('Items').first().json.data;\nconst meId=mdata.me.id;\nconst items=mdata.boards[0].items_page.items;\nconst rand=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<10;i++)s+=a[Math.floor(Math.random()*a.length)];return s;};\nconst dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;return Date.parse(j.date+'T'+(j.time||'00:00:00')+'Z');}catch(e){return null;}};\nconst toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};\nconst checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};\n\nconst out=[];\nfor(const it of items){\n  const cv={};for(const c of it.column_values)cv[c.id]=c;\n  const isTest=/^TEST/.test(it.name||'');\n  if(MODE==='test'?!isTest:isTest)continue;\n  const phone=norm(cv.refi_phone?.text);if(!phone)continue;\n  let status=cv.fn_status?.text||'';let path=cv.fn_path?.text||'';let step=cv.fn_step?.text||'';\n  let next=dateVal(cv.fn_next?.value);const last=dateVal(cv.fn_last?.value);\n  let token=cv.fn_token?.text||'';const stage=cv.refi_stage?.text||'';\n  const mkt=checked(cv.boolean_mm88mzry?.value);const svc=checked(cv.boolean_mm8848pn?.value);\n  const quiz=(cv.long_text_mm88pfdv?.text||'').trim().length>0;\n  const meeting=dateVal(cv.refi_meeting?.value);\n  let heat=Number(cv.numeric_mm883h9v?.text||0);\n  let st={};try{st=JSON.parse(cv.fn_opens?.text||'{}')||{};}catch(e){st={};}\n  const first=(it.name||'').replace(/^TEST\\s*/,'').trim().split(/\\s+/)[0]||'שלום';\n  const cols={};let send=null;let notify=null;let changed=false;\n  const set=(k,v)=>{cols[k]=v;changed=true;};\n\n  if(!status){\n    if(!(mkt||svc))continue;\n    if(Date.parse(it.created_at)<GO_LIVE)continue;\n    token=rand();status='פעיל';\n    if(quiz){path='D';step='QUIZ';}else{path='B';step='NEW';}\n    next=now;st.mkt=mkt;\n    set('fn_status',{label:'פעיל'});set('fn_token',token);\n  }\n  if(stage==='לקוח משלם'&&status!=='לקוח'){set('fn_status',{label:'לקוח'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n  if(stage==='לא רלוונטי'&&status==='פעיל'){set('fn_status',{label:'נעצר'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n\n  const cvn=convos[phone];\n  if(status==='פעיל'&&cvn&&cvn.dir==='incoming'&&cvn.time>(last||0)&&cvn.time>(st.reply||0)){\n    st.reply=cvn.time;const t=cvn.text.trim();\n    if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set('fn_status',{label:'הסר'});set('fn_next',{});notify='ביקש הסרה מהודעות: \"'+t.slice(0,80)+'\"';}\n    else if(/^פחות/.test(t)){status='פחות';set('fn_status',{label:'פחות'});notify='ביקש לקבל פחות הודעות';}\n    else{status='ענה';set('fn_status',{label:'ענה'});heat+=10;set('numeric_mm883h9v',String(heat));notify='ענה בוואטסאפ ל 055-9881245: \"'+t.slice(0,120)+'\". ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}\n    set('fn_opens',{text:JSON.stringify(st)});\n  }\n  if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}\n\n  if(stage==='פגישה נקבעה'&&meeting&&meeting>now&&!(path==='E'&&st.mt===meeting)){path='E';step='BOOK';next=now;st.mt=meeting;set('fn_opens',{text:JSON.stringify(st)});}\n  else if(stage==='פגישה התקיימה'&&path!=='G'&&path!=='L'){path='G';step='MET';next=atLocal((meeting&&meeting<now?meeting:now),2,10,0);}\n  else if((stage==='פגישה בוטלה'||stage==='לא הגיע')&&path==='E'){st.ns=(st.ns||0)+1;set('fn_opens',{text:JSON.stringify(st)});if(st.ns>=2){path='L';step='NOSHOW2';next=now+14*D;}else{path='F';step='NOSHOW';next=Math.max(now,(meeting||now)+H);}}\n  else if(quiz&&(path==='B'||path==='C')){path='D';step='QUIZ';next=now;}\n\n  let code=null,nPath=path,nStep=step,nNext=next,fixed=false;\n  if(next&&next<=now&&open){\n    const sameDay=last&&dayKey(last)===dayKey(now);\n    if(path==='B'&&step==='NEW'){code='M1';nNext=now+5*60000;}\n    else if(path==='B'&&step==='M1'){code='M2';nPath='C';nNext=now+3*H;}\n    else if(path==='C'&&step==='M2'){code='M3';nNext=atLocal(now,1,10,0);}\n    else if(path==='C'&&step==='M3'){code='M4';nNext=atLocal(now,2,10,0);}\n    else if(path==='C'&&step==='M4'){code='M5';nNext=atLocal(now,4,10,0);}\n    else if(path==='C'&&step==='M5'){code='M6';nPath='L';nNext=now+14*D;}\n    else if(path==='D'&&step==='QUIZ'){code='M7';nNext=now+D;}\n    else if(path==='D'&&step==='M7'){code='M8';nNext=now+2*D;}\n    else if(path==='D'&&step==='M8'){code='M9';nPath='L';nNext=now+14*D;}\n    else if(path==='E'&&step==='BOOK'){code='M10';fixed=true;const r24=meeting-D,r1=meeting-H;if(r24>now+2*H){nStep='M10';nNext=r24;}else if(r1>now+15*60000){nStep='R1';nNext=r1;}else{nStep='M10';nNext=null;}}\n    else if(path==='E'&&step==='M10'){fixed=true;if(meeting&&meeting>now){code='M10R';const r1=meeting-H;if(r1>now+30*60000){nStep='R1';nNext=r1;}else{nStep='R2';nNext=null;}}else{nNext=null;}}\n    else if(path==='E'&&step==='R1'){fixed=true;if(meeting&&meeting>now){code='M10R';}nStep='R2';nNext=null;}\n    else if(path==='F'&&step==='NOSHOW'){code='M11';nNext=null;}\n    else if(path==='G'&&step==='MET'){code='M12';nNext=now+3*D;}\n    else if(path==='G'&&step==='M12'){code='M13';nNext=now+5*D;}\n    else if(path==='G'&&step==='M13'){code='M14';nNext=now+11*D;}\n    else if(path==='G'&&step==='M14'){code='M15';nPath='L';nNext=now+14*D;}\n    else if(path==='L'){nNext=now+14*D;}\n    if(code&&sameDay&&['C','D','G'].includes(path)&&!['M2','M3'].includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}\n    if(code){\n      if(!fixed)nStep=code;\n      const vars=['M10','M10R'].includes(code)?[first,whenText(meeting)]:[first];\n      send={to:phone,templateId:T[code],variables:vars};\n      if(DEST[code])send.buttonVariables=[token+DEST[code]];\n      set('fn_last',toDate(now));\n    }\n  }\n  if(nPath!==(cv.fn_path?.text||''))set('fn_path',nPath);\n  if(nStep!==(cv.fn_step?.text||''))set('fn_step',nStep);\n  if(nNext!==dateVal(cv.fn_next?.value))set('fn_next',nNext?toDate(nNext):{});\n  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});\n}\nreturn out.map(o=>({json:{...o,hasSend:!!o.send,live:MODE==='live',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));\n"
+    "jsCode": "// Funnel engine planner. Runs inside the n8n Code node \"Plan\" (source of truth: this file).\n// MODE is injected by build-workflow.js: 'test' handles only items named TEST and never calls Gambot;\n// 'live' handles real leads only and sends real WhatsApp templates.\nconst MODE = 'test';\nconst GO_LIVE = Date.parse('2026-10-20T07:00:00Z');\nlet testBody={};try{testBody=$('Run test').first().json.body||{};}catch(e){}\nconst T = {M1:'2146929776251168',M2:'2866421103739060',M3:'2306286663247344',M4:'991655264017502',M5:'1861514208308620',M6:'922497660829094',M7:'1695504292330742',M8:'1456261889708463',M9:'1825910702064350',M10:'1517902547031884',M10R:'4090685337891850',M11:'1462992419096031',M12:'1152794754084561',M13:'1022323597539469',M14:'1665753921818083',M15:'1150212394355928'};\nconst DEST = {M2:'q',M3:'b',M4:'c',M5:'q',M7:'c',M8:'c',M9:'c',M10R:'c',M11:'c',M12:'g',M13:'m',M15:'c'};\nconst H = 3600000, D = 86400000;\nconst now = (MODE==='test'&&testBody.now)?Date.parse(testBody.now):Date.now();\n\nfunction parts(ts){const o={};new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false}).formatToParts(new Date(ts)).forEach(p=>o[p.type]=p.value);o.hour=o.hour==='24'?'00':o.hour;return o;}\nfunction offset(ts){const p=parts(ts);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ts/60000)*60000;}\nfunction atLocal(ts,days,hh,mm){const p=parts(ts+days*D);const guess=Date.UTC(+p.year,+p.month-1,+p.day,hh,mm);return guess-offset(guess);}\nfunction dayKey(ts){const p=parts(ts);return p.year+p.month+p.day;}\nconst HEB_DAYS={Sun:'ראשון',Mon:'שני',Tue:'שלישי',Wed:'רביעי',Thu:'חמישי',Fri:'שישי',Sat:'שבת'};\nfunction whenText(ts){const p=parts(ts);return 'יום '+HEB_DAYS[p.weekday]+' '+(+p.day)+'.'+(+p.month)+' בשעה '+p.hour+':'+p.minute;}\n\nlet candles=null,havdalah=null;\ntry{const items=($('Shabbat').first().json.items)||[];for(const it of items){if(it.category==='candles'&&!candles)candles=Date.parse(it.date);if(it.category==='havdalah'&&!havdalah)havdalah=Date.parse(it.date);}}catch(e){}\nfunction windowOpen(ts){const p=parts(ts);const mins=(+p.hour)*60+(+p.minute);\n  if(candles&&havdalah&&ts>=candles&&ts<havdalah)return false;\n  if(p.weekday==='Fri'){if(mins<510)return false;if(candles&&dayKey(candles)===dayKey(ts))return ts<candles;return mins<840;}\n  if(p.weekday==='Sat'){if(havdalah&&dayKey(havdalah)===dayKey(ts))return ts>=havdalah&&mins<1350;return mins>=1200&&mins<1350;}\n  return mins>=510&&mins<1200;}\nconst open=windowOpen(now);\n\nconst norm=s=>{let d=String(s||'').replace(/\\D/g,'');if(d.startsWith('0'))d='972'+d.slice(1);return d.length>=11?d:'';};\nconst convos={};\ntry{for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}\nconst mdata=$('Items').first().json.data;\nconst meId=mdata.me.id;\nconst items=mdata.boards[0].items_page.items;\nconst rand=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<10;i++)s+=a[Math.floor(Math.random()*a.length)];return s;};\nconst dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;return Date.parse(j.date+'T'+(j.time||'00:00:00')+'Z');}catch(e){return null;}};\nconst toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};\nconst checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};\n\nconst out=[];\nfor(const it of items){\n  const cv={};for(const c of it.column_values)cv[c.id]=c;\n  const isTest=/^TEST/.test(it.name||'');\n  if(MODE==='test'?!isTest:isTest)continue;\n  const phone=norm(cv.refi_phone?.text);if(!phone)continue;\n  let status=cv.fn_status?.text||'';let path=cv.fn_path?.text||'';let step=cv.fn_step?.text||'';\n  let next=dateVal(cv.fn_next?.value);const last=dateVal(cv.fn_last?.value);\n  let token=cv.fn_token?.text||'';const stage=cv.refi_stage?.text||'';\n  const mkt=checked(cv.boolean_mm88mzry?.value);const svc=checked(cv.boolean_mm8848pn?.value);\n  const quiz=(cv.long_text_mm88pfdv?.text||'').trim().length>0;\n  const meeting=dateVal(cv.refi_meeting?.value);\n  let heat=Number(cv.numeric_mm883h9v?.text||0);\n  let st={};try{st=JSON.parse(cv.fn_opens?.text||'{}')||{};}catch(e){st={};}\n  const first=(it.name||'').replace(/^TEST\\s*/,'').trim().split(/\\s+/)[0]||'שלום';\n  const cols={};let send=null;let notify=null;let changed=false;\n  const set=(k,v)=>{cols[k]=v;changed=true;};\n\n  if(!status){\n    if(!(mkt||svc))continue;\n    if(Date.parse(it.created_at)<GO_LIVE)continue;\n    token=rand();status='פעיל';\n    if(quiz){path='D';step='QUIZ';}else{path='B';step='NEW';}\n    next=now;st.mkt=mkt;\n    set('fn_status',{label:'פעיל'});set('fn_token',token);\n  }\n  if(stage==='לקוח משלם'&&status!=='לקוח'){set('fn_status',{label:'לקוח'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n  if(stage==='לא רלוונטי'&&status==='פעיל'){set('fn_status',{label:'נעצר'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n\n  const cvn=convos[phone];\n  if(status==='פעיל'&&cvn&&cvn.dir==='incoming'&&cvn.time>(last||0)&&cvn.time>(st.reply||0)){\n    st.reply=cvn.time;const t=cvn.text.trim();\n    if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set('fn_status',{label:'הסר'});set('fn_next',{});notify='ביקש הסרה מהודעות: \"'+t.slice(0,80)+'\"';}\n    else if(/^פחות/.test(t)){status='פחות';set('fn_status',{label:'פחות'});notify='ביקש לקבל פחות הודעות';}\n    else{status='ענה';set('fn_status',{label:'ענה'});heat+=10;set('numeric_mm883h9v',String(heat));notify='ענה בוואטסאפ ל 055-9881245: \"'+t.slice(0,120)+'\". ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}\n    set('fn_opens',{text:JSON.stringify(st)});\n  }\n  if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}\n\n  if(stage==='פגישה נקבעה'&&meeting&&meeting>now&&!(path==='E'&&st.mt===meeting)){path='E';step='BOOK';next=now;st.mt=meeting;set('fn_opens',{text:JSON.stringify(st)});}\n  else if(stage==='פגישה התקיימה'&&path!=='G'&&path!=='L'){path='G';step='MET';next=atLocal((meeting&&meeting<now?meeting:now),2,10,0);}\n  else if((stage==='פגישה בוטלה'||stage==='לא הגיע')&&path==='E'){st.ns=(st.ns||0)+1;set('fn_opens',{text:JSON.stringify(st)});if(st.ns>=2){path='L';step='NOSHOW2';next=now+14*D;}else{path='F';step='NOSHOW';next=Math.max(now,(meeting||now)+H);}}\n  else if(quiz&&(path==='B'||path==='C')){path='D';step='QUIZ';next=now;}\n\n  let code=null,nPath=path,nStep=step,nNext=next,fixed=false;\n  if(next&&next<=now&&open){\n    const sameDay=last&&dayKey(last)===dayKey(now);\n    if(path==='B'&&step==='NEW'){code='M1';nNext=now+5*60000;}\n    else if(path==='B'&&step==='M1'){code='M2';nPath='C';nNext=now+3*H;}\n    else if(path==='C'&&step==='M2'){code='M3';nNext=atLocal(now,1,10,0);}\n    else if(path==='C'&&step==='M3'){code='M4';nNext=atLocal(now,2,10,0);}\n    else if(path==='C'&&step==='M4'){code='M5';nNext=atLocal(now,4,10,0);}\n    else if(path==='C'&&step==='M5'){code='M6';nPath='L';nNext=now+14*D;}\n    else if(path==='D'&&step==='QUIZ'){code='M7';nNext=now+D;}\n    else if(path==='D'&&step==='M7'){code='M8';nNext=now+2*D;}\n    else if(path==='D'&&step==='M8'){code='M9';nPath='L';nNext=now+14*D;}\n    else if(path==='E'&&step==='BOOK'){code='M10';fixed=true;const r24=meeting-D,r1=meeting-H;if(r24>now+2*H){nStep='M10';nNext=r24;}else if(r1>now+15*60000){nStep='R1';nNext=r1;}else{nStep='M10';nNext=null;}}\n    else if(path==='E'&&step==='M10'){fixed=true;if(meeting&&meeting>now){code='M10R';const r1=meeting-H;if(r1>now+30*60000){nStep='R1';nNext=r1;}else{nStep='R2';nNext=null;}}else{nNext=null;}}\n    else if(path==='E'&&step==='R1'){fixed=true;if(meeting&&meeting>now){code='M10R';}nStep='R2';nNext=null;}\n    else if(path==='F'&&step==='NOSHOW'){code='M11';nNext=null;}\n    else if(path==='G'&&step==='MET'){code='M12';nNext=now+3*D;}\n    else if(path==='G'&&step==='M12'){code='M13';nNext=now+5*D;}\n    else if(path==='G'&&step==='M13'){code='M14';nNext=now+11*D;}\n    else if(path==='G'&&step==='M14'){code='M15';nPath='L';nNext=now+14*D;}\n    else if(path==='L'){nNext=now+14*D;}\n    if(code&&sameDay&&['C','D','G'].includes(path)&&!['M2','M3','M7'].includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}\n    if(code){\n      if(!fixed)nStep=code;\n      const vars=['M10','M10R'].includes(code)?[first,whenText(meeting)]:[first];\n      send={to:phone,templateId:T[code],variables:vars};\n      if(DEST[code])send.buttonVariables=[token+DEST[code]];\n      set('fn_last',toDate(now));\n    }\n  }\n  if(nPath!==(cv.fn_path?.text||''))set('fn_path',nPath);\n  if(nStep!==(cv.fn_step?.text||''))set('fn_step',nStep);\n  if(nNext!==dateVal(cv.fn_next?.value))set('fn_next',nNext?toDate(nNext):{});\n  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});\n}\nreturn out.map(o=>({json:{...o,hasSend:!!o.send,live:MODE==='live',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));\n"
    }
   },
   {
-   "id": "e20c40a6-e864-4a2f-9985-ba1f5e9651ba",
+   "id": "9e75a609-36bd-460b-99f8-7c8b069e2c83",
    "name": "Has send?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -152,7 +152,7 @@
      },
      "conditions": [
       {
-       "id": "06de8c99-40ce-4088-8f11-4f9c7fb87066",
+       "id": "f206f599-bcf6-4a4a-a3d4-9b3e950d48fc",
        "leftValue": "={{ $json.hasSend }}",
        "rightValue": true,
        "operator": {
@@ -168,7 +168,7 @@
    }
   },
   {
-   "id": "b696f5cf-a488-4738-a37f-a2de83998f5c",
+   "id": "34bc69d7-a708-42dc-acc9-90bcfce4c456",
    "name": "Live?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -185,7 +185,7 @@
      },
      "conditions": [
       {
-       "id": "00583b1d-45e4-4dfa-af22-38b3436b5b72",
+       "id": "0ecf3635-0be1-458d-aa88-0b445340c55c",
        "leftValue": "={{ $json.live }}",
        "rightValue": true,
        "operator": {
@@ -201,7 +201,7 @@
    }
   },
   {
-   "id": "1b9a13b9-a8fd-478c-a9be-60b5b4156bf2",
+   "id": "eec969c5-aded-455e-a602-40a098e07ca1",
    "name": "Send WhatsApp",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -241,7 +241,7 @@
    }
   },
   {
-   "id": "e71f04bb-fb1b-40c3-bd9e-6b62f274f6a7",
+   "id": "d8a5e38a-18e0-4791-b32d-098e3a9ebf77",
    "name": "Simulated send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -255,7 +255,7 @@
    }
   },
   {
-   "id": "ef463369-9924-4c16-8f13-4ab437e1cf59",
+   "id": "6ef052b2-2ee2-402b-91c6-6e6c106cfed0",
    "name": "After send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -269,7 +269,7 @@
    }
   },
   {
-   "id": "212d9fdf-b5db-4773-b593-8ea9939e3366",
+   "id": "f0bcc89f-7e6a-486c-85dc-848b9f4eb1d0",
    "name": "Update item (sent)",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -304,7 +304,7 @@
    }
   },
   {
-   "id": "7ca5e2fa-32cd-46be-9b6e-4ff548377456",
+   "id": "5e8ac144-c0fd-4959-a539-2cab0e31d469",
    "name": "Update item",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -339,7 +339,7 @@
    }
   },
   {
-   "id": "408d23e4-77cd-4108-b646-5f74f8cd24de",
+   "id": "f59dea60-6fe1-4d69-a7e7-6c9820bb1d79",
    "name": "Notify?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -356,7 +356,7 @@
      },
      "conditions": [
       {
-       "id": "6841d398-4dcd-4612-8d49-ae1b5686d59d",
+       "id": "be2e6b9b-b930-4d35-9e2c-0a0f1ae2d397",
        "leftValue": "={{ $('Has send?').item.json.hasNotify }}",
        "rightValue": true,
        "operator": {
@@ -372,7 +372,7 @@
    }
   },
   {
-   "id": "62e15cc4-c424-4faf-bd00-5c15e7b494bb",
+   "id": "99231c40-a19a-4a7e-8a06-02d00fb04200",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
