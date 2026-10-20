@@ -26,6 +26,16 @@ test('Monday update failing after a send cannot cause a second send',()=>{
 test('manual stage stops automatic messages',()=>{for(const stage of ['בטיפול','נוצר קשר']){const r=plan({items:[item({cols:active({fn_path:'C',fn_step:'M2',fn_next:due,refi_stage:stage})})],now:NOW});assert.ok(r.every(x=>!x.send),stage);}});
 test('a recorded human first reply stops automatic messages',()=>{const r=plan({items:[item({cols:active({fn_path:'C',fn_step:'M2',fn_next:due,refi_first_reply:'2026-10-20'})})],now:NOW});assert.ok(r.every(x=>!x.send));});
 test('pilot touches only the listed internal phone and sends live',()=>{const r=pilot({items:[item({name:'TEST פיילוט',cols:{...base,refi_phone:'0552783459'}}),item({id:'2',name:'ליד אמיתי',cols:{...base,refi_phone:'0521234567'}})],now:NOW});assert.equal(r.length,1);assert.equal(r[0].send.to,'972552783459');assert.equal(r[0].live,true);});
-test('new link tokens are cryptographic-length and never contain numbers from phone',()=>{const [r]=plan({items:[item({cols:base})],now:NOW});const t=JSON.parse(r.colsJson).fn_token;assert.match(t,/^[a-z0-9]{20}$/);assert.ok(!t.includes('0500000040'));});
+test('new link tokens are cryptographic-length and never contain numbers from phone',()=>{const [r]=plan({items:[item({cols:base})],now:NOW});const t=JSON.parse(r.colsJson).fn_token;assert.match(t,/^[a-f0-9]{32}$/);assert.ok(!t.includes('0500000040'));});
+test('callback consent alone cannot send a MARKETING acknowledgment or followup',()=>{
+ const svc={refi_phone:'0500000040',boolean_mm8848pn:{checked:true}};
+ for(const fields of [svc,{...svc,fn_status:'פעיל',fn_path:'B',fn_step:'M1',fn_token:'abcdefghjk',fn_next:due}]){
+   const r=plan({items:[item({cols:fields})],now:NOW});assert.ok(r.every(x=>!x.send));
+ }
+});
+test('callback consent permits a verified UTILITY booking confirmation',()=>{
+ const r=plan({items:[item({cols:{refi_phone:'0500000040',boolean_mm8848pn:{checked:true},fn_status:'פעיל',fn_token:'abcdefghjk',refi_stage:'פגישה נקבעה',refi_meeting:{date:'2026-10-22',time:'07:00:00'}}})],now:NOW});
+ assert.equal(r[0].send.templateId,require('../../campaigns/refi.json').templates.M10.id);
+});
 test('two new leads never get the same token, and an existing token is never reused',()=>{const items=[item({id:'1',cols:base}),item({id:'2',cols:{...base,refi_phone:'0500000041'}}),item({id:'3',cols:{...base,refi_phone:'0500000042',fn_status:'פעיל',fn_token:'abcdefghjk'}})];
   for(let i=0;i<50;i++){const r=plan({items,now:NOW});const toks=r.filter(x=>JSON.parse(x.colsJson).fn_token).map(x=>JSON.parse(x.colsJson).fn_token);assert.equal(new Set(toks).size,toks.length);assert.ok(!toks.includes('abcdefghjk'));}});

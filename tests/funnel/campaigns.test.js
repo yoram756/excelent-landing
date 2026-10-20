@@ -22,3 +22,18 @@ test('building a campaign does not touch the shared engine code and writes separ
   const d=path.resolve(__dirname,'../../automation/funnel/dist/consolidation');const w=require(d+'/engine-test.json');
   assert.ok(w.name.includes('איחוד הלוואות'));const code=w.nodes.find(n=>n.name==='Plan').parameters.jsCode;assert.ok(code.includes('"id":"consolidation"'));
   assert.equal(require(d+'/go.json').nodes.find(n=>n.name==='Link').parameters.path,'go-consolidation');});
+
+test('refinance link templates match the approved v2 inventory and use body variables',()=>{
+ const c=require('../../campaigns/refi.json');
+ const inventory=require('../../docs/evidence/20261020/gambot-refi-v2-templates.json');
+ const linked=Object.values(c.templates).filter(t=>t.dest);assert.equal(linked.length,12);
+ for(const t of linked){
+   const approved=inventory.find(x=>x.id===t.id);assert.ok(approved,t.name);assert.equal(approved.status,'APPROVED');assert.equal(t.name,approved.name);
+   assert.equal(t.linkMode,'body');assert.equal(t.vars.at(-1),'link');assert.notEqual(t.id,t.legacyId);
+   const body=approved.components.find(x=>x.type==='BODY').text;
+   assert.ok(body.includes('webhook/go?c={{'+t.vars.length+'}}'),t.name);
+   const buttons=approved.components.flatMap(x=>x.buttons||[]).filter(b=>b.type==='URL');
+   assert.ok(buttons.length>0);assert.ok(buttons.every(b=>!b.url.includes('{{')));
+   const target=new URL(c.links[t.dest]);assert.ok(buttons.some(b=>{const u=new URL(b.url);return u.origin===target.origin&&u.pathname===target.pathname;}),t.name+' destination');
+ }
+});

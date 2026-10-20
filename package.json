@@ -4,7 +4,7 @@
   "description": "Excelent landing pages, funnel engine sources and their tests",
   "scripts": {
     "test": "npm run test:funnel && npm run test:site",
-    "test:funnel": "node --test tests/funnel/plan.test.js tests/funnel/links.test.js tests/funnel/build.test.js tests/funnel/reliability.test.js tests/funnel/campaigns.test.js tests/funnel/identity.test.js",
+    "test:funnel": "node --test tests/funnel/plan.test.js tests/funnel/links.test.js tests/funnel/build.test.js tests/funnel/reliability.test.js tests/funnel/campaigns.test.js tests/funnel/identity.test.js tests/funnel/hardening.test.js tests/funnel/intake.test.js",
     "test:site": "node tests/site/run.js",
     "verify": "bash scripts/verify.sh"
   },

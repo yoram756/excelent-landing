@@ -1,7 +1,7 @@
 const test=require('node:test');const assert=require('node:assert/strict');
 const {planner,afterSend,item}=require('./load');
 const plan=planner('test');const live=planner('live');
-const T={M1:'2146929776251168',M2:'2866421103739060',M3:'2306286663247344',M4:'991655264017502',M6:'922497660829094',M7:'1695504292330742',M8:'1456261889708463',M10:'1517902547031884',M10R:'4090685337891850',M11:'1462992419096031',M12:'1152794754084561'};
+const T={M1:'2146929776251168',M2:'2157972271457704',M3:'2017016385642572',M4:'1840616890627890',M6:'922497660829094',M7:'1915186253195181',M8:'28923882683911966',M10:'1517902547031884',M10R:'4665876823677509',M11:'4430944130505180',M12:'1586746399324895'};
 const NOW='2026-10-20T09:00:00Z'; // Tuesday 12:00 Jerusalem
 const base={refi_phone:'0500000040',boolean_mm88mzry:{checked:'true'}};
 const active=o=>({...base,fn_status:'פעיל',fn_token:'abcdefghjk',...o});
@@ -10,13 +10,13 @@ const cols=r=>JSON.parse(r.colsJson);
 
 test('new form lead gets M1 and a token',()=>{const [r]=plan({items:[item({cols:base})],now:NOW});
   assert.equal(r.send.templateId,T.M1);assert.equal(r.send.to,'972500000040');assert.deepEqual(r.send.variables,['דני']);
-  const c=cols(r);assert.equal(c.fn_status.label,'פעיל');assert.match(c.fn_token,/^[a-z0-9]{20}$/);assert.equal(c.fn_path,'B');assert.equal(c.fn_step,'M1');});
+  const c=cols(r);assert.equal(c.fn_status.label,'פעיל');assert.match(c.fn_token,/^[a-f0-9]{32}$/);assert.equal(c.fn_path,'B');assert.equal(c.fn_step,'M1');});
 test('landing page lead with quiz starts at M7',()=>{const [r]=plan({items:[item({cols:{...base,long_text_mm88pfdv:'פירוט'}})],now:NOW});assert.equal(r.send.templateId,T.M7);assert.equal(cols(r).fn_path,'D');});
 test('lead without any consent is not contacted',()=>{assert.equal(plan({items:[item({cols:{refi_phone:'0500000040'}})],now:NOW}).length,0);});
 test('lead created before go live is not contacted',()=>{assert.equal(plan({items:[item({created:'2026-10-19T08:00:00Z',cols:base})],now:NOW}).length,0);});
 test('lead without phone is skipped',()=>{assert.equal(plan({items:[item({cols:{boolean_mm88mzry:{checked:'true'}}})],now:NOW}).length,0);});
 test('M2 carries the personal link code',()=>{const [r]=plan({items:[item({cols:active({fn_path:'B',fn_step:'M1',fn_next:due})})],now:NOW});
-  assert.equal(r.send.templateId,T.M2);assert.deepEqual(r.send.buttonVariables,['abcdefghjkq']);assert.equal(cols(r).fn_path,'C');});
+  assert.equal(r.send.templateId,T.M2);assert.deepEqual(r.send.variables,['דני','abcdefghjkq']);assert.equal(r.send.buttonVariables,undefined);assert.equal(cols(r).fn_path,'C');});
 test('nothing is sent before the due time (no double send)',()=>{assert.equal(plan({items:[item({cols:active({fn_path:'C',fn_step:'M2',fn_next:{date:'2026-10-20',time:'12:00:00'},fn_last:due})})],now:NOW}).length,0);});
 test('second message in the same day is postponed for C path',()=>{const [r]=plan({items:[item({cols:active({fn_path:'C',fn_step:'M3',fn_next:due,fn_last:{date:'2026-10-20',time:'06:00:00'}})})],now:NOW});assert.equal(r.send,null);assert.equal(cols(r).fn_next.date,'2026-10-21');});
 test('no sends on Shabbat',()=>{assert.equal(plan({items:[item({cols:active({fn_path:'C',fn_step:'M2',fn_next:due})})],now:'2026-10-24T09:00:00Z',shabbat:[{category:'candles',date:'2026-10-23T17:04:00+03:00'},{category:'havdalah',date:'2026-10-24T18:00:00+03:00'}]}).length,0);});

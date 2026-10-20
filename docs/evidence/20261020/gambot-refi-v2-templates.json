@@ -1,0 +1,356 @@
+[
+  {
+    "id": "1089275163875623",
+    "name": "exc_refi_m05_case_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, יוסי ודני הגיעו אלינו עם משכנתא של 1.1 מיליון ₪, ויצאו עם חיסכון של יותר מ 400,000 ₪ בסך התשלומים.\nהכול התחיל באותו שאלון קצר.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לשאלון",
+            "url": "https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m05#check",
+            "phone_number": null
+          },
+          {
+            "type": "URL",
+            "text": "הדירוג שלנו במידרג",
+            "url": "https://www.midrag.co.il/SpCard/Sp/94658",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "1111684781346512",
+    "name": "exc_refi_m15_offer_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, ההצעה מהשיחה עם יורם נשמרת עבורך עד סוף החודש.\nרוצה להתקדם? בחר מועד לשיחה קצרה.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לבחירת מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m15",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "1586746399324895",
+    "name": "exc_refi_m12_google_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "תודה על השיחה, {{1}}.\nבזמן שאתה שוקל, ככה לקוחות מתארים את העבודה איתנו.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "ביקורות בגוגל",
+            "url": "https://share.google/L6zPPGazOqwdvB1pH",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "1819887545875725",
+    "name": "exc_refi_m09_wait_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, כל חודש של המתנה הוא עוד חודש של ההחזר הנוכחי.\nהשיחה עם יורם ללא עלות ונמשכת 15 דקות.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לבחירת מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m09",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "1840616890627890",
+    "name": "exc_refi_m04_call_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, מעדיף לדבר ולא למלא שאלון?\nבחר יום ושעה שנוחים לך לשיחת היכרות של 15 דקות עם יורם, ללא עלות.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לבחירת מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m04",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "1915186253195181",
+    "name": "exc_refi_m07_thanks_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "תודה {{1}}, קיבלנו את התשובות. עכשיו נשאר רק לבחור מועד לשיחה עם יורם.\nאם יש לך דוח יתרות לסילוק, אפשר לשלוח אותו כאן ונגיע לשיחה מוכנים.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לבחירת מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m07",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "2017016385642572",
+    "name": "exc_refi_m03_reviews_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, לפני שמחליטים על מי לסמוך עם משכנתא, כדאי לשמוע מה מספרים מי שכבר עבר את זה איתנו: 74 חוות דעת, דירוג 5.0.\nוהשאלון שלך עדיין מחכה לך.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לחוות הדעת",
+            "url": "https://www.bizreviews.co.il/provider/peled-yoram",
+            "phone_number": null
+          },
+          {
+            "type": "URL",
+            "text": "לשאלון",
+            "url": "https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m03#check",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "2157972271457704",
+    "name": "exc_refi_m02_quiz_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, הנה השאלון שלך: 12 שאלות, שתי דקות, בלי מסמכים ובלי מספרים מדויקים.\nבסוף תראה מה בודקים אצלך קודם.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לשאלון",
+            "url": "https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m02#check",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "28923882683911966",
+    "name": "exc_refi_m08_remind_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, התשובות שלך כבר אצל יורם, וחסר רק מועד לשיחה.\nורוצה לדעת מה אומרים עלינו? 5.0 מ 62 ביקורות בגוגל.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לבחירת מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m08",
+            "phone_number": null
+          },
+          {
+            "type": "URL",
+            "text": "ביקורות בגוגל",
+            "url": "https://share.google/L6zPPGazOqwdvB1pH",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "4430944130505180",
+    "name": "exc_refi_m11_noshow_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, פספסנו אחד את השני היום. קורה.\nאפשר לבחור מועד חדש שנוח לך.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לבחירת מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m11",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "4665876823677509",
+    "name": "exc_refi_m10r_reminder_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, תזכורת: השיחה עם יורם מאקסלנט נקבעה ל {{2}}.\nאם צריך לשנות, אפשר לבחור מועד אחר.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{3}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "לשינוי מועד",
+            "url": "https://calendly.com/excellnet/15min?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel&utm_content=m10r",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  },
+  {
+    "id": "4667983876817219",
+    "name": "exc_refi_m13_midrag_v2",
+    "status": "APPROVED",
+    "category": "MARKETING",
+    "components": [
+      {
+        "type": "BODY",
+        "text": "היי {{1}}, שאלה ששואלים אותנו הרבה: למה לא ללכת ישר לבנק? כי הבנק מציע את מה ששלו.\nככה הלקוחות שלנו דירגו אותנו במידרג: 9.89 בתוצאות ובחוויית לקוח.\n\nהקישור האישי שלך: https://n8n-qhxa.srv1604140.hstgr.cloud/webhook/go?c={{2}}\nהקישור מיועד לך בלבד."
+      },
+      {
+        "type": "BUTTONS",
+        "text": null,
+        "buttons": [
+          {
+            "type": "URL",
+            "text": "למידרג",
+            "url": "https://www.midrag.co.il/SpCard/Sp/94658",
+            "phone_number": null
+          }
+        ]
+      },
+      {
+        "type": "FOOTER",
+        "text": "להסרה יש להשיב הסר"
+      }
+    ]
+  }
+]

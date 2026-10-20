@@ -46,25 +46,14 @@ const page=mdata.boards[0].items_page;
 if (page.cursor) throw new Error('Monday list exceeds one 500-item page: refuse sends until paginated lookup is configured');
 const items=page.items;
 const col=(cv,k)=>cv[C[k]]||{};
-// Personal links are bearer tokens. Never use Math.random for identity tokens.
-function secureBytes(size) {
-  const out = new Uint8Array(size);
-  if (globalThis.crypto && typeof globalThis.crypto.getRandomValues === 'function') {
-    globalThis.crypto.getRandomValues(out); return out;
-  }
-  try {
-    const nodeCrypto = require('node:crypto');
-    if (typeof nodeCrypto.randomBytes === 'function') return nodeCrypto.randomBytes(size);
-  } catch (e) {}
-  // Fail closed rather than silently generating guessable identifiers.
-  throw new Error('Secure CSPRNG unavailable in this n8n Code runtime; no lead may enter automated sends');
-}
-const rand=()=>{
-  const a='abcdefghjkmnpqrstuvwxyz23456789';
-  const cutoff=Math.floor(256/a.length)*a.length;
-  let s='';
-  while(s.length<20)for(const b of secureBytes(32)){if(b<cutoff)s+=a[b%a.length];if(s.length===20)break;}
-  return s;
+// The built-in Crypto node supplies independent 128-bit random tokens. The Code
+// sandbox does not expose crypto on the deployed n8n instance. No weak fallback.
+let tokenRows=[];try{tokenRows=$('Secure tokens').all();}catch(e){}
+const rand=itemId=>{
+  const rows=tokenRows.filter(r=>String(r.json.itemId)===String(itemId));
+  if(rows.length!==1||! /^[a-f0-9]{32}$/.test(rows[0].json.secureToken||''))
+    throw new Error('Secure CSPRNG unavailable or token missing/ambiguous for lead');
+  return rows[0].json.secureToken;
 };
 const dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;return Date.parse(j.date+'T'+(j.time||'00:00:00')+'Z');}catch(e){return null;}};
 const toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};
@@ -97,13 +86,16 @@ for(const it of items){
   const set=(k,v)=>{cols[k]=v;changed=true;};
 
   if(!status){
+    // Do not enroll a lead already handled by a person, even with no funnel status.
+    if(HUMAN.includes(stage)||(col(cv,'firstReply').text||'').trim())continue;
     if(!(mkt||svc))continue;
     if(owner[phone]&&owner[phone]!==it.id)continue;
     owner[phone]=it.id;
     if(Date.parse(it.created_at)<GO_LIVE)continue;
-    do{token=rand();}while(usedTokens.has(token));usedTokens.add(token);status='פעיל';
+    token=rand(it.id);if(usedTokens.has(token))throw new Error('Secure token collision; abort enrollment');usedTokens.add(token);status='פעיל';
     if(quiz){path=CFG.entry.quizDone.path;step=CFG.entry.quizDone.step;}else{path=CFG.entry.default.path;step=CFG.entry.default.step;}
-    next=now;st.mkt=mkt;
+    next=now;st.mkt=mkt;st.tokenIssuedAt=now;st.tokenExpiresAt=now+90*D;
+    set(C.state,{text:JSON.stringify(st)});
     set(C.status,{label:'פעיל'});set(C.token,token);
   }
   if(stage===SG.paid&&status!=='לקוח'){set(C.status,{label:'לקוח'});set(C.next,{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}
@@ -142,11 +134,17 @@ for(const it of items){
     if(code&&sameDay&&CFG.rules.onePerDayPaths.includes(path)&&!CFG.rules.sameDayAllowed.includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}
     // a template without an approved Meta id is never sent: the lead waits and Yoram is told
     if(code&&!/^\d{6,}$/.test(String(T[code]||''))){notify='תבנית '+code+' עוד לא אושרה בקמפיין '+CFG.name+', ההודעה לא נשלחה.';code=null;nPath=path;nStep=step;nNext=now+D;}
+    // A callback request is not marketing opt-in. Unknown template categories
+    // also require marketing consent; only a verified UTILITY category is exempt.
+    if(code&&!mkt&&CFG.templates[code].category!=='UTILITY'){
+      notify='בקשת חזרה ללא הסכמה לדיוור: טיפול ידני בלבד, תבנית שיווקית לא נשלחה.';
+      code=null;nPath=path;nStep=step;nNext=null;
+    }
     if(code){
       if(!fixed)nStep=code;
-      const vars=(CFG.templates[code].vars||['first']).map(v=>v==='when'?whenText(meeting):first);
+      const vars=(CFG.templates[code].vars||['first']).map(v=>v==='when'?whenText(meeting):v==='link'?token+DEST[code]:first);
       send={to:phone,templateId:T[code],variables:vars};
-      if(DEST[code])send.buttonVariables=[token+DEST[code]];
+      if(DEST[code]&&CFG.templates[code].linkMode!=='body')send.buttonVariables=[token+DEST[code]];
       set(C.last,toDate(now));
     }
   }

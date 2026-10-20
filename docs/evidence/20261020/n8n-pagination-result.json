@@ -1,0 +1,431 @@
+{
+  "name": "TEST LP1 isolated intake 20261020 NO MESSAGES",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem"
+  },
+  "nodes": [
+    {
+      "id": "intake-probe-0",
+      "name": "Manual only",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "intake-probe-1",
+      "name": "Fixture",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        0
+      ],
+      "parameters": {
+        "jsCode": "return [{json:{body:{product:'LP1',first_name:'TEST LP1 RELEASE 20261020',phone:'0500000040',idempotency_key:'lp1-release-20261020-001',service_request:true,service_request_at:new Date().toISOString(),marketing_consent:false,money_included:false,answers:{ask:'check',when:'week'}},headers:{}}}];"
+      }
+    },
+    {
+      "id": "intake-probe-2",
+      "name": "Validate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Validate, normalize and score a landing page lead. Product agnostic: product code comes from the request.\nconst LABELS = {\"has\": {\"q\": \"יש לכם היום משכנתא?\", \"o\": {\"yes\": \"כן, משכנתא אחת\", \"multi\": \"כן, יותר ממשכנתא אחת\", \"selling\": \"יש, ואנחנו בתהליך מכירה או פירעון\", \"none\": \"אין, אנחנו לפני קנייה\"}}, \"goal\": {\"q\": \"מה המטרה העיקרית?\", \"o\": {\"monthly\": \"תשלום חודשי נמוך יותר\", \"total\": \"עלות כוללת נמוכה יותר\", \"term\": \"קיצור התקופה\", \"risk\": \"פחות חשיפה למדד או לריבית\", \"loans\": \"טיפול בהלוואות נוספות\", \"mix\": \"תמהיל שמתאים לתוכניות שלנו\"}}, \"bal\": {\"q\": \"מה יתרת המשכנתא בקירוב?\", \"o\": {\"b1\": \"עד 300 אלף ₪\", \"b2\": \"מעל 300 אלף ועד 600 אלף ₪\", \"b3\": \"מעל 600 אלף ועד מיליון ₪\", \"b4\": \"מעל מיליון ועד 1.5 מיליון ₪\", \"b5\": \"מעל 1.5 מיליון ₪\", \"na\": \"לא יודע\"}}, \"pay\": {\"q\": \"מה ההחזר החודשי היום?\", \"o\": {\"p1\": \"עד 3,000 ₪\", \"p2\": \"מעל 3,000 ועד 5,000 ₪\", \"p3\": \"מעל 5,000 ועד 8,000 ₪\", \"p4\": \"מעל 8,000 ועד 12,000 ₪\", \"p5\": \"מעל 12,000 ₪\", \"na\": \"לא יודע\"}}, \"left\": {\"q\": \"כמה זמן נשאר לתשלום?\", \"o\": {\"l1\": \"עד 10 שנים\", \"l2\": \"מעל 10 ועד 20 שנה\", \"l3\": \"מעל 20 שנה\", \"na\": \"לא יודע\"}}, \"when\": {\"q\": \"מתי תרצו לפעול?\", \"o\": {\"week\": \"השבוע\", \"month\": \"החודש\", \"later\": \"בהמשך, יש לנו מועד\", \"none\": \"אין מועד מסוים\"}}, \"ask\": {\"q\": \"מה אתם מבקשים כרגע?\", \"o\": {\"info\": \"מידע כללי\", \"check\": \"בדיקה אישית\", \"call\": \"שיחת טלפון קצרה\", \"meet\": \"פגישה\"}}, \"doc\": {\"q\": \"יש לכם דוח יתרות לסילוק עדכני?\", \"o\": {\"have\": \"יש, ואשמח לשלוח\", \"old\": \"יש, אבל לא עדכני\", \"help\": \"אין, צריך עזרה להשיג\", \"what\": \"לא בטוח מה זה\"}}, \"loans\": {\"q\": \"יש הלוואות נוספות מלבד המשכנתא?\", \"o\": {\"n\": \"אין\", \"s\": \"יש, עד 50 אלף ₪ בסך הכול\", \"m\": \"יש, מעל 50 אלף ועד 200 אלף ₪\", \"l\": \"יש, מעל 200 אלף ועד 500 אלף ₪\", \"xl\": \"יש, מעל 500 אלף ₪\", \"na\": \"לא יודע\"}}, \"income\": {\"q\": \"צפוי שינוי בהכנסה בשנים הקרובות?\", \"o\": {\"down\": \"כן, ירידה\", \"up\": \"כן, עלייה\", \"no\": \"לא צפוי\", \"na\": \"לא יודע\"}}, \"plan\": {\"q\": \"מתוכננים מכירה של הנכס או פירעון גדול?\", \"o\": {\"sell\": \"כן, מכירה\", \"repay\": \"כן, פירעון גדול\", \"no\": \"לא\", \"na\": \"עוד לא יודע\"}}, \"strain\": {\"q\": \"יש קושי בתשלומים היום?\", \"o\": {\"late\": \"כן, כבר קשה לשלם בזמן\", \"tight\": \"יש לחץ, אבל משלמים\", \"no\": \"לא\", \"skip\": \"מעדיף לא לענות\"}}}\n;\nconst PRODUCTS = { LP1: { name: 'מחזור משכנתא', labels: LABELS } };\nconst MONEY = ['bal','pay','loans','income','strain'];\nconst W = { intent:{info:0,check:25,call:40,meet:40}, timing:{none:0,later:10,month:15,week:25}, action:{none:0,received:10,meeting:25}, docs:{help:3,what:3,old:3,have:6,received:10} };\nconst band = n => n>=85?'רותח':n>=70?'חם מאוד':n>=40?'חם':'מתעניין';\nfunction scoreLead(l, now){\n  const reasons=[], missing=[];\n  const pick=(t,k,f)=>{ if(k==null||!(k in t)){missing.push(f);return 0;} reasons.push(`${f}=${k} (+${t[k]})`); return t[k]; };\n  const intent=pick(W.intent,l.ask,'intent'), timing=pick(W.timing,l.when,'timing');\n  let ak='none'; if(l.messageReceived) ak='received'; if(l.meetingSet&&!l.meetingCancelled) ak='meeting';\n  const action=W.action[ak]; reasons.push(`action=${ak} (+${action})`);\n  const docs=pick(W.docs, l.docReceived?'received':l.doc, 'docs');\n  const score=intent+timing+action+docs; let label;\n  if(missing.includes('intent')&&missing.includes('timing')) label='אין מספיק מידע';\n  else { label=band(score); if(label==='רותח' && !(l.messageReceived&&l.requestedRecently)){label='חם מאוד';reasons.push('cap: רותח דורש הודעה שהתקבלה ובקשה עדכנית');} }\n  const complexity=[];\n  if(l.strain==='late') complexity.push('קושי בתשלום');\n  if(['m','l','xl'].includes(l.loans)) complexity.push('הלוואות נוספות משמעותיות');\n  if(l.income==='down') complexity.push('ירידה צפויה בהכנסה');\n  if(l.has==='none') complexity.push('אין משכנתא, לא מחזור');\n  return { version:'heat-1.1', computedAt:now.toISOString(), score, label, reasons, missing, completeness:`${4-missing.length}/4`, complexity, feasibility:'לא נבדקה כדאיות' };\n}\nconst fail = (code, status=400) => [{ json: { ok:false, status, error:code } }];\nconst req = $input.first().json; const b = req.body || {};\n// the landing page proxy passes the visitor IP in x-lp-client-ip; direct calls fall back to the forwarded address\nconst ip = (req.headers && (req.headers['x-lp-client-ip'] || req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || '')).split(',')[0].trim();\nif (typeof b !== 'object' || Array.isArray(b)) return fail('bad_body');\nif (b.website) return fail('rejected');\nconst product = String(b.product || ((String(b.source||'').match(/LP\\d+/i)||[''])[0])).toUpperCase();\nconst P = PRODUCTS[product]; if (!P) return fail('unknown_product');\n// This public form endpoint cannot attest that an inbound WhatsApp message exists.\nconst channel = 'טופס';\nconst name = String(b.first_name||'').trim().replace(/\\s+/g,' ');\nconst nl = Array.from(name).length; if (nl<2 || nl>40 || /[<>{}\\[\\]\\\\]/.test(name)) return fail('bad_name');\nlet phone = String(b.phone||'').replace(/[\\s()+-]/g,''); if (/^05\\d{8}$/.test(phone)) phone='972'+phone.slice(1);\nif (!/^9725\\d{8}$/.test(phone)) return fail('bad_phone');\nif (b.service_request !== true) return fail('no_service_request');\nfor (const field of ['service_request_at','marketing_consent_at']) {\n  if (b[field] != null && !Number.isFinite(Date.parse(b[field]))) return fail('bad_consent_date');\n}\nconst key = String(b.idempotency_key||''); if (!/^[A-Za-z0-9-]{8,80}$/.test(key)) return fail('bad_key');\nconst answers = b.answers && typeof b.answers==='object' ? b.answers : {};\nconst clean = {};\nfor (const [k,v] of Object.entries(answers)) {\n  if (!Object.hasOwn(P.labels,k)) return fail('bad_answer');\n  if (v == null) continue;\n  const vals = Array.isArray(v) ? v : [v];\n  for (const x of vals) if (typeof x!=='string' || !Object.hasOwn(P.labels[k].o,x)) return fail('bad_answer');\n  if (b.money_included !== true && MONEY.includes(k)) continue;\n  clean[k] = Array.isArray(v) ? v.slice(0,6) : v;\n}\n// rate limit per IP and idempotency, kept in workflow static data\nconst sd = $getWorkflowStaticData('global'); const now = Date.now();\nsd.idem = sd.idem || {}; sd.ipHits2 = sd.ipHits2 || {};\nfor (const [k,v] of Object.entries(sd.idem)) if (now - v.t > 48*3600e3) delete sd.idem[k];\nfor (const [k,v] of Object.entries(sd.ipHits2)) { sd.ipHits2[k] = v.filter(t => now - t < 3600e3); if (!sd.ipHits2[k].length) delete sd.ipHits2[k]; }\nif (sd.idem[key] && sd.idem[key].id) return [{ json: { ok:true, duplicate:true, request_id: sd.idem[key].id } }];\nif (ip) { const h = sd.ipHits2[ip] || []; if (h.length >= 20) return fail('rate_limited', 429); h.push(now); sd.ipHits2[ip] = h; }\nconst first = v => Array.isArray(v) ? v[0] : v;\nconst lab = (q, v) => v==null ? null : (Array.isArray(v) ? v : [v]).map(x => P.labels[q].o[x]).join(', ');\nconst score = scoreLead({ ask:first(clean.ask), when:first(clean.when), doc:first(clean.doc), loans:first(clean.loans), strain:first(clean.strain), income:first(clean.income), has:first(clean.has), messageReceived: channel==='וואטסאפ', requestedRecently:true }, new Date());\nconst readable = Object.keys(P.labels).filter(q => clean[q]!=null).map(q => `${P.labels[q].q} ${lab(q, clean[q])}`).join('\\n');\nreturn [{ json: { ok:true, duplicate:false, key, product, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),\n  answers: clean, goalNames: (Array.isArray(clean.goal)?clean.goal:(clean.goal?[clean.goal]:[])).map(x=>P.labels.goal.o[x]), labels: Object.fromEntries(Object.keys(clean).map(q=>[q, lab(q, clean[q])])), readable,\n  money_included: b.money_included===true, service_request_at: b.service_request_at || new Date().toISOString(),\n  marketing_consent: b.marketing_consent===true, marketing_consent_at: b.marketing_consent===true ? (b.marketing_consent_at || new Date().toISOString()) : null, score } }];\n"
+      }
+    },
+    {
+      "id": "intake-probe-3",
+      "name": "Find query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const v=$input.first().json;\n// Phone lookup accepts one number without formatting, not alternate representations.\nreturn [{json:{query:'query($v:[String]!){ items_page_by_column_values(limit: 10, board_id: 5106246268, columns: [{column_id: \"refi_phone\", column_values: $v}]){ cursor items { id name created_at column_values(ids:[\"refi_phone\"]){id text} } } }', variables:{v:[v.phone]}}}];\n"
+      }
+    },
+    {
+      "id": "intake-probe-4",
+      "name": "Find by phone",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({query:$json.query,variables:$json.variables}) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      }
+    },
+    {
+      "id": "intake-probe-5",
+      "name": "Guard synthetic phone ownership",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1100,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const r=$input.first().json;const rows=r.data?.items_page_by_column_values?.items;if(r.errors?.length||!Array.isArray(rows)||rows.length>1||rows.some(it=>it.name!=='TEST LP1 RELEASE 20261020 0500000040'))throw new Error('Synthetic phone conflict or lookup error; no write permitted');return [{json:r}];"
+      }
+    },
+    {
+      "id": "intake-probe-6",
+      "name": "Build mutation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Decide create or update (same phone within 24 hours) and build the Monday mutation with variables.\nconst v = $('Validate').first().json;\nconst response=$input.first().json;\nconst page=response.data?.items_page_by_column_values;\nif(response.errors?.length || !Array.isArray(page?.items) || page.cursor)throw new Error('Monday lookup failed or incomplete; refusing duplicate-prone create');\nconst norm=s=>{let n=String(s||'').replace(/\\D/g,'');return n.startsWith('0')?'972'+n.slice(1):n;};\nconst found=page.items.filter(it=>norm(it.column_values?.find(c=>c.id==='refi_phone')?.text)===v.phone);\nconst dayAgo = Date.now() - 24*3600e3;\nconst sd = $getWorkflowStaticData('global'); sd.phones = sd.phones || {};\nfor (const [k,x] of Object.entries(sd.phones)) if (Date.now() - x.t > 24*3600e3) delete sd.phones[k];\n// Monday search can lag by a minute, so a local 24 hour cache of phone to item is checked first\nconst cached = sd.phones[v.phone] ? { id: sd.phones[v.phone].id, created_at: new Date(sd.phones[v.phone].t).toISOString() } : null;\nconst recent = cached || found.filter(i => Date.parse(i.created_at) >= dayAgo).sort((a,b) => Date.parse(b.created_at) - Date.parse(a.created_at))[0];\nconst L = v.labels, A = v.answers, s = v.score;\nconst dt = iso => { const d = new Date(iso); return { date: d.toISOString().slice(0,10), time: d.toISOString().slice(11,19) }; };\nconst goals = Array.isArray(A.goal) ? A.goal : (A.goal ? [A.goal] : []);\nconst cv = {};\nconst st = (col, label) => { if (label) cv[col] = { label: String(label).slice(0,30) }; };\nst('refi_source', v.source);\nst('refi_balance', L.bal);\nif (goals[0]) st('refi_goal', v.goalNames[0]);\nif (goals[1]) st('color_mm88h0j8', v.goalNames[1]);\nif (A.loans === 'n') st('refi_other_loans', 'לא'); else if (A.loans && A.loans !== 'na') st('refi_other_loans', 'כן');\nst('color_mm88h799', L.pay); st('color_mm885m0t', L.left); st('color_mm88cffb', L.when); st('color_mm88fzyb', L.ask); st('color_mm88catt', L.doc);\ncv.numeric_mm883h9v = String(s.score);\nst('color_mm88xpa8', s.label);\ncv.long_text_mm88pfdv = { text: `גרסה ${s.version}, חושב ${s.computedAt}, שלמות ${s.completeness}\\n${s.reasons.join('\\n')}${s.missing.length ? '\\nחסר: ' + s.missing.join(', ') : ''}` };\ncv.long_text_mm88xzfe = { text: `מוצר: ${v.productName} (${v.product})\\nמידע כספי צורף: ${v.money_included ? 'כן' : 'לא'}\\n${v.readable}` };\ncv.long_text_mm88cs6f = { text: s.complexity.length ? s.complexity.join('\\n') : 'לא זוהתה מורכבות מיוחדת' };\nif (A.has) cv.dropdown_mm88dkb2 = { labels: [L.has] };\ncv.boolean_mm8848pn = { checked: 'true' };\ncv.date_mm88hmw2 = dt(v.service_request_at);\nif (v.marketing_consent) { cv.boolean_mm88mzry = { checked: 'true' }; cv.date_mm88qwfm = dt(v.marketing_consent_at); }\nif (v.channel === 'וואטסאפ') cv.boolean_mm88aae4 = { checked: 'true' };\nif (recent) {\n  return [{ json: { mode: 'update', itemId: recent.id, query: 'mutation($item: ID!, $vals: JSON!){ change_multiple_column_values(board_id: 5106246268, item_id: $item, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { item: String(recent.id), vals: JSON.stringify(cv) } } }];\n}\ncv.refi_phone = { phone: v.phone, countryShortName: 'IL' };\ncv.refi_entered = dt(new Date().toISOString());\ncv.refi_stage = { label: 'ליד חדש' };\ncv.color_mm88hss3 = { label: s.feasibility };\nreturn [{ json: { mode: 'create', query: 'mutation($name: String!, $vals: JSON!){ create_item(board_id: 5106246268, group_id: \"topics\", item_name: $name, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { name: `${v.name} ${v.phoneLocal}`, vals: JSON.stringify(cv) } } }];\n"
+      }
+    },
+    {
+      "id": "intake-probe-7",
+      "name": "Save to Monday",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1540,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({query:$json.query,variables:$json.variables}) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      }
+    },
+    {
+      "id": "intake-probe-8",
+      "name": "Check save",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1760,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Confirm Monday saved the item, remember the idempotency key, and prepare the reply and the internal alert.\nconst r = $input.first().json; const m = $('Build mutation').first().json; const v = $('Validate').first().json;\nconst id = r.data && (r.data.create_item || r.data.change_multiple_column_values || {}).id;\nif (!id || r.errors?.length) return [{ json: { saved: false, status: 502, error: 'save_failed' } }];\nconst sd = $getWorkflowStaticData('global'); sd.idem = sd.idem || {}; sd.idem[v.key] = { id: String(id), t: Date.now() };\nsd.phones = sd.phones || {}; if (!sd.phones[v.phone]) sd.phones[v.phone] = { id: String(id), t: Date.now() };\nconst s = v.score;\nconst text = `${m.mode === 'create' ? 'ליד חדש' : 'פנייה חוזרת'} ${v.source}: ${v.name}, ${s.label}${s.complexity.length ? ', מורכבות: ' + s.complexity.join(', ') : ''}${v.labels.ask ? ', מבקש: ' + v.labels.ask : ''}`;\nreturn [{ json: { saved: true, status: 200, request_id: String(id), mode: m.mode, alertText: text } }];\n"
+      }
+    },
+    {
+      "id": "intake-probe-9",
+      "name": "Read query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1980,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const s=$input.first().json;if(!s.saved||!/^\\d+$/.test(s.request_id))throw new Error('Save not confirmed');return [{json:{query:'query($ids:[ID!]){items(ids:$ids){id name column_values(ids:[\"refi_phone\",\"boolean_mm8848pn\",\"boolean_mm88mzry\",\"refi_source\"]){id text value}}}',variables:{ids:[s.request_id]}}}];"
+      }
+    },
+    {
+      "id": "intake-probe-10",
+      "name": "Read saved lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2200,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({query:$json.query,variables:$json.variables}) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      }
+    },
+    {
+      "id": "intake-probe-11",
+      "name": "Verify and deduplicate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2420,
+        0
+      ],
+      "parameters": {
+        "jsCode": "function validateAgain($input,$getWorkflowStaticData){// Validate, normalize and score a landing page lead. Product agnostic: product code comes from the request.\nconst LABELS = {\"has\": {\"q\": \"יש לכם היום משכנתא?\", \"o\": {\"yes\": \"כן, משכנתא אחת\", \"multi\": \"כן, יותר ממשכנתא אחת\", \"selling\": \"יש, ואנחנו בתהליך מכירה או פירעון\", \"none\": \"אין, אנחנו לפני קנייה\"}}, \"goal\": {\"q\": \"מה המטרה העיקרית?\", \"o\": {\"monthly\": \"תשלום חודשי נמוך יותר\", \"total\": \"עלות כוללת נמוכה יותר\", \"term\": \"קיצור התקופה\", \"risk\": \"פחות חשיפה למדד או לריבית\", \"loans\": \"טיפול בהלוואות נוספות\", \"mix\": \"תמהיל שמתאים לתוכניות שלנו\"}}, \"bal\": {\"q\": \"מה יתרת המשכנתא בקירוב?\", \"o\": {\"b1\": \"עד 300 אלף ₪\", \"b2\": \"מעל 300 אלף ועד 600 אלף ₪\", \"b3\": \"מעל 600 אלף ועד מיליון ₪\", \"b4\": \"מעל מיליון ועד 1.5 מיליון ₪\", \"b5\": \"מעל 1.5 מיליון ₪\", \"na\": \"לא יודע\"}}, \"pay\": {\"q\": \"מה ההחזר החודשי היום?\", \"o\": {\"p1\": \"עד 3,000 ₪\", \"p2\": \"מעל 3,000 ועד 5,000 ₪\", \"p3\": \"מעל 5,000 ועד 8,000 ₪\", \"p4\": \"מעל 8,000 ועד 12,000 ₪\", \"p5\": \"מעל 12,000 ₪\", \"na\": \"לא יודע\"}}, \"left\": {\"q\": \"כמה זמן נשאר לתשלום?\", \"o\": {\"l1\": \"עד 10 שנים\", \"l2\": \"מעל 10 ועד 20 שנה\", \"l3\": \"מעל 20 שנה\", \"na\": \"לא יודע\"}}, \"when\": {\"q\": \"מתי תרצו לפעול?\", \"o\": {\"week\": \"השבוע\", \"month\": \"החודש\", \"later\": \"בהמשך, יש לנו מועד\", \"none\": \"אין מועד מסוים\"}}, \"ask\": {\"q\": \"מה אתם מבקשים כרגע?\", \"o\": {\"info\": \"מידע כללי\", \"check\": \"בדיקה אישית\", \"call\": \"שיחת טלפון קצרה\", \"meet\": \"פגישה\"}}, \"doc\": {\"q\": \"יש לכם דוח יתרות לסילוק עדכני?\", \"o\": {\"have\": \"יש, ואשמח לשלוח\", \"old\": \"יש, אבל לא עדכני\", \"help\": \"אין, צריך עזרה להשיג\", \"what\": \"לא בטוח מה זה\"}}, \"loans\": {\"q\": \"יש הלוואות נוספות מלבד המשכנתא?\", \"o\": {\"n\": \"אין\", \"s\": \"יש, עד 50 אלף ₪ בסך הכול\", \"m\": \"יש, מעל 50 אלף ועד 200 אלף ₪\", \"l\": \"יש, מעל 200 אלף ועד 500 אלף ₪\", \"xl\": \"יש, מעל 500 אלף ₪\", \"na\": \"לא יודע\"}}, \"income\": {\"q\": \"צפוי שינוי בהכנסה בשנים הקרובות?\", \"o\": {\"down\": \"כן, ירידה\", \"up\": \"כן, עלייה\", \"no\": \"לא צפוי\", \"na\": \"לא יודע\"}}, \"plan\": {\"q\": \"מתוכננים מכירה של הנכס או פירעון גדול?\", \"o\": {\"sell\": \"כן, מכירה\", \"repay\": \"כן, פירעון גדול\", \"no\": \"לא\", \"na\": \"עוד לא יודע\"}}, \"strain\": {\"q\": \"יש קושי בתשלומים היום?\", \"o\": {\"late\": \"כן, כבר קשה לשלם בזמן\", \"tight\": \"יש לחץ, אבל משלמים\", \"no\": \"לא\", \"skip\": \"מעדיף לא לענות\"}}}\n;\nconst PRODUCTS = { LP1: { name: 'מחזור משכנתא', labels: LABELS } };\nconst MONEY = ['bal','pay','loans','income','strain'];\nconst W = { intent:{info:0,check:25,call:40,meet:40}, timing:{none:0,later:10,month:15,week:25}, action:{none:0,received:10,meeting:25}, docs:{help:3,what:3,old:3,have:6,received:10} };\nconst band = n => n>=85?'רותח':n>=70?'חם מאוד':n>=40?'חם':'מתעניין';\nfunction scoreLead(l, now){\n  const reasons=[], missing=[];\n  const pick=(t,k,f)=>{ if(k==null||!(k in t)){missing.push(f);return 0;} reasons.push(`${f}=${k} (+${t[k]})`); return t[k]; };\n  const intent=pick(W.intent,l.ask,'intent'), timing=pick(W.timing,l.when,'timing');\n  let ak='none'; if(l.messageReceived) ak='received'; if(l.meetingSet&&!l.meetingCancelled) ak='meeting';\n  const action=W.action[ak]; reasons.push(`action=${ak} (+${action})`);\n  const docs=pick(W.docs, l.docReceived?'received':l.doc, 'docs');\n  const score=intent+timing+action+docs; let label;\n  if(missing.includes('intent')&&missing.includes('timing')) label='אין מספיק מידע';\n  else { label=band(score); if(label==='רותח' && !(l.messageReceived&&l.requestedRecently)){label='חם מאוד';reasons.push('cap: רותח דורש הודעה שהתקבלה ובקשה עדכנית');} }\n  const complexity=[];\n  if(l.strain==='late') complexity.push('קושי בתשלום');\n  if(['m','l','xl'].includes(l.loans)) complexity.push('הלוואות נוספות משמעותיות');\n  if(l.income==='down') complexity.push('ירידה צפויה בהכנסה');\n  if(l.has==='none') complexity.push('אין משכנתא, לא מחזור');\n  return { version:'heat-1.1', computedAt:now.toISOString(), score, label, reasons, missing, completeness:`${4-missing.length}/4`, complexity, feasibility:'לא נבדקה כדאיות' };\n}\nconst fail = (code, status=400) => [{ json: { ok:false, status, error:code } }];\nconst req = $input.first().json; const b = req.body || {};\n// the landing page proxy passes the visitor IP in x-lp-client-ip; direct calls fall back to the forwarded address\nconst ip = (req.headers && (req.headers['x-lp-client-ip'] || req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || '')).split(',')[0].trim();\nif (typeof b !== 'object' || Array.isArray(b)) return fail('bad_body');\nif (b.website) return fail('rejected');\nconst product = String(b.product || ((String(b.source||'').match(/LP\\d+/i)||[''])[0])).toUpperCase();\nconst P = PRODUCTS[product]; if (!P) return fail('unknown_product');\n// This public form endpoint cannot attest that an inbound WhatsApp message exists.\nconst channel = 'טופס';\nconst name = String(b.first_name||'').trim().replace(/\\s+/g,' ');\nconst nl = Array.from(name).length; if (nl<2 || nl>40 || /[<>{}\\[\\]\\\\]/.test(name)) return fail('bad_name');\nlet phone = String(b.phone||'').replace(/[\\s()+-]/g,''); if (/^05\\d{8}$/.test(phone)) phone='972'+phone.slice(1);\nif (!/^9725\\d{8}$/.test(phone)) return fail('bad_phone');\nif (b.service_request !== true) return fail('no_service_request');\nfor (const field of ['service_request_at','marketing_consent_at']) {\n  if (b[field] != null && !Number.isFinite(Date.parse(b[field]))) return fail('bad_consent_date');\n}\nconst key = String(b.idempotency_key||''); if (!/^[A-Za-z0-9-]{8,80}$/.test(key)) return fail('bad_key');\nconst answers = b.answers && typeof b.answers==='object' ? b.answers : {};\nconst clean = {};\nfor (const [k,v] of Object.entries(answers)) {\n  if (!Object.hasOwn(P.labels,k)) return fail('bad_answer');\n  if (v == null) continue;\n  const vals = Array.isArray(v) ? v : [v];\n  for (const x of vals) if (typeof x!=='string' || !Object.hasOwn(P.labels[k].o,x)) return fail('bad_answer');\n  if (b.money_included !== true && MONEY.includes(k)) continue;\n  clean[k] = Array.isArray(v) ? v.slice(0,6) : v;\n}\n// rate limit per IP and idempotency, kept in workflow static data\nconst sd = $getWorkflowStaticData('global'); const now = Date.now();\nsd.idem = sd.idem || {}; sd.ipHits2 = sd.ipHits2 || {};\nfor (const [k,v] of Object.entries(sd.idem)) if (now - v.t > 48*3600e3) delete sd.idem[k];\nfor (const [k,v] of Object.entries(sd.ipHits2)) { sd.ipHits2[k] = v.filter(t => now - t < 3600e3); if (!sd.ipHits2[k].length) delete sd.ipHits2[k]; }\nif (sd.idem[key] && sd.idem[key].id) return [{ json: { ok:true, duplicate:true, request_id: sd.idem[key].id } }];\nif (ip) { const h = sd.ipHits2[ip] || []; if (h.length >= 20) return fail('rate_limited', 429); h.push(now); sd.ipHits2[ip] = h; }\nconst first = v => Array.isArray(v) ? v[0] : v;\nconst lab = (q, v) => v==null ? null : (Array.isArray(v) ? v : [v]).map(x => P.labels[q].o[x]).join(', ');\nconst score = scoreLead({ ask:first(clean.ask), when:first(clean.when), doc:first(clean.doc), loans:first(clean.loans), strain:first(clean.strain), income:first(clean.income), has:first(clean.has), messageReceived: channel==='וואטסאפ', requestedRecently:true }, new Date());\nconst readable = Object.keys(P.labels).filter(q => clean[q]!=null).map(q => `${P.labels[q].q} ${lab(q, clean[q])}`).join('\\n');\nreturn [{ json: { ok:true, duplicate:false, key, product, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),\n  answers: clean, goalNames: (Array.isArray(clean.goal)?clean.goal:(clean.goal?[clean.goal]:[])).map(x=>P.labels.goal.o[x]), labels: Object.fromEntries(Object.keys(clean).map(q=>[q, lab(q, clean[q])])), readable,\n  money_included: b.money_included===true, service_request_at: b.service_request_at || new Date().toISOString(),\n  marketing_consent: b.marketing_consent===true, marketing_consent_at: b.marketing_consent===true ? (b.marketing_consent_at || new Date().toISOString()) : null, score } }];\n}\nconst r=$input.first().json;const item=r.data?.items?.[0];\nif(r.errors?.length||!item||item.id!==$('Check save').first().json.request_id||!item.name.startsWith('TEST LP1 RELEASE 20261020'))throw new Error('Unexpected saved lead');\nconst c=Object.fromEntries(item.column_values.map(v=>[v.id,v]));\nif(!c.refi_phone.text.includes('500000040')||![true,'true'].includes(JSON.parse(c.boolean_mm8848pn.value||'null')?.checked)||[true,'true'].includes(JSON.parse(c.boolean_mm88mzry.value||'null')?.checked)||c.refi_source.text!=='קליטת LP1')throw new Error('Consent, source or phone readback mismatch');\nconst duplicate=validateAgain({first:()=>({json:$('Fixture').first().json})},$getWorkflowStaticData)[0].json;\nif(!duplicate.duplicate||duplicate.request_id!==item.id)throw new Error('Idempotency failed');\nreturn [{json:{itemId:item.id,saved:true,serviceConsent:true,marketingConsent:false,duplicateSameId:true,noMessages:true}}];"
+      }
+    },
+    {
+      "id": "intake-probe-12",
+      "name": "Archive synthetic lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2640,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({query:\"mutation($id:ID!){archive_item(item_id:$id){id} }\",variables:{id:$json.itemId} }) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      }
+    },
+    {
+      "id": "intake-probe-13",
+      "name": "Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2860,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const r=$input.first().json;const proof=$('Verify and deduplicate').first().json;if(r.errors?.length||r.data?.archive_item?.id!==proof.itemId)throw new Error('Test lead archive not confirmed');return [{json:{...proof,archived:true,scope:'manual n8n validation to Monday save/readback/idempotency/archive; no messages or schedules'}}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual only": {
+      "main": [
+        [
+          {
+            "node": "Fixture",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fixture": {
+      "main": [
+        [
+          {
+            "node": "Validate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate": {
+      "main": [
+        [
+          {
+            "node": "Find query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find query": {
+      "main": [
+        [
+          {
+            "node": "Find by phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find by phone": {
+      "main": [
+        [
+          {
+            "node": "Guard synthetic phone ownership",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard synthetic phone ownership": {
+      "main": [
+        [
+          {
+            "node": "Build mutation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build mutation": {
+      "main": [
+        [
+          {
+            "node": "Save to Monday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Monday": {
+      "main": [
+        [
+          {
+            "node": "Check save",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check save": {
+      "main": [
+        [
+          {
+            "node": "Read query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read query": {
+      "main": [
+        [
+          {
+            "node": "Read saved lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read saved lead": {
+      "main": [
+        [
+          {
+            "node": "Verify and deduplicate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify and deduplicate": {
+      "main": [
+        [
+          {
+            "node": "Archive synthetic lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Archive synthetic lead": {
+      "main": [
+        [
+          {
+            "node": "Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

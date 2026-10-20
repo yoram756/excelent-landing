@@ -1,0 +1,157 @@
+[
+  {
+    "scope": "Gambot read-only template and schedule inventory; no messages",
+    "templatesReadOK": true,
+    "refinanceTemplates": [
+      {
+        "id": "1022323597539469",
+        "name": "exc_refi_m13_midrag",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1089275163875623",
+        "name": "exc_refi_m05_case_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1111684781346512",
+        "name": "exc_refi_m15_offer_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1150212394355928",
+        "name": "exc_refi_m15_offer",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1152794754084561",
+        "name": "exc_refi_m12_google",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1456261889708463",
+        "name": "exc_refi_m08_remind",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1462992419096031",
+        "name": "exc_refi_m11_noshow",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1517902547031884",
+        "name": "exc_refi_m10_booked",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1586746399324895",
+        "name": "exc_refi_m12_google_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1634314488438257",
+        "name": "exc_refi_ack_v4",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1665753921818083",
+        "name": "exc_refi_m14_block",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1695504292330742",
+        "name": "exc_refi_m07_thanks",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1819887545875725",
+        "name": "exc_refi_m09_wait_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1825910702064350",
+        "name": "exc_refi_m09_wait",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1840616890627890",
+        "name": "exc_refi_m04_call_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1861514208308620",
+        "name": "exc_refi_m05_case",
+        "status": "APPROVED"
+      },
+      {
+        "id": "1915186253195181",
+        "name": "exc_refi_m07_thanks_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "2017016385642572",
+        "name": "exc_refi_m03_reviews_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "2146929776251168",
+        "name": "exc_refi_m01_ack",
+        "status": "APPROVED"
+      },
+      {
+        "id": "2157972271457704",
+        "name": "exc_refi_m02_quiz_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "2306286663247344",
+        "name": "exc_refi_m03_reviews",
+        "status": "APPROVED"
+      },
+      {
+        "id": "2866421103739060",
+        "name": "exc_refi_m02_quiz",
+        "status": "APPROVED"
+      },
+      {
+        "id": "28923882683911966",
+        "name": "exc_refi_m08_remind_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "4090685337891850",
+        "name": "exc_refi_m10r_reminder",
+        "status": "APPROVED"
+      },
+      {
+        "id": "4430944130505180",
+        "name": "exc_refi_m11_noshow_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "4665876823677509",
+        "name": "exc_refi_m10r_reminder_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "4667983876817219",
+        "name": "exc_refi_m13_midrag_v2",
+        "status": "APPROVED"
+      },
+      {
+        "id": "922497660829094",
+        "name": "exc_refi_m06_close",
+        "status": "APPROVED"
+      },
+      {
+        "id": "991655264017502",
+        "name": "exc_refi_m04_call",
+        "status": "APPROVED"
+      }
+    ],
+    "scheduledReadOK": true,
+    "scheduledCount": 0,
+    "scheduledIds": [],
+    "metaAdCampaignStatus": "NOT TESTED: Gambot schedules are not Meta ad campaigns"
+  }
+]

@@ -5,8 +5,11 @@ const cfg=(id='refi')=>fs.readFileSync(path.resolve(__dirname,'../../campaigns/'
 function planner(mode='test',goLive='2026-10-20T07:00:00Z',pilot='',campaign='refi'){
   const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__CONFIG__',cfg(campaign)).replace('__BUSINESS__',fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8')).replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot);
   return ({items,convos=[],now,shabbat=[],convosDown=false})=>{
-    const $=n=>({first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?(convosDown?{error:'down'}:{data:{items:convos}}):n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
-    return new Function('$',code)($).map(x=>x.json);
+    const generated=items.map(it=>({json:{itemId:String(it.id),secureToken:require('crypto').randomBytes(16).toString('hex')}}));
+    const $=n=>({all:()=>n==='Secure tokens'?generated:[],first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?(convosDown?{error:'down'}:{data:{items:convos}}):n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
+    // Pilot/live logic uses Date.now(), so freeze the test clock for every mode.
+    const TestDate=now?class extends Date{constructor(...args){super(...(args.length?args:[now]));}static now(){return Date.parse(now);}}:Date;
+    return new Function('$','Date',code)($,TestDate).map(x=>x.json);
   };
 }
 function afterSend(planOut,response){

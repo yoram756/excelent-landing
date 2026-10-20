@@ -51,46 +51,104 @@
   "templates": {
     "M1": {
       "id": "2146929776251168",
-      "name": "exc_refi_m01_ack"
+      "name": "exc_refi_m01_ack",
+      "category": "MARKETING"
     },
     "M2": {
-      "id": "2866421103739060",
-      "name": "exc_refi_m02_quiz",
-      "dest": "q"
+      "id": "2157972271457704",
+      "name": "exc_refi_m02_quiz_v2",
+      "dest": "q",
+      "legacyId": "2866421103739060",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M3": {
-      "id": "2306286663247344",
-      "name": "exc_refi_m03_reviews",
-      "dest": "b"
+      "id": "2017016385642572",
+      "name": "exc_refi_m03_reviews_v2",
+      "dest": "b",
+      "legacyId": "2306286663247344",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M4": {
-      "id": "991655264017502",
-      "name": "exc_refi_m04_call",
-      "dest": "c"
+      "id": "1840616890627890",
+      "name": "exc_refi_m04_call_v2",
+      "dest": "c",
+      "legacyId": "991655264017502",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M5": {
-      "id": "1861514208308620",
-      "name": "exc_refi_m05_case",
-      "dest": "q"
+      "id": "1089275163875623",
+      "name": "exc_refi_m05_case_v2",
+      "dest": "q",
+      "legacyId": "1861514208308620",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M6": {
       "id": "922497660829094",
-      "name": "exc_refi_m06_close"
+      "name": "exc_refi_m06_close",
+      "category": "MARKETING"
     },
     "M7": {
-      "id": "1695504292330742",
-      "name": "exc_refi_m07_thanks",
-      "dest": "c"
+      "id": "1915186253195181",
+      "name": "exc_refi_m07_thanks_v2",
+      "dest": "c",
+      "legacyId": "1695504292330742",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M8": {
-      "id": "1456261889708463",
-      "name": "exc_refi_m08_remind",
-      "dest": "c"
+      "id": "28923882683911966",
+      "name": "exc_refi_m08_remind_v2",
+      "dest": "c",
+      "legacyId": "1456261889708463",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M9": {
-      "id": "1825910702064350",
-      "name": "exc_refi_m09_wait",
-      "dest": "c"
+      "id": "1819887545875725",
+      "name": "exc_refi_m09_wait_v2",
+      "dest": "c",
+      "legacyId": "1825910702064350",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M10": {
       "id": "1517902547031884",
@@ -98,40 +156,79 @@
       "vars": [
         "first",
         "when"
-      ]
+      ],
+      "category": "UTILITY"
     },
     "M10R": {
-      "id": "4090685337891850",
-      "name": "exc_refi_m10r_reminder",
+      "id": "4665876823677509",
+      "name": "exc_refi_m10r_reminder_v2",
       "vars": [
         "first",
-        "when"
+        "when",
+        "link"
       ],
-      "dest": "c"
+      "dest": "c",
+      "legacyId": "4090685337891850",
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M11": {
-      "id": "1462992419096031",
-      "name": "exc_refi_m11_noshow",
-      "dest": "c"
+      "id": "4430944130505180",
+      "name": "exc_refi_m11_noshow_v2",
+      "dest": "c",
+      "legacyId": "1462992419096031",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M12": {
-      "id": "1152794754084561",
-      "name": "exc_refi_m12_google",
-      "dest": "g"
+      "id": "1586746399324895",
+      "name": "exc_refi_m12_google_v2",
+      "dest": "g",
+      "legacyId": "1152794754084561",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M13": {
-      "id": "1022323597539469",
-      "name": "exc_refi_m13_midrag",
-      "dest": "m"
+      "id": "4667983876817219",
+      "name": "exc_refi_m13_midrag_v2",
+      "dest": "m",
+      "legacyId": "1022323597539469",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     },
     "M14": {
       "id": "1665753921818083",
-      "name": "exc_refi_m14_block"
+      "name": "exc_refi_m14_block",
+      "category": "MARKETING"
     },
     "M15": {
-      "id": "1150212394355928",
-      "name": "exc_refi_m15_offer",
-      "dest": "c"
+      "id": "1111684781346512",
+      "name": "exc_refi_m15_offer_v2",
+      "dest": "c",
+      "legacyId": "1150212394355928",
+      "vars": [
+        "first",
+        "link"
+      ],
+      "linkMode": "body",
+      "approvedStatus": "APPROVED",
+      "category": "MARKETING"
     }
   },
   "entry": {

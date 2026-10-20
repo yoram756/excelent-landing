@@ -1,0 +1,139 @@
+{
+  "name": "TEST LP1 Monday pagination READ ONLY 20261020",
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "nodes": [
+    {
+      "id": "pagination-manual",
+      "name": "Manual read only",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "d65ac77e-3458-99aa-504f-230efc41e3f2",
+      "name": "Fetch pages",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000,
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:1){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\",\\\"fn_status\\\"]){ id text value } } } } }\"}",
+        "options": {
+          "pagination": {
+            "pagination": {
+              "paginationMode": "updateAParameterInEachRequest",
+              "parameters": {
+                "parameters": [
+                  {
+                    "type": "body",
+                    "name": "query",
+                    "value": "={{ $pageCount === 0 ? \"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:1){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\",\\\"fn_status\\\"]){ id text value } } } } }\" : \"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:1,cursor:\" + JSON.stringify($response.body.data.boards[0].items_page.cursor) + \"){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\",\\\"fn_status\\\"]){ id text value } } } } }\" }}"
+                  }
+                ]
+              },
+              "paginationCompleteWhen": "other",
+              "completeExpression": "={{ !!$response.body.errors?.length || !$response.body.data?.boards?.[0]?.items_page?.cursor }}",
+              "limitPagesFetched": true,
+              "maxRequests": 50,
+              "requestInterval": 250
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "108b9d5c-9a97-3d74-d984-babab33214c7",
+      "name": "Items",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// n8n Code node \"Items\": validate every page before any attribution or write.\nconst pages = $input.all();\nif (!pages.length) throw new Error('Monday returned no pages');\nconst items = [], ids = new Set(), cursors = new Set();\nlet me;\nfor (let i = 0; i < pages.length; i++) {\n  const body = pages[i].json;\n  if (body.errors?.length) throw new Error('Monday GraphQL errors: refusing partial results');\n  const data = body.data;\n  const page = data?.boards?.[0]?.items_page;\n  if (!data?.me?.id || !Array.isArray(page?.items) || !Object.hasOwn(page, 'cursor') ||\n      (page.cursor !== null && (typeof page.cursor !== 'string' || !page.cursor))) {\n    throw new Error('Invalid Monday page');\n  }\n  if (me && me.id !== data.me.id) throw new Error('Monday identity changed between pages');\n  me = data.me;\n  if (i < pages.length - 1 && !page.cursor) throw new Error('Unexpected page after terminal cursor');\n  if (page.cursor && cursors.has(page.cursor)) throw new Error('Repeated Monday cursor');\n  if (page.cursor) cursors.add(page.cursor);\n  if (i === pages.length - 1 && page.cursor) throw new Error('Monday result truncated at pagination limit');\n  for (const item of page.items) {\n    if (!item.id || !Array.isArray(item.column_values) || ids.has(String(item.id))) {\n      throw new Error('Invalid or duplicate Monday item across pages');\n    }\n    ids.add(String(item.id)); items.push(item);\n  }\n}\nreturn [{json:{data:{me,boards:[{items_page:{items,cursor:null}}]}}}];\n"
+      }
+    },
+    {
+      "id": "pagination-result",
+      "name": "Count only NO WRITES",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const pages=$('Fetch pages').all().length;const rows=$input.first().json.data.boards[0].items_page;if(pages<2||rows.cursor!==null)throw new Error('Pagination was not exercised fully');return [{json:{passed:true,pages,itemCount:rows.items.length,scope:'real Monday read-only cursor pagination with limit 1; no writes or messages'}}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual read only": {
+      "main": [
+        [
+          {
+            "node": "Fetch pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch pages": {
+      "main": [
+        [
+          {
+            "node": "Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Items": {
+      "main": [
+        [
+          {
+            "node": "Count only NO WRITES",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

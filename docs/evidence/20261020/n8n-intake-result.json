@@ -1,0 +1,12 @@
+[
+  {
+    "itemId": "3297724910",
+    "saved": true,
+    "serviceConsent": true,
+    "marketingConsent": false,
+    "duplicateSameId": true,
+    "noMessages": true,
+    "archived": true,
+    "scope": "manual n8n validation to Monday save/readback/idempotency/archive; no messages or schedules"
+  }
+]

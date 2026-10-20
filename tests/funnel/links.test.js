@@ -1,11 +1,11 @@
 const test=require('node:test');const assert=require('node:assert/strict');
 const {goLink,calendly,item}=require('./load');
-const lead=item({id:'77',name:'TEST דני',cols:{refi_phone:'0500000040',fn_token:'abcdefghjk',fn_step:'M12',numeric_mm883h9v:'60',fn_path:'G'}});
+const lead=item({id:'77',name:'TEST דני',cols:{refi_phone:'0500000040',fn_token:'abcdefghjk',fn_opens:'{}',fn_step:'M12',numeric_mm883h9v:'60',fn_path:'G'}});
 test('token link goes to its destination and counts the open',()=>{const r=goLink({c:'abcdefghjkm'},[lead]);
   assert.equal(r.url,'https://www.midrag.co.il/SpCard/Sp/94658');assert.equal(r.itemId,'77');const c=JSON.parse(r.colsJson);
   assert.equal(JSON.parse(c.fn_opens.text).opens.m,1);assert.equal(c.numeric_mm883h9v,'65');});
 test('quiz link carries the token',()=>{const r=goLink({c:'abcdefghjkq'},[lead]);assert.ok(r.url.includes('t=abcdefghjk#check'));});
-test('reaching 70 notifies Yoram',()=>{const hot=item({id:'78',cols:{refi_phone:'0500000041',fn_token:'zzzzzzzzzz',numeric_mm883h9v:'66',fn_path:'C'}});const r=goLink({c:'zzzzzzzzzzb'},[hot]);assert.equal(r.notify,true);});
+test('reaching 70 notifies Yoram',()=>{const hot=item({id:'78',cols:{refi_phone:'0500000041',fn_token:'zzzzzzzzzz',fn_opens:'{}',numeric_mm883h9v:'66',fn_path:'C'}});const r=goLink({c:'zzzzzzzzzzb'},[hot]);assert.equal(r.notify,true);});
 test('repeat open of the same link adds no more heat',()=>{const again=item({id:'79',cols:{fn_token:'yyyyyyyyyy',numeric_mm883h9v:'50',fn_opens:JSON.stringify({opens:{g:1},clickHeat:5})}});const r=goLink({c:'yyyyyyyyyyg'},[again]);assert.equal(JSON.parse(r.colsJson).numeric_mm883h9v,undefined);});
 test('a phone number in the link is never used to identify a lead',()=>{const r=goLink({c:'972500000040'},[lead]);assert.equal(r.found,false);assert.equal(r.itemId,undefined);});
 test('the template example value is never treated as a real token',()=>{const ex=item({id:'90',cols:{fn_token:'a1b2c3d4e5',numeric_mm883h9v:'10'}});const r=goLink({c:'a1b2c3d4e5q'},[ex]);assert.equal(r.found,false);assert.equal(r.reason,'template example value');assert.equal(r.colsJson,undefined);});

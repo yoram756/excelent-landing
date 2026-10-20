@@ -1,0 +1,9 @@
+{
+  "workflowId": "ZnIureJBIqYN52Zw",
+  "active": false,
+  "testMode": true,
+  "sendNodeDisabled": true,
+  "planMatchesSource": true,
+  "bodyLinkTemplateCount": 12,
+  "consentGuardPresent": true
+}

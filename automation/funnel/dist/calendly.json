@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "faba424a-5a74-7976-b698-12238d57fb40",
+   "id": "45720f50-e385-0c6c-d703-e7f7048bc079",
    "name": "Every 5 min",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "id": "b2af5925-1b9e-e6b1-2d83-e1721d488bc9",
+   "id": "229692fc-05fb-d600-aa1e-79f35a8d7177",
    "name": "Calendly mails",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -55,7 +55,7 @@
    }
   },
   {
-   "id": "45720f50-e385-0c6c-d703-e7f7048bc079",
+   "id": "288a9e22-3a3e-3a00-af3b-3ff57e8c18e3",
    "name": "Run test",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -63,7 +63,7 @@
     0,
     200
    ],
-   "webhookId": "229692fc-05fb-d600-aa1e-79f35a8d7177",
+   "webhookId": "2266ffe8-4267-dba1-578a-89d18cd7a76c",
    "parameters": {
     "httpMethod": "POST",
     "path": "__TEST_PATH__calendly",
@@ -72,8 +72,8 @@
    }
   },
   {
-   "id": "288a9e22-3a3e-3a00-af3b-3ff57e8c18e3",
-   "name": "Items",
+   "id": "55972fd8-2e95-707d-a594-e2a8ab7ccee7",
+   "name": "Fetch pages",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
    "position": [
@@ -106,12 +106,32 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\"]){ id text value } } } } }\"}",
-    "options": {}
+    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\"]){ id text value } } } } }\"}",
+    "options": {
+     "pagination": {
+      "pagination": {
+       "paginationMode": "updateAParameterInEachRequest",
+       "parameters": {
+        "parameters": [
+         {
+          "type": "body",
+          "name": "query",
+          "value": "={{ $pageCount === 0 ? \"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\"]){ id text value } } } } }\" : \"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500,cursor:\" + JSON.stringify($response.body.data.boards[0].items_page.cursor) + \"){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\"]){ id text value } } } } }\" }}"
+         }
+        ]
+       },
+       "paginationCompleteWhen": "other",
+       "completeExpression": "={{ !!$response.body.errors?.length || !$response.body.data?.boards?.[0]?.items_page?.cursor }}",
+       "limitPagesFetched": true,
+       "maxRequests": 50,
+       "requestInterval": 250
+      }
+     }
+    }
    }
   },
   {
-   "id": "2266ffe8-4267-dba1-578a-89d18cd7a76c",
+   "id": "77d81467-b789-c66a-423d-4f3bff4a451e",
    "name": "Match bookings",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -120,11 +140,11 @@
     0
    ],
    "parameters": {
-    "jsCode": "// n8n Code node \"Match bookings\" in the Calendly workflow. Source of truth: this file.\n// Input: Calendly notification emails (Gmail) or a test body. Output: Monday updates for matched leads.\nconst CFG = {\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת, גיל 25 עד 55, כל הארץ\",\"status\":\"internal-test\",\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88pfdv\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\"},\"M2\":{\"id\":\"2866421103739060\",\"name\":\"exc_refi_m02_quiz\",\"dest\":\"q\"},\"M3\":{\"id\":\"2306286663247344\",\"name\":\"exc_refi_m03_reviews\",\"dest\":\"b\"},\"M4\":{\"id\":\"991655264017502\",\"name\":\"exc_refi_m04_call\",\"dest\":\"c\"},\"M5\":{\"id\":\"1861514208308620\",\"name\":\"exc_refi_m05_case\",\"dest\":\"q\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\"},\"M7\":{\"id\":\"1695504292330742\",\"name\":\"exc_refi_m07_thanks\",\"dest\":\"c\"},\"M8\":{\"id\":\"1456261889708463\",\"name\":\"exc_refi_m08_remind\",\"dest\":\"c\"},\"M9\":{\"id\":\"1825910702064350\",\"name\":\"exc_refi_m09_wait\",\"dest\":\"c\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"]},\"M10R\":{\"id\":\"4090685337891850\",\"name\":\"exc_refi_m10r_reminder\",\"vars\":[\"first\",\"when\"],\"dest\":\"c\"},\"M11\":{\"id\":\"1462992419096031\",\"name\":\"exc_refi_m11_noshow\",\"dest\":\"c\"},\"M12\":{\"id\":\"1152794754084561\",\"name\":\"exc_refi_m12_google\",\"dest\":\"g\"},\"M13\":{\"id\":\"1022323597539469\",\"name\":\"exc_refi_m13_midrag\",\"dest\":\"m\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\"},\"M15\":{\"id\":\"1150212394355928\",\"name\":\"exc_refi_m15_offer\",\"dest\":\"c\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"},\"linkTokenExamples\":[\"a1b2c3d4e5q\"]}; const C = CFG.columns;\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d.length >= 11 ? d : ''; };\nconst MONTHS = {January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};\nfunction israelToUtc(y, mo, d, hh, mm) {\n  const guess = Date.UTC(y, mo - 1, d, hh, mm);\n  const p = {}; new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(guess)).forEach(x => p[x.type] = x.value);\n  const off = Date.UTC(+p.year, +p.month - 1, +p.day, +(p.hour === '24' ? 0 : p.hour), +p.minute) - guess;\n  return guess - off;\n}\nfunction parse(subject, text) {\n  const t = String(text || '').replace(/\\s+/g, ' ');\n  const kind = /^(New Event|TEST New Event)/i.test(subject) ? 'new' : /^(Canceled|Cancelled)/i.test(subject) ? 'cancel' : '';\n  if (!kind) return null;\n  const name = (t.match(/Invitee: (.+?) Invitee Email:/) || [])[1] || '';\n  const email = ((t.match(/Invitee Email: ([^\\s\\[]+)/) || [])[1] || '').toLowerCase();\n  const dm = t.match(/Event Date\\/Time: (\\d{1,2}):(\\d{2}) [^,]*, (\\d{1,2}) ([A-Za-z]+) (\\d{4})/);\n  const loc = (t.match(/Location: (\\+?[\\d\\s\\-]{9,20})/) || [])[1] || '';\n  const phoneQ = (t.match(/(\\+?972[\\d\\s\\-]{8,14}|05\\d[\\d\\s\\-]{7,10})/) || [])[1] || '';\n  if (!dm) return null;\n  const at = israelToUtc(+dm[5], MONTHS[dm[4]], +dm[3], +dm[1], +dm[2]);\n  return { kind, name, email, phone: norm(loc) || norm(phoneQ), at };\n}\nconst sd = $getWorkflowStaticData('global'); sd.seen = sd.seen || {};\nconst mails = [];\ntry { const b = $('Run test').first().json.body; if (b && b.subject) mails.push({ id: 'test-' + (b.id || Date.now()), subject: b.subject, text: b.text }); } catch (e) {}\ntry { for (const m of $('Calendly mails').all()) if (m.json && m.json.id) mails.push({ id: m.json.id, subject: m.json.subject || m.json.headers?.subject || '', text: m.json.text || m.json.snippet || '' }); } catch (e) {}\nconst items = $('Items').first().json.data.boards[0].items_page.items;\nconst out = [];\nfor (const mail of mails) {\n  if (sd.seen[mail.id]) continue;\n  const ev = parse(mail.subject, mail.text);\n  sd.seen[mail.id] = Date.now();\n  if (!ev) continue;\n  let lead = null;\n  for (const it of items) {\n    const cv = {}; for (const c of it.column_values) cv[c.id] = c;\n    if ((ev.phone && norm(cv[C.phone]?.text) === ev.phone) || (ev.email && (cv[C.email]?.text || '').toLowerCase() === ev.email)) { lead = it; break; }\n  }\n  if (!lead && ev.kind === 'cancel') continue; // a cancel for someone we do not know creates nothing\n  const d = new Date(ev.at).toISOString();\n  const cols = ev.kind === 'new'\n    ? { [C.stage]: { label: CFG.stages.booked }, [C.meeting]: { date: d.slice(0, 10), time: d.slice(11, 19) } }\n    : { [C.stage]: { label: CFG.stages.noShow[0] } };\n  if (ev.email) cols[C.email] = { email: ev.email, text: ev.email };\n  out.push({ json: { kind: ev.kind, matched: !!lead, itemId: lead ? lead.id : null, name: ev.name, phone: ev.phone, colsJson: JSON.stringify(cols), mailId: mail.id } });\n}\n// keep the dedupe store small\nconst cutoff = Date.now() - 30 * 86400000; for (const k of Object.keys(sd.seen)) if (sd.seen[k] < cutoff) delete sd.seen[k];\nreturn out;\n"
+    "jsCode": "// n8n Code node \"Match bookings\" in the Calendly workflow. Source of truth: this file.\r\n// Input: Calendly notification emails (Gmail) or a test body. Output: Monday updates for matched leads.\r\nconst CFG = {\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת, גיל 25 עד 55, כל הארץ\",\"status\":\"internal-test\",\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88pfdv\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\",\"category\":\"MARKETING\"},\"M2\":{\"id\":\"2157972271457704\",\"name\":\"exc_refi_m02_quiz_v2\",\"dest\":\"q\",\"legacyId\":\"2866421103739060\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M3\":{\"id\":\"2017016385642572\",\"name\":\"exc_refi_m03_reviews_v2\",\"dest\":\"b\",\"legacyId\":\"2306286663247344\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M4\":{\"id\":\"1840616890627890\",\"name\":\"exc_refi_m04_call_v2\",\"dest\":\"c\",\"legacyId\":\"991655264017502\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M5\":{\"id\":\"1089275163875623\",\"name\":\"exc_refi_m05_case_v2\",\"dest\":\"q\",\"legacyId\":\"1861514208308620\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\",\"category\":\"MARKETING\"},\"M7\":{\"id\":\"1915186253195181\",\"name\":\"exc_refi_m07_thanks_v2\",\"dest\":\"c\",\"legacyId\":\"1695504292330742\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M8\":{\"id\":\"28923882683911966\",\"name\":\"exc_refi_m08_remind_v2\",\"dest\":\"c\",\"legacyId\":\"1456261889708463\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M9\":{\"id\":\"1819887545875725\",\"name\":\"exc_refi_m09_wait_v2\",\"dest\":\"c\",\"legacyId\":\"1825910702064350\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"],\"category\":\"UTILITY\"},\"M10R\":{\"id\":\"4665876823677509\",\"name\":\"exc_refi_m10r_reminder_v2\",\"vars\":[\"first\",\"when\",\"link\"],\"dest\":\"c\",\"legacyId\":\"4090685337891850\",\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M11\":{\"id\":\"4430944130505180\",\"name\":\"exc_refi_m11_noshow_v2\",\"dest\":\"c\",\"legacyId\":\"1462992419096031\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M12\":{\"id\":\"1586746399324895\",\"name\":\"exc_refi_m12_google_v2\",\"dest\":\"g\",\"legacyId\":\"1152794754084561\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M13\":{\"id\":\"4667983876817219\",\"name\":\"exc_refi_m13_midrag_v2\",\"dest\":\"m\",\"legacyId\":\"1022323597539469\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\",\"category\":\"MARKETING\"},\"M15\":{\"id\":\"1111684781346512\",\"name\":\"exc_refi_m15_offer_v2\",\"dest\":\"c\",\"legacyId\":\"1150212394355928\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"},\"linkTokenExamples\":[\"a1b2c3d4e5q\"]}; const C = CFG.columns;\r\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d.length >= 11 ? d : ''; };\r\nconst MONTHS = {January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};\r\nfunction israelToUtc(y, mo, d, hh, mm) {\r\n  const guess = Date.UTC(y, mo - 1, d, hh, mm);\r\n  const p = {}; new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(guess)).forEach(x => p[x.type] = x.value);\r\n  const off = Date.UTC(+p.year, +p.month - 1, +p.day, +(p.hour === '24' ? 0 : p.hour), +p.minute) - guess;\r\n  return guess - off;\r\n}\r\nfunction parse(subject, text) {\r\n  const t = String(text || '').replace(/\\s+/g, ' ');\r\n  const kind = /^(New Event|TEST New Event)/i.test(subject) ? 'new' : /^(Canceled|Cancelled)/i.test(subject) ? 'cancel' : '';\r\n  if (!kind) return null;\r\n  const name = (t.match(/Invitee: (.+?) Invitee Email:/) || [])[1] || '';\r\n  const email = ((t.match(/Invitee Email: ([^\\s\\[]+)/) || [])[1] || '').toLowerCase();\r\n  const dm = t.match(/Event Date\\/Time: (\\d{1,2}):(\\d{2}) [^,]*, (\\d{1,2}) ([A-Za-z]+) (\\d{4})/);\r\n  const loc = (t.match(/Location: (\\+?[\\d\\s\\-]{9,20})/) || [])[1] || '';\r\n  const phoneQ = (t.match(/(\\+?972[\\d\\s\\-]{8,14}|05\\d[\\d\\s\\-]{7,10})/) || [])[1] || '';\r\n  if (!dm) return null;\r\n  const at = israelToUtc(+dm[5], MONTHS[dm[4]], +dm[3], +dm[1], +dm[2]);\r\n  return { kind, name, email, phone: norm(loc) || norm(phoneQ), at };\r\n}\r\nconst sd = $getWorkflowStaticData('global'); sd.seen = sd.seen || {};\r\nconst mails = [];\r\ntry { const b = $('Run test').first().json.body; if (b && b.subject) mails.push({ id: 'test-' + (b.id || Date.now()), subject: b.subject, text: b.text }); } catch (e) {}\r\ntry { for (const m of $('Calendly mails').all()) if (m.json && m.json.id) mails.push({ id: m.json.id, subject: m.json.subject || m.json.headers?.subject || '', text: m.json.text || m.json.snippet || '' }); } catch (e) {}\r\nconst items = $('Items').first().json.data.boards[0].items_page.items;\r\nconst out = [];\r\nfor (const mail of mails) {\r\n  if (sd.seen[mail.id]) continue;\r\n  const ev = parse(mail.subject, mail.text);\r\n  sd.seen[mail.id] = Date.now();\r\n  if (!ev) continue;\r\n  let lead = null;\r\n  for (const it of items) {\r\n    const cv = {}; for (const c of it.column_values) cv[c.id] = c;\r\n    if ((ev.phone && norm(cv[C.phone]?.text) === ev.phone) || (ev.email && (cv[C.email]?.text || '').toLowerCase() === ev.email)) { lead = it; break; }\r\n  }\r\n  if (!lead && ev.kind === 'cancel') continue; // a cancel for someone we do not know creates nothing\r\n  const d = new Date(ev.at).toISOString();\r\n  const cols = ev.kind === 'new'\r\n    ? { [C.stage]: { label: CFG.stages.booked }, [C.meeting]: { date: d.slice(0, 10), time: d.slice(11, 19) } }\r\n    : { [C.stage]: { label: CFG.stages.noShow[0] } };\r\n  if (ev.email) cols[C.email] = { email: ev.email, text: ev.email };\r\n  out.push({ json: { kind: ev.kind, matched: !!lead, itemId: lead ? lead.id : null, name: ev.name, phone: ev.phone, colsJson: JSON.stringify(cols), mailId: mail.id } });\r\n}\r\n// keep the dedupe store small\r\nconst cutoff = Date.now() - 30 * 86400000; for (const k of Object.keys(sd.seen)) if (sd.seen[k] < cutoff) delete sd.seen[k];\r\nreturn out;\r\n"
    }
   },
   {
-   "id": "55972fd8-2e95-707d-a594-e2a8ab7ccee7",
+   "id": "b41b3ef7-bb9d-422e-6b41-58f723e4b963",
    "name": "Matched?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -141,7 +161,7 @@
      },
      "conditions": [
       {
-       "id": "77d81467-b789-c66a-423d-4f3bff4a451e",
+       "id": "08e09334-fb69-73d7-44e4-412c899f06fb",
        "leftValue": "={{ $json.matched }}",
        "rightValue": true,
        "operator": {
@@ -157,7 +177,7 @@
    }
   },
   {
-   "id": "b41b3ef7-bb9d-422e-6b41-58f723e4b963",
+   "id": "e16dc902-b57f-9db6-9e24-fcc40f96d493",
    "name": "Update lead",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -195,7 +215,7 @@
    }
   },
   {
-   "id": "08e09334-fb69-73d7-44e4-412c899f06fb",
+   "id": "9708f394-eb33-7a42-0731-68db6b79c23e",
    "name": "Create lead",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -233,7 +253,7 @@
    }
   },
   {
-   "id": "e16dc902-b57f-9db6-9e24-fcc40f96d493",
+   "id": "f72835d4-ed70-5dcb-52a5-375097eb6d0b",
    "name": "Wait for board automation",
    "type": "n8n-nodes-base.wait",
    "typeVersion": 1.1,
@@ -241,14 +261,14 @@
     1200,
     100
    ],
-   "webhookId": "9708f394-eb33-7a42-0731-68db6b79c23e",
+   "webhookId": "853397ea-469f-398c-0dec-0f4a6043a024",
    "parameters": {
     "amount": 15,
     "unit": "seconds"
    }
   },
   {
-   "id": "f72835d4-ed70-5dcb-52a5-375097eb6d0b",
+   "id": "e6250bf1-da25-75ba-924b-db1c9919210b",
    "name": "Set meeting stage",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -284,6 +304,19 @@
     "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.data.create_item.id),v:JSON.stringify({[\"refi_stage\"]:JSON.parse($('Match bookings').item.json.colsJson)[\"refi_stage\"]})} }) }}",
     "options": {}
    }
+  },
+  {
+   "id": "70ec2357-a4d5-f3ed-e40f-f9cebcfd9151",
+   "name": "Items",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    400,
+    100
+   ],
+   "parameters": {
+    "jsCode": "// n8n Code node \"Items\": validate every page before any attribution or write.\nconst pages = $input.all();\nif (!pages.length) throw new Error('Monday returned no pages');\nconst items = [], ids = new Set(), cursors = new Set();\nlet me;\nfor (let i = 0; i < pages.length; i++) {\n  const body = pages[i].json;\n  if (body.errors?.length) throw new Error('Monday GraphQL errors: refusing partial results');\n  const data = body.data;\n  const page = data?.boards?.[0]?.items_page;\n  if (!data?.me?.id || !Array.isArray(page?.items) || !Object.hasOwn(page, 'cursor') ||\n      (page.cursor !== null && (typeof page.cursor !== 'string' || !page.cursor))) {\n    throw new Error('Invalid Monday page');\n  }\n  if (me && me.id !== data.me.id) throw new Error('Monday identity changed between pages');\n  me = data.me;\n  if (i < pages.length - 1 && !page.cursor) throw new Error('Unexpected page after terminal cursor');\n  if (page.cursor && cursors.has(page.cursor)) throw new Error('Repeated Monday cursor');\n  if (page.cursor) cursors.add(page.cursor);\n  if (i === pages.length - 1 && page.cursor) throw new Error('Monday result truncated at pagination limit');\n  for (const item of page.items) {\n    if (!item.id || !Array.isArray(item.column_values) || ids.has(String(item.id))) {\n      throw new Error('Invalid or duplicate Monday item across pages');\n    }\n    ids.add(String(item.id)); items.push(item);\n  }\n}\nreturn [{json:{data:{me,boards:[{items_page:{items,cursor:null}}]}}}];\n"
+   }
   }
  ],
  "connections": {
@@ -302,7 +335,7 @@
    "main": [
     [
      {
-      "node": "Items",
+      "node": "Fetch pages",
       "type": "main",
       "index": 0
      }
@@ -313,7 +346,7 @@
    "main": [
     [
      {
-      "node": "Items",
+      "node": "Fetch pages",
       "type": "main",
       "index": 0
      }
@@ -376,6 +409,17 @@
     [
      {
       "node": "Set meeting stage",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch pages": {
+   "main": [
+    [
+     {
+      "node": "Items",
       "type": "main",
       "index": 0
      }

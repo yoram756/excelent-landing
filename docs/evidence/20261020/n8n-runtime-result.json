@@ -1,0 +1,14 @@
+[
+  {
+    "cryptoNode": true,
+    "page501": true,
+    "partialBlocked": true,
+    "missingClickStateBlocked": true,
+    "plannerUsesCrypto": true,
+    "bodyLinkMapping": true,
+    "noMarketingWithoutConsent": true,
+    "expiryAndRevocation": true,
+    "scope": "synthetic compute only; no HTTP, Monday writes, messages or schedules",
+    "passed": true
+  }
+]
