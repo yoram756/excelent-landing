@@ -1,0 +1,65 @@
+{
+  "observedAtIsrael": "2026-10-20 22:38",
+  "businessPortfolioId": "745355029428233",
+  "readOnly": true,
+  "targetNumber": "0552783459",
+  "targetFound": false,
+  "accounts": [
+    {
+      "id": "1605491381368825",
+      "name": "ייעוץ משכנתא אקסלנט",
+      "numbers": [
+        {
+          "number": "0535640657",
+          "status": "לא מאומת"
+        }
+      ]
+    },
+    {
+      "id": "1770959017385306",
+      "name": "ייעוץ משכנתא אקסלנט",
+      "numbers": [
+        {
+          "number": "0559881245",
+          "status": "לא מאומת"
+        }
+      ]
+    },
+    {
+      "id": "848287037598986",
+      "name": "אקסלנט יועצים",
+      "businessApp": true,
+      "numbers": [
+        {
+          "number": "0559881245",
+          "status": "מחובר",
+          "quality": "גבוהה"
+        }
+      ]
+    },
+    {
+      "id": "1700424457595618",
+      "name": "אקסלנט יועצי משכנתאות ופיננסים - יורם פלד",
+      "numbers": [],
+      "emptyStateTextVerified": true
+    },
+    {
+      "id": "902306149300449",
+      "name": "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance",
+      "numbers": [
+        {
+          "number": "+15559458059",
+          "status": "בהמתנה"
+        }
+      ]
+    },
+    {
+      "id": "1412993070010429",
+      "name": "ייעוץ משכנתא אקסלנט",
+      "numbers": [],
+      "emptyStateTextVerified": true
+    }
+  ],
+  "scopeLimitation": "Only the six visible WABAs in this portfolio were inspected. This does not establish that the target is absent from all Meta assets or other portfolios.",
+  "changesSaved": false
+}

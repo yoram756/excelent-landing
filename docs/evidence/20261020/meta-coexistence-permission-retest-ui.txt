@@ -1,0 +1,60 @@
+	1 container
+		2 container
+			3 pop up button (collapsed) פתח תפריט נפתח Facebook ​, ID: js_47, Secondary Actions: Expand
+				4 text פתח תפריט נפתח
+				5 container
+					6 image Facebook
+				7 image
+			8 content list
+				9 container
+					10 button מספר טלפון סטטוס בהמתנה
+					11 text מספר טלפון
+				12 container
+					13 button (disabled) נכסים עסקיים סטטוס בהמתנה
+					14 text נכסים עסקיים
+				15 container
+					16 button (disabled) פרטי העסק סטטוס בהמתנה
+					17 text פרטי העסק
+			18 container הוספת מספר הטלפון ב-WhatsApp
+				19 heading הוספת מספר הטלפון ב-WhatsApp, Value: 3, ID: js_2c
+					20 text הוספת מספר הטלפון ב-WhatsApp
+				21 text בחירת האופן שבו ברצונך להזדהות בעת משלוח הודעות.
+				22 container
+					23 text מספר טלפון
+					24 combo box (collapsed) מספר טלפון הזן/הזיני מספר טלפון חדש, Value: הזן/הזיני מספר טלפון חדש ​, ID: js_2n, Secondary Actions: Expand
+						25 container
+							26 text הזן/הזיני מספר טלפון חדש
+							27 image
+					28 text מספר טלפון
+					29 container
+						30 text ארץ
+						54 combo box (collapsed) מספר טלפון ארץ IL +972, Value: IL +972 ​, ID: js_2y, Secondary Actions: Expand
+							55 container
+								56 text IL +972
+								57 image
+					35 container
+						36 text מספר טלפון
+						58 text field (settable) מספר טלפון מספר טלפון, Value: <redacted>
+						59 image
+					38 text בחירת דרך מועדפת לאמת את המספר
+					39 Description: בחירת דרך מועדפת לאמת את המספר, ID: js_3a
+						40 container
+							41 container
+								42 radio button (settable, integer) Description: הודעת טקסט, Value: 1, ID: js_3e
+							43 text הודעת טקסט
+						44 container
+							45 container
+								46 radio button (settable, integer) Description: שיחת טלפון, Value: 0, ID: js_3k
+							47 text שיחת טלפון
+					60 image
+					61 container
+						62 text אין לך הרשאות לצפות בנכס הזה. יש לפנות לבעלים של הנכס כדי לקבל גישה או להשלים את הפעולה דרך החשבון של הבעלים. (# 3441038 :[session identifier omitted] ) האם זה עזר לך?
+						63 button מועילה
+						64 button לא מועילה
+				49 text  של Gambot Session ID: [session identifier omitted]
+				50 button חזרה
+					51 text חזרה
+				52 button הבא
+					53 text הבא
+
+The focused UI element is 3 pop up button (collapsed) פתח תפריט נפתח Facebook ​, ID: js_47, Secondary Actions: Expand

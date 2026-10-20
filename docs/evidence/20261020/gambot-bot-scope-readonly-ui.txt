@@ -45,7 +45,7 @@ Browser tab: 6, Title: "▶️ TEST LP1 bot number scope READ ONLY 20261020 - n8
 					43 link Description: Oct 20, 21:12:51 Succeededin 1.418s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2573?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
 				44 text Which executions is this workflow saving?
 				45 container
-					46 text Oct 20, 22:18:04 Succeeded in 1.064s  | 8KB  | ID#2624  | 
+					46 text Oct 20, 22:18:04 Succeeded in 1.064s  | 8KB  | ID#2624  |
 					208 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/history/5de42f35-5ba2-4d1a-a434-97eff1a6fd53
 					48 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/debug/2624
 					49 button Delete this execution

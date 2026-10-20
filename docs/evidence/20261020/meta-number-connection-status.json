@@ -1,5 +1,5 @@
 {
-  "observedAtIsrael": "2026-10-20 22:29",
+  "observedAtIsrael": "2026-10-20 22:38",
   "targetBusinessNumber": "0552783459",
   "existingSenderNumber": "0559881245",
   "mode": "Coexistence",
@@ -32,8 +32,8 @@
   "billingCheckboxAcceptedByAgentAfterApproval": true,
   "actualChargeVerified": false,
   "previousAttemptErrorCode": "3441038",
-  "previousErrorResolvedByNewSubmission": "NOT TESTED",
-  "currentAttemptStage": "Gambot bridge; manual click required to open Meta signup, Facebook homepage alone is not signup",
+  "previousErrorResolvedByNewSubmission": false,
+  "currentAttemptStage": "Phone-number entry before Business Assets selection",
   "numberReadExecution": 2624,
   "numberReadAtIsrael": "2026-10-20 22:18:04",
   "numberReadCount": 1,
@@ -41,5 +41,13 @@
   "inspectedBotId": "CM9bp2N9eYMUlNdEte1O",
   "explicitBusinessNumberScopeFoundInInspectedDefinition": false,
   "runtimeScopeVerified": false,
-  "whatsappMessagesSentInThisContinuation": false
+  "whatsappMessagesSentInThisContinuation": false,
+  "retestedAfterPermissionChange": true,
+  "observedErrorCode": "3441038",
+  "errorReproducedByAgent": true,
+  "visibleWabasInspected": 6,
+  "targetFoundInVisibleWabas": false,
+  "rootCauseConfirmed": false,
+  "nextDiagnostic": "Owner checks Facebook/Instagram linkage and Business Platform connection in the target number WhatsApp Business app",
+  "additionalPermissionsChangedInRetest": false
 }
