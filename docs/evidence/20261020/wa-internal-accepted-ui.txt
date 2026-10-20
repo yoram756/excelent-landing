@@ -1,0 +1,188 @@
+Browser tab: 7, Title: "▶️ TEST LP1 WA SEND ONCE internal 0502234052 ONLY 20261020 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/hb6w0IQ45q1qDsiB?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+0 AXWebArea ▶️ TEST LP1 WA SEND ONCE internal 0502234052 ONLY 20261020 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/hb6w0IQ45q1qDsiB?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	1 container n8n-app
+		2 container
+			3 container
+				27 container
+					28 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					29 text /
+					30 container
+						31 text TEST LP1 WA SEND ONCE internal 0502234052 ONLY 20261020
+					32 button More actions
+					33 button (disabled) Publish
+					34 button More actions
+				4 radio button Description: Editor, Value: 1
+				5 radio button Description: Executions, Value: 0
+				6 radio button Description: Evaluations, Value: 0
+			7 container side-menu
+				8 menu bar
+					9 (collapsed) Add new item, Secondary Actions: Expand
+						10 button Add new item
+				11 button Open command palette
+				12 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				13 container
+					14 Description: n8n Assistant, ID: instance-ai
+					15 Description: Overview, ID: home
+				16 Description: Templates, ID: templates
+				17 Description: Insights, ID: insights
+				18 Description: Help, ID: help
+				19 Description: Settings, ID: settings
+			20 container content
+				35 container
+					36 container
+						37 container
+							38 image
+								39 container Edge from 4672ed66-25fd-428f-9078-269bc293eaa3 to 93d092d7-7da4-4a03-b342-a8ee1a1ea9a1
+							40 image
+								41 container Edge from 93d092d7-7da4-4a03-b342-a8ee1a1ea9a1 to 44101c03-2c35-4a69-8795-24f5832853d5
+							42 image
+								43 container Edge from 44101c03-2c35-4a69-8795-24f5832853d5 to aa92748d-ce08-44f7-b009-c05b5c9f5ea6
+							44 image
+								45 container Edge from aa92748d-ce08-44f7-b009-c05b5c9f5ea6 to a08a913f-7157-47dc-8364-d44c323b548b
+							46 image
+								47 container Edge from a08a913f-7157-47dc-8364-d44c323b548b to c75c7368-9131-4cb6-ae28-20738b422e58
+							121 text 1 item
+							122 text 1 item
+							123 text 1 item
+							124 text 1 item
+							125 text 1 item
+							48 container
+								49 button Execute step
+								50 button Deactivate
+								51 button Delete
+								52 button Add to chat
+								53 button More actions
+								54 text Manual only
+								55 container
+									56 button Execute workflow
+							57 container
+								58 button Execute step
+								59 button Deactivate
+								60 button Delete
+								61 button Add to chat
+								62 button More actions
+								63 container
+									64 text Verify approved internal template GET: https://api.gambot.co.il/api/v1/templates/2386590312169194
+							65 container
+								66 button Execute step
+								67 button Deactivate
+								68 button Delete
+								69 button Add to chat
+								70 button More actions
+								71 text Guard exact internal recipient
+							72 container
+								73 button Execute step
+								74 button Deactivate
+								75 button Delete
+								76 button Add to chat
+								77 button More actions
+								78 container
+									79 text SEND ONCE internal test ONLY POST: https://api.gambot.co.il/api/v1/messages/send-template
+							80 container
+								81 button Execute step
+								82 button Deactivate
+								83 button Delete
+								84 button Add to chat
+								85 button More actions
+								86 text Require provider acknowledgment
+							87 container
+								126 text 1 item
+								88 button Execute step
+								89 button Deactivate
+								90 button Delete
+								91 button Add to chat
+								92 button More actions
+								93 text Read exact test message status
+							94 button Add 6 nodes to chat
+						95 image
+						96 image
+						97 container n8n Minimap
+						98 container
+							99 button Zoom to Fit
+							100 button Zoom In
+							101 button Zoom Out
+							102 button Tidy Up
+								103 image
+					104 button Execute workflow
+					105 button Open nodes panel
+					106 button Command bar
+					107 button Add sticky note
+					108 button Open side panel
+					109 button n8n AI
+						110 image
+				21 container
+					22 container
+						23 text Logs
+						127 button Clear execution
+						128 text Success in 11.708s
+						113 outline
+							114 row (selectable, collapsed) Manual only, Secondary Actions: Expand
+								115 text Manual only
+							119 row (selectable, collapsed) Verify approved internal template, Secondary Actions: Expand
+								120 text Verify approved internal template
+							129 row (selectable, collapsed) Guard exact internal recipient, Secondary Actions: Expand
+								130 text Guard exact internal recipient
+							131 row (selectable, collapsed) SEND ONCE internal test ONLY, Secondary Actions: Expand
+								132 text SEND ONCE internal test ONLY
+							133 row (selectable, collapsed) Require provider acknowledgment, Secondary Actions: Expand
+								134 text Require provider acknowledgment
+							135 row (selected, collapsed) Read exact test message status, Secondary Actions: Expand
+								136 text Read exact test message status
+					137 container
+						138 text Read exact test message status Success in 621ms
+						139 button Input
+						140 button Output
+						141 button Actions
+						142 button Collapse panel
+					143 container
+						144 text OUTPUT
+						145 container
+							146 text field (settable)
+							147 radio button Description: Schema, Value: 0
+							148 radio button Description: Table, Value: 1
+							149 radio button Description: JSON, Value: 0
+						150 text 1 item
+						151 table
+							152 row
+								153 cell
+									154 container
+										155 text success
+										156 button Collapse rows
+								157 cell
+									158 container
+										159 text message
+										160 button Collapse rows
+								161 cell
+									162 container
+										163 text data
+										164 button Collapse rows
+							165 row
+								166 cell
+									167 text true
+								168 cell
+									169 text null
+								170 cell
+									171 container
+										172 text messageId : wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA
+									173 container
+										174 text phone : 972502234052
+									175 container
+										176 text status : pending
+									177 container
+										178 text direction : Outbound
+									179 container
+										180 text time : 2026-10-20T18:17:31Z
+									181 container
+										182 text templateId : 2386590312169194
+									183 container
+										184 text templateName : exc_internal_lead_alert
+									185 container
+										186 text campaignId : null
+									187 container
+										188 text errorMessage : null
+									189 container
+										190 text errorCode : null
+									191 container
+										192 text found : true
+
+The focused UI element is 135 row (selected, collapsed) Read exact test message status, Secondary Actions: Expand

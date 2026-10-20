@@ -1,0 +1,159 @@
+Browser tab: 9, Title: "▶️ קליטת LP1: תזכורת 30/60 דקות ליורם - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/kiHHRdm7KzMEuXlO".
+0 AXWebArea ▶️ קליטת LP1: תזכורת 30/60 דקות ליורם - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/kiHHRdm7KzMEuXlO
+	1 container n8n-app
+		2 container
+			3 container
+				27 container
+					28 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					29 text /
+					30 container
+						31 text קליטת LP1: תזכורת 30/60 דקות ליורם
+					32 button More actions
+					33 button (disabled) Published
+					34 button More actions
+				4 radio button Description: Editor, Value: 1
+				5 radio button Description: Executions, Value: 0
+				6 radio button Description: Evaluations, Value: 0
+			7 container side-menu
+				8 menu bar
+					9 (collapsed) Add new item, Secondary Actions: Expand
+						10 button Add new item
+				11 button Open command palette
+				12 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				13 container
+					14 Description: n8n Assistant, ID: instance-ai
+					15 Description: Overview, ID: home
+				16 Description: Templates, ID: templates
+				17 Description: Insights, ID: insights
+				18 Description: Help, ID: help
+				19 Description: Settings, ID: settings
+			20 container content
+				35 container
+					36 container
+						37 container
+							130 image
+								131 container Edge from 96e04751-a6fa-45ac-8d8a-7d56b3fc6c41 to 2da85c73-4160-4f39-937f-faa3ced7a302
+							132 image
+								133 container Edge from 2da85c73-4160-4f39-937f-faa3ced7a302 to c48038c8-eed3-4fbf-8b50-d225e3b0099e
+							134 image
+								135 container Edge from c48038c8-eed3-4fbf-8b50-d225e3b0099e to bf8eac5b-a73e-4384-90c1-de4e71538cf3
+							136 image
+								137 container Edge from bf8eac5b-a73e-4384-90c1-de4e71538cf3 to e281d3a6-0b7d-4651-af72-cd497a7a10b9
+							138 image
+								139 container Edge from e281d3a6-0b7d-4651-af72-cd497a7a10b9 to 5f49ae51-c12a-4441-be48-cb6881eed26e
+							140 image
+								141 container Edge from 5f49ae51-c12a-4441-be48-cb6881eed26e to d5c81261-3f2b-4791-82e1-cacfedfa318d
+							227 text 1 item
+							228 text 1 item
+							145 container
+								146 button Execute step
+								147 button Deactivate
+								148 button Delete
+								149 button Add to chat
+								150 button More actions
+								151 text Every 5 minutes
+								152 container
+									153 button Execute workflow
+							154 container
+								155 button Execute step
+								156 button Deactivate
+								157 button Delete
+								158 button Add to chat
+								159 button More actions
+								160 container
+									161 text New leads POST: https://api.monday.com/v2
+							162 container
+								163 button Execute step
+								164 button Deactivate
+								165 button Delete
+								166 button Add to chat
+								167 button More actions
+								168 text Pick overdue
+							169 container
+								170 button Execute step
+								171 button Deactivate
+								172 button Delete
+								173 button Add to chat
+								174 button More actions
+								175 container
+									176 text Who am I POST: https://api.monday.com/v2
+							177 container
+								178 button Execute step
+								179 button Deactivate
+								180 button Delete
+								181 button Add to chat
+								182 button More actions
+								183 container
+									184 text Remind Yoram POST: https://api.monday.com/v2
+							185 container
+								186 button Execute step
+								187 button Deactivate
+								188 button Delete
+								189 button Add to chat
+								190 button More actions
+								191 container
+									192 text Email reminder send: message
+							193 container
+								194 button (disabled) Execute step
+								195 button Activate
+								196 button Delete
+								197 button Add to chat
+								198 button More actions
+								199 container
+									200 text WhatsApp recipients (Deactivated)
+							201 container
+								202 button (disabled) Execute step
+								203 button Activate
+								204 button Delete
+								205 button Add to chat
+								206 button More actions
+								207 container
+									208 text WhatsApp reminder (Deactivated) POST: https://api.gambot.co.il/api/v1/messages/send-template
+							209 container
+								210 button Execute step
+								211 button Deactivate
+								212 button Delete
+								213 button Add to chat
+								214 button More actions
+								215 text Confirm reminder
+							216 button Add 9 nodes to chat
+						115 image
+						116 image
+						117 container
+							118 button Zoom to Fit
+							119 button Zoom In
+							120 button Zoom Out
+							121 button Tidy Up
+								122 image
+					217 button Execute workflow
+					124 button Open nodes panel
+					125 button Command bar
+					126 button Add sticky note
+					127 button Open side panel
+					128 button n8n AI
+						129 image
+				21 container
+					22 container
+						23 text Logs
+						229 button Clear execution
+						230 text Success in 935ms
+						220 outline
+							221 row (selectable, collapsed) Every 5 minutes, Secondary Actions: Expand
+								222 text Every 5 minutes
+							226 row (selectable, collapsed) New leads, Secondary Actions: Expand
+								231 text New leads
+							232 row (selected, collapsed) Pick overdue, Secondary Actions: Expand
+								233 text Pick overdue
+					234 container
+						235 text Pick overdue Success in 8ms
+						236 button Input
+						237 button Output
+						238 button Actions
+						239 button Collapse panel
+					240 container
+						241 text OUTPUT
+						242 text 0 items
+						243 heading No output data returned, Value: 1
+							244 text No output data returned
+
+The focused UI element is 232 row (selected, collapsed) Pick overdue, Secondary Actions: Expand

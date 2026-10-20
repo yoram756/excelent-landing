@@ -75,7 +75,10 @@ for(const it of items){
   let next=dateVal(col(cv,'next').value);const last=dateVal(col(cv,'last').value);
   let token=col(cv,'token').text||'';const stage=col(cv,'stage').text||'';
   const mkt=checked(col(cv,'consentMarketing').value);const svc=checked(col(cv,'consentService').value);
-  const quiz=(col(cv,'quizDone').text||'').trim().length>0;
+  // Score explanations also exist for callback-only leads. A configured campaign
+  // must find actual questionnaire answer lines before selecting the quiz path.
+  const quizText=(col(cv,'quizDone').text||'').trim();
+  const quiz=CFG.quizDonePattern ? new RegExp(CFG.quizDonePattern).test(quizText) : quizText.length>0;
   const meeting=dateVal(col(cv,'meeting').value);
   let heat=Number(col(cv,'heat').text||0);
   // Corrupt state may hide an unresolved send; never reset it and send again.

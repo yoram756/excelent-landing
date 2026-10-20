@@ -1,0 +1,222 @@
+Browser tab: 148905269, Title: "גמבוט | בוט לוואטסאפ | בוט AI | שיווק ודיוור בוואטסאפ | מערכת WhatsApp API מובילה בישראל 2026", URL: "https://app.gambot.co.il/settings/whatsapp-numbers".
+0 AXWebArea גמבוט | בוט לוואטסאפ | בוט AI | שיווק ודיוור בוואטסאפ | מערכת WhatsApp API מובילה בישראל 2026, URL: app.gambot.co.il/settings/whatsapp-numbers
+	1 container
+		2 container root
+			3 container
+				4 image Gambot Logo
+				5 heading Gambot, Value: 2
+					6 text Gambot
+				7 text DASHBOARD
+				8 text י
+				9 heading לילה טוב, יורם פלד, Value: 3
+					10 text לילה טוב ,  יורם פלד
+				11 text Admin
+				12 content list
+					13 container
+						14 button (expanded) 📊 ראשי, Secondary Actions: Collapse
+							15 image
+							16 text 📊 ראשי
+						17 checkbox Description: בטל נעיצה, Value: 1
+							18 image
+					19 content list
+						20 link Description: לוח בקרה, Value: app.gambot.co.il/dashbord
+						21 link Description: דוחות, Value: app.gambot.co.il/reports
+					22 container
+						23 button (expanded) 👥 לקוחות, Secondary Actions: Collapse
+							24 image
+							25 text 👥 לקוחות
+						26 checkbox Description: בטל נעיצה, Value: 1
+							27 image
+					28 content list
+						29 link Description: אנשי קשר, Value: app.gambot.co.il/contacts
+						30 link Description: לידים, Value: app.gambot.co.il/leads
+						31 link Description: פניות, Value: app.gambot.co.il/cases
+					32 container
+						33 button (expanded) 💬 תקשורת, Secondary Actions: Collapse
+							34 image
+							35 text 💬 תקשורת
+						36 checkbox Description: בטל נעיצה, Value: 1
+							37 image
+					38 content list
+						39 link Description: צ'אטים, Value: app.gambot.co.il/chat
+						40 link Description: תיבת דואר, Value: app.gambot.co.il/email-inbox
+						41 link Description: יומן, Value: app.gambot.co.il/calendar
+					42 container
+						43 button (expanded) 📣 שיווק, Secondary Actions: Collapse
+							44 image
+							45 text 📣 שיווק
+						46 checkbox Description: בטל נעיצה, Value: 1
+							47 image
+					48 content list
+						49 button קמפיינים
+							50 text קמפיינים
+							51 image
+						52 button תבניות
+							53 text תבניות
+							54 image
+					55 container
+						56 button (expanded) 💼 מסמכים, Secondary Actions: Collapse
+							57 image
+							58 text 💼 מסמכים
+						59 checkbox Description: בטל נעיצה, Value: 1
+							60 image
+					61 content list
+						62 link Description: הצעות מחיר, Value: app.gambot.co.il/quotes
+						63 link Description: חשבוניות, Value: app.gambot.co.il/invoices
+						64 link Description: חתימה דיגיטלית, Value: app.gambot.co.il/esignature
+					65 container
+						66 button (expanded) 🛍️ ניהול חנות, Secondary Actions: Collapse
+							67 image
+							68 text 🛍️ ניהול חנות
+						69 checkbox Description: בטל נעיצה, Value: 1
+							70 image
+					71 content list
+						72 link Description: הזמנות, Value: app.gambot.co.il/orders
+						73 link Description: קטלוג, Value: app.gambot.co.il/catalog
+					74 container
+						75 button (expanded) 🤖 אוטומציה, Secondary Actions: Collapse
+							76 image
+							77 text 🤖 אוטומציה
+						78 checkbox Description: בטל נעיצה, Value: 1
+							79 image
+					80 content list
+						81 link Description: בוטומיישן, Value: app.gambot.co.il/Botomations
+						82 link Description: תכנון בוטים, Value: app.gambot.co.il/flow-builder
+						83 link Description: בינה מלאכותית, Value: app.gambot.co.il/GambotAi
+						206 link Description: חיבורים, Value: app.gambot.co.il/Connections
+					85 container
+						86 button (expanded) ⚙️ ניהול, Secondary Actions: Collapse
+							87 image
+							88 text ⚙️ ניהול
+						89 checkbox Description: בטל נעיצה, Value: 1
+							90 image
+					91 content list
+						92 button טבלאות
+							93 image
+							94 text טבלאות
+							95 image
+						96 link Description: ניהול מדיה, Value: app.gambot.co.il/media-manager
+						97 link Description: שעות עבודה, Value: app.gambot.co.il/employees
+						98 link Description: משתמשים, Value: app.gambot.co.il/users
+						99 link Description: וידג'ט, Value: app.gambot.co.il/ChatWidget
+					100 link Description: הגדרות, Value: app.gambot.co.il/settings/notifications
+					101 link Description: התקן אפליקציה, Value: app.gambot.co.il/install
+					102 button התאם תפריט
+						103 image
+						104 text התאם תפריט
+					105 button התנתק
+						106 image
+						107 text התנתק
+				108 button סגור
+			207 container
+				208 text הגדרות
+				209 button חיפוש אנשי קשר, לידים, הזמנות, משימות...
+					210 image
+					211 text חיפוש אנשי קשר, לידים, הזמנות, משימות...
+				212 button פלפל, Help: פתח את פלפל — עוזר ה-AI
+					213 image פלפל
+				214 container
+					215 button התראות
+						216 image
+					217 heading התראות, Value: 3
+						218 text התראות
+					219 button ×, Help: סגור
+					220 text 🔔
+					221 text אין התראות חדשות
+					222 text כשיהיו לידים חדשים, הודעות, שיחות ועוד — הם יופיעו כאן
+				223 button י יורם פלד Admin
+					224 text י
+					225 text יורם פלד
+					226 text Admin
+					227 image
+				228 container
+					229 heading ⚙️ הגדרות ותצורה, Value: 1
+						230 text ⚙️  הגדרות ותצורה
+					231 text נהל את העדפות החשבון, אינטגרציות ותצורות מערכת
+					232 heading ניווט, Value: 3
+						233 text ניווט
+					234 text בחר קטגוריית הגדרות
+					235 container
+						236 link Description: פרופיל WhatsApp הגדרות פרופיל עסקי, Value: app.gambot.co.il/settings/waba-profile
+						237 link Description: מספרי WhatsApp ניהול מספרי WhatsApp Business, הוספה וקביעת ראשי, Value: app.gambot.co.il/settings/whatsapp-numbers
+						238 link Description: עמודות אנשי קשר נהל שדות אנשי קשר, Value: app.gambot.co.il/settings/contact-column
+						239 link Description: ניהול תגיות הוספה, שינוי ומחיקה של תגיות אנשי קשר, Value: app.gambot.co.il/settings/tag-settings
+						240 link Description: טבלאות מותאמות צור ונהל טבלאות מידע, Value: app.gambot.co.il/settings/custom-tables
+						241 link Description: הגדרות כלליות העדפות מערכת, Value: app.gambot.co.il/settings/general-settings
+						242 link Description: העדפות משתמש שפה ואזור זמן, Value: app.gambot.co.il/settings/user-preferences
+						243 link Description: התראות התראות קול והתראות, Value: app.gambot.co.il/settings/notifications
+						244 link Description: הגדרות AI הגבלת תשלום נוסף, Value: app.gambot.co.il/settings/ai-settings
+						245 link Description: הגדרות משפך מכירות הגדר שלבי לידים, Value: app.gambot.co.il/settings/pipeline-settings
+						246 link Description: הגדרות פניות שלבים, קטגוריות ו-SLA, Value: app.gambot.co.il/settings/case-settings
+						247 link Description: הצעות מחיר לוגו, מספור, פרטי חברה, Value: app.gambot.co.il/settings/quote-settings
+						248 link Description: תבניות WABA ברירת מחדל פתיחת שיחה, הצעת מחיר, חתימה דיגיטלית, Value: app.gambot.co.il/settings/common-message
+						249 link Description: חשבוניות ספרור מסמכים, מיתוג, פרטי בנק, Value: app.gambot.co.il/settings/invoice-settings
+						250 link Description: הגדרות דוחות תזמון דוחות, נמענים ו-SLA, Value: app.gambot.co.il/settings/report-settings
+						251 link Description: הגדרת מסלול צפה והשווה חבילות, שדרוג, Value: app.gambot.co.il/settings/plan-settings
+						252 link Description: הגדרות מייל שולח ברירת מחדל, חתימה, תיוג אוטומטי, Value: app.gambot.co.il/settings/email-settings
+						253 link Description: הגדרות יומן שעות עבודה, תצוגה ותזכורות, Value: app.gambot.co.il/settings/calendar-settings
+						254 link Description: Gambot Agent סוכן AI, הרשאות ומשתמשים מורשים, Value: app.gambot.co.il/settings/agent-settings
+						255 link Description: טלפוניה / מרכזייה שיחות, הקלטות, תורים ו-WebRTC, Value: app.gambot.co.il/settings/telephony-settings
+						256 link Description: הגדרות סליקה חיבור ספקי סליקה, הגדרת מסופים וטוקנים, Value: app.gambot.co.il/settings/clearing-settings
+						257 link Description: תשלומים תצורת תשלום, Value: app.gambot.co.il/settings/payments
+					258 heading ניהול מספרי WhatsApp, Value: 2
+						259 image
+						260 text ניהול מספרי WhatsApp
+					261 text נהל את כל מספרי ה-WhatsApp Business של הארגון שלך. כל מספר יכול לשלוח ולקבל הודעות בנפרד.
+					262 button הוסף מספר
+						263 image
+						264 text הוסף מספר
+					265 text מספר ראשי
+					266 image
+					267 text +972 55-988-1245
+					268 image
+					269 text ראשי פעיל Coexistence
+					270 container מחובר ומאומת מול Meta
+						271 image
+						272 text מחובר
+					273 container ערוך תווית
+						274 text +972 55-988-1245
+						275 image
+					276 text המספר הראשי משמש כברירת מחדל לשליחת כל ההודעות, קמפיינים ובוטומיישנים. אם לא נבחר מספר אחר - זה המספר שישלח.
+					277 image
+					278 text מידע חשוב:
+					279 content list
+						280 container
+							281 AXListMarker •
+							282 text תבניות הודעה משותפות לכל המספרים תחת אותו חשבון WABA.
+						283 container
+							284 AXListMarker •
+							285 text המספר הראשי משמש כברירת מחדל לשליחת הודעות כשלא נבחר מספר אחר.
+						286 container
+							287 AXListMarker •
+							288 text כל מספר מקבל דירוג איכות ותפוקה נפרדים מ-Meta.
+						289 container
+							290 AXListMarker •
+							291 text לא ניתן למחוק את המספר הראשי. יש להגדיר מספר אחר כראשי תחילה.
+					292 image
+					293 heading איפה רואים את חשבוניות Meta על הודעות WhatsApp?, Value: 3
+						294 text איפה רואים את חשבוניות Meta על הודעות WhatsApp?
+					295 text התשלום ל-Meta עבור הודעות (תמחור לפי שיחה/הודעה) מתבצע ישירות מול Meta ונפרד מהחיוב של Gambot. את החשבוניות והקבלות מ-Meta מורידים מתוך Meta Business Suite — כך עושים זאת:
+					296 content list
+						297 container
+							298 AXListMarker . 1
+							299 text היכנסו ל- Meta Business Suite  עם חשבון הפייסבוק שמחובר ל-WhatsApp שלכם.
+						300 container
+							301 AXListMarker . 2
+							302 text בתפריט לחצו על  "כל הכלים" (All tools)  ואז על  "חיוב ותשלומים" (Billing & payments) .
+						303 container
+							304 AXListMarker . 3
+							305 text עברו ללשונית  "פעילות תשלומים" (Payment activity)  — אם אינכם רואים אותה, ודאו שנבחר ה-Portfolio / הנכס הנכון בפינה העליונה.
+						306 container
+							307 AXListMarker . 4
+							308 text בחרו  "חשבונות" (Accounts) ← "WhatsApp Business accounts"  וודאו שנבחר חשבון ה-WhatsApp הנכון.
+						309 container
+							310 AXListMarker . 5
+							311 text בחרו טווח תאריכים (למשל "החודש שעבר") — לצד כל עסקה יופיע אייקון הורדה להפקת החשבונית כ-PDF.
+					312 link Description: פתח את מרכז החיוב של Meta, Value: business.facebook.com/billing_hub/
+					313 text טיפ: אם מופיע "No WhatsApp Business account selected" — בחרו תחילה את הנכס/Portfolio הנכון בראש העמוד. חיובי Gambot (מנוי ומספרים נוספים) מופיעים בנפרד תחת הגדרות התשלומים של Gambot, ולא אצל Meta.
+		203 button פלפל פלפל, Help: פתח את פלפל
+			204 image פלפל
+			205 text פלפל
+
+The focused UI element is 237 link Description: מספרי WhatsApp ניהול מספרי WhatsApp Business, הוספה וקביעת ראשי, URL: app.gambot.co.il/settings/whatsapp-numbers

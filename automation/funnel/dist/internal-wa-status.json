@@ -1,0 +1,167 @@
+{
+  "name": "TEST LP1 WA exact message STATUS READ ONLY 20261020",
+  "nodes": [
+    {
+      "id": "internal-status-0",
+      "name": "Manual read only",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "internal-status-1",
+      "name": "Exact test status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.gambot.co.il/api/v1/messages/wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA/status?phone=972502234052",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "id": "internal-status-2",
+      "name": "Internal replies after test only",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.gambot.co.il/api/v1/conversations/972502234052/messages?after=wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA&pageSize=20",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "id": "internal-status-3",
+      "name": "CRM credential owner READ ONLY",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"query\":\"query { me { id name } }\"}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      }
+    },
+    {
+      "id": "internal-status-4",
+      "name": "Summarize exact internal test",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const s=$('Exact test status').first().json,r=$('Internal replies after test only').first().json,m=$input.first().json;if(s.success!==true||r.success!==true||m.errors?.length||!m.data?.me?.id)throw Error('Provider read failed');const list=r.data?.messages||r.data?.items||[];if(!Array.isArray(list))throw Error('Unrecognized history');const replies=list.filter(x=>Date.parse(x.time||x.timestamp||x.createdAt||'')>=Date.parse('2026-10-20T18:17:31Z')&&/^(in|incoming|inbound)$/i.test(x.direction||'')&&/TEST/i.test(x.text||x.body||''));return [{json:{readOnly:true,simulation:false,at:new Date().toISOString(),messageStatus:s.data,replyCount:replies.length,testReplies:replies.map(x=>({direction:x.direction,time:x.time||x.timestamp||x.createdAt,text:x.text||x.body})),historyKeys:Object.keys(r.data||{}),crmCredentialOwner:m.data.me,noMessageSent:true}}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual read only": {
+      "main": [
+        [
+          {
+            "node": "Exact test status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exact test status": {
+      "main": [
+        [
+          {
+            "node": "Internal replies after test only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Internal replies after test only": {
+      "main": [
+        [
+          {
+            "node": "CRM credential owner READ ONLY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CRM credential owner READ ONLY": {
+      "main": [
+        [
+          {
+            "node": "Summarize exact internal test",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem"
+  },
+  "pinData": {}
+}

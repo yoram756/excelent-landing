@@ -3,7 +3,8 @@
   "name": "מחזור משכנתא",
   "service": "בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות",
   "goal": "לקוח שחתם והעביר מקדמה",
-  "audience": "בעלי משכנתא קיימת, גיל 25 עד 55, כל הארץ",
+  "audience": "בעלי משכנתא קיימת המבקשים לבדוק מחזור; מיקוד Meta בפועל מתועד ב-docs/meta-campaign-audit-20261020.md",
+  "quizDonePattern": "(?:^|\\n)(?:יש לכם היום משכנתא|מה המטרה העיקרית|מה יתרת המשכנתא בקירוב|מה ההחזר החודשי היום|כמה זמן נשאר לתשלום|מתי תרצו לפעול|מה אתם מבקשים כרגע|יש לכם דוח יתרות לסילוק עדכני|יש הלוואות נוספות מלבד המשכנתא|צפוי שינוי בהכנסה בשנים הקרובות|מתוכננים מכירה של הנכס או פירעון גדול|יש קושי בתשלומים היום)\\? .+",
   "status": "internal-test",
   "sources": [
     "LP1 טופס",
@@ -19,7 +20,7 @@
     "firstReply": "refi_first_reply",
     "consentMarketing": "boolean_mm88mzry",
     "consentService": "boolean_mm8848pn",
-    "quizDone": "long_text_mm88pfdv",
+    "quizDone": "long_text_mm88xzfe",
     "heat": "numeric_mm883h9v",
     "status": "fn_status",
     "path": "fn_path",

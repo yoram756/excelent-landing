@@ -1,0 +1,155 @@
+{
+  "name": "TEST LP1 WhatsApp internal READ ONLY 0502234052 20261020",
+  "nodes": [
+    {
+      "id": "internal-wa-0",
+      "name": "Manual only",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "internal-wa-1",
+      "name": "Connected numbers",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.gambot.co.il/api/v1/numbers",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "id": "internal-wa-2",
+      "name": "Internal window only",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.gambot.co.il/api/v1/conversations/972502234052/window",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "id": "internal-wa-3",
+      "name": "Approved templates",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.gambot.co.il/api/v1/templates/2386590312169194",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      }
+    },
+    {
+      "id": "internal-wa-4",
+      "name": "Evidence without messages",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const n=$('Connected numbers').first().json,w=$('Internal window only').first().json,t=$input.first().json;if(n.success!==true||w.success!==true||t.success!==true)throw Error('Read check failed');return [{json:{readOnly:true,at:new Date().toISOString(),numbers:n.data,internalWindow:w.data,templates:t.data,noMessageSent:true}}];"
+      }
+    }
+  ],
+  "connections": {
+    "Manual only": {
+      "main": [
+        [
+          {
+            "node": "Connected numbers",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Connected numbers": {
+      "main": [
+        [
+          {
+            "node": "Internal window only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Internal window only": {
+      "main": [
+        [
+          {
+            "node": "Approved templates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Approved templates": {
+      "main": [
+        [
+          {
+            "node": "Evidence without messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem"
+  },
+  "pinData": {}
+}

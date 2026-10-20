@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-20T18:16:59.252Z",
+  "workflow": "8W7MymUCLpPnilJs",
+  "active": true,
+  "versionId": "6de4aabb-40e0-463e-b8e4-5abeaeeeb480",
+  "pass": true,
+  "nodes": 18,
+  "sourceHashes": {
+    "Validate": "43285b7857a754c55f3344e2f7c8db26592206f73aa3aeaf1f8ce495c2fbcf69",
+    "Find query": "77e3f43d4a10a282646ad64b90c4282cc51bba5aaf4adc8e8f2a77f32ce5f234",
+    "Build mutation": "e4f52b9b3f6a0be7bb39602db57825a9c1fd984829c4105ce090f54e9d4fdbc6",
+    "Check save": "d40773a45a84898918dae348fe0bd4b581b68ea2fbdf06401d82a2e9111f66e6"
+  },
+  "settingsPreserved": true,
+  "staticDataPreserved": true,
+  "webhookAndCredentialsPreserved": true,
+  "connectionsMatch": true,
+  "customerTrafficSent": false
+}

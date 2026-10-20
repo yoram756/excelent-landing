@@ -4,12 +4,16 @@ const root=path.resolve(__dirname,'../..'),read=n=>fs.readFileSync(path.join(roo
 const cfg=read('campaigns/refi.json'),biz=read('config/business.json');
 const src=n=>read('automation/funnel/'+n+'.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
 const suite=read('tests/funnel/acceptance.test.js').split('\n').slice(2).join('\n');
+const slaPolicy=JSON.parse(read('config/lead-service.json'));
+const slaSource=read('automation/intake/pick-overdue.js').replace('__SERVICE__',JSON.stringify(slaPolicy)).replace('__QUIZ_PATTERN__',JSON.stringify(JSON.parse(cfg).quizDonePattern));
+const slaSuite=read('tests/funnel/sla.test.js').split('\n').slice(4).join('\n');
 const js=`function Plan($){${src('plan')}}
 function Calendar($,$getWorkflowStaticData){${src('calendly')}}
 function Sent($,$json){${src('after-send')}}
 function Validate($input,$getWorkflowStaticData){${read('automation/intake/validate.js')}}
+function Build($input,$,$getWorkflowStaticData){${read('automation/intake/build-mutation.js')}}
 const results=[];
-const assert={equal:(a,b,m)=>{if(a!==b)throw new Error(m||JSON.stringify({a,b}));},deepEqual:(a,b)=>{if(JSON.stringify(a)!==JSON.stringify(b))throw new Error(JSON.stringify({a,b}));},ok:(a,m)=>{if(!a)throw new Error(m||'Expected truthy');}};
+const assert={equal:(a,b,m)=>{if(a!==b)throw new Error(m||JSON.stringify({a,b}));},deepEqual:(a,b)=>{if(JSON.stringify(a)!==JSON.stringify(b))throw new Error(JSON.stringify({a,b}));},ok:(a,m)=>{if(!a)throw new Error(m||'Expected truthy');},throws:(f,re)=>{let error;try{f();}catch(e){error=e;}if(!error||!re.test(error.message))throw new Error('Expected matching failure');}};
 const test=(name,f)=>{try{f();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e.message});}};
 const tokens=$input.all();
 const item=o=>({id:o.id||'1',name:o.name||'TEST Acceptance',created_at:'2026-10-20T08:00:00Z',column_values:Object.entries(o.cols||{}).map(([id,v])=>({id,text:typeof v==='string'?v:'',value:typeof v==='string'?null:JSON.stringify(v)}))});
@@ -21,6 +25,8 @@ const valid=(b,sd={})=>Validate({first:()=>({json:{body:b,headers:{}}})},()=>sd)
 test('S1 LP1 entry validates synthetic form; no marketing consent',()=>{const r=valid(base);assert.equal(r.ok,true);assert.equal(r.source,'קליטת LP1');assert.equal(r.marketing_consent,false);});
 test('S1 Meta-shaped normalized lead enters test planner; Meta transport NOT TESTED',()=>{const r=planner()({items:[item({cols:{refi_source:'טופס מטא',refi_phone:'0500000040',boolean_mm88mzry:{checked:true}}})],now:NOW});assert.equal(r[0].live,false);assert.ok(r[0].send);});
 test('S2 quiz validated and money excluded unless explicitly permitted',()=>{const r=valid({...base,answers:{...base.answers,bal:'b3'}});assert.equal(r.answers.bal,undefined);assert.equal(valid({...base,answers:{ask:'wrong'}}).ok,false);});
+test('S2 callback-only intake score cannot enter questionnaire-completed path',()=>{const v=valid({...base,marketing_consent:true,answers:{}});const b=Build({first:()=>({json:{data:{items_page_by_column_values:{items:[],cursor:null}}}})},()=>({first:()=>({json:v})}),()=>({}))[0].json;const cv=JSON.parse(b.variables.vals),cols=Object.fromEntries(Object.entries(cv).map(([k,v])=>[k,v&&typeof v==='object'?(v.text??v.phone??v.label??v):v]));const [p]=planner()({items:[item({cols})],now:NOW});assert.equal(p.send.templateId,${JSON.stringify(JSON.parse(cfg).templates.M1.id)});});
+test('S2 submitted unknown answer selects questionnaire path without financial details',()=>{const [p]=planner()({items:[item({cols:{refi_phone:'0500000040',boolean_mm88mzry:{checked:true},long_text_mm88xzfe:'יש לכם דוח יתרות לסילוק עדכני? לא בטוח מה זה'}})],now:NOW});assert.equal(p.send.templateId,${JSON.stringify(JSON.parse(cfg).templates.M7.id)});});
 test('S3 idempotency returns confirmed Monday ID only (mock response)',()=>{assert.equal(valid(base,{idem:{[base.idempotency_key]:{id:'123',t:Date.now()}}}).request_id,'123');});
 test('S4 outbound simulation applies actual After send; no provider call',()=>{const [p]=planner()({items:[item({cols:active})],now:NOW});const r=Sent(()=>({item:{json:p}}),{success:true,simulated:true}).json;assert.equal(r.simulated,true);assert.equal(r.sendOk,true);assert.equal(p.live,false);});
 test('S4 incoming mock reply stops series and proposes handoff notification',()=>{const [r]=planner()({items:[item({cols:active})],now:NOW,convos:[{phone:'972500000040',lastMessageDirection:'incoming',lastMessageTime:NOW,lastMessage:'Please call'}]});assert.equal(r.cols.fn_status.label,'ענה');assert.equal(r.send,null);assert.equal(r.hasNotify,true);});
@@ -30,6 +36,9 @@ test('S6 booking and cancellation parsed without creating a calendar event',()=>
 test('S7 human handling and first reply stop automatic sends',()=>{for(const extra of [{refi_stage:'בטיפול'},{refi_first_reply:'2026-10-20'}])assert.ok(planner()({items:[item({cols:{...active,...extra}})],now:NOW}).every(r=>!r.send));});
 test('S8 simulated paid stage becomes client and clears next send',()=>{const [r]=planner()({items:[item({cols:{...active,refi_stage:'לקוח משלם'}})],now:NOW});assert.equal(r.cols.fn_status.label,'לקוח');assert.deepEqual(r.cols.fn_next,{});assert.equal(r.send,null);});
 test('Safety: real-looking non-TEST item is excluded',()=>assert.equal(planner()({items:[item({name:'Synthetic but not TEST',cols:active})],now:NOW}).length,0));
+const policy=${JSON.stringify(slaPolicy)};
+const source=${JSON.stringify(slaSource)},ack=${JSON.stringify(read('automation/intake/ack-reminder.js'))};
+${slaSuite}
 const passed=results.every(r=>r.status==='PASS');
 if(!passed)throw new Error(JSON.stringify(results.filter(r=>r.status==='FAIL')));
 return [{json:{passed,checks:results.length,results,scope:'actual Code sources in n8n; synthetic inputs/provider responses only; no HTTP, messages, calendar events, ads or production writes',metaTransport:'NOT TESTED',whatsappTransport:'SIMULATED'}}];`;

@@ -1,0 +1,332 @@
+Browser tab: 1, Title: "▶️ TEST LP1 eight scenarios acceptance 20261020 NO NETWORK - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/z0QYWZKsIQDpDnKr?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+0 AXWebArea ▶️ TEST LP1 eight scenarios acceptance 20261020 NO NETWORK - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/z0QYWZKsIQDpDnKr?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	1 container n8n-app
+		2 container
+			3 container
+				4 container
+					5 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					6 text /
+					7 container
+						8 text TEST LP1 eight scenarios acceptance 20261020 NO NETWORK
+					9 button More actions
+					10 button (disabled) Publish
+					11 button More actions
+				12 radio button Description: Editor, Value: 1
+				13 radio button Description: Executions, Value: 0
+				14 radio button Description: Evaluations, Value: 0
+			15 container side-menu
+				16 menu bar
+					17 (collapsed) Add new item, Secondary Actions: Expand
+						18 button Add new item
+				19 button Open command palette
+				20 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				21 container
+					22 Description: n8n Assistant, ID: instance-ai
+					23 Description: Overview, ID: home
+				24 Description: Templates, ID: templates
+				25 Description: Insights, ID: insights
+				26 Description: Help, ID: help
+				27 Description: Settings, ID: settings
+			28 container content
+				29 container
+					30 container
+						31 container
+							32 image
+								33 container Edge from c4d8ac95-2d53-48f6-a8f8-40d04e60f33f to ad2813e8-19b7-4e04-979c-6b2858934b56
+							34 image
+								35 container Edge from ad2813e8-19b7-4e04-979c-6b2858934b56 to 337adfc9-63d9-43fc-951f-c7a03a80b45e
+							36 image
+								37 container Edge from 337adfc9-63d9-43fc-951f-c7a03a80b45e to 3ea7342a-8a65-4990-8da3-8829e4a35759
+							104 text 1 item
+							105 text 3 items
+							106 text 3 items
+							38 container
+								39 button Execute step
+								40 button Deactivate
+								41 button Delete
+								42 button Add to chat
+								43 button More actions
+								44 text Manual only
+								45 container
+									46 button Execute workflow
+							47 container
+								48 button Execute step
+								49 button Deactivate
+								50 button Delete
+								51 button Add to chat
+								52 button More actions
+								53 text Synthetic token IDs
+							54 container
+								55 button Execute step
+								56 button Deactivate
+								57 button Delete
+								58 button Add to chat
+								59 button More actions
+								60 container
+									61 text Secure tokens generate
+							62 container
+								107 text 1 item
+								63 button Execute step
+								64 button Deactivate
+								65 button Delete
+								66 button Add to chat
+								67 button More actions
+								68 text Acceptance NO NETWORK
+						70 image
+						71 image
+						72 container
+							73 button Zoom to Fit
+							74 button Zoom In
+							75 button Zoom Out
+							76 button Tidy Up
+								77 image
+					78 button Execute workflow
+					80 button Open nodes panel
+					81 button Command bar
+					82 button Add sticky note
+					83 button Open side panel
+					84 button n8n AI
+						85 image
+				86 container
+					87 container
+						88 text Logs
+						108 button Clear execution
+						109 text Success in 527ms
+						92 outline
+							93 row (selectable, collapsed) Manual only, Secondary Actions: Expand
+								94 text Manual only
+							98 row (selectable, collapsed) Synthetic token IDs, Secondary Actions: Expand
+								99 text Synthetic token IDs
+							110 row (selectable, collapsed) Secure tokens, Secondary Actions: Expand
+								111 text Secure tokens
+							115 row (selected, collapsed) Acceptance NO NETWORK, Secondary Actions: Expand
+								116 text Acceptance NO NETWORK
+					117 container
+						118 text Acceptance NO NETWORK Success in 172ms
+						119 button Input
+						120 button Output
+						121 button Actions
+						122 button Collapse panel
+					123 container
+						124 text OUTPUT
+						125 container
+							126 text field (settable)
+							127 radio button Description: Schema, Value: 0
+							128 radio button Description: Table, Value: 1
+							129 radio button Description: JSON, Value: 0
+						130 text 1 item
+						131 table
+							132 row
+								133 cell
+									134 container
+										135 text passed
+										136 button Collapse rows
+								137 cell
+									138 container
+										139 text checks
+										140 button Collapse rows
+								141 cell
+									142 container
+										143 text results
+										144 button Collapse rows
+								145 cell
+									146 container
+										147 text scope
+										148 button Collapse rows
+								149 cell
+									150 container
+										151 text metaTransport
+										152 button Collapse rows
+								153 cell
+									154 container
+										155 text whatsappTransport
+										156 button Collapse rows
+							157 row
+								158 cell
+									159 text true
+								160 cell
+									161 text 35
+								162 cell
+									163 text 0
+									164 container
+										165 text name : corrupt planner state fails closed rather than forgetting pending sends
+									166 container
+										167 text status : PASS
+									168 text 1
+									169 container
+										170 text name : opt-out takes priority over pending send reconciliation
+									171 container
+										172 text status : PASS
+									173 text 2
+									174 container
+										175 text name : paid and human-handled leads never reconcile stale pending advancement
+									176 container
+										177 text status : PASS
+									178 text 3
+									179 container
+										180 text name : Calendly 12-hour PM is converted to Israel afternoon
+									181 container
+										182 text status : PASS
+									183 text 4
+									184 container
+										185 text name : Calendly noon and midnight are distinct
+									186 container
+										187 text status : PASS
+									188 text 5
+									189 container
+										190 text name : invalid Calendly date, time and unsupported timezone never write
+									191 container
+										192 text status : PASS
+									193 text 6
+									194 container
+										195 text name : Calendly conflicting phone and email never select the first lead
+									196 container
+										197 text status : PASS
+									198 text 7
+									199 container
+										200 text name : Calendly duplicate phone owners never receive a booking
+									201 container
+										202 text status : PASS
+									203 text 8
+									204 container
+										205 text name : Calendly cancellation clears date and cannot cancel a newer meeting
+									206 container
+										207 text status : PASS
+									208 text 9
+									209 container
+										210 text name : Calendly cannot downgrade a paying client
+									211 container
+										212 text status : PASS
+									213 text 10
+									214 container
+										215 text name : Calendly parse does not acknowledge a failed or unattempted write
+									216 container
+										217 text status : PASS
+									218 text 11
+									219 container
+										220 text name : S1 LP1 entry validates synthetic form; no marketing consent
+									221 container
+										222 text status : PASS
+									223 text 12
+									224 container
+										225 text name : S1 Meta-shaped normalized lead enters test planner; Meta transport NOT TESTED
+									226 container
+										227 text status : PASS
+									228 text 13
+									229 container
+										230 text name : S2 quiz validated and money excluded unless explicitly permitted
+									231 container
+										232 text status : PASS
+									233 text 14
+									234 container
+										235 text name : S2 callback-only intake score cannot enter questionnaire-completed path
+									236 container
+										237 text status : PASS
+									238 text 15
+									239 container
+										240 text name : S2 submitted unknown answer selects questionnaire path without financial details
+									241 container
+										242 text status : PASS
+									243 text 16
+									244 container
+										245 text name : S3 idempotency returns confirmed Monday ID only (mock response)
+									246 container
+										247 text status : PASS
+									248 text 17
+									249 container
+										250 text name : S4 outbound simulation applies actual After send; no provider call
+									251 container
+										252 text status : PASS
+									253 text 18
+									254 container
+										255 text name : S4 incoming mock reply stops series and proposes handoff notification
+									256 container
+										257 text status : PASS
+									258 text 19
+									259 container
+										260 text name : S5 provider error never advances; unknown response never retries blindly
+									261 container
+										262 text status : PASS
+									263 text 20
+									264 container
+										265 text name : S5 unreadable provider history prevents sending
+									266 container
+										267 text status : PASS
+									268 text 21
+									269 container
+										270 text name : S6 booking and cancellation parsed without creating a calendar event
+									271 container
+										272 text status : PASS
+									273 text 22
+									274 container
+										275 text name : S7 human handling and first reply stop automatic sends
+									276 container
+										277 text status : PASS
+									278 text 23
+									279 container
+										280 text name : S8 simulated paid stage becomes client and clears next send
+									281 container
+										282 text status : PASS
+									283 text 24
+									284 container
+										285 text name : Safety: real-looking non-TEST item is excluded
+									286 container
+										287 text status : PASS
+									288 text 25
+									289 container
+										290 text name : SLA callback-only waits a full 60 business minutes
+									291 container
+										292 text status : PASS
+									293 text 26
+									294 container
+										295 text name : SLA questionnaire unknown answer is due at 30 minutes
+									296 container
+										297 text status : PASS
+									298 text 27
+									299 container
+										300 text name : SLA score metadata alone remains callback-only
+									301 container
+										302 text status : PASS
+									303 text 28
+									304 container
+										305 text name : SLA opening starts at 08:30 Israel and never sends reminders outside hours
+									306 container
+										307 text status : PASS
+									308 text 29
+									309 container
+										310 text name : SLA carries remaining minutes across Thursday weekend and Israel DST change
+									311 container
+										312 text status : PASS
+									313 text 30
+									314 container
+										315 text name : SLA after-hours requests start counting on the next business opening
+									316 container
+										317 text status : PASS
+									318 text 31
+									319 container
+										320 text name : SLA handled, replied, future and stale leads do not alert
+									321 container
+										322 text status : PASS
+									323 text 32
+									324 container
+										325 text name : SLA new service request resets elapsed time for a repeated submission
+									326 container
+										327 text status : PASS
+									328 text 33
+									329 container
+										330 text name : SLA incomplete lookup fails closed and planning does not mark delivery
+									331 container
+										332 text status : PASS
+									333 text 34
+									334 container
+										335 text name : SLA acknowledgment follows confirmed notification; failures remain retryable
+									336 container
+										337 text status : PASS
+								338 cell
+									339 text actual Code sources in n8n; synthetic inputs/provider responses only; no HTTP, messages, calendar events, ads or production writes
+								340 cell
+									341 text NOT TESTED
+								342 cell
+									343 text SIMULATED
+
+The focused UI element is 115 row (selected, collapsed) Acceptance NO NETWORK, Secondary Actions: Expand

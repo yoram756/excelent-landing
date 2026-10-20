@@ -1,0 +1,186 @@
+{
+  "name": "TEST LP1 WA SEND ONCE internal 0502234052 ONLY 20261020",
+  "nodes": [
+    {
+      "id": "internal-test-0",
+      "name": "Manual only",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "internal-test-1",
+      "name": "Verify approved internal template",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.gambot.co.il/api/v1/templates/2386590312169194",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      },
+      "retryOnFail": false
+    },
+    {
+      "id": "internal-test-2",
+      "name": "Guard exact internal recipient",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const r=$input.first().json,t=r.data;if(r.success!==true||String(t?.id)!=='2386590312169194'||t.name!=='exc_internal_lead_alert'||t.status!=='APPROVED'||t.category!=='UTILITY')throw Error('Template not the approved internal utility');const body={to:'972502234052',from:'972559881245',templateId:'2386590312169194',variables:['TEST בדיקת מערכת בלבד, אין ליד אמיתי','0502234052','TEST 20261020, בדיקה פנימית מאושרת','TEST ללא ניקוד לקוח','נא להשיב TEST התקבל לצורך בדיקת תגובה בלבד','https://kho566440.monday.com/boards/5106403803']};if(body.to!=='972502234052'||body.from!=='972559881245'||body.variables.some(x=>typeof x!=='string'))throw Error('Recipient guard');return [{json:body}];"
+      }
+    },
+    {
+      "id": "internal-test-3",
+      "name": "SEND ONCE internal test ONLY",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.gambot.co.il/api/v1/messages/send-template",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}"
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      },
+      "retryOnFail": false,
+      "disabled": true
+    },
+    {
+      "id": "internal-test-4",
+      "name": "Require provider acknowledgment",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        960,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const r=$input.first().json;if(r.success!==true||!r.data?.messageId)throw Error('Provider did not acknowledge message; do not retry blindly');return [{json:{messageId:r.data.messageId,to:'972502234052',providerAccepted:true,delivered:false,simulation:false}}];"
+      }
+    },
+    {
+      "id": "internal-test-5",
+      "name": "Read exact test message status",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1200,
+        0
+      ],
+      "parameters": {
+        "method": "GET",
+        "url": "={{ 'https://api.gambot.co.il/api/v1/messages/' + encodeURIComponent($json.messageId) + '/status?phone=972502234052' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "6hr28GsvQQrGzjwx",
+          "name": "Header Auth account"
+        }
+      },
+      "retryOnFail": false
+    }
+  ],
+  "connections": {
+    "Manual only": {
+      "main": [
+        [
+          {
+            "node": "Verify approved internal template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify approved internal template": {
+      "main": [
+        [
+          {
+            "node": "Guard exact internal recipient",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard exact internal recipient": {
+      "main": [
+        [
+          {
+            "node": "SEND ONCE internal test ONLY",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SEND ONCE internal test ONLY": {
+      "main": [
+        [
+          {
+            "node": "Require provider acknowledgment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Require provider acknowledgment": {
+      "main": [
+        [
+          {
+            "node": "Read exact test message status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem"
+  },
+  "pinData": {}
+}

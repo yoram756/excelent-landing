@@ -1,0 +1,34 @@
+{
+  "version": "2026-10-20",
+  "approvedByOwnerInChat": true,
+  "scope": "intake, questionnaire, CRM documentation, response, appointment coordination",
+  "owner": "yoram",
+  "customerContactPhone": "excelent_contact",
+  "timezone": "Asia/Jerusalem",
+  "businessHours": {
+    "days": [0, 1, 2, 3, 4],
+    "open": "08:30",
+    "close": "20:00"
+  },
+  "responseMinutes": {
+    "questionnaireSubmittedWithKnownAnswers": 30,
+    "withoutQuestionnaire": 60
+  },
+  "outsideBusinessHours": "next_business_day",
+  "holidayCalendar": null,
+  "activationStatus": "callback_delivery_not_verified_in_live_operations_see_release_report_for_deployment",
+  "testMessaging": {
+    "allowedRecipientPhone": "yoram_050",
+    "allowedE164": "972502234052",
+    "purpose": "internal acceptance tests only",
+    "realCustomersAllowed": false,
+    "groupsAllowed": false
+  },
+  "deferred": ["SMS", "email nurturing", "WhatsApp tips group"],
+  "notes": [
+    "Questionnaire answers may include unknown or skipped details; do not demand financial documents before returning to the lead.",
+    "This file records owner decisions. See the release report for the deployed reminder version; a callback or appointment still requires operational evidence.",
+    "Business hours count in Israel time; advertising account schedules currently display PDT.",
+    "Do not silently reuse the existing 45-minute reminder as proof of the new 30/60-minute SLA."
+  ]
+}

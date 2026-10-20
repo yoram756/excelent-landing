@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-20T18:31:19.246Z",
+  "workflow": "kiHHRdm7KzMEuXlO",
+  "active": true,
+  "versionId": "a7066d02-75d7-4818-ac04-50215e57d2b8",
+  "pass": true,
+  "nodes": 9,
+  "whatsappDisabled": true,
+  "connectionsMatch": true,
+  "settingsAndStatePreserved": true,
+  "sourceHashes": {
+    "Pick overdue": "372e064d089a1126db2f57a74f66aa5285d1a66f83eddf2772c0bdb66ce824b3",
+    "Confirm reminder": "73944ffe0446371a15fca2752b7ef06d0ae6dc4ffa4ba7fe7426743e72b9f0e7"
+  },
+  "liveReminderDeliveryTested": false
+}

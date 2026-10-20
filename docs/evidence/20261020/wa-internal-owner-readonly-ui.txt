@@ -1,0 +1,209 @@
+Browser tab: 6, Title: "▶️ TEST LP1 WA exact message STATUS READ ONLY 20261020 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2598?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+0 AXWebArea ▶️ TEST LP1 WA exact message STATUS READ ONLY 20261020 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2598?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	1 container n8n-app
+		2 container
+			3 container
+				27 container
+					28 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					29 text /
+					30 container
+						31 text TEST LP1 WA exact message STATUS READ ONLY 20261020
+					32 button More actions
+					33 button (disabled) Publish
+					34 button More actions
+				4 radio button Description: Editor, Value: 0
+				5 radio button Description: Executions, Value: 1
+				6 radio button Description: Evaluations, Value: 0
+			7 container side-menu
+				8 menu bar
+					9 (collapsed) Add new item, Secondary Actions: Expand
+						10 button Add new item
+				11 button Open command palette
+				12 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				13 container
+					14 Description: n8n Assistant, ID: instance-ai
+					15 Description: Overview, ID: home
+				16 Description: Templates, ID: templates
+				17 Description: Insights, ID: insights
+				18 Description: Help, ID: help
+				19 Description: Settings, ID: settings
+			35 container
+				36 heading Executions, Value: 2
+					37 text Executions
+				38 checkbox Description: Auto refresh, Value: 1, ID: v-1-387
+				39 text Auto refresh
+				40 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-1-388, Secondary Actions: Expand
+				41 link Description: Oct 20, 21:37:05 Succeededin 1.629s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2598?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				42 link Description: Oct 20, 21:35:40 Succeededin 1.539s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2596?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				43 link Description: Oct 20, 21:35:39 Succeededin 1.247s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2595?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				44 link Description: Oct 20, 21:18:54 Succeededin 1.265s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2580?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				45 link Description: Oct 20, 21:15:56 Succeededin 1.863s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2577?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				46 link Description: Oct 20, 21:13:27 Succeededin 1.943s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2574?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				47 link Description: Oct 20, 21:12:51 Succeededin 1.418s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2573?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				48 text Which executions is this workflow saving?
+				49 container
+					50 text Oct 20, 21:37:05 Succeeded in 1.629s  | 20KB  | ID#2598  |
+					53 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/history/4588c60c-6a9f-4483-a0df-fb1b2eb802a4
+					51 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/debug/2598
+					52 button Delete this execution
+				54 container
+					55 container
+						56 container
+							103 image
+								104 container Edge from 1603c520-eb3e-49c6-aa12-8bcc1da7d22e to 88248883-35ec-483f-8493-45dca2769ca9
+							105 image
+								106 container Edge from 88248883-35ec-483f-8493-45dca2769ca9 to cd74fb38-62e9-47ed-a661-b1f9c236802a
+							107 image
+								108 container Edge from cd74fb38-62e9-47ed-a661-b1f9c236802a to 63288065-ca8d-4107-a5ff-751df4110b6f
+							109 image
+								110 container Edge from 63288065-ca8d-4107-a5ff-751df4110b6f to 16369346-bd0d-4119-88f7-01592255721f
+							111 text 1 item
+							112 text 1 item
+							113 text 1 item
+							114 text 1 item
+							115 container
+								116 button Add to chat
+								117 button More actions
+								118 text Manual read only
+							119 container
+								120 button Add to chat
+								121 button More actions
+								122 container
+									123 text Exact test status GET: https://api.gambot.co.il/api/v1/messages/wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA/status?phone=972502234052
+							124 container
+								125 button Add to chat
+								126 button More actions
+								127 container
+									128 text Internal replies after test only GET: https://api.gambot.co.il/api/v1/conversations/972502234052/messages?after=wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA&pageSize=20
+							129 container
+								130 button Add to chat
+								131 button More actions
+								132 container
+									133 text CRM credential owner READ ONLY POST: https://api.monday.com/v2
+							134 container
+								135 text 1 item
+								136 button Add to chat
+								137 button More actions
+								138 text Summarize exact internal test
+						85 image
+						86 image
+						87 container
+							88 button Zoom to Fit
+							89 button Zoom In
+							90 button Zoom Out
+					91 container
+						92 container
+							93 text Logs Success in 1.629s
+							94 outline
+								95 row (selectable, collapsed) Manual read only, Secondary Actions: Expand
+									96 text Manual read only
+								97 row (selectable, collapsed) Exact test status, Secondary Actions: Expand
+									98 text Exact test status
+								99 row (selectable, collapsed) Internal replies after test only, Secondary Actions: Expand
+									100 text Internal replies after test only
+								101 row (selectable, collapsed) CRM credential owner READ ONLY, Secondary Actions: Expand
+									102 text CRM credential owner READ ONLY
+								154 row (selected, collapsed) Summarize exact internal test, Secondary Actions: Expand
+									155 text Summarize exact internal test
+						156 container
+							157 text Summarize exact internal test Success in 9ms
+							158 button Input
+							159 button Output
+							160 button Actions
+							161 button Collapse panel
+						162 container
+							163 text OUTPUT
+							164 container
+								165 text field (settable)
+								166 radio button Description: Schema, Value: 0
+								167 radio button Description: Table, Value: 1
+								168 radio button Description: JSON, Value: 0
+							169 text 1 item
+							170 table
+								171 row
+									172 cell
+										173 container
+											174 text readOnly
+											175 button Collapse rows
+									176 cell
+										177 container
+											178 text simulation
+											179 button Collapse rows
+									180 cell
+										181 container
+											182 text at
+											183 button Collapse rows
+									184 cell
+										185 container
+											186 text messageStatus
+											187 button Collapse rows
+									188 cell
+										189 container
+											190 text replyCount
+											191 button Collapse rows
+									192 cell
+										193 container
+											194 text testReplies
+											195 button Collapse rows
+									196 cell
+										197 container
+											198 text historyKeys
+											199 button Collapse rows
+									200 cell
+										201 container
+											202 text crmCredentialOwner
+											203 button Collapse rows
+									204 cell
+										205 container
+											206 text noMessageSent
+											207 button Collapse rows
+								208 row
+									209 cell
+										210 text true
+									211 cell
+										212 text false
+									213 cell
+										214 text 2026-10-20T18:37:07.279Z
+									215 cell
+										216 container
+											217 text messageId : wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA
+										218 container
+											219 text phone : 972502234052
+										220 container
+											221 text status : read
+										222 container
+											223 text direction : Outbound
+										224 container
+											225 text time : 2026-10-20T18:17:31Z
+										226 container
+											227 text templateId : 2386590312169194
+										228 container
+											229 text templateName : exc_internal_lead_alert
+										230 container
+											231 text campaignId : null
+										232 container
+											233 text errorMessage : null
+										234 container
+											235 text errorCode : null
+										236 container
+											237 text found : true
+									238 cell
+										239 text 0
+									240 cell
+										241 text [empty array]
+									242 cell
+										243 container
+											244 text 0 : count
+										245 container
+											246 text 1 : hasMore
+										247 container
+											248 text 2 : messages
+									249 cell
+										250 container
+											251 text id : 75075191
+										252 container
+											253 text name : אקסלנט יועצים פיננסים ומשכנתאות
+									254 cell
+										255 text true
+
+The focused UI element is 154 row (selected, collapsed) Summarize exact internal test, Secondary Actions: Expand

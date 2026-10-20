@@ -1,0 +1,199 @@
+Browser tab: 6, Title: "▶️ TEST LP1 WA exact message STATUS READ ONLY 20261020 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+0 AXWebArea ▶️ TEST LP1 WA exact message STATUS READ ONLY 20261020 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	1 container n8n-app
+		2 container
+			3 container
+				27 container
+					28 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					29 text /
+					30 container
+						31 text TEST LP1 WA exact message STATUS READ ONLY 20261020
+					32 button More actions
+					33 button (disabled) Publish
+					34 button More actions
+				4 radio button Description: Editor, Value: 1
+				5 radio button Description: Executions, Value: 0
+				6 radio button Description: Evaluations, Value: 0
+			7 container side-menu
+				8 menu bar
+					9 (collapsed) Add new item, Secondary Actions: Expand
+						10 button Add new item
+				11 button Open command palette
+				12 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				13 container
+					14 Description: n8n Assistant, ID: instance-ai
+					15 Description: Overview, ID: home
+				16 Description: Templates, ID: templates
+				17 Description: Insights, ID: insights
+				18 Description: Help, ID: help
+				19 Description: Settings, ID: settings
+			20 container content
+				35 container
+					36 container
+						37 container
+							108 image
+								109 container Edge from 626b9f31-99eb-453a-948d-3900a9f40904 to 8933aa68-0e8e-4c98-9503-383962463f19
+							110 image
+								111 container Edge from 8933aa68-0e8e-4c98-9503-383962463f19 to 23972552-e027-4117-aaff-88aa59113d32
+							112 image
+								113 container Edge from 23972552-e027-4117-aaff-88aa59113d32 to 28569931-314a-4fa3-97f7-c6124f42b209
+							160 text 1 item
+							161 text 1 item
+							162 text 1 item
+							114 container
+								115 button Execute step
+								116 button Deactivate
+								117 button Delete
+								118 button Add to chat
+								119 button More actions
+								120 text Manual read only
+								121 container
+									122 button Execute workflow
+							123 container
+								124 button Execute step
+								125 button Deactivate
+								126 button Delete
+								127 button Add to chat
+								128 button More actions
+								129 container
+									130 text Exact test status GET: https://api.gambot.co.il/api/v1/messages/wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA/status?phone=972502234052
+							131 container
+								132 button Execute step
+								133 button Deactivate
+								134 button Delete
+								135 button Add to chat
+								136 button More actions
+								137 container
+									138 text Internal replies after test only GET: https://api.gambot.co.il/api/v1/conversations/972502234052/messages?after=wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA&pageSize=20
+							139 container
+								163 text 1 item
+								140 button Execute step
+								141 button Deactivate
+								142 button Delete
+								143 button Add to chat
+								144 button More actions
+								145 text Summarize exact internal test
+							146 button Add 4 nodes to chat
+						41 image
+						42 image
+						107 container n8n Minimap
+						43 container
+							44 button Zoom to Fit
+							45 button Zoom In
+							46 button Zoom Out
+							47 button Tidy Up
+								48 image
+					147 button Execute workflow
+					49 button Open nodes panel
+					50 button Command bar
+					51 button Add sticky note
+					52 button Open side panel
+					53 button n8n AI
+						54 image
+				21 container
+					22 container
+						23 text Logs
+						164 button Clear execution
+						165 text Success in 1.546s
+						152 outline
+							153 row (selectable, collapsed) Manual read only, Secondary Actions: Expand
+								154 text Manual read only
+							158 row (selectable, collapsed) Exact test status, Secondary Actions: Expand
+								159 text Exact test status
+							166 row (selectable, collapsed) Internal replies after test only, Secondary Actions: Expand
+								167 text Internal replies after test only
+							168 row (selected, collapsed) Summarize exact internal test, Secondary Actions: Expand
+								169 text Summarize exact internal test
+					170 container
+						171 text Summarize exact internal test Success in 7ms
+						172 button Input
+						173 button Output
+						174 button Actions
+						175 button Collapse panel
+					176 container
+						177 text OUTPUT
+						178 container
+							179 text field (settable)
+							180 radio button Description: Schema, Value: 0
+							181 radio button Description: Table, Value: 1
+							182 radio button Description: JSON, Value: 0
+						183 text 1 item
+						184 table
+							185 row
+								186 cell
+									187 container
+										188 text readOnly
+										189 button Collapse rows
+								190 cell
+									191 container
+										192 text simulation
+										193 button Collapse rows
+								194 cell
+									195 container
+										196 text at
+										197 button Collapse rows
+								198 cell
+									199 container
+										200 text messageStatus
+										201 button Collapse rows
+								202 cell
+									203 container
+										204 text replyCount
+										205 button Collapse rows
+								206 cell
+									207 container
+										208 text testReplies
+										209 button Collapse rows
+								210 cell
+									211 container
+										212 text historyKeys
+										213 button Collapse rows
+								214 cell
+									215 container
+										216 text noMessageSent
+										217 button Collapse rows
+							218 row
+								219 cell
+									220 text true
+								221 cell
+									222 text false
+								223 cell
+									224 text 2026-10-20T18:18:55.947Z
+								225 cell
+									226 container
+										227 text messageId : wamid.HBgMOTcyNTAyMjM0MDUyFQIAERgUQ0U3NzU4MkQyQUQ3ODM0Q0FENUMA
+									228 container
+										229 text phone : 972502234052
+									230 container
+										231 text status : read
+									232 container
+										233 text direction : Outbound
+									234 container
+										235 text time : 2026-10-20T18:17:31Z
+									236 container
+										237 text templateId : 2386590312169194
+									238 container
+										239 text templateName : exc_internal_lead_alert
+									240 container
+										241 text campaignId : null
+									242 container
+										243 text errorMessage : null
+									244 container
+										245 text errorCode : null
+									246 container
+										247 text found : true
+								248 cell
+									249 text 0
+								250 cell
+									251 text [empty array]
+								252 cell
+									253 container
+										254 text 0 : count
+									255 container
+										256 text 1 : hasMore
+									257 container
+										258 text 2 : messages
+								259 cell
+									260 text true
+
+The focused UI element is 168 row (selected, collapsed) Summarize exact internal test, Secondary Actions: Expand
