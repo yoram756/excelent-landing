@@ -10,7 +10,7 @@ const cols=r=>JSON.parse(r.colsJson);
 
 test('new form lead gets M1 and a token',()=>{const [r]=plan({items:[item({cols:base})],now:NOW});
   assert.equal(r.send.templateId,T.M1);assert.equal(r.send.to,'972500000040');assert.deepEqual(r.send.variables,['דני']);
-  const c=cols(r);assert.equal(c.fn_status.label,'פעיל');assert.match(c.fn_token,/^[a-z0-9]{10}$/);assert.equal(c.fn_path,'B');assert.equal(c.fn_step,'M1');});
+  const c=cols(r);assert.equal(c.fn_status.label,'פעיל');assert.match(c.fn_token,/^[a-z0-9]{20}$/);assert.equal(c.fn_path,'B');assert.equal(c.fn_step,'M1');});
 test('landing page lead with quiz starts at M7',()=>{const [r]=plan({items:[item({cols:{...base,long_text_mm88pfdv:'פירוט'}})],now:NOW});assert.equal(r.send.templateId,T.M7);assert.equal(cols(r).fn_path,'D');});
 test('lead without any consent is not contacted',()=>{assert.equal(plan({items:[item({cols:{refi_phone:'0500000040'}})],now:NOW}).length,0);});
 test('lead created before go live is not contacted',()=>{assert.equal(plan({items:[item({created:'2026-10-19T08:00:00Z',cols:base})],now:NOW}).length,0);});
