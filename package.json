@@ -1,0 +1,16 @@
+{
+  "name": "excelent-landing",
+  "private": true,
+  "description": "Excelent landing pages, funnel engine sources and their tests",
+  "scripts": {
+    "test": "npm run test:funnel && npm run test:site",
+    "test:funnel": "node --test tests/funnel/plan.test.js tests/funnel/links.test.js",
+    "test:site": "node tests/site/run.js",
+    "verify": "bash scripts/verify.sh"
+  },
+  "devDependencies": {
+    "@fontsource/assistant": "5.1.0",
+    "axe-core": "4.10.2",
+    "playwright": "1.48.2"
+  }
+}

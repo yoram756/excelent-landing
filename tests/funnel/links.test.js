@@ -1,0 +1,17 @@
+const test=require('node:test');const assert=require('node:assert/strict');
+const {goLink,calendly,item}=require('./load');
+const lead=item({id:'77',name:'TEST דני',cols:{refi_phone:'0500000040',fn_token:'abcdefghjk',fn_step:'M12',numeric_mm883h9v:'60',fn_path:'G'}});
+test('token link goes to its destination and counts the open',()=>{const r=goLink({c:'abcdefghjkm'},[lead]);
+  assert.equal(r.url,'https://www.midrag.co.il/SpCard/Sp/94658');assert.equal(r.itemId,'77');const c=JSON.parse(r.colsJson);
+  assert.equal(JSON.parse(c.fn_opens.text).opens.m,1);assert.equal(c.numeric_mm883h9v,'65');});
+test('quiz link carries the token',()=>{const r=goLink({c:'abcdefghjkq'},[lead]);assert.ok(r.url.includes('t=abcdefghjk#check'));});
+test('reaching 70 notifies Yoram',()=>{const hot=item({id:'78',cols:{refi_phone:'0500000041',fn_token:'zzzzzzzzzz',numeric_mm883h9v:'66',fn_path:'C'}});const r=goLink({c:'zzzzzzzzzzb'},[hot]);assert.equal(r.notify,true);});
+test('repeat open of the same link adds no more heat',()=>{const again=item({id:'79',cols:{fn_token:'yyyyyyyyyy',numeric_mm883h9v:'50',fn_opens:JSON.stringify({opens:{g:1}})}});const r=goLink({c:'yyyyyyyyyyg'},[again]);assert.equal(JSON.parse(r.colsJson).numeric_mm883h9v,undefined);});
+test('phone fallback finds the lead and picks the destination by last step',()=>{const r=goLink({c:'972500000040'},[lead]);assert.equal(r.found,true);assert.equal(r.url,'https://share.google/L6zPPGazOqwdvB1pH');});
+test('unknown code still redirects to the quiz',()=>{const r=goLink({c:'דני'},[lead]);assert.equal(r.found,false);assert.ok(r.url.startsWith('https://refi.excelentfinance.com/'));});
+const SAMPLE='Hi ייעוץ, A new event has been scheduled. Event Type: שיחת אבחון Invitee: TEST דני Invitee Email: dani@example.com[](dani@example.com) Event Date/Time: 18:00 - Tuesday, 8 September 2026 (Israel Time) Description: x Location: +972 50-000-0040 Invitee Time Zone: Israel Time';
+test('Calendly booking is parsed and matched by phone',()=>{const [r]=calendly({body:{subject:'New Event: TEST דני - 18:00 Tue, 8 Sep 2026',text:SAMPLE,id:'a1'},items:[lead]});
+  assert.equal(r.matched,true);assert.equal(r.itemId,'77');const c=JSON.parse(r.colsJson);assert.equal(c.refi_stage.label,'פגישה נקבעה');assert.deepEqual(c.refi_meeting,{date:'2026-09-08',time:'15:00:00'});});
+test('Calendly cancel sets cancelled',()=>{const [r]=calendly({body:{subject:'Canceled: TEST דני',text:SAMPLE,id:'a2'},items:[lead]});assert.equal(JSON.parse(r.colsJson).refi_stage.label,'פגישה בוטלה');});
+test('the same email is processed once',()=>{const store={};calendly({body:{subject:'New Event: x',text:SAMPLE,id:'a3'},items:[lead],store});assert.equal(calendly({body:{subject:'New Event: x',text:SAMPLE,id:'a3'},items:[lead],store}).length,0);});
+test('booking from unknown person is returned unmatched',()=>{const [r]=calendly({body:{subject:'New Event: y',text:SAMPLE.replace('+972 50-000-0040','+972 52-111-2222').replace('dani@','other@'),id:'a4'},items:[lead]});assert.equal(r.matched,false);assert.equal(r.phone,'972521112222');});

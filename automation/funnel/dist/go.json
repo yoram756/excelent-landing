@@ -1,0 +1,306 @@
+{
+ "name": "משפך מחזור: קישורים אישיים (go)",
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "nodes": [
+  {
+   "id": "134630c2-7d3a-4d9d-9bce-5a7b985d703f",
+   "name": "Link",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "b3d9f744-d89f-4b03-9dec-37673eddcf54",
+   "parameters": {
+    "httpMethod": "GET",
+    "path": "go",
+    "responseMode": "responseNode",
+    "options": {}
+   }
+  },
+  {
+   "id": "4f7715d2-bc68-43e4-a89b-c194e4019043",
+   "name": "Items",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    200,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"query{me{id} boards(ids:[5106246268]){items_page(limit:500){items{id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\"]){id text value}}}}}\"}) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "0dea7adb-8061-4a4f-9533-dec2f07241fd",
+   "name": "Resolve",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    400,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// n8n Code node \"Resolve link\" in the go redirect workflow. Source of truth: this file.\n// c = 10 char personal token + 1 letter destination, or a phone number as fallback.\nconst DEST = {\n  q: 'https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check',\n  c: 'https://calendly.com/excellnet/15min',\n  g: 'https://share.google/L6zPPGazOqwdvB1pH',\n  m: 'https://www.midrag.co.il/SpCard/Sp/94658',\n  b: 'https://www.bizreviews.co.il/provider/peled-yoram'\n};\nconst BY_STEP = { M2:'q', M3:'b', M4:'c', M5:'q', M7:'c', M8:'c', M9:'c', R1:'c', R2:'c', M10:'c', M11:'c', M12:'g', M13:'m', M15:'c' };\nconst raw = String(($('Link').first().json.query || {}).c || '').trim().toLowerCase();\nconst items = $('Items').first().json.data.boards[0].items_page.items;\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d; };\nlet token = '', dest = '', lead = null;\nconst m = raw.match(/^([a-z0-9]{10})([qcgmb])$/);\nif (m) { token = m[1]; dest = m[2]; }\nfor (const it of items) {\n  const cv = {}; for (const c of it.column_values) cv[c.id] = c;\n  if (token && cv.fn_token?.text === token) { lead = { it, cv }; break; }\n  if (!token && raw.replace(/\\D/g, '').length >= 9 && norm(cv.refi_phone?.text) === norm(raw)) { lead = { it, cv }; break; }\n}\nif (lead && !dest) dest = BY_STEP[lead.cv.fn_step?.text] || 'q';\nif (!dest) dest = 'q';\nlet url = DEST[dest];\nif (dest === 'q' && lead) url = url.replace('#check', '&t=' + (lead.cv.fn_token?.text || '') + '#check');\nconst out = { url, found: !!lead, dest };\nif (lead) {\n  let st = {}; try { st = JSON.parse(lead.cv.fn_opens?.text || '{}') || {}; } catch (e) {}\n  st.opens = st.opens || {};\n  const firstOfType = !st.opens[dest];\n  st.opens[dest] = (st.opens[dest] || 0) + 1;\n  const openPoints = Object.keys(st.opens).length * 5;\n  let heat = Number(lead.cv.numeric_mm883h9v?.text || 0);\n  const before = heat;\n  if (firstOfType && openPoints <= 15) heat += 5;\n  const cols = { fn_opens: { text: JSON.stringify(st) } };\n  if (heat !== before) cols.numeric_mm883h9v = String(heat);\n  out.itemId = lead.it.id; out.colsJson = JSON.stringify(cols);\n  out.notify = before < 70 && heat >= 70 && (lead.cv.fn_path?.text || '') !== 'E';\n  out.notifyText = 'משפך מחזור: הליד הגיע לציון חום ' + heat + ' ומוכן לשיחה. פתח קישור: ' + dest;\n  out.meId = $('Items').first().json.data.me.id;\n}\nreturn [{ json: out }];\n"
+   }
+  },
+  {
+   "id": "5e45db7e-1688-4750-9d19-2fc0d4bdfc6b",
+   "name": "Redirect",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    600,
+    0
+   ],
+   "parameters": {
+    "respondWith": "redirect",
+    "redirectURL": "={{ $json.url }}",
+    "options": {
+     "responseCode": 302
+    }
+   }
+  },
+  {
+   "id": "8ee0580d-2e07-44ab-821c-1acfcbe1dd9f",
+   "name": "Found?",
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2,
+   "position": [
+    800,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "60977e2c-dc68-4298-a719-86f76b9326ca",
+       "leftValue": "={{ $('Resolve').item.json.found }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "0a010f0a-7f5b-441e-a40b-380d6fe5e3bd",
+   "name": "Update opens",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1000,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}\",variables:{b:\"5106246268\",i:String($('Resolve').item.json.itemId),v:$('Resolve').item.json.colsJson}}) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "460ff798-cf4c-43d0-9fcd-07118f642418",
+   "name": "Hot?",
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "931b25a5-c360-478c-91f8-d19d0567004a",
+       "leftValue": "={{ $('Resolve').item.json.notify }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "f44d125b-08ee-49e5-9c26-3b9a4e25a279",
+   "name": "Notify Yoram",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1400,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){text} create_update(item_id:$i,body:$b){id}}\",variables:{u:String($('Resolve').item.json.meId),t:String($('Resolve').item.json.itemId),x:$('Resolve').item.json.notifyText,i:String($('Resolve').item.json.itemId),b:$('Resolve').item.json.notifyText}}) }}",
+    "options": {}
+   }
+  }
+ ],
+ "connections": {
+  "Link": {
+   "main": [
+    [
+     {
+      "node": "Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Items": {
+   "main": [
+    [
+     {
+      "node": "Resolve",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Resolve": {
+   "main": [
+    [
+     {
+      "node": "Redirect",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Redirect": {
+   "main": [
+    [
+     {
+      "node": "Found?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Found?": {
+   "main": [
+    [
+     {
+      "node": "Update opens",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Update opens": {
+   "main": [
+    [
+     {
+      "node": "Hot?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Hot?": {
+   "main": [
+    [
+     {
+      "node": "Notify Yoram",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ }
+}
