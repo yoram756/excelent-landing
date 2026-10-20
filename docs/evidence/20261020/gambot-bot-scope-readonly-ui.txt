@@ -1,0 +1,291 @@
+Browser tab: 6, Title: "▶️ TEST LP1 bot number scope READ ONLY 20261020 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2624?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+0 AXWebArea ▶️ TEST LP1 bot number scope READ ONLY 20261020 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2624?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	1 container n8n-app
+		2 container
+			3 container
+				4 container
+					5 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					6 text /
+					7 container
+						8 text TEST LP1 bot number scope READ ONLY 20261020
+					9 button More actions
+					10 button (disabled) Publish
+					11 button More actions
+				12 radio button Description: Editor, Value: 0
+				13 radio button Description: Executions, Value: 1
+				14 radio button Description: Evaluations, Value: 0
+			15 container side-menu
+				16 menu bar
+					17 (collapsed) Add new item, Secondary Actions: Expand
+						18 button Add new item
+				19 button Open command palette
+				20 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				21 container
+					22 Description: n8n Assistant, ID: instance-ai
+					23 Description: Overview, ID: home
+				24 Description: Templates, ID: templates
+				25 Description: Insights, ID: insights
+				26 Description: Help, ID: help
+				27 Description: Settings, ID: settings
+			28 container
+				29 heading Executions, Value: 2
+					30 text Executions
+				31 checkbox Description: Auto refresh, Value: 1, ID: v-1-607
+				32 text Auto refresh
+				33 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-1-608, Secondary Actions: Expand
+				34 container
+					35 link Description: Oct 20, 22:18:04 Succeededin 1.064s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2624?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					36 link Description: Oct 20, 22:17:29 Succeededin 1.179s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2623?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					37 link Description: Oct 20, 21:37:05 Succeededin 1.629s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2598?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					38 link Description: Oct 20, 21:35:40 Succeededin 1.539s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2596?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					39 link Description: Oct 20, 21:35:39 Succeededin 1.247s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2595?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					40 link Description: Oct 20, 21:18:54 Succeededin 1.265s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2580?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					41 link Description: Oct 20, 21:15:56 Succeededin 1.863s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2577?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					42 link Description: Oct 20, 21:13:27 Succeededin 1.943s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2574?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+					43 link Description: Oct 20, 21:12:51 Succeededin 1.418s, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/executions/2573?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				44 text Which executions is this workflow saving?
+				45 container
+					46 text Oct 20, 22:18:04 Succeeded in 1.064s  | 8KB  | ID#2624  | 
+					208 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/history/5de42f35-5ba2-4d1a-a434-97eff1a6fd53
+					48 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/el4DUFwjn6zQFjwg/debug/2624
+					49 button Delete this execution
+				50 container
+					51 container
+						52 container
+							209 image
+								254 container Edge from 560ed767-d210-4b41-8e8d-6f88eb0ce215 to f3f23aa0-6fb1-43c6-a45d-a0556d4805cd
+							210 image
+								255 container Edge from f3f23aa0-6fb1-43c6-a45d-a0556d4805cd to 62e5c315-75c4-40fa-8d7f-291af982aad3
+							211 image
+								256 container Edge from 62e5c315-75c4-40fa-8d7f-291af982aad3 to ae3de15b-5a7c-47e6-9212-51daf07c77ac
+							257 text 1 item
+							258 text 1 item
+							259 text 1 item
+							212 container
+								213 button Add to chat
+								214 button More actions
+								260 text Manual READ ONLY
+							215 container
+								216 button Add to chat
+								217 button More actions
+								261 container
+									262 text Numbers READ ONLY GET: https://api.gambot.co.il/api/v1/numbers
+							218 container
+								219 button Add to chat
+								220 button More actions
+								263 container
+									264 text Existing quiz bot READ ONLY GET: https://api.gambot.co.il/api/v1/bots/CM9bp2N9eYMUlNdEte1O
+							221 container
+								265 text 1 item
+								222 button Add to chat
+								223 button More actions
+								266 text Scope summary NO SEND
+						89 image
+						90 image
+						91 container
+							92 button Zoom to Fit
+							93 button Zoom In
+							94 button Zoom Out
+					95 container
+						96 container
+							97 text Logs Success in 1.064s
+							98 outline
+								99 row (selectable, collapsed) Manual READ ONLY, Secondary Actions: Expand
+									100 text Manual READ ONLY
+								101 row (selectable, collapsed) Numbers READ ONLY, Secondary Actions: Expand
+									102 text Numbers READ ONLY
+								103 row (selectable, collapsed) Existing quiz bot READ ONLY, Secondary Actions: Expand
+									104 text Existing quiz bot READ ONLY
+								105 row (selected, collapsed) Scope summary NO SEND, Secondary Actions: Expand
+									106 text Scope summary NO SEND
+						109 container
+							110 text Scope summary NO SEND Success in 9ms
+							111 button Input
+							112 button Output
+							113 button Actions
+							114 button Collapse panel
+						115 container
+							116 text OUTPUT
+							117 container
+								118 text field (settable)
+								119 radio button Description: Schema, Value: 0
+								120 radio button Description: Table, Value: 1
+								121 radio button Description: JSON, Value: 0
+							122 text 1 item
+							123 table
+								124 row
+									125 cell
+										126 container
+											127 text readOnly
+											128 button Collapse rows
+									133 cell
+										134 container
+											135 text at
+											136 button Collapse rows
+									224 cell
+										225 container
+											267 text numbers
+											226 button Collapse rows
+									227 cell
+										228 container
+											268 text botId
+											229 button Collapse rows
+									230 cell
+										231 container
+											269 text botName
+											232 button Collapse rows
+									233 cell
+										234 container
+											270 text botStatus
+											235 button Collapse rows
+									236 cell
+										237 container
+											271 text topLevelKeys
+											238 button Collapse rows
+									239 cell
+										240 container
+											272 text scopeFields
+											241 button Collapse rows
+									242 cell
+										243 container
+											273 text steps
+											244 button Collapse rows
+									157 cell
+										158 container
+											159 text noMessageSent
+											160 button Collapse rows
+								161 row
+									162 cell
+										163 text true
+									164 cell
+										165 text 2026-10-20T19:18:05.172Z
+									166 cell
+										274 container
+											275 text count : 1
+										245 text items 0
+										276 container
+											277 text phoneNumberId : 1138723472651617
+										278 container
+											279 text displayNumber : +972 55-988-1245
+										280 container
+											281 text label : +972 55-988-1245
+										282 container
+											283 text isPrimary : true
+										284 container
+											285 text status : active
+										286 container
+											287 text defaultTemplateId : empty
+									168 cell
+										246 text CM9bp2N9eYMUlNdEte1O
+									191 cell
+										192 text שאלון התאמה לפני שיחה
+									193 cell
+										194 text active
+									195 cell
+										196 container
+											197 text 0 : Id
+										198 container
+											199 text 1 : Name
+										200 container
+											201 text 2 : Status
+										288 container
+											289 text 3 : Steps
+										290 container
+											291 text 4 : Error
+										292 container
+											293 text 5 : CreatedOn
+										294 container
+											295 text 6 : CreatedByName
+										296 container
+											297 text 7 : CreatedById
+										298 container
+											299 text 8 : ModifiedOn
+										300 container
+											301 text 9 : ModifiedByName
+										302 container
+											303 text 10 : ModifiedById
+										304 container
+											305 text 11 : IsPrimaryFlow
+										306 container
+											307 text 12 : PrimaryFlowSettings
+										308 container
+											309 text 13 : isBot
+										310 container
+											311 text 14 : SourceFlowId
+										312 container
+											313 text 15 : CreatedFromBotRecipe
+										314 container
+											315 text 16 : LinkedBotomationId
+										316 container
+											317 text 17 : PendingTemplates
+										318 container
+											319 text 18 : createdFrom
+										320 container
+											321 text 19 : sourceNote
+										322 container
+											323 text 20 : ActivatorOfBotomationId
+										324 container
+											325 text 21 : deployNotify
+									202 cell
+										247 text [empty array]
+									207 cell
+										248 text 0
+										326 container
+											327 text StepId : null
+										328 container
+											329 text Action : IncomingMessage
+										330 container
+											331 text Type : trigger
+										249 text Config
+										332 container
+											333 text messageType : regular
+										334 container
+											335 text triggerMode : conditions
+										250 text conditionGroups 0
+										336 container
+											337 text logicOperator : AND
+										251 text conditions 0
+										338 container
+											339 text operator : equals
+										340 container
+											341 text value : שאלון
+										342 container
+											343 text field : message
+										344 container
+											345 text groupRelations : [empty array]
+										346 container
+											347 text selectedTemplates : [empty array]
+										348 container
+											349 text selectedButtons : [empty array]
+										350 container
+											351 text allowRetrigger : true
+										352 container
+											353 text SubSteps : null
+										354 container
+											355 text IsCondition : false
+										356 container
+											357 text ConditionResult : false
+										252 text 1
+										358 container
+											359 text StepId : null
+										360 container
+											361 text Action : SendMessage
+										362 container
+											363 text Type : action
+										253 text Config
+										364 container
+											365 text messageType : regular
+										366 container
+											367 text phoneNumber : {{Step_1_PhoneNumber}}
+										368 container
+											369 text messageContent : מצוין, הנה כמה שאלות קצרות. אפשר לענות על הכל בהודעה אחת: \n \n 1. באיזו עיר הנכס? \n 2. במה מדובר: מחזור, משכנתה שנייה, קניית נכס או מכירה ושדרוג? \n 3. מה שווי הנכס בערך? \n 4. אם יש משכנתה קיימת, מה היתרה שלה בערך? \n 5. שכיר, עצמאי או שילוב של שניהם? \n 6. מתי נוח שנחזור אליך? \n \n תודה, יועץ יחזור אליך בזמן שביקשת 🙂
+										370 container
+											371 text SubSteps : null
+										372 container
+											373 text IsCondition : false
+										374 container
+											375 text ConditionResult : false
+									376 cell
+										377 text true
+
+The focused UI element is 105 row (selected, collapsed) Scope summary NO SEND, Secondary Actions: Expand
