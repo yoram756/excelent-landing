@@ -1,0 +1,42 @@
+{
+  "baseCommit": "282e04b3618eb3a9102bcc35f2024811c2823393",
+  "acceptanceExecution": {
+    "id": 2546,
+    "checks": 23,
+    "status": "PASS",
+    "url": "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/z0QYWZKsIQDpDnKr/executions/2546",
+    "scope": "compute only; actual source in n8n; mock inputs"
+  },
+  "mondayExecution": {
+    "id": 2557,
+    "status": "PASS",
+    "checkpoints": 10,
+    "url": "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/ZcpOvegzp0byNmO6/executions/2557",
+    "board": "5106403803",
+    "item": "3297930966",
+    "archived": true,
+    "scope": "real Monday sandbox transport; WhatsApp, calendar and payment events simulated"
+  },
+  "local": {
+    "funnel": 123,
+    "site": 43,
+    "regressionsFailedBeforeFix": 11
+  },
+  "staging": {
+    "status": "BLOCKED",
+    "url": "https://lp1-stg.srv1604140.hstgr.cloud/",
+    "browserError": "net::ERR_INVALID_AUTH_CREDENTIALS"
+  },
+  "meta": {
+    "actualLeadTest": "NOT TESTED",
+    "normalizedFixture": "PASS",
+    "reason": "No isolated Meta source-to-test-board adapter was verified; the connected route was not invoked"
+  },
+  "sources": {
+    "automation/funnel/plan.js": "d2294f8f24f1d5d7c058b257456c63fc1cf8dac83e61938aeff903c7e6dfff2a",
+    "automation/funnel/calendly.js": "38554dc0c957d102b23cd7511f3f44f91f4560b596d556fbd81065d8d224bb51",
+    "automation/funnel/calendly-ack.js": "eed94fe0b9923bf7e485f8e5a4494f4982492ad7e14cb6898b36dbad54a9b05d",
+    "automation/funnel/dist/acceptance-probe.json": "84fbaf28d206690cea06df76deda4c241cc7ddaeec1f47dfb8611ae6f5ada3b3",
+    "automation/funnel/dist/sandbox-journey.json": "d8645b2cc115378beeb478a5f816de7d9a04ba69d8764e63993853095ee5d686"
+  }
+}

@@ -49,3 +49,22 @@ test('isolated intake probe has no messaging endpoints or automatic triggers',()
   assert.ok(p.nodes.some(n=>n.name==='Guard synthetic phone ownership'));
   assert.ok(p.nodes.some(n=>n.name==='Archive synthetic lead'));
 });
+
+test('acceptance exports are manual only and sandbox transport cannot call messaging providers',()=>{
+  const fs=require('fs');
+  for(const name of ['acceptance-probe','sandbox-journey']){
+    execFileSync('node',[path.join(__dirname,'build-'+(name==='acceptance-probe'?'acceptance-probe':'sandbox-journey')+'.js')]);
+    const w=JSON.parse(fs.readFileSync(D+'/dist/'+name+'.json','utf8'));
+    assert.equal(w.active,false);
+    assert.equal(w.nodes.filter(n=>n.type.endsWith('.manualTrigger')).length,1);
+    assert.ok(w.nodes.every(n=>['manualTrigger','code','crypto','httpRequest'].some(t=>n.type==='n8n-nodes-base.'+t)));
+    for(const n of w.nodes){
+      if(n.type.endsWith('.httpRequest'))assert.equal(n.parameters.url,'https://api.monday.com/v2');
+      if(n.type.endsWith('.code'))new Function(n.parameters.jsCode);
+      const b=n.parameters.jsonBody;
+      if(b?.startsWith('={{')){assert.ok(!/\}\}/.test(b.slice(3,-2)),n.name);new Function('return ('+b.slice(3,-2)+')');}
+    }
+    if(name==='acceptance-probe')assert.ok(w.nodes.every(n=>!n.credentials));
+    else {assert.ok(w.nodes.some(n=>n.name==='Guard sandbox ownership'));assert.ok(w.nodes.some(n=>n.name==='Archive synthetic item'));}
+  }
+});

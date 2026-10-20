@@ -1,0 +1,432 @@
+Browser tab: 2, Title: "⚠️ TEST LP1 private Monday journey 20261020 NO MESSAGES - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/ZcpOvegzp0byNmO6?projectId=LmaRyBnHRyfXp2Py".
+0 AXWebArea ⚠️ TEST LP1 private Monday journey 20261020 NO MESSAGES - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/ZcpOvegzp0byNmO6?projectId=LmaRyBnHRyfXp2Py
+	1 container n8n-app
+		2 container
+			3 container
+				4 container
+					5 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					6 text /
+					7 container
+						8 text TEST LP1 private Monday journey 20261020 NO MESSAGES
+					9 button More actions
+					10 button (disabled) Publish
+					11 button More actions
+				12 radio button Description: Editor, Value: 1
+				13 radio button Description: Executions, Value: 0
+				14 radio button Description: Evaluations, Value: 0
+			15 container side-menu
+				16 menu bar
+					17 (collapsed) Add new item, Secondary Actions: Expand
+						18 button Add new item
+				19 button Open command palette
+				20 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				21 container
+					22 Description: n8n Assistant, ID: instance-ai
+					23 Description: Overview, ID: home
+				24 Description: Templates, ID: templates
+				25 Description: Insights, ID: insights
+				26 Description: Help, ID: help
+				27 Description: Settings, ID: settings
+			28 container content
+				29 container
+					30 container
+						31 container
+							56 image
+								57 container Edge from 03047bb0-37c9-4677-921b-30c3a4c0d71f to 73c6c918-e574-4934-a2cb-3f86cd3a31da
+							58 image
+								59 container Edge from 73c6c918-e574-4934-a2cb-3f86cd3a31da to b180f272-52eb-4aa7-bec2-0060653e288d
+							60 image
+								61 container Edge from b180f272-52eb-4aa7-bec2-0060653e288d to 87bac373-d52b-47a0-884f-8edd7a022e0c
+							62 image
+								63 container Edge from 87bac373-d52b-47a0-884f-8edd7a022e0c to 7f38402d-f846-4bf0-b8cf-b25b17bd9a51
+							64 image
+								65 container Edge from 7f38402d-f846-4bf0-b8cf-b25b17bd9a51 to 23375d56-6929-4413-9e95-79f82e9d1df4
+							66 image
+								67 container Edge from 23375d56-6929-4413-9e95-79f82e9d1df4 to a3fa3296-d76b-4a74-bcad-401f0d03c2ca
+							68 image
+								69 container Edge from a3fa3296-d76b-4a74-bcad-401f0d03c2ca to 95a54138-50f8-428b-afaf-fc2b9ec6c7fc
+							70 image
+								71 container Edge from 95a54138-50f8-428b-afaf-fc2b9ec6c7fc to 3782c97e-6186-4efc-b6cb-6265d5bede55
+							72 image
+								73 container Edge from 3782c97e-6186-4efc-b6cb-6265d5bede55 to 3697ece6-0dd1-4aa7-8e3a-8cb6738a9132
+							74 image
+								75 container Edge from 3697ece6-0dd1-4aa7-8e3a-8cb6738a9132 to 6caea67b-8c40-4d50-856e-faee0495dbe1
+							76 image
+								77 container Edge from 6caea67b-8c40-4d50-856e-faee0495dbe1 to 74ea307a-62fb-4091-ae28-fa8de67d3aa3
+							78 image
+								79 container Edge from 74ea307a-62fb-4091-ae28-fa8de67d3aa3 to c8d36d82-63e2-438b-a648-2430fa0ffe8b
+							80 image
+								81 container Edge from c8d36d82-63e2-438b-a648-2430fa0ffe8b to 1517e193-b832-4fea-8d29-4de68a92c25a
+							82 image
+								83 container Edge from 1517e193-b832-4fea-8d29-4de68a92c25a to 2b13ceb9-ad6a-4c7d-907f-79edb314bbda
+							84 image
+								85 container Edge from 2b13ceb9-ad6a-4c7d-907f-79edb314bbda to 42b6f9da-767d-4b6e-9782-c7e40a7adbbd
+							86 image
+								87 container Edge from 42b6f9da-767d-4b6e-9782-c7e40a7adbbd to 1e3063b9-3c29-4b00-9576-b0103dd2f97d
+							88 image
+								89 container Edge from 1e3063b9-3c29-4b00-9576-b0103dd2f97d to 6728471a-bb0b-403c-a592-9c964791725c
+							90 image
+								91 container Edge from 6728471a-bb0b-403c-a592-9c964791725c to 9bf67f6b-38e9-4a7d-a103-bc83644bed60
+							92 image
+								93 container Edge from 9bf67f6b-38e9-4a7d-a103-bc83644bed60 to 587ceaf5-0a31-44ee-9278-0af5aa397451
+							94 image
+								95 container Edge from 587ceaf5-0a31-44ee-9278-0af5aa397451 to d66a83c6-05b7-44e8-a9e6-e5b897a4d042
+							96 image
+								97 container Edge from d66a83c6-05b7-44e8-a9e6-e5b897a4d042 to 02f249db-22c0-4514-b966-b3b9bfa96266
+							98 image
+								99 container Edge from 02f249db-22c0-4514-b966-b3b9bfa96266 to 011ede0e-0e53-4ae6-962e-1eb763d70f61
+							100 image
+								101 container Edge from 011ede0e-0e53-4ae6-962e-1eb763d70f61 to 5631ab2d-f3e9-4285-a881-1dfe9a35644b
+							102 image
+								103 container Edge from 5631ab2d-f3e9-4285-a881-1dfe9a35644b to d942a4ae-c49d-4ee4-8b3b-470786c88938
+							104 image
+								105 container Edge from d942a4ae-c49d-4ee4-8b3b-470786c88938 to c16aa111-f7f5-48af-bd12-23f517d3bd74
+							106 image
+								107 container Edge from c16aa111-f7f5-48af-bd12-23f517d3bd74 to cb37ed47-87b3-4703-bbde-00d1f9e3c7b0
+							108 image
+								109 container Edge from cb37ed47-87b3-4703-bbde-00d1f9e3c7b0 to 11fb8e19-f569-4f5b-89b8-1a57079901b6
+							110 image
+								111 container Edge from 11fb8e19-f569-4f5b-89b8-1a57079901b6 to 7762d8ed-e96e-4daf-9aa9-2ab9325bd471
+							112 image
+								113 container Edge from 7762d8ed-e96e-4daf-9aa9-2ab9325bd471 to 2471b4d8-3041-4099-8350-07b0c82967b0
+							114 image
+								115 container Edge from 2471b4d8-3041-4099-8350-07b0c82967b0 to c3d90313-f464-42d8-b1ef-b27f54f2fa46
+							116 image
+								117 container Edge from c3d90313-f464-42d8-b1ef-b27f54f2fa46 to b4d00fef-c1ae-4f70-84c2-e645acb394a1
+							118 image
+								119 container Edge from b4d00fef-c1ae-4f70-84c2-e645acb394a1 to 0a3e1ffb-8e89-40aa-8270-391562ba1702
+							120 image
+								121 container Edge from 0a3e1ffb-8e89-40aa-8270-391562ba1702 to 8b5deea4-ceca-4842-a335-2aced46f335c
+							389 text 1 item
+							390 text 1 item
+							391 text 1 item
+							392 text 1 item
+							393 text 1 item
+							394 text 1 item
+							395 text 1 item
+							396 text 1 item
+							397 text 1 item
+							122 container
+								123 button Execute step
+								124 button Deactivate
+								125 button Delete
+								126 button Add to chat
+								127 button More actions
+								128 text Manual only
+								129 container
+									130 button Execute workflow
+							131 container
+								132 button Execute step
+								133 button Deactivate
+								134 button Delete
+								135 button Add to chat
+								136 button More actions
+								137 container
+									138 text Inspect private sandbox POST: https://api.monday.com/v2
+							139 container
+								140 button Execute step
+								141 button Deactivate
+								142 button Delete
+								143 button Add to chat
+								144 button More actions
+								145 text Guard empty sandbox
+							146 container
+								147 button Execute step
+								148 button Deactivate
+								149 button Delete
+								150 button Add to chat
+								151 button More actions
+								152 text Validate
+							153 container
+								154 button Execute step
+								155 button Deactivate
+								156 button Delete
+								157 button Add to chat
+								158 button More actions
+								159 text Find query
+							160 container
+								161 button Execute step
+								162 button Deactivate
+								163 button Delete
+								164 button Add to chat
+								165 button More actions
+								166 container
+									167 text Find by phone POST: https://api.monday.com/v2
+							168 container
+								169 button Execute step
+								170 button Deactivate
+								171 button Delete
+								172 button Add to chat
+								173 button More actions
+								174 text Build mutation
+							175 container
+								176 button Execute step
+								177 button Deactivate
+								178 button Delete
+								179 button Add to chat
+								180 button More actions
+								181 container
+									182 text Save to Monday sandbox POST: https://api.monday.com/v2
+							183 container
+								184 button Execute step
+								185 button Deactivate
+								186 button Delete
+								187 button Add to chat
+								188 button More actions
+								189 text Check save
+							190 container
+								191 button Execute step
+								192 button Deactivate
+								193 button Delete
+								194 button Add to chat
+								195 button More actions
+								196 container
+									197 text Read intake POST: https://api.monday.com/v2
+							198 container
+								199 button Execute step
+								200 button Deactivate
+								201 button Delete
+								202 button Add to chat
+								203 button More actions
+								204 text Verify intake and simulate send
+							205 container
+								206 button Execute step
+								207 button Deactivate
+								208 button Delete
+								209 button Add to chat
+								210 button More actions
+								211 container
+									212 text Apply simulated send POST: https://api.monday.com/v2
+							213 container
+								214 button Execute step
+								215 button Deactivate
+								216 button Delete
+								217 button Add to chat
+								218 button More actions
+								219 container
+									220 text Read simulated send POST: https://api.monday.com/v2
+							221 container
+								222 button Execute step
+								223 button Deactivate
+								224 button Delete
+								225 button Add to chat
+								226 button More actions
+								227 text Verify send and mock reply
+							228 container
+								229 button Execute step
+								230 button Deactivate
+								231 button Delete
+								232 button Add to chat
+								233 button More actions
+								234 container
+									235 text Apply reply handoff POST: https://api.monday.com/v2
+							236 container
+								237 button Execute step
+								238 button Deactivate
+								239 button Delete
+								240 button Add to chat
+								241 button More actions
+								242 container
+									243 text Read reply handoff POST: https://api.monday.com/v2
+							244 container
+								245 button Execute step
+								246 button Deactivate
+								247 button Delete
+								248 button Add to chat
+								249 button More actions
+								250 text Verify reply and mock optout
+							251 container
+								252 button Execute step
+								253 button Deactivate
+								254 button Delete
+								255 button Add to chat
+								256 button More actions
+								257 container
+									258 text Apply optout POST: https://api.monday.com/v2
+							259 container
+								260 button Execute step
+								261 button Deactivate
+								262 button Delete
+								263 button Add to chat
+								264 button More actions
+								265 container
+									266 text Read optout POST: https://api.monday.com/v2
+							267 container
+								268 button Execute step
+								269 button Deactivate
+								270 button Delete
+								271 button Add to chat
+								272 button More actions
+								273 text Match bookings
+							274 container
+								275 button Execute step
+								276 button Deactivate
+								277 button Delete
+								278 button Add to chat
+								279 button More actions
+								280 container
+									281 text Apply mock booking POST: https://api.monday.com/v2
+							282 container
+								283 button Execute step
+								284 button Deactivate
+								285 button Delete
+								286 button Add to chat
+								287 button More actions
+								288 container
+									289 text Read booking POST: https://api.monday.com/v2
+							290 container
+								291 button Execute step
+								292 button Deactivate
+								293 button Delete
+								294 button Add to chat
+								295 button More actions
+								296 text Match cancellation
+							297 container
+								298 button Execute step
+								299 button Deactivate
+								300 button Delete
+								301 button Add to chat
+								302 button More actions
+								303 container
+									304 text Apply mock cancellation POST: https://api.monday.com/v2
+							305 container
+								306 button Execute step
+								307 button Deactivate
+								308 button Delete
+								309 button Add to chat
+								310 button More actions
+								311 container
+									312 text Read cancellation POST: https://api.monday.com/v2
+							313 container
+								314 button Execute step
+								315 button Deactivate
+								316 button Delete
+								317 button Add to chat
+								318 button More actions
+								319 text Verify cancellation and human handoff
+							320 container
+								321 button Execute step
+								322 button Deactivate
+								323 button Delete
+								324 button Add to chat
+								325 button More actions
+								326 container
+									327 text Apply human handoff fixture POST: https://api.monday.com/v2
+							328 container
+								329 button Execute step
+								330 button Deactivate
+								331 button Delete
+								332 button Add to chat
+								333 button More actions
+								334 container
+									335 text Read human handoff POST: https://api.monday.com/v2
+							336 container
+								337 button Execute step
+								338 button Deactivate
+								339 button Delete
+								340 button Add to chat
+								341 button More actions
+								342 text Verify handoff and simulated paid
+							343 container
+								344 button Execute step
+								345 button Deactivate
+								346 button Delete
+								347 button Add to chat
+								348 button More actions
+								349 container
+									350 text Apply simulated paid POST: https://api.monday.com/v2
+							351 container
+								352 button Execute step
+								353 button Deactivate
+								354 button Delete
+								355 button Add to chat
+								356 button More actions
+								357 container
+									358 text Read simulated paid POST: https://api.monday.com/v2
+							359 container
+								360 button Execute step
+								361 button Deactivate
+								362 button Delete
+								363 button Add to chat
+								364 button More actions
+								365 text Verify paid and prepare archive
+							366 container
+								367 button Execute step
+								368 button Deactivate
+								369 button Delete
+								370 button Add to chat
+								371 button More actions
+								372 container
+									373 text Archive synthetic item POST: https://api.monday.com/v2
+							374 container
+								375 button Execute step
+								376 button Deactivate
+								377 button Delete
+								378 button Add to chat
+								379 button More actions
+								380 text Confirm archive
+							381 button Add 34 nodes to chat
+						35 image
+						36 image
+						382 container n8n Minimap
+						37 container
+							38 button Zoom to Fit
+							39 button Zoom In
+							40 button Zoom Out
+							41 button Tidy Up
+								42 image
+					383 button Execute workflow
+					43 button Open nodes panel
+					44 button Command bar
+					45 button Add sticky note
+					46 button Open side panel
+					47 button n8n AI
+						48 image
+				49 container
+					50 container
+						51 text Logs
+						398 button Clear execution
+						399 text Error in 3.666s
+						386 outline
+							388 row (selectable, collapsed) Inspect private sandbox, Secondary Actions: Expand
+								400 text Inspect private sandbox
+							401 row (selectable, collapsed) Guard empty sandbox, Secondary Actions: Expand
+								402 text Guard empty sandbox
+							403 row (selectable, collapsed) Validate, Secondary Actions: Expand
+								404 text Validate
+							405 row (selectable, collapsed) Find query, Secondary Actions: Expand
+								406 text Find query
+							407 row (selectable, collapsed) Find by phone, Secondary Actions: Expand
+								408 text Find by phone
+							409 row (selectable, collapsed) Build mutation, Secondary Actions: Expand
+								410 text Build mutation
+							411 row (selectable, collapsed) Save to Monday sandbox, Secondary Actions: Expand
+								412 text Save to Monday sandbox
+							413 row (selectable, collapsed) Check save, Secondary Actions: Expand
+								414 text Check save
+							415 row (selected, collapsed) Read intake, Secondary Actions: Expand
+								416 text Read intake
+					417 container
+						418 text Read intake Error in 7ms
+						419 button Input
+						420 button Output
+						421 button Actions
+						422 button Collapse panel
+					423 container
+						424 text OUTPUT
+						425 text 1 item
+						426 container
+							427 text invalid syntax
+							428 button Ask n8n Assistant
+								429 image
+								430 text Ask n8n Assistant
+							431 text Error details
+							432 button
+							433 button (collapsed)  Other info, Secondary Actions: Expand
+								434 text  Other info
+		435 container notification_1
+			436 heading Problem in node ‘Read intake‘, Value: 2
+				437 text Problem in node ‘Read intake‘
+			438 text invalid syntax
+
+The focused UI element is 415 row (selected, collapsed) Read intake, Secondary Actions: Expand

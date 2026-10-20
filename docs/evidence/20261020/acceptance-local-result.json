@@ -1,0 +1,101 @@
+{
+  "passed": true,
+  "checks": 23,
+  "results": [
+    {
+      "name": "corrupt planner state fails closed rather than forgetting pending sends",
+      "status": "PASS"
+    },
+    {
+      "name": "opt-out takes priority over pending send reconciliation",
+      "status": "PASS"
+    },
+    {
+      "name": "paid and human-handled leads never reconcile stale pending advancement",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly 12-hour PM is converted to Israel afternoon",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly noon and midnight are distinct",
+      "status": "PASS"
+    },
+    {
+      "name": "invalid Calendly date, time and unsupported timezone never write",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly conflicting phone and email never select the first lead",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly duplicate phone owners never receive a booking",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly cancellation clears date and cannot cancel a newer meeting",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly cannot downgrade a paying client",
+      "status": "PASS"
+    },
+    {
+      "name": "Calendly parse does not acknowledge a failed or unattempted write",
+      "status": "PASS"
+    },
+    {
+      "name": "S1 LP1 entry validates synthetic form; no marketing consent",
+      "status": "PASS"
+    },
+    {
+      "name": "S1 Meta-shaped normalized lead enters test planner; Meta transport NOT TESTED",
+      "status": "PASS"
+    },
+    {
+      "name": "S2 quiz validated and money excluded unless explicitly permitted",
+      "status": "PASS"
+    },
+    {
+      "name": "S3 idempotency returns confirmed Monday ID only (mock response)",
+      "status": "PASS"
+    },
+    {
+      "name": "S4 outbound simulation applies actual After send; no provider call",
+      "status": "PASS"
+    },
+    {
+      "name": "S4 incoming mock reply stops series and proposes handoff notification",
+      "status": "PASS"
+    },
+    {
+      "name": "S5 provider error never advances; unknown response never retries blindly",
+      "status": "PASS"
+    },
+    {
+      "name": "S5 unreadable provider history prevents sending",
+      "status": "PASS"
+    },
+    {
+      "name": "S6 booking and cancellation parsed without creating a calendar event",
+      "status": "PASS"
+    },
+    {
+      "name": "S7 human handling and first reply stop automatic sends",
+      "status": "PASS"
+    },
+    {
+      "name": "S8 simulated paid stage becomes client and clears next send",
+      "status": "PASS"
+    },
+    {
+      "name": "Safety: real-looking non-TEST item is excluded",
+      "status": "PASS"
+    }
+  ],
+  "scope": "actual Code sources in n8n; synthetic inputs/provider responses only; no HTTP, messages, calendar events, ads or production writes",
+  "metaTransport": "NOT TESTED",
+  "whatsappTransport": "SIMULATED"
+}

@@ -1,0 +1,350 @@
+- main:
+  - link "Personal":
+    - /url: /projects/LmaRyBnHRyfXp2Py
+    - generic "Personal":
+    - generic "Personal"
+  - generic: /
+  - generic "TEST LP1 private Monday journey 20261020 NO MESSAGES":
+    - generic: TEST LP1 private Monday journey 20261020 NO MESSAGES
+  - button "More actions":
+  - button "Publish" [disabled]:
+    - generic: Publish
+  - button "More actions":
+  - radiogroup:
+    - radio "Editor"
+    - radio "Executions" [checked]
+    - radio "Evaluations"
+  - complementary:
+    - menubar:
+      - menuitem "Add new item":
+        - button "Add new item":
+    - button "Open command palette":
+    - button "Toggle sidebar":
+    - menuitem "n8n Assistant":
+    - menuitem "Overview":
+    - menuitem "Templates":
+    - menuitem "Insights":
+    - menuitem "Help":
+    - menuitem "Settings":
+  - main:
+    - heading "Executions" [level=2]
+    - checkbox "Auto refresh" [checked]:
+    - generic: Auto refresh
+    - button "Filters":
+    - link "Oct 20, 20:46:48 Succeeded in 14.287s":
+      - /url: /workflow/ZcpOvegzp0byNmO6/executions/2557?projectId=LmaRyBnHRyfXp2Py
+      - generic: Oct 20, 20:46:48
+      - generic: Succeeded
+      - generic: in 14.287s
+    - link "Oct 20, 20:44:31 Succeeded in 15.567s":
+      - /url: /workflow/ZcpOvegzp0byNmO6/executions/2553?projectId=LmaRyBnHRyfXp2Py
+      - generic: Oct 20, 20:44:31
+      - generic: Succeeded
+      - generic: in 15.567s
+    - link "Oct 20, 20:43:06 Error in 7.564s Actions":
+      - /url: /workflow/ZcpOvegzp0byNmO6/executions/2552?projectId=LmaRyBnHRyfXp2Py
+      - generic: Oct 20, 20:43:06
+      - generic: Error
+      - generic: in 7.564s
+      - button "Actions":
+    - link "Oct 20, 20:41:50 Error in 2.465s Actions":
+      - /url: /workflow/ZcpOvegzp0byNmO6/executions/2551?projectId=LmaRyBnHRyfXp2Py
+      - generic: Oct 20, 20:41:50
+      - generic: Error
+      - generic: in 2.465s
+      - button "Actions":
+    - link "Oct 20, 20:40:16 Error in 3.232s Actions":
+      - /url: /workflow/ZcpOvegzp0byNmO6/executions/2547?projectId=LmaRyBnHRyfXp2Py
+      - generic: Oct 20, 20:40:16
+      - generic: Error
+      - generic: in 3.232s
+      - button "Actions":
+    - generic: Which executions is this workflow saving?
+    - generic: Oct 20, 20:46:48
+    - generic: Succeeded
+    - text: in 14.287s | 435KB | ID#2557 |
+    - link "Autosave":
+      - /url: /workflow/ZcpOvegzp0byNmO6/history/7c725c5f-0578-4e8c-9450-e5b0efd0ad54
+    - link "Copy to editor":
+      - /url: /workflow/ZcpOvegzp0byNmO6/debug/2557
+      - button "Copy to editor":
+        - generic: Copy to editor
+    - button "Delete this execution":
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Manual only
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Inspect private sandbox
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Guard sandbox ownership
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Prepare exact fixture reset
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Reset retained synthetic fixture
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Restore fixture input
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Validate
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Find query
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Find by phone
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Build mutation
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Save to Monday sandbox
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Check save
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read intake
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify intake and simulate send
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply simulated send
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read simulated send
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify send and mock reply
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply reply handoff
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read reply handoff
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify reply and mock optout
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply optout
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read optout
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Match bookings
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply mock booking
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Acknowledge mock booking
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read booking
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Match cancellation
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply mock cancellation
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read cancellation
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify cancellation and human handoff
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply human handoff fixture
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read human handoff
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify handoff and simulated paid
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply simulated paid
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read simulated paid
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify paid and prepare archive
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Archive synthetic item
+    - generic: "POST: https://api.monday.com/v2"
+    - generic: 1 item
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Confirm archive
+    - button "Zoom to Fit":
+    - button "Zoom In":
+    - button "Zoom Out":
+    - generic: Logs
+    - generic: Success in 14.287s
+    - tree:
+      - treeitem "Verify cancellation and human handoff":
+        - generic: Verify cancellation and human handoff
+      - treeitem "Apply human handoff fixture":
+        - generic: Apply human handoff fixture
+      - treeitem "Read human handoff":
+        - generic: Read human handoff
+      - treeitem "Verify handoff and simulated paid":
+        - generic: Verify handoff and simulated paid
+      - treeitem "Apply simulated paid":
+        - generic: Apply simulated paid
+      - treeitem "Read simulated paid":
+        - generic: Read simulated paid
+      - treeitem "Verify paid and prepare archive":
+        - generic: Verify paid and prepare archive
+      - treeitem "Archive synthetic item":
+        - generic: Archive synthetic item
+      - treeitem "Confirm archive" [active] [selected]:
+        - generic: Confirm archive
+    - generic: Confirm archive
+    - generic: Success in 20ms
+    - button "Input":
+      - generic: Input
+    - button "Output":
+      - generic: Output
+    - button "Actions":
+    - button "Collapse panel":
+    - generic: Output
+    - textbox "Search (Ctrl+F)"
+    - radiogroup:
+      - radio "Schema":
+      - radio "Table" [checked]:
+      - radio "JSON":
+    - generic: 1 item
+    - table:
+      - rowgroup:
+        - row "passed Collapse rows board Collapse rows itemId Collapse rows archived Collapse rows checks Collapse rows scope Collapse rows":
+          - columnheader "passed Collapse rows":
+            - generic: passed
+            - button "Collapse rows":
+          - columnheader "board Collapse rows":
+            - generic: board
+            - button "Collapse rows":
+          - columnheader "itemId Collapse rows":
+            - generic: itemId
+            - button "Collapse rows":
+          - columnheader "archived Collapse rows":
+            - generic: archived
+            - button "Collapse rows":
+          - columnheader "checks Collapse rows":
+            - generic: checks
+            - button "Collapse rows":
+          - columnheader "scope Collapse rows":
+            - generic: scope
+            - button "Collapse rows":
+          - columnheader
+      - rowgroup:
+        - row "true 5106403803 3297930966 true 0:intake-save-readback 1:separate-consents 2:mock-outbound-ack-readback 3:mock-inbound-handoff-readback 4:optout-readback 5:mock-booking-Israel-PM-readback 6:booking-write-acknowledgment 7:mock-cancellation-clear-date 8:human-stop-readback 9:mock-paid-stop-readback actual n8n HTTP and Monday private board; all WhatsApp/Calendly/paid events simulated; no messages, notifications, production records or ads":
+          - cell "true":
+            - generic: "true"
+          - cell "5106403803":
+            - generic: "5106403803"
+          - cell "3297930966":
+            - generic: "3297930966"
+          - cell "true":
+            - generic: "true"
+          - cell "0:intake-save-readback 1:separate-consents 2:mock-outbound-ack-readback 3:mock-inbound-handoff-readback 4:optout-readback 5:mock-booking-Israel-PM-readback 6:booking-write-acknowledgment 7:mock-cancellation-clear-date 8:human-stop-readback 9:mock-paid-stop-readback":
+            - generic: "0"
+            - text: ":"
+            - generic: intake-save-readback
+            - generic: "1"
+            - text: ":"
+            - generic: separate-consents
+            - generic: "2"
+            - text: ":"
+            - generic: mock-outbound-ack-readback
+            - generic: "3"
+            - text: ":"
+            - generic: mock-inbound-handoff-readback
+            - generic: "4"
+            - text: ":"
+            - generic: optout-readback
+            - generic: "5"
+            - text: ":"
+            - generic: mock-booking-Israel-PM-readback
+            - generic: "6"
+            - text: ":"
+            - generic: booking-write-acknowledgment
+            - generic: "7"
+            - text: ":"
+            - generic: mock-cancellation-clear-date
+            - generic: "8"
+            - text: ":"
+            - generic: human-stop-readback
+            - generic: "9"
+            - text: ":"
+            - generic: mock-paid-stop-readback
+          - cell "actual n8n HTTP and Monday private board; all WhatsApp/Calendly/paid events simulated; no messages, notifications, production records or ads":
+            - generic: actual n8n HTTP and Monday private board; all WhatsApp/Calendly/paid events simulated; no messages, notifications, production records or ads
+          - cell
+- complementary

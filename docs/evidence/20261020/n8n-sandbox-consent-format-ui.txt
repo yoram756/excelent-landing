@@ -1,0 +1,597 @@
+- main:
+  - link "Personal":
+    - /url: /projects/LmaRyBnHRyfXp2Py
+    - generic "Personal":
+    - generic "Personal"
+  - generic: /
+  - generic "TEST LP1 private Monday journey 20261020 NO MESSAGES":
+    - generic: TEST LP1 private Monday journey 20261020 NO MESSAGES
+  - button "More actions":
+  - button "Publish" [disabled]:
+    - generic: Publish
+  - button "More actions":
+  - radiogroup:
+    - radio "Editor" [checked]
+    - radio "Executions"
+    - radio "Evaluations"
+  - complementary:
+    - menubar:
+      - menuitem "Add new item":
+        - button "Add new item":
+    - button "Open command palette":
+    - button "Toggle sidebar":
+    - menuitem "n8n Assistant":
+    - menuitem "Overview":
+    - menuitem "Templates":
+    - menuitem "Insights":
+    - menuitem "Help":
+    - menuitem "Settings":
+  - main:
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Manual only
+    - button "Execute workflow":
+      - generic: Execute workflow
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Inspect private sandbox
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Guard sandbox ownership
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Validate
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Find query
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Find by phone
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Build mutation
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Save to Monday sandbox
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Check save
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read intake
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify intake and simulate send
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply simulated send
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read simulated send
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify send and mock reply
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply reply handoff
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read reply handoff
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify reply and mock optout
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply optout
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read optout
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Match bookings
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply mock booking
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read booking
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Match cancellation
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply mock cancellation
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read cancellation
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify cancellation and human handoff
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply human handoff fixture
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read human handoff
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify handoff and simulated paid
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Apply simulated paid
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Read simulated paid
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Verify paid and prepare archive
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Archive synthetic item
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Execute step":
+    - button "Deactivate":
+    - button "Delete":
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Confirm archive
+    - img "n8n Minimap"
+    - button "Zoom to Fit":
+    - button "Zoom In":
+    - button "Zoom Out":
+    - button "Tidy Up":
+    - button "Execute workflow":
+      - generic: Execute workflow
+    - button "Open nodes panel":
+    - button "Command bar":
+    - button "Add sticky note":
+    - button "Open side panel":
+    - button "n8n AI":
+    - complementary
+    - generic: Logs
+    - button "Clear execution":
+      - text: Clear execution
+    - generic: Error in 2.838s
+    - radiogroup:
+      - radio "Overview"
+      - radio "Details" [checked]
+    - tree:
+      - treeitem "Guard sandbox ownership":
+        - generic: Guard sandbox ownership
+      - treeitem "Validate":
+        - generic: Validate
+      - treeitem "Find query":
+        - generic: Find query
+      - treeitem "Find by phone":
+        - generic: Find by phone
+      - treeitem "Build mutation":
+        - generic: Build mutation
+      - treeitem "Save to Monday sandbox":
+        - generic: Save to Monday sandbox
+      - treeitem "Check save":
+        - generic: Check save
+      - treeitem "Read intake Open... Execute step" [active] [selected]:
+        - generic: Read intake
+        - button "Open...":
+        - button "Execute step":
+      - treeitem "Verify intake and simulate send":
+        - generic: Verify intake and simulate send
+    - generic: Read intake
+    - generic: Success in 434ms
+    - button "Input":
+      - generic: Input
+    - button "Output":
+      - generic: Output
+    - button "Actions":
+    - button "Collapse panel":
+    - generic: Output
+    - textbox "Search (Ctrl+F)"
+    - radiogroup:
+      - radio "Schema":
+      - radio "Table" [checked]:
+      - radio "JSON":
+    - generic: 1 item
+    - table:
+      - rowgroup:
+        - row "data Collapse rows extensions Collapse rows":
+          - columnheader "data Collapse rows":
+            - generic: data
+            - button "Collapse rows":
+          - columnheader "extensions Collapse rows":
+            - generic: extensions
+            - button "Collapse rows":
+          - columnheader
+      - rowgroup:
+        - row:
+          - cell:
+            - generic: items
+            - generic: "0"
+            - generic: id
+            - text: ":"
+            - generic: "3297936391"
+            - generic: name
+            - text: ":"
+            - generic: TEST LP1 SANDBOX 20261020 0500000040
+            - generic: created_at
+            - text: ":"
+            - generic: 2026-10-20T17:40:19Z
+            - generic: column_values
+            - generic: "0"
+            - generic: id
+            - text: ":"
+            - generic: phone_mm8a5qe9
+            - generic: text
+            - text: ":"
+            - generic: "972500000040"
+            - generic: value
+            - text: ":"
+            - generic: "{\"phone\":\"972500000040\",\"countryShortName\":\"IL\"}"
+            - generic: "1"
+            - generic: id
+            - text: ":"
+            - generic: color_mm8akqee
+            - generic: text
+            - text: ":"
+            - generic: ליד חדש
+            - generic: value
+            - text: ":"
+            - generic: "{\"index\":3}"
+            - generic: "2"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8aw1xt
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "3"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8ah5kc
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "4"
+            - generic: id
+            - text: ":"
+            - generic: boolean_mm8a583r
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "{\"checked\":false}"
+            - generic: "5"
+            - generic: id
+            - text: ":"
+            - generic: boolean_mm8a6tsk
+            - generic: text
+            - text: ":"
+            - generic: v
+            - generic: value
+            - text: ":"
+            - generic: "{\"checked\":true}"
+            - generic: "6"
+            - generic: id
+            - text: ":"
+            - generic: long_text_mm8acce0
+            - generic: text
+            - text: ":"
+            - generic: גרסה heat-1.1, חושב 2026-10-20T17:41:51.062Z, שלמות 1/4
+            - generic: \naction=none (+0)
+            - generic: "\\nחסר: intent, timing, docs"
+            - generic: value
+            - text: ":"
+            - generic: "{\"text\":\"גרסה heat-1.1, חושב 2026-10-20T17:41:51.062Z, שלמות 1/4\\naction=none (+0)\\nחסר: intent, timing, docs\",\"changed_at\":\"2026-10-20T17:41:51.954Z\"}"
+            - generic: "7"
+            - generic: id
+            - text: ":"
+            - generic: numeric_mm8arcrn
+            - generic: text
+            - text: ":"
+            - generic: "0"
+            - generic: value
+            - text: ":"
+            - generic: "\"0\""
+            - generic: "8"
+            - generic: id
+            - text: ":"
+            - generic: color_mm8aqqdj
+            - generic: text
+            - text: ":"
+            - generic: "null"
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "9"
+            - generic: id
+            - text: ":"
+            - generic: text_mm8ae05j
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "10"
+            - generic: id
+            - text: ":"
+            - generic: text_mm8ar4gj
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "11"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8a31xh
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "12"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8ax20r
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "13"
+            - generic: id
+            - text: ":"
+            - generic: text_mm8axgqy
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "14"
+            - generic: id
+            - text: ":"
+            - generic: long_text_mm8ahe71
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "15"
+            - generic: id
+            - text: ":"
+            - generic: email_mm8a25jb
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "16"
+            - generic: id
+            - text: ":"
+            - generic: color_mm8amms5
+            - generic: text
+            - text: ":"
+            - generic: קליטת LP1
+            - generic: value
+            - text: ":"
+            - generic: "{\"index\":3}"
+            - generic: "17"
+            - generic: id
+            - text: ":"
+            - generic: long_text_mm8awjfn
+            - generic: text
+            - text: ":"
+            - generic: "מוצר: מחזור משכנתא (LP1)"
+            - generic: "\\nמידע כספי צורף: לא"
+            - generic: value
+            - text: ":"
+            - generic: "{\"text\":\"מוצר: מחזור משכנתא (LP1)\\nמידע כספי צורף: לא\"}"
+            - generic: "18"
+            - generic: id
+            - text: ":"
+            - generic: long_text_mm8ajayp
+            - generic: text
+            - text: ":"
+            - generic: לא זוהתה מורכבות מיוחדת
+            - generic: value
+            - text: ":"
+            - generic: "{\"text\":\"לא זוהתה מורכבות מיוחדת\"}"
+            - generic: "19"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8ab7k5
+            - generic: text
+            - text: ":"
+            - generic: 2026-10-20 20:41
+            - generic: value
+            - text: ":"
+            - generic: "{\"date\":\"2026-10-20\",\"time\":\"17:41:51\",\"changed_at\":\"2026-10-20T17:41:51.957Z\"}"
+            - generic: "20"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8aph6
+            - generic: text
+            - text: ":"
+            - generic: empty
+            - generic: value
+            - text: ":"
+            - generic: "null"
+            - generic: "21"
+            - generic: id
+            - text: ":"
+            - generic: date_mm8aea5t
+            - generic: text
+            - text: ":"
+            - generic: 2026-10-20 20:40
+            - generic: value
+            - text: ":"
+            - generic: "{\"date\":\"2026-10-20\",\"time\":\"17:40:18\"}"
+            - generic: "22"
+            - generic: id
+            - text: ":"
+            - generic: color_mm8aw60x
+            - generic: text
+            - text: ":"
+            - generic: לא נבדקה כדאיות
+            - generic: value
+            - text: ":"
+            - generic: "{\"index\":3}"
+            - generic: "23"
+            - generic: id
+            - text: ":"
+            - generic: color_mm8at03k
+            - generic: text
+            - text: ":"
+            - generic: אין מספיק מידע
+            - generic: value
+            - text: ":"
+            - generic: "{\"index\":3}"
+          - cell "request_id:4ffa98de-bb27-9d09-bc46-bea4b299b01d":
+            - generic: request_id
+            - text: ":"
+            - generic: 4ffa98de-bb27-9d09-bc46-bea4b299b01d
+          - cell
+- complementary
+- alert:
+  - heading "Problem in node ‘Verify intake and simulate send‘" [level=2]
+  - paragraph: Service consent readback [line 1194]

@@ -6,7 +6,7 @@ const fs=require('fs');const path=require('path');const crypto=require('crypto')
 const CAMPAIGN=process.env.CAMPAIGN||'refi';
 const CFG=JSON.parse(fs.readFileSync(path.join(__dirname,'../../campaigns',CAMPAIGN+'.json'),'utf8'));
 const CFGS=JSON.stringify(CFG);
-const BIZS=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8');
+const BIZS=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8').replace(/\r\n/g,'\n');
 const MODE=process.argv[2]||'test';if(!['test','pilot','live'].includes(MODE))throw new Error('mode must be test, pilot or live');
 const GO_LIVE=process.argv[3]||'2026-10-20T07:00:00Z';
 const PILOT=MODE==='pilot'?(process.argv[4]||''):'';
@@ -21,7 +21,7 @@ if(MODE!=='test'){
   if(!prof.allowedContactPhones.includes(ID.contactPhone))throw new Error('contact phone not allowed for profile');
   if(MODE==='pilot'){const ok=ID.testPhones.map(k=>BIZ0.phones[k].e164);for(const ph of PILOT.split(','))if(!ok.includes(ph))throw new Error('pilot phone '+ph+' is not an approved test phone of '+CFG.id);}
 }
-const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS);
+const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS);
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
@@ -88,7 +88,7 @@ const go={name:PFX+'קישורים אישיים (go)',settings:{executionOrder:'
  connections:{'Link':L('Items'),'Items':L('Resolve'),'Resolve':L('Redirect'),'Redirect':L('Found?'),'Found?':L('Update opens'),'Update opens':L('Hot?'),'Hot?':L('Notify Yoram')}};
 
 // 3. Calendly bookings from the office mailbox
-const calCols=['phone','email'].map(k=>COLS[k]);
+const calCols=['phone','email','stage','meeting'].map(k=>COLS[k]);
 const cal={name:PFX+'פגישות מ Calendly',settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
  {id:id(),name:'Every 5 min',type:'n8n-nodes-base.scheduleTrigger',typeVersion:1.2,position:[0,0],parameters:{rule:{interval:[{field:'minutes',minutesInterval:5}]}}},
  {id:id(),name:'Calendly mails',type:'n8n-nodes-base.gmail',typeVersion:2.1,position:[200,0],credentials:GMAIL,onError:'continueRegularOutput',alwaysOutputData:true,parameters:{resource:'message',operation:'getAll',returnAll:false,limit:20,simple:false,filters:{q:'from:notifications@calendly.com newer_than:2d'},options:{}}},
@@ -102,6 +102,10 @@ const cal={name:PFX+'פגישות מ Calendly',settings:{executionOrder:'v1',tim
 // A board automation sets new items to "ליד חדש"; set the meeting stage again after it ran.
 cal.nodes.push({id:id(),name:'Wait for board automation',type:'n8n-nodes-base.wait',typeVersion:1.1,position:[1200,100],webhookId:id(),parameters:{amount:15,unit:'seconds'}});
 cal.nodes.push(monday('Set meeting stage',[1400,100],'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }",variables:{b:"'+BOARD+'",i:String($json.data.create_item.id),v:JSON.stringify({['+JSON.stringify(COLS.stage)+']:JSON.parse($(\'Match bookings\').item.json.colsJson)['+JSON.stringify(COLS.stage)+']})}}) }}'));
+
+cal.nodes.push(code('Acknowledge booking',[1600,0],src('calendly-ack.js'),'runOnceForEachItem'));
+cal.connections['Update lead']=L('Acknowledge booking');
+cal.connections['Set meeting stage']=L('Acknowledge booking');
 
 // Fetch all Monday pages, then expose one validated complete list under the
 // existing Items name. A failed page or exhausted cap never reaches write nodes.

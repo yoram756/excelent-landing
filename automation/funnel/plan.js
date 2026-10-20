@@ -78,10 +78,9 @@ for(const it of items){
   const quiz=(col(cv,'quizDone').text||'').trim().length>0;
   const meeting=dateVal(col(cv,'meeting').value);
   let heat=Number(col(cv,'heat').text||0);
-  let st={};try{st=JSON.parse(col(cv,'state').text||'{}')||{};}catch(e){st={};}
+  // Corrupt state may hide an unresolved send; never reset it and send again.
+  let st;try{st=JSON.parse(col(cv,'state').text||'{}');if(!st||typeof st!=='object'||Array.isArray(st))continue;}catch(e){continue;}
   const first=(it.name||'').replace(/^TEST\s*/,'').trim().split(/\s+/)[0]||'שלום';
-  // a send whose result is not confirmed yet: check Gambot before anything else, never send blindly again
-  if(st.pending){out.push({itemId:it.id,phone,reconcile:true,pendingJson:JSON.stringify(st.pending),stJson:JSON.stringify(st),cols:{},send:null,notify:null});continue;}
   const cols={};let send=null;let notify=null;let changed=false;
   const set=(k,v)=>{cols[k]=v;changed=true;};
 
@@ -113,6 +112,9 @@ for(const it of items){
   if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
   // manual handling wins: no automatic message while a person handles the lead
   if(HUMAN.includes(stage)||(col(cv,'firstReply').text||'').trim()){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
+
+  // Stops and replies win over stale pending advancement. Reconciliation never sends.
+  if(st.pending){out.push({itemId:it.id,phone,reconcile:true,pendingJson:JSON.stringify(st.pending),stJson:JSON.stringify(st),cols:{},send:null,notify:null});continue;}
 
   const MT=CFG.meeting,HOLD=MT.holdPath;
   if(stage===SG.booked&&meeting&&meeting>now&&!(path==='E'&&st.mt===meeting)){path='E';step='BOOK';next=now;st.mt=meeting;set(C.state,{text:JSON.stringify(st)});}

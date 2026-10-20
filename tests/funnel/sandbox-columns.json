@@ -1,0 +1,30 @@
+{
+  "board": "5106403803",
+  "productionBoardForbidden": "5106246268",
+  "columns": {
+    "refi_phone": "phone_mm8a5qe9",
+    "refi_stage": "color_mm8akqee",
+    "refi_meeting": "date_mm8aw1xt",
+    "refi_first_reply": "date_mm8ah5kc",
+    "boolean_mm88mzry": "boolean_mm8a583r",
+    "boolean_mm8848pn": "boolean_mm8a6tsk",
+    "long_text_mm88pfdv": "long_text_mm8acce0",
+    "numeric_mm883h9v": "numeric_mm8arcrn",
+    "fn_status": "color_mm8aqqdj",
+    "fn_path": "text_mm8ae05j",
+    "fn_step": "text_mm8ar4gj",
+    "fn_next": "date_mm8a31xh",
+    "fn_last": "date_mm8ax20r",
+    "fn_token": "text_mm8axgqy",
+    "fn_opens": "long_text_mm8ahe71",
+    "fn_email": "email_mm8a25jb",
+    "refi_source": "color_mm8amms5",
+    "long_text_mm88xzfe": "long_text_mm8awjfn",
+    "long_text_mm88cs6f": "long_text_mm8ajayp",
+    "date_mm88hmw2": "date_mm8ab7k5",
+    "date_mm88qwfm": "date_mm8aph6",
+    "refi_entered": "date_mm8aea5t",
+    "color_mm88hss3": "color_mm8aw60x",
+    "color_mm88xpa8": "color_mm8at03k"
+  }
+}

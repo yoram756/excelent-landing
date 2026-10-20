@@ -1,0 +1,28 @@
+{
+  "verifiedAtUtc": "2026-10-20T17:47:46Z",
+  "board": {
+    "id": "5106403803",
+    "name": "TEST Excelent LP1 acceptance 20261020 NO AUTOMATIONS",
+    "hierarchy_type": "classic"
+  },
+  "activeItems": [],
+  "pagination": {
+    "has_more": false,
+    "nextCursor": null,
+    "count": 0
+  },
+  "automations": {
+    "workflows": [],
+    "automations": [],
+    "recipes": {
+      "recipes": [],
+      "dynamicRecipes": [],
+      "apps": []
+    }
+  },
+  "archivedSyntheticItemIds": [
+    "3297936391",
+    "3297930966"
+  ],
+  "scope": "Private test board only; real Monday HTTP transport, synthetic lifecycle events. No messaging or production activation."
+}

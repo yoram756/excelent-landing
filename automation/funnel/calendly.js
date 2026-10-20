@@ -15,11 +15,16 @@ function parse(subject, text) {
   if (!kind) return null;
   const name = (t.match(/Invitee: (.+?) Invitee Email:/) || [])[1] || '';
   const email = ((t.match(/Invitee Email: ([^\s\[]+)/) || [])[1] || '').toLowerCase();
-  const dm = t.match(/Event Date\/Time: (\d{1,2}):(\d{2}) [^,]*, (\d{1,2}) ([A-Za-z]+) (\d{4})/);
+  const dm = t.match(/Event Date\/Time: (\d{1,2}):(\d{2})\s*(am|pm)?\s*-?[^,]*, (\d{1,2}) ([A-Za-z]+) (\d{4}) \(Israel Time\)/i);
   const loc = (t.match(/Location: (\+?[\d\s\-]{9,20})/) || [])[1] || '';
   const phoneQ = (t.match(/(\+?972[\d\s\-]{8,14}|05\d[\d\s\-]{7,10})/) || [])[1] || '';
   if (!dm) return null;
-  const at = israelToUtc(+dm[5], MONTHS[dm[4]], +dm[3], +dm[1], +dm[2]);
+  let hh=+dm[1];const mm=+dm[2],day=+dm[4],mo=MONTHS[dm[5]],year=+dm[6];
+  if(!mo||mm>59||(dm[3]?(hh<1||hh>12):hh>23))return null;
+  if(dm[3])hh=hh%12+(dm[3].toLowerCase()==='pm'?12:0);
+  const check=new Date(Date.UTC(year,mo-1,day));
+  if(check.getUTCFullYear()!==year||check.getUTCMonth()!==mo-1||check.getUTCDate()!==day)return null;
+  const at = israelToUtc(year,mo,day,hh,mm);
   return { kind, name, email, phone: norm(loc) || norm(phoneQ), at };
 }
 const sd = $getWorkflowStaticData('global'); sd.seen = sd.seen || {};
@@ -28,21 +33,31 @@ try { const b = $('Run test').first().json.body; if (b && b.subject) mails.push(
 try { for (const m of $('Calendly mails').all()) if (m.json && m.json.id) mails.push({ id: m.json.id, subject: m.json.subject || m.json.headers?.subject || '', text: m.json.text || m.json.snippet || '' }); } catch (e) {}
 const items = $('Items').first().json.data.boards[0].items_page.items;
 const out = [];
+const inBatch=new Set();
 for (const mail of mails) {
-  if (sd.seen[mail.id]) continue;
+  if (sd.seen[mail.id]||inBatch.has(mail.id)) continue;
+  inBatch.add(mail.id);
   const ev = parse(mail.subject, mail.text);
-  sd.seen[mail.id] = Date.now();
   if (!ev) continue;
-  let lead = null;
+  const matches=[];
   for (const it of items) {
     const cv = {}; for (const c of it.column_values) cv[c.id] = c;
-    if ((ev.phone && norm(cv[C.phone]?.text) === ev.phone) || (ev.email && (cv[C.email]?.text || '').toLowerCase() === ev.email)) { lead = it; break; }
+    if ((ev.phone && norm(cv[C.phone]?.text) === ev.phone) || (ev.email && (cv[C.email]?.text || '').toLowerCase() === ev.email)) matches.push(it);
   }
+  // Conflicting identities and duplicate owners require manual resolution.
+  if(matches.length>1||(!ev.phone&&!ev.email))continue;
+  const lead=matches[0]||null;
   if (!lead && ev.kind === 'cancel') continue; // a cancel for someone we do not know creates nothing
+  const cv=Object.fromEntries((lead?.column_values||[]).map(c=>[c.id,c]));
+  if(cv[C.stage]?.text===CFG.stages.paid)continue;
+  if(ev.kind==='cancel'&&cv[C.meeting]?.value){
+    let mt;try{mt=JSON.parse(cv[C.meeting].value);}catch(e){continue;}
+    if(mt?.date&&Date.parse(mt.date+'T'+(mt.time||'00:00:00')+'Z')!==ev.at)continue;
+  }
   const d = new Date(ev.at).toISOString();
   const cols = ev.kind === 'new'
     ? { [C.stage]: { label: CFG.stages.booked }, [C.meeting]: { date: d.slice(0, 10), time: d.slice(11, 19) } }
-    : { [C.stage]: { label: CFG.stages.noShow[0] } };
+    : { [C.stage]: { label: CFG.stages.noShow[0] }, [C.meeting]: {} };
   if (ev.email) cols[C.email] = { email: ev.email, text: ev.email };
   out.push({ json: { kind: ev.kind, matched: !!lead, itemId: lead ? lead.id : null, name: ev.name, phone: ev.phone, colsJson: JSON.stringify(cols), mailId: mail.id } });
 }

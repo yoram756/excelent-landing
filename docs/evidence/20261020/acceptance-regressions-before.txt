@@ -1,0 +1,277 @@
+✖ corrupt planner state fails closed rather than forgetting pending sends (70.9638ms)
+✖ opt-out takes priority over pending send reconciliation (4.2636ms)
+✖ paid and human-handled leads never reconcile stale pending advancement (1.5404ms)
+✖ Calendly 12-hour PM is converted to Israel afternoon (1.9089ms)
+✖ Calendly noon and midnight are distinct (1.2811ms)
+✖ invalid Calendly date, time and unsupported timezone never write (2.708ms)
+✖ Calendly conflicting phone and email never select the first lead (1.2603ms)
+✖ Calendly duplicate phone owners never receive a booking (1.0161ms)
+✖ Calendly cancellation clears date and cannot cancel a newer meeting (1.4497ms)
+✖ Calendly cannot downgrade a paying client (2.1186ms)
+✖ Calendly parse does not acknowledge a failed or unattempted write (1.5632ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 0
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 193.9417
+
+✖ failing tests:
+
+test at tests\funnel\acceptance.test.js:7:1
+✖ corrupt planner state fails closed rather than forgetting pending sends (70.9638ms)
+  AssertionError [ERR_ASSERTION]: {bad
+
+  1 !== 0
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:7:137)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:8:1
+✖ opt-out takes priority over pending send reconciliation (4.2636ms)
+  TypeError: Cannot read properties of undefined (reading 'label')
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:8:317)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests\funnel\acceptance.test.js:9:1
+✖ paid and human-handled leads never reconcile stale pending advancement (1.5404ms)
+  AssertionError [ERR_ASSERTION]: לקוח משלם
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:9:263)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:10:1
+✖ Calendly 12-hour PM is converted to Israel afternoon (1.9089ms)
+  TypeError: Cannot read properties of undefined (reading 'colsJson')
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:10:149)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\funnel\acceptance.test.js:11:1
+✖ Calendly noon and midnight are distinct (1.2811ms)
+  TypeError: Cannot read properties of undefined (reading 'colsJson')
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:11:236)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\funnel\acceptance.test.js:12:1
+✖ invalid Calendly date, time and unsupported timezone never write (2.708ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + [
+  +   {
+  +     colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"22:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}',
+  +     itemId: '1',
+  +     kind: 'new',
+  +     mailId: 'test-acceptance-1',
+  +     matched: true,
+  +     name: 'TEST Acceptance',
+  +     phone: '972500000040'
+  +   }
+  + ]
+  - []
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:12:234)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { kind: 'new', matched: true, itemId: '1', name: 'TEST Acceptance', phone: '972500000040', colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"22:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}', mailId: 'test-acceptance-1' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:13:1
+✖ Calendly conflicting phone and email never select the first lead (1.2603ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + [
+  +   {
+  +     colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"15:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}',
+  +     itemId: '1',
+  +     kind: 'new',
+  +     mailId: 'test-acceptance-1',
+  +     matched: true,
+  +     name: 'TEST Acceptance',
+  +     phone: '972500000040'
+  +   }
+  + ]
+  - []
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:13:85)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { kind: 'new', matched: true, itemId: '1', name: 'TEST Acceptance', phone: '972500000040', colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"15:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}', mailId: 'test-acceptance-1' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:14:1
+✖ Calendly duplicate phone owners never receive a booking (1.0161ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + [
+  +   {
+  +     colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"15:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}',
+  +     itemId: '1',
+  +     kind: 'new',
+  +     mailId: 'test-acceptance-1',
+  +     matched: true,
+  +     name: 'TEST Acceptance',
+  +     phone: '972500000040'
+  +   }
+  + ]
+  - []
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:14:76)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { kind: 'new', matched: true, itemId: '1', name: 'TEST Acceptance', phone: '972500000040', colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"15:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}', mailId: 'test-acceptance-1' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:15:1
+✖ Calendly cancellation clears date and cannot cancel a newer meeting (1.4497ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + [
+  +   {
+  +     colsJson: '{"refi_stage":{"label":"פגישה בוטלה"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}',
+  +     itemId: '1',
+  +     kind: 'cancel',
+  +     mailId: 'test-acceptance-1',
+  +     matched: true,
+  +     name: 'TEST Acceptance',
+  +     phone: '972500000040'
+  +   }
+  + ]
+  - []
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:15:173)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { kind: 'cancel', matched: true, itemId: '1', name: 'TEST Acceptance', phone: '972500000040', colsJson: '{"refi_stage":{"label":"פגישה בוטלה"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}', mailId: 'test-acceptance-1' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:16:1
+✖ Calendly cannot downgrade a paying client (2.1186ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + [
+  +   {
+  +     colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"15:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}',
+  +     itemId: '1',
+  +     kind: 'new',
+  +     mailId: 'test-acceptance-1',
+  +     matched: true,
+  +     name: 'TEST Acceptance',
+  +     phone: '972500000040'
+  +   }
+  + ]
+  - []
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:16:62)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { kind: 'new', matched: true, itemId: '1', name: 'TEST Acceptance', phone: '972500000040', colsJson: '{"refi_stage":{"label":"פגישה נקבעה"},"refi_meeting":{"date":"2026-10-22","time":"15:00:00"},"fn_email":{"email":"acceptance@example.com","text":"acceptance@example.com"}}', mailId: 'test-acceptance-1' } ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\acceptance.test.js:17:1
+✖ Calendly parse does not acknowledge a failed or unattempted write (1.5632ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\acceptance.test.js:17:250)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

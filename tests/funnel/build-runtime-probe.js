@@ -1,7 +1,7 @@
 // Build an unpublished, manual-only probe. No network, credentials or customer data.
 const fs=require('fs'),path=require('path');
 const sourceDir=path.resolve(__dirname,'../../automation/funnel');
-const read=n=>fs.readFileSync(path.join(sourceDir,n+'.js'),'utf8');
+const read=n=>fs.readFileSync(path.join(sourceDir,n+'.js'),'utf8').replace(/\r\n/g,'\n');
 const cfg=fs.readFileSync(path.join(__dirname,'../../campaigns/refi.json'),'utf8');
 const biz=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8');
 const plan=read('plan').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');

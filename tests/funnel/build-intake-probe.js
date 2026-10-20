@@ -1,7 +1,7 @@
 // Manual integration probe: exactly one synthetic lead, no alert nodes, archive on success.
 const fs=require('fs'),path=require('path');
 const root=path.resolve(__dirname,'../..');
-const read=n=>fs.readFileSync(path.join(root,'automation/intake',n+'.js'),'utf8');
+const read=n=>fs.readFileSync(path.join(root,'automation/intake',n+'.js'),'utf8').replace(/\r\n/g,'\n');
 const nodes=[],connections={};
 const add=(name,type,parameters,extra={})=>nodes.push({id:'intake-probe-'+nodes.length,name,type,typeVersion:type==='n8n-nodes-base.httpRequest'?4.2:type==='n8n-nodes-base.code'?2:1,position:[nodes.length*220,0],parameters,...extra});
 const code=(name,js)=>add(name,'n8n-nodes-base.code',{jsCode:js});
