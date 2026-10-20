@@ -1,0 +1,212 @@
+{
+  "id": "consolidation",
+  "name": "איחוד הלוואות",
+  "service": "בדיקת איחוד הלוואות לבעלי נכס ללא עלות",
+  "goal": "לקוח שחתם והעביר מקדמה",
+  "audience": "בעלי נכס עם כמה הלוואות והחזר חודשי כבד",
+  "status": "draft",
+  "sources": [
+    "טופס מטא"
+  ],
+  "board": "5106246268",
+  "columns": {
+    "phone": "refi_phone",
+    "stage": "refi_stage",
+    "meeting": "refi_meeting",
+    "firstReply": "refi_first_reply",
+    "consentMarketing": "boolean_mm88mzry",
+    "consentService": "boolean_mm8848pn",
+    "quizDone": "long_text_mm88pfdv",
+    "heat": "numeric_mm883h9v",
+    "status": "fn_status",
+    "path": "fn_path",
+    "step": "fn_step",
+    "next": "fn_next",
+    "last": "fn_last",
+    "token": "fn_token",
+    "state": "fn_opens",
+    "email": "fn_email",
+    "source": "refi_source"
+  },
+  "groups": {
+    "meetings": "group_mm883gr6"
+  },
+  "stages": {
+    "human": [
+      "נוצר קשר",
+      "בטיפול",
+      "התקבל",
+      "נבדק",
+      "דוח התקבל"
+    ],
+    "booked": "פגישה נקבעה",
+    "met": "פגישה התקיימה",
+    "noShow": [
+      "פגישה בוטלה",
+      "לא הגיע"
+    ],
+    "paid": "לקוח משלם",
+    "notRelevant": "לא רלוונטי"
+  },
+  "templates": {
+    "A1": {
+      "id": "PENDING",
+      "name": "exc_cons_a1_ack"
+    },
+    "A2": {
+      "id": "PENDING",
+      "name": "exc_cons_a2_quiz",
+      "dest": "q"
+    },
+    "A3": {
+      "id": "PENDING",
+      "name": "exc_cons_a3_case",
+      "dest": "c"
+    },
+    "A4": {
+      "id": "PENDING",
+      "name": "exc_cons_a4_close"
+    },
+    "B1": {
+      "id": "PENDING",
+      "name": "exc_cons_b1_booked",
+      "vars": [
+        "first",
+        "when"
+      ]
+    },
+    "B2": {
+      "id": "PENDING",
+      "name": "exc_cons_b2_reminder",
+      "vars": [
+        "first",
+        "when"
+      ],
+      "dest": "c"
+    },
+    "B3": {
+      "id": "PENDING",
+      "name": "exc_cons_b3_noshow",
+      "dest": "c"
+    },
+    "F1": {
+      "id": "PENDING",
+      "name": "exc_cons_f1_after",
+      "dest": "g"
+    }
+  },
+  "entry": {
+    "default": {
+      "path": "B",
+      "step": "NEW"
+    },
+    "quizDone": {
+      "path": "D",
+      "step": "QUIZ"
+    }
+  },
+  "sequences": {
+    "B": [
+      {
+        "code": "A1",
+        "next": {
+          "minutes": 5
+        }
+      },
+      {
+        "code": "A2",
+        "next": {
+          "days": 1,
+          "at": "10:00"
+        },
+        "thenPath": "C"
+      }
+    ],
+    "C": [
+      {
+        "code": "A3",
+        "next": {
+          "days": 3,
+          "at": "10:00"
+        }
+      },
+      {
+        "code": "A4",
+        "next": {
+          "days": 14
+        },
+        "thenPath": "L"
+      }
+    ],
+    "D": [],
+    "G": [
+      {
+        "code": "F1",
+        "next": {
+          "days": 14
+        },
+        "thenPath": "L"
+      }
+    ],
+    "L": []
+  },
+  "quizUpgrade": {
+    "fromPaths": [
+      "B",
+      "C"
+    ],
+    "to": {
+      "path": "D",
+      "step": "QUIZ"
+    }
+  },
+  "meeting": {
+    "booked": "B1",
+    "reminder": "B2",
+    "noShow": "B3",
+    "after": {
+      "path": "G",
+      "step": "MET",
+      "next": {
+        "days": 2,
+        "at": "10:00"
+      }
+    },
+    "noShowLimit": 2,
+    "holdPath": "L"
+  },
+  "rules": {
+    "onePerDayPaths": [
+      "C",
+      "G"
+    ],
+    "sameDayAllowed": [
+      "A2"
+    ],
+    "holdDays": 14
+  },
+  "links": {
+    "q": "https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=consolidation#check",
+    "c": "https://calendly.com/excellnet/15min",
+    "g": "https://share.google/L6zPPGazOqwdvB1pH",
+    "m": "https://www.midrag.co.il/SpCard/Sp/94658",
+    "b": "https://www.bizreviews.co.il/provider/peled-yoram"
+  },
+  "linkByStep": {
+    "A2": "q",
+    "A3": "c",
+    "B2": "c",
+    "B3": "c",
+    "F1": "g"
+  },
+  "handoff": {
+    "heatAtLeast": 70,
+    "onReply": true,
+    "onBooking": true
+  },
+  "kpiTargets": {
+    "costPerPayingClient": null,
+    "costPerMeeting": null
+  },
+  "notes": "טיוטה להוכחת התשתית. מסרים, שאלון ויעדים טרם הוגדרו עסקית. אין להפעיל לפני אישור יורם."
+}

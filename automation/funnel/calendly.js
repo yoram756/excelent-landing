@@ -1,5 +1,6 @@
 // n8n Code node "Match bookings" in the Calendly workflow. Source of truth: this file.
 // Input: Calendly notification emails (Gmail) or a test body. Output: Monday updates for matched leads.
+const CFG = __CONFIG__; const C = CFG.columns;
 const norm = s => { let d = String(s || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d.length >= 11 ? d : ''; };
 const MONTHS = {January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};
 function israelToUtc(y, mo, d, hh, mm) {
@@ -35,14 +36,14 @@ for (const mail of mails) {
   let lead = null;
   for (const it of items) {
     const cv = {}; for (const c of it.column_values) cv[c.id] = c;
-    if ((ev.phone && norm(cv.refi_phone?.text) === ev.phone) || (ev.email && (cv.fn_email?.text || '').toLowerCase() === ev.email)) { lead = it; break; }
+    if ((ev.phone && norm(cv[C.phone]?.text) === ev.phone) || (ev.email && (cv[C.email]?.text || '').toLowerCase() === ev.email)) { lead = it; break; }
   }
   if (!lead && ev.kind === 'cancel') continue; // a cancel for someone we do not know creates nothing
   const d = new Date(ev.at).toISOString();
   const cols = ev.kind === 'new'
-    ? { refi_stage: { label: 'פגישה נקבעה' }, refi_meeting: { date: d.slice(0, 10), time: d.slice(11, 19) } }
-    : { refi_stage: { label: 'פגישה בוטלה' } };
-  if (ev.email) cols.fn_email = { email: ev.email, text: ev.email };
+    ? { [C.stage]: { label: CFG.stages.booked }, [C.meeting]: { date: d.slice(0, 10), time: d.slice(11, 19) } }
+    : { [C.stage]: { label: CFG.stages.noShow[0] } };
+  if (ev.email) cols[C.email] = { email: ev.email, text: ev.email };
   out.push({ json: { kind: ev.kind, matched: !!lead, itemId: lead ? lead.id : null, name: ev.name, phone: ev.phone, colsJson: JSON.stringify(cols), mailId: mail.id } });
 }
 // keep the dedupe store small

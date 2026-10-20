@@ -1,0 +1,315 @@
+{
+ "name": "משפך איחוד הלוואות: קישורים אישיים (go)",
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "nodes": [
+  {
+   "id": "11599f86-7f9f-b80f-9211-ba10f199243b",
+   "name": "Link",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    0
+   ],
+   "webhookId": "eb8ef043-cef3-e366-7fd6-50f88088a4fc",
+   "parameters": {
+    "httpMethod": "GET",
+    "path": "go-consolidation",
+    "responseMode": "responseNode",
+    "options": {}
+   }
+  },
+  {
+   "id": "653edcca-3040-96f2-091e-5564c679520e",
+   "name": "Items",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    200,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "onError": "continueRegularOutput",
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\"]){ id text value } } } } }\"}",
+    "options": {}
+   }
+  },
+  {
+   "id": "4fb696ef-9269-38dc-b122-bd178c3461b4",
+   "name": "Resolve",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    400,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// n8n Code node \"Resolve link\" in the go redirect workflow. Source of truth: this file.\n// c = 10 char personal token + 1 letter destination, or a phone number as fallback.\nconst CFG = {\"id\":\"consolidation\",\"name\":\"איחוד הלוואות\",\"service\":\"בדיקת איחוד הלוואות לבעלי נכס ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי נכס עם כמה הלוואות והחזר חודשי כבד\",\"status\":\"draft\",\"sources\":[\"טופס מטא\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88pfdv\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"A1\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a1_ack\"},\"A2\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a2_quiz\",\"dest\":\"q\"},\"A3\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a3_case\",\"dest\":\"c\"},\"A4\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a4_close\"},\"B1\":{\"id\":\"PENDING\",\"name\":\"exc_cons_b1_booked\",\"vars\":[\"first\",\"when\"]},\"B2\":{\"id\":\"PENDING\",\"name\":\"exc_cons_b2_reminder\",\"vars\":[\"first\",\"when\"],\"dest\":\"c\"},\"B3\":{\"id\":\"PENDING\",\"name\":\"exc_cons_b3_noshow\",\"dest\":\"c\"},\"F1\":{\"id\":\"PENDING\",\"name\":\"exc_cons_f1_after\",\"dest\":\"g\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"A1\",\"next\":{\"minutes\":5}},{\"code\":\"A2\",\"next\":{\"days\":1,\"at\":\"10:00\"},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"A3\",\"next\":{\"days\":3,\"at\":\"10:00\"}},{\"code\":\"A4\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[],\"G\":[{\"code\":\"F1\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"B1\",\"reminder\":\"B2\",\"noShow\":\"B3\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"G\"],\"sameDayAllowed\":[\"A2\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=consolidation#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"linkByStep\":{\"A2\":\"q\",\"A3\":\"c\",\"B2\":\"c\",\"B3\":\"c\",\"F1\":\"g\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"kpiTargets\":{\"costPerPayingClient\":null,\"costPerMeeting\":null},\"notes\":\"טיוטה להוכחת התשתית. מסרים, שאלון ויעדים טרם הוגדרו עסקית. אין להפעיל לפני אישור יורם.\"};\nconst DEST = CFG.links, BY_STEP = CFG.linkByStep, C = CFG.columns;\nconst raw = String(($('Link').first().json.query || {}).c || '').trim().toLowerCase();\nconst items = $('Items').first().json.data.boards[0].items_page.items;\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d; };\nlet token = '', dest = '', lead = null;\nconst m = raw.match(/^([a-z0-9]{10})([qcgmb])$/);\nif (m) { token = m[1]; dest = m[2]; }\nfor (const it of items) {\n  const cv = {}; for (const c of it.column_values) cv[c.id] = c;\n  if (token && cv[C.token]?.text === token) { lead = { it, cv }; break; }\n  if (!token && raw.replace(/\\D/g, '').length >= 9 && norm(cv[C.phone]?.text) === norm(raw)) { lead = { it, cv }; break; }\n}\nif (lead && !dest) dest = BY_STEP[lead.cv[C.step]?.text] || 'q';\nif (!dest) dest = 'q';\nlet url = DEST[dest];\nif (dest === 'q' && lead) url = url.replace('#check', '&t=' + (lead.cv[C.token]?.text || '') + '#check');\nconst out = { url, found: !!lead, dest };\nif (lead) {\n  let st = {}; try { st = JSON.parse(lead.cv[C.state]?.text || '{}') || {}; } catch (e) {}\n  st.opens = st.opens || {};\n  const firstOfType = !st.opens[dest];\n  st.opens[dest] = (st.opens[dest] || 0) + 1;\n  const openPoints = Object.keys(st.opens).length * 5;\n  let heat = Number(lead.cv[C.heat]?.text || 0);\n  const before = heat;\n  if (firstOfType && openPoints <= 15) heat += 5;\n  const cols = { [C.state]: { text: JSON.stringify(st) } };\n  if (heat !== before) cols[C.heat] = String(heat);\n  out.itemId = lead.it.id; out.colsJson = JSON.stringify(cols);\n  out.notify = before < CFG.handoff.heatAtLeast && heat >= CFG.handoff.heatAtLeast && (lead.cv[C.path]?.text || '') !== 'E';\n  out.notifyText = 'משפך מחזור: הליד הגיע לציון חום ' + heat + ' ומוכן לשיחה. פתח קישור: ' + dest;\n  out.meId = $('Items').first().json.data.me.id;\n}\nreturn [{ json: out }];\n"
+   }
+  },
+  {
+   "id": "2a7cac04-c01c-1bd8-d998-5834dc9d04ec",
+   "name": "Redirect",
+   "type": "n8n-nodes-base.respondToWebhook",
+   "typeVersion": 1.1,
+   "position": [
+    600,
+    0
+   ],
+   "parameters": {
+    "respondWith": "redirect",
+    "redirectURL": "={{ $json.url }}",
+    "options": {
+     "responseCode": 302
+    }
+   }
+  },
+  {
+   "id": "2f9dc9eb-5156-0d79-ac80-9251c401b719",
+   "name": "Found?",
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2,
+   "position": [
+    800,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "64eb8be3-ae1f-bcee-fab9-4fe635a14b85",
+       "leftValue": "={{ $('Resolve').item.json.found }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "dfac7992-2038-1112-5278-b4558cfd8395",
+   "name": "Update opens",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1000,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($('Resolve').item.json.itemId),v:$('Resolve').item.json.colsJson} }) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "9abaf031-da5f-0ac9-96ad-ecf7c9113d2a",
+   "name": "Hot?",
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "a15f7529-8219-c218-81fd-156fd78e8dab",
+       "leftValue": "={{ $('Resolve').item.json.notify }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "2169a2b6-1615-87d4-f15d-cb8ecc792b63",
+   "name": "Notify Yoram",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1400,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){ create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){ text } create_update(item_id:$i,body:$b){ id } }\",variables:{u:String($('Resolve').item.json.meId),t:String($('Resolve').item.json.itemId),x:$('Resolve').item.json.notifyText,i:String($('Resolve').item.json.itemId),b:$('Resolve').item.json.notifyText} }) }}",
+    "options": {}
+   }
+  }
+ ],
+ "connections": {
+  "Link": {
+   "main": [
+    [
+     {
+      "node": "Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Items": {
+   "main": [
+    [
+     {
+      "node": "Resolve",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Resolve": {
+   "main": [
+    [
+     {
+      "node": "Redirect",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Redirect": {
+   "main": [
+    [
+     {
+      "node": "Found?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Found?": {
+   "main": [
+    [
+     {
+      "node": "Update opens",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Update opens": {
+   "main": [
+    [
+     {
+      "node": "Hot?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Hot?": {
+   "main": [
+    [
+     {
+      "node": "Notify Yoram",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ }
+}

@@ -4,6 +4,7 @@
 // no answer     -> result unknown: keep the pending send, the reconcile step checks Gambot before any resend
 const p = $('Has send?').item.json;
 const r = $json || {};
+const C = p.colmap;
 const ok = r.success === true;
 const refused = r.success === false;
 let cols = JSON.parse(p.colsJson);
@@ -12,11 +13,11 @@ if (refused) {
   delete st.pending;
   st.fails = (st.fails || 0) + 1;
   st.lastError = String(r.message || r.error || 'unknown').slice(0, 160);
-  cols = { fn_path: p.prevPath, fn_step: p.prevStep };
+  cols = { [C.path]: p.prevPath, [C.step]: p.prevStep };
   const t = new Date(Date.now() + 30 * 60000).toISOString();
-  cols.fn_next = { date: t.slice(0, 10), time: t.slice(11, 19) };
-  if (st.fails >= 3) { cols.fn_status = { label: 'נעצר' }; cols.fn_next = {}; }
-  cols.fn_opens = { text: JSON.stringify(st) };
+  cols[C.next] = { date: t.slice(0, 10), time: t.slice(11, 19) };
+  if (st.fails >= 3) { cols[C.status] = { label: 'נעצר' }; cols[C.next] = {}; }
+  cols[C.state] = { text: JSON.stringify(st) };
 } else if (!ok) {
   cols = {};
 }
