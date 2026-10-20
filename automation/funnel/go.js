@@ -6,8 +6,10 @@ const CFG = __CONFIG__;
 const DEST = CFG.links, C = CFG.columns;
 const EXAMPLES = (CFG.linkTokenExamples || []).map(x => String(x).toLowerCase());
 const raw = String(($('Link').first().json.query || {}).c || '').trim().toLowerCase();
-const items = $('Items').first().json.data.boards[0].items_page.items;
-const m = raw.match(/^([a-z0-9]{10})([a-z])$/);
+const page = $('Items').first().json.data.boards[0].items_page;
+if (page.cursor) throw new Error('Monday result truncated: do not attribute clicks from a partial lead list');
+const items = page.items;
+const m = raw.match(/^([a-z0-9]{10}|[a-z0-9]{20})([a-z])$/);
 let token = '', dest = '', lead = null, reason = '';
 if (!m) reason = 'bad format';
 else if (EXAMPLES.includes(raw) || EXAMPLES.includes(m[1])) reason = 'template example value';
@@ -23,7 +25,13 @@ let url = DEST[dest];
 const out = { url, found: !!lead, dest, reason, campaign: CFG.id };
 if (lead) {
   if (dest === 'q') out.url = url.replace('#', (url.includes('?') ? '&' : '?') + 't=' + token + '#');
-  let st = {}; try { st = JSON.parse(lead.cv[C.state]?.text || '{}') || {}; } catch (e) {}
+  let st;
+  const storedState = lead.cv[C.state]?.text;
+  try { st = storedState ? JSON.parse(storedState) : {}; } catch (e) { st = null; }
+  if (!st || typeof st !== 'object' || Array.isArray(st) || (st.opens && (typeof st.opens !== 'object' || Array.isArray(st.opens)))) {
+    // The destination still works, but no heat or engagement state is written over corrupted state.
+    return [{ json: { url: out.url, found: false, dest, reason: 'invalid stored lead state', campaign: CFG.id } }];
+  }
   st.opens = st.opens || {};
   const now = Date.now();
   const firstOfType = !st.opens[dest];
