@@ -6,3 +6,4 @@ test('every connection points at an existing node',()=>{for(const w of wfs){cons
 test('no expression contains a run of closing braces (n8n breaks on it)',()=>{for(const w of wfs)for(const x of w.nodes){const b=x.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{'))assert.ok(!/\}\}/.test(b.slice(3,-2)),w.name+' / '+x.name);}});
 test('test build never contains a live engine',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.ok(p.includes("MODE = 'test'"));});
 test('no secret test path is baked into the build',()=>{for(const w of wfs)for(const x of w.nodes)if(x.type==='n8n-nodes-base.webhook'&&x.name==='Run test')assert.ok(x.parameters.path.startsWith('__TEST_PATH__'));});
+test('rebuilding gives identical files (no churn in git)',()=>{const fs=require('fs');const before=fs.readFileSync(D+'/dist/go.json','utf8');execFileSync('node',[D+'/build-workflows.js','test']);assert.equal(fs.readFileSync(D+'/dist/go.json','utf8'),before);});

@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "fe1f2e68-7970-43c1-a3d7-35bf9a0c9385",
+   "id": "fc687a81-42be-ee18-970d-8a008901df4e",
    "name": "Every 5 min",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "id": "68864868-2e82-4aa1-9d4a-f93c2a1021d9",
+   "id": "848b0b92-4955-70d8-529c-ced7e0634d3b",
    "name": "Run test",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -34,7 +34,7 @@
     0,
     200
    ],
-   "webhookId": "9e277b2c-6ed3-4abf-b918-839d348348a1",
+   "webhookId": "1c2298df-f804-534e-b178-e8809ca752ac",
    "parameters": {
     "httpMethod": "POST",
     "path": "__TEST_PATH__engine",
@@ -43,7 +43,7 @@
    }
   },
   {
-   "id": "2fe55c25-5252-4222-b484-4a67cd45ed22",
+   "id": "3b71efd2-1577-3475-b8c7-502bc9546108",
    "name": "Shabbat",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -61,7 +61,7 @@
    }
   },
   {
-   "id": "f6fe496d-9954-49e6-b72f-bf00dc73c37d",
+   "id": "82475202-a5ef-c42c-75ad-d425c47ac032",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -75,6 +75,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "parameters": {
     "method": "POST",
     "url": "https://api.monday.com/v2",
@@ -96,7 +99,7 @@
    }
   },
   {
-   "id": "7638e998-60ab-4f53-936f-714e3daa9c5f",
+   "id": "31335717-64ae-dafa-e82a-de080d8f0af0",
    "name": "Convos",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -122,7 +125,7 @@
    }
   },
   {
-   "id": "63822269-e1e8-4030-b8b4-58d8b1699cc7",
+   "id": "69e8f9ff-7ffc-6d10-4ead-a8790503ae11",
    "name": "Plan",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -131,11 +134,11 @@
     0
    ],
    "parameters": {
-    "jsCode": "// Funnel engine planner. Runs inside the n8n Code node \"Plan\" (source of truth: this file).\n// MODE is injected by build-workflow.js: 'test' handles only items named TEST and never calls Gambot;\n// 'live' handles real leads only and sends real WhatsApp templates.\nconst MODE = 'test';\nconst GO_LIVE = Date.parse('2026-10-20T07:00:00Z');\nlet testBody={};try{testBody=$('Run test').first().json.body||{};}catch(e){}\nconst T = {M1:'2146929776251168',M2:'2866421103739060',M3:'2306286663247344',M4:'991655264017502',M5:'1861514208308620',M6:'922497660829094',M7:'1695504292330742',M8:'1456261889708463',M9:'1825910702064350',M10:'1517902547031884',M10R:'4090685337891850',M11:'1462992419096031',M12:'1152794754084561',M13:'1022323597539469',M14:'1665753921818083',M15:'1150212394355928'};\nconst DEST = {M2:'q',M3:'b',M4:'c',M5:'q',M7:'c',M8:'c',M9:'c',M10R:'c',M11:'c',M12:'g',M13:'m',M15:'c'};\nconst H = 3600000, D = 86400000;\nconst now = (MODE==='test'&&testBody.now)?Date.parse(testBody.now):Date.now();\n\nfunction parts(ts){const o={};new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false}).formatToParts(new Date(ts)).forEach(p=>o[p.type]=p.value);o.hour=o.hour==='24'?'00':o.hour;return o;}\nfunction offset(ts){const p=parts(ts);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ts/60000)*60000;}\nfunction atLocal(ts,days,hh,mm){const p=parts(ts+days*D);const guess=Date.UTC(+p.year,+p.month-1,+p.day,hh,mm);return guess-offset(guess);}\nfunction dayKey(ts){const p=parts(ts);return p.year+p.month+p.day;}\nconst HEB_DAYS={Sun:'ראשון',Mon:'שני',Tue:'שלישי',Wed:'רביעי',Thu:'חמישי',Fri:'שישי',Sat:'שבת'};\nfunction whenText(ts){const p=parts(ts);return 'יום '+HEB_DAYS[p.weekday]+' '+(+p.day)+'.'+(+p.month)+' בשעה '+p.hour+':'+p.minute;}\n\nlet candles=null,havdalah=null;\ntry{const items=($('Shabbat').first().json.items)||[];for(const it of items){if(it.category==='candles'&&!candles)candles=Date.parse(it.date);if(it.category==='havdalah'&&!havdalah)havdalah=Date.parse(it.date);}}catch(e){}\nfunction windowOpen(ts){const p=parts(ts);const mins=(+p.hour)*60+(+p.minute);\n  if(candles&&havdalah&&ts>=candles&&ts<havdalah)return false;\n  if(p.weekday==='Fri'){if(mins<510)return false;if(candles&&dayKey(candles)===dayKey(ts))return ts<candles;return mins<840;}\n  if(p.weekday==='Sat'){if(havdalah&&dayKey(havdalah)===dayKey(ts))return ts>=havdalah&&mins<1350;return mins>=1200&&mins<1350;}\n  return mins>=510&&mins<1200;}\nconst open=windowOpen(now);\n\nconst norm=s=>{let d=String(s||'').replace(/\\D/g,'');if(d.startsWith('0'))d='972'+d.slice(1);return d.length>=11?d:'';};\nconst convos={};\ntry{for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}\nconst mdata=$('Items').first().json.data;\nconst meId=mdata.me.id;\nconst items=mdata.boards[0].items_page.items;\nconst rand=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<10;i++)s+=a[Math.floor(Math.random()*a.length)];return s;};\nconst dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;return Date.parse(j.date+'T'+(j.time||'00:00:00')+'Z');}catch(e){return null;}};\nconst toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};\nconst checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};\n\nconst out=[];\nfor(const it of items){\n  const cv={};for(const c of it.column_values)cv[c.id]=c;\n  const isTest=/^TEST/.test(it.name||'');\n  if(MODE==='test'?!isTest:isTest)continue;\n  const phone=norm(cv.refi_phone?.text);if(!phone)continue;\n  let status=cv.fn_status?.text||'';let path=cv.fn_path?.text||'';let step=cv.fn_step?.text||'';\n  let next=dateVal(cv.fn_next?.value);const last=dateVal(cv.fn_last?.value);\n  let token=cv.fn_token?.text||'';const stage=cv.refi_stage?.text||'';\n  const mkt=checked(cv.boolean_mm88mzry?.value);const svc=checked(cv.boolean_mm8848pn?.value);\n  const quiz=(cv.long_text_mm88pfdv?.text||'').trim().length>0;\n  const meeting=dateVal(cv.refi_meeting?.value);\n  let heat=Number(cv.numeric_mm883h9v?.text||0);\n  let st={};try{st=JSON.parse(cv.fn_opens?.text||'{}')||{};}catch(e){st={};}\n  const first=(it.name||'').replace(/^TEST\\s*/,'').trim().split(/\\s+/)[0]||'שלום';\n  const cols={};let send=null;let notify=null;let changed=false;\n  const set=(k,v)=>{cols[k]=v;changed=true;};\n\n  if(!status){\n    if(!(mkt||svc))continue;\n    if(Date.parse(it.created_at)<GO_LIVE)continue;\n    token=rand();status='פעיל';\n    if(quiz){path='D';step='QUIZ';}else{path='B';step='NEW';}\n    next=now;st.mkt=mkt;\n    set('fn_status',{label:'פעיל'});set('fn_token',token);\n  }\n  if(stage==='לקוח משלם'&&status!=='לקוח'){set('fn_status',{label:'לקוח'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n  if(stage==='לא רלוונטי'&&status==='פעיל'){set('fn_status',{label:'נעצר'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n\n  const cvn=convos[phone];\n  if(status==='פעיל'&&cvn&&cvn.dir==='incoming'&&cvn.time>(last||0)&&cvn.time>(st.reply||0)){\n    st.reply=cvn.time;const t=cvn.text.trim();\n    if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set('fn_status',{label:'הסר'});set('fn_next',{});notify='ביקש הסרה מהודעות: \"'+t.slice(0,80)+'\"';}\n    else if(/^פחות/.test(t)){status='פחות';set('fn_status',{label:'פחות'});notify='ביקש לקבל פחות הודעות';}\n    else{status='ענה';set('fn_status',{label:'ענה'});heat+=10;set('numeric_mm883h9v',String(heat));notify='ענה בוואטסאפ ל 055-9881245: \"'+t.slice(0,120)+'\". ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}\n    set('fn_opens',{text:JSON.stringify(st)});\n  }\n  if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}\n\n  if(stage==='פגישה נקבעה'&&meeting&&meeting>now&&!(path==='E'&&st.mt===meeting)){path='E';step='BOOK';next=now;st.mt=meeting;set('fn_opens',{text:JSON.stringify(st)});}\n  else if(stage==='פגישה התקיימה'&&path!=='G'&&path!=='L'){path='G';step='MET';next=atLocal((meeting&&meeting<now?meeting:now),2,10,0);}\n  else if((stage==='פגישה בוטלה'||stage==='לא הגיע')&&path==='E'){st.ns=(st.ns||0)+1;set('fn_opens',{text:JSON.stringify(st)});if(st.ns>=2){path='L';step='NOSHOW2';next=now+14*D;}else{path='F';step='NOSHOW';next=Math.max(now,(meeting||now)+H);}}\n  else if(quiz&&(path==='B'||path==='C')){path='D';step='QUIZ';next=now;}\n\n  let code=null,nPath=path,nStep=step,nNext=next,fixed=false;\n  if(next&&next<=now&&open){\n    const sameDay=last&&dayKey(last)===dayKey(now);\n    if(path==='B'&&step==='NEW'){code='M1';nNext=now+5*60000;}\n    else if(path==='B'&&step==='M1'){code='M2';nPath='C';nNext=now+3*H;}\n    else if(path==='C'&&step==='M2'){code='M3';nNext=atLocal(now,1,10,0);}\n    else if(path==='C'&&step==='M3'){code='M4';nNext=atLocal(now,2,10,0);}\n    else if(path==='C'&&step==='M4'){code='M5';nNext=atLocal(now,4,10,0);}\n    else if(path==='C'&&step==='M5'){code='M6';nPath='L';nNext=now+14*D;}\n    else if(path==='D'&&step==='QUIZ'){code='M7';nNext=now+D;}\n    else if(path==='D'&&step==='M7'){code='M8';nNext=now+2*D;}\n    else if(path==='D'&&step==='M8'){code='M9';nPath='L';nNext=now+14*D;}\n    else if(path==='E'&&step==='BOOK'){code='M10';fixed=true;const r24=meeting-D,r1=meeting-H;if(r24>now+2*H){nStep='M10';nNext=r24;}else if(r1>now+15*60000){nStep='R1';nNext=r1;}else{nStep='M10';nNext=null;}}\n    else if(path==='E'&&step==='M10'){fixed=true;if(meeting&&meeting>now){code='M10R';const r1=meeting-H;if(r1>now+30*60000){nStep='R1';nNext=r1;}else{nStep='R2';nNext=null;}}else{nNext=null;}}\n    else if(path==='E'&&step==='R1'){fixed=true;if(meeting&&meeting>now){code='M10R';}nStep='R2';nNext=null;}\n    else if(path==='F'&&step==='NOSHOW'){code='M11';nNext=null;}\n    else if(path==='G'&&step==='MET'){code='M12';nNext=now+3*D;}\n    else if(path==='G'&&step==='M12'){code='M13';nNext=now+5*D;}\n    else if(path==='G'&&step==='M13'){code='M14';nNext=now+11*D;}\n    else if(path==='G'&&step==='M14'){code='M15';nPath='L';nNext=now+14*D;}\n    else if(path==='L'){nNext=now+14*D;}\n    if(code&&sameDay&&['C','D','G'].includes(path)&&!['M2','M3','M7'].includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}\n    if(code){\n      if(!fixed)nStep=code;\n      const vars=['M10','M10R'].includes(code)?[first,whenText(meeting)]:[first];\n      send={to:phone,templateId:T[code],variables:vars};\n      if(DEST[code])send.buttonVariables=[token+DEST[code]];\n      set('fn_last',toDate(now));\n    }\n  }\n  if(nPath!==(cv.fn_path?.text||''))set('fn_path',nPath);\n  if(nStep!==(cv.fn_step?.text||''))set('fn_step',nStep);\n  if(nNext!==dateVal(cv.fn_next?.value))set('fn_next',nNext?toDate(nNext):{});\n  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});\n}\nreturn out.map(o=>({json:{...o,hasSend:!!o.send,live:MODE==='live',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));\n"
+    "jsCode": "// Funnel engine planner. Runs inside the n8n Code node \"Plan\" (source of truth: this file).\n// MODE is injected by build-workflow.js: 'test' handles only items named TEST and never calls Gambot;\n// 'live' handles real leads only and sends real WhatsApp templates.\nconst MODE = 'test';\nconst GO_LIVE = Date.parse('2026-10-20T07:00:00Z');\nlet testBody={};try{testBody=$('Run test').first().json.body||{};}catch(e){}\nconst T = {M1:'2146929776251168',M2:'2866421103739060',M3:'2306286663247344',M4:'991655264017502',M5:'1861514208308620',M6:'922497660829094',M7:'1695504292330742',M8:'1456261889708463',M9:'1825910702064350',M10:'1517902547031884',M10R:'4090685337891850',M11:'1462992419096031',M12:'1152794754084561',M13:'1022323597539469',M14:'1665753921818083',M15:'1150212394355928'};\nconst DEST = {M2:'q',M3:'b',M4:'c',M5:'q',M7:'c',M8:'c',M9:'c',M10R:'c',M11:'c',M12:'g',M13:'m',M15:'c'};\nconst H = 3600000, D = 86400000;\nconst now = (MODE==='test'&&testBody.now)?Date.parse(testBody.now):Date.now();\n\nfunction parts(ts){const o={};new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Jerusalem',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false}).formatToParts(new Date(ts)).forEach(p=>o[p.type]=p.value);o.hour=o.hour==='24'?'00':o.hour;return o;}\nfunction offset(ts){const p=parts(ts);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour,+p.minute)-Math.floor(ts/60000)*60000;}\nfunction atLocal(ts,days,hh,mm){const p=parts(ts+days*D);const guess=Date.UTC(+p.year,+p.month-1,+p.day,hh,mm);return guess-offset(guess);}\nfunction dayKey(ts){const p=parts(ts);return p.year+p.month+p.day;}\nconst HEB_DAYS={Sun:'ראשון',Mon:'שני',Tue:'שלישי',Wed:'רביעי',Thu:'חמישי',Fri:'שישי',Sat:'שבת'};\nfunction whenText(ts){const p=parts(ts);return 'יום '+HEB_DAYS[p.weekday]+' '+(+p.day)+'.'+(+p.month)+' בשעה '+p.hour+':'+p.minute;}\n\nlet candles=null,havdalah=null;\ntry{const items=($('Shabbat').first().json.items)||[];for(const it of items){if(it.category==='candles'&&!candles)candles=Date.parse(it.date);if(it.category==='havdalah'&&!havdalah)havdalah=Date.parse(it.date);}}catch(e){}\nfunction windowOpen(ts){const p=parts(ts);const mins=(+p.hour)*60+(+p.minute);\n  if(candles&&havdalah&&ts>=candles&&ts<havdalah)return false;\n  if(p.weekday==='Fri'){if(mins<510)return false;if(candles&&dayKey(candles)===dayKey(ts))return ts<candles;return mins<840;}\n  if(p.weekday==='Sat'){if(havdalah&&dayKey(havdalah)===dayKey(ts))return ts>=havdalah&&mins<1350;return mins>=1200&&mins<1350;}\n  return mins>=510&&mins<1200;}\nconst open=windowOpen(now);\n\nconst norm=s=>{let d=String(s||'').replace(/\\D/g,'');if(d.startsWith('0'))d='972'+d.slice(1);return d.length>=11?d:'';};\nconst convos={};let convosOk=false;\ntry{if(Array.isArray($('Convos').first().json.data.items))convosOk=true;for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}\nconst mdata=$('Items').first().json.data;\nconst meId=mdata.me.id;\nconst items=mdata.boards[0].items_page.items;\nconst rand=()=>{const a='abcdefghjkmnpqrstuvwxyz23456789';let s='';for(let i=0;i<10;i++)s+=a[Math.floor(Math.random()*a.length)];return s;};\nconst dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;return Date.parse(j.date+'T'+(j.time||'00:00:00')+'Z');}catch(e){return null;}};\nconst toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};\nconst checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};\n\nconst out=[];\n// phones already in the funnel: a second item with the same phone never starts its own series\nconst owner={};\nfor(const it of items){const cv={};for(const c of it.column_values)cv[c.id]=c;const ph=norm(cv.refi_phone?.text);if(ph&&cv.fn_status?.text&&!owner[ph])owner[ph]=it.id;}\nfor(const it of items){\n  const cv={};for(const c of it.column_values)cv[c.id]=c;\n  const isTest=/^TEST/.test(it.name||'');\n  if(MODE==='test'?!isTest:isTest)continue;\n  const phone=norm(cv.refi_phone?.text);if(!phone)continue;\n  let status=cv.fn_status?.text||'';let path=cv.fn_path?.text||'';let step=cv.fn_step?.text||'';\n  let next=dateVal(cv.fn_next?.value);const last=dateVal(cv.fn_last?.value);\n  let token=cv.fn_token?.text||'';const stage=cv.refi_stage?.text||'';\n  const mkt=checked(cv.boolean_mm88mzry?.value);const svc=checked(cv.boolean_mm8848pn?.value);\n  const quiz=(cv.long_text_mm88pfdv?.text||'').trim().length>0;\n  const meeting=dateVal(cv.refi_meeting?.value);\n  let heat=Number(cv.numeric_mm883h9v?.text||0);\n  let st={};try{st=JSON.parse(cv.fn_opens?.text||'{}')||{};}catch(e){st={};}\n  const first=(it.name||'').replace(/^TEST\\s*/,'').trim().split(/\\s+/)[0]||'שלום';\n  const cols={};let send=null;let notify=null;let changed=false;\n  const set=(k,v)=>{cols[k]=v;changed=true;};\n\n  if(!status){\n    if(!(mkt||svc))continue;\n    if(owner[phone]&&owner[phone]!==it.id)continue;\n    owner[phone]=it.id;\n    if(Date.parse(it.created_at)<GO_LIVE)continue;\n    token=rand();status='פעיל';\n    if(quiz){path='D';step='QUIZ';}else{path='B';step='NEW';}\n    next=now;st.mkt=mkt;\n    set('fn_status',{label:'פעיל'});set('fn_token',token);\n  }\n  if(stage==='לקוח משלם'&&status!=='לקוח'){set('fn_status',{label:'לקוח'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n  if(stage==='לא רלוונטי'&&status==='פעיל'){set('fn_status',{label:'נעצר'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}\n\n  const cvn=convos[phone];\n  if(status==='פעיל'&&cvn&&cvn.time>(last||0)+120000&&cvn.time>(st.reply||0)&&(cvn.dir==='incoming'||last)){\n    st.reply=cvn.time;const t=cvn.text.trim();\n    if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set('fn_status',{label:'הסר'});set('fn_next',{});notify='ביקש הסרה מהודעות: \"'+t.slice(0,80)+'\"';}\n    else if(/^פחות/.test(t)){status='פחות';set('fn_status',{label:'פחות'});notify='ביקש לקבל פחות הודעות';}\n    else if(cvn.dir!=='incoming'){status='ענה';set('fn_status',{label:'ענה'});notify='יש שיחה ידנית פעילה עם הליד ב 055-9881245, ולכן ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}\n    else{status='ענה';set('fn_status',{label:'ענה'});heat+=10;set('numeric_mm883h9v',String(heat));notify='ענה בוואטסאפ ל 055-9881245: \"'+t.slice(0,120)+'\". ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}\n    set('fn_opens',{text:JSON.stringify(st)});\n  }\n  if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}\n\n  if(stage==='פגישה נקבעה'&&meeting&&meeting>now&&!(path==='E'&&st.mt===meeting)){path='E';step='BOOK';next=now;st.mt=meeting;set('fn_opens',{text:JSON.stringify(st)});}\n  else if(stage==='פגישה התקיימה'&&path!=='G'&&path!=='L'){path='G';step='MET';next=atLocal((meeting&&meeting<now?meeting:now),2,10,0);}\n  else if((stage==='פגישה בוטלה'||stage==='לא הגיע')&&path==='E'){st.ns=(st.ns||0)+1;set('fn_opens',{text:JSON.stringify(st)});if(st.ns>=2){path='L';step='NOSHOW2';next=now+14*D;}else{path='F';step='NOSHOW';next=Math.max(now,(meeting||now)+H);}}\n  else if(quiz&&(path==='B'||path==='C')){path='D';step='QUIZ';next=now;}\n\n  let code=null,nPath=path,nStep=step,nNext=next,fixed=false;\n  if(next&&next<=now&&open&&convosOk){\n    const sameDay=last&&dayKey(last)===dayKey(now);\n    if(path==='B'&&step==='NEW'){code='M1';nNext=now+5*60000;}\n    else if(path==='B'&&step==='M1'){code='M2';nPath='C';nNext=now+3*H;}\n    else if(path==='C'&&step==='M2'){code='M3';nNext=atLocal(now,1,10,0);}\n    else if(path==='C'&&step==='M3'){code='M4';nNext=atLocal(now,2,10,0);}\n    else if(path==='C'&&step==='M4'){code='M5';nNext=atLocal(now,4,10,0);}\n    else if(path==='C'&&step==='M5'){code='M6';nPath='L';nNext=now+14*D;}\n    else if(path==='D'&&step==='QUIZ'){code='M7';nNext=now+D;}\n    else if(path==='D'&&step==='M7'){code='M8';nNext=now+2*D;}\n    else if(path==='D'&&step==='M8'){code='M9';nPath='L';nNext=now+14*D;}\n    else if(path==='E'&&step==='BOOK'){code='M10';fixed=true;const r24=meeting-D,r1=meeting-H;if(r24>now+2*H){nStep='M10';nNext=r24;}else if(r1>now+15*60000){nStep='R1';nNext=r1;}else{nStep='M10';nNext=null;}}\n    else if(path==='E'&&step==='M10'){fixed=true;if(meeting&&meeting>now){code='M10R';const r1=meeting-H;if(r1>now+30*60000){nStep='R1';nNext=r1;}else{nStep='R2';nNext=null;}}else{nNext=null;}}\n    else if(path==='E'&&step==='R1'){fixed=true;if(meeting&&meeting>now){code='M10R';}nStep='R2';nNext=null;}\n    else if(path==='F'&&step==='NOSHOW'){code='M11';nNext=null;}\n    else if(path==='G'&&step==='MET'){code='M12';nNext=now+3*D;}\n    else if(path==='G'&&step==='M12'){code='M13';nNext=now+5*D;}\n    else if(path==='G'&&step==='M13'){code='M14';nNext=now+11*D;}\n    else if(path==='G'&&step==='M14'){code='M15';nPath='L';nNext=now+14*D;}\n    else if(path==='L'){nNext=now+14*D;}\n    if(code&&sameDay&&['C','D','G'].includes(path)&&!['M2','M3','M7'].includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}\n    if(code){\n      if(!fixed)nStep=code;\n      const vars=['M10','M10R'].includes(code)?[first,whenText(meeting)]:[first];\n      send={to:phone,templateId:T[code],variables:vars};\n      if(DEST[code])send.buttonVariables=[token+DEST[code]];\n      set('fn_last',toDate(now));\n    }\n  }\n  if(nPath!==(cv.fn_path?.text||''))set('fn_path',nPath);\n  if(nStep!==(cv.fn_step?.text||''))set('fn_step',nStep);\n  if(nNext!==dateVal(cv.fn_next?.value))set('fn_next',nNext?toDate(nNext):{});\n  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});\n}\nreturn out.map(o=>({json:{...o,hasSend:!!o.send,live:MODE==='live',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));\n"
    }
   },
   {
-   "id": "8c8c7575-47b3-4597-85b4-19f08f2c3c31",
+   "id": "6874fde1-42b4-218a-82a2-671e959e457a",
    "name": "Has send?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -152,7 +155,7 @@
      },
      "conditions": [
       {
-       "id": "7404086c-63be-435c-8501-37e5a1bb89b3",
+       "id": "f2b592a5-64b7-21e3-59b8-cb270fb6006f",
        "leftValue": "={{ $json.hasSend }}",
        "rightValue": true,
        "operator": {
@@ -168,7 +171,7 @@
    }
   },
   {
-   "id": "bb6f524b-c2db-4baa-a824-dd4d67104b21",
+   "id": "8556af78-a14c-5a18-d4f9-60bc3e0ff791",
    "name": "Live?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -185,7 +188,7 @@
      },
      "conditions": [
       {
-       "id": "56f6fc6a-4d11-40eb-a8ab-878b3083fe96",
+       "id": "a0f244d1-9489-ddd2-3aaa-87fef20079f7",
        "leftValue": "={{ $json.live }}",
        "rightValue": true,
        "operator": {
@@ -201,7 +204,7 @@
    }
   },
   {
-   "id": "6046d478-7954-4568-8cf3-a35725acf224",
+   "id": "4e031df6-d6d3-0687-d5ed-536c0f2c35a3",
    "name": "Send WhatsApp",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -241,7 +244,7 @@
    }
   },
   {
-   "id": "710fa0f6-0e6a-4587-8e8e-3b691af72b5c",
+   "id": "7ca3416c-a630-d58e-6b5e-28e800d8613e",
    "name": "Simulated send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -255,7 +258,7 @@
    }
   },
   {
-   "id": "1c949b7f-7571-4bf0-b112-b56908bcef56",
+   "id": "97d9d2b7-2d9b-5ae9-5df8-92c9e4ba519c",
    "name": "After send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -269,7 +272,7 @@
    }
   },
   {
-   "id": "47c53a13-5c9c-4258-9376-aefa1b63905c",
+   "id": "2e01e7eb-5285-f1be-19b0-ddfd546477d1",
    "name": "Update item (sent)",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -283,6 +286,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "parameters": {
     "method": "POST",
     "url": "https://api.monday.com/v2",
@@ -304,7 +310,7 @@
    }
   },
   {
-   "id": "cf4df272-00b4-43fd-8b8b-4e099b2b826b",
+   "id": "be1e39eb-19d3-0a8f-1b8b-78c7bb78dffe",
    "name": "Update item",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -318,6 +324,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "parameters": {
     "method": "POST",
     "url": "https://api.monday.com/v2",
@@ -339,7 +348,7 @@
    }
   },
   {
-   "id": "19fb6356-cd22-48d2-bdd3-f9f0cbd723bd",
+   "id": "1a6f0ed4-741b-105d-e388-8f0e2b46e7d8",
    "name": "Notify?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -356,7 +365,7 @@
      },
      "conditions": [
       {
-       "id": "f045394f-1c88-4a59-82e0-b69ad9bfa714",
+       "id": "3a1cd412-57a7-a7d8-95b1-4972b7899051",
        "leftValue": "={{ $('Has send?').item.json.hasNotify }}",
        "rightValue": true,
        "operator": {
@@ -372,7 +381,7 @@
    }
   },
   {
-   "id": "56d55029-46e4-47a0-841b-46ebd1aee158",
+   "id": "a22edf0e-b878-99bf-f88f-53d2a38511bf",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -386,6 +395,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "parameters": {
     "method": "POST",
     "url": "https://api.monday.com/v2",

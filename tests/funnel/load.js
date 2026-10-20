@@ -3,8 +3,8 @@ const fs=require('fs');const path=require('path');
 const SRC=path.resolve(__dirname,'../../automation/funnel');
 function planner(mode='test',goLive='2026-10-20T07:00:00Z'){
   const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__MODE__',mode).replace('__GO_LIVE__',goLive);
-  return ({items,convos=[],now,shabbat=[]})=>{
-    const $=n=>({first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?{data:{items:convos}}:n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
+  return ({items,convos=[],now,shabbat=[],convosDown=false})=>{
+    const $=n=>({first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?(convosDown?{error:'down'}:{data:{items:convos}}):n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
     return new Function('$',code)($).map(x=>x.json);
   };
 }

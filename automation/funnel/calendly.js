@@ -37,6 +37,7 @@ for (const mail of mails) {
     const cv = {}; for (const c of it.column_values) cv[c.id] = c;
     if ((ev.phone && norm(cv.refi_phone?.text) === ev.phone) || (ev.email && (cv.fn_email?.text || '').toLowerCase() === ev.email)) { lead = it; break; }
   }
+  if (!lead && ev.kind === 'cancel') continue; // a cancel for someone we do not know creates nothing
   const d = new Date(ev.at).toISOString();
   const cols = ev.kind === 'new'
     ? { refi_stage: { label: 'פגישה נקבעה' }, refi_meeting: { date: d.slice(0, 10), time: d.slice(11, 19) } }

@@ -26,8 +26,8 @@ function windowOpen(ts){const p=parts(ts);const mins=(+p.hour)*60+(+p.minute);
 const open=windowOpen(now);
 
 const norm=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('0'))d='972'+d.slice(1);return d.length>=11?d:'';};
-const convos={};
-try{for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}
+const convos={};let convosOk=false;
+try{if(Array.isArray($('Convos').first().json.data.items))convosOk=true;for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}
 const mdata=$('Items').first().json.data;
 const meId=mdata.me.id;
 const items=mdata.boards[0].items_page.items;
@@ -37,6 +37,9 @@ const toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {
 const checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};
 
 const out=[];
+// phones already in the funnel: a second item with the same phone never starts its own series
+const owner={};
+for(const it of items){const cv={};for(const c of it.column_values)cv[c.id]=c;const ph=norm(cv.refi_phone?.text);if(ph&&cv.fn_status?.text&&!owner[ph])owner[ph]=it.id;}
 for(const it of items){
   const cv={};for(const c of it.column_values)cv[c.id]=c;
   const isTest=/^TEST/.test(it.name||'');
@@ -56,6 +59,8 @@ for(const it of items){
 
   if(!status){
     if(!(mkt||svc))continue;
+    if(owner[phone]&&owner[phone]!==it.id)continue;
+    owner[phone]=it.id;
     if(Date.parse(it.created_at)<GO_LIVE)continue;
     token=rand();status='פעיל';
     if(quiz){path='D';step='QUIZ';}else{path='B';step='NEW';}
@@ -66,10 +71,11 @@ for(const it of items){
   if(stage==='לא רלוונטי'&&status==='פעיל'){set('fn_status',{label:'נעצר'});set('fn_next',{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}
 
   const cvn=convos[phone];
-  if(status==='פעיל'&&cvn&&cvn.dir==='incoming'&&cvn.time>(last||0)&&cvn.time>(st.reply||0)){
+  if(status==='פעיל'&&cvn&&cvn.time>(last||0)+120000&&cvn.time>(st.reply||0)&&(cvn.dir==='incoming'||last)){
     st.reply=cvn.time;const t=cvn.text.trim();
     if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set('fn_status',{label:'הסר'});set('fn_next',{});notify='ביקש הסרה מהודעות: "'+t.slice(0,80)+'"';}
     else if(/^פחות/.test(t)){status='פחות';set('fn_status',{label:'פחות'});notify='ביקש לקבל פחות הודעות';}
+    else if(cvn.dir!=='incoming'){status='ענה';set('fn_status',{label:'ענה'});notify='יש שיחה ידנית פעילה עם הליד ב 055-9881245, ולכן ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
     else{status='ענה';set('fn_status',{label:'ענה'});heat+=10;set('numeric_mm883h9v',String(heat));notify='ענה בוואטסאפ ל 055-9881245: "'+t.slice(0,120)+'". ההודעות האוטומטיות נעצרו. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
     set('fn_opens',{text:JSON.stringify(st)});
   }
@@ -81,7 +87,7 @@ for(const it of items){
   else if(quiz&&(path==='B'||path==='C')){path='D';step='QUIZ';next=now;}
 
   let code=null,nPath=path,nStep=step,nNext=next,fixed=false;
-  if(next&&next<=now&&open){
+  if(next&&next<=now&&open&&convosOk){
     const sameDay=last&&dayKey(last)===dayKey(now);
     if(path==='B'&&step==='NEW'){code='M1';nNext=now+5*60000;}
     else if(path==='B'&&step==='M1'){code='M2';nPath='C';nNext=now+3*H;}

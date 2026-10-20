@@ -5,7 +5,7 @@
  },
  "nodes": [
   {
-   "id": "e71ae2c6-5f91-4f31-8e31-ae21a4a77a93",
+   "id": "a0a73793-485a-be9a-ecdd-d42f09bd7b2a",
    "name": "Link",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -13,7 +13,7 @@
     0,
     0
    ],
-   "webhookId": "f9d04a21-71eb-4059-8e03-64f99687bb53",
+   "webhookId": "ab8d9adf-ede7-6b61-b9d9-9868ccd310a4",
    "parameters": {
     "httpMethod": "GET",
     "path": "go",
@@ -22,7 +22,7 @@
    }
   },
   {
-   "id": "ce410aa9-db0d-430a-8fa9-652aef3a125e",
+   "id": "aa340c80-cd6a-f040-0f00-0a77e0c72386",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -36,6 +36,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "onError": "continueRegularOutput",
    "parameters": {
     "method": "POST",
@@ -58,7 +61,7 @@
    }
   },
   {
-   "id": "58556b22-2654-4bd9-980b-cfa60fe8cb4e",
+   "id": "9c371220-7bf9-dde1-728a-e3b62958b7d8",
    "name": "Resolve",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -71,7 +74,7 @@
    }
   },
   {
-   "id": "926edf9f-9a34-41a1-9657-51c6d9e5104b",
+   "id": "c33c91fc-8b04-aaa3-9558-26b4c5f2ca61",
    "name": "Redirect",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -88,7 +91,7 @@
    }
   },
   {
-   "id": "af5ab35b-8080-41fa-b812-c384ebb6f9f7",
+   "id": "94871c85-02a5-ac7b-f128-411872107e1e",
    "name": "Found?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -105,7 +108,7 @@
      },
      "conditions": [
       {
-       "id": "bdeacd46-fcc3-4446-ac1b-dbd28fd9067d",
+       "id": "8859dfd1-495f-756c-7dd0-e2c7fdff3677",
        "leftValue": "={{ $('Resolve').item.json.found }}",
        "rightValue": true,
        "operator": {
@@ -121,7 +124,7 @@
    }
   },
   {
-   "id": "07e56743-054a-4dfb-907a-3f5d1f89ad6c",
+   "id": "38a2310e-81c4-efb8-ccd3-2af5acb51a99",
    "name": "Update opens",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -135,6 +138,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "parameters": {
     "method": "POST",
     "url": "https://api.monday.com/v2",
@@ -156,7 +162,7 @@
    }
   },
   {
-   "id": "3a5c0304-4f87-4dbe-9cf6-890c06fbb887",
+   "id": "11599f86-7f9f-b80f-9211-ba10f199243b",
    "name": "Hot?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -173,7 +179,7 @@
      },
      "conditions": [
       {
-       "id": "237b13fe-b260-46e8-8187-8cc59b612b2d",
+       "id": "eb8ef043-cef3-e366-7fd6-50f88088a4fc",
        "leftValue": "={{ $('Resolve').item.json.notify }}",
        "rightValue": true,
        "operator": {
@@ -189,7 +195,7 @@
    }
   },
   {
-   "id": "15381612-b312-4115-9e99-cf837a951fa6",
+   "id": "653edcca-3040-96f2-091e-5564c679520e",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -203,6 +209,9 @@
      "name": "Monday.com account"
     }
    },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
    "parameters": {
     "method": "POST",
     "url": "https://api.monday.com/v2",

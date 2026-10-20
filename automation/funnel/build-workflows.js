@@ -5,12 +5,13 @@ const fs=require('fs');const path=require('path');const crypto=require('crypto')
 const MODE=process.argv[2]||'test';if(!['test','live'].includes(MODE))throw new Error('mode must be test or live');
 const GO_LIVE=process.argv[3]||'2026-10-20T07:00:00Z';
 const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8');
-const id=()=>crypto.randomUUID();
+// Deterministic ids, so rebuilding does not change the committed files.
+let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD='5106246268';
 const MON={mondayComApi:{id:'Un7HBqZvldpVYUaB',name:'Monday.com account'}};
 const GAM={httpHeaderAuth:{id:'6hr28GsvQQrGzjwx',name:'Header Auth account'}};
 const GMAIL={gmailOAuth2:{id:'1H4YGm5Z2UFN4IeE',name:'Gmail account'}};
-const monday=(name,pos,body,extra={})=>({id:id(),name,type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:pos,credentials:MON,...extra,parameters:{method:'POST',url:'https://api.monday.com/v2',authentication:'predefinedCredentialType',nodeCredentialType:'mondayComApi',sendHeaders:true,headerParameters:{parameters:[{name:'API-Version',value:'2024-10'}]},sendBody:true,specifyBody:'json',jsonBody:body,options:{}}});
+const monday=(name,pos,body,extra={})=>({id:id(),name,type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:pos,credentials:MON,retryOnFail:true,maxTries:3,waitBetweenTries:2000,...extra,parameters:{method:'POST',url:'https://api.monday.com/v2',authentication:'predefinedCredentialType',nodeCredentialType:'mondayComApi',sendHeaders:true,headerParameters:{parameters:[{name:'API-Version',value:'2024-10'}]},sendBody:true,specifyBody:'json',jsonBody:body,options:{}}});
 // GraphQL braces are spaced out: n8n expressions break on runs of closing braces.
 const gq=q=>q.replace(/\{/g,'{ ').replace(/\}/g,' }');
 const itemsQuery=cols=>JSON.stringify({query:gq('query{me{id} boards(ids:['+BOARD+']){items_page(limit:500){items{id name created_at column_values(ids:'+JSON.stringify(cols)+'){id text value}}}}}')});
