@@ -1,0 +1,39 @@
+// Real private Monday writes/readback; synthetic contacts; no delivery providers.
+const fs=require('fs'),path=require('path'),{execFileSync}=require('child_process');
+const root=path.resolve(__dirname,'../..');
+execFileSync(process.execPath,[path.join(__dirname,'build-sandbox-journey.js')]);
+const read=p=>fs.readFileSync(path.join(root,p),'utf8').replace(/\r\n/g,'\n');
+const S=JSON.parse(read('tests/funnel/sandbox-columns.json')),M=S.columns,B=S.board;
+if(B!=='5106403803'||B===S.productionBoardForbidden)throw Error('Private board required');
+const remap=s=>Object.entries(M).reduce((v,[a,b])=>v.split(a).join(b),s).split(S.productionBoardForbidden).join(B);
+const base=JSON.parse(read('automation/funnel/dist/sandbox-journey.json'));
+const nodes=base.nodes.slice(0,base.nodes.findIndex(n=>n.name==='Read intake')+1),connections={};
+const fixture=(channels,key)=>({body:{product:'LP1',first_name:'TEST LP1 SANDBOX 20261020',phone:'0500000040',email:'test@example.invalid',idempotency_key:key,service_request:true,marketing_consent:channels.includes('whatsapp'),marketing_channels:channels,answers:{}},headers:{}});
+nodes.find(n=>n.name==='Guard sandbox ownership').parameters.jsCode=`const r=$input.first().json,b=r.data?.boards?.[0];if(r.errors?.length||b?.id!=='${B}'||b.board_kind!=='private'||b.name!=='TEST Excelent LP1 acceptance 20261020 NO AUTOMATIONS'||b.items_page.items.length)throw Error('Empty named private sandbox required; no writes');return [{json:${JSON.stringify(fixture(['whatsapp','email','sms'],'channel-probe-all-20261020'))}}];`;
+const add=(name,type,parameters,extra={})=>nodes.push({id:'channels-'+nodes.length,name,type:'n8n-nodes-base.'+type,typeVersion:type==='httpRequest'?4.2:2,position:[nodes.length*220,0],parameters,...extra});
+const code=(name,js)=>add(name,'code',{jsCode:js});
+const http=(name,jsonBody)=>add(name,'httpRequest',{...base.nodes.find(n=>n.name==='Save to Monday sandbox').parameters,jsonBody},{credentials:base.nodes.find(n=>n.name==='Save to Monday sandbox').credentials});
+const dynamic='={{ JSON.stringify({query:$json.query,variables:$json.variables}) }}';
+const proof=`const r=$input.first().json,it=r.data?.items?.[0],id=$('Check save').first().json.request_id;if(r.errors?.length||!it||it.id!==id||it.name!=='TEST LP1 SANDBOX 20261020 0500000040')throw Error('Synthetic ownership/readback failed');const cv=Object.fromEntries(it.column_values.map(c=>[c.id,c]));const receipt=JSON.parse(JSON.parse(cv['${M.long_text_mm8ag9s}'].value).text);const email=JSON.parse(cv['${M.fn_email}'].value).email;const checked=[true,'true'].includes(JSON.parse(cv['${M.boolean_mm88mzry}'].value||'{}').checked);if(email!=='test@example.invalid'||receipt.email!==email||receipt.phone!=='972500000040'||receipt.version!=='lp1-channels-20261020'||!Number.isFinite(Date.parse(receipt.receivedAt)))throw Error('Recipient-bound server receipt failed');`;
+code('Verify grants and prepare withdrawal',proof+`if(!checked||!['whatsapp','email','sms'].every(c=>receipt.grants[c]===true))throw Error('Three grants missing');return [{json:${JSON.stringify(fixture(['email'],'channel-probe-email-only-20261020'))}}];`);
+code('Validate email only',read('automation/intake/validate.js'));
+code('Find query email only',remap(read('automation/intake/find-query.js')).replaceAll("$('Validate')","$('Validate email only')"));
+http('Find by phone email only',dynamic);
+code('Build mutation email only',remap(read('automation/intake/build-mutation.js')).replaceAll("$('Validate')","$('Validate email only')"));
+http('Save email only',dynamic);
+code('Check save email only',read('automation/intake/check-save.js').replaceAll("$('Validate')","$('Validate email only')").replaceAll("$('Build mutation')","$('Build mutation email only')"));
+http('Read withdrawal',base.nodes.find(n=>n.name==='Read intake').parameters.jsonBody);
+code('Verify withdrawal and prepare archive',proof+`const saved=$('Check save email only').first().json;if(!saved.saved||saved.mode!=='update'||saved.request_id!==id)throw Error('Same-item update required');if(checked||receipt.grants.whatsapp!==false||receipt.grants.sms!==false||receipt.grants.email!==true||receipt.requestId!=='channel-probe-email-only-20261020'||JSON.parse(cv['${M.date_mm88qwfm}'].value||'null')?.date)throw Error('Withdrawal did not clear WhatsApp/date independently');return [{json:{query:'mutation($id:ID!){archive_item(item_id:$id){id}}',variables:{id}}}];`);
+http('Archive synthetic item',dynamic);
+code('Verify archive',`const r=$input.first().json;if(r.errors?.length||r.data?.archive_item?.id!==$('Check save').first().json.request_id)throw Error('Archive not acknowledged');return [{json:{query:'query{boards(ids:[${B}]){id items_page(limit:5){items{id}}}}'}}];`);
+http('Read empty sandbox',dynamic);
+code('Confirm channel acceptance',`const r=$input.first().json,b=r.data?.boards?.[0];if(r.errors?.length||b?.id!=='${B}'||b.items_page.items.length)throw Error('Cleanup readback failed');return [{json:{passed:true,board:'${B}',itemId:$('Check save').first().json.request_id,archived:true,activeItemsAfter:0,checks:['optional-email-save-readback','recipient-bound-server-consent','three-channel-grants','same-item-update','WhatsApp-withdrawal-clears-checkbox-and-date','email-preserved-independently','SMS-withdrawal','archive-empty-readback'],scope:'Actual private Monday transport only; synthetic fixture; no messages, calendar, ads or production lead writes'}}];`);
+for(let i=0;i<nodes.length-1;i++)connections[nodes[i].name]={main:[[{node:nodes[i+1].name,type:'main',index:0}]]};
+for(const n of nodes){let s=n.parameters.jsonBody;if(s?.startsWith('={{')){let inner=s.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
+const workflow={name:'TEST LP1 channel consent private Monday NO DELIVERY',active:false,settings:base.settings,nodes,connections};
+// Fresh request keys permit a new synthetic run after the prior fixture was archived.
+nodes.find(n=>n.name==='Guard sandbox ownership').parameters.jsCode=nodes.find(n=>n.name==='Guard sandbox ownership').parameters.jsCode.replace('"channel-probe-all-20261020"',"'channel-probe-all-'+Date.now()");
+nodes.find(n=>n.name==='Verify grants and prepare withdrawal').parameters.jsCode=nodes.find(n=>n.name==='Verify grants and prepare withdrawal').parameters.jsCode.replace('"channel-probe-email-only-20261020"',"'channel-probe-email-only-'+id");
+nodes.find(n=>n.name==='Verify withdrawal and prepare archive').parameters.jsCode=nodes.find(n=>n.name==='Verify withdrawal and prepare archive').parameters.jsCode.replace("receipt.requestId!=='channel-probe-email-only-20261020'","receipt.requestId!==$('Validate email only').first().json.key");
+fs.writeFileSync(path.join(root,'automation/funnel/dist/channel-intake-probe.json'),JSON.stringify(workflow,null,2));
+console.log('Built private channel consent probe:',nodes.length,'nodes');

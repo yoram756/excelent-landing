@@ -15,7 +15,9 @@ if(input.errors?.length)throw new Error('Monday GraphQL error');
 const lead=input.data?.items?.[0];
 const proof=$('Check save').first().json;
 if(!lead||String(lead.id)!==proof.request_id||lead.name!=='TEST LP1 SANDBOX 20261020 0500000040')throw new Error('Synthetic item ownership mismatch');
-const canonical={...lead,column_values:lead.column_values.map(c=>({...c,id:back[c.id]||c.id}))};
+// Planner events below use a fixed historical clock. Only its synthetic copy is
+// dated before that clock; the actual Monday created_at is never modified.
+const canonical={...lead,created_at:'2026-10-20T08:00:00Z',column_values:lead.column_values.map(c=>({...c,id:back[c.id]||c.id}))};
 const cv=Object.fromEntries(canonical.column_values.map(c=>[c.id,c]));
 const vals=o=>Object.fromEntries(Object.entries(o).map(([k,v])=>[M[k]||k,v]));
 const mutation=o=>[{json:{query:'mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}',variables:{b:B,i:lead.id,v:JSON.stringify(vals(o))}}}];

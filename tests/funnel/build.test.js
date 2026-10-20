@@ -52,8 +52,8 @@ test('isolated intake probe has no messaging endpoints or automatic triggers',()
 
 test('acceptance exports are manual only and sandbox transport cannot call messaging providers',()=>{
   const fs=require('fs');
-  for(const name of ['acceptance-probe','sandbox-journey']){
-    execFileSync('node',[path.join(__dirname,'build-'+(name==='acceptance-probe'?'acceptance-probe':'sandbox-journey')+'.js')]);
+  for(const name of ['acceptance-probe','sandbox-journey','channel-intake-probe']){
+    execFileSync('node',[path.join(__dirname,'build-'+name+'.js')]);
     const w=JSON.parse(fs.readFileSync(D+'/dist/'+name+'.json','utf8'));
     assert.equal(w.active,false);
     assert.equal(w.nodes.filter(n=>n.type.endsWith('.manualTrigger')).length,1);
