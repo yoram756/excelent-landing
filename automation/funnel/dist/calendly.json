@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "d0363647-b691-473f-945c-e5212737daed",
+   "id": "5953dcb5-d88a-4df8-88fd-d36b0039215f",
    "name": "Every 5 min",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "id": "ba3d3d15-a88c-499b-b9eb-890401f1f955",
+   "id": "059210ec-4145-4eef-b9ca-3a190ecd6210",
    "name": "Calendly mails",
    "type": "n8n-nodes-base.gmail",
    "typeVersion": 2.1,
@@ -55,7 +55,7 @@
    }
   },
   {
-   "id": "a53a4e80-f52d-423f-a4a9-9b21627ad57f",
+   "id": "68209a2f-3e96-41a2-be39-cb5cc468d8b8",
    "name": "Run test",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -63,7 +63,7 @@
     0,
     200
    ],
-   "webhookId": "680d2674-73eb-45c0-860a-a0bd2f1c2d6d",
+   "webhookId": "949f3809-e73b-4b29-bf18-0efecece8a0c",
    "parameters": {
     "httpMethod": "POST",
     "path": "__TEST_PATH__calendly",
@@ -72,7 +72,7 @@
    }
   },
   {
-   "id": "62cee78a-130e-4b89-af65-93efd937c5df",
+   "id": "780867e1-cef6-454a-ba2c-0565d6e416be",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -103,12 +103,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"query{me{id} boards(ids:[5106246268]){items_page(limit:500){items{id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\"]){id text value}}}}}\"}) }}",
+    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\"]){ id text value } } } } }\"}",
     "options": {}
    }
   },
   {
-   "id": "ec0c7c33-3046-4e3d-ba82-063bb9491216",
+   "id": "2cd1041e-ffde-469c-8995-5dd1acc07620",
    "name": "Match bookings",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -121,7 +121,7 @@
    }
   },
   {
-   "id": "5f403c49-9109-4905-a642-a765e9d1965b",
+   "id": "f33cd119-11b0-46c4-a7f0-361a7966a741",
    "name": "Matched?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -138,7 +138,7 @@
      },
      "conditions": [
       {
-       "id": "5bcc6854-4080-4188-ae25-82d94060fa67",
+       "id": "54f5b673-67d0-4acc-95bd-c93c91b356fd",
        "leftValue": "={{ $json.matched }}",
        "rightValue": true,
        "operator": {
@@ -154,7 +154,7 @@
    }
   },
   {
-   "id": "b4d1901d-92cb-433b-a6a8-138fb33cf2d3",
+   "id": "17cb1796-cea0-4516-9872-bc4958619ad6",
    "name": "Update lead",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -184,12 +184,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}\",variables:{b:\"5106246268\",i:String($json.itemId),v:$json.colsJson}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.itemId),v:$json.colsJson} }) }}",
     "options": {}
    }
   },
   {
-   "id": "3ba5c344-f17c-4cb3-8d5d-f2707e1cb25e",
+   "id": "9135eb9f-32ea-4e98-bff9-a967003292a3",
    "name": "Create lead",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -219,7 +219,7 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){id}}\",variables:{b:\"5106246268\",g:\"group_mm883gr6\",n:($json.name||\"פגישה מהיומן\"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{refi_phone:$json.phone?{phone:$json.phone,countryShortName:\"IL\"}:undefined,refi_source:{label:\"יומן\"}}))}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){ create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",g:\"group_mm883gr6\",n:($json.name||\"פגישה מהיומן\"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{refi_phone:$json.phone?{phone:$json.phone,countryShortName:\"IL\"}:undefined,refi_source:{label:\"יומן\"} }))} }) }}",
     "options": {}
    }
   }

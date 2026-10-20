@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "9f929077-5d63-4bbc-8074-497e33b53587",
+   "id": "a138ecc1-052c-42c8-8d8a-312e839c5e41",
    "name": "Every 5 min",
    "type": "n8n-nodes-base.scheduleTrigger",
    "typeVersion": 1.2,
@@ -26,7 +26,7 @@
    }
   },
   {
-   "id": "d930a9a8-ccfb-4283-a7a1-daae147eae07",
+   "id": "28c0c0d6-07db-4414-90b9-94448d003188",
    "name": "Run test",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -34,7 +34,7 @@
     0,
     200
    ],
-   "webhookId": "2b4e9ef8-ba6c-4809-b940-2860660ca990",
+   "webhookId": "1607f768-19ad-40f5-8c90-88f1d8c89190",
    "parameters": {
     "httpMethod": "POST",
     "path": "__TEST_PATH__engine",
@@ -43,7 +43,7 @@
    }
   },
   {
-   "id": "b8e9b32e-19d4-4b31-91e7-9471b47d27cf",
+   "id": "f38c19d0-10ee-4a25-9594-94cc58a588f6",
    "name": "Shabbat",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -61,7 +61,7 @@
    }
   },
   {
-   "id": "0ee28794-c4c2-495e-a5ff-abd1fe56b918",
+   "id": "525a4496-7df8-456f-adf3-66c7e83c6f07",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -91,12 +91,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"query{me{id} boards(ids:[5106246268]){items_page(limit:500){items{id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"refi_stage\\\",\\\"refi_meeting\\\",\\\"boolean_mm88mzry\\\",\\\"boolean_mm8848pn\\\",\\\"long_text_mm88pfdv\\\",\\\"numeric_mm883h9v\\\",\\\"fn_status\\\",\\\"fn_path\\\",\\\"fn_step\\\",\\\"fn_next\\\",\\\"fn_last\\\",\\\"fn_token\\\",\\\"fn_opens\\\"]){id text value}}}}}\"}) }}",
+    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"refi_stage\\\",\\\"refi_meeting\\\",\\\"boolean_mm88mzry\\\",\\\"boolean_mm8848pn\\\",\\\"long_text_mm88pfdv\\\",\\\"numeric_mm883h9v\\\",\\\"fn_status\\\",\\\"fn_path\\\",\\\"fn_step\\\",\\\"fn_next\\\",\\\"fn_last\\\",\\\"fn_token\\\",\\\"fn_opens\\\"]){ id text value } } } } }\"}",
     "options": {}
    }
   },
   {
-   "id": "5528a59e-d1e8-4c41-819e-1f60c0a3537f",
+   "id": "3957d942-4995-4255-9dd8-4ced70a4c8a4",
    "name": "Convos",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -122,7 +122,7 @@
    }
   },
   {
-   "id": "cb3fb098-a8b9-4aa8-b2a0-1be2f6ce1bf4",
+   "id": "db019f80-c352-43e3-88be-4a11c8283156",
    "name": "Plan",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -135,7 +135,7 @@
    }
   },
   {
-   "id": "919252ee-eec5-4ed2-a24c-d367c84e9600",
+   "id": "e20c40a6-e864-4a2f-9985-ba1f5e9651ba",
    "name": "Has send?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -152,7 +152,7 @@
      },
      "conditions": [
       {
-       "id": "13e48c1a-7c69-472e-86b3-d403923e8500",
+       "id": "06de8c99-40ce-4088-8f11-4f9c7fb87066",
        "leftValue": "={{ $json.hasSend }}",
        "rightValue": true,
        "operator": {
@@ -168,7 +168,7 @@
    }
   },
   {
-   "id": "23685af6-e941-4088-bd36-796cabe85900",
+   "id": "b696f5cf-a488-4738-a37f-a2de83998f5c",
    "name": "Live?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -185,7 +185,7 @@
      },
      "conditions": [
       {
-       "id": "328bf77d-4117-41d4-8034-e3990615cb73",
+       "id": "00583b1d-45e4-4dfa-af22-38b3436b5b72",
        "leftValue": "={{ $json.live }}",
        "rightValue": true,
        "operator": {
@@ -201,7 +201,7 @@
    }
   },
   {
-   "id": "471be1ae-ba0c-4048-9158-e7c79f219938",
+   "id": "1b9a13b9-a8fd-478c-a9be-60b5b4156bf2",
    "name": "Send WhatsApp",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -241,7 +241,7 @@
    }
   },
   {
-   "id": "7a0cfcee-c4e9-4c3a-be93-0c36b9c63ded",
+   "id": "e71f04bb-fb1b-40c3-bd9e-6b62f274f6a7",
    "name": "Simulated send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -255,7 +255,7 @@
    }
   },
   {
-   "id": "5631552c-852a-466f-abd4-9f72a57f5da5",
+   "id": "ef463369-9924-4c16-8f13-4ab437e1cf59",
    "name": "After send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -269,7 +269,7 @@
    }
   },
   {
-   "id": "4b3eeff3-c059-49a7-854e-da693af69b5f",
+   "id": "212d9fdf-b5db-4773-b593-8ea9939e3366",
    "name": "Update item (sent)",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -299,12 +299,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}\",variables:{b:\"5106246268\",i:String($json.itemId),v:$json.colsJson}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.itemId),v:$json.colsJson} }) }}",
     "options": {}
    }
   },
   {
-   "id": "a4b4d980-926a-4f72-832a-7d233763076f",
+   "id": "7ca5e2fa-32cd-46be-9b6e-4ff548377456",
    "name": "Update item",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -334,12 +334,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}\",variables:{b:\"5106246268\",i:String($('Has send?').item.json.itemId),v:$('Has send?').item.json.colsJson}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($('Has send?').item.json.itemId),v:$('Has send?').item.json.colsJson} }) }}",
     "options": {}
    }
   },
   {
-   "id": "822c7a5e-07bb-481c-ac9f-13567842905d",
+   "id": "408d23e4-77cd-4108-b646-5f74f8cd24de",
    "name": "Notify?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -356,7 +356,7 @@
      },
      "conditions": [
       {
-       "id": "8d9c03a1-baa7-466c-afd7-c2eb91fdb637",
+       "id": "6841d398-4dcd-4612-8d49-ae1b5686d59d",
        "leftValue": "={{ $('Has send?').item.json.hasNotify }}",
        "rightValue": true,
        "operator": {
@@ -372,7 +372,7 @@
    }
   },
   {
-   "id": "c2e4f468-3831-471f-8337-b7aeb6f1b5fe",
+   "id": "62e15cc4-c424-4faf-bd00-5c15e7b494bb",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -402,7 +402,7 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){text} create_update(item_id:$i,body:$b){id}}\",variables:{u:String($('Has send?').item.json.meId),t:String($('Has send?').item.json.itemId),x:$('Has send?').item.json.notifyText,i:String($('Has send?').item.json.itemId),b:$('Has send?').item.json.notifyText}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){ create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){ text } create_update(item_id:$i,body:$b){ id } }\",variables:{u:String($('Has send?').item.json.meId),t:String($('Has send?').item.json.itemId),x:$('Has send?').item.json.notifyText,i:String($('Has send?').item.json.itemId),b:$('Has send?').item.json.notifyText} }) }}",
     "options": {}
    }
   }

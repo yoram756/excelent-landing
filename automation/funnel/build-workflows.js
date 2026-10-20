@@ -11,9 +11,11 @@ const MON={mondayComApi:{id:'Un7HBqZvldpVYUaB',name:'Monday.com account'}};
 const GAM={httpHeaderAuth:{id:'6hr28GsvQQrGzjwx',name:'Header Auth account'}};
 const GMAIL={gmailOAuth2:{id:'1H4YGm5Z2UFN4IeE',name:'Gmail account'}};
 const monday=(name,pos,body,extra={})=>({id:id(),name,type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:pos,credentials:MON,...extra,parameters:{method:'POST',url:'https://api.monday.com/v2',authentication:'predefinedCredentialType',nodeCredentialType:'mondayComApi',sendHeaders:true,headerParameters:{parameters:[{name:'API-Version',value:'2024-10'}]},sendBody:true,specifyBody:'json',jsonBody:body,options:{}}});
-const itemsQuery=cols=>'={{ JSON.stringify({query:'+JSON.stringify('query{me{id} boards(ids:['+BOARD+']){items_page(limit:500){items{id name created_at column_values(ids:'+JSON.stringify(cols)+'){id text value}}}}}')+'}) }}';
-const update=ref=>'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}",variables:{b:"'+BOARD+'",i:String('+ref+'.itemId),v:'+ref+'.colsJson}}) }}';
-const notify=ref=>'={{ JSON.stringify({query:"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){text} create_update(item_id:$i,body:$b){id}}",variables:{u:String('+ref+'.meId),t:String('+ref+'.itemId),x:'+ref+'.notifyText,i:String('+ref+'.itemId),b:'+ref+'.notifyText}}) }}';
+// GraphQL braces are spaced out: n8n expressions break on runs of closing braces.
+const gq=q=>q.replace(/\{/g,'{ ').replace(/\}/g,' }');
+const itemsQuery=cols=>JSON.stringify({query:gq('query{me{id} boards(ids:['+BOARD+']){items_page(limit:500){items{id name created_at column_values(ids:'+JSON.stringify(cols)+'){id text value}}}}}')});
+const update=ref=>'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }",variables:{b:"'+BOARD+'",i:String('+ref+'.itemId),v:'+ref+'.colsJson}}) }}';
+const notify=ref=>'={{ JSON.stringify({query:"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){ create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){ text } create_update(item_id:$i,body:$b){ id } }",variables:{u:String('+ref+'.meId),t:String('+ref+'.itemId),x:'+ref+'.notifyText,i:String('+ref+'.itemId),b:'+ref+'.notifyText}}) }}';
 const code=(name,pos,js,mode)=>({id:id(),name,type:'n8n-nodes-base.code',typeVersion:2,position:pos,parameters:mode?{mode,jsCode:js}:{jsCode:js}});
 const ifTrue=(name,pos,expr,type='n8n-nodes-base.if')=>({id:id(),name,type,typeVersion:2,position:pos,parameters:{conditions:{options:{caseSensitive:true,leftValue:'',typeValidation:'loose'},conditions:[{id:id(),leftValue:expr,rightValue:true,operator:{type:'boolean',operation:'true',singleValue:true}}],combinator:'and'},options:{}}});
 const hook=(name,pos,p,method='POST',responseMode='onReceived')=>({id:id(),name,type:'n8n-nodes-base.webhook',typeVersion:2,position:pos,webhookId:id(),parameters:{httpMethod:method,path:p,responseMode,options:{}}});
@@ -63,9 +65,11 @@ const cal={name:'משפך מחזור: פגישות מ Calendly',settings:{execut
  code('Match bookings',[600,0],src('calendly.js')),
  ifTrue('Matched?',[800,0],'={{ $json.matched }}'),
  monday('Update lead',[1000,-100],update('$json')),
- monday('Create lead',[1000,100],'={{ JSON.stringify({query:"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){id}}",variables:{b:"'+BOARD+'",g:"group_mm883gr6",n:($json.name||"פגישה מהיומן"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{refi_phone:$json.phone?{phone:$json.phone,countryShortName:"IL"}:undefined,refi_source:{label:"יומן"}}))}}) }}')],
+ monday('Create lead',[1000,100],'={{ JSON.stringify({query:"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){ create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){ id } }",variables:{b:"'+BOARD+'",g:"group_mm883gr6",n:($json.name||"פגישה מהיומן"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{refi_phone:$json.phone?{phone:$json.phone,countryShortName:"IL"}:undefined,refi_source:{label:"יומן"}}))}}) }}')],
  connections:{'Every 5 min':L('Calendly mails'),'Calendly mails':L('Items'),'Run test':L('Items'),'Items':L('Match bookings'),'Match bookings':L('Matched?'),'Matched?':L('Update lead','Create lead')}};
 
+// Final guard: no run of two closing braces inside an expression body.
+for(const w of [engine,go,cal])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist');fs.mkdirSync(out,{recursive:true});
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 console.log('built',MODE,fs.readdirSync(out).join(' '));

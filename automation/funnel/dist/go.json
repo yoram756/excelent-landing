@@ -5,7 +5,7 @@
  },
  "nodes": [
   {
-   "id": "134630c2-7d3a-4d9d-9bce-5a7b985d703f",
+   "id": "3e0f61e0-ad22-4675-86a6-1f539f63a020",
    "name": "Link",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -13,7 +13,7 @@
     0,
     0
    ],
-   "webhookId": "b3d9f744-d89f-4b03-9dec-37673eddcf54",
+   "webhookId": "c10dc72d-a3dc-4f9a-8ab3-601a4c1b4ee4",
    "parameters": {
     "httpMethod": "GET",
     "path": "go",
@@ -22,7 +22,7 @@
    }
   },
   {
-   "id": "4f7715d2-bc68-43e4-a89b-c194e4019043",
+   "id": "53eb24cf-77d2-4e4d-a95b-687a98a38406",
    "name": "Items",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -53,12 +53,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"query{me{id} boards(ids:[5106246268]){items_page(limit:500){items{id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\"]){id text value}}}}}\"}) }}",
+    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_token\\\",\\\"fn_step\\\",\\\"fn_opens\\\",\\\"numeric_mm883h9v\\\",\\\"fn_path\\\"]){ id text value } } } } }\"}",
     "options": {}
    }
   },
   {
-   "id": "0dea7adb-8061-4a4f-9533-dec2f07241fd",
+   "id": "07e2e939-b39c-40dd-b60a-6589f6688b11",
    "name": "Resolve",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -71,7 +71,7 @@
    }
   },
   {
-   "id": "5e45db7e-1688-4750-9d19-2fc0d4bdfc6b",
+   "id": "98ebbed5-fd1a-4255-b3d2-e23d06058b2c",
    "name": "Redirect",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -88,7 +88,7 @@
    }
   },
   {
-   "id": "8ee0580d-2e07-44ab-821c-1acfcbe1dd9f",
+   "id": "2ab397b3-60f9-4e2f-858a-d4e8471d7f22",
    "name": "Found?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -105,7 +105,7 @@
      },
      "conditions": [
       {
-       "id": "60977e2c-dc68-4298-a719-86f76b9326ca",
+       "id": "d6f57fa3-b51e-43b5-9651-fe44e69348d2",
        "leftValue": "={{ $('Resolve').item.json.found }}",
        "rightValue": true,
        "operator": {
@@ -121,7 +121,7 @@
    }
   },
   {
-   "id": "0a010f0a-7f5b-441e-a40b-380d6fe5e3bd",
+   "id": "b23354d3-d99d-4908-92e5-7b2320191f2f",
    "name": "Update opens",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -151,12 +151,12 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}\",variables:{b:\"5106246268\",i:String($('Resolve').item.json.itemId),v:$('Resolve').item.json.colsJson}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($('Resolve').item.json.itemId),v:$('Resolve').item.json.colsJson} }) }}",
     "options": {}
    }
   },
   {
-   "id": "460ff798-cf4c-43d0-9fcd-07118f642418",
+   "id": "f93d9fda-f764-40f2-9aa1-c8ff548ee616",
    "name": "Hot?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -173,7 +173,7 @@
      },
      "conditions": [
       {
-       "id": "931b25a5-c360-478c-91f8-d19d0567004a",
+       "id": "778a4c43-85e4-47de-8cba-c47069dc3c54",
        "leftValue": "={{ $('Resolve').item.json.notify }}",
        "rightValue": true,
        "operator": {
@@ -189,7 +189,7 @@
    }
   },
   {
-   "id": "f44d125b-08ee-49e5-9c26-3b9a4e25a279",
+   "id": "cf8661d2-cab7-40cd-bc50-8257bf44d35e",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -219,7 +219,7 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){text} create_update(item_id:$i,body:$b){id}}\",variables:{u:String($('Resolve').item.json.meId),t:String($('Resolve').item.json.itemId),x:$('Resolve').item.json.notifyText,i:String($('Resolve').item.json.itemId),b:$('Resolve').item.json.notifyText}}) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($u:ID!,$t:ID!,$x:String!,$i:ID!,$b:String!){ create_notification(user_id:$u,target_id:$t,text:$x,target_type:Project){ text } create_update(item_id:$i,body:$b){ id } }\",variables:{u:String($('Resolve').item.json.meId),t:String($('Resolve').item.json.itemId),x:$('Resolve').item.json.notifyText,i:String($('Resolve').item.json.itemId),b:$('Resolve').item.json.notifyText} }) }}",
     "options": {}
    }
   }
