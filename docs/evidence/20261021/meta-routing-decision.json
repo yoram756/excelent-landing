@@ -1,0 +1,36 @@
+{
+  "campaignId": "120252891592490603",
+  "accountId": "287081049104797",
+  "decision": {
+    "status": "PASS",
+    "selectedDestination": "055-9881245",
+    "selectedDestinationE164": "972559881245",
+    "phoneRegistryKey": "gambot_sender",
+    "source": "Direct human reply to request_user_input_async call_d51c0090c08f4f16958391c4042d5c9c",
+    "answer": "055-9881245, המספר המחובר ל־Gambot",
+    "scope": "Desired ad-click destination for acceptance planning. The question explicitly said no ad changes would be made now. Not evidence of application or publication."
+  },
+  "lastObservedDestination": "055-2783459",
+  "lastObservedDestinationSource": "../20261020/meta-refresh-destination-ui.txt and ../20261020/meta-refresh-original-destination-ui.txt; no fresh UI read in this decision-only turn",
+  "liveApplication": {
+    "status": "BLOCKED",
+    "applied": false,
+    "reason": "Desired destination recorded; current scope explicitly leaves ads unchanged. The last observed live destination differs."
+  },
+  "fullJourney": {
+    "status": "BLOCKED",
+    "reason": "Changing the ad destination alone does not establish authenticated inbound event mapping, atomic ingestion, operational CRM sync or safe provider integration."
+  },
+  "liveWhatsAppResponse": {
+    "status": "NOT TESTED",
+    "reason": "WhatsApp connections remain read/draft only, including internal tests; no sending, replying or read marking."
+  },
+  "requiredAcceptanceEvidence": [
+    "Exact destination read back from both adsets and representative published ad previews after a separately scoped change",
+    "Business phone identity and provider account match without disclosing credentials",
+    "Verified inbound event mapped to campaign and lead identity without treating message contact as marketing consent",
+    "Atomic intake and matching operational CRM write/readback before declaring success",
+    "No duplicate, unsolicited send, or revival after opt-out; manual takeover remains respected"
+  ],
+  "unchanged": ["config/business.json", "campaign identities", "Meta ads", "n8n", "providers", "WhatsApp", "budget", "audiences"]
+}
