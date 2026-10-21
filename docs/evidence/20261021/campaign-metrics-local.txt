@@ -1,0 +1,27 @@
+Command: node --test tests/funnel/campaign-metrics.test.js
+Exit code: 0
+✔ platform result cost is distinct from attributed and qualified enrollment denominators (22.1367ms)
+✔ unreported dash stays null and never becomes zero conversations or a zero cost (0.4167ms)
+✔ zero results and zero qualified denominator produce unavailable metrics, while verified zero spend is valid (0.8392ms)
+✔ incomplete attribution prevents qualified CPL even if verified subset looks successful (0.4426ms)
+✔ partial cohort or spend never implies a complete lead denominator (0.7957ms)
+✔ unknown qualification blocks qualified cost but preserves complete attributed enrollment cost (0.4251ms)
+✔ account campaign period and reporting timezone must match before joining spend (1.1378ms)
+✔ identical enrollment replay deduplicates while conflicting status duplicates require reconciliation (2.5337ms)
+✔ entry cohort is half-open and later qualification cannot pull historical leads into denominator (0.5756ms)
+✔ invalid or contradictory monetary coverage assessment and clock assertions fail closed (1.9877ms)
+✔ aggregate report never emits enrollment identifiers contact data or free-text payloads (0.6874ms)
+✔ equivalent UTC timestamps normalize to the same window without timezone relabeling (0.4245ms)
+✔ impossible calendar dates and timezone-free timestamps cannot be silently normalized (0.1975ms)
+✔ later qualification observation must be separately visible from spend snapshot clock (0.3427ms)
+✔ partial platform cost is visibly provisional and exposes incomplete period coverage (0.2482ms)
+✔ mismatched cohort counts retain their own account campaign and window metadata (0.3519ms)
+✔ a positive cost below one minor unit never rounds into a false zero (0.2781ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 147.3627

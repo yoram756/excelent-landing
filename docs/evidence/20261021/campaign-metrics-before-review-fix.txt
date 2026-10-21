@@ -1,0 +1,115 @@
+Command: node --test tests/funnel/campaign-metrics.test.js
+Exit code: 1
+✔ platform result cost is distinct from attributed and qualified enrollment denominators (26.4731ms)
+✔ unreported dash stays null and never becomes zero conversations or a zero cost (0.5652ms)
+✔ zero results and zero qualified denominator produce unavailable metrics, while verified zero spend is valid (0.8418ms)
+✔ incomplete attribution prevents qualified CPL even if verified subset looks successful (0.8052ms)
+✔ partial cohort or spend never implies a complete lead denominator (1.1115ms)
+✔ unknown qualification blocks qualified cost but preserves complete attributed enrollment cost (0.5257ms)
+✔ account campaign period and reporting timezone must match before joining spend (1.6751ms)
+✔ identical enrollment replay deduplicates while conflicting status duplicates require reconciliation (1.8589ms)
+✔ entry cohort is half-open and later qualification cannot pull historical leads into denominator (0.4989ms)
+✔ invalid or contradictory monetary coverage assessment and clock assertions fail closed (2.3961ms)
+✔ aggregate report never emits enrollment identifiers contact data or free-text payloads (0.646ms)
+✔ equivalent UTC timestamps normalize to the same window without timezone relabeling (1.3057ms)
+✖ impossible calendar dates and timezone-free timestamps cannot be silently normalized (3.0223ms)
+✖ later qualification observation must be separately visible from spend snapshot clock (1.7085ms)
+✖ partial platform cost is visibly provisional and exposes incomplete period coverage (0.8669ms)
+✖ mismatched cohort counts retain their own account campaign and window metadata (0.9489ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 12
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 201.2692
+
+✖ failing tests:
+
+test at tests\funnel\campaign-metrics.test.js:43:1
+✖ impossible calendar dates and timezone-free timestamps cannot be silently normalized (3.0223ms)
+  AssertionError [ERR_ASSERTION]: Missing expected exception.
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\campaign-metrics.test.js:44:181)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at tests\funnel\campaign-metrics.test.js:46:1
+✖ later qualification observation must be separately visible from spend snapshot clock (1.7085ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '2027-01-01T08:00:00.000Z'
+  
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\campaign-metrics.test.js:47:169)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '2027-01-01T08:00:00.000Z',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\campaign-metrics.test.js:49:1
+✖ partial platform cost is visibly provisional and exposes incomplete period coverage (0.8669ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'AVAILABLE'
+  - 'PROVISIONAL'
+  
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\campaign-metrics.test.js:50:77)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'AVAILABLE',
+    expected: 'PROVISIONAL',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\campaign-metrics.test.js:52:1
+✖ mismatched cohort counts retain their own account campaign and window metadata (0.9489ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - '187081049104797'
+  
+      at TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\campaign-metrics.test.js:53:189)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '187081049104797',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

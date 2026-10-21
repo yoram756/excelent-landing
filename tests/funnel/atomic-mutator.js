@@ -10,7 +10,10 @@ const mutations={
  restore_gate:['store.js',"if(this.restorePending())return {status:'BLOCKED'","if(false)return {status:'BLOCKED'"],
  crm_readback:['crm-sandbox.js','if(encode(after)!==encode(expected))','if(false)'],
  crm_unknown_retry:['store.js',"WHERE (p.state='queued' OR (p.state='reserved' AND p.lease_until<=?))","WHERE (p.state='queued' OR (p.state IN ('reserved','unknown') AND p.lease_until<=?))"],
- crm_snapshot:['crm-sandbox.js','return store.tx(()=>{','return (fn=>fn())(()=>{']
+ crm_snapshot:['crm-sandbox.js','return store.tx(()=>{','return (fn=>fn())(()=>{'],
+ metrics_denominator:['campaign-metrics.js','cost(spend.amountMinor,qualified.length)','cost(spend.amountMinor,attributed.length)'],
+ metrics_null:['campaign-metrics.js',"unavailable('platform_result_not_reported',spend.amountMinor)",'cost(0,1)'],
+ metrics_attribution:['campaign-metrics.js',"else if(inside.some(row=>!row.attributionVerified))reason='attribution_incomplete';",'']
 };
 if(!Object.hasOwn(mutations,process.env.ATOMIC_MUTATION||''))throw Error('Explicit known test mutation required');
 const [file,before,after]=mutations[process.env.ATOMIC_MUTATION],target=path.resolve(__dirname,'../../automation/lifecycle',file);
