@@ -1,0 +1,12 @@
+{
+  "reviewer": "/root/qa_reviewer",
+  "mode": "independent read-only review required by CLAUDE.md",
+  "requirements": [
+    {"requirement":"Six saved drafts with matching ad identity, video preview and unpublished status", "status":"PASS", "evidence":"Six before/after snapshot pairs; each after has 0:20, saved edits, unpublished edits and correct URL/ad heading."},
+    {"requirement":"Preserve primary text, headline, description and CTA", "status":"PASS", "evidence":"Reviewer compared all six before/after snapshot pairs exactly."},
+    {"requirement":"Exact saved video identity in all six ads", "status":"PASS", "evidence":"Six meta-video-ad-{adId}-media-readback.txt snapshots: matching URL, Edit video modal, refi_final_9x16_v4.mp4 1080 x 1920, 19.5 seconds, Save disabled. Each modal canceled without edits."},
+    {"requirement":"Fresh budget, audience and destination comparison", "status":"NOT TESTED", "evidence":"These settings are not exposed in the media snapshots; no changes were performed to them."},
+    {"requirement":"Publish requested change in active ads", "status":"BLOCKED", "evidence":"Action-time Meta advertising-tools terms confirmation pending; no Publish action performed."}
+  ],
+  "scope": "Saved Meta drafts only. No live publication, review approval or delivery claim. Initial identity evidence gap was closed with exact filename readbacks in all six ads."
+}

@@ -1,0 +1,497 @@
+Browser tab: 148905955, Title: "מנהל המודעות - ניהול המודעות - קמפיינים", URL: "https://adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0".
+0 AXWebArea מנהל המודעות - ניהול המודעות - קמפיינים, URL: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0
+	1 container
+		2 container ads_pe_container
+			3 container
+				293 link Description: מנהל המודעות Meta ​, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797
+				5 container nux_jewel_nav_anchor
+					6 button Pressable
+				7 container כלים
+					8 content list
+						9 container
+							10 button סקירת החשבון, ID: js_8b
+							11 text סקירת החשבון
+						12 container
+							13 button קמפיינים
+							14 text קמפיינים
+						15 container
+							16 button דוחות של ביצועי מודעות
+							17 text דוחות של ביצועי מודעות
+						18 container
+							19 link Description: קהלים, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797&business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+							20 text קהלים
+						21 container
+							22 button הגדרות פרסום, ID: ecosystem_nav_advertising_preferences_context_id
+							23 text הגדרות פרסום
+						24 container
+							25 link Description: חיובים ותשלומים, Value: adsmanager.facebook.com/adsmanager/billing_hub/accounts/details?nav_entry_point=ads_ecosystem_navigation_menu&placement=ads_manager&asset_id=287081049104797&business_id=745355029428233&payment_account_id=287081049104797&session_id=REDACTED
+							26 text חיובים ותשלומים
+						27 container
+							28 link Description: מנהל האירועים, Value: eventsmanager.facebook.com/events_manager2/overview?business_id=745355029428233&act=287081049104797&nav_source=ads_ecosystem_nav
+							29 text מנהל האירועים
+						30 container
+							31 button כל הכלים, ID: ecosystem_nav_all_tools_context_id
+							32 text כל הכלים
+				33 container
+					34 button המסייע העסקי של Meta AI
+				294 container
+					295 button עזרה
+					296 text עזרה
+				38 button הגדרות העסק ​, ID: js_1a3
+					39 text הגדרות העסק
+					40 image
+				41 button חיפוש ​, ID: js_1a5
+					42 text חיפוש
+					43 image
+				44 button דיווח על בעיה ​, ID: js_1a9
+					45 text דיווח על בעיה
+					46 image
+			47 container
+				48 container
+					49 button סגירה
+						50 image
+					51 button Description: הצגת התרשימים (Ctrl+Y), ID: insights_tray_button
+					52 button עריכה (Ctrl+U)
+					53 button הצג היסטוריה (Ctrl+I)
+					54 button צמצם את התצוגה
+				55 container campaign_structure_tree_root
+					56 container
+						57 text חיפוש
+						58 container
+							59 image
+							60 combo box (collapsed, settable) חיפוש, ID: js_hw, Secondary Actions: Expand
+					61 table grid
+						62 container
+							63 row קמפיין
+								64 cell Description: קמפיין, ID: ads_campaign_structure_item_120252891592490603
+									65 image
+									66 text EXC_Refi_WA_R1_2026-10
+							67 row סדרת מודעות
+								68 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252926489540603
+									69 image
+									70 text ‏מטורגט-איגור 20.10
+							71 row מודעה
+								72 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489570603
+									73 image
+									74 text R1_Img_Balance
+							75 row מודעה
+								76 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489550603
+									77 image
+									78 text R1_Img_Bank
+							79 row מודעה
+								80 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489560603
+									81 image
+									82 text R1_Video
+							83 row סדרת מודעות
+								84 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252891592500603
+									85 image
+									86 text EXC_Refi_IL_18-65_WA_R1
+							87 row מודעה
+								88 cell Description: מודעה, ID: ads_campaign_structure_item_120252891592510603
+									89 image
+									90 text R1_Video
+							91 row מודעה
+								92 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718060603
+									93 image
+									94 text R1_Img_Balance
+							95 row מודעה
+								96 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718070603
+									97 image
+									98 text R1_Img_Bank
+				99 container
+					100 button פתיחה ​
+						101 text פתיחה
+						102 image
+					103 link Description: EXC_Refi_WA_R1_2026-10, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					104 image
+					105 link Description: ‏מטורגט-איגור 20.10, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					106 image
+					297 container
+						298 image
+						299 heading R1_Img_Balance, Value: 4
+							300 text R1_Img_Balance
+					110 container cpgn_temp_save_as_template_nux_i2
+						301 container
+							302 text עריכות שלא פורסמו עריכות שלא פורסמו
+						111 text פעיל
+						112 container
+							113 switch (settable, boolean) הפעלה/כיבוי, Value: 1, ID: js_i4
+						114 pop up button (collapsed) תפריט הפעולות ​, Secondary Actions: Expand
+							115 text תפריט הפעולות
+							116 image
+					117 tab group
+						118 tab (selected, settable, boolean) Description: ערוך, Value: 1
+						119 tab (selectable, settable, boolean) Description: בדוק, Value: 0
+					132 container
+						133 image
+						134 heading הגדרות מודעה, Value: 3
+							135 text הגדרות מודעה
+						142 container formatEditorComponent
+							143 container js_iq
+								144 text פורמט 
+								145 image
+							146 text עליך לבחור פריסת קריאייטיב של מודעה.
+							147 container
+								148 js_it
+									149 container
+										150 container
+											151 radio button (settable, integer) Description: תמונה יחידה או סרטון יחיד, Value: 1, ID: js_ix
+										152 text תמונה יחידה או סרטון יחיד
+									153 container
+										154 container
+											155 radio button (settable, integer) Description: קרוסלה, Value: 0, ID: js_j3
+										156 text קרוסלה
+						157 container
+							158 container
+								159 checkbox (settable, integer) Description: מודעות של כמה מפרסמים, Value: 1, ID: js_ja
+								160 image
+							161 text מודעות של כמה מפרסמים
+							162 container
+								163 text המודעה שלך יכולה להופיע עם מודעות אחרות באותה יחידת מודעות כדי לקדם את יכולת הגילוי. ייתכן שהמערכת תשנה את גודל קריאייטיב המודעה שלך או תחתוך אותו. 
+								164 link Description: מידע על מודעות של כמה מפרסמים, Value: facebook.com/business/help/1024826868233885
+						165 link Description: הצגת אפשרויות נוספות, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					356 container
+						357 image
+						358 heading יעד, Value: 3
+							359 text יעד
+						360 text יש להגדיר לאן לשלוח אנשים מייד אחרי שהם לוחצים על המודעה שלך. הבחירה כבר בוצעה עבור מודעה זו. 
+						361 link Description: מידע נוסף, Value: facebook.com/business/help/1174990279685960
+					172 container
+						738 image
+						174 heading קריאייטיב של מודעה, Value: 3
+							175 text קריאייטיב של מודעה
+						176 text אפשר לבחור ולמטב את המודעה, הטקסט והשיפורים שלך. לאחר בחירת פוסט, תהיה לך אפשרות לבחור היכן תופיע המודעה המשותפת. 
+						177 link Description: מידע על התאמה אישית של נכסים, Value: facebook.com/business/help/1044825198987622
+						739 container ads_manager_ces_entrypoint_button1cy
+							740 pop up button (collapsed) הוספת מדיה, ID: js_1ep, Secondary Actions: Expand
+								741 image
+								742 text הוספת מדיה
+								743 image
+						362 container creativeEditorComponent
+							405 text הטקסט הראשי
+							406 container
+								407 combo box (collapsed) Description: ספר לאנשים מה מה אתה מפרסם במודעה, Secondary Actions: Expand, Value: משכנתא שנלקחה לפני כמה שנים לא תמיד מתאימה לשוק של היום.
+ובשנים הראשונות של ההחזר, רוב התשלום הולך לריבית. לכן בדיקה מוקדמת שווה יותר מבדיקה מאוחרת.
+היום את דוח יתרת הסילוק מורידים מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+שולחים לנו אותו בוואטסאפ, ואנחנו באקסלנט בודקים ומחזירים תשובה ברורה: כדאי למחזר, או שעדיף להשאיר.
+בלי עלות ובלי התחייבות. ציון 9.89 בתוצאות ובחוויית לקוח במידרג.
+לחצו על הכפתור ושלחו הודעה.
+									408 text משכנתא שנלקחה לפני כמה שנים לא תמיד מתאימה לשוק של היום.
+									409 text ובשנים הראשונות של ההחזר, רוב התשלום הולך לריבית. לכן בדיקה מוקדמת שווה יותר מבדיקה מאוחרת.
+									410 text היום את דוח יתרת הסילוק מורידים מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+									411 text שולחים לנו אותו בוואטסאפ, ואנחנו באקסלנט בודקים ומחזירים תשובה ברורה: כדאי למחזר, או שעדיף להשאיר.
+									412 text בלי עלות ובלי התחייבות. ציון 9.89 בתוצאות ובחוויית לקוח במידרג.
+									413 text לחצו על הכפתור ושלחו הודעה.
+							414 link Description: מידע נוסף, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+							415 container
+								416 container js_1dr
+									417 text כותרת
+								418 text כותרת
+								419 container
+									420 text field (settable) כותרת, Value: בדיקת מחזור משכנתא בלי עלות, ID: js_1dv
+							421 link Description: מידע נוסף, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+							373 container
+								374 text תיאור
+								375 text entry area (settable) אקסלנט יועצי משכנתאות ופיננסים, מאז 2011
+							422 link Description: מידע נוסף, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+							376 heading מיטוב טקסט לכל אדם, Value: 4
+								377 text מיטוב טקסט לכל 
+								378 link Description: אדם, Value: facebook.com/business/help/283579896000936
+							379 text מושבת
+							380 container
+								381 container js_mo
+									382 text קריאה לפעולה
+								383 container
+									384 text בחירת פריט
+									385 combo box (collapsed) בחירת פריט שליחת הודעת WhatsApp, Value: שליחת הודעת WhatsApp ​, ID: js_128, Secondary Actions: Expand
+										386 container
+											387 text שליחת הודעת WhatsApp
+											388 image
+								389 container
+									390 image
+									391 heading 'הצגת הפרטים' הוא טקסט ברירת המחדל של הקריאה לפעולה, Value: 4
+										392 text 'הצגת הפרטים' הוא טקסט ברירת המחדל של הקריאה לפעולה
+									393 text השימוש באפשרות 'הצגת הפרטים' מגדיל את שיעור ההמרות בשיעור של עד ‎2.3%‎ בהשוואה לשימוש באפשרות 'מידע נוסף'. עדיין אפשר לבחור באפשרות 'מידע נוסף' או באפשרות אחרת.
+					718 container
+						719 image
+						720 heading חוויות עם מודעות, Value: 3
+							721 text חוויות עם מודעות
+						722 text אפשר לצפות בפורמטים, בתכונות האינטראקטיביות ובמקורות הנתונים של המודעה שלך ולערוך אותם.
+					229 container
+						230 image
+						231 heading מעקב, Value: 3
+							232 text מעקב
+						233 text בחירת אירועי המרה למעקב. ערכת נתוני ההמרה הנבחרת של חשבון המודעות הזה תהיה במעקב כברירת מחדל.
+					234 container
+						235 container
+							236 image
+							237 heading הגדרות החשבון, Value: 4
+								238 text הגדרות החשבון
+							239 text לא נקבעו הגדרות
+							240 button (collapsed) הרחבה של הגדרות החשבון ​, Secondary Actions: Expand
+								241 text הרחבה של הגדרות החשבון
+								242 image
+						243 container
+							723 container previewEditorComponent
+								724 container
+									725 switch (settable, boolean) Description: תצוגה מקדימה של מודעה, Value: 1, ID: js_1gf
+									726 text תצוגה מקדימה של מודעה
+									727 tab group
+										728 tab (selected, settable, boolean) Description: מודעה, Value: 1
+										729 tab (selectable, settable, boolean) Description: יעד, Value: 0
+									744 tab group
+										745 pop up button עוד
+											746 image
+									747 tab group
+										748 tab (selectable, settable, boolean) Description: המודעה שלך מוצגת בכל המיקומים שבחרת, Value: 0
+									749 tab group
+										750 tab (selectable, settable, boolean) Description: בדיקת הגדרות ברירת המחדל, Value: 0
+									751 button תצוגה מקדימה מתקדמת ​
+										752 text תצוגה מקדימה מתקדמת
+										753 image
+									754 pop up button (collapsed) שיתוף ​, Secondary Actions: Expand
+										755 text שיתוף
+										756 image
+										757 image
+								758 container
+									759 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance מודעה  · 
+									760 link עוד...
+										761 text עוד...
+									762 container
+										763 text משכנתא שנלקחה לפני כמה שנים לא תמיד מתאימה לשוק של היום.
+									764 container
+										765 text ובשנים הראשונות של ההחזר, רוב התשלום הולך לריבית. לכן בדיקה מוקדמת שווה יותר מבדיקה מאוחרת.
+									766 container
+										767 text היום את דוח יתרת הסילוק מורידים מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+									768 container
+										769 text שולחים לנו אותו בוואטסאפ, ואנחנו באקסלנט בודקים ומחזירים תשובה ברורה: כדאי למחזר, או שעדיף להשאיר.
+									770 container
+										771 text בלי עלות ובלי התחייבות. ציון 9.89 בתוצאות ובחוויית לקוח במידרג.
+									772 container
+										773 text לחצו על הכפתור ושלחו הודעה.
+									774 text ,
+									775 container
+										776 container
+											777 container Video player
+												778 button
+												779 button הפעלה
+												780 container
+													781 button הפעל
+													782 text 0:00  /  0:20
+													783 slider Description: Change Position, Value: 0
+													784 slider Description: שנה את עוצמת הקול, Value: 1
+													785 button בטל השתקה
+										786 container
+											787 container
+												788 text … יצירת קשר עם ‏אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance‏
+											789 button WhatsApp
+												790 container
+													791 text WhatsApp
+									792 text לייק הוספת תגובה שיתוף
+								731 container
+									732 text עיבוד המודעה והאינטראקציה איתה עשויים להשתנות בהתאם למכשיר, לפורמט ולגורמים אחרים.
+									733 pop up button מידע נוסף
+					345 text לחיצה על ' פרסם ' מהווה את אישורך לכך שהשימוש בכלי המודעות של Meta כפוף ל
+					346 link Description: תנאים והגבלות, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					347 text .
+					348 button סגור
+						349 text סגור
+					793 text כל העריכות נשמרו
+					351 container
+						352 button ביטול טיוטה
+							353 text ביטול טיוטה
+						354 button פרסם, ID: ads-editor-primary-btn
+							355 text פרסם
+		464 container
+			465 content list
+				466 container
+					467 button מדיה הסטטוס לא הושלם
+						533 container
+							534 image
+							535 text מדיה
+				468 container
+					469 button טקסט סטטוס בהמתנה
+						536 container
+							537 image
+							538 text טקסט
+				470 container
+					471 button חיתוך סטטוס בהמתנה
+						539 container
+							540 image
+							541 text חיתוך
+				472 container
+					473 button חיתוך סטטוס בהמתנה
+						542 container
+							543 image
+							544 text חיתוך
+				474 container
+					475 button (disabled) תרגום סטטוס בהמתנה
+						545 container
+							546 image
+							547 text תרגום
+			476 button סגירה ​
+				548 text סגירה
+				477 image
+			478 heading מדיה, Value: 3
+				549 text מדיה
+			550 text עליך לבחור או להעלות את המדיה שברצונך להשתמש בה במודעה שלך. אפשר לבחור תמונה אחת או סרטון אחד.
+			479 container
+				480 tab group
+					481 tab (selected, settable, boolean) Description: הכל, Value: 1
+					482 tab (selectable, settable, boolean) Description: חשבון, Value: 0
+					483 tab (selectable, settable, boolean) Description: עסק, Value: 0
+					484 tab (selectable, settable, boolean) Description: כתובת URL של הסרטון, Value: 0
+					485 tab (selectable, settable, boolean) Description: אינסטגרם, Value: 0
+					486 tab (selectable, settable, boolean) Description: דף, Value: 0
+				551 text כאן אפשר לחפש מדיה
+				794 container
+					795 text field (settable) כאן אפשר לחפש מדיה, ID: js_1f6
+				489 button מסננים 1
+					490 image
+					552 text מסננים 1
+					491 image
+				492 button העלה/העלי
+					493 image
+					553 text העלה/העלי
+				494 container
+					495 image
+					554 text סרטונים חשבון מוצגים תחילה  16 סרטונים
+					496 link Description: הכול, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					796 container grid
+						797 container
+							798 button refi_final_9x16_v4.mp4 1080 ⨯ 1920
+								799 text refi_final_9x16_v4.mp4
+								800 text 1080 ⨯ 1920
+							801 button R1_Video_9x16.mp4 1080 ⨯ 1920
+								802 text R1_Video_9x16.mp4
+								803 text 1080 ⨯ 1920
+							804 button R1_Video_4x5.mp4 1080 ⨯ 1350
+								805 text R1_Video_4x5.mp4
+								806 text 1080 ⨯ 1350
+							807 button EXC_REFI_H1B_VIDEO_4x5 1080 ⨯ 1350
+								808 text EXC_REFI_H1B_VIDEO_4x5
+								809 text 1080 ⨯ 1350
+							810 button EXC_REFI_H1B_VIDEO_9x16 1080 ⨯ 1920
+								811 text EXC_REFI_H1B_VIDEO_9x16
+								812 text 1080 ⨯ 1920
+							813 button IMG_0050.MOV 1080 ⨯ 1920
+								814 text IMG_0050.MOV
+								815 text 1080 ⨯ 1920
+							816 button IMG_0051.MOV 1080 ⨯ 1920
+								817 text IMG_0051.MOV
+								818 text 1080 ⨯ 1920
+							819 button סרטון יורם (4).MOV 1080 ⨯ 1920
+								820 text סרטון יורם (4).MOV
+								821 text 1080 ⨯ 1920
+							822 button סרטון יורם (3).MOV 1080 ⨯ 1920
+								823 text סרטון יורם (3).MOV
+								824 text 1080 ⨯ 1920
+							825 button סרטון יורם (2).MOV 1080 ⨯ 1920
+								826 text סרטון יורם (2).MOV
+								827 text 1080 ⨯ 1920
+							828 button סרטון יורם (5).MOV 1080 ⨯ 1920
+								829 text סרטון יורם (5).MOV
+								830 text 1080 ⨯ 1920
+							831 button סרטון יורם (1).MOV 1080 ⨯ 1920
+								832 text סרטון יורם (1).MOV
+								833 text 1080 ⨯ 1920
+							834 button אמנון חן עם תמונת קאבר.mp4 1080 ⨯ 1920
+								835 text אמנון חן עם תמונת קאבר.mp4
+								836 text 1080 ⨯ 1920
+							837 button 0314.mp4 1080 ⨯ 1920
+								838 text 0314.mp4
+								839 text 1080 ⨯ 1920
+							840 button הקליפ המלא לממומן.mp4 1080 ⨯ 1920
+								841 text הקליפ המלא לממומן.mp4
+								842 text 1080 ⨯ 1920
+							843 button משכנתא הפוכה כולל טקסט ודיבוב.mp4 848 ⨯ 480
+								844 text משכנתא הפוכה כולל טקסט ודיבוב.mp4
+								845 text 848 ⨯ 480
+					506 image
+					591 text סרטוני אינסטגרם מוצגים תחילה  14 סרטונים
+					507 link Description: הכול, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					592 container grid
+						593 container
+							594 button 1080 ⨯ 1350
+								595 text 1080 ⨯ 1350
+							596 button 640 ⨯ 1138
+								597 text 640 ⨯ 1138
+							598 button 640 ⨯ 1136
+								599 text 640 ⨯ 1136
+							600 button 640 ⨯ 1136
+								601 text 640 ⨯ 1136
+							602 button 1080 ⨯ 1920
+								603 text 1080 ⨯ 1920
+							604 button 1080 ⨯ 1920
+								605 text 1080 ⨯ 1920
+							606 button 640 ⨯ 1136
+								607 text 640 ⨯ 1136
+							608 button 389 ⨯ 219
+								609 text 389 ⨯ 219
+							846 button 389 ⨯ 389
+								847 text 389 ⨯ 389
+							848 button 1080 ⨯ 1080
+								849 text 1080 ⨯ 1080
+							850 button 410 ⨯ 410
+								851 text 410 ⨯ 410
+							852 button 1080 ⨯ 565
+								853 text 1080 ⨯ 565
+							854 button 612 ⨯ 612
+								855 text 612 ⨯ 612
+							856 button 410 ⨯ 410
+								857 text 410 ⨯ 410
+					616 image
+					617 combo box (collapsed) אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance, Value: ​ אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance ​, Secondary Actions: Expand
+						677 container
+							678 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance
+							679 image
+					680 text מוצגים תחילה  16 סרטונים
+					618 link Description: הכול, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0#
+					681 container grid
+						682 container
+							683 button 1080 ⨯ 1350
+								684 text 1080 ⨯ 1350
+							685 button 1080 ⨯ 1920
+								686 text 1080 ⨯ 1920
+							687 button 620 ⨯ 1104
+								688 text 620 ⨯ 1104
+							689 button 1080 ⨯ 1920
+								690 text 1080 ⨯ 1920
+							691 button 720 ⨯ 1280
+								692 text 720 ⨯ 1280
+							693 button רוצה לשמוע על חבילת של יועץ משכנתאות ועורך דין >> 1080 ⨯ 1920
+								694 text רוצה לשמוע על חבילת של יועץ משכנתאות ועורך דין >>
+								695 text 1080 ⨯ 1920
+							696 button רוצה להתחיל לפני התקנה של יולי 2026 >> 1080 ⨯ 1920
+								697 text רוצה להתחיל לפני התקנה של יולי 2026 >>
+								698 text 1080 ⨯ 1920
+							699 button 1080 ⨯ 1920
+								700 text 1080 ⨯ 1920
+							858 button 1080 ⨯ 1920
+								859 text 1080 ⨯ 1920
+							860 button 720 ⨯ 1280
+								861 text 720 ⨯ 1280
+							862 button 1080 ⨯ 1920
+								863 text 1080 ⨯ 1920
+							864 button משכנתא שמתה בטרם עת. 1080 ⨯ 1920
+								865 text משכנתא שמתה בטרם עת.
+								866 text 1080 ⨯ 1920
+							867 button כבדהו וחשדהו הבנקאי של הבנק. 1080 ⨯ 1920
+								868 text כבדהו וחשדהו הבנקאי של הבנק.
+								869 text 1080 ⨯ 1920
+							870 button 368 ⨯ 656
+								871 text 368 ⨯ 656
+							872 button 1080 ⨯ 1920
+								873 text 1080 ⨯ 1920
+							874 button 1080 ⨯ 1920
+								875 text 1080 ⨯ 1920
+			636 container
+				637 text ‏1 נבחרו מדיה שלך
+				736 container
+					737 text ‏0 נבחרו תמונה שנוצרה באמצעות AI
+			517 button ביטול
+				638 text ביטול
+			518 button הבא
+				639 text הבא
+
+The focused UI element is 492 button העלה/העלי
