@@ -1,0 +1,31 @@
+{
+  "status": "BLOCKED",
+  "scope": "Historical read-only Meta UI snapshot, not a fresh export or current live CPL calculation",
+  "accountId": "287081049104797",
+  "platformCampaignId": "120252891592490603",
+  "sourceFiles": {
+    "spendMinor": "docs/evidence/20261020/meta-refresh-budget-ui.txt:334",
+    "platformResultAndDateLabel": "docs/evidence/20261020/meta-refresh-results-ui.txt",
+    "accountTimezoneLabel": "docs/evidence/20261020/meta-refresh-original-audience-ui.txt"
+  },
+  "accountDateLabel": "Today 20 October 2026, Pacific account time",
+  "exactCapturedAt": null,
+  "verifiedMachineWindow": null,
+  "currency": "ILS",
+  "spendMinor": 8371,
+  "platformResult": {
+    "name": "messaging_conversation_started",
+    "count": null,
+    "cost": null,
+    "reason": "UI displayed dash"
+  },
+  "cohort": {
+    "complete": false,
+    "attributionVerified": false,
+    "observedEnrollments": null,
+    "qualifiedEnrollments": null
+  },
+  "costPerAttributedEnrollment": null,
+  "costPerQualifiedEnrollment": null,
+  "reason": "Missing reconciled campaign cohort and qualification denominator, exact observation timestamp and verified period boundaries; no synthetic CRM row counted as a real lead"
+}

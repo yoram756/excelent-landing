@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "scope": "Synthetic reporting inputs, no live cohort export, production dashboard or ad mutations",
+  "workflowRun": 39543129508,
+  "job": 119035180048,
+  "url": "https://github.com/yoram756/excelent-landing/actions/runs/39543129508",
+  "codeCommit": "02d0837fb531553f94011bbd2a723f45caebfb51",
+  "identicalTree": "6ae607b2faffd5048dd8f5805e84d7c02a208f95",
+  "logicHttp": {
+    "passed": 254,
+    "failed": 0
+  },
+  "browserAccessibility": {
+    "passed": 55,
+    "failed": 0
+  },
+  "mutationProofs": 12,
+  "logExcerpt": [
+    "2026-10-21T04:16:54.0566084Z # shared_pause: broken implementation rejected",
+    "2026-10-21T04:16:54.0566427Z # optout: broken implementation rejected",
+    "2026-10-21T04:16:54.0566768Z # unknown_retry: broken implementation rejected",
+    "2026-10-21T04:16:54.0567183Z # adapter_grants: broken implementation rejected",
+    "2026-10-21T04:16:54.0567591Z # enrollment_anchor: broken implementation rejected",
+    "2026-10-21T04:16:54.0567992Z # restore_gate: broken implementation rejected",
+    "2026-10-21T04:16:54.0568370Z # crm_readback: broken implementation rejected",
+    "2026-10-21T04:16:54.0568799Z # crm_unknown_retry: broken implementation rejected",
+    "2026-10-21T04:16:54.0569800Z # crm_snapshot: broken implementation rejected",
+    "2026-10-21T04:16:54.0570174Z # metrics_denominator: broken implementation rejected",
+    "2026-10-21T04:16:54.0570541Z # metrics_null: broken implementation rejected",
+    "2026-10-21T04:16:54.0571086Z # metrics_attribution: broken implementation rejected",
+    "2026-10-21T04:16:58.5228875Z # tests 254",
+    "2026-10-21T04:16:58.5229193Z # pass 254",
+    "2026-10-21T04:16:58.5229300Z # fail 0",
+    "2026-10-21T04:17:24.1597046Z 55/55"
+  ]
+}

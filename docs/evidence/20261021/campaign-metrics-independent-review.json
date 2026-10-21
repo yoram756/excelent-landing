@@ -1,0 +1,38 @@
+{
+  "reviewer": "Independent read-only qa_reviewer required by CLAUDE.md",
+  "codeCommit": "02d0837fb531553f94011bbd2a723f45caebfb51",
+  "workflowRun": 39543129508,
+  "job": 119035180048,
+  "checks": [
+    {
+      "requirement": "Synthetic metrics tests",
+      "status": "PASS",
+      "evidence": "17/17 local, no live cost claims"
+    },
+    {
+      "requirement": "Denominators, missing values and source coverage",
+      "status": "PASS",
+      "evidence": "Separate platform/attributed/qualified denominators; zero and null distinct; partial platform cost provisional"
+    },
+    {
+      "requirement": "Dates, cohort metadata and precision",
+      "status": "PASS",
+      "evidence": "Impossible and timezone-free dates rejected; separate observation clocks; positive sub-cent value preserved"
+    },
+    {
+      "requirement": "Mutation evidence and full gate",
+      "status": "PASS",
+      "evidence": "Three metrics mutants rejected; full gate254/254+55/55 and12total baseline-positive mutation proofs"
+    },
+    {
+      "requirement": "Historical source references",
+      "status": "PASS",
+      "evidence": "Corrected per-field refs;8371minor units in budgetUI334, dash/date inresultsUI, PDT inaudienceUI159"
+    },
+    {
+      "requirement": "Live CPL and source export reconciliation",
+      "status": "NOT TESTED",
+      "evidence": "No actual complete attributed qualification export joined"
+    }
+  ]
+}
