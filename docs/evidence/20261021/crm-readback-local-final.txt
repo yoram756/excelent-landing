@@ -1,0 +1,11 @@
+Command: node --test --test-name-pattern CRM readback mismatch tests/funnel/crm-sandbox.test.js
+Exit code: 0
+✔ CRM readback mismatch never acknowledges and cannot be retried after lease expiry (128.9043ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 295.4135

@@ -14,7 +14,8 @@ test('LP1 to SQLite to CRM exact readback acknowledges one preallocated item and
 });
 test('CRM readback mismatch never acknowledges and cannot be retried after lease expiry',async t=>{
  const f=setup(t),read=f.transport.read;f.transport.read=async target=>{const item=await read(target);if(f.counts().reads>1){const v=JSON.parse(item.text);v.projection.data.grants.sms=true;v.projection.hash=hash(v.projection.data);item.text=encode(v);}return item;};
- await assert.rejects(projectNext(f.args),/readback mismatch/);assert.equal(f.s.snapshot().projections[0].state,'unknown');assert.equal((await projectNext({...f.args,now:()=>LATER})).status,'IDLE');assert.equal(f.counts().writes,1);
+ await assert.rejects(projectNext(f.args),/readback mismatch/);assert.equal(f.s.snapshot().projections[0].state,'unknown');const reads=f.counts().reads;
+ await assert.doesNotReject(async()=>assert.equal((await projectNext({...f.args,now:()=>LATER})).status,'IDLE'),'unknown must never be reclaimed, including for a read');assert.equal(f.counts().reads,reads);assert.equal(f.counts().writes,1);
 });
 test('lost response after remote commit remains unknown with no automatic write replay',async t=>{
  const f=setup(t),write=f.transport.write;f.transport.write=async r=>{await write(r);throw Error('timeout after remote commit');};await assert.rejects(projectNext(f.args),/timeout/);assert.equal(f.s.snapshot().projections[0].state,'unknown');assert.ok(JSON.parse(f.item().text).projection);assert.equal((await projectNext({...f.args,now:()=>LATER})).status,'IDLE');assert.equal(f.counts().writes,1);
