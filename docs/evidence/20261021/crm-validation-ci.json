@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scope": "Synthetic test database and injected/local CRM transport; real private Monday JSON envelope proof recorded separately",
+  "workflowRun": 39542062644,
+  "job": 119031820529,
+  "url": "https://github.com/yoram756/excelent-landing/actions/runs/39542062644",
+  "codeCommit": "0e22b5a4849ebd7c73f5df65ca2023c62a70ffd0",
+  "localCodeCommit": "e87ce035ae451620721f37dae6e4446604143c08",
+  "identicalTree": "1fa10012b08b6a37db02e3dd0ea1451065be7a04",
+  "conclusion": "success",
+  "logicHttp": {
+    "passed": 237,
+    "failed": 0
+  },
+  "browserAccessibility": {
+    "passed": 55,
+    "failed": 0
+  },
+  "mutationProofs": 9,
+  "previousRun": {
+    "id": 39541870119,
+    "conclusion": "failure",
+    "passed": 236,
+    "failed": 1,
+    "note": "Mutation guard rejected a thrown CRM conflict because it required AssertionError. Requirement preserved; regression strengthened to assert no rejection and no additional read. No implementation change."
+  },
+  "logExcerpt": [
+    "2026-10-21T04:05:25.7815000Z # shared_pause: broken implementation rejected",
+    "2026-10-21T04:05:25.7816028Z # optout: broken implementation rejected",
+    "2026-10-21T04:05:25.7817315Z # unknown_retry: broken implementation rejected",
+    "2026-10-21T04:05:25.7820755Z # adapter_grants: broken implementation rejected",
+    "2026-10-21T04:05:25.7821852Z # enrollment_anchor: broken implementation rejected",
+    "2026-10-21T04:05:25.7822961Z # restore_gate: broken implementation rejected",
+    "2026-10-21T04:05:25.7824003Z # crm_readback: broken implementation rejected",
+    "2026-10-21T04:05:25.7825093Z # crm_unknown_retry: broken implementation rejected",
+    "2026-10-21T04:05:25.7826134Z # crm_snapshot: broken implementation rejected",
+    "2026-10-21T04:05:36.6610922Z # tests 237",
+    "2026-10-21T04:05:36.6611420Z # pass 237",
+    "2026-10-21T04:05:36.6611607Z # fail 0",
+    "2026-10-21T04:06:03.5042661Z 55/55"
+  ]
+}

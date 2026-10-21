@@ -1,0 +1,44 @@
+{
+  "reviewer": "Independent read-only qa_reviewer mandated by CLAUDE.md",
+  "codeCommit": "0e22b5a4849ebd7c73f5df65ca2023c62a70ffd0",
+  "workflowRun": 39542062644,
+  "job": 119031820529,
+  "checks": [
+    {
+      "requirement": "Real private Monday envelope sync",
+      "status": "PASS",
+      "evidence": "9 writes and18 reads,9 matching hashes/ACK,1 enrollment. Activity API independently confirmed9 update_column_value for the same item and receipt column."
+    },
+    {
+      "requirement": "Owned synthetic item cleanup",
+      "status": "PASS",
+      "evidence": "archive_pulse in independent activity read; item3298491868 archived; query-api0active/no more pages."
+    },
+    {
+      "requirement": "Consistency, identity and unknown write guards",
+      "status": "PASS",
+      "evidence": "49 local targeted tests, two race regressions rejected old behavior."
+    },
+    {
+      "requirement": "Final CI and nine mutation proofs",
+      "status": "PASS",
+      "evidence": "237/237 logic+HTTP,55/55 browser/accessibility; nine good baselines and AssertionError failures on broken implementations."
+    },
+    {
+      "requirement": "Active n8n, operational CRM columns and messaging providers",
+      "status": "NOT TESTED",
+      "evidence": "No live ingress, regular column projection or provider send performed."
+    },
+    {
+      "requirement": "Complete commercial acceptance",
+      "status": "BLOCKED",
+      "evidence": "Live routing/integration dependencies remain as documented."
+    }
+  ],
+  "limits": [
+    "Only JSON envelope long_text projection; not operational CRM UI readiness",
+    "No CAS; exclusive item ownership required",
+    "No immediate fan-out to all campaign CRM copies; SQLite remains authoritative",
+    "Stop all old workers before schema migration; an already-open old connection is not forcibly closed"
+  ]
+}
