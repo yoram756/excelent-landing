@@ -1,8 +1,8 @@
 {
   "request": "Explicit human request to adapt current campaign settings from image to video",
   "campaignId": "120252891592490603",
-  "status": "BLOCKED",
-  "scope": "Two saved unpublished adset placement changes, in addition to six prepared video ad drafts. No new campaign, no objective change, no activation or messaging.",
+  "status": "PASS",
+  "scope": "Two specific adset placement changes submitted/published after explicit human terms and publication approval, alongside six video ads. No new campaign, objective change or messaging. Final delivery remains unverified.",
   "changes": [
     {
       "adsetId": "120252891592500603",
@@ -86,9 +86,10 @@
     "scope": "No audience or destination edit actions. Placement previews show WhatsApp CTA; not a new phone-route or audience comparison."
   },
   "publication": {
-    "status": "BLOCKED",
-    "published": false,
-    "reason": "Action-time confirmation for Meta advertising-tools terms pending. Approval must cover six video ad changes and two placement changes only; unrelated11drafts excluded."
+    "status": "PASS",
+    "published": true,
+    "evidence": "meta-video-publication-acceptance.json",
+    "scope": "Two adsets submitted; delivery remains unverified."
   },
   "caveats": [
     "Original9:16 and19.5seconds retained. Existing Facebook feed retained to avoid removing existing inventory. Preview is not actual delivery proof or exhaustive safe-zone testing across devices.",

@@ -1,0 +1,425 @@
+Browser tab: 148905955, Title: "(22) מנהל המודעות - ניהול המודעות - מודעות - עריכה - עריכה", URL: "https://adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#".
+1 AXWebArea (22) מנהל המודעות - ניהול המודעות - מודעות - עריכה - עריכה, URL: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+	2 container
+		3 container ads_pe_container
+			4 container
+				5 link Description: מנהל המודעות Meta ​, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797
+				6 container nux_jewel_nav_anchor
+					7 button Pressable
+				8 container כלים
+					9 content list
+						10 container
+							11 button סקירת החשבון, ID: js_70
+							12 text סקירת החשבון
+						13 container
+							14 button קמפיינים
+							15 text קמפיינים
+						16 container
+							17 button דוחות של ביצועי מודעות
+							18 text דוחות של ביצועי מודעות
+						19 container
+							20 link Description: קהלים, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797&business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+							21 text קהלים
+						22 container
+							23 button הגדרות פרסום, ID: ecosystem_nav_advertising_preferences_context_id
+							24 text הגדרות פרסום
+						25 container
+							26 link Description: חיובים ותשלומים, Value: adsmanager.facebook.com/adsmanager/billing_hub/accounts/details?nav_entry_point=ads_ecosystem_navigation_menu&placement=ads_manager&asset_id=287081049104797&business_id=745355029428233&payment_account_id=287081049104797&session_id=REDACTED
+							27 text חיובים ותשלומים
+						28 container
+							29 link Description: מנהל האירועים, Value: eventsmanager.facebook.com/events_manager2/overview?business_id=745355029428233&act=287081049104797&nav_source=ads_ecosystem_nav
+							30 text מנהל האירועים
+						31 container
+							32 button כל הכלים, ID: ecosystem_nav_all_tools_context_id
+							33 text כל הכלים
+				34 container
+					35 button המסייע העסקי של Meta AI
+				36 container
+					37 button עזרה
+					38 text עזרה
+				39 button הגדרות העסק ​
+					40 text הגדרות העסק
+					41 image
+				42 button חיפוש ​
+					43 text חיפוש
+					44 image
+				45 button דיווח על בעיה ​
+					46 text דיווח על בעיה
+					47 image
+			48 container
+				49 container
+					50 button סגירה
+						51 image
+					52 button Description: הצגת התרשימים (Ctrl+Y), ID: insights_tray_button
+					53 button עריכה (Ctrl+U)
+					54 button הצג היסטוריה (Ctrl+I)
+					55 button צמצם את התצוגה
+				56 container campaign_structure_tree_root
+					57 container
+						58 text חיפוש
+						59 container
+							60 image
+							61 combo box (collapsed, settable) חיפוש, ID: js_25, Secondary Actions: Expand
+					62 table grid
+						63 container
+							64 row קמפיין
+								65 cell Description: קמפיין, ID: ads_campaign_structure_item_120252891592490603
+									66 image
+									67 text EXC_Refi_WA_R1_2026-10
+							68 row סדרת מודעות
+								69 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252926489540603
+									70 image
+									71 text ‏מטורגט-איגור 20.10
+							72 row מודעה
+								73 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489550603
+									74 image
+									75 text R1_Img_Bank
+							76 row מודעה
+								77 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489560603
+									78 image
+									79 text R1_Video
+							80 row מודעה
+								81 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489570603
+									82 image
+									83 text R1_Img_Balance
+							84 row סדרת מודעות
+								85 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252891592500603
+									86 image
+									87 text EXC_Refi_IL_18-65_WA_R1
+							88 row מודעה
+								89 cell Description: מודעה, ID: ads_campaign_structure_item_120252891592510603
+									90 image
+									91 text R1_Video
+							92 row מודעה
+								93 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718060603
+									94 image
+									95 text R1_Img_Balance
+							96 row מודעה
+								97 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718070603
+									98 image
+									99 text R1_Img_Bank
+				100 container
+					101 button פתיחה ​
+						102 text פתיחה
+						103 image
+					104 link Description: EXC_Refi_WA_R1_2026-10, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+					105 image
+					106 link Description: ‏מטורגט-איגור 20.10, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+					107 image
+					108 image
+					109 heading R1_Img_Balance, Value: 4
+						110 text R1_Img_Balance
+					111 container cpgn_temp_save_as_template_nux_a
+						112 text בעיבוד
+						113 container
+							114 switch (settable, boolean) הפעלה/כיבוי, Value: 1, ID: js_c
+						115 pop up button (collapsed) תפריט הפעולות ​, Secondary Actions: Expand
+							116 text תפריט הפעולות
+							117 image
+					118 tab group
+						119 tab (selected, settable, boolean) Description: ערוך, Value: 1
+						120 tab (selectable, settable, boolean) Description: בדוק, Value: 0
+					121 container
+						122 image
+						123 heading שם המודעה, Value: 3
+							124 text שם המודעה
+						125 container
+							126 combo box (collapsed, settable) Value: R1_Img_Balance, ID: js_2e, Secondary Actions: Expand
+						127 link Description: הצגת אפשרויות נוספות, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+					128 container
+						129 container adgroupPartnershipAdsHeader
+							130 heading מודעה משותפת, Value: 3
+								131 text מודעה משותפת
+							132 text כבוי
+							133 container
+								134 switch (settable, boolean) Description: כבוי, Value: 0, ID: js_k
+							135 text כדי לשפר את ביצועי הקמפיין, כדאי להציג מודעות עם יוצרים, מותגים ועסקים אחרים. 
+							136 link Description: לצפייה בתוכן של יוצרים ב'המרכז לשיווק באמצעות יוצרים', Value: business.facebook.com/creator_marketing_hub/ad_content/?ad_account_id=287081049104797&nav_ref=ads_manager_partnership_ads_card&business_id=745355029428233&selected_business_ig_user_id=17841400687782267&selected_business_page_id=102101428225258
+					137 container
+						138 container identityHeader
+							139 heading זהות, Value: 3
+								140 text זהות
+						141 container identityEditorComponent
+							142 text הפרופילים שיופיעו במודעה.
+							143 container
+								144 image Facebook
+							145 container
+								146 image Instagram
+							147 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance
+							148 text excellnetfinance
+							149 container
+								150 link Description: עריכה, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+								151 button עריכה, ID: js_2n
+					152 container
+						153 image
+						154 heading הגדרות מודעה, Value: 3
+							155 text הגדרות מודעה
+						156 container
+							157 text יש לבחור פוסט קיים או ליצור פוסט חדש
+							158 combo box (collapsed) יש לבחור פוסט קיים או ליצור פוסט חדש יצירת מודעה, Value: יצירת מודעה ​, ID: js_u, Secondary Actions: Expand
+								159 container
+									160 text יצירת מודעה
+									161 image
+						162 container formatEditorComponent
+							163 container js_11
+								164 text פורמט 
+								165 image
+							166 text עליך לבחור פריסת קריאייטיב של מודעה.
+							167 container
+								168 js_14
+									169 container
+										170 container
+											171 radio button (settable, integer) Description: תמונה יחידה או סרטון יחיד, Value: 1, ID: js_18
+										172 text תמונה יחידה או סרטון יחיד
+									173 container
+										174 container
+											175 radio button (settable, integer) Description: קרוסלה, Value: 0, ID: js_1e
+										176 text קרוסלה
+						177 container
+							178 container
+								179 checkbox (settable, integer) Description: מודעות של כמה מפרסמים, Value: 1, ID: js_3t
+								180 image
+							181 text מודעות של כמה מפרסמים
+							182 container
+								183 text המודעה שלך יכולה להופיע עם מודעות אחרות באותה יחידת מודעות כדי לקדם את יכולת הגילוי. ייתכן שהמערכת תשנה את גודל קריאייטיב המודעה שלך או תחתוך אותו. 
+								184 link Description: מידע על מודעות של כמה מפרסמים, Value: facebook.com/business/help/1024826868233885
+						185 link Description: הצגת אפשרויות נוספות, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+					186 container
+						187 image
+						188 heading יעד, Value: 3
+							189 text יעד
+						190 text יש להגדיר לאן לשלוח אנשים מייד אחרי שהם לוחצים על המודעה שלך. הבחירה כבר בוצעה עבור מודעה זו. 
+						191 link Description: מידע נוסף, Value: facebook.com/business/help/1174990279685960
+					192 container
+						193 image
+						194 heading קריאייטיב של מודעה, Value: 3
+							195 text קריאייטיב של מודעה
+						196 text אפשר לבחור ולמטב את המודעה, הטקסט והשיפורים שלך. לאחר בחירת פוסט, תהיה לך אפשרות לבחור היכן תופיע המודעה המשותפת. 
+						197 link Description: מידע על התאמה אישית של נכסים, Value: facebook.com/business/help/1044825198987622
+						198 container ads-preemptive-error-tour-creative
+							199 text מדיה
+							200 content list
+								201 pop up button (collapsed) ערוך את המדיה, Secondary Actions: Expand
+									202 text ערוך את המדיה
+									203 image
+							204 button הסרת המדיה ​
+								205 text הסרת המדיה
+								206 image
+							207 content list
+								208 button (collapsed) סטוריז, סטטוס, Reels עריכת הקבוצה ​, Secondary Actions: Expand
+									209 text סטוריז, סטטוס, Reels
+									210 button עריכת הקבוצה ​
+										211 text עריכת הקבוצה
+										212 image
+							213 content list
+								214 container
+									215 text הפיד של פייסבוק
+									216 button ערוך ​
+										217 text ערוך
+										218 image
+						219 container creativeEditorComponent
+							220 text הטקסט הראשי
+							221 container
+								222 combo box (collapsed) Description: ספר לאנשים מה מה אתה מפרסם במודעה, Secondary Actions: Expand, Value: משכנתא שנלקחה לפני כמה שנים לא תמיד מתאימה לשוק של היום.
+ובשנים הראשונות של ההחזר, רוב התשלום הולך לריבית. לכן בדיקה מוקדמת שווה יותר מבדיקה מאוחרת.
+היום את דוח יתרת הסילוק מורידים מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+שולחים לנו אותו בוואטסאפ, ואנחנו באקסלנט בודקים ומחזירים תשובה ברורה: כדאי למחזר, או שעדיף להשאיר.
+בלי עלות ובלי התחייבות. ציון 9.89 בתוצאות ובחוויית לקוח במידרג.
+לחצו על הכפתור ושלחו הודעה.
+									223 text משכנתא שנלקחה לפני כמה שנים לא תמיד מתאימה לשוק של היום.
+									224 text ובשנים הראשונות של ההחזר, רוב התשלום הולך לריבית. לכן בדיקה מוקדמת שווה יותר מבדיקה מאוחרת.
+									225 text היום את דוח יתרת הסילוק מורידים מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+									226 text שולחים לנו אותו בוואטסאפ, ואנחנו באקסלנט בודקים ומחזירים תשובה ברורה: כדאי למחזר, או שעדיף להשאיר.
+									227 text בלי עלות ובלי התחייבות. ציון 9.89 בתוצאות ובחוויית לקוח במידרג.
+									228 text לחצו על הכפתור ושלחו הודעה.
+							229 link Description: מידע נוסף, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+							230 container
+								231 container js_5m
+									232 text כותרת
+								233 text כותרת
+								234 container
+									235 text field (settable) כותרת, Value: בדיקת מחזור משכנתא בלי עלות, ID: js_5q
+							236 link Description: מידע נוסף, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+							237 container
+								238 text תיאור
+								239 text entry area (settable) אקסלנט יועצי משכנתאות ופיננסים, מאז 2011
+							240 link Description: מידע נוסף, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+							241 heading מיטוב טקסט לכל אדם, Value: 4
+								242 text מיטוב טקסט לכל 
+								243 link Description: אדם, Value: facebook.com/business/help/283579896000936
+							244 text מושבת
+							245 container
+								246 container js_64
+									247 text קריאה לפעולה
+								248 container
+									249 text בחירת פריט
+									250 combo box (collapsed) בחירת פריט שליחת הודעת WhatsApp, Value: שליחת הודעת WhatsApp ​, ID: js_69, Secondary Actions: Expand
+										251 container
+											252 text שליחת הודעת WhatsApp
+											253 image
+								254 container
+									255 image
+									256 heading 'הצגת הפרטים' הוא טקסט ברירת המחדל של הקריאה לפעולה, Value: 4
+										257 text 'הצגת הפרטים' הוא טקסט ברירת המחדל של הקריאה לפעולה
+									258 text השימוש באפשרות 'הצגת הפרטים' מגדיל את שיעור ההמרות בשיעור של עד ‎2.3%‎ בהשוואה לשימוש באפשרות 'מידע נוסף'. עדיין אפשר לבחור באפשרות 'מידע נוסף' או באפשרות אחרת.
+					259 container
+						260 image
+						261 heading חוויות עם מודעות, Value: 3
+							262 text חוויות עם מודעות
+						263 text אפשר לצפות בפורמטים, בתכונות האינטראקטיביות ובמקורות הנתונים של המודעה שלך ולערוך אותם.
+						264 container adgroupL1SimplificationAdEngagementComponent
+							265 heading מקורות מודעות, Value: 4
+								266 text מקורות מודעות
+							267 text במצב כבוי: מוצרים
+							268 button עריכה
+								269 text עריכה
+						270 container adgroupFlexibleFormatComponent
+							271 heading אפשרויות תצוגת הפורמט, Value: 4
+								272 text אפשרויות תצוגת הפורמט
+							273 text מופעל: מדיה יחידה
+							274 button עריכה
+								275 text עריכה
+					276 container
+						277 image
+						278 heading שיחות, Value: 3
+							279 text שיחות
+						280 text אפשר ליצור את חוויית ההתכתבות שאנשים יראו אחרי שיקישו על המודעה שלך. 
+						281 link Description: מידע נוסף, Value: facebook.com/business/help/1816962591668838
+						282 tab group
+							283 tab (selectable, settable, boolean) Description: הצעה לתבנית, Value: 0
+							284 tab (selected, settable, boolean) Description: תבניות שנשמרו, Value: 1
+						285 container
+							286 text בחירת תבנית
+							287 combo box (collapsed) בחירת תבנית R1_Img_Balance_Refi_WA, Value: R1_Img_Balance_Refi_WA ​, ID: js_gf, Secondary Actions: Expand
+								288 container
+									289 text R1_Img_Balance_Refi_WA
+									290 image
+						291 text הודעת פתיחה
+						292 container
+							293 text היי, תודה שפניתם לאקסלנט יועצי משכנתאות ופיננסים.
+							294 text כדי לבדוק אם מחזור משתלם, שלחו כאן את דוח יתרת הסילוק של המשכנתא. מורידים אותו מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+							295 text יועץ יעבור עליו ויחזור אליכם עם תשובה ברורה, כדאי למחזר או לא.
+							296 text יש שאלה לפני? פשוט כתבו אותה כאן.
+						297 link Description: הוספה של קריאה לפעולה, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+						298 text הודעה כתובה מראש
+						299 text היי, אשמח לבדוק את יתרת המשכנתא
+						300 button עריכה, ID: js_gk
+							301 image
+							302 text עריכה
+						303 button שכפול
+							304 image
+							305 text שכפול
+						306 button יצירת תבנית, ID: js_gd
+							307 image
+							308 text יצירת תבנית
+					309 container
+						310 image
+						311 heading מעקב, Value: 3
+							312 text מעקב
+						313 text בחירת אירועי המרה למעקב. ערכת נתוני ההמרה הנבחרת של חשבון המודעות הזה תהיה במעקב כברירת מחדל.
+						314 container trackingEditorComponent
+							315 container
+								316 text מעקב
+								317 container
+									318 container
+										319 checkbox (settable, integer) Description: אירועים באתר, Value: 0, ID: js_ep
+										320 image
+									321 text אירועים באתר
+								322 container
+									323 container
+										324 checkbox (settable, integer) Description: אירועים באפליקציה, Value: 0, ID: js_ev
+										325 image
+									326 text אירועים באפליקציה
+								327 container
+									328 container
+										329 checkbox (settable, integer) Description: אירועים לא מקוונים, Value: 0, ID: js_f1
+										330 image
+									331 text אירועים לא מקוונים
+								332 link Description: עריכת סדרות של אירועים לא מקוונים שבמעקב, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+							333 container
+								334 container js_fc
+									335 text פרמטרים של URL
+								336 text field (settable) פרמטרים של URL, ID: js_fb
+							337 link Description: בניית פרמטר URL, Value: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#
+							338 text דיווח של צד שלישי
+							339 text ייתכן שרכישות ב-Meta לא יופיעו בדיווח Google שלך. אפשר לחבר את החשבון ולמדוד פעולות במודעות ששולחות אנשים לאתר או לחנות שלך. 
+							340 link Description: מידע נוסף, Value: facebook.com/business/help/140637645369656
+							341 link Description: חיבור, Value: …
+					342 container
+						343 container
+							344 image
+							345 heading הגדרות החשבון, Value: 4
+								346 text הגדרות החשבון
+							347 text לא נקבעו הגדרות
+							348 button (collapsed) הרחבה של הגדרות החשבון ​, Secondary Actions: Expand
+								349 text הרחבה של הגדרות החשבון
+								350 image
+						351 container
+							352 container previewEditorComponent
+								353 container
+									354 switch (settable, boolean) Description: תצוגה מקדימה של מודעה, Value: 1, ID: js_4i
+									355 text תצוגה מקדימה של מודעה
+									356 tab group
+										357 tab (selected, settable, boolean) Description: מודעה, Value: 1
+										358 tab (selectable, settable, boolean) Description: יעד, Value: 0
+									359 tab group
+										360 tab (selected, settable, boolean) Description: הכל, Value: 1
+										361 tab (selectable, settable, boolean) Description: עדכונים, Value: 0
+										362 tab (selectable, settable, boolean) Description: סטוריז, סטטוס, Reels, Value: 0
+									363 tab group
+										364 tab (selectable, settable, boolean) Description: המודעה שלך מוצגת בכל המיקומים שבחרת, Value: 0
+									365 tab group
+										366 tab (selectable, settable, boolean) Description: בדיקת הגדרות ברירת המחדל, Value: 0
+									367 button תצוגה מקדימה מתקדמת ​
+										368 text תצוגה מקדימה מתקדמת
+										369 image
+									370 pop up button (collapsed) שיתוף ​, Secondary Actions: Expand
+										371 text שיתוף
+										372 image
+										373 image
+								374 container
+									375 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance מודעה  · 
+									376 link עוד...
+										377 text עוד...
+									378 container
+										379 text משכנתא שנלקחה לפני כמה שנים לא תמיד מתאימה לשוק של היום.
+									380 container
+										381 text ובשנים הראשונות של ההחזר, רוב התשלום הולך לריבית. לכן בדיקה מוקדמת שווה יותר מבדיקה מאוחרת.
+									382 container
+										383 text היום את דוח יתרת הסילוק מורידים מאתר הבנק או מהאפליקציה, בלי להגיע לסניף.
+									384 container
+										385 text שולחים לנו אותו בוואטסאפ, ואנחנו באקסלנט בודקים ומחזירים תשובה ברורה: כדאי למחזר, או שעדיף להשאיר.
+									386 container
+										387 text בלי עלות ובלי התחייבות. ציון 9.89 בתוצאות ובחוויית לקוח במידרג.
+									388 container
+										389 text לחצו על הכפתור ושלחו הודעה.
+									390 text ,
+									391 container
+										392 container
+											393 container Video player
+												394 button
+												395 button הפעלה
+												396 container
+													397 button הפעל
+													398 text 0:00  /  0:20
+													399 slider Description: Change Position, Value: 0
+													400 slider Description: שנה את עוצמת הקול, Value: 1
+													401 button בטל השתקה
+										402 container
+											403 container
+												404 text … יצירת קשר עם ‏אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance‏
+											405 button WhatsApp
+												406 container
+													407 text WhatsApp
+									408 text לייק הוספת תגובה שיתוף
+								409 container
+									410 container
+										411 container Video player
+									412 text צ'אט ב-WhatsApp
+									413 container
+										414 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance   מודעה · הפעלה באורך מלא  0:20
+								415 container
+									416 text עיבוד המודעה והאינטראקציה איתה עשויים להשתנות בהתאם למכשיר, לפורמט ולגורמים אחרים.
+									417 image
+
+The focused UI element is 1 AXWebArea (22) מנהל המודעות - ניהול המודעות - מודעות - עריכה - עריכה, URL: adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252926489570603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#

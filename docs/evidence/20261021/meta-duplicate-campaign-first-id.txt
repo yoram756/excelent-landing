@@ -1,0 +1,196 @@
+Browser tab: 148905990, Title: "מנהל המודעות - ניהול המודעות - סדרות מודעות", URL: "https://adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 135-145, 147-152, 187-192, 199-204, 273-284, 286-314, 316-327, 329-340, 342-353, 355-366, 368-379, 381-392, 394-451
+~0 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות, URL: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602
++			273 container
++				274 link Description: מנהל המודעות Meta ​, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797
++				275 container nux_jewel_nav_anchor
++					276 button Pressable
++				277 container כלים
++					278 content list
++						279 container
++							280 button סקירת החשבון, ID: js_8d
++							281 text סקירת החשבון
++						282 container
++							283 button קמפיינים
++							284 text קמפיינים
++						285 container
++							286 button דוחות של ביצועי מודעות
++							287 text דוחות של ביצועי מודעות
++						288 container
++							289 link Description: קהלים, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797&business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
++							290 text קהלים
++						291 container
++							292 button הגדרות פרסום, ID: ecosystem_nav_advertising_preferences_context_id
++							293 text הגדרות פרסום
++						294 container
++							295 link Description: חיובים ותשלומים, Value: adsmanager.facebook.com/adsmanager/billing_hub/accounts/details?nav_entry_point=ads_ecosystem_navigation_menu&placement=ads_manager&asset_id=287081049104797&business_id=745355029428233&payment_account_id=287081049104797&session_id=REDACTED
++							296 text חיובים ותשלומים
++						297 container
++							298 link Description: מנהל האירועים, Value: eventsmanager.facebook.com/events_manager2/overview?business_id=745355029428233&act=287081049104797&nav_source=ads_ecosystem_nav
++							299 text מנהל האירועים
++						300 container
++							301 button כל הכלים, ID: ecosystem_nav_all_tools_context_id
++							302 text כל הכלים
++				303 container
++					304 button המסייע העסקי של Meta AI
++				305 container
++					306 button עזרה
++					307 text עזרה
++				308 button הגדרות העסק ​
++					309 text הגדרות העסק
++					310 image
++				311 button חיפוש ​
++					312 text חיפוש
++					313 image
++				314 button דיווח על בעיה ​
++					315 text דיווח על בעיה
++					316 image
+~						13 button (disabled) רענון נתוני הטבלה ​
++					317 button Facebook
++						318 container
++							319 image Facebook
+~					29 button (disabled) בחר סדרת מודעות אחת לפחות לעריכה.
+~					30 button (disabled) בחר סדרת מודעות אחת לפחות כדי לראות היסטוריה של שינויים.
+~					32 link Description: כל הפרסומות status_before_click:selected, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602#
+~					33 link Description: מודעות פעילות status_before_click:unselected, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602#
+~					34 link Description: הוצגו status_before_click:unselected, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602#
+~						47 tab (selectable, settable, boolean) Description: הסרת 1 שנבחרו מקמפיינים, קמפיינים פריט אחד נבחר הסרת 1 שנבחרו מקמפיינים
+קמפיינים, Value: 0
+3
+קמפיינים
+פריט אחד נבחר
+~						48 tab (selected, settable, boolean) סדרות מודעותעבור 1 קמפיין
+סדרות מודעותעבור 1 קמפיין, Value: 1
+3
+סדרות מודעות
+עבור 1
+קמפיין
+~						49 tab (selectable, settable, boolean) מודעותעבור 1 קמפיין
+מודעותעבור 1 קמפיין, Value: 0
+3
+מודעות
+עבור 1
+קמפיין
++					320 container
++						321 toolbar
++							322 button
++								323 image
++							324 button (disabled)
++								325 image
++							326 button (disabled)
++								327 image
++							328 button
++								329 image
++							330 pop up button (collapsed) Secondary Actions: Expand
++								331 image
++							332 pop up button (collapsed) Secondary Actions: Expand
++								333 image
++								334 image
++							335 pop up button (collapsed) Secondary Actions: Expand
++								336 image
++							337 pop up button (collapsed) Secondary Actions: Expand
++								338 image
++								339 image
++							340 pop up button (collapsed) Secondary Actions: Expand
++								341 image
++								342 image
++							343 container
++								344 button
++									345 image
++								346 pop up button (collapsed) Secondary Actions: Expand
++									347 image
++						348 toolbar
++							349 button יצירה
++								350 image
++								351 text יצירה
++							352 button (disabled) שכפול
++								353 image
++								354 text שכפול
++							355 button (disabled) עריכה
++								356 image
++								357 text עריכה
++							358 button בדיקת A/B
++								359 image
++								360 text בדיקת A/B
++							361 pop up button (collapsed) עוד, Secondary Actions: Expand
++								362 text עוד
++								363 image
++							364 pop up button (collapsed) עמודות, ID: insights_table_column_preset_dropdown, Secondary Actions: Expand
++								365 image
++								366 text עמודות
++								367 image
++							368 pop up button (collapsed) פירוט, Secondary Actions: Expand
++								369 text פירוט
++								370 image
++							371 pop up button (collapsed) קבוצות, Secondary Actions: Expand
++								372 image
++								373 text קבוצות
++								374 image
++							375 pop up button (collapsed) דוחות ​, Secondary Actions: Expand
++								376 text דוחות
++								377 image
++								378 image
++							379 container
++								380 button יצא ​
++									381 text יצא
++									382 image
++								383 pop up button (collapsed) פתח תפריט נפתח ​, Secondary Actions: Expand
++									384 text פתח תפריט נפתח
++									385 image
++						386 progress indicator 4
++										387 container
++											388 cell
++												389 heading השבתה / הפעלה, Value: 4
++													390 text השבתה / הפעלה
++													391 image
++										392 container
++											393 cell
++												394 heading סדרת מודעות, Value: 4
++													395 text סדרת מודעות
++													396 image
++												397 button פתח את התפריט הנפתח של אפשרויות המיון
++										398 container
++											399 cell
++												400 heading מסירה, Value: 4
++													401 text מסירה
++													402 image
++												403 button פתח את התפריט הנפתח של אפשרויות המיון
++										404 container
++											405 cell
++												406 heading תקציב, Value: 4
++													407 text תקציב
++													408 image
++												409 button פתח את התפריט הנפתח של אפשרויות המיון
++										410 container
++											411 cell
++												412 heading סיום, Value: 4
++													413 text סיום
++													414 image
++												415 button פתח את התפריט הנפתח של אפשרויות המיון
++										416 container
++											417 cell
++												418 heading תזמון, Value: 4
++													419 text תזמון
++													420 image
++												421 button פתח את התפריט הנפתח של אפשרויות המיון
+~											272 link Description: התאמה אישית של עמודות..., Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602#
++								422 container
++									423 container
++										424 container
++											425 checkbox (settable, integer) Value: 0, ID: js_bw
++											426 image
++										427 container
++											428 switch 0
++										429 container
++											430 link adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602#
++											431 link adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602#
++								432 container
++									433 container
++										434 container
++											435 text תוצאות מסדרת מודעות אחת
++											436 button (collapsed) Description: information symbol, button, tap for more information, Secondary Actions: Expand
++												437 image
++											438 text טוען...
++											439 button הצגת התוצאות
+The focused UI element is 0 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות, URL: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23854369467130602

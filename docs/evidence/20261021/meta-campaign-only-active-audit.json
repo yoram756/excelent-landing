@@ -1,0 +1,274 @@
+{
+  "status": "PASS",
+  "accountId": "287081049104797",
+  "targetCampaign": "EXC_Refi_WA_R1_2026-10",
+  "uiCampaignTotal": 23,
+  "uniqueVisibleNames": 22,
+  "duplicateNameEntities": [
+    {
+      "id": "23854369467130602",
+      "offEvidence": "meta-duplicate-campaign-first-off.txt",
+      "identityAfterClick": "meta-duplicate-campaign-first-id.txt"
+    },
+    {
+      "id": "23850741815560602",
+      "offEvidence": "meta-duplicate-campaign-second-off.txt",
+      "identityAfterClick": "meta-duplicate-campaign-second-id.txt"
+    }
+  ],
+  "identityMethod": "Each before snapshot showed one visible named duplicate row with toggle0. Clicking that exact name navigated to the following selected_campaign_ids URL. Two distinct IDs resolve duplicate-name accounting; no switch mutation.",
+  "observations": [
+    {
+      "name": "EXC_Refi_WA_R1_2026-10",
+      "enabled": true,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "קמפיין משפרי דיור קהל מותאם אישית כל הארץ",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "EXC_Refi_Leads_2026-10_PROD",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "Test_Compliance_Mortgage_2026",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "EXC_REFI_TEST_H1H3_2026-10 טיוטה לא להפעיל ללא אישור יורם",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "EXC_Refi_WA_Stories_2026-09",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "EXC_Consolidation_Lead_2026-09",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "-‏קמפיין לידים | קרוסלה‏ - עותק",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "getscale.io | atomic testing | traffic | 29.7.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "getscale.io | validation | leads | form | 3.8.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-1.txt"
+    },
+    {
+      "name": "‏‏פרטי | 2 חדשים‏ (חדש 27.05)",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "‏פרטי | 3 עובדים‏ (חדש 27.05)",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "EXC_Refi_Leads_2026-10_PROD",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "Test_Compliance_Mortgage_2026",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "EXC_REFI_TEST_H1H3_2026-10 טיוטה לא להפעיל ללא אישור יורם",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "EXC_Refi_WA_Stories_2026-09",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "EXC_Consolidation_Lead_2026-09",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "-‏קמפיין לידים | קרוסלה‏ - עותק",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "getscale.io | atomic testing | traffic | 29.7.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "getscale.io | validation | leads | form | 3.8.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-2.txt"
+    },
+    {
+      "name": "קמפיין משפרי דיור קהל מותאם אישית כל הארץ",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "Young couples, Lead generation, 22.06.22",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "פרטי | 3 עובדים",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "‏פרטי | 2 חדשים",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "‏פרטי | 2 שלא קיבלו חשיפה",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "בעלי עסקים | 75 יומי",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "‏דוד וטין || לידים || איחוד הלוואות || 31.10.23 || ליאב‏",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "קמפיין לידים מסורבי בנקים אמנון חן מרץ 2026",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "Bank refused, Lead generation, 22.06.22",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "Reverse mortgage, Lead generation, 20.06.22",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-3.txt"
+    },
+    {
+      "name": "קמפיין משפרי דיור קהל מותאם אישית כל הארץ",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "EXC_Refi_WA_R1_2026-10",
+      "enabled": true,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "getscale.io | validation | leads | form | 3.8.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "getscale.io | atomic testing | traffic | 29.7.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "-‏קמפיין לידים | קרוסלה‏ - עותק",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "EXC_Consolidation_Lead_2026-09",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "EXC_Refi_WA_Stories_2026-09",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "EXC_REFI_TEST_H1H3_2026-10 טיוטה לא להפעיל ללא אישור יורם",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "Test_Compliance_Mortgage_2026",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "EXC_Refi_Leads_2026-10_PROD",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-4.txt"
+    },
+    {
+      "name": "‏פרטי | 3 עובדים‏ (חדש 27.05)",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "‏‏פרטי | 2 חדשים‏ (חדש 27.05)",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "getscale.io | validation | leads | form | 3.8.26",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "קמפיין לידים מסורבי בנקים אמנון חן מרץ 2026",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "‏דוד וטין || לידים || איחוד הלוואות || 31.10.23 || ליאב‏",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "בעלי עסקים | 75 יומי",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "‏פרטי | 2 שלא קיבלו חשיפה",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "‏פרטי | 2 חדשים",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "פרטי | 3 עובדים",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    },
+    {
+      "name": "קמפיין לידים | קרוסלה",
+      "enabled": false,
+      "evidence": "meta-campaign-switches-page-5.txt"
+    }
+  ],
+  "conclusion": "23campaigns accounted for:22unique names plus second entity sharing one name. Only target campaign toggle on;22others off. No campaign toggle mutation required.",
+  "limitations": "Virtualized UI recycles AX/DOM ids. Do not count duplicate snapshots as distinct campaigns. Active quick view additionally includes impressions>0 and is not the sole proof. Scope only this ad account, not other accounts."
+}

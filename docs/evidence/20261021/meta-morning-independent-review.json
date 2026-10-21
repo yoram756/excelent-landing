@@ -1,0 +1,63 @@
+{
+  "reviewer": "/root/qa_reviewer",
+  "mode": "Read-only independent review required by CLAUDE.md",
+  "record": "Summary of the completed reviewer response; no new code or provider test is implied.",
+  "requirements": [
+    {
+      "requirement": "Submit six video ads and two placement adsets only",
+      "status": "PASS",
+      "evidence": [
+        "meta-video-publication-acceptance.json",
+        "meta-video-six-published-ui.txt"
+      ],
+      "scope": "Eight specific submissions,11 unrelated drafts retained. Preparing/processing/in-review does not prove approved delivery."
+    },
+    {
+      "requirement": "Keep one fixed Yoram portrait cover",
+      "status": "PASS",
+      "evidence": [
+        "meta-portrait-thumbnail-live-readback.txt",
+        "meta-portrait-thumbnail-published-reopen.txt"
+      ],
+      "scope": "Ad120252926489570603, manual thumbnail for3placements read back after publication."
+    },
+    {
+      "requirement": "Create three readable covers matching copy",
+      "status": "PASS",
+      "evidence": [
+        "meta-video-generated-covers.json"
+      ],
+      "scope": "Local files visually inspected; no proven uplift claim."
+    },
+    {
+      "requirement": "Apply new covers to five other ads",
+      "status": "BLOCKED",
+      "evidence": [
+        "meta-video-generated-covers.json",
+        "meta-cover-manual-upload-ready.txt"
+      ],
+      "scope": "Actual file chooser upload requires missing extension file-URL permission. Manual image-library upload prepared; no bypass and no custom-cover publication claim."
+    },
+    {
+      "requirement": "Report current campaign metrics",
+      "status": "PASS",
+      "evidence": [
+        "meta-campaign-morning-metrics.json"
+      ],
+      "scope": "80ILS daily budget,89.32ILS spend,1020impressions,746reach,one platform conversation;20Oct Pacific account day, read21Oct Israel. Not qualified CPL or new-video performance. Click metrics omitted due incomplete saved row."
+    },
+    {
+      "requirement": "Only this campaign enabled in this account",
+      "status": "PASS",
+      "evidence": [
+        "meta-campaign-only-active-audit.json"
+      ],
+      "scope": "23 entities,22 others off. Duplicate names resolved through distinct selected campaign IDs23854369467130602 and23850741815560602. No toggle change needed."
+    },
+    {
+      "requirement": "Approved delivery of all videos and full commercial funnel acceptance",
+      "status": "NOT TESTED",
+      "scope": "No all-ad approval/delivery proof, qualified CPL or commercial end-to-end acceptance."
+    }
+  ]
+}

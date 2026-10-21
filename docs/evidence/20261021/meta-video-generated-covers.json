@@ -1,0 +1,74 @@
+{
+  "generation": {
+    "status": "PASS",
+    "tool": "built-in imagegen",
+    "files": [
+      {
+        "key": "balance",
+        "file": "refi-cover-balance-v1.png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1825771,
+        "sha256": "4bf1eda742e6b7980a3494226d882d19db3c59cd698b600cab75a8ebfee9104a"
+      },
+      {
+        "key": "bank",
+        "file": "refi-cover-bank-v1.png",
+        "width": 941,
+        "height": 1672,
+        "bytes": 1942280,
+        "sha256": "bc08b80a817d550900ed49a0472415f98546d15c6b7f4c53e7cd75646ceb073e"
+      },
+      {
+        "key": "decision",
+        "file": "refi-cover-decision-v1.png",
+        "width": 940,
+        "height": 1672,
+        "bytes": 1835328,
+        "sha256": "f8502bcd16491f0baa9ca814378e41dc0d18fe8fdcf53455abde3e8a71fa3230"
+      }
+    ]
+  },
+  "application": {
+    "status": "BLOCKED",
+    "reason": "Current actual chooser.setFiles failed: ChatGPT Chrome extension requires Allow access to file URLs. No attempt to bypass chrome://extensions policy block. Image-library picker currently supports single-file uploads.",
+    "uploaded": false,
+    "published": false
+  },
+  "mapping": [
+    {
+      "adId": "120252926489570603",
+      "cover": "existing video frame with Yoram portrait",
+      "status": "PASS"
+    },
+    {
+      "adId": "120252926489550603",
+      "cover": "refi-cover-bank-v1.png",
+      "status": "BLOCKED"
+    },
+    {
+      "adId": "120252926489560603",
+      "cover": "refi-cover-decision-v1.png",
+      "status": "BLOCKED"
+    },
+    {
+      "adId": "120252891592510603",
+      "cover": "refi-cover-decision-v1.png",
+      "status": "BLOCKED"
+    },
+    {
+      "adId": "120252891718060603",
+      "cover": "refi-cover-balance-v1.png",
+      "status": "BLOCKED"
+    },
+    {
+      "adId": "120252891718070603",
+      "cover": "refi-cover-bank-v1.png",
+      "status": "BLOCKED"
+    }
+  ],
+  "performance": {
+    "status": "NOT TESTED",
+    "scope": "Designed for curiosity and readability. No claim of proven uplift, guaranteed play or exactly one second of cover display. Existing automatic thumbnails in other five ads may still show video frames until custom covers are applied."
+  }
+}

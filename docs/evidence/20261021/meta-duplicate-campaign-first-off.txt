@@ -1,0 +1,385 @@
+Browser tab: 148905990, Title: "מנהל המודעות - ניהול המודעות - קמפיינים", URL: "https://adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233".
+0 AXWebArea מנהל המודעות - ניהול המודעות - קמפיינים, URL: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233
+	1 container
+		2 container ads_pe_container
+			3 container
+				4 container
+					5 combo box (collapsed) אקסלנט ייעוץ משכנתאות (6049) (287081049104797), Secondary Actions: Expand
+						6 container
+							7 container js_4
+								8 text אקסלנט ייעוץ משכנתאות (6049) (287081049104797)
+					9 button ציון המלצות
+						10 container Opportunity Score Progress Ring
+						11 text ציון המלצות
+					12 toolbar
+						13 button רענון נתוני הטבלה ​
+							14 text רענון נתוני הטבלה
+							15 image
+					16 toolbar
+						17 container
+							18 button מחק את הטיוטות ​
+								19 text מחק את הטיוטות
+								20 image
+							21 button בדיקה ופרסום (11)
+								22 container
+									23 text בדיקה ופרסום  (11)
+					24 pop up button (collapsed) תפריט ​, Secondary Actions: Expand
+						25 text תפריט
+						26 image
+				27 container
+					28 button Description: הצגת התרשימים (Ctrl+Y), ID: insights_tray_button
+					29 button (disabled) בחר קמפיין אחד לפחות לעריכה.
+					30 button (disabled) בחר קמפיין אחד לפחות כדי לראות היסטוריה של שינויים.
+				31 toolbar
+					32 link Description: כל הפרסומות status_before_click:selected, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+					33 link Description: מודעות פעילות status_before_click:unselected, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+					34 link Description: הוצגו status_before_click:unselected, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+					35 pop up button (collapsed) 2 צפיות נוספות, Secondary Actions: Expand
+						36 image
+						37 text 2 צפיות נוספות
+				38 button יצירת תצוגה
+					39 text יצירת תצוגה
+				40 button הגדרות ​
+					41 text הגדרות
+					42 image
+				43 container
+					44 text כאן מתארים את מה שמחפשים
+				45 container peTabs
+					46 tab group
+						47 tab (selected, settable, boolean) קמפיינים
+קמפיינים, Value: 1
+3
+קמפיינים
+						48 tab (selectable, settable, boolean) סדרות מודעות
+סדרות מודעות, Value: 0
+3
+סדרות מודעות
+						49 tab (selectable, settable, boolean) מודעות
+מודעות, Value: 0
+3
+מודעות
+					50 button 30 הימים האחרונים: 20 בספט' 2026 – 19 באוק' 2026
+						51 image
+						52 container
+							53 text 30 הימים האחרונים :  20 בספט' 2026 – 19 באוק' 2026
+						54 image
+				55 container
+					402 toolbar
+						403 button יצירה
+							404 image
+							405 text יצירה
+						406 button (disabled) שכפול
+							407 image
+							408 text שכפול
+						409 button (disabled) עריכה
+							410 image
+							411 text עריכה
+						412 button בדיקת A/B ​
+							413 text בדיקת A/B
+							414 image
+						415 pop up button (collapsed) עוד, Secondary Actions: Expand
+							416 text עוד
+							417 image
+						418 pop up button (collapsed) עמודות ​, ID: insights_table_column_preset_dropdown, Secondary Actions: Expand
+							419 text עמודות
+							420 image
+							421 image
+						422 pop up button (collapsed) פירוט ​, Secondary Actions: Expand
+							423 text פירוט
+							424 image
+						425 pop up button (collapsed) קבוצות ​, Secondary Actions: Expand
+							426 text קבוצות
+							427 image
+							428 image
+						429 pop up button (collapsed) דוחות ​, Secondary Actions: Expand
+							430 text דוחות
+							431 image
+							432 image
+						433 container
+							434 button יצא ​
+								435 text יצא
+								436 image
+							437 pop up button (collapsed) פתח תפריט נפתח ​, Secondary Actions: Expand
+								438 text פתח תפריט נפתח
+								439 image
+					126 container
+						128 table
+							129 container
+								130 row
+									131 container
+										132 container
+											133 checkbox (settable, integer) 'תיבת סימון לבחירת כל המודעות', Value: 0, ID: js_1n
+											134 image
+										135 container
+											136 cell
+												137 heading השבתה / הפעלה, Value: 4
+													138 text השבתה / הפעלה
+													139 image
+										140 container
+											141 cell
+												142 heading קמפיין, Value: 4
+													143 text קמפיין
+													144 image
+												145 button פתח את התפריט הנפתח של אפשרויות המיון
+									146 container
+										147 container
+											148 cell
+												149 heading מסירה, Value: 4
+													150 text מסירה
+													151 image
+												152 button פתח את התפריט הנפתח של אפשרויות המיון
+										153 container
+											154 cell
+												155 heading פעולות, Value: 4
+													156 text פעולות
+												157 button פתח את התפריט הנפתח של אפשרויות המיון
+										158 container
+											159 cell
+												160 heading הגדרת ייחוס, Value: 4
+													161 text הגדרת ייחוס
+												162 button פתח את התפריט הנפתח של אפשרויות המיון
+										163 container
+											164 cell
+												165 heading תוצאות, Value: 4
+													166 text תוצאות
+													167 image
+												168 button פתח את התפריט הנפתח של אפשרויות המיון
+										169 container
+											170 cell
+												171 heading תפוצה, Value: 4
+													172 text תפוצה
+													173 image
+												174 button פתח את התפריט הנפתח של אפשרויות המיון
+										175 container
+											176 cell
+												177 heading תדירות, Value: 4
+													178 text תדירות
+													179 image
+												180 button פתח את התפריט הנפתח של אפשרויות המיון
+										181 container
+											182 cell
+												183 heading עלות לתוצאה, Value: 4
+													184 text עלות לתוצאה
+													185 image
+												186 button פתח את התפריט הנפתח של אפשרויות המיון
+										187 container
+											188 cell
+												189 heading תקציב, Value: 4
+													190 text תקציב
+													191 image
+												192 button פתח את התפריט הנפתח של אפשרויות המיון
+										193 container
+											194 cell
+												195 heading הסכום ששולם, Value: 4
+													196 text הסכום ששולם
+													197 image
+												198 button פתח את התפריט הנפתח של אפשרויות המיון
+										199 container
+											200 cell
+												201 heading סיום, Value: 4
+													202 text סיום
+													203 image
+												204 button פתח את התפריט הנפתח של אפשרויות המיון
+										205 container
+											206 cell
+												207 heading חשיפות, Value: 4
+													208 text חשיפות
+													209 image
+												210 button פתח את התפריט הנפתח של אפשרויות המיון
+										211 container
+											212 cell
+												213 heading עלות לאלף חשיפות, Value: 4
+													214 text עלות לאלף חשיפות
+													215 image
+												216 button פתח את התפריט הנפתח של אפשרויות המיון
+										217 container
+											218 cell
+												219 heading קליקים על קישור, Value: 4
+													220 text קליקים על קישור
+													221 image
+												222 button פתח את התפריט הנפתח של אפשרויות המיון
+										223 container
+											224 cell
+												225 heading קליקים על 'לקנות', Value: 4
+													226 text קליקים על 'לקנות'
+													227 image
+												228 button פתח את התפריט הנפתח של אפשרויות המיון
+										229 container
+											230 cell
+												231 heading עלות לקליק (עלות לקליק על קישור), Value: 4
+													232 text עלות לקליק (עלות לקליק על קישור)
+													233 image
+												234 button פתח את התפריט הנפתח של אפשרויות המיון
+										235 container
+											236 cell
+												237 heading שיעור קליקים על קישור, Value: 4
+													238 text שיעור קליקים על קישור
+													239 image
+												240 button פתח את התפריט הנפתח של אפשרויות המיון
+										241 container
+											242 cell
+												243 heading קליקים (הכל), Value: 4
+													244 text קליקים (הכל)
+													245 image
+												246 button פתח את התפריט הנפתח של אפשרויות המיון
+										247 container
+											248 cell
+												249 heading שיעור קליקים (הכול), Value: 4
+													250 text שיעור קליקים (הכול)
+													251 image
+												252 button פתח את התפריט הנפתח של אפשרויות המיון
+										253 container
+											254 cell
+												255 heading עלות לקליק (הכול), Value: 4
+													256 text עלות לקליק (הכול)
+													257 image
+												258 button פתח את התפריט הנפתח של אפשרויות המיון
+										259 container
+											260 cell
+												261 heading צפיות בדף נחיתה, Value: 4
+													262 text צפיות בדף נחיתה
+													263 image
+												264 button פתח את התפריט הנפתח של אפשרויות המיון
+										265 container
+											266 cell
+												267 heading עלות לצפייה בדף נחיתה, Value: 4
+													268 text עלות לצפייה בדף נחיתה
+													269 image
+												270 button פתח את התפריט הנפתח של אפשרויות המיון
+										271 container
+											272 link Description: התאמה אישית של עמודות..., Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+								273 container
+									274 container
+										275 container
+											276 checkbox (settable, integer) Value: 0, ID: js_2m
+											277 image
+										278 container
+											279 switch (settable, boolean) הפעלה/כיבוי, Value: 1, ID: js_2q
+										280 container js_2u
+											281 link Description: EXC_Refi_WA_R1_2026-10, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											282 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									283 container
+										284 text מכין
+								286 container
+									287 container
+										288 container
+											289 checkbox (settable, integer) Value: 0, ID: js_31
+											290 image
+										291 container
+											292 switch (disabled, settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_35
+										293 container js_39
+											294 link Description: קמפיין משפרי דיור קהל מותאם אישית כל הארץ, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											295 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											296 container
+												297 text עריכות שלא פורסמו עריכות שלא פורסמו
+									298 container
+										299 text לא מוצגת
+										300 container js_c
+											301 image
+											302 text שגיאה בהצגת מודעות
+								303 container
+									304 container
+										305 container
+											306 checkbox (settable, integer) Value: 0, ID: js_3h
+											307 image
+										308 container
+											309 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_3l
+										310 container js_3p
+											311 link Description: EXC_Refi_Leads_2026-10_PROD, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											312 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									313 container
+										314 text כבוי
+								316 container
+									317 container
+										318 container
+											319 checkbox (settable, integer) Value: 0, ID: js_3v
+											320 image
+										321 container
+											322 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_3z
+										323 container js_43
+											324 link Description: Test_Compliance_Mortgage_2026, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											325 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									326 container
+										327 text כבוי
+								329 container
+									330 container
+										331 container
+											332 checkbox (settable, integer) Value: 0, ID: js_49
+											333 image
+										334 container
+											335 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_4d
+										336 container js_4h
+											337 link Description: EXC_REFI_TEST_H1H3_2026-10 טיוטה לא להפעיל ללא אישור יורם, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											338 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									339 container
+										340 text כבוי
+								342 container
+									343 container
+										344 container
+											345 checkbox (settable, integer) Value: 0, ID: js_4n
+											346 image
+										347 container
+											348 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_4r
+										349 container js_4v
+											350 link Description: EXC_Refi_WA_Stories_2026-09, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											351 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									352 container
+										353 text כבוי
+								355 container
+									356 container
+										357 container
+											358 checkbox (settable, integer) Value: 0, ID: js_51
+											359 image
+										360 container
+											361 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_55
+										362 container js_59
+											363 link Description: EXC_Consolidation_Lead_2026-09, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											364 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									365 container
+										366 text כבוי
+								368 container
+									369 container
+										370 container
+											371 checkbox (settable, integer) Value: 0, ID: js_5f
+											372 image
+										373 container
+											374 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_5j
+										375 container js_5n
+											376 link Description: -‏קמפיין לידים | קרוסלה‏ - עותק, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											377 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									378 container
+										379 text כבוי
+								381 container
+									382 container
+										383 container
+											384 checkbox (settable, integer) Value: 0, ID: js_5t
+											385 image
+										386 container
+											387 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_5x
+										388 container js_61
+											389 link Description: getscale.io | atomic testing | traffic | 29.7.26, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											390 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									391 container
+										392 text כבוי
+								440 container
+									441 container
+										442 container
+											443 checkbox (settable, integer) Value: 0, ID: js_7n
+											444 image
+										445 container
+											446 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_7r
+										447 container js_7v
+											448 link Description: getscale.io | validation | leads | form | 3.8.26, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+											449 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233#
+									450 container
+										451 text כבוי
+								394 container
+									395 container
+										396 container
+											397 text תוצאות מ-23 קמפיינים
+											398 button (collapsed) Description: information symbol, button, tap for more information, Secondary Actions: Expand
+												399 image
+		400 container
+			401 text טוען...
+
+The focused UI element is 0 AXWebArea מנהל המודעות - ניהול המודעות - קמפיינים, URL: adsmanager.facebook.com/adsmanager/manage/campaigns?act=287081049104797&business_id=745355029428233

@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "campaignId": "120252891592490603",
+  "authorization": "Explicit human response to call_c6e7bb0414e14a24af90b91d984f92ac: approve Meta terms and publish six video ads plus two Stories/Reels adset changes.",
+  "ads": [
+    {
+      "adId": "120252926489570603",
+      "status": "PASS",
+      "scope": "Submitted/published changes to Meta, not approved delivery",
+      "before": "meta-video-publish-ad-120252926489570603-before.txt",
+      "result": "meta-video-publish-ad-120252926489570603-result.txt"
+    },
+    {
+      "adId": "120252926489550603",
+      "status": "PASS",
+      "scope": "Submitted/published changes to Meta, not approved delivery",
+      "before": "meta-video-publish-ad-120252926489550603-before.txt",
+      "result": "meta-video-publish-ad-120252926489550603-result.txt"
+    },
+    {
+      "adId": "120252926489560603",
+      "status": "PASS",
+      "scope": "Submitted/published changes to Meta, not approved delivery",
+      "before": "meta-video-publish-ad-120252926489560603-before.txt",
+      "result": "meta-video-publish-ad-120252926489560603-result.txt"
+    },
+    {
+      "adId": "120252891592510603",
+      "status": "PASS",
+      "scope": "Submitted/published changes to Meta, not approved delivery",
+      "before": "meta-video-publish-ad-120252891592510603-before.txt",
+      "result": "meta-video-publish-ad-120252891592510603-result.txt"
+    },
+    {
+      "adId": "120252891718060603",
+      "status": "PASS",
+      "scope": "Submitted/published changes to Meta, not approved delivery",
+      "before": "meta-video-publish-ad-120252891718060603-before.txt",
+      "result": "meta-video-publish-ad-120252891718060603-result.txt"
+    },
+    {
+      "adId": "120252891718070603",
+      "status": "PASS",
+      "scope": "Submitted/published changes to Meta, not approved delivery",
+      "before": "meta-video-publish-ad-120252891718070603-before.txt",
+      "result": "meta-video-publish-ad-120252891718070603-result.txt"
+    }
+  ],
+  "adsets": [
+    {
+      "adsetId": "120252926489540603",
+      "status": "PASS",
+      "result": "meta-video-publish-targeted-result.txt",
+      "proof": "Success notice: one adset published."
+    },
+    {
+      "adsetId": "120252891592500603",
+      "status": "PASS",
+      "result": "meta-video-publish-original-result.txt",
+      "proof": "Unpublished flag removed from selected adset, global pending count17 after second specific adset publication."
+    }
+  ],
+  "aggregate": {
+    "evidence": "meta-video-six-published-ui.txt",
+    "sixRows": true,
+    "allTogglesOn": true,
+    "unpublishedFlags": 0,
+    "remainingUnrelatedDrafts": 11
+  },
+  "delivery": {
+    "status": "NOT TESTED",
+    "scope": "UI shows processing, preparing and in-review. No approval/delivery claim for all six and no performance attribution to new videos."
+  },
+  "portrait": {
+    "status": "PASS",
+    "adId": "120252926489570603",
+    "evidence": "meta-portrait-thumbnail-live-readback.txt",
+    "reopened": "meta-portrait-thumbnail-published-reopen.txt",
+    "scope": "Manual thumbnail with Yoram portrait selected, saved, published and read back with manual1/automatic0/Save disabled for3placements. Processing after publication."
+  },
+  "scope": "Only approved media and placement changes, plus explicitly requested fixed portrait thumbnail. No global publish, WhatsApp interaction, budget/audience/destination changes."
+}

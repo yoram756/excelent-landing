@@ -1,5 +1,5 @@
 {
-  "status": "BLOCKED",
+  "status": "PASS",
   "requirement": "Publish requested media replacement in six active ads, preserving other settings",
   "accountId": "287081049104797",
   "campaignId": "120252891592490603",
@@ -14,7 +14,7 @@
   },
   "uploadCompleted": true,
   "draftsPrepared": 6,
-  "published": false,
+  "published": true,
   "ads": [
     {
       "adId": "120252926489570603",
@@ -113,14 +113,13 @@
       "selectionEvidence": "Actual saved-draft Edit video UI readback of exact filename, dimensions and duration; modal canceled without changes. No asset-ID API readback."
     }
   ],
-  "blockers": [
-    "Action-time confirmation for binding Meta advertising-tools terms in Publish footer is pending; all six drafts were prepared first."
-  ],
+  "blockers": [],
   "historicalUploadBlock": "Extension file-URL permission was not enabled; chrome://extensions policy block was not bypassed. User manual upload made extension-based local upload unnecessary.",
   "preserved": "Copy compared from snapshots; no budget, audience, destination, names or CTA edit actions. Not a fresh API readback of all campaign settings.",
   "placementCaveat": "Original 9:16 and full19.5seconds retained. Meta warns that some placements can auto-crop or not show; no universal fit claim.",
   "separateIntroApplied": false,
   "unrelatedDraftsPublished": false,
-  "nextAction": "After action-time terms confirmation covering all requested changes, publish only six video ad drafts and two FacebookStories/Reels adset drafts; exclude unrelated11drafts and verify submission/review state.",
-  "relatedPlacementChange": "meta-video-placement-status.json"
+  "nextAction": "Wait for Meta review/processing; do not equate submission with delivery. New generated covers need manual upload because file-URL permission blocks tool upload.",
+  "relatedPlacementChange": "meta-video-placement-status.json",
+  "publicationEvidence": "meta-video-publication-acceptance.json"
 }

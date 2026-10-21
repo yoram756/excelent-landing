@@ -1,0 +1,3 @@
+Browser tab: 148905955, Title: "(23) מנהל המודעות - ניהול המודעות - מודעות - עריכה - עריכה", URL: "https://adsmanager.facebook.com/adsmanager/manage/ads/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_ad_ids=120252891718070603&nav_source=no_referrer&current_step=0&ads_manager_write_regions=true#".
+There has been no change in the accessibility tree.
+The focused UI element is 476 button סגור

@@ -1,0 +1,115 @@
+Browser tab: 148905990, Title: "מנהל המודעות - ניהול המודעות - סדרות מודעות", URL: "https://adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 320-325, 327-329, 331-336, 338-348, 350-351, 353-355, 357-374, 383-393, 395-400, 435-440, 447-452, 521-525, 528-530, 544-545, 547-551, 554-558, 560-564, 567-571, 573-590, 593-603, 606-610, 613-617, 620-624, 627-631, 634-644, 647-657, 660-697
+~0 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות, URL: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602
+~					29 button (disabled) בחר סדרת מודעות אחת לפחות לעריכה.
+~					30 button (disabled) בחר סדרת מודעות אחת לפחות כדי לראות היסטוריה של שינויים.
+~					32 link Description: כל הפרסומות status_before_click:selected, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602#
+~					33 link Description: מודעות פעילות status_before_click:unselected, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602#
+~					34 link Description: הוצגו status_before_click:unselected, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602#
+~						47 tab (selectable, settable, boolean) Description: הסרת 1 שנבחרו מקמפיינים, קמפיינים פריט אחד נבחר הסרת 1 שנבחרו מקמפיינים
+קמפיינים, Value: 0
+3
+קמפיינים
+פריט אחד נבחר
+~						48 tab (selected, settable, boolean) סדרות מודעותעבור 1 קמפיין
+סדרות מודעותעבור 1 קמפיין, Value: 1
+3
+סדרות מודעות
+עבור 1
+קמפיין
++					521 toolbar
++						522 button יצירה
++							523 image
++							524 text יצירה
++						525 button (disabled) שכפול
++							526 image
++							527 text שכפול
++						528 button (disabled) עריכה
++							529 image
++							530 text עריכה
++						531 button בדיקת A/B
++							532 image
++							533 text בדיקת A/B
++						534 pop up button (collapsed) עוד, Secondary Actions: Expand
++							535 text עוד
++							536 image
++						537 pop up button (collapsed) עמודות, ID: insights_table_column_preset_dropdown, Secondary Actions: Expand
++							538 image
++							539 text עמודות
++							540 image
++						541 pop up button (collapsed) פירוט, Secondary Actions: Expand
++							542 text פירוט
++							543 image
++						544 pop up button (collapsed) קבוצות, Secondary Actions: Expand
++							545 image
++							546 text קבוצות
++							547 image
++						548 pop up button (collapsed) דוחות ​, Secondary Actions: Expand
++							549 text דוחות
++							550 image
++							551 image
++						552 container
++							553 button יצא ​
++								554 text יצא
++								555 image
++							556 pop up button (collapsed) פתח תפריט נפתח ​, Secondary Actions: Expand
++								557 text פתח תפריט נפתח
++								558 image
++						559 progress indicator 4
++										560 container
++											561 cell
++												562 heading השבתה / הפעלה, Value: 4
++													563 text השבתה / הפעלה
++													564 image
++										565 container
++											566 cell
++												567 heading סדרת מודעות, Value: 4
++													568 text סדרת מודעות
++													569 image
++												570 button פתח את התפריט הנפתח של אפשרויות המיון
++										571 container
++											572 cell
++												573 heading מסירה, Value: 4
++													574 text מסירה
++													575 image
++												576 button פתח את התפריט הנפתח של אפשרויות המיון
++										577 container
++											578 cell
++												579 heading תקציב, Value: 4
++													580 text תקציב
++													581 image
++												582 button פתח את התפריט הנפתח של אפשרויות המיון
++										583 container
++											584 cell
++												585 heading סיום, Value: 4
++													586 text סיום
++													587 image
++												588 button פתח את התפריט הנפתח של אפשרויות המיון
++										589 container
++											590 cell
++												591 heading תזמון, Value: 4
++													592 text תזמון
++													593 image
++												594 button פתח את התפריט הנפתח של אפשרויות המיון
+~											520 link Description: התאמה אישית של עמודות..., Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602#
++								595 container
++									596 container
++										597 container
++											598 checkbox (settable, integer) Value: 0, ID: js_ke
++											599 image
++										600 container
++											601 switch (settable, boolean) הפעלה/כיבוי, Value: 0, ID: js_ki
++										602 container js_km
++											603 link Description: סדרת מודעות יצירת לידים חדשה, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602#
++											604 link Description: עריכת הטור, Value: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602#
++									605 container
++										606 text כבוי
++								607 container
++									608 container
++										609 container
++											610 text תוצאות מסדרת מודעות אחת
++											611 button (collapsed) Description: information symbol, button, tap for more information, Secondary Actions: Expand
++												612 image
++											613 text טוען...
+The focused UI element is 0 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות, URL: adsmanager.facebook.com/adsmanager/manage/adsets?act=287081049104797&business_id=745355029428233&selected_campaign_ids=23850741815560602

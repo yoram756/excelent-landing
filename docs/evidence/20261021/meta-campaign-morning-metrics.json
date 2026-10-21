@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scope": "Actual UI report for2026-10-20 Today, Pacific ad-account timezone, read on2026-10-21 morning Israel; cumulative campaign data, not a new-video result.",
+  "campaignId": "120252891592490603",
+  "dailyBudgetILS": 80,
+  "spendILS": 89.32,
+  "impressions": 1020,
+  "reach": 746,
+  "frequency": 1.37,
+  "platformMessagingConversations": 1,
+  "costPerPlatformConversationILS": 89.32,
+  "platformCPMILS": 87.57,
+  "qualifiedLeadCost": null,
+  "sourceFiles": [
+    "meta-campaign-current-day-performance-core.txt",
+    "meta-campaign-current-day-results.txt",
+    "meta-campaign-current-day-spend-impressions.txt"
+  ],
+  "caveat": "Spend exceeds configured daily budget by9.32ILS; no budget edit was performed. Platform conversation is not a verified qualified lead. Link5/cost17.86 observed in session UI but not claimed here without a dedicated complete saved row."
+}
