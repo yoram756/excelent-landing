@@ -1,0 +1,99 @@
+{
+  "request": "Explicit human request to adapt current campaign settings from image to video",
+  "campaignId": "120252891592490603",
+  "status": "BLOCKED",
+  "scope": "Two saved unpublished adset placement changes, in addition to six prepared video ad drafts. No new campaign, no objective change, no activation or messaging.",
+  "changes": [
+    {
+      "adsetId": "120252891592500603",
+      "status": "PASS",
+      "before": "meta-video-original-adset-placements-before.txt",
+      "after": "meta-video-original-adset-placements-after.txt",
+      "changed": {
+        "facebookStories": [
+          false,
+          true
+        ],
+        "facebookReels": [
+          false,
+          true
+        ]
+      },
+      "preserved": {
+        "platforms": "Facebook only",
+        "feeds": "existing mixed selection",
+        "instagramStories": false,
+        "instagramReels": false,
+        "inStreamReels": false,
+        "search": false,
+        "externalApps": false,
+        "whatsappMarketing": "disabled/off"
+      },
+      "preview": {
+        "status": "PASS",
+        "adId": "120252891718060603",
+        "evidence": "meta-video-original-vertical-preview.txt",
+        "scope": "One representative ad per adset, three rendered video placements with WhatsApp CTA; no click/send/live-delivery test."
+      }
+    },
+    {
+      "adsetId": "120252926489540603",
+      "status": "PASS",
+      "before": "meta-video-targeted-adset-placements-before.txt",
+      "after": "meta-video-targeted-adset-placements-after.txt",
+      "changed": {
+        "facebookStories": [
+          false,
+          true
+        ],
+        "facebookReels": [
+          false,
+          true
+        ]
+      },
+      "preserved": {
+        "platforms": "Facebook only",
+        "feeds": "existing mixed selection",
+        "instagramStories": false,
+        "instagramReels": false,
+        "inStreamReels": false,
+        "search": false,
+        "externalApps": false,
+        "whatsappMarketing": "disabled/off"
+      },
+      "preview": {
+        "status": "PASS",
+        "adId": "120252926489570603",
+        "evidence": "meta-video-targeted-vertical-preview.txt",
+        "scope": "One representative ad per adset, three rendered video placements with WhatsApp CTA; no click/send/live-delivery test."
+      }
+    }
+  ],
+  "budget": {
+    "status": "PASS",
+    "dailyILS": 80,
+    "shared": true,
+    "evidence": "meta-video-shared-budget-after.txt"
+  },
+  "optimization": {
+    "status": "PASS",
+    "value": "Maximize conversations",
+    "liveVideo": false,
+    "evidence": "meta-video-shared-budget-after.txt"
+  },
+  "audienceAndDestinationFreshComparison": {
+    "status": "NOT TESTED",
+    "scope": "No audience or destination edit actions. Placement previews show WhatsApp CTA; not a new phone-route or audience comparison."
+  },
+  "publication": {
+    "status": "BLOCKED",
+    "published": false,
+    "reason": "Action-time confirmation for Meta advertising-tools terms pending. Approval must cover six video ad changes and two placement changes only; unrelated11drafts excluded."
+  },
+  "caveats": [
+    "Original9:16 and19.5seconds retained. Existing Facebook feed retained to avoid removing existing inventory. Preview is not actual delivery proof or exhaustive safe-zone testing across devices.",
+    "Placement expansion can redistribute existing80ILS daily spend; no budget increase or outcome guarantee.",
+    "Existing routing mismatch0552783459vsconnected0559881245 remains unresolved.",
+    "Advanced preview URL may retain stale selected_adset_ids while adId and breadcrumb identify current ad; adset before/after records are canonical for placements."
+  ]
+}

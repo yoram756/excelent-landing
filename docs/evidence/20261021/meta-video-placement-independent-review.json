@@ -1,0 +1,12 @@
+{
+  "reviewer":"/root/qa_reviewer",
+  "mode":"read-only independent review required by CLAUDE.md",
+  "requirements":[
+    {"requirement":"Add FacebookStories and FacebookReels in both adsets only","status":"PASS","evidence":"Both before/after pairs show0to1 for two requested switches. Other visible switches preserved; Instagram, externalApps and WhatsAppMarketing off."},
+    {"requirement":"Saved unpublished adset changes","status":"PASS","evidence":"Both after snapshots show saved edits and unpublished edits."},
+    {"requirement":"Existing shared budget and conversation objective","status":"PASS","evidence":"meta-video-shared-budget-after.txt:80ILS daily shared campaign budget, maximize conversations, liveVideo off."},
+    {"requirement":"Representative placement previews","status":"PASS","evidence":"One ad per adset rendered video in FacebookFeed, FacebookStories and FacebookReels with WhatsApp action. Not all six ads, not all devices or full playback."},
+    {"requirement":"Detailed feed subplacements, audience and destination comparison","status":"NOT TESTED","evidence":"Visible feed-group mixed state preserved; subplacements and audience/destination were not separately compared."},
+    {"requirement":"Live publication","status":"BLOCKED","evidence":"All changes remain draft pending action-time Meta advertising-tools terms confirmation."}
+  ]
+}

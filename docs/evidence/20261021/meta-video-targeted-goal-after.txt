@@ -1,0 +1,362 @@
+Browser tab: 148905955, Title: "מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה", URL: "https://adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer".
+0 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה, URL: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer
+	1 container
+		2 container ads_pe_container
+			3 container
+				4 link Description: מנהל המודעות Meta ​, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797
+				5 container nux_jewel_nav_anchor
+					6 button Pressable
+				7 container כלים
+					8 content list
+						9 container
+							10 button סקירת החשבון, ID: js_8b
+							11 text סקירת החשבון
+						12 container
+							13 button קמפיינים
+							14 text קמפיינים
+						15 container
+							16 button דוחות של ביצועי מודעות
+							17 text דוחות של ביצועי מודעות
+						18 container
+							19 link Description: קהלים, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797&business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+							20 text קהלים
+						21 container
+							22 button הגדרות פרסום, ID: ecosystem_nav_advertising_preferences_context_id
+							23 text הגדרות פרסום
+						24 container
+							25 link Description: חיובים ותשלומים, Value: adsmanager.facebook.com/adsmanager/billing_hub/accounts/details?nav_entry_point=ads_ecosystem_navigation_menu&placement=ads_manager&asset_id=287081049104797&business_id=745355029428233&payment_account_id=287081049104797&session_id=REDACTED
+							26 text חיובים ותשלומים
+						27 container
+							28 link Description: מנהל האירועים, Value: eventsmanager.facebook.com/events_manager2/overview?business_id=745355029428233&act=287081049104797&nav_source=ads_ecosystem_nav
+							29 text מנהל האירועים
+						30 container
+							31 button כל הכלים, ID: ecosystem_nav_all_tools_context_id
+							32 text כל הכלים
+				33 container
+					34 button המסייע העסקי של Meta AI
+				35 container
+					36 button עזרה
+					37 text עזרה
+				38 button הגדרות העסק ​, ID: js_1a3
+					39 text הגדרות העסק
+					40 image
+				41 button חיפוש ​, ID: js_1a5
+					42 text חיפוש
+					43 image
+				44 button דיווח על בעיה ​, ID: js_1a9
+					45 text דיווח על בעיה
+					46 image
+			47 container
+				48 container
+					49 button סגירה
+						50 image
+					51 button Description: הצגת התרשימים (Ctrl+Y), ID: insights_tray_button
+					52 button עריכה (Ctrl+U)
+					53 button הצג היסטוריה (Ctrl+I)
+					54 button צמצם את התצוגה
+				55 container campaign_structure_tree_root
+					56 container
+						57 text חיפוש
+						58 container
+							59 image
+							60 combo box (collapsed, settable) חיפוש, ID: js_hw, Secondary Actions: Expand
+					61 table grid
+						62 container
+							63 row קמפיין
+								64 cell Description: קמפיין, ID: ads_campaign_structure_item_120252891592490603
+									65 image
+									66 text EXC_Refi_WA_R1_2026-10
+							67 row סדרת מודעות
+								68 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252926489540603
+									2181 image
+									70 text ‏מטורגט-איגור 20.10
+									2182 button שכפול ​, ID: js_3s8
+										2183 text שכפול
+										2184 image
+									2185 button תפריט הפעולות ​
+										2186 text תפריט הפעולות
+										2187 image
+							71 row מודעה
+								72 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489550603
+									73 image
+									74 text R1_Img_Bank
+							75 row מודעה
+								76 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489560603
+									77 image
+									78 text R1_Video
+							79 row מודעה
+								80 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489570603
+									2188 image
+									82 text R1_Img_Balance
+							83 row סדרת מודעות
+								84 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252891592500603
+									1796 image
+									86 text EXC_Refi_IL_18-65_WA_R1
+							87 row מודעה
+								88 cell Description: מודעה, ID: ads_campaign_structure_item_120252891592510603
+									89 image
+									90 text R1_Video
+							91 row מודעה
+								92 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718060603
+									2124 image
+									94 text R1_Img_Balance
+							95 row מודעה
+								96 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718070603
+									97 image
+									98 text R1_Img_Bank
+				99 container
+					100 button פתיחה ​
+						101 text פתיחה
+						102 image
+					2189 link Description: EXC_Refi_WA_R1_2026-10, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+					2190 image
+					2191 container
+						2192 image
+						2193 heading ‏מטורגט-איגור 20.10, Value: 4
+							2196 text ‏מטורגט-איגור 20.10
+					2194 image
+					2195 link Description: 3 מודעות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+					2197 container cpgn_temp_save_as_template_nux_i2
+						2198 container
+							2199 text עריכות שלא פורסמו עריכות שלא פורסמו
+						2200 text פעיל
+						2201 container
+							2202 switch (settable, boolean) הפעלה/כיבוי, Value: 1, ID: js_4jp
+						2203 pop up button (collapsed) תפריט הפעולות ​, Secondary Actions: Expand
+							2204 text תפריט הפעולות
+							2205 image
+					120 tab group
+						121 tab (selected, settable, boolean) Description: ערוך, Value: 1
+						122 tab (selectable, settable, boolean) Description: בדוק, Value: 0
+					2206 container AdsPECampaignEditor
+						2207 container
+							2208 container
+								2209 image
+								2210 heading שם סדרת מודעות, Value: 3
+									2211 heading שם סדרת מודעות, Value: 3
+										2212 text שם סדרת מודעות
+								2213 container
+									2214 combo box (collapsed, settable) Value: ‏מטורגט-איגור 20.10, ID: js_4jy, Secondary Actions: Expand
+								2215 link Description: הצגת אפשרויות נוספות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+							2216 container
+								2217 image
+								2218 heading המרה, Value: 3
+									2219 text המרה
+								2220 container
+									2221 text מיקום המרה
+									2222 table
+										2223 row סרטון בשידור חי באינסטגרם אפשר למשוך עוד אנשים לצפות בשידור חי שלך באינסטגרם.
+											2224 cell (disabled)
+												2225 container js_4vj
+													2226 container
+														2227 radio button (disabled, settable, integer) Description: סרטון בשידור חי באינסטגרם אפשר למשוך עוד אנשים לצפות בשידור חי שלך באינסטגרם., Value: 0
+													2228 text סרטון בשידור חי באינסטגרם
+													2229 text אפשר למשוך עוד אנשים לצפות בשידור חי שלך באינסטגרם.
+										2230 row יעדי ההודעה לעודד אנשים ליצור אינטראקציה עם המותג שלך ב-Messenger, ב-WhatsApp או באינסטגרם.
+											2231 cell (disabled)
+												2232 container js_4vk
+													2233 container
+														2234 radio button (disabled, settable, integer) Description: יעדי ההודעה לעודד אנשים ליצור אינטראקציה עם המותג שלך ב-Messenger, ב-WhatsApp או באינסטגרם., Value: 1
+													2235 text יעדי ההודעה
+													2236 text לעודד אנשים ליצור אינטראקציה עם המותג שלך ב-Messenger, ב-WhatsApp או באינסטגרם.
+										2237 row במודעה שלך אפשר לעודד אנשים לקיים אינטראקציה עם הפוסט או האירוע שלך, או לצפות בסרטון.
+											2238 cell (disabled)
+												2239 container js_4vl
+													2240 container
+														2241 radio button (disabled, settable, integer) Description: במודעה שלך אפשר לעודד אנשים לקיים אינטראקציה עם הפוסט או האירוע שלך, או לצפות בסרטון., Value: 0
+													2242 text במודעה שלך
+													2243 text אפשר לעודד אנשים לקיים אינטראקציה עם הפוסט או האירוע שלך, או לצפות בסרטון.
+										2244 row שיחות לעודד אנשים להתקשר לעסק שלך.
+											2245 cell (disabled)
+												2246 container js_4vm
+													2247 container
+														2248 radio button (disabled, settable, integer) Description: שיחות לעודד אנשים להתקשר לעסק שלך., Value: 0
+													2249 text שיחות
+													2250 text לעודד אנשים להתקשר לעסק שלך.
+										2251 row אתר לעודד אנשים ליצור אינטראקציה עם האתר שלך.
+											2252 cell (disabled)
+												2253 container js_4vn
+													2254 container
+														2255 radio button (disabled, settable, integer) Description: אתר לעודד אנשים ליצור אינטראקציה עם האתר שלך., Value: 0
+													2256 text אתר
+													2257 text לעודד אנשים ליצור אינטראקציה עם האתר שלך.
+										2258 row אפליקציה לעודד אנשים ליצור אינטראקציה עם האפליקציה שלך.
+											2259 cell (disabled)
+												2260 container js_4vo
+													2261 container
+														2262 radio button (disabled, settable, integer) Description: אפליקציה לעודד אנשים ליצור אינטראקציה עם האפליקציה שלך., Value: 0
+													2263 text אפליקציה
+													2264 text לעודד אנשים ליצור אינטראקציה עם האפליקציה שלך.
+										2265 row אינסטגרם או פייסבוק כדאי לעודד אנשים ליצור אינטראקציה עם הפרופיל שלך באינסטגרם, עם דף הפייסבוק שלך – או עם שניהם.
+											2266 cell (disabled)
+												2267 container js_4vp
+													2268 container
+														2269 radio button (disabled, settable, integer) Value: 0, Description: אינסטגרם או פייסבוק כדאי לעודד אנשים ליצור אינטראקציה עם הפרופיל שלך באינסטגרם, עם דף הפייסבוק שלך – או עם שניהם.
+													2270 text אינסטגרם או פייסבוק
+													2271 text כדאי לעודד אנשים ליצור אינטראקציה עם הפרופיל שלך באינסטגרם, עם דף הפייסבוק שלך – או עם שניהם.
+									2272 heading דף פייסבוק, Value: 4
+										2273 text דף פייסבוק
+									2274 image
+									2275 heading ∙, Value: 4
+										2276 text ∙
+									2277 heading לא חובה, Value: 4
+										2278 text לא חובה
+									2279 text הדף הזה ייצג את העסק במודעה ובשיחה.
+									2280 content list
+										2281 button (collapsed) Facebook דף פייסבוק אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance, Secondary Actions: Expand
+											2282 container
+												2283 image Facebook
+											2284 heading דף פייסבוק, Value: 3
+												2285 text דף פייסבוק
+											2286 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance
+									2287 heading יעדי ההודעה, Value: 4
+										2288 text יעדי ההודעה
+									2289 image
+									2290 text כאן בוחרים איפה לשוחח עם אנשים אחרי שהם רואים את המודעה שלך. 
+									2291 link Description: איך זה עובד, Value: facebook.com/business/help/1192884166182156
+									2292 container
+										2293 text תווית יעד ההודעה
+										2294 Description: תווית יעד ההודעה, ID: js_4vu
+											2295 container
+												2296 container
+													2297 radio button (disabled, settable, integer) Description: יעד אוטומטי (מומלץ), Value: 0, ID: js_4vy
+												2298 text יעד אוטומטי (מומלץ)
+												2299 text נשלח אנשים לאפליקציית ההתכתבות שבה הם מקיימים את האינטראקציה הרבה ביותר ונוריד את עלויות הפרסום.
+											2300 container
+												2301 container
+													2302 radio button (disabled, settable, integer) Description: יעד ידני, Value: 1, ID: js_4w4
+												2303 text יעד ידני
+												2304 text נשלח אנשים רק לאפליקציות ההתכתבות שבחרת.
+									2305 container
+										2306 checkbox (disabled, settable, integer) Value: 0, ID: js_4wa
+										2307 image
+									2308 image Messenger
+									2309 heading Messenger, Value: 3
+										2310 text Messenger
+									2311 text אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance
+									2312 container
+										2313 checkbox (disabled, settable, integer) Value: 0, ID: js_4wg
+										2314 image
+									2315 image Instagram
+									2316 heading אינסטגרם, Value: 3
+										2317 text אינסטגרם
+									2318 text @excellnetfinance
+									2319 content list
+										2320 container
+											2321 button (expanded) WhatsApp WhatsApp +972 55-278-3459, Secondary Actions: Collapse
+												2322 container
+													2323 container
+														2324 checkbox (disabled, settable, integer) Value: 1, ID: js_4wn
+														2325 image
+												2326 container
+													2327 image WhatsApp
+												2328 heading WhatsApp, Value: 3
+													2329 text WhatsApp
+												2330 text +972 55-278-3459
+											2331 text תפריט נפתח של WhatsApp
+											2332 combo box (disabled, collapsed) תפריט נפתח של WhatsApp +972 55-278-3459, Value: +972 55-278-3459 ​, ID: js_4xy, Secondary Actions: Expand
+												2333 container
+													2334 text +972 55-278-3459
+													2335 image
+											2336 text או
+											2337 button חיבור מספר נוסף
+												2338 text חיבור מספר נוסף
+											2339 image
+											2340 container
+												2341 text באפשרותך לחבר עד 50 מספרי WhatsApp לכל דף פייסבוק. עריכה של מספרי WhatsApp ב-
+												2342 link Description: 'כלי הניהול לעסקים', Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+												2343 text  וחיבורים של מספרים ב-
+												2344 link Description: הגדרות הדף, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+												2345 text .
+											2346 text שיתוף נתוני מודעות מופעל
+											2347 image
+											2348 button ניהול
+												2349 text ניהול
+											2350 text המידע ב-WhatsApp, כולל שמות ומספרי טלפון, כפוף למגבלות השימוש בנתונים, המפורטות ב
+											2351 link Description: מדיניות הפרסום של Meta, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+											2352 text .  גם העסק והמודעות שלך חייבים לציית ל
+											2353 link Description: מדיניות המסחר של WhatsApp., Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+											2354 text .  קישורים ל-WhatsApp באתר שלך עשויים להשתנות כאשר אנשים צופים באתר שלך בפייסבוק או באינסטגרם. המודעות שלך ללחיצה ל- WhatsApp מציגות "פעיל ב-WhatsApp" כאשר אתה משתמש באפליקציית WhatsApp Business. כך אנשים הצופים במודעות ידעו שהם יכולים לצפות לתשובה מהירה. אפשר להשבית אפשרות זו ב'הגדרות הפרטיות' ב-WhatsApp.
+									2355 container
+										2356 text יעד ביצועים
+										2357 text הדרך שבה היית רוצה למדוד את הצלחת המודעות שלך. 
+										2358 link Description: מידע על יעדי ביצועים, Value: facebook.com/business/help/355670007911605
+										2359 container OptimizationGoalDropDownMenu
+											2360 container
+												2361 combo box (disabled, collapsed) מקסום מספר השיחות, Value: מקסום מספר השיחות ​, ID: js_4wz, Secondary Actions: Expand
+													2362 container
+														2363 text מקסום מספר השיחות
+														2364 image
+								2365 container
+									2366 container js_4x6
+										2367 text יעד של עלות לתוצאה
+									2368 text הצעת מחיר
+									2369 container
+										2370 text field (disabled) הצעת מחיר, ID: js_4xa
+									2371 text Meta תשתדל להשתמש בתקציב שלך במלואו, ולהשיג את מרב ה תוצאות  באמצעות אסטרטגיית הצעת מחיר של הנפח הגבוה ביותר.
+								2372 container js_4ya
+									2373 image
+									2374 heading אפשר להשיג עד 103% יותר המרות מקהלים מועדפים ​, Value: 4
+										2375 text אפשר להשיג עד 103% יותר המרות מקהלים מועדפים
+										2376 image
+									2377 container
+										2378 text כללי ערך מאפשרים לך לתעדף את הקהלים שחשובים ביותר לעסק שלך, באמצעות הגדלה או הקטנה של הצעות המחיר. כך אפשר למקד את התקציב באנשים שרלוונטיים במיוחד למטרות של העסק ולהשיג מהם יותר המרות. 
+										2379 link Description: מידע על כללי ערך, Value: facebook.com/business/help/535014515741813
+										2380 button יצירת סדרת כללים
+											2381 text יצירת סדרת כללים
+								2382 container
+									2383 container js_4xl
+										2384 text כללי ערך
+									2385 container js_4xm
+										2386 text חשוב לנו לדעת עד כמה קהלים, מיקומי המודעות ומיקומי ההמרות מסוימים יכולים לתרום לעסק שלך. המערכת שלנו תבצע מיטוב לתוצאות על סמך הכללים האלה. 
+										2387 link Description: מידע על כללי ערך, Value: facebook.com/business/help/535014515741813
+									2388 button יצירת סדרת כללים
+										2389 image
+										2390 text יצירת סדרת כללים
+								2391 link Description: הצגת אפשרויות נוספות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+							2392 container
+								2393 container
+									2394 text ‏מטורגט-איגור 20.10 פעילים  •  30 הימים האחרונים התחילה שיחת הודעות
+									2395 image
+									2396 text — עלות לתוצאה
+									2397 image
+									2398 text — סכום ההוצאה
+									2399 image
+									2400 text ₪0.00
+								2401 container
+									2402 image
+									2403 heading הגדרות החשבון, Value: 4
+										2404 text הגדרות החשבון
+									2405 text לא נקבעו הגדרות
+									2406 button (collapsed) הרחבה של הגדרות החשבון ​, Secondary Actions: Expand
+										2407 text הרחבה של הגדרות החשבון
+										2408 image
+								2409 container
+									2410 heading קטגוריית מודעות מיוחדות, Value: 3
+										2411 text קטגוריית מודעות מיוחדות
+									2412 text דיור and מוצרים ושירותים פיננסיים
+									2413 link Description: ראה את דרישות הקטגוריה, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+								2414 container
+									2415 heading גודל הקהל המשוער ​, Value: 3
+										2416 container
+											2417 text גודל הקהל המשוער
+											2418 image
+									2419 container
+										2420 text 1,200,000  -  1,400,000
+						2421 container
+							2422 text לחיצה על ' פרסם ' מהווה את אישורך לכך שהשימוש בכלי המודעות של Meta כפוף ל
+							2423 link Description: תנאים והגבלות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252926489540603&selected_ad_ids=120252926489570603&nav_source=no_referrer#
+							2424 text .
+							2425 button סגור
+								2426 text סגור
+							2427 text כל העריכות נשמרו
+							2428 container
+								2429 button ביטול טיוטה
+									2430 text ביטול טיוטה
+								2431 button פרסם, ID: ads-editor-primary-btn
+									2432 text פרסם
+		1129 text נמצאו 0 תוצאות
+		2433 container שכפול, ID: js_1y8
+			2434 text שכפול
+
+The focused UI element is 68 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252926489540603

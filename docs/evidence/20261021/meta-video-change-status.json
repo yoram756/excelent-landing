@@ -121,5 +121,6 @@
   "placementCaveat": "Original 9:16 and full19.5seconds retained. Meta warns that some placements can auto-crop or not show; no universal fit claim.",
   "separateIntroApplied": false,
   "unrelatedDraftsPublished": false,
-  "nextAction": "After specific terms confirmation, publish only these six changes, read back submission/review state, update evidence. Never use global publish for unrelated11drafts."
+  "nextAction": "After action-time terms confirmation covering all requested changes, publish only six video ad drafts and two FacebookStories/Reels adset drafts; exclude unrelated11drafts and verify submission/review state.",
+  "relatedPlacementChange": "meta-video-placement-status.json"
 }

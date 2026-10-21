@@ -1,0 +1,346 @@
+Browser tab: 148905955, Title: "מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה", URL: "https://adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&selected_ad_ids=120252891718060603&nav_source=no_referrer".
+0 AXWebArea מנהל המודעות - ניהול המודעות - סדרות מודעות - עריכה - עריכה, URL: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&selected_ad_ids=120252891718060603&nav_source=no_referrer
+	1 container
+		2 container ads_pe_container
+			3 container
+				4 link Description: מנהל המודעות Meta ​, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797
+				5 container nux_jewel_nav_anchor
+					6 button Pressable
+				7 container כלים
+					8 content list
+						9 container
+							10 button סקירת החשבון, ID: js_8b
+							11 text סקירת החשבון
+						12 container
+							13 button קמפיינים
+							14 text קמפיינים
+						15 container
+							16 button דוחות של ביצועי מודעות
+							17 text דוחות של ביצועי מודעות
+						18 container
+							19 link Description: קהלים, Value: adsmanager.facebook.com/adsmanager/?act=287081049104797&business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+							20 text קהלים
+						21 container
+							22 button הגדרות פרסום, ID: ecosystem_nav_advertising_preferences_context_id
+							23 text הגדרות פרסום
+						24 container
+							25 link Description: חיובים ותשלומים, Value: adsmanager.facebook.com/adsmanager/billing_hub/accounts/details?nav_entry_point=ads_ecosystem_navigation_menu&placement=ads_manager&asset_id=287081049104797&business_id=745355029428233&payment_account_id=287081049104797&session_id=REDACTED
+							26 text חיובים ותשלומים
+						27 container
+							28 link Description: מנהל האירועים, Value: eventsmanager.facebook.com/events_manager2/overview?business_id=745355029428233&act=287081049104797&nav_source=ads_ecosystem_nav
+							29 text מנהל האירועים
+						30 container
+							31 button כל הכלים, ID: ecosystem_nav_all_tools_context_id
+							32 text כל הכלים
+				33 container
+					34 button המסייע העסקי של Meta AI
+				35 container
+					36 button עזרה
+					37 text עזרה
+				38 button הגדרות העסק ​, ID: js_1a3
+					39 text הגדרות העסק
+					40 image
+				41 button חיפוש ​, ID: js_1a5
+					42 text חיפוש
+					43 image
+				44 button דיווח על בעיה ​, ID: js_1a9
+					45 text דיווח על בעיה
+					46 image
+			47 container
+				48 container
+					49 button סגירה
+						50 image
+					51 button Description: הצגת התרשימים (Ctrl+Y), ID: insights_tray_button
+					52 button עריכה (Ctrl+U)
+					53 button הצג היסטוריה (Ctrl+I)
+					54 button צמצם את התצוגה
+				55 container campaign_structure_tree_root
+					56 container
+						57 text חיפוש
+						58 container
+							59 image
+							60 combo box (collapsed, settable) חיפוש, ID: js_hw, Secondary Actions: Expand
+					61 table grid
+						62 container
+							63 row קמפיין
+								64 cell Description: קמפיין, ID: ads_campaign_structure_item_120252891592490603
+									65 image
+									66 text EXC_Refi_WA_R1_2026-10
+							67 row סדרת מודעות
+								68 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252926489540603
+									69 image
+									70 text ‏מטורגט-איגור 20.10
+							71 row מודעה
+								72 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489550603
+									73 image
+									74 text R1_Img_Bank
+							75 row מודעה
+								76 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489560603
+									77 image
+									78 text R1_Video
+							79 row מודעה
+								80 cell Description: מודעה, ID: ads_campaign_structure_item_120252926489570603
+									81 image
+									82 text R1_Img_Balance
+							83 row סדרת מודעות
+								84 cell Description: סדרת מודעות, ID: ads_campaign_structure_item_120252891592500603
+									314 image
+									86 text EXC_Refi_IL_18-65_WA_R1
+							87 row מודעה
+								88 cell Description: מודעה, ID: ads_campaign_structure_item_120252891592510603
+									89 image
+									90 text R1_Video
+							91 row מודעה
+								92 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718060603
+									315 image
+									94 text R1_Img_Balance
+							95 row מודעה
+								96 cell Description: מודעה, ID: ads_campaign_structure_item_120252891718070603
+									97 image
+									98 text R1_Img_Bank
+				99 container
+					100 button פתיחה ​
+						101 text פתיחה
+						102 image
+					316 link Description: EXC_Refi_WA_R1_2026-10, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&selected_ad_ids=120252891718060603&nav_source=no_referrer#
+					317 image
+					318 image
+					319 heading EXC_Refi_IL_18-65_WA_R1, Value: 4
+						320 text EXC_Refi_IL_18-65_WA_R1
+					321 image
+					322 link Description: 3 מודעות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&selected_ad_ids=120252891718060603&nav_source=no_referrer#
+					323 container cpgn_temp_save_as_template_nux_i2
+						324 text פעיל
+						325 container
+							326 switch (settable, boolean) הפעלה/כיבוי, Value: 1, ID: js_3c2
+						327 pop up button (collapsed) תפריט הפעולות ​, Secondary Actions: Expand
+							328 text תפריט הפעולות
+							329 image
+					120 tab group
+						121 tab (selected, settable, boolean) Description: ערוך, Value: 1
+						122 tab (selectable, settable, boolean) Description: בדוק, Value: 0
+					330 container
+						605 container
+							606 image
+							607 heading מיקומי מודעה, Value: 3
+								608 text מיקומי מודעה
+							609 text נציג אוטומטית מודעות במקומות שבהם יש סבירות גבוהה לכך שאנשים יגיבו להן. 
+							610 link Description: אודות מיקומי מודעה, Value: facebook.com/business/help/196554084569964
+							611 container
+								612 image
+								613 heading הקפמיין שלך יציג רק מודעות, Value: 4
+									614 text הקפמיין שלך יציג רק מודעות
+								615 text הודעות שיווקיות אינן זמינות כאשר נבחרה קטגוריית מודעות מיוחדות.
+							616 container js_3pp
+								617 image
+								618 heading אפשר לשפר את הביצועים אם כוללים 6 מיקומי מודעה או יותר, Value: 4
+									619 text אפשר לשפר את הביצועים אם כוללים 6 מיקומי מודעה או יותר
+								620 container
+									621 text שימוש בפחות מ-6 מיקומי מודעה עשוי להגדיל את העלות לתוצאה. כדי לעזור למערכת הצגת המודעות להקצות את התקציב באופן יעיל, מומלץ להוסיף מיקומים. ‏
+									622 link Description: מידע על מיקומי Meta, Value: adsmanager.facebook.com/business/help/965529646866485
+									623 text ‏
+									624 button הצגת המיקומים
+										625 text הצגת המיקומים
+							626 content list
+								627 button (expanded) כללי ערך של מיקומי מודעות ​, Secondary Actions: Collapse
+									628 text כללי ערך של מיקומי מודעות
+									629 image
+									630 image
+								631 text כדאי לתעדף את מיקומי המודעות שהכי חשובים לעסק שלך ולהתאים להם הצעות מחיר. 
+								632 link Description: מידע על כללי ערך, Value: facebook.com/business/help/535014515741813
+								633 container
+									634 container js_3ll
+										635 text כללי ערך
+									636 container js_3lm
+										637 text חשוב לנו לדעת עד כמה קהלים, מיקומי המודעות ומיקומי ההמרות מסוימים יכולים לתרום לעסק שלך. המערכת שלנו תבצע מיטוב לתוצאות על סמך הכללים האלה. 
+										638 link Description: מידע על כללי ערך, Value: facebook.com/business/help/535014515741813
+									639 button יצירת סדרת כללים
+										640 image
+										641 text יצירת סדרת כללים
+							642 content list
+								643 button (collapsed) הגדרות החשבון ​ מיקומי מודעות שהוחרגו: ללא, Secondary Actions: Expand
+									644 text הגדרות החשבון
+									645 image
+									646 container
+										647 text מיקומי מודעות שהוחרגו: ללא
+							648 container
+								649 container
+									650 checkbox (settable, integer) Description: הפעלת בדיקת A/B כדי לראות את התוצאות של הפעלת מיקומי מודעה של +Advantage, Value: 0, ID: js_3q4
+									651 image
+								652 container js_3q6
+									653 text הפעלת בדיקת A/B כדי לראות את התוצאות של הפעלת  מיקומי מודעה של +Advantage
+							654 link Description: הסתרת ההגדרות, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&selected_ad_ids=120252891718060603&nav_source=no_referrer#
+							655 content list
+								656 button (collapsed) מכשירים ומערכות הפעלה הכול, Secondary Actions: Expand
+									723 text מכשירים ומערכות הפעלה
+									724 text הכול
+							657 content list
+								658 button (collapsed) פלטפורמות פייסבוק, Secondary Actions: Expand
+									725 text פלטפורמות
+									726 text פייסבוק
+							659 content list
+								660 button (expanded) מיקומי מודעות, Secondary Actions: Collapse
+									727 text מיקומי מודעות
+									661 image
+								662 content list
+									663 content list
+										664 container
+											665 button הרחב
+											728 text פידים
+											666 container
+												667 container
+													668 checkbox (settable, integer) Description: פידים, Value: 2, ID: js_3qb
+													669 image
+												729 text פידים
+												730 text ניתן להשיג חשיפה גדולה לעסק שלך באמצעות מודעות בפידים
+											731 text ניתן להשיג חשיפה גדולה לעסק שלך באמצעות מודעות בפידים
+									670 content list
+										671 container
+											672 button כווץ
+											732 text סטוריז, סטטוס, Reels
+											673 container
+												674 container
+													675 checkbox (settable, integer) Description: סטוריז, סטטוס, Reels, Value: 0, ID: js_3qi
+													676 image
+												733 text סטוריז, סטטוס, Reels
+												734 text עם סטוריז וסרטוני Reels אפשר להציג מודעות סוחפות במסך מלא ובפורמט אנכי, שמעבירות מסר ויזואלי עשיר
+											735 text עם סטוריז וסרטוני Reels אפשר להציג מודעות סוחפות במסך מלא ובפורמט אנכי, שמעבירות מסר ויזואלי עשיר
+										770 container
+											771 text 'סטוריז באינסטגרם'
+											772 container placement-instagram/story
+												773 checkbox (settable, integer) Description: 'סטוריז באינסטגרם', Value: 0, ID: js_3rw
+												774 text 'סטוריז באינסטגרם'
+										775 container
+											776 text סטוריז בפייסבוק
+											777 container placement-facebook/stories
+												778 checkbox (settable, integer) Description: סטוריז בפייסבוק, Value: 0, ID: js_3ry
+												779 text סטוריז בפייסבוק
+										780 container
+											781 text סרטוני Reels באינסטגרם
+											782 container placement-instagram/reels
+												783 checkbox (settable, integer) Description: סרטוני Reels באינסטגרם, Value: 0, ID: js_3s0
+												784 text סרטוני Reels באינסטגרם
+										785 container
+											786 text Reels בפייסבוק
+											787 container placement-facebook/fb_reels
+												788 checkbox (settable, integer) Description: Reels בפייסבוק, Value: 0, ID: js_3s2
+												789 text Reels בפייסבוק
+										790 container
+											791 text סטטוס WhatsApp
+											792 checkbox (disabled, settable, integer) Description: סטטוס WhatsApp, Value: 0, ID: js_3s4
+											793 text סטטוס WhatsApp
+									677 content list
+										678 container
+											679 button הרחב
+											736 text מודעות מוזרמות ל-Reels
+											680 container
+												681 container
+													682 checkbox (settable, integer) Description: מודעות מוזרמות ל-Reels, Value: 0, ID: js_3qo
+													683 image
+												737 text מודעות מוזרמות ל-Reels
+												738 text אפשר להגיע לאנשים לפני, במהלך או אחרי שהם צופים בסרטון Reels
+											739 text אפשר להגיע לאנשים לפני, במהלך או אחרי שהם צופים בסרטון Reels
+									684 content list
+										685 container
+											686 button הרחב
+											740 text תוצאות חיפוש
+											687 container
+												688 container
+													689 checkbox (settable, integer) Description: תוצאות חיפוש, Value: 0, ID: js_3qu
+													690 image
+												741 text תוצאות חיפוש
+												742 text העסק שלך יקבל חשיפה בזמן שאנשים מחפשים
+											743 text העסק שלך יקבל חשיפה בזמן שאנשים מחפשים
+									691 content list
+										692 container
+											693 button הרחב
+											744 text הודעות שיווקיות
+											694 container
+												695 checkbox (disabled, settable, integer) Description: הודעות שיווקיות, Value: 0, ID: js_3r0
+												696 image
+											745 container
+												746 text הודעות שיווקיות
+												747 text שליחת הודעה שיווקית ב-WhatsApp לאנשים כשיש להם סיכוי הכי גבוה ליצור קשר
+											748 text שליחת הודעה שיווקית ב-WhatsApp לאנשים כשיש להם סיכוי הכי גבוה ליצור קשר
+									697 content list
+										698 container
+											699 button הרחב
+											749 text אפליקציות ואתרים
+											700 container
+												701 container
+													702 checkbox (settable, integer) Description: אפליקציות ואתרים, Value: 0, ID: js_3r6
+													703 image
+												750 text אפליקציות ואתרים
+												751 text אפשר להרחיב את התפוצה עם מודעות שמופיעות באפליקציות ואתרים חיצוניים
+											752 text אפשר להרחיב את התפוצה עם מודעות שמופיעות באפליקציות ואתרים חיצוניים
+								704 container
+									794 text סטוריז, סטטוס, Reels לסטוריז וסטטוס: אנו ממליצים על תמונות או סרטונים  אנכיים במסך מלא (9:16) .
+									795 text ב-Reels באינסטגרם: יש להשתמש בסרטונים  אנכיים במסך מלא (9:16)  באורך של 15 דקות או פחות. אנו ממליצים לכלול קול.
+							706 content list
+								707 button (disabled, collapsed) מודעות שאפשר לדלג עליהן כלולות, Secondary Actions: Expand
+									753 text מודעות שאפשר לדלג עליהן
+									754 text כלולות
+							708 container
+								709 heading הבטיחות וההתאמה של המותג, Value: 3
+									755 text הבטיחות וההתאמה של המותג
+								710 image
+								756 text בטיחות מותג:  Meta מפעילה בכל המודעות אמצעים לשמירה על בטיחות המותג דרך 
+								711 link Description: כללי הקהילה, Value: l.facebook.com/l.php?u=https%3A%2F%2Ftransparency.meta.com%2Fpolicies%2Fcommunity-standards%2F%3Ffbclid%3DIwZXh0bgNhZW0CMTAAcGRvZgVicmlkETFvOWZIeGFJZTR6NmExSTN3c3J0YwZhcHBfaWQPMTE5MjExNzI4MTQ0NTA0AAEeZ4BxI2qJzvG0NnJHO-ZX6wwZGsfj9_iWnJ3-sckAMXrGfyD1oZyYg3W1HGo_aem_pbYF5K8wpcsII3q1mYoixA&h=AUCfV8E_huk-gjFx0bwYF6e-TwHgoiHMS48WZXOjGeWS1RjFNPPV0HqmVjgZ0SUnY3AtaF8V4HxShUTAnHNkZdSyLlv9-SZb4-0BC3-xMfCMhNz0_mlmB4L15xv7m49J70mMBR87STK5j4uRDdcn0A
+								757 text  ו
+								712 link Description: מדיניות המונטיזציה, Value: facebook.com/business/help/1348682518563619?id=2520940424820218
+								758 text , כדי להרחיק את המודעות שלך מתוכן שמעורר התנגדות.
+								759 text התאמה של המותג:  במקרים מסוימים, מותגים רוצים יותר שליטה על המקומות שבהם המודעות שלהם יכולות להופיע. התאמה של המותג מסננת או מחריגה נושאים או בעלי תוכן ספציפיים. חשוב לזכור שהשימוש באפשרויות האלה יכול להקטין את התפוצה ולהגדיל את העלויות.
+								713 heading מסנני מלאי, Value: 4
+									760 text מסנני מלאי
+								714 image
+								761 text אנחנו מחילים את מסנן המלאי בברירת המחדל, אלא אם שינית אותו. תוכן שנוי במחלוקת או פוגעני בצורה קיצונית לא ייכלל בשום מצב, בלי קשר למסנן שייבחר.
+								715 content list
+									716 button (disabled, collapsed) מודעות בתוכן לא נבחרו אפשרויות, Secondary Actions: Expand
+										762 text מודעות בתוכן
+										763 text לא נבחרו אפשרויות
+								717 content list
+									718 button (disabled, collapsed) מודעות של רשת קהלים לא נבחרו אפשרויות, Secondary Actions: Expand
+										764 text מודעות של רשת קהלים
+										765 text לא נבחרו אפשרויות
+								719 content list
+									720 button (disabled, collapsed) רשימות חסימות של בעלי תוכן לא נבחרו אפשרויות, Secondary Actions: Expand
+										766 text רשימות חסימות של בעלי תוכן
+										767 text לא נבחרו אפשרויות
+								721 content list
+									722 button (disabled, collapsed) אי הכללה של סוגי תוכן לא נבחרו אפשרויות, Secondary Actions: Expand
+										768 text אי הכללה של סוגי תוכן
+										769 text לא נבחרו אפשרויות
+						432 container
+							433 container
+								434 text EXC_Refi_IL_18-65_WA_R1 פעילים  •  30 הימים האחרונים התחלת התכתבויות
+								435 image
+								436 text 3 עלות לתוצאה
+								437 image
+								438 text ₪28.61 סכום ההוצאה
+								439 image
+								440 text ₪85.82
+							441 container
+								442 image
+								443 heading הגדרות החשבון, Value: 4
+									444 text הגדרות החשבון
+								445 text לא נקבעו הגדרות
+								446 button (collapsed) הרחבה של הגדרות החשבון ​, Secondary Actions: Expand
+									447 text הרחבה של הגדרות החשבון
+									448 image
+							449 container
+								450 heading קטגוריית מודעות מיוחדות, Value: 3
+									451 text קטגוריית מודעות מיוחדות
+								452 text דיור and מוצרים ושירותים פיננסיים
+								453 link Description: ראה את דרישות הקטגוריה, Value: adsmanager.facebook.com/adsmanager/manage/adsets/edit/standalone?act=287081049104797&business_id=745355029428233&selected_campaign_ids=120252891592490603&selected_adset_ids=120252891592500603&selected_ad_ids=120252891718060603&nav_source=no_referrer#
+							454 container
+								455 heading גודל הקהל המשוער ​, Value: 3
+									456 container
+										457 text גודל הקהל המשוער
+										458 image
+								459 container
+									460 text 4,400,000  -  5,200,000
+								461 image
+								462 text ההערכות לא כוללות את אפשרויות קהל Advantage+‎
+								463 text ועשויים להשתנות באופן משמעותי עם הזמן.
+
+The focused UI element is 672 button כווץ
