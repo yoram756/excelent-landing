@@ -1,0 +1,27 @@
+Command: node --test --test-name-pattern optout in another campaign tests/funnel/crm-sandbox.test.js
+Exit code: 1
+✖ optout in another campaign between frame and write refuses stale CRM subject state (26.5743ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 120.5233
+
+✖ failing tests:
+
+test at tests\funnel\crm-sandbox.test.js:44:1
+✖ optout in another campaign between frame and write refuses stale CRM subject state (26.5743ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (C:\Users\User\Documents\Codex\2026-10-20\referenced-chatgpt-conversation-this-is-an-2\work\excelent-landing\tests\funnel\crm-sandbox.test.js:47:2)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /changed before write/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

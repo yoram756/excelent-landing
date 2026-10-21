@@ -7,7 +7,10 @@ const mutations={
  unknown_retry:['store.js',"UPDATE outbox SET state='unknown',updated_at=?","UPDATE outbox SET state='queued',updated_at=?"],
  adapter_grants:['lp1-adapter.js','[ch,p.grants[ch]]','[ch,true]'],
  enrollment_anchor:['store.js','start=enrolledAt===null?at:iso(enrolledAt)','start=at'],
- restore_gate:['store.js',"if(this.restorePending())return {status:'BLOCKED'","if(false)return {status:'BLOCKED'"]
+ restore_gate:['store.js',"if(this.restorePending())return {status:'BLOCKED'","if(false)return {status:'BLOCKED'"],
+ crm_readback:['crm-sandbox.js','if(encode(after)!==encode(expected))','if(false)'],
+ crm_unknown_retry:['store.js',"WHERE (p.state='queued' OR (p.state='reserved' AND p.lease_until<=?))","WHERE (p.state='queued' OR (p.state IN ('reserved','unknown') AND p.lease_until<=?))"],
+ crm_snapshot:['crm-sandbox.js','return store.tx(()=>{','return (fn=>fn())(()=>{']
 };
 if(!Object.hasOwn(mutations,process.env.ATOMIC_MUTATION||''))throw Error('Explicit known test mutation required');
 const [file,before,after]=mutations[process.env.ATOMIC_MUTATION],target=path.resolve(__dirname,'../../automation/lifecycle',file);

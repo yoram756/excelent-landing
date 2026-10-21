@@ -21,6 +21,11 @@ test('post-snapshot optout is not invented; the restored copy remains blocked un
  const f=setup(t),e=f.s.ingest(intake()),m=backup(f.s,{target:f.target,root:f.root,now:NOW});f.s.record({eventId:'later-optout',enrollmentId:e.enrollmentId,type:'optout',now:AFTER});const r=restore({source:f.target,manifest:m,target:f.recovered,root:f.root,now:AFTER});f.open.push(r);
  assert.equal(r.snapshot().subjects[0].stop_reason,null);assert.equal(r.reserve({enrollmentId:e.enrollmentId,workerId:'blocked',now:AFTER}).status,'BLOCKED');r.record({eventId:'later-optout',enrollmentId:e.enrollmentId,type:'optout',now:AFTER});assert.equal(r.snapshot().subjects[0].stop_reason,'optout');assert.equal(r.restorePending(),true);
 });
+
+test('restored inflight CRM write becomes unknown and retains its reconciliation frame and target binding',t=>{
+ const f=setup(t);f.s.ingest(intake());const p=f.s.claimProjection({workerId:'crm',now:NOW});f.s.beginProjection({...p,binding:'monday:5106403803:1234567',payloadHash:'a'.repeat(64),payload:'synthetic-reconciliation-frame',now:NOW});
+ const m=backup(f.s,{target:f.target,root:f.root,now:NOW}),r=restore({source:f.target,manifest:m,target:f.recovered,root:f.root,now:AFTER});f.open.push(r);assert.equal(r.snapshot().projections[0].state,'unknown');assert.equal(r.get("SELECT value FROM runtime_control WHERE key=?",'crm_frame:'+p.eventId).value,'synthetic-reconciliation-frame');assert.equal(r.claimProjection({workerId:'no-retry',now:AFTER}),null);assert.throws(()=>r.beginProjection({...p,binding:'other',payloadHash:'a'.repeat(64),now:AFTER}),e=>e.code==='RESTORE_PENDING');
+});
 test('checksum and manifest mismatch fail before creating a recovery destination',t=>{
  const f=setup(t);f.s.ingest(intake());const m=backup(f.s,{target:f.target,root:f.root,now:NOW});for(const altered of [{...m,sha256:'0'.repeat(64)},{...m,eventFrontier:m.eventFrontier+1},{...m,tables:{...m.tables,subjects:99}}])assert.throws(()=>restore({source:f.target,manifest:altered,target:f.recovered,root:f.root,now:NOW}),/checksum|manifest/);assert.ok(!fs.existsSync(f.recovered));
 });
@@ -30,9 +35,9 @@ test('truncated backup fails checksum and existing targets are never overwritten
 test('recovery paths reject traversal, URI filenames and a source path outside the explicit root',t=>{
  const f=setup(t);f.s.ingest(intake());for(const target of [path.join(f.root,'..','escaped.sqlite'),'file:other.sqlite','relative.sqlite',path.join(f.root,'bad.txt')])assert.throws(()=>backup(f.s,{target,root:f.root,now:NOW}));assert.ok(!fs.existsSync(f.target));
 });
-test('schema one migrates atomically without losing intake, and recovery requires schema two',t=>{
- const f=setup(t),e=f.s.ingest(intake());f.s.db.exec('DROP TABLE runtime_control; PRAGMA user_version=1;');f.s.close();const migrated=new Store(f.source,{sandbox:true});f.open.push(migrated);assert.equal(migrated.get('PRAGMA user_version').user_version,2);assert.equal(migrated.snapshot().enrollments[0].id,e.enrollmentId);assert.equal(migrated.ingest(intake()).replayed,true);
- const m=backup(migrated,{target:f.target,root:f.root,now:NOW});assert.equal(m.schemaVersion,2);assert.equal(migrated.restorePending(),false);
+test('schema one migrates atomically without losing intake, and recovery requires schema three',t=>{
+ const f=setup(t),e=f.s.ingest(intake());f.s.db.exec('DROP TABLE runtime_control; PRAGMA user_version=1;');f.s.close();const migrated=new Store(f.source,{sandbox:true});f.open.push(migrated);assert.equal(migrated.get('PRAGMA user_version').user_version,3);assert.equal(migrated.snapshot().enrollments[0].id,e.enrollmentId);assert.equal(migrated.ingest(intake()).replayed,true);
+ const m=backup(migrated,{target:f.target,root:f.root,now:NOW});assert.equal(m.schemaVersion,3);assert.equal(migrated.restorePending(),false);
 });
 test('crash after VACUUM leaves only a non-runtime staging file, never an unblocked published snapshot',t=>{
  const root=fs.mkdtempSync(path.join(os.tmpdir(),'excelent-backup-crash-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));const env={...process.env,NODE_NO_WARNINGS:'1'};delete env.NODE_TEST_CONTEXT;

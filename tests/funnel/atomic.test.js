@@ -88,7 +88,7 @@ test('CRM projection retries are ordered and acknowledge only a current lease an
  const retry=await child(path,'claimProjection',{workerId:'recovery',now:LATER});assert.equal(retry.eventId,first.eventId);assert.equal(retry.attempts,2);
  assert.throws(()=>store.acknowledgeProjection({...first,receipt:'mock-item',now:LATER}),e=>e.code==='STALE');
  assert.throws(()=>store.acknowledgeProjection({...retry,now:LATER}),/acknowledgement/);
- store.acknowledgeProjection({...retry,receipt:'mock-item',now:LATER});assert.equal(store.claimProjection({workerId:'crm2',now:LATER}).type,'questionnaire');
+ store.beginProjection({...retry,binding:'sandbox-owned-item',payloadHash:'a'.repeat(64),now:LATER});store.acknowledgeProjection({...retry,receipt:'mock-item',now:LATER});assert.equal(store.claimProjection({workerId:'crm2',now:LATER}).type,'questionnaire');
 });
 test('CRM claims by competing processes expose one current lease for one event',async t=>{
  const {store,path}=setup(t);store.ingest(intake());const r=await Promise.all(Array.from({length:8},(_,i)=>child(path,'claimProjection',{workerId:'crm'+i,now:DUE})));

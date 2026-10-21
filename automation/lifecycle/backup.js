@@ -20,11 +20,11 @@ function inspect(file){
  const db=new DatabaseSync(file,{readOnly:true});
  try{
   if(db.prepare('PRAGMA integrity_check').get().integrity_check!=='ok'||db.prepare('PRAGMA foreign_key_check').all().length)throw Error('Backup database integrity failed');
-  if(db.prepare('PRAGMA user_version').get().user_version!==2)throw Error('Unsupported backup schema');
+  if(db.prepare('PRAGMA user_version').get().user_version!==3)throw Error('Unsupported backup schema');
   if(db.prepare("SELECT value FROM runtime_control WHERE key='restore_pending'").get()?.value!=='1')throw Error('Backup is not quarantined');
   const tables=Object.fromEntries(TABLES.map(table=>[table,db.prepare('SELECT COUNT(*) AS n FROM '+table).get().n]));
   const frontier=db.prepare('SELECT COALESCE(MAX(seq),0) AS seq FROM events').get().seq;
-  return {schemaVersion:2,tables,eventFrontier:frontier};
+  return {schemaVersion:3,tables,eventFrontier:frontier};
  }finally{db.close();}
 }
 function backup(store,{target,root,now}){
@@ -62,7 +62,7 @@ function restore({source,manifest,target,root,now}){
   try{
    db.exec('PRAGMA synchronous=FULL; BEGIN IMMEDIATE');
    db.prepare("INSERT INTO runtime_control(key,value) VALUES('restore_source',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value").run(JSON.stringify({sha256:manifest.sha256,eventFrontier:manifest.eventFrontier,restoredAt:at}));
-   db.exec("UPDATE outbox SET state='queued',token=NULL,lease_until=NULL,note='restore_revoked_reservation' WHERE state='reserved'; UPDATE outbox SET state='unknown',note='restore_unresolved_attempt' WHERE state='inflight'; UPDATE projections SET state='queued',token=NULL,lease_until=NULL WHERE state='reserved'; COMMIT;");
+   db.exec("UPDATE outbox SET state='queued',token=NULL,lease_until=NULL,note='restore_revoked_reservation' WHERE state='reserved'; UPDATE outbox SET state='unknown',note='restore_unresolved_attempt' WHERE state='inflight'; UPDATE projections SET state='queued',token=NULL,lease_until=NULL WHERE state='reserved'; UPDATE projections SET state='unknown',last_error='restore_unresolved_remote_write' WHERE state='inflight'; COMMIT;");
   }finally{db.close();}
   inspect(staging);unused(output);fs.linkSync(staging,output);
   return new Store(output,{sandbox:true});

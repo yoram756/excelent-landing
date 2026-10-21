@@ -1,0 +1,22 @@
+Command: node --test tests/funnel/crm-snapshot.test.js tests/funnel/crm-sandbox.test.js
+Exit code: 0
+✔ LP1 to SQLite to CRM exact readback acknowledges one preallocated item and deduplicates intake (27.0387ms)
+✔ CRM readback mismatch never acknowledges and cannot be retried after lease expiry (4.5543ms)
+✔ lost response after remote commit remains unknown with no automatic write replay (3.2434ms)
+✔ readback exception, partial item, wrong event or missing column cannot produce success (8.6749ms)
+✔ wrong board, item, TEST name, owner, recipient and future remote version refuse writes (16.9381ms)
+✔ wrong configured target and expired prewrite lease cannot reach remote write (4.8636ms)
+✔ remote ownership is checked again after write before acknowledgment (3.3854ms)
+✔ consent withdrawal and optout update same CRM item in order without expanding grants (5.609ms)
+✔ target binding is immutable and cannot be shared by different enrollments (6.6892ms)
+✔ process exit after beginning CRM write preserves unknown state on restart and does not starve other leads (124.2794ms)
+✔ schema two migrates to three while old CRM reservations remain valid only before write (36.1288ms)
+✔ CRM snapshot frontier and consent cannot mix two committed database versions (54.7274ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 351.7282

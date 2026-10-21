@@ -27,7 +27,7 @@ class Store{
   try{
    this.db.exec('PRAGMA busy_timeout=10000; PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;');
    const version=this.db.prepare('PRAGMA user_version').get().user_version;
-   if(![0,1,2].includes(version))fail('Unsupported database schema');
+   if(![0,1,2,3].includes(version))fail('Unsupported database schema');
    this.tx(()=>{
     this.db.exec(`
      CREATE TABLE IF NOT EXISTS subjects(
@@ -64,7 +64,7 @@ class Store{
       token_hash TEXT PRIMARY KEY, enrollment_id TEXT NOT NULL REFERENCES enrollments(id),
       csrf TEXT NOT NULL, expires_at TEXT NOT NULL);
      CREATE TABLE IF NOT EXISTS runtime_control(key TEXT PRIMARY KEY,value TEXT NOT NULL);
-     PRAGMA user_version=2;
+     PRAGMA user_version=3;
     `);
    });
   }catch(e){this.db.close();throw e;}
@@ -239,20 +239,44 @@ class Store{
   const at=iso(now);if(!id(workerId)||!Number.isInteger(leaseMs)||leaseMs<1000||leaseMs>300000)fail('Invalid projection lease');
   return this.tx(()=>{
    if(this.restorePending())return null;
-   const row=this.get("SELECT p.*,e.seq,e.enrollment_id,e.type,e.at,e.detail FROM projections p JOIN events e ON e.id=p.event_id WHERE p.state!='acked' AND (p.state='queued' OR p.lease_until<=?) AND NOT EXISTS (SELECT 1 FROM events prior JOIN projections pp ON pp.event_id=prior.id WHERE prior.enrollment_id=e.enrollment_id AND prior.seq<e.seq AND pp.state!='acked') ORDER BY e.seq LIMIT 1",at);
+   // A remote write may have committed even if the worker disappeared. Never
+   // reclaim inflight/unknown writes as a fresh attempt after lease expiration.
+   this.run("UPDATE projections SET state='unknown',last_error='expired_remote_write' WHERE state='inflight' AND lease_until<=?",at);
+   const row=this.get("SELECT p.*,e.seq,e.enrollment_id,e.type,e.at,e.detail FROM projections p JOIN events e ON e.id=p.event_id WHERE (p.state='queued' OR (p.state='reserved' AND p.lease_until<=?)) AND NOT EXISTS (SELECT 1 FROM events prior JOIN projections pp ON pp.event_id=prior.id WHERE prior.enrollment_id=e.enrollment_id AND prior.seq<e.seq AND pp.state!='acked') ORDER BY e.seq LIMIT 1",at);
    if(!row)return null;
    // Per-enrollment ordering: a later update must not overtake an unresolved one.
    if(this.get("SELECT 1 FROM projections p JOIN events e ON e.id=p.event_id WHERE e.enrollment_id=? AND e.seq<? AND p.state!='acked'",row.enrollment_id,row.seq))return null;
    const token=randomUUID();this.run("UPDATE projections SET state='reserved',token=?,lease_until=?,attempts=attempts+1 WHERE event_id=?",token,new Date(Date.parse(at)+leaseMs).toISOString(),row.event_id);
-   return {eventId:row.event_id,enrollmentId:row.enrollment_id,type:row.type,at:row.at,detail:JSON.parse(row.detail),token,attempts:row.attempts+1,requiresRemoteIdempotency:true};
+   return {eventId:row.event_id,enrollmentId:row.enrollment_id,seq:row.seq,type:row.type,at:row.at,detail:JSON.parse(row.detail),token,attempts:row.attempts+1,requiresRemoteIdempotency:true};
   });
+ }
+ beginProjection({eventId,token,binding,payloadHash,payload=null,frontier=null,subjectFrontier=null,now}){
+  const at=iso(now);if(typeof binding!=='string'||binding.length>200||!binding||! /^[a-f0-9]{64}$/.test(payloadHash||''))fail('CRM target binding and payload hash required');
+  return this.tx(()=>{
+   if(this.restorePending())fail('Restored database requires reconciliation','RESTORE_PENDING');
+   const row=this.get("SELECT p.*,e.enrollment_id FROM projections p JOIN events e ON e.id=p.event_id WHERE event_id=? AND token=?",eventId,token);
+   if(!row||row.state!=='reserved'||row.lease_until<=at)fail('Stale projection lease','STALE');
+   if(frontier!==null&&this.get('SELECT MAX(seq) AS seq FROM events WHERE enrollment_id=?',row.enrollment_id).seq!==frontier)fail('CRM frame changed before write','STALE');
+   if(subjectFrontier!==null&&this.get('SELECT MAX(events.seq) AS seq FROM events JOIN enrollments ON enrollments.id=events.enrollment_id WHERE subject_id=?',this.enrollment(row.enrollment_id).subject_id).seq!==subjectFrontier)fail('CRM subject frame changed before write','STALE');
+   const enrollmentKey='crm_enrollment:'+row.enrollment_id,targetKey='crm_target:'+binding;
+   const pinned=this.get('SELECT value FROM runtime_control WHERE key=?',enrollmentKey),owner=this.get('SELECT value FROM runtime_control WHERE key=?',targetKey);
+   if(pinned&&pinned.value!==binding||owner&&owner.value!==row.enrollment_id)fail('CRM target already bound','IDENTITY_CONFLICT');
+   this.run('INSERT OR IGNORE INTO runtime_control VALUES(?,?)',enrollmentKey,binding);this.run('INSERT OR IGNORE INTO runtime_control VALUES(?,?)',targetKey,row.enrollment_id);
+   if(payload!==null&&(typeof payload!=='string'||payload.length>60000))fail('Invalid CRM reconciliation frame');
+   this.run('INSERT INTO runtime_control VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value','crm_payload:'+eventId,payloadHash);
+   if(payload!==null)this.run('INSERT INTO runtime_control VALUES(?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value','crm_frame:'+eventId,payload);
+   this.run("UPDATE projections SET state='inflight' WHERE event_id=?",eventId);return {started:true};
+  });
+ }
+ unknownProjection({eventId,token}){
+  return this.tx(()=>{const r=this.get('SELECT * FROM projections WHERE event_id=? AND token=?',eventId,token);if(!r||!['inflight','unknown'].includes(r.state))fail('Stale projection attempt','STALE');this.run("UPDATE projections SET state='unknown',last_error='unverified_remote_result' WHERE event_id=?",eventId);return {status:'UNKNOWN'};});
  }
  acknowledgeProjection({eventId,token,receipt,now}){
   const at=iso(now);if(typeof receipt!=='string'||!receipt.trim()||receipt.length>200)fail('CRM acknowledgement required');
   return this.tx(()=>{
    if(this.restorePending())fail('Restored database requires reconciliation','RESTORE_PENDING');
    const row=this.get('SELECT * FROM projections WHERE event_id=? AND token=?',eventId,token);
-   if(!row||row.state!=='reserved'||row.lease_until<=at)fail('Stale projection lease','STALE');
+   if(!row||row.state!=='inflight'||row.lease_until<=at)fail('Stale projection lease','STALE');
    this.run("UPDATE projections SET state='acked',receipt=?,lease_until=NULL WHERE event_id=?",receipt,eventId);
    return {acked:true};
   });

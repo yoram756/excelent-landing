@@ -1,0 +1,9 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path'),{Store}=require('../../automation/lifecycle/store'),{projectNext,bootstrap,encode,BOARD,COLUMN}=require('../../automation/lifecycle/crm-sandbox'),campaign=require('../../config/lifecycle/refi.json');
+test('CRM snapshot frontier and consent cannot mix two committed database versions',async t=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'excelent-crm-snapshot-')),file=path.join(dir,'source.sqlite'),s=new Store(file,{sandbox:true}),other=new Store(file,{sandbox:true});other.db.exec('PRAGMA busy_timeout=0');t.after(()=>{other.close();s.close();fs.rmSync(dir,{recursive:true,force:true});});
+ const now='2026-10-20T09:00:00.000Z',e=s.ingest({eventId:'test',campaign,now,receipt:{version:'lifecycle-consent-v1',campaignId:'refi',receivedAt:now,recipients:{phone:'0500000040',email:'test@example.invalid'},grants:{email:true,sms:false,whatsapp:false}}}),target={boardId:BOARD,columnId:COLUMN,itemId:'1234567',runId:'12345678-1234-1234-1234-123456789012',enrollmentId:e.enrollmentId};
+ let item={boardId:BOARD,id:target.itemId,name:'TEST SQLite CRM '+target.runId,state:'active',text:encode(bootstrap(target))},injected=false;
+ const get=s.get.bind(s);s.get=(sql,...args)=>{if(!injected&&sql.startsWith('SELECT MAX(seq) AS seq FROM events')){injected=true;try{other.withdraw({eventId:'withdraw',enrollmentId:e.enrollmentId,channels:['email'],now});}catch(error){assert.match(error.message,/locked/);}}return get(sql,...args);};
+ await projectNext({store:s,resolveTarget:()=>target,now:()=>now,transport:{read:async()=>({...item}),write:async r=>{item.text=r.text;}}});
+ const data=JSON.parse(item.text).projection.data;assert.equal(injected,true);if(data.frontier===2)assert.equal(data.grants.email,false,'frontier including withdrawal must not retain withdrawn consent');else assert.equal(data.frontier,1);
+});

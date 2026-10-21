@@ -1,0 +1,732 @@
+{
+  "status": "PASS",
+  "scope": "Real authorized Monday connector writes/reads of synthetic JSON envelope only. Local server Validate -> LP1 adapter -> SQLite -> JSONL operator bridge -> private Monday long_text. No active n8n or operational CRM column integration; lifecycle source events simulated.",
+  "boardId": "5106403803",
+  "columnId": "long_text_mm8adnp7",
+  "itemId": "3298491868",
+  "itemUrl": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+  "runId": "c5263e76-a533-4164-8839-1da9fe9b0b37",
+  "allocation": {
+    "op": "allocate-owned-item",
+    "boardId": "5106403803",
+    "columnId": "long_text_mm8adnp7",
+    "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+    "runId": "c5263e76-a533-4164-8839-1da9fe9b0b37",
+    "enrollmentId": "eb04cab2-fe59-42b6-8877-3bd69348ef4b",
+    "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":null,\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+  },
+  "result": {
+    "op": "complete",
+    "itemId": "3298491868",
+    "runId": "c5263e76-a533-4164-8839-1da9fe9b0b37",
+    "enrollmentId": "eb04cab2-fe59-42b6-8877-3bd69348ef4b",
+    "intakeReplayed": true,
+    "enrollments": 1,
+    "events": 9,
+    "acked": 9,
+    "results": [
+      {
+        "status": "ACKED",
+        "eventId": "lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c",
+        "itemId": "3298491868",
+        "payloadHash": "d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-questionnaire",
+        "itemId": "3298491868",
+        "payloadHash": "a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-reply",
+        "itemId": "3298491868",
+        "payloadHash": "570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-meeting_booked",
+        "itemId": "3298491868",
+        "payloadHash": "57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-meeting_cancelled",
+        "itemId": "3298491868",
+        "payloadHash": "884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-handed_off",
+        "itemId": "3298491868",
+        "payloadHash": "c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-withdraw",
+        "itemId": "3298491868",
+        "payloadHash": "7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-optout",
+        "itemId": "3298491868",
+        "payloadHash": "6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      },
+      {
+        "status": "ACKED",
+        "eventId": "test-paid",
+        "itemId": "3298491868",
+        "payloadHash": "9e8f05dba2bf70914a8871da876c8fdc4a47f00489dd978aac3b06f1fe2a2acf",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    ],
+    "dispatchEnabled": false,
+    "scope": "LP1 server Validate + SQLite + real connector transport in private board; not live n8n"
+  },
+  "cleanup": {
+    "status": "PASS",
+    "archive": {
+      "id": "3298491868",
+      "state": "archived",
+      "board": {
+        "id": "5106403803"
+      }
+    },
+    "activeItems": 0,
+    "hasMore": false
+  },
+  "limitations": [
+    "No provider messages, calendar booking, real reply or payment",
+    "No claim of absence of all board automations from board description alone; only isolated predefined test board used",
+    "No Monday CAS, single owned item required; unknown writes do not retry",
+    "No global fanout to every enrollment CRM copy; SQLite is authoritative for consent/stop"
+  ],
+  "transcript": [
+    {
+      "op": "allocate-owned-item",
+      "boardId": "5106403803",
+      "columnId": "long_text_mm8adnp7",
+      "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+      "runId": "c5263e76-a533-4164-8839-1da9fe9b0b37",
+      "enrollmentId": "eb04cab2-fe59-42b6-8877-3bd69348ef4b",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":null,\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":null,\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:27:45.093Z\",\"detail\":{\"source\":\"lp1\"},\"id\":\"lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c\",\"seq\":1,\"type\":\"entered\"},\"frontier\":1,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":false,\"meetingActive\":false},\"state\":{},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":1},\"hash\":\"d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"detail\\\":{\\\"source\\\":\\\"lp1\\\"},\\\"id\\\":\\\"lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c\\\",\\\"seq\\\":1,\\\"type\\\":\\\"entered\\\"},\\\"frontier\\\":1,\\\"grants\\\":{\\\"email\\\":true,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":false,\\\"incomingReplyPending\\\":false,\\\"meetingActive\\\":false},\\\"state\\\":{},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":1},\\\"hash\\\":\\\"d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:12.188Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:27:45.093Z\",\"detail\":{\"source\":\"lp1\"},\"id\":\"lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c\",\"seq\":1,\"type\":\"entered\"},\"frontier\":1,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":false,\"meetingActive\":false},\"state\":{},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":1},\"hash\":\"d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c",
+        "itemId": "3298491868",
+        "payloadHash": "d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:27:45.093Z\",\"detail\":{\"source\":\"lp1\"},\"id\":\"lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c\",\"seq\":1,\"type\":\"entered\"},\"frontier\":1,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":false,\"meetingActive\":false},\"state\":{},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":1},\"hash\":\"d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:13.692Z\",\"detail\":{},\"id\":\"test-questionnaire\",\"seq\":2,\"type\":\"questionnaire\"},\"frontier\":2,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":false,\"meetingActive\":false},\"state\":{\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":2},\"hash\":\"a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:13.692Z\\\",\\\"detail\\\":{},\\\"id\\\":\\\"test-questionnaire\\\",\\\"seq\\\":2,\\\"type\\\":\\\"questionnaire\\\"},\\\"frontier\\\":2,\\\"grants\\\":{\\\"email\\\":true,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":false,\\\"incomingReplyPending\\\":false,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":2},\\\"hash\\\":\\\"a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:18.076Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:13.692Z\",\"detail\":{},\"id\":\"test-questionnaire\",\"seq\":2,\"type\":\"questionnaire\"},\"frontier\":2,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":false,\"meetingActive\":false},\"state\":{\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":2},\"hash\":\"a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-questionnaire",
+        "itemId": "3298491868",
+        "payloadHash": "a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:13.692Z\",\"detail\":{},\"id\":\"test-questionnaire\",\"seq\":2,\"type\":\"questionnaire\"},\"frontier\":2,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":false,\"meetingActive\":false},\"state\":{\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":2},\"hash\":\"a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:19.041Z\",\"detail\":{},\"id\":\"test-reply\",\"seq\":3,\"type\":\"reply\"},\"frontier\":3,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"incomingReplyPending\":true,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":3},\"hash\":\"570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:19.041Z\\\",\\\"detail\\\":{},\\\"id\\\":\\\"test-reply\\\",\\\"seq\\\":3,\\\"type\\\":\\\"reply\\\"},\\\"frontier\\\":3,\\\"grants\\\":{\\\"email\\\":true,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":false,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"incomingReplyPending\\\":true,\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":3},\\\"hash\\\":\\\"570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:23.426Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:19.041Z\",\"detail\":{},\"id\":\"test-reply\",\"seq\":3,\"type\":\"reply\"},\"frontier\":3,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"incomingReplyPending\":true,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":3},\"hash\":\"570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-reply",
+        "itemId": "3298491868",
+        "payloadHash": "570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:19.041Z\",\"detail\":{},\"id\":\"test-reply\",\"seq\":3,\"type\":\"reply\"},\"frontier\":3,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"incomingReplyPending\":true,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":3},\"hash\":\"570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:27.117Z\",\"detail\":{\"referenceId\":\"test-meeting\"},\"id\":\"test-meeting_booked\",\"seq\":4,\"type\":\"meeting_booked\"},\"frontier\":4,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":true},\"state\":{\"incomingReplyPending\":true,\"meetingActive\":true,\"meetingIds\":[\"test-meeting\"]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":4},\"hash\":\"57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:27.117Z\\\",\\\"detail\\\":{\\\"referenceId\\\":\\\"test-meeting\\\"},\\\"id\\\":\\\"test-meeting_booked\\\",\\\"seq\\\":4,\\\"type\\\":\\\"meeting_booked\\\"},\\\"frontier\\\":4,\\\"grants\\\":{\\\"email\\\":true,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":false,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":true},\\\"state\\\":{\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":true,\\\"meetingIds\\\":[\\\"test-meeting\\\"]},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":4},\\\"hash\\\":\\\"57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:31.635Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:27.117Z\",\"detail\":{\"referenceId\":\"test-meeting\"},\"id\":\"test-meeting_booked\",\"seq\":4,\"type\":\"meeting_booked\"},\"frontier\":4,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":true},\"state\":{\"incomingReplyPending\":true,\"meetingActive\":true,\"meetingIds\":[\"test-meeting\"]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":4},\"hash\":\"57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-meeting_booked",
+        "itemId": "3298491868",
+        "payloadHash": "57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:27.117Z\",\"detail\":{\"referenceId\":\"test-meeting\"},\"id\":\"test-meeting_booked\",\"seq\":4,\"type\":\"meeting_booked\"},\"frontier\":4,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":true},\"state\":{\"incomingReplyPending\":true,\"meetingActive\":true,\"meetingIds\":[\"test-meeting\"]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":4},\"hash\":\"57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:33.094Z\",\"detail\":{\"referenceId\":\"test-meeting\"},\"id\":\"test-meeting_cancelled\",\"seq\":5,\"type\":\"meeting_cancelled\"},\"frontier\":5,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":5},\"hash\":\"884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:33.094Z\\\",\\\"detail\\\":{\\\"referenceId\\\":\\\"test-meeting\\\"},\\\"id\\\":\\\"test-meeting_cancelled\\\",\\\"seq\\\":5,\\\"type\\\":\\\"meeting_cancelled\\\"},\\\"frontier\\\":5,\\\"grants\\\":{\\\"email\\\":true,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":false,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"cancelledMeetingIds\\\":[\\\"test-meeting\\\"],\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false,\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":5},\\\"hash\\\":\\\"884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:38.608Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:33.094Z\",\"detail\":{\"referenceId\":\"test-meeting\"},\"id\":\"test-meeting_cancelled\",\"seq\":5,\"type\":\"meeting_cancelled\"},\"frontier\":5,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":5},\"hash\":\"884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-meeting_cancelled",
+        "itemId": "3298491868",
+        "payloadHash": "884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:33.094Z\",\"detail\":{\"referenceId\":\"test-meeting\"},\"id\":\"test-meeting_cancelled\",\"seq\":5,\"type\":\"meeting_cancelled\"},\"frontier\":5,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":false,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":5},\"hash\":\"884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:40.034Z\",\"detail\":{},\"id\":\"test-handed_off\",\"seq\":6,\"type\":\"handed_off\"},\"frontier\":6,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":6},\"hash\":\"c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:40.034Z\\\",\\\"detail\\\":{},\\\"id\\\":\\\"test-handed_off\\\",\\\"seq\\\":6,\\\"type\\\":\\\"handed_off\\\"},\\\"frontier\\\":6,\\\"grants\\\":{\\\"email\\\":true,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"cancelledMeetingIds\\\":[\\\"test-meeting\\\"],\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false,\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":6},\\\"hash\\\":\\\"c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:47.091Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:40.034Z\",\"detail\":{},\"id\":\"test-handed_off\",\"seq\":6,\"type\":\"handed_off\"},\"frontier\":6,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":6},\"hash\":\"c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-handed_off",
+        "itemId": "3298491868",
+        "payloadHash": "c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:40.034Z\",\"detail\":{},\"id\":\"test-handed_off\",\"seq\":6,\"type\":\"handed_off\"},\"frontier\":6,\"grants\":{\"email\":true,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":6},\"hash\":\"c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:48.252Z\",\"detail\":{\"channels\":[\"email\"]},\"id\":\"test-withdraw\",\"seq\":7,\"type\":\"channel_withdrawal\"},\"frontier\":7,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":7},\"hash\":\"7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:48.252Z\\\",\\\"detail\\\":{\\\"channels\\\":[\\\"email\\\"]},\\\"id\\\":\\\"test-withdraw\\\",\\\"seq\\\":7,\\\"type\\\":\\\"channel_withdrawal\\\"},\\\"frontier\\\":7,\\\"grants\\\":{\\\"email\\\":false,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"cancelledMeetingIds\\\":[\\\"test-meeting\\\"],\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false,\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":null,\\\"reason\\\":null},\\\"subjectFrontier\\\":7},\\\"hash\\\":\\\"7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:29:53.784Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:48.252Z\",\"detail\":{\"channels\":[\"email\"]},\"id\":\"test-withdraw\",\"seq\":7,\"type\":\"channel_withdrawal\"},\"frontier\":7,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":7},\"hash\":\"7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-withdraw",
+        "itemId": "3298491868",
+        "payloadHash": "7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:48.252Z\",\"detail\":{\"channels\":[\"email\"]},\"id\":\"test-withdraw\",\"seq\":7,\"type\":\"channel_withdrawal\"},\"frontier\":7,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":null,\"reason\":null},\"subjectFrontier\":7},\"hash\":\"7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"detail\":{},\"id\":\"test-optout\",\"seq\":8,\"type\":\"optout\"},\"frontier\":8,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"reason\":\"optout\"},\"subjectFrontier\":8},\"hash\":\"6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:29:56.120Z\\\",\\\"detail\\\":{},\\\"id\\\":\\\"test-optout\\\",\\\"seq\\\":8,\\\"type\\\":\\\"optout\\\"},\\\"frontier\\\":8,\\\"grants\\\":{\\\"email\\\":false,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"cancelledMeetingIds\\\":[\\\"test-meeting\\\"],\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false,\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":\\\"2026-10-20T22:29:56.120Z\\\",\\\"reason\\\":\\\"optout\\\"},\\\"subjectFrontier\\\":8},\\\"hash\\\":\\\"6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:30:04.225Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"detail\":{},\"id\":\"test-optout\",\"seq\":8,\"type\":\"optout\"},\"frontier\":8,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"reason\":\"optout\"},\"subjectFrontier\":8},\"hash\":\"6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-optout",
+        "itemId": "3298491868",
+        "payloadHash": "6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"detail\":{},\"id\":\"test-optout\",\"seq\":8,\"type\":\"optout\"},\"frontier\":8,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"reason\":\"optout\"},\"subjectFrontier\":8},\"hash\":\"6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "write",
+      "itemId": "3298491868",
+      "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:30:05.392Z\",\"detail\":{},\"id\":\"test-paid\",\"seq\":9,\"type\":\"paid\"},\"frontier\":9,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"reason\":\"optout\"},\"subjectFrontier\":9},\"hash\":\"9e8f05dba2bf70914a8871da876c8fdc4a47f00489dd978aac3b06f1fe2a2acf\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}",
+      "connectorResult": {
+        "summary": {
+          "total": 1,
+          "updated": 1,
+          "failed": 0
+        },
+        "is_partial_success": false,
+        "results": [
+          {
+            "index": 0,
+            "board_id": 5106403803,
+            "message": "Item 3298491868 successfully updated",
+            "item_id": "3298491868",
+            "item_name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+            "item_url": "https://kho566440.monday.com/boards/5106403803/pulses/3298491868",
+            "column_values": {
+              "long_text_mm8adnp7": "{\"text\":\"{\\\"owner\\\":{\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"runId\\\":\\\"c5263e76-a533-4164-8839-1da9fe9b0b37\\\"},\\\"projection\\\":{\\\"data\\\":{\\\"campaignId\\\":\\\"refi\\\",\\\"enrolledAt\\\":\\\"2026-10-20T22:27:45.093Z\\\",\\\"enrollmentId\\\":\\\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\\\",\\\"event\\\":{\\\"at\\\":\\\"2026-10-20T22:30:05.392Z\\\",\\\"detail\\\":{},\\\"id\\\":\\\"test-paid\\\",\\\"seq\\\":9,\\\"type\\\":\\\"paid\\\"},\\\"frontier\\\":9,\\\"grants\\\":{\\\"email\\\":false,\\\"sms\\\":false,\\\"whatsapp\\\":false},\\\"recipients\\\":{\\\"email\\\":\\\"test@example.invalid\\\",\\\"phone\\\":\\\"972500000040\\\"},\\\"sharedPause\\\":{\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false},\\\"state\\\":{\\\"cancelledMeetingIds\\\":[\\\"test-meeting\\\"],\\\"humanHandling\\\":true,\\\"incomingReplyPending\\\":true,\\\"meetingActive\\\":false,\\\"meetingIds\\\":[]},\\\"stop\\\":{\\\"at\\\":\\\"2026-10-20T22:29:56.120Z\\\",\\\"reason\\\":\\\"optout\\\"},\\\"subjectFrontier\\\":9},\\\"hash\\\":\\\"9e8f05dba2bf70914a8871da876c8fdc4a47f00489dd978aac3b06f1fe2a2acf\\\"},\\\"synthetic\\\":true,\\\"version\\\":\\\"excelent-sandbox-crm-v1\\\"}\",\"changed_at\":\"2026-10-20T22:30:10.120Z\"}"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "op": "read",
+      "item": {
+        "id": "3298491868",
+        "boardId": "5106403803",
+        "name": "TEST SQLite CRM c5263e76-a533-4164-8839-1da9fe9b0b37",
+        "state": "active",
+        "text": "{\"owner\":{\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"runId\":\"c5263e76-a533-4164-8839-1da9fe9b0b37\"},\"projection\":{\"data\":{\"campaignId\":\"refi\",\"enrolledAt\":\"2026-10-20T22:27:45.093Z\",\"enrollmentId\":\"eb04cab2-fe59-42b6-8877-3bd69348ef4b\",\"event\":{\"at\":\"2026-10-20T22:30:05.392Z\",\"detail\":{},\"id\":\"test-paid\",\"seq\":9,\"type\":\"paid\"},\"frontier\":9,\"grants\":{\"email\":false,\"sms\":false,\"whatsapp\":false},\"recipients\":{\"email\":\"test@example.invalid\",\"phone\":\"972500000040\"},\"sharedPause\":{\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false},\"state\":{\"cancelledMeetingIds\":[\"test-meeting\"],\"humanHandling\":true,\"incomingReplyPending\":true,\"meetingActive\":false,\"meetingIds\":[]},\"stop\":{\"at\":\"2026-10-20T22:29:56.120Z\",\"reason\":\"optout\"},\"subjectFrontier\":9},\"hash\":\"9e8f05dba2bf70914a8871da876c8fdc4a47f00489dd978aac3b06f1fe2a2acf\"},\"synthetic\":true,\"version\":\"excelent-sandbox-crm-v1\"}"
+      }
+    },
+    {
+      "op": "projection-result",
+      "result": {
+        "status": "ACKED",
+        "eventId": "test-paid",
+        "itemId": "3298491868",
+        "payloadHash": "9e8f05dba2bf70914a8871da876c8fdc4a47f00489dd978aac3b06f1fe2a2acf",
+        "writePerformed": true,
+        "dispatchEnabled": false
+      }
+    },
+    {
+      "op": "complete",
+      "itemId": "3298491868",
+      "runId": "c5263e76-a533-4164-8839-1da9fe9b0b37",
+      "enrollmentId": "eb04cab2-fe59-42b6-8877-3bd69348ef4b",
+      "intakeReplayed": true,
+      "enrollments": 1,
+      "events": 9,
+      "acked": 9,
+      "results": [
+        {
+          "status": "ACKED",
+          "eventId": "lp1_e505ef6226365b13781a5ce7844dbbab0aaa92debcf0ea27354a6a24c0a31c2c",
+          "itemId": "3298491868",
+          "payloadHash": "d612a00dd65250792c3c527af492b512ededdd63e089f0513722cf1b5b1026a8",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-questionnaire",
+          "itemId": "3298491868",
+          "payloadHash": "a8348bfebf7f5690b8833073ea70f404cf07ed090284e02ce2d983c47a5e4aeb",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-reply",
+          "itemId": "3298491868",
+          "payloadHash": "570673810c5e87647bb897500a9fbe603d4e29dc1af75165432c9c996f08fe90",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-meeting_booked",
+          "itemId": "3298491868",
+          "payloadHash": "57b84141870264fb319351759ffd3ddcdf65e0509be356bd7ef83eb69a9540b2",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-meeting_cancelled",
+          "itemId": "3298491868",
+          "payloadHash": "884a26bc9212bd6225d35d7d565df894719e44986ee6fa29a6ce611ac39173de",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-handed_off",
+          "itemId": "3298491868",
+          "payloadHash": "c4fabde28ca302a6a5ccb36b39dfe02b402cb3f234e7f7f5402b628f794201d2",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-withdraw",
+          "itemId": "3298491868",
+          "payloadHash": "7e2e9cd1abca382904238cab4f3a36877c81d8b2f2d40304aa472fb54044268d",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-optout",
+          "itemId": "3298491868",
+          "payloadHash": "6e4c014e4e11ab5b68155aa7202ac739a2c14c800b47dd82c1aedaf2c943631c",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        },
+        {
+          "status": "ACKED",
+          "eventId": "test-paid",
+          "itemId": "3298491868",
+          "payloadHash": "9e8f05dba2bf70914a8871da876c8fdc4a47f00489dd978aac3b06f1fe2a2acf",
+          "writePerformed": true,
+          "dispatchEnabled": false
+        }
+      ],
+      "dispatchEnabled": false,
+      "scope": "LP1 server Validate + SQLite + real connector transport in private board; not live n8n"
+    }
+  ]
+}
