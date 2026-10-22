@@ -1,0 +1,226 @@
+TAP version 13
+# Subtest: form source cannot impersonate a received WhatsApp message
+ok 1 - form source cannot impersonate a received WhatsApp message
+  ---
+  duration_ms: 22.740406
+  type: 'test'
+  ...
+# Subtest: money requires explicit boolean consent and marketing is independent
+ok 2 - money requires explicit boolean consent and marketing is independent
+  ---
+  duration_ms: 3.690712
+  type: 'test'
+  ...
+# Subtest: invalid dates and inherited answer names are rejected
+ok 3 - invalid dates and inherited answer names are rejected
+  ---
+  duration_ms: 4.51785
+  type: 'test'
+  ...
+# Subtest: same idempotency key returns the saved id, not a new create
+ok 4 - same idempotency key returns the saved id, not a new create
+  ---
+  duration_ms: 6.937547
+  type: 'test'
+  ...
+# Subtest: Monday lookup failure cannot fall back to create
+ok 5 - Monday lookup failure cannot fall back to create
+  ---
+  duration_ms: 20.531631
+  type: 'test'
+  ...
+# Subtest: partial GraphQL save failure never returns success
+ok 6 - partial GraphQL save failure never returns success
+  ---
+  duration_ms: 3.391923
+  type: 'test'
+  ...
+# Subtest: phone lookup declares the required non-null list and sends one unformatted number
+ok 7 - phone lookup declares the required non-null list and sends one unformatted number
+  ---
+  duration_ms: 7.824731
+  type: 'test'
+  ...
+# Subtest: partial lookup cannot create and a normalized exact phone updates the existing item
+ok 8 - partial lookup cannot create and a normalized exact phone updates the existing item
+  ---
+  duration_ms: 4.410553
+  type: 'test'
+  ...
+# Subtest: channel receipt binds choices to recipient and server receipt time
+ok 9 - channel receipt binds choices to recipient and server receipt time
+  ---
+  duration_ms: 3.983089
+  type: 'test'
+  ...
+# Subtest: email-only consent cannot authorize WhatsApp or SMS
+ok 10 - email-only consent cannot authorize WhatsApp or SMS
+  ---
+  duration_ms: 3.842405
+  type: 'test'
+  ...
+# Subtest: empty choices preserve callback request without marketing permission
+ok 11 - empty choices preserve callback request without marketing permission
+  ---
+  duration_ms: 1.001593
+  type: 'test'
+  ...
+# Subtest: legacy generic consent never invents channel-specific proof
+ok 12 - legacy generic consent never invents channel-specific proof
+  ---
+  duration_ms: 3.868763
+  type: 'test'
+  ...
+# Subtest: invalid or contradictory channel payloads are rejected
+ok 13 - invalid or contradictory channel payloads are rejected
+  ---
+  duration_ms: 6.117952
+  type: 'test'
+  ...
+# Subtest: invalid email and header injection are rejected; optional email stays optional
+ok 14 - invalid email and header injection are rejected; optional email stays optional
+  ---
+  duration_ms: 4.627396
+  type: 'test'
+  ...
+# Subtest: modern consent and email persist in the mutation and clear prior WhatsApp opt-in
+ok 15 - modern consent and email persist in the mutation and clear prior WhatsApp opt-in
+  ---
+  duration_ms: 5.188013
+  type: 'test'
+  ...
+# Subtest: replayed key cannot acknowledge a different recipient
+ok 16 - replayed key cannot acknowledge a different recipient
+  ---
+  duration_ms: 1.386222
+  type: 'test'
+  ...
+# Subtest: replayed key cannot silently discard changed request or consent
+ok 17 - replayed key cannot silently discard changed request or consent
+  ---
+  duration_ms: 6.297068
+  type: 'test'
+  ...
+# Subtest: bound replay accepts normalized identity and reordered fields despite regenerated timestamps
+ok 18 - bound replay accepts normalized identity and reordered fields despite regenerated timestamps
+  ---
+  duration_ms: 1.755685
+  type: 'test'
+  ...
+# Subtest: legacy unbound receipt never acknowledges a request or creates a replacement
+ok 19 - legacy unbound receipt never acknowledges a request or creates a replacement
+  ---
+  duration_ms: 0.384029
+  type: 'test'
+  ...
+# Subtest: failed Monday save does not create a replay receipt
+ok 20 - failed Monday save does not create a replay receipt
+  ---
+  duration_ms: 1.039683
+  type: 'test'
+  ...
+# Subtest: reused key cannot cross the supported product or campaign
+ok 21 - reused key cannot cross the supported product or campaign
+  ---
+  duration_ms: 1.455432
+  type: 'test'
+  ...
+# Subtest: save confirmation requires the bound validated request
+ok 22 - save confirmation requires the bound validated request
+  ---
+  duration_ms: 1.502315
+  type: 'test'
+  ...
+# Subtest: malformed replay receipts fail closed without exposing the cached item
+ok 23 - malformed replay receipts fail closed without exposing the cached item
+  ---
+  duration_ms: 9.275816
+  type: 'test'
+  ...
+# Subtest: malformed Monday item identifiers never return success or prime the replay cache
+ok 24 - malformed Monday item identifiers never return success or prime the replay cache
+  ---
+  duration_ms: 6.254723
+  type: 'test'
+  ...
+# Subtest: expired bound receipt is pruned before accepting a fresh request
+ok 25 - expired bound receipt is pruned before accepting a fresh request
+  ---
+  duration_ms: 1.10644
+  type: 'test'
+  ...
+# Subtest: actual LP1 Validate output maps explicit email-only proof into durable intake and CRM outbox
+ok 26 - actual LP1 Validate output maps explicit email-only proof into durable intake and CRM outbox
+  ---
+  duration_ms: 128.593506
+  type: 'test'
+  ...
+# Subtest: generic legacy checkbox, missing proof and forged client output never invent grants
+ok 27 - generic legacy checkbox, missing proof and forged client output never invent grants
+  ---
+  duration_ms: 8.236467
+  type: 'test'
+  ...
+# Subtest: receipt is bound to product, request id, recipient and explicit campaign mapping
+ok 28 - receipt is bound to product, request id, recipient and explicit campaign mapping
+  ---
+  duration_ms: 12.011705
+  type: 'test'
+  ...
+# Subtest: all seven grant combinations plus callback-only retain exact independent choices
+ok 29 - all seven grant combinations plus callback-only retain exact independent choices
+  ---
+  duration_ms: 7.058959
+  type: 'test'
+  ...
+# Subtest: unknown, missing, truthy and contradictory grants fail closed
+ok 30 - unknown, missing, truthy and contradictory grants fail closed
+  ---
+  duration_ms: 5.185724
+  type: 'test'
+  ...
+# Subtest: original server receipt anchors the horizon even after an eighteen-month processing delay
+ok 31 - original server receipt anchors the horizon even after an eighteen-month processing delay
+  ---
+  duration_ms: 9.362221
+  type: 'test'
+  ...
+# Subtest: equivalent receipt timestamps replay but changing enrollment origin conflicts
+ok 32 - equivalent receipt timestamps replay but changing enrollment origin conflicts
+  ---
+  duration_ms: 11.029579
+  type: 'test'
+  ...
+# Subtest: long request ids are not truncated into collisions and financial answers never cross this adapter
+ok 33 - long request ids are not truncated into collisions and financial answers never cross this adapter
+  ---
+  duration_ms: 3.36471
+  type: 'test'
+  ...
+# Subtest: future server dates and malformed or inconsistent enrollment clocks cannot enter the store
+ok 34 - future server dates and malformed or inconsistent enrollment clocks cannot enter the store
+  ---
+  duration_ms: 10.28785
+  type: 'test'
+  ...
+# Subtest: repeat LP1 form can withdraw grants atomically without renewing the horizon or reviving withdrawn channels
+ok 35 - repeat LP1 form can withdraw grants atomically without renewing the horizon or reviving withdrawn channels
+  ---
+  duration_ms: 18.104448
+  type: 'test'
+  ...
+# Subtest: repeat-form withdrawal rolls back its consent and reservation changes when audit persistence fails
+ok 36 - repeat-form withdrawal rolls back its consent and reservation changes when audit persistence fails
+  ---
+  duration_ms: 25.784818
+  type: 'test'
+  ...
+1..36
+# tests 36
+# suites 0
+# pass 36
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1312.449209

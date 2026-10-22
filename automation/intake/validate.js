@@ -1,7 +1,7 @@
 // Validate, normalize and score a landing page lead. Product agnostic: product code comes from the request.
 const LABELS = {"has": {"q": "יש לכם היום משכנתא?", "o": {"yes": "כן, משכנתא אחת", "multi": "כן, יותר ממשכנתא אחת", "selling": "יש, ואנחנו בתהליך מכירה או פירעון", "none": "אין, אנחנו לפני קנייה"}}, "goal": {"q": "מה המטרה העיקרית?", "o": {"monthly": "תשלום חודשי נמוך יותר", "total": "עלות כוללת נמוכה יותר", "term": "קיצור התקופה", "risk": "פחות חשיפה למדד או לריבית", "loans": "טיפול בהלוואות נוספות", "mix": "תמהיל שמתאים לתוכניות שלנו"}}, "bal": {"q": "מה יתרת המשכנתא בקירוב?", "o": {"b1": "עד 300 אלף ₪", "b2": "מעל 300 אלף ועד 600 אלף ₪", "b3": "מעל 600 אלף ועד מיליון ₪", "b4": "מעל מיליון ועד 1.5 מיליון ₪", "b5": "מעל 1.5 מיליון ₪", "na": "לא יודע"}}, "pay": {"q": "מה ההחזר החודשי היום?", "o": {"p1": "עד 3,000 ₪", "p2": "מעל 3,000 ועד 5,000 ₪", "p3": "מעל 5,000 ועד 8,000 ₪", "p4": "מעל 8,000 ועד 12,000 ₪", "p5": "מעל 12,000 ₪", "na": "לא יודע"}}, "left": {"q": "כמה זמן נשאר לתשלום?", "o": {"l1": "עד 10 שנים", "l2": "מעל 10 ועד 20 שנה", "l3": "מעל 20 שנה", "na": "לא יודע"}}, "when": {"q": "מתי תרצו לפעול?", "o": {"week": "השבוע", "month": "החודש", "later": "בהמשך, יש לנו מועד", "none": "אין מועד מסוים"}}, "ask": {"q": "מה אתם מבקשים כרגע?", "o": {"info": "מידע כללי", "check": "בדיקה אישית", "call": "שיחת טלפון קצרה", "meet": "פגישה"}}, "doc": {"q": "יש לכם דוח יתרות לסילוק עדכני?", "o": {"have": "יש, ואשמח לשלוח", "old": "יש, אבל לא עדכני", "help": "אין, צריך עזרה להשיג", "what": "לא בטוח מה זה"}}, "loans": {"q": "יש הלוואות נוספות מלבד המשכנתא?", "o": {"n": "אין", "s": "יש, עד 50 אלף ₪ בסך הכול", "m": "יש, מעל 50 אלף ועד 200 אלף ₪", "l": "יש, מעל 200 אלף ועד 500 אלף ₪", "xl": "יש, מעל 500 אלף ₪", "na": "לא יודע"}}, "income": {"q": "צפוי שינוי בהכנסה בשנים הקרובות?", "o": {"down": "כן, ירידה", "up": "כן, עלייה", "no": "לא צפוי", "na": "לא יודע"}}, "plan": {"q": "מתוכננים מכירה של הנכס או פירעון גדול?", "o": {"sell": "כן, מכירה", "repay": "כן, פירעון גדול", "no": "לא", "na": "עוד לא יודע"}}, "strain": {"q": "יש קושי בתשלומים היום?", "o": {"late": "כן, כבר קשה לשלם בזמן", "tight": "יש לחץ, אבל משלמים", "no": "לא", "skip": "מעדיף לא לענות"}}}
 ;
-const PRODUCTS = { LP1: { name: 'מחזור משכנתא', labels: LABELS } };
+const PRODUCTS = { LP1: { name: 'מחזור משכנתא', campaign: 'refi', labels: LABELS } };
 const MONEY = ['bal','pay','loans','income','strain'];
 const W = { intent:{info:0,check:25,call:40,meet:40}, timing:{none:0,later:10,month:15,week:25}, action:{none:0,received:10,meeting:25}, docs:{help:3,what:3,old:3,have:6,received:10} };
 const band = n => n>=85?'רותח':n>=70?'חם מאוד':n>=40?'חם':'מתעניין';
@@ -30,6 +30,7 @@ if (typeof b !== 'object' || Array.isArray(b)) return fail('bad_body');
 if (b.website) return fail('rejected');
 const product = String(b.product || ((String(b.source||'').match(/LP\d+/i)||[''])[0])).toUpperCase();
 const P = PRODUCTS[product]; if (!P) return fail('unknown_product');
+if (b.campaign !== undefined && b.campaign !== P.campaign) return fail('unknown_campaign');
 // This public form endpoint cannot attest that an inbound WhatsApp message exists.
 const channel = 'טופס';
 const name = String(b.first_name||'').trim().replace(/\s+/g,' ');
@@ -62,18 +63,37 @@ for (const [k,v] of Object.entries(answers)) {
   if (b.money_included !== true && MONEY.includes(k)) continue;
   clean[k] = Array.isArray(v) ? v.slice(0,6) : v;
 }
-// rate limit per IP and idempotency, kept in workflow static data
+// Bind a replay to the normalized submission, not just its user-supplied key.
+// Client timestamps change on an unchanged browser retry, so preserve the first
+// saved receipt rather than including those timestamps in the comparison.
+// No runtime-specific crypto/module availability is assumed. This exact binding
+// contains normalized contact/answers in internal workflow state. Receipts are
+// eligible for replay for 48 hours and are pruned lazily on a later validation;
+// this is not a timed deletion guarantee. Do not export workflow static data.
+const replayBinding = JSON.stringify({version:1,product,campaign:P.campaign,purpose:'callback',name,phone,email:email||null,
+  answers:Object.fromEntries(Object.keys(P.labels).filter(k=>Object.hasOwn(clean,k)).map(k=>[k,clean[k]])),
+  money_included:b.money_included===true,service_request:true,marketing_consent:b.marketing_consent===true,
+  marketing_channels:contactPermissions ? contactPermissions.grants : null});
+// Rate limit per IP and replay receipts are kept in workflow static data.
+// This cache is not an atomic claim across concurrent executions or workers.
 const sd = $getWorkflowStaticData('global'); const now = Date.now();
 sd.idem = sd.idem || {}; sd.ipHits2 = sd.ipHits2 || {};
-for (const [k,v] of Object.entries(sd.idem)) if (now - v.t > 48*3600e3) delete sd.idem[k];
+if (typeof sd.idem!=='object' || Array.isArray(sd.idem)) return fail('idempotency_store_invalid',503);
+for (const [k,v] of Object.entries(sd.idem)) if (v && Number.isFinite(v.t) && now - v.t > 48*3600e3) delete sd.idem[k];
 for (const [k,v] of Object.entries(sd.ipHits2)) { sd.ipHits2[k] = v.filter(t => now - t < 3600e3); if (!sd.ipHits2[k].length) delete sd.ipHits2[k]; }
-if (sd.idem[key] && sd.idem[key].id) return [{ json: { ok:true, duplicate:true, request_id: sd.idem[key].id } }];
+if (Object.hasOwn(sd.idem,key)) {
+  const prior=sd.idem[key];
+  if (!prior || Array.isArray(prior) || prior.binding_version!==1 || typeof prior.binding!=='string' ||
+      typeof prior.id!=='string' || !/^[1-9]\d*$/.test(prior.id) || !Number.isFinite(prior.t) || prior.t>now) return fail('idempotency_unverified',409);
+  if (prior.binding!==replayBinding) return fail('idempotency_conflict',409);
+  return [{ json: { ok:true, duplicate:true, request_id: prior.id } }];
+}
 if (ip) { const h = sd.ipHits2[ip] || []; if (h.length >= 20) return fail('rate_limited', 429); h.push(now); sd.ipHits2[ip] = h; }
 const first = v => Array.isArray(v) ? v[0] : v;
 const lab = (q, v) => v==null ? null : (Array.isArray(v) ? v : [v]).map(x => P.labels[q].o[x]).join(', ');
 const score = scoreLead({ ask:first(clean.ask), when:first(clean.when), doc:first(clean.doc), loans:first(clean.loans), strain:first(clean.strain), income:first(clean.income), has:first(clean.has), messageReceived: channel==='וואטסאפ', requestedRecently:true }, new Date());
 const readable = Object.keys(P.labels).filter(q => clean[q]!=null).map(q => `${P.labels[q].q} ${lab(q, clean[q])}`).join('\n');
-return [{ json: { ok:true, duplicate:false, key, product, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),
+return [{ json: { ok:true, duplicate:false, key, replay_binding:replayBinding, product, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),
   answers: clean, goalNames: (Array.isArray(clean.goal)?clean.goal:(clean.goal?[clean.goal]:[])).map(x=>P.labels.goal.o[x]), labels: Object.fromEntries(Object.keys(clean).map(q=>[q, lab(q, clean[q])])), readable,
   money_included: b.money_included===true, service_request_at: b.service_request_at || new Date().toISOString(),
   email:email||null, contact_permissions:contactPermissions,

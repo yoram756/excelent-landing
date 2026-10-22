@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-22",
+  "repository": "yoram756/excelent-landing",
+  "pr": 2,
+  "base_head": "95b633e99e2ee51656e87c3f41a0771d136aadce",
+  "scope": "Source fixes and local isolated verification; no live deployment or outbound messages",
+  "local_tests": {
+    "node": "v24.2.0",
+    "funnel": {
+      "passed": 264,
+      "failed": 0
+    },
+    "site": {
+      "passed": 55,
+      "failed": 0,
+      "upstream": "local mocked API"
+    },
+    "deploy": {
+      "passed": 2,
+      "failed": 0,
+      "nginx": "1.24.0",
+      "upstream": "controlled loopback HTTP; no external POSTs"
+    },
+    "focused_after": {
+      "passed": 36,
+      "failed": 0
+    },
+    "focused_before": {
+      "passed": 17,
+      "failed": 3,
+      "scope": "Earlier 20-case regression set against original source; not same size as final focused suite"
+    }
+  },
+  "read_only_live_observations": {
+    "public_page": {
+      "url": "https://refi.excelentfinance.com/",
+      "method": "GET",
+      "status": 200,
+      "sha256": "64644ae0bad0c265d6a2b930567dd10c39cf4c87e013c929ee41eec1f3de7a5b"
+    },
+    "public_script": {
+      "url": "https://refi.excelentfinance.com/assets/v2.js",
+      "method": "GET",
+      "status": 200,
+      "sha256": "0f4ce08be9ae18538c0cf3aa85b54efd8ec232137a877999ae0a87697f213529",
+      "matches_checkout": true
+    },
+    "api_head": {
+      "public_status": 403,
+      "staging_status": 403,
+      "proves_post_intake": false
+    },
+    "monday_test_board": {
+      "id": "5106403803",
+      "state": "active",
+      "kind": "private",
+      "items_count": 0,
+      "workflows": 0,
+      "legacy_automations": 0,
+      "writes_this_run": 0
+    },
+    "n8n": {
+      "inspection": "blocked_at_signin",
+      "error": "Wrong username or password",
+      "runtime_workflows_read": false
+    }
+  },
+  "remaining_gates": [
+    "Inspect deployed server config and version",
+    "Authenticate to n8n and read published workflow and execution data",
+    "Establish isolated staging backend before any staging POST",
+    "Prove one controlled request across source, proxy, workflow, saved CRM fields and acknowledgement",
+    "Verify durable concurrent deduplication and operational field readback before commercial acceptance"
+  ],
+  "files": {
+    "intake-replay-before.txt": {
+      "sha256": "ba976801be1ee69ee33832669bc2446a59c730c0dbce58a0a633f612225702bb"
+    },
+    "intake-replay-after.txt": {
+      "sha256": "ede3754ab3010304543506183fbc75dfb1c345bccdd4306e55b577440314fb34"
+    },
+    "stage6-funnel-tests.txt": {
+      "sha256": "0004405e87eb380f340f98318d9075155732f5e5155fa6fdecb12addbae601cf"
+    },
+    "stage6-site-tests.txt": {
+      "sha256": "f448708a78247482f885db553998a0fc669bb07add0adeda185491719585563d"
+    },
+    "stage6-proxy-tests.txt": {
+      "sha256": "54f8e916cf3a0e1740ded9f9fa20da998839c9d51c3bf5826c35fd8a4739811f"
+    }
+  }
+}

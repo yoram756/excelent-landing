@@ -1,0 +1,93 @@
+✔ form source cannot impersonate a received WhatsApp message (14.488545ms)
+✔ money requires explicit boolean consent and marketing is independent (3.110079ms)
+✔ invalid dates and inherited answer names are rejected (1.752119ms)
+✔ same idempotency key returns the saved id, not a new create (1.343474ms)
+✔ Monday lookup failure cannot fall back to create (9.382514ms)
+✔ partial GraphQL save failure never returns success (2.572284ms)
+✔ phone lookup declares the required non-null list and sends one unformatted number (3.045465ms)
+✔ partial lookup cannot create and a normalized exact phone updates the existing item (2.104362ms)
+✔ channel receipt binds choices to recipient and server receipt time (2.150011ms)
+✔ email-only consent cannot authorize WhatsApp or SMS (2.143421ms)
+✔ empty choices preserve callback request without marketing permission (2.153907ms)
+✔ legacy generic consent never invents channel-specific proof (0.878839ms)
+✔ invalid or contradictory channel payloads are rejected (4.241116ms)
+✔ invalid email and header injection are rejected; optional email stays optional (2.382073ms)
+✔ modern consent and email persist in the mutation and clear prior WhatsApp opt-in (2.40615ms)
+✖ replayed key cannot acknowledge a different recipient (5.048098ms)
+✖ replayed key cannot silently discard changed request or consent (6.043905ms)
+✔ bound replay accepts normalized identity and reordered fields despite regenerated timestamps (1.201782ms)
+✖ legacy unbound receipt never acknowledges a request or creates a replacement (0.558968ms)
+✔ failed Monday save does not create a replay receipt (1.186311ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 17
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 484.290066
+
+✖ failing tests:
+
+test at tests/funnel/intake.test.js:51:1
+✖ replayed key cannot acknowledge a different recipient (5.048098ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/scratch/6a24effd5775/excelent-landing/tests/funnel/intake.test.js:54:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/funnel/intake.test.js:57:1
+✖ replayed key cannot silently discard changed request or consent (6.043905ms)
+  AssertionError [ERR_ASSERTION]: {"first_name":"TEST אחר"}
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/scratch/6a24effd5775/excelent-landing/tests/funnel/intake.test.js:62:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/funnel/intake.test.js:71:1
+✖ legacy unbound receipt never acknowledges a request or creates a replacement (0.558968ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (/workspace/scratch/6a24effd5775/excelent-landing/tests/funnel/intake.test.js:73:38)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
