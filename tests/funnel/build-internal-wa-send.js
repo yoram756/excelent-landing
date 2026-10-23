@@ -17,4 +17,4 @@ http('Read exact test message status','GET',`={{ 'https://api.gambot.co.il/api/v
 for(let i=0;i<nodes.length-1;i++)connections[nodes[i].name]={main:[[{node:nodes[i+1].name,type:'main',index:0}]]};
 const w={name:'TEST LP1 WA SEND ONCE internal 0502234052 ONLY 20261020',nodes,connections,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},pinData:{}};
 if(nodes.some(n=>/webhook|scheduleTrigger|monday/i.test(n.type))||nodes.filter(n=>n.parameters.method==='POST').length!==1)throw Error('Unexpected live surface');
-const out=path.join(__dirname,'../../automation/funnel/dist/internal-wa-send-once.json');fs.writeFileSync(out,JSON.stringify(w,null,2)+'\n');console.log(out);
+const out=path.join(__dirname,'../../src/services/funnel/dist/internal-wa-send-once.json');fs.writeFileSync(out,JSON.stringify(w,null,2)+'\n');console.log(out);

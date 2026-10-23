@@ -1,4 +1,4 @@
-const test=require('node:test'),assert=require('node:assert/strict'),{calculate}=require('../../automation/lifecycle/campaign-metrics');
+const test=require('node:test'),assert=require('node:assert/strict'),{calculate}=require('../../src/services/lifecycle/campaign-metrics');
 const window={from:'2026-10-20T07:00:00Z',until:'2026-10-21T07:00:00Z',timezone:'America/Los_Angeles'},accountId='287081049104797',campaignId='120252891592490603';
 const spend=()=>({accountId,campaignId,currency:'ILS',amountMinor:10000,window,observedAt:'2026-10-21T08:00:00Z',periodComplete:true,result:{name:'messaging_conversation_started',count:10}});
 const lead=(id,qualification='qualified')=>({id,enteredAt:'2026-10-20T08:00:00Z',attributionVerified:true,qualification,...(qualification==='unknown'?{}:{qualificationRecordedAt:'2026-10-21T07:30:00Z'})});

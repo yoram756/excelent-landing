@@ -16,5 +16,5 @@ const mutations={
  metrics_attribution:['campaign-metrics.js',"else if(inside.some(row=>!row.attributionVerified))reason='attribution_incomplete';",'']
 };
 if(!Object.hasOwn(mutations,process.env.ATOMIC_MUTATION||''))throw Error('Explicit known test mutation required');
-const [file,before,after]=mutations[process.env.ATOMIC_MUTATION],target=path.resolve(__dirname,'../../automation/lifecycle',file);
+const [file,before,after]=mutations[process.env.ATOMIC_MUTATION],target=path.resolve(__dirname,'../../src/services/lifecycle',file);
 Module._extensions['.js']=function(module,filename){if(filename!==target)return original(module,filename);const source=fs.readFileSync(filename,'utf8');if(!source.includes(before))throw Error('Mutation target changed');module._compile(source.replace(before,after),filename);};

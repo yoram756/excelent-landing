@@ -6,8 +6,8 @@ const S=JSON.parse(read('tests/funnel/sandbox-columns.json')),M=S.columns,B=S.bo
 if(B===S.productionBoardForbidden||B!=='5106403803')throw Error('Unexpected sandbox target');
 const remap=s=>Object.entries(M).reduce((s,[a,b])=>s.split(a).join(b),s).split(S.productionBoardForbidden).join(B);
 const cfg=read('campaigns/refi.json'),biz=read('config/business.json');
-const planner=read('automation/funnel/plan.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
-const calendar=read('automation/funnel/calendly.js').replace('__CONFIG__',cfg);
+const planner=read('src/services/funnel/plan.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
+const calendar=read('src/services/funnel/calendly.js').replace('__CONFIG__',cfg);
 const pre=`const M=${JSON.stringify(M)},B='${B}';
 const back=Object.fromEntries(Object.entries(M).map(([a,b])=>[b,a]));
 const input=$input.first().json;
@@ -45,12 +45,12 @@ cv[c.fn_opens]={text:'{}'};cv[c.boolean_mm88mzry]={checked:false};cv[c.boolean_m
 return [{json:{query:'mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v){id}}',variables:{b:'${B}',i:it.id,v:JSON.stringify(cv)}}}];`);
 http('Reset retained synthetic fixture',dynamic);
 code('Restore fixture input',`const r=$input.first().json;if(r.errors?.length)throw new Error('Fixture reset failed');return [{json:$('Guard sandbox ownership').first().json}];`);
-code('Validate',read('automation/intake/validate.js'));
-code('Find query',remap(read('automation/intake/find-query.js')));
+code('Validate',read('src/webhooks/intake/validate.js'));
+code('Find query',remap(read('src/webhooks/intake/find-query.js')));
 http('Find by phone',dynamic);
-code('Build mutation',remap(read('automation/intake/build-mutation.js')));
+code('Build mutation',remap(read('src/webhooks/intake/build-mutation.js')));
 http('Save to Monday sandbox',dynamic);
-code('Check save',read('automation/intake/check-save.js'));
+code('Check save',read('src/webhooks/intake/check-save.js'));
 readback('Read intake');
 code('Verify intake and simulate send',pre+`
 assert([true,'true'].includes(JSON.parse(cv.boolean_mm8848pn.value).checked),'Service consent readback');
@@ -58,7 +58,7 @@ assert(!cv.boolean_mm88mzry.value||![true,'true'].includes(JSON.parse(cv.boolean
 assert(cv.refi_source.text==='קליטת LP1','LP1 source');
 assert(plan().every(p=>!p.send),'Service-only lead must not get marketing');
 const [p]=plan({boolean_mm88mzry:{checked:true}});assert(p?.send&&!p.live,'Simulated outbound plan');
-function after($,$json){${read('automation/funnel/after-send.js')}}
+function after($,$json){${read('src/services/funnel/after-send.js')}}
 const a=after(()=>({item:{json:p}}),{success:true,simulated:true}).json;
 assert(a.sendOk&&a.simulated,'Mock provider acknowledgment');
 return mutation({...JSON.parse(a.colsJson),boolean_mm88mzry:{checked:true}});`);
@@ -72,7 +72,7 @@ http('Apply optout',dynamic);
 readback('Read optout');
 code('Match bookings',pre+`assert(cv.fn_status.text==='הסר'&&!JSON.parse(cv.fn_next.value||'null')?.date,'Optout readback');const [p]=Calendar(n=>({first:()=>({json:n==='Run test'?{body:{id:'sandbox-book',subject:'New Event: TEST',text:mail}}:{data:{boards:[{items_page:{items:[canonical]}}]}}}),all:()=>[]}),()=>({})).map(x=>x.json);assert(p?.matched&&p.itemId===lead.id,'Booking match');return mutation(JSON.parse(p.colsJson));`);
 http('Apply mock booking',dynamic);
-add('Acknowledge mock booking','code',{mode:'runOnceForEachItem',jsCode:`function acknowledge($json,$,$getWorkflowStaticData){${read('automation/funnel/calendly-ack.js')}}
+add('Acknowledge mock booking','code',{mode:'runOnceForEachItem',jsCode:`function acknowledge($json,$,$getWorkflowStaticData){${read('src/services/funnel/calendly-ack.js')}}
 return acknowledge($json,()=>({item:{json:{itemId:$('Check save').first().json.request_id,mailId:'sandbox-booking-ack-'+$('Check save').first().json.request_id}}}),$getWorkflowStaticData);`});
 readback('Read booking');
 code('Match cancellation',pre+`assert(cv.refi_stage.text==='פגישה נקבעה'&&JSON.parse(cv.refi_meeting.value).time==='15:00:00','Booking readback timezone');const [p]=Calendar(n=>({first:()=>({json:n==='Run test'?{body:{id:'sandbox-cancel',subject:'Canceled: TEST',text:mail}}:{data:{boards:[{items_page:{items:[canonical]}}]}}}),all:()=>[]}),()=>({})).map(x=>x.json);assert(p?.matched,'Cancellation match');return mutation(JSON.parse(p.colsJson));`);
@@ -90,5 +90,5 @@ code('Confirm archive',`const r=$input.first().json;if(r.errors?.length||r.data?
 for(let i=0;i<nodes.length-1;i++)connections[nodes[i].name]={main:[[{node:nodes[i+1].name,type:'main',index:0}]]};
 for(const n of nodes){let s=n.parameters.jsonBody;if(s?.startsWith('={{')){let inner=s.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const w={name:'TEST LP1 private Monday journey 20261020 NO MESSAGES',active:false,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes,connections};
-fs.writeFileSync(path.join(root,'automation/funnel/dist/sandbox-journey.json'),JSON.stringify(w,null,2));
+fs.writeFileSync(path.join(root,'src/services/funnel/dist/sandbox-journey.json'),JSON.stringify(w,null,2));
 console.log('Built manual private-board journey:',nodes.length,'nodes; no outbound providers');

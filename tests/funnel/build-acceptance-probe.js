@@ -2,17 +2,17 @@
 const fs=require('fs'),path=require('path');
 const root=path.resolve(__dirname,'../..'),read=n=>fs.readFileSync(path.join(root,n),'utf8');
 const cfg=read('campaigns/refi.json'),biz=read('config/business.json');
-const src=n=>read('automation/funnel/'+n+'.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
+const src=n=>read('src/services/funnel/'+n+'.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
 const suite=read('tests/funnel/acceptance.test.js').split('\n').slice(2).join('\n');
 const slaPolicy=JSON.parse(read('config/lead-service.json'));
-const slaSource=read('automation/intake/pick-overdue.js').replace('__SERVICE__',JSON.stringify(slaPolicy)).replace('__QUIZ_PATTERN__',JSON.stringify(JSON.parse(cfg).quizDonePattern));
+const slaSource=read('src/webhooks/intake/pick-overdue.js').replace('__SERVICE__',JSON.stringify(slaPolicy)).replace('__QUIZ_PATTERN__',JSON.stringify(JSON.parse(cfg).quizDonePattern));
 const slaSuite=read('tests/funnel/sla.test.js').split('\n').slice(4).join('\n');
 const js=`function Plan($){${src('plan')}}
 function Calendar($,$getWorkflowStaticData){${src('calendly')}}
 function Sent($,$json){${src('after-send')}}
-function Validate($input,$getWorkflowStaticData){${read('automation/intake/validate.js')}}
-function Build($input,$,$getWorkflowStaticData){${read('automation/intake/build-mutation.js')}}
-function CheckSave($input,$,$getWorkflowStaticData){${read('automation/intake/check-save.js')}}
+function Validate($input,$getWorkflowStaticData){${read('src/webhooks/intake/validate.js')}}
+function Build($input,$,$getWorkflowStaticData){${read('src/webhooks/intake/build-mutation.js')}}
+function CheckSave($input,$,$getWorkflowStaticData){${read('src/webhooks/intake/check-save.js')}}
 const results=[];
 const assert={equal:(a,b,m)=>{if(a!==b)throw new Error(m||JSON.stringify({a,b}));},deepEqual:(a,b)=>{if(JSON.stringify(a)!==JSON.stringify(b))throw new Error(JSON.stringify({a,b}));},ok:(a,m)=>{if(!a)throw new Error(m||'Expected truthy');},throws:(f,re)=>{let error;try{f();}catch(e){error=e;}if(!error||!re.test(error.message))throw new Error('Expected matching failure');}};
 const test=(name,f)=>{try{f();results.push({name,status:'PASS'});}catch(e){results.push({name,status:'FAIL',error:e.message});}};
@@ -38,7 +38,7 @@ test('S7 human handling and first reply stop automatic sends',()=>{for(const ext
 test('S8 simulated paid stage becomes client and clears next send',()=>{const [r]=planner()({items:[item({cols:{...active,refi_stage:'לקוח משלם'}})],now:NOW});assert.equal(r.cols.fn_status.label,'לקוח');assert.deepEqual(r.cols.fn_next,{});assert.equal(r.send,null);});
 test('Safety: real-looking non-TEST item is excluded',()=>assert.equal(planner()({items:[item({name:'Synthetic but not TEST',cols:active})],now:NOW}).length,0));
 const policy=${JSON.stringify(slaPolicy)};
-const source=${JSON.stringify(slaSource)},ack=${JSON.stringify(read('automation/intake/ack-reminder.js'))};
+const source=${JSON.stringify(slaSource)},ack=${JSON.stringify(read('src/webhooks/intake/ack-reminder.js'))};
 ${slaSuite}
 const passed=results.every(r=>r.status==='PASS');
 if(!passed)throw new Error(JSON.stringify(results.filter(r=>r.status==='FAIL')));
@@ -47,5 +47,5 @@ const names=['Manual only','Synthetic token IDs','Secure tokens','Acceptance NO 
 const nodes=[{name:names[0],type:'manualTrigger',parameters:{}},{name:names[1],type:'code',parameters:{jsCode:"return Array.from({length:3},(_,i)=>({json:{itemId:String(i+1)}}));"}},{name:names[2],type:'crypto',parameters:{action:'generate',dataPropertyName:'secureToken',encodingType:'hex',stringLength:32}},{name:names[3],type:'code',parameters:{jsCode:js}}].map((n,i)=>({...n,id:'acceptance-'+i,type:'n8n-nodes-base.'+n.type,typeVersion:n.type==='code'?2:1,position:[i*260,0]}));
 const connections={};names.slice(0,-1).forEach((n,i)=>connections[n]={main:[[{node:names[i+1],type:'main',index:0}]]});
 const w={name:'TEST LP1 eight scenarios acceptance 20261020 NO NETWORK',active:false,settings:{executionOrder:'v1'},nodes,connections};
-fs.writeFileSync(path.join(root,'automation/funnel/dist/acceptance-probe.json'),JSON.stringify(w,null,2));
+fs.writeFileSync(path.join(root,'src/services/funnel/dist/acceptance-probe.json'),JSON.stringify(w,null,2));
 if(require.main===module){const rows=Array.from({length:3},(_,i)=>({json:{itemId:String(i+1),secureToken:require('crypto').randomBytes(16).toString('hex')}}));const result=new Function('$input',js)({all:()=>rows})[0].json;console.log(JSON.stringify(result,null,2));}

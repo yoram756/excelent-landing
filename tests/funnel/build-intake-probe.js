@@ -1,7 +1,7 @@
 // Manual integration probe: exactly one synthetic lead, no alert nodes, archive on success.
 const fs=require('fs'),path=require('path');
 const root=path.resolve(__dirname,'../..');
-const read=n=>fs.readFileSync(path.join(root,'automation/intake',n+'.js'),'utf8').replace(/\r\n/g,'\n');
+const read=n=>fs.readFileSync(path.join(root,'src/webhooks/intake',n+'.js'),'utf8').replace(/\r\n/g,'\n');
 const nodes=[],connections={};
 const add=(name,type,parameters,extra={})=>nodes.push({id:'intake-probe-'+nodes.length,name,type,typeVersion:type==='n8n-nodes-base.httpRequest'?4.2:type==='n8n-nodes-base.code'?2:1,position:[nodes.length*220,0],parameters,...extra});
 const code=(name,js)=>add(name,'n8n-nodes-base.code',{jsCode:js});
@@ -29,5 +29,5 @@ http('Archive synthetic lead','={{ JSON.stringify({query:"mutation($id:ID!){arch
 code('Result',`const r=$input.first().json;const proof=$('Verify and deduplicate').first().json;if(r.errors?.length||r.data?.archive_item?.id!==proof.itemId)throw new Error('Test lead archive not confirmed');return [{json:{...proof,archived:true,scope:'manual n8n validation to Monday save/readback/idempotency/archive; no messages or schedules'}}];`);
 for(let i=0;i<nodes.length-1;i++)connections[nodes[i].name]={main:[[{node:nodes[i+1].name,type:'main',index:0}]]};
 for(const node of nodes){const body=node.parameters.jsonBody;if(typeof body==='string'&&body.startsWith('={{'))node.parameters.jsonBody='={{'+body.slice(3,-2).replace(/\}\}/g,'} }')+'}}';}
-fs.writeFileSync(path.join(root,'automation/funnel/dist/intake-probe.json'),JSON.stringify({name:'TEST LP1 isolated intake 20261020 NO MESSAGES',active:false,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes,connections},null,2));
+fs.writeFileSync(path.join(root,'src/services/funnel/dist/intake-probe.json'),JSON.stringify({name:'TEST LP1 isolated intake 20261020 NO MESSAGES',active:false,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes,connections},null,2));
 console.log('Built manual-only isolated intake probe');

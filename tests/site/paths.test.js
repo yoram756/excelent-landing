@@ -131,7 +131,7 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   ok('email address is submitted',req?.email==='test@example.invalid');ok('email-only consent remains separate',req?.marketing_channels?.join(',')==='email'&&req?.marketing_consent===false);
   ok('email-only callback is saved',(await p.locator('#fStatus').getAttribute('data-state'))==='success');await b.close();}
  // Isolated feedback view: responsive layout, voluntary fields and accessibility.
- {const {b,p}=await open(390,844);await p.setContent(require('../../automation/lifecycle/feedback-page').render({csrf:'synthetic-csrf'}));
+ {const {b,p}=await open(390,844);await p.setContent(require('../../src/services/lifecycle/feedback-page').render({csrf:'synthetic-csrf'}));
   ok('feedback mobile has no horizontal overflow',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
   ok('feedback answers are all optional',await p.locator('select,textarea').count()===5&&await p.locator('[required]').count()===0);
   ok('feedback removal does not require questionnaire',await p.locator('form').first().locator('select,textarea').count()===0);

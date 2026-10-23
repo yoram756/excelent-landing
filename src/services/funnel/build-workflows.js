@@ -1,18 +1,18 @@
 // Builds the n8n workflow JSON files from the Code node sources in this folder.
-// Usage: node automation/funnel/build-workflows.js <test|live>
+// Usage: node src/services/funnel/build-workflows.js <test|live>
 // The test webhook paths are placeholders (__TEST_PATH__) filled in at deploy time, so no secret lands in git.
 const fs=require('fs');const path=require('path');const crypto=require('crypto');
 // Usage: build-workflows.js test | pilot <go-live ISO> <phone,phone> | live <go-live ISO>   (env CAMPAIGN=<id>, default refi)
 const CAMPAIGN=process.env.CAMPAIGN||'refi';
-const CFG=JSON.parse(fs.readFileSync(path.join(__dirname,'../../campaigns',CAMPAIGN+'.json'),'utf8'));
+const CFG=JSON.parse(fs.readFileSync(path.join(__dirname,'../../../campaigns',CAMPAIGN+'.json'),'utf8'));
 const CFGS=JSON.stringify(CFG);
-const BIZS=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8').replace(/\r\n/g,'\n');
+const BIZS=fs.readFileSync(path.join(__dirname,'../../../config/business.json'),'utf8').replace(/\r\n/g,'\n');
 const MODE=process.argv[2]||'test';if(!['test','pilot','live'].includes(MODE))throw new Error('mode must be test, pilot or live');
 const GO_LIVE=process.argv[3]||'2026-10-20T07:00:00Z';
 const PILOT=MODE==='pilot'?(process.argv[4]||''):'';
 if(MODE==='pilot'&&!/^972\d{9}(,972\d{9})*$/.test(PILOT))throw new Error('pilot needs internal phones like 9725XXXXXXXX');
 // identity gate: every campaign declares its own approved identity; nothing is inherited from another campaign
-const BIZ0=JSON.parse(fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8'));
+const BIZ0=JSON.parse(fs.readFileSync(path.join(__dirname,'../../../config/business.json'),'utf8'));
 const ID=CFG.identity;
 if(!ID)throw new Error('campaign '+CFG.id+' has no identity block');
 if(MODE!=='test'){

@@ -1,7 +1,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs');
 const policy=require('../../config/lead-service.json'),cfg=require('../../campaigns/refi.json');
-const source=fs.readFileSync(__dirname+'/../../automation/intake/pick-overdue.js','utf8').replace('__SERVICE__',JSON.stringify(policy)).replace('__QUIZ_PATTERN__',JSON.stringify(cfg.quizDonePattern));
-const ack=fs.readFileSync(__dirname+'/../../automation/intake/ack-reminder.js','utf8');
+const source=fs.readFileSync(__dirname+'/../../src/webhooks/intake/pick-overdue.js','utf8').replace('__SERVICE__',JSON.stringify(policy)).replace('__QUIZ_PATTERN__',JSON.stringify(cfg.quizDonePattern));
+const ack=fs.readFileSync(__dirname+'/../../src/webhooks/intake/ack-reminder.js','utf8');
 const lead=(created,extra={})=>({id:'1',name:'TEST SLA',created_at:created,column_values:Object.entries({refi_source:'קליטת LP1',refi_stage:'ליד חדש',...extra}).map(([id,v])=>({id,text:typeof v==='string'?v:'',value:typeof v==='string'?null:JSON.stringify(v)}))});
 function run(now,items,store={},override){const date=class extends Date{constructor(...a){super(...(a.length?a:[now]));}static now(){return Date.parse(now);}};return new Function('$input','$getWorkflowStaticData','Date',source)({first:()=>({json:override||{data:{boards:[{groups:[{items_page:{items,cursor:null}}]}]}}})},()=>store,date).map(x=>x.json);}
 const quiz={long_text_mm88xzfe:'יש לכם דוח יתרות לסילוק עדכני? לא בטוח מה זה'};

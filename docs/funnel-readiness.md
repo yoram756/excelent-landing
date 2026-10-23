@@ -6,7 +6,7 @@
 
 ## איפה הכול נמצא
 
-1. הקוד: automation/funnel. בתיקייה plan.js (מנוע ההודעות), after-send.js (טיפול בכשל שליחה), go.js (קישורים אישיים), calendly.js (פגישות), ו build-workflows.js שמייצר את קובצי ה JSON של n8n.
+1. הקוד: src/services/funnel. בתיקייה plan.js (מנוע ההודעות), after-send.js (טיפול בכשל שליחה), go.js (קישורים אישיים), calendly.js (פגישות), ו build-workflows.js שמייצר את קובצי ה JSON של n8n.
 2. הבדיקות: tests/funnel עם 41 בדיקות node:test, ו tests/site עם 43 בדיקות דפדפן ונגישות. מריצים עם npm test.
 3. תהליכים ב n8n:
    ZnIureJBIqYN52Zw: המנוע, במצב בדיקה וכבוי.
@@ -17,7 +17,7 @@
 ## המעבר לייצור (רק אחרי אישור של יורם)
 
 1. מריצים
-   node automation/funnel/build-workflows.js live 2026-MM-DDTHH:MMZ
+   node src/services/funnel/build-workflows.js live 2026-MM-DDTHH:MMZ
    כאשר הפרמטר השני הוא מועד ההפעלה, וממנו נקבע אילו לידים נכנסים למשפך. ליד שנוצר לפני המועד הזה לא מקבל הודעות.
 2. מעדכנים את התהליך ZnIureJBIqYN52Zw לפי dist/engine-live.json ומפעילים אותו.
 3. מעדכנים את wEYSZMNU2JqeEoGZ לפי dist/calendly.json, הפעם כולל סריקת המייל, ומפעילים אותו.

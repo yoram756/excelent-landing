@@ -1,6 +1,6 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
-const {adapt}=require('../../automation/lifecycle/lp1-adapter'),{Store}=require('../../automation/lifecycle/store'),campaign=require('../../config/lifecycle/refi.json');
-const source=fs.readFileSync(path.resolve(__dirname,'../../automation/intake/validate.js'),'utf8');
+const {adapt}=require('../../src/services/lifecycle/lp1-adapter'),{Store}=require('../../src/services/lifecycle/store'),campaign=require('../../config/lifecycle/refi.json');
+const source=fs.readFileSync(path.resolve(__dirname,'../../src/webhooks/intake/validate.js'),'utf8');
 const body={product:'LP1',first_name:'TEST חיבור מקומי',phone:'0500000040',email:'test@example.invalid',idempotency_key:'test-lp1-adapter-001',service_request:true,marketing_consent:false,marketing_channels:['email'],answers:{ask:'call',when:'week'}};
 function validate(b=body){return new Function('$input','$getWorkflowStaticData',source)({first:()=>({json:{body:b,headers:{}}})},()=>({}))[0].json;}
 const options=()=>({campaign,now:new Date().toISOString()});

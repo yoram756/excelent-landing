@@ -1,6 +1,6 @@
 // Developer preview with synthetic contacts only; no remote provider credentials.
 const {mkdirSync}=require('node:fs'),{join}=require('node:path'),{createServer}=require('node:http');
-const {Store}=require('./store'),{handler}=require('./feedback-http'),campaign=require('../../config/lifecycle/refi.json');
+const {Store}=require('./store'),{handler}=require('./feedback-http'),campaign=require('../../../config/lifecycle/refi.json');
 if(process.argv[2]!=='--sandbox')throw Error('Explicit --sandbox required; this is not a production service');
 const runtime=join(__dirname,'runtime');mkdirSync(runtime,{recursive:true});
 const store=new Store(join(runtime,'preview.sqlite'),{sandbox:true}),now=new Date().toISOString();

@@ -2,7 +2,7 @@ name: Funnel and landing quality gate
 on:
   pull_request:
     paths:
-      - 'automation/**'
+      - 'src/**'
       - 'campaigns/**'
       - 'config/**'
       - 'tests/**'

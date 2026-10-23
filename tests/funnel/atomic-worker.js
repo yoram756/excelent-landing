@@ -1,5 +1,5 @@
 // A separate OS process, sharing only the SQLite file with its competitors.
-const {Store}=require('../../automation/lifecycle/store');
+const {Store}=require('../../src/services/lifecycle/store');
 const [path,action,args]=process.argv.slice(2),store=new Store(path,{sandbox:true});
 try{
  const input=JSON.parse(args),result=store[action](input);

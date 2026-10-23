@@ -1,8 +1,9 @@
 node_modules/
+.env
 tests/out/
-automation/funnel/dist/engine-pilot.json
-automation/funnel/dist/engine-live.json
-automation/lifecycle/runtime/
+src/services/funnel/dist/engine-pilot.json
+src/services/funnel/dist/engine-live.json
+src/services/lifecycle/runtime/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm

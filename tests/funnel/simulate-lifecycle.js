@@ -1,6 +1,6 @@
 // Deterministic long-horizon simulation: no HTTP, credentials, timers or messages.
 const assert=require('node:assert/strict');
-const {plan,addMonths}=require('../../automation/lifecycle/policy');
+const {plan,addMonths}=require('../../src/services/lifecycle/policy');
 const refi=require('../../config/lifecycle/refi.json');
 const DAY=86400000,channels=['whatsapp','email','sms'];
 function simulate(){

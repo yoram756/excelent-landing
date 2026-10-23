@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),{createServer}=require('node:http');
-const {Store}=require('../../automation/lifecycle/store'),{handler}=require('../../automation/lifecycle/feedback-http'),{render}=require('../../automation/lifecycle/feedback-page'),config=require('../../config/lifecycle/refi.json');
+const {Store}=require('../../src/services/lifecycle/store'),{handler}=require('../../src/services/lifecycle/feedback-http'),{render}=require('../../src/services/lifecycle/feedback-page'),config=require('../../config/lifecycle/refi.json');
 const NOW='2026-10-20T09:00:00.000Z';
 async function fixture(t){
  const store=new Store(':memory:',{sandbox:true});let now=NOW;

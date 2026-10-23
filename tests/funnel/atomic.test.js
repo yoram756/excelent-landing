@@ -1,6 +1,6 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const {mkdtempSync,rmSync}=require('node:fs'),{tmpdir}=require('node:os'),{join}=require('node:path'),{spawn}=require('node:child_process');
-const {Store}=require('../../automation/lifecycle/store'),config=require('../../config/lifecycle/refi.json');
+const {Store}=require('../../src/services/lifecycle/store'),config=require('../../config/lifecycle/refi.json');
 const START='2026-10-18T09:00:00.000Z',DUE='2026-10-20T09:00:00.000Z',LATER='2026-10-20T09:02:00.000Z';
 const worker=join(__dirname,'atomic-worker.js');
 const receipt=(campaignId='refi',n=40)=>({version:'lifecycle-consent-v1',campaignId,receivedAt:START,recipients:{phone:'05000000'+String(n).padStart(2,'0'),email:'test'+n+'@example.invalid'},grants:{whatsapp:true,email:true,sms:true}});

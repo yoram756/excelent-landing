@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
-const root=process.env.INTAKE_SOURCE_ROOT||path.resolve(__dirname,'../../automation/intake');
+const root=process.env.INTAKE_SOURCE_ROOT||path.resolve(__dirname,'../../src/webhooks/intake');
 const read=n=>fs.readFileSync(path.join(root,n+'.js'),'utf8');
 const base={product:'LP1',first_name:'TEST פנימי',phone:'0500000040',idempotency_key:'test-intake-001',service_request:true,marketing_consent:false,answers:{ask:'check',when:'week'}};
 const validate=(b,store={})=>new Function('$input','$getWorkflowStaticData',read('validate'))({first:()=>({json:{body:b,headers:{}}})},()=>store)[0].json;

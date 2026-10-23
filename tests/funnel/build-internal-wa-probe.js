@@ -10,4 +10,4 @@ get('Approved templates','templates/2386590312169194');
 add('Evidence without messages','code',{jsCode:`const n=$('Connected numbers').first().json,w=$('Internal window only').first().json,t=$input.first().json;if(n.success!==true||w.success!==true||t.success!==true)throw Error('Read check failed');return [{json:{readOnly:true,at:new Date().toISOString(),numbers:n.data,internalWindow:w.data,templates:t.data,noMessageSent:true}}];`});
 for(let i=0;i<nodes.length-1;i++)connections[nodes[i].name]={main:[[{node:nodes[i+1].name,type:'main',index:0}]]};
 const result={name:'TEST LP1 WhatsApp internal READ ONLY 0502234052 20261020',nodes,connections,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},pinData:{}};
-const out=path.join(__dirname,'../../automation/funnel/dist/internal-wa-readonly.json');fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(result,null,2)+'\n');console.log(out);
+const out=path.join(__dirname,'../../src/services/funnel/dist/internal-wa-readonly.json');fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,JSON.stringify(result,null,2)+'\n');console.log(out);

@@ -1,6 +1,6 @@
 // Exercise the actual HTTP node's cursor pagination on the real board, read only.
 const fs=require('fs'),path=require('path');
-const dir=path.resolve(__dirname,'../../automation/funnel/dist');
+const dir=path.resolve(__dirname,'../../src/services/funnel/dist');
 const go=JSON.parse(fs.readFileSync(path.join(dir,'go.json'),'utf8'));
 const fetch=go.nodes.find(n=>n.name==='Fetch pages');
 fetch.parameters.jsonBody=fetch.parameters.jsonBody.replace(/limit:500/g,'limit:1');

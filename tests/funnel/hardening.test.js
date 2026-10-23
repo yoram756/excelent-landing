@@ -1,6 +1,6 @@
 const test=require('node:test');const assert=require('node:assert/strict');
 const fs=require('fs'),path=require('path');
-const root=process.env.HARDENING_SOURCE_ROOT||path.resolve(__dirname,'../../automation/funnel');
+const root=process.env.HARDENING_SOURCE_ROOT||path.resolve(__dirname,'../../src/services/funnel');
 const cfg=fs.readFileSync(path.resolve(__dirname,'../../campaigns/refi.json'),'utf8');
 const biz=fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8');
 const {item}=require('./load');

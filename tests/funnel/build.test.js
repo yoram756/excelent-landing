@@ -1,5 +1,5 @@
 const test=require('node:test');const assert=require('node:assert/strict');const {execFileSync}=require('child_process');const path=require('path');
-const D=path.resolve(__dirname,'../../automation/funnel');
+const D=path.resolve(__dirname,'../../src/services/funnel');
 execFileSync('node',[D+'/build-workflows.js','test']);
 const wfs=['engine-test','go','calendly'].map(f=>require(D+'/dist/'+f+'.json'));
 test('every connection points at an existing node',()=>{for(const w of wfs){const n=new Set(w.nodes.map(x=>x.name));for(const [a,c] of Object.entries(w.connections)){assert.ok(n.has(a),a);for(const br of c.main)for(const x of br)assert.ok(n.has(x.node),x.node);}}});

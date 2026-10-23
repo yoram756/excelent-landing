@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),os=require('node:os'),path=require('node:path');
-const {Store}=require('../../automation/lifecycle/store'),{backup,restore}=require('../../automation/lifecycle/backup'),campaign=require('../../config/lifecycle/refi.json');
+const {Store}=require('../../src/services/lifecycle/store'),{backup,restore}=require('../../src/services/lifecycle/backup'),campaign=require('../../config/lifecycle/refi.json');
 const START='2026-10-18T09:00:00.000Z',NOW='2026-10-20T09:00:00.000Z',AFTER='2026-10-20T09:02:00.000Z';
 const intake=(n=40)=>({eventId:'source-'+n,campaign,now:START,receipt:{version:'lifecycle-consent-v1',campaignId:'refi',receivedAt:START,recipients:{phone:'05000000'+n,email:'test'+n+'@example.invalid'},grants:{whatsapp:true,email:true,sms:true}}});
 function setup(t){const root=fs.mkdtempSync(path.join(os.tmpdir(),'excelent-recovery-')),source=path.join(root,'source.sqlite'),target=path.join(root,'snapshot.sqlite'),recovered=path.join(root,'recovered.sqlite'),s=new Store(source,{sandbox:true});const open=[s];t.after(()=>{for(const x of open)try{x.close();}catch{}fs.rmSync(root,{recursive:true,force:true});});return {root,source,target,recovered,s,open};}

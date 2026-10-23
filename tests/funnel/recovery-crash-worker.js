@@ -1,6 +1,6 @@
 // Test-only abrupt exit immediately after VACUUM completed, before quarantine.
 const {DatabaseSync}=require('node:sqlite'),path=require('node:path');
-const {Store}=require('../../automation/lifecycle/store'),{backup,restore}=require('../../automation/lifecycle/backup'),campaign=require('../../config/lifecycle/refi.json');
+const {Store}=require('../../src/services/lifecycle/store'),{backup,restore}=require('../../src/services/lifecycle/backup'),campaign=require('../../config/lifecycle/refi.json');
 const root=process.argv[2],s=new Store(path.join(root,'source.sqlite'),{sandbox:true}),now='2026-10-18T09:00:00.000Z';
 s.ingest({eventId:'crash-source',campaign,now,receipt:{version:'lifecycle-consent-v1',campaignId:'refi',receivedAt:now,recipients:{phone:'0500000040',email:null},grants:{whatsapp:false,email:false,sms:false}}});
 if(process.argv[3]==='restore'){

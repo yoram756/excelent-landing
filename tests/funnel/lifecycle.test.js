@@ -1,6 +1,6 @@
 const test=require('node:test'),assert=require('node:assert/strict');
-const {plan,addMonths}=require('../../automation/lifecycle/policy');
-const feedback=require('../../automation/lifecycle/feedback'),{summarize}=require('../../automation/lifecycle/insights');
+const {plan,addMonths}=require('../../src/services/lifecycle/policy');
+const feedback=require('../../src/services/lifecycle/feedback'),{summarize}=require('../../src/services/lifecycle/insights');
 const config=require('../../config/lifecycle/refi.json');
 const now='2026-10-20T09:00:00Z';
 const base=()=>({lead:{id:'synthetic-enrollment-1',enrolledAt:'2026-10-18T09:00:00Z',phone:'0500000040',email:'test@example.invalid',consent:{version:'lifecycle-consent-v1',campaignId:'refi',receivedAt:'2026-10-18T09:00:00Z',recipients:{phone:'972500000040',email:'test@example.invalid'},grants:{whatsapp:true,email:true,sms:true}}},campaign:config,ledger:{complete:true,subjectId:'synthetic-enrollment-1',entries:[]},now});

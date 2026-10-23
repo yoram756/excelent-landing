@@ -18,8 +18,8 @@ test('consolidation with an approved id would send its own first message',()=>{c
   const x=JSON.parse(JSON.stringify(c));x.id='_tmp_test';x.templates.A1.id='1111111111';fs.writeFileSync(tmp,JSON.stringify(x));
   try{const p=planner('test','2026-10-20T07:00:00Z','','_tmp_test');const [r]=p({items:[item({cols:base})],now:NOW});assert.equal(r.send.templateId,'1111111111');assert.equal(r.code,'A1');}finally{fs.unlinkSync(tmp);}});
 test('building a campaign does not touch the shared engine code and writes separate workflows',()=>{
-  execFileSync('node',[path.resolve(__dirname,'../../automation/funnel/build-workflows.js'),'test'],{env:{...process.env,CAMPAIGN:'consolidation'}});
-  const d=path.resolve(__dirname,'../../automation/funnel/dist/consolidation');const w=require(d+'/engine-test.json');
+  execFileSync('node',[path.resolve(__dirname,'../../src/services/funnel/build-workflows.js'),'test'],{env:{...process.env,CAMPAIGN:'consolidation'}});
+  const d=path.resolve(__dirname,'../../src/services/funnel/dist/consolidation');const w=require(d+'/engine-test.json');
   assert.ok(w.name.includes('איחוד הלוואות'));const code=w.nodes.find(n=>n.name==='Plan').parameters.jsCode;assert.ok(code.includes('"id":"consolidation"'));
   assert.equal(require(d+'/go.json').nodes.find(n=>n.name==='Link').parameters.path,'go-consolidation');});
 

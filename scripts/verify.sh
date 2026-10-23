@@ -8,7 +8,7 @@ changed=$( { git status --porcelain -uall 2>/dev/null | awk '{print $2}'; git di
 run_funnel=1; run_site=1; run_deploy=1
 if [ "${1:-}" = "--changed" ]; then
   run_funnel=0; run_site=0; run_deploy=0
-  echo "$changed" | grep -qE '^(automation/|tests/funnel/|campaigns/|config/|package.json)' && run_funnel=1
+  echo "$changed" | grep -qE '^(src/|tests/funnel/|campaigns/|config/|package.json)' && run_funnel=1
   echo "$changed" | grep -qE '^(site/|tests/site/)' && run_site=1
   echo "$changed" | grep -qE '^(deploy/|tests/deploy/|docker-compose.yml|package.json|scripts/verify.sh|.github/workflows/funnel-ci.yml)' && run_deploy=1
 fi
