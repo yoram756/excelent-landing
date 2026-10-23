@@ -2,7 +2,7 @@
 
 ## TASK-01 closed
 - Commit 282f73a "refactor: complete TASK-01 modular folder structure and build tests" was merged into main (fast-forward) and pushed. origin/main moved 919f3d5..282f73a, which also contains PR #2 (ebb3bde).
-- Architect decisions recorded: the 60 second window is a first automatic WhatsApp message; the human SLA stays 30 to 60 minutes (config/lead-service.json). Monday fields are mapped in TASK-02.
+- Architect decisions recorded: the 60 second window is a first automatic WhatsApp message (approved HSM template); the human SLA stays 30 to 60 minutes (config/lead-service.json). Monday fields are mapped in TASK-02.
 
 ## TASK-02 Monday and phone alignment (2026-10-23)
 
@@ -36,4 +36,4 @@ The thresholds are not new: they match the existing intake bands (>= 85 רותח
 3. Lead_Temperature and Niche_Segment have no Monday column. Choose: a new status column (a Monday write that needs approval), or reuse the Hebrew label column `color_mm88xpa8`, which has five tiers.
 4. crm-fields.js is a Node module and is not yet called from an n8n Code node. Wiring it in means injecting it in build-workflows.js.
 5. Found, not in scope: build-mutation.js hardcodes refi column ids (refi_phone, color_mm88..., etc.), which breaks the multi-niche rule. It should move to the campaign config in a separate task.
-6. The 60 second automatic WhatsApp is decided but not built.
+6. The 60 second automatic WhatsApp (HSM) is decided but not built. It needs an approved Gambot template and owner approval for live sends.
