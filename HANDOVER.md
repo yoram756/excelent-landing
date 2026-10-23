@@ -1,27 +1,24 @@
 # HANDOVER
 
-History on main: TASK-01 (src/ layout, 282f73a), TASK-02 (phone rule and Monday mapping, 1e5143a), TASK-03 (omni-channel, opt-out, instant reply, intake config, 9d3cab7).
+History on main: TASK-01 282f73a, TASK-02 1e5143a, TASK-03 9d3cab7, TASK-04 b7fc051, TASK-05 5f50816. Full overview: FINAL_HANDOVER.md.
 
-## TASK-04 SQLite engine, atomic dedup, reminder config, instant reply replaces the opener (2026-10-23)
+## TASK-06 HTTP lock service and Meta Lead Ads adapter (2026-10-23)
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Instant HSM replaces the engine's 5 minute opener | PASS (code and tests; still off) | After a confirmed send the instant workflow writes `fn_last` (`Sent?`, `Mark sent`, `Update item (instant)`). On enrollment the engine waits `graceMinutes` (2) for that mark, then starts after the opener (M1 counted as sent at the instant time). If the instant reply never went out, the regular opener goes out once. Never both |
-| SMS and Email stay disabled | PASS | providers.sms and providers.email remain null |
-| Hardcoded ids out of the reminder | PASS | pick-overdue.js and patch-reminder-export.js read board, group, columns, sources and open stages from `intake.reminder` and `columns` in src/config/campaigns/refi.json. There is no `work.js` in the repo; patch-reminder-export.js is the reminder's other hardcoded file. The query built from config is byte identical to the deployed one (tests/funnel/reminder-config.test.js) |
-| Lead_Temperature in color_mm88xpa8 | PASS | The column holds Hebrew labels. HOT, WARM and COLD map to existing labels (HOT writes "חם מאוד", WARM "חם", COLD "מתעניין"), so no new label is created. A label that already fits (for example "רותח") is not downgraded. The engine writes only when heat changes (a reply, +10) |
-| SQLite engine src/services/lifecycle/db.js | PASS (local) | Tables `incoming_webhooks` (raw text), `lead_dedup_locks` (normalized phone, 60 seconds) and `lifecycle_events` (lead_received, duplicate_blocked, status, heat) |
-| Atomic lock before Monday or WhatsApp | PASS (mechanism); production wiring BLOCKED | `admitLead` records the raw webhook, takes the lock with one conditional UPSERT and logs the outcome in a single `BEGIN IMMEDIATE` transaction. Production intake runs in n8n Code nodes, which cannot open SQLite, so a service that n8n calls before "Find query" is needed, and deploying it needs approval |
+| src/services/lifecycle/lock-server.js over db.js | PASS (local) | `POST /lock` {phone, source} returns {locked, phone, lockedUntil}; locked=true means this caller won the 60 second lock. `GET /health` returns {ok:true}. Every call is stored raw in incoming_webhooks and logged in lifecycle_events |
+| Lock service security | PASS | Bearer token required (LOCK_SERVER_TOKEN, at least 32 characters, compared in constant time); the service refuses to start without it or without an absolute .sqlite path. Binds to 127.0.0.1 by default. Body capped at 16 KB (413), 10 second request timeout. Unauthorized calls leave no record |
+| src/webhooks/intake/meta-adapter.js signature | PASS | X-Hub-Signature-256 (HMAC-SHA256 of the exact raw body with META_APP_SECRET), constant-time compare; rejects a tampered body, wrong secret, missing or malformed header. Also handles the GET subscription challenge (META_VERIFY_TOKEN) |
+| Graph API fetch and normalization | PASS (Graph SIMULATED) | GET /v21.0/{leadgen_id}?fields=field_data,created_time,ad_id,adset_id,campaign_id,form_id with the token in the Authorization header, never in the URL; fails closed on Graph errors or a mismatched id. Normalizes the name, phone (same rule as intake), email and Meta ids (leadgen, form, ad, adset, campaign) to the intake shape. The campaign is resolved by `meta.campaignIds` in the campaign config; an unknown campaign is rejected. A lead form is a service request; marketing consent is never assumed |
+| No secret in code | PASS | Secrets only from env (.env.example lists them empty). tests/funnel/secrets.test.js scans every text file for Meta, AWS, Google, Slack and private key shapes, and for tokens in URLs. Proven: a planted fake Meta token made it fail |
 
 ### Test output
-- Linux container (node 22.23, nginx 1.22.1), the same as CI: `npm run test:funnel` 299/299 pass; `npm run test:deploy` 2/2 pass.
-- Windows: `npm run test:site` 55/55. Total: 356/356, 0 failures.
-- Atomic dedup: 8 separate processes race on one SQLite file for the same phone in two formats. Exactly 1 is admitted, 8 raw webhooks are stored, and the events are 1 lead_received and 7 duplicate_blocked.
-- Mutation checks: removing the lock's expiry condition fails 3 tests (including the race); removing the transaction fails the no-partial-record test. Removing the global opt-out (TASK-03) still fails its test.
-- dist/*.json was rebuilt in Linux and contains no carriage returns.
+- Linux container (node v22.23.4, nginx 1.22.1), the same as CI: `npm run test:funnel` exit 0, 316/316 pass, 0 fail, 0 skipped; `npm run test:deploy` exit 0, 2/2.
+- Windows: `npm run test:site` exit 0, 55/55. Total: 373/373, 0 failures.
+- New: lock-server.test.js (6 tests, including 12 parallel HTTP requests where exactly 1 gets the lock), meta-adapter.test.js (7 tests, including the chain signed webhook, Graph lead, normalized intake, HTTP lock, where a redelivery is blocked), secrets.test.js (3 tests).
+- Mutation checks: a signature check that always passes fails the adapter test; an auth check that always passes fails the lock test.
 
-## Open items
-1. Deploy (n8n plus a small lock service): needs n8n access and approval from יורם.
-2. The instant reply stays off until a Gambot template id is approved; then set `instantReply.enabled` and `template.id`.
-3. The 60 second lock blocks rapid duplicates only. The existing 24 hour same-phone update in build-mutation.js is unchanged.
-4. Niche_Segment still has no Monday column.
+## Still open (deploy, needs approval from יורם)
+1. Run lock-server.js on the n8n host (env LOCK_SERVER_TOKEN and LOCK_DB_PATH, port 8787 on 127.0.0.1 or the internal Docker network). In the intake workflow, call `POST /lock` before "Find query"; on locked=false, answer as a duplicate without writing.
+2. Meta: an HTTPS endpoint that receives the webhook with the raw body, calls verifySignature, then leadgenEvents, fetchLead and normalizeLead, then the lock and the intake. Register it in the Meta app (leadgen field) with META_VERIFY_TOKEN, and grant the page access token leads_retrieval. The hosting endpoint itself is not built.
+3. Meta leads currently map only to refi (meta.campaignIds); consolidation has no Meta campaign ids, so its leads are rejected until they are added.

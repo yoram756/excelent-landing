@@ -1,7 +1,7 @@
 // One phone rule for intake (validate, build-mutation) and the WhatsApp engine (plan, calendly).
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
 const root=process.env.PHONE_SOURCE_ROOT||path.resolve(__dirname,'../../src');
-const SOURCES=['webhooks/intake/validate.js','webhooks/intake/build-mutation.js','services/funnel/plan.js','services/funnel/calendly.js','services/lifecycle/db.js'];
+const SOURCES=['webhooks/intake/validate.js','webhooks/intake/build-mutation.js','services/funnel/plan.js','services/funnel/calendly.js','services/lifecycle/db.js','webhooks/intake/meta-adapter.js'];
 const normOf=f=>{const line=fs.readFileSync(path.join(root,f),'utf8').split(/\r?\n/).find(l=>/^const norm\s*=/.test(l));
   assert.ok(line,'no single-line norm in '+f);return new Function(line+';return norm;')();};
 const CASES=[['0501234567','972501234567'],['050-123-4567','972501234567'],['+972501234567','972501234567'],['972501234567','972501234567'],
