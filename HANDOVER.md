@@ -1,24 +1,39 @@
-# HANDOVER TASK-01
+# HANDOVER
 
-Date: 2026-10-23. Branch: `task-01/modular-structure` (local, uncommitted, not pushed).
+## TASK-01 closed
+- Commit 282f73a "refactor: complete TASK-01 modular folder structure and build tests" was merged into main (fast-forward) and pushed. origin/main moved 919f3d5..282f73a, which also contains PR #2 (ebb3bde).
+- Architect decisions recorded: the 60 second window is a first automatic WhatsApp message; the human SLA stays 30 to 60 minutes (config/lead-service.json). Monday fields are mapped in TASK-02.
 
-## Status per requirement
+## TASK-02 Monday and phone alignment (2026-10-23)
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Merge release/lp1-funnel-hardening-20261020 (PR #2) into main | PASS (local only) | main was an ancestor of the branch, so the merge was `git merge --ff-only` with no conflicts. Local main is at ebb3bde. Not pushed: origin/main is still 919f3d5 |
-| Layout src/ docs/ tests/ | PASS | automation/intake moved to src/webhooks/intake; automation/funnel to src/services/funnel; automation/lifecycle to src/services/lifecycle (git mv). See docs/decisions/0001-src-layout.md |
-| AGENTS.md plus slim CLAUDE.md | PASS | AGENTS.md holds layout, commands, modularity principles and the binding rules moved word for word from the old CLAUDE.md. CLAUDE.md imports it with `@AGENTS.md` |
-| .env.example without secrets | PASS | Lists only the variables the code reads: CAMPAIGN, NGINX_BINARY, PW_CHROMIUM. `.env` added to .gitignore |
-| Unit and contract tests | PASS | `npm run test:funnel` 264/264; `npm run test:site` 55/55; `tests/deploy/routing.test.js` 2/2 in a node:22 container with nginx 1.22.1 (Windows has no nginx) |
-| Production unaffected | PASS (by config reading) | docker-compose.yml mounts only site/ and deploy/; neither changed. Nothing deployed |
+| Phone gap found and closed | PASS (code and tests) | Four normalizers disagreed. `00972501234567` became `9720972501234567` in the engine, `+972-0501234567` became `9720501234567`, and intake rejected both plus `050.123.4567`. One canonical `norm` now lives in validate.js, build-mutation.js, plan.js and calendly.js |
+| WhatsApp sender is the active number | PASS | plan.js sends `from: BIZ.phones.gambot_sender.e164` = 972559881245 from config/business.json. The test fails if `9881245` is hardcoded in any src JS file |
+| Monday column ids from the API | PASS | get_board_info on board 5106246268 (read only), saved as tests/funnel/board-columns.json (52 columns) |
+| Field mapping in src/services/funnel | PASS (computed, not written) | `crmFields` in campaigns/refi.json and consolidation.json plus src/services/funnel/crm-fields.js |
+| Tests | PASS | See below |
 
-## Not done, needs a decision from יורם
+### Mapping
 
-1. 60 second response window: config/lead-service.json records an owner-approved SLA of 30 minutes (questionnaire done) and 60 minutes (without questionnaire), in business hours. That contradicts 60 seconds. Nothing changed. Also, 60 seconds would need an automatic first message, not a human callback.
-2. Monday fields Niche_Segment, Lead_Temperature (HOT/WARM/COLD), Churn_Reason: no such columns exist in campaigns/*.json. Today there is `heat` (numeric). Adding them needs real column ids from the board, plus the rule mapping heat to HOT/WARM/COLD. Not invented.
-3. src/integrations/: reserved but empty. The Monday and Calendly adapters stay inside their service modules. Splitting them is a separate refactor with tests.
-4. Push: local main (fast-forward) and the branch have not been pushed. PR #2 on GitHub is still open.
+| Logical field | Source | Monday column | Written now |
+|---|---|---|---|
+| Lead_Temperature | heat `numeric_mm883h9v`: HOT >= 70, WARM 40 to 69, COLD < 40 | none (column null) | no |
+| Niche_Segment | campaign value (`refi`, `consolidation`) | none, the board has no such column | no |
+| Churn_Reason | close reason | `refi_close_reason` (text, "סיבת סגירה") | only when the code is wired in |
 
-## Not touched on purpose
-docs/evidence/ and dated reports keep the old automation/ paths as a historical record. site/, deploy/, campaigns/, config/ unchanged apart from documentation.
+The thresholds are not new: they match the existing intake bands (>= 85 רותח and >= 70 חם מאוד = HOT, >= 40 חם = WARM, below = מתעניין = COLD) and handoff.heatAtLeast 70. A test checks this for every heat value from 0 to 120.
+
+### Test output
+- Linux container (node 22, nginx 1.22.1), the same as CI: `npm run test:funnel` 272/272 pass (264 before plus 8 new); `npm run test:deploy` 2/2 pass.
+- Windows: `npm run test:site` 55/55.
+- The new tests fail on the previous code: run against HEAD sources with PHONE_SOURCE_ROOT, 2 of the 4 phone tests fail (`every copy of norm...`, `intake accepts every common mobile format...`).
+- dist/*.json was rebuilt in Linux. All 27 changed lines are the new norm or the crmFields block.
+
+## Open items, need a decision
+1. Not deployed: the n8n intake and engine workflows still run the old code. Applying the new phone rule live needs the approved deploy path (patch-export / build-workflows) and an owner decision.
+2. No .env override for the sender number was added. AGENTS.md binds phones to a single source (config/business.json), and n8n Code nodes do not read the repo .env.
+3. Lead_Temperature and Niche_Segment have no Monday column. Choose: a new status column (a Monday write that needs approval), or reuse the Hebrew label column `color_mm88xpa8`, which has five tiers.
+4. crm-fields.js is a Node module and is not yet called from an n8n Code node. Wiring it in means injecting it in build-workflows.js.
+5. Found, not in scope: build-mutation.js hardcodes refi column ids (refi_phone, color_mm88..., etc.), which breaks the multi-niche rule. It should move to the campaign config in a separate task.
+6. The 60 second automatic WhatsApp is decided but not built.

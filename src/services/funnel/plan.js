@@ -37,7 +37,7 @@ function windowOpen(ts){const p=parts(ts);const mins=(+p.hour)*60+(+p.minute);
   return mins>=510&&mins<1200;}
 const open=windowOpen(now);
 
-const norm=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('0'))d='972'+d.slice(1);return d.length>=11?d:'';};
+const norm=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='972'+d.slice(1);if(d.startsWith('9720'))d='972'+d.slice(4);return d.length>=11?d:'';};
 const convos={};let convosOk=false;
 try{if(Array.isArray($('Convos').first().json.data.items))convosOk=true;for(const c of ($('Convos').first().json.data.items||[]))convos[norm(c.phone)]={dir:c.lastMessageDirection,time:Date.parse(c.lastMessageTime),text:c.lastMessage||''};}catch(e){}
 const mdata=$('Items').first().json.data;

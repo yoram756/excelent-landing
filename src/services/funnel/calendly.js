@@ -1,7 +1,7 @@
 // n8n Code node "Match bookings" in the Calendly workflow. Source of truth: this file.
 // Input: Calendly notification emails (Gmail) or a test body. Output: Monday updates for matched leads.
 const CFG = __CONFIG__; const C = CFG.columns;
-const norm = s => { let d = String(s || '').replace(/\D/g, ''); if (d.startsWith('0')) d = '972' + d.slice(1); return d.length >= 11 ? d : ''; };
+const norm = s => { let d = String(s || '').replace(/\D/g, ''); if (d.startsWith('00')) d = d.slice(2); else if (d.startsWith('0')) d = '972' + d.slice(1); if (d.startsWith('9720')) d = '972' + d.slice(4); return d.length >= 11 ? d : ''; };
 const MONTHS = {January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};
 function israelToUtc(y, mo, d, hh, mm) {
   const guess = Date.UTC(y, mo - 1, d, hh, mm);

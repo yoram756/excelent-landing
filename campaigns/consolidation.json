@@ -197,6 +197,19 @@
     "onReply": true,
     "onBooking": true
   },
+  "crmFields": {
+    "leadTemperature": {
+      "from": "heat",
+      "column": null,
+      "bands": [
+        { "atLeast": 70, "value": "HOT" },
+        { "atLeast": 40, "value": "WARM" },
+        { "atLeast": 0, "value": "COLD" }
+      ]
+    },
+    "nicheSegment": { "value": "consolidation", "column": null },
+    "churnReason": { "column": "refi_close_reason" }
+  },
   "kpiTargets": {
     "costPerPayingClient": null,
     "costPerMeeting": null

@@ -35,7 +35,9 @@ Landing pages for אקסלנט (site/), the lead funnel sources for n8n (src/), 
 
 - Everything campaign or niche specific comes from `campaigns/<id>.json` (or `config/`). Engine code in `src/` never hardcodes a niche name, board id, column id, phone, message or price.
 - A new niche is a new campaign file plus tests, not a code fork. If the engine cannot express it, extend the engine generically for all campaigns.
-- Monday.com is the single source of truth for lead state. Column ids live only in the campaign file under `columns`.
+- Monday.com is the single source of truth for lead state. Column ids live only in the campaign file under `columns` and `crmFields`. `tests/funnel/board-columns.json` is a read-back of the real board; `tests/funnel/crm-fields.test.js` fails when a configured column is missing from it.
+- Logical fields Lead_Temperature (HOT/WARM/COLD from heat), Niche_Segment and Churn_Reason are computed by `src/services/funnel/crm-fields.js`. A field with `"column": null` is never written.
+- One phone rule: the single-line `norm` in validate.js, build-mutation.js, plan.js and calendly.js must stay identical (`tests/funnel/phone.test.js`). The WhatsApp sender comes only from `config/business.json` phones.gambot_sender.
 - Response time targets come from `config/lead-service.json`, which records owner decisions. Do not change them without an explicit owner instruction.
 - Provider calls (Monday, Gambot, Calendly, Meta) stay behind one module each, so they can be tested with an injected transport.
 

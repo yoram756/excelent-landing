@@ -3,7 +3,7 @@ const v = $('Validate').first().json;
 const response=$input.first().json;
 const page=response.data?.items_page_by_column_values;
 if(response.errors?.length || !Array.isArray(page?.items) || page.cursor)throw new Error('Monday lookup failed or incomplete; refusing duplicate-prone create');
-const norm=s=>{let n=String(s||'').replace(/\D/g,'');return n.startsWith('0')?'972'+n.slice(1):n;};
+const norm=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='972'+d.slice(1);if(d.startsWith('9720'))d='972'+d.slice(4);return d.length>=11?d:'';};
 const found=page.items.filter(it=>norm(it.column_values?.find(c=>c.id==='refi_phone')?.text)===v.phone);
 const dayAgo = Date.now() - 24*3600e3;
 const sd = $getWorkflowStaticData('global'); sd.phones = sd.phones || {};

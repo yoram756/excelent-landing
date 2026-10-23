@@ -35,7 +35,10 @@ if (b.campaign !== undefined && b.campaign !== P.campaign) return fail('unknown_
 const channel = 'טופס';
 const name = String(b.first_name||'').trim().replace(/\s+/g,' ');
 const nl = Array.from(name).length; if (nl<2 || nl>40 || /[<>{}\[\]\\]/.test(name)) return fail('bad_name');
-let phone = String(b.phone||'').replace(/[\s()+-]/g,''); if (/^05\d{8}$/.test(phone)) phone='972'+phone.slice(1);
+// Same normalizer as build-mutation.js, plan.js and calendly.js (tests/funnel/phone.test.js keeps them identical).
+const norm=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='972'+d.slice(1);if(d.startsWith('9720'))d='972'+d.slice(4);return d.length>=11?d:'';};
+if (!/^[\d\s()+.\-]*$/.test(String(b.phone||''))) return fail('bad_phone');
+const phone = norm(b.phone);
 if (!/^9725\d{8}$/.test(phone)) return fail('bad_phone');
 if (b.service_request !== true) return fail('no_service_request');
 for (const field of ['service_request_at','marketing_consent_at']) {
