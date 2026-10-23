@@ -1,0 +1,204 @@
+{
+ "name": "משפך איחוד הלוואות: מענה מיידי (מצב בדיקה)",
+ "settings": {
+  "executionOrder": "v1",
+  "timezone": "Asia/Jerusalem"
+ },
+ "nodes": [
+  {
+   "id": "70f15ab4-0e5a-bab7-8af1-6796831ad332",
+   "name": "From intake",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    0,
+    0
+   ],
+   "parameters": {
+    "inputSource": "passthrough"
+   }
+  },
+  {
+   "id": "3c3392bf-1865-4810-9137-4cb6eda66a80",
+   "name": "Instant reply",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    200,
+    0
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "// n8n Code node \"Instant reply\" (mode: run once for each item). Source of truth: this file.\n// First automatic WhatsApp template (HSM) within CFG.instantReply.withinSeconds of a saved intake lead.\n// Input from the intake workflow (Execute Workflow): {itemId, name, firstName, phone, receivedAt, grants, marketing}.\n// Off until the owner approves a Gambot template id and sets instantReply.enabled; the human SLA is unchanged.\nconst CFG = {\"id\":\"consolidation\",\"name\":\"איחוד הלוואות\",\"service\":\"בדיקת איחוד הלוואות לבעלי נכס ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי נכס עם כמה הלוואות והחזר חודשי כבד\",\"status\":\"draft\",\"sources\":[\"טופס מטא\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88pfdv\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"A1\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a1_ack\"},\"A2\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a2_quiz\",\"dest\":\"q\"},\"A3\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a3_case\",\"dest\":\"c\"},\"A4\":{\"id\":\"PENDING\",\"name\":\"exc_cons_a4_close\"},\"B1\":{\"id\":\"PENDING\",\"name\":\"exc_cons_b1_booked\",\"vars\":[\"first\",\"when\"]},\"B2\":{\"id\":\"PENDING\",\"name\":\"exc_cons_b2_reminder\",\"vars\":[\"first\",\"when\"],\"dest\":\"c\"},\"B3\":{\"id\":\"PENDING\",\"name\":\"exc_cons_b3_noshow\",\"dest\":\"c\"},\"F1\":{\"id\":\"PENDING\",\"name\":\"exc_cons_f1_after\",\"dest\":\"g\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"A1\",\"next\":{\"minutes\":5}},{\"code\":\"A2\",\"next\":{\"days\":1,\"at\":\"10:00\"},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"A3\",\"next\":{\"days\":3,\"at\":\"10:00\"}},{\"code\":\"A4\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[],\"G\":[{\"code\":\"F1\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"B1\",\"reminder\":\"B2\",\"noShow\":\"B3\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"G\"],\"sameDayAllowed\":[\"A2\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=consolidation#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"channels\":{\"cascade\":[\"whatsapp\",\"sms\",\"email\"],\"providers\":{\"whatsapp\":\"gambot\",\"sms\":null,\"email\":null},\"optOut\":{\"label\":\"הסר\",\"keywords\":\"הסר|הסירו|להסיר|stop\"}},\"instantReply\":{\"enabled\":false,\"withinSeconds\":60,\"template\":{\"id\":null,\"category\":\"UTILITY\",\"vars\":[\"first\"]}},\"crmFields\":{\"leadTemperature\":{\"from\":\"heat\",\"column\":null,\"bands\":[{\"atLeast\":70,\"value\":\"HOT\"},{\"atLeast\":40,\"value\":\"WARM\"},{\"atLeast\":0,\"value\":\"COLD\"}]},\"nicheSegment\":{\"value\":\"consolidation\",\"column\":null},\"churnReason\":{\"column\":\"refi_close_reason\"}},\"kpiTargets\":{\"costPerPayingClient\":null,\"costPerMeeting\":null},\"notes\":\"טיוטה להוכחת התשתית. מסרים, שאלון ויעדים טרם הוגדרו עסקית. אין להפעיל לפני אישור יורם.\",\"identity\":{\"profile\":null,\"nameInMessages\":null,\"contactPhone\":null,\"testPhones\":[],\"approved\":false,\"note\":\"טרם נקבעו זהות ופרטי קשר לקמפיין. לא נלקחים אוטומטית מקמפיין אחר.\"},\"linkTokenExamples\":[]};\nconst BIZ = {\n  \"_doc\": \"פרטי העסק הקבועים: מספרים, שמות ופרופילים עסקיים. כל קמפיין בוחר פרופיל ופרטי קשר במפורש בקובץ שלו. שינוי כאן רק לפי הנחיה מפורשת של יורם.\",\n  \"owner\": {\n    \"knownNames\": [\n      \"יורם\",\n      \"יורם פלד\",\n      \"יורם אקסלנט\",\n      \"יורם חדד\"\n    ],\n    \"note\": \"יורם חדד הוא זהות מוכרת של יורם (משפחה ופעילות נדל״ן בנגב המערבי). אין להחליף שם אחד באחר באופן אוטומטי.\"\n  },\n  \"phones\": {\n    \"excelent_contact\": {\n      \"number\": \"055-2783459\",\n      \"e164\": \"972552783459\",\n      \"role\": \"המספר הראשי לחזרה ללקוחות בקמפייני המשכנתאות והפיננסים של אקסלנט: מענה, חזרה טלפונית ותיאום המשך.\",\n      \"owner\": \"yoram\"\n    },\n    \"backup\": {\n      \"number\": \"054-8180280\",\n      \"e164\": \"972548180280\",\n      \"role\": \"המספר של נריה חדד, שותף עסקי: העתק התראות פנימיות ובדיקות מאושרות. לא מספר קשר ללקוחות.\",\n      \"owner\": \"neria\"\n    },\n    \"gambot_sender\": {\n      \"number\": \"055-9881245\",\n      \"e164\": \"972559881245\",\n      \"role\": \"מספר שליחה טכני מחובר ל Gambot. ממנו יוצאות הודעות אוטומטיות ואליו מגיעות תשובות. לא משנים ולא מנתקים בלי אישור.\",\n      \"owner\": \"business\"\n    },\n    \"yoram_050\": {\n      \"number\": \"050-2234052\",\n      \"e164\": \"972502234052\",\n      \"role\": \"מספר של יורם: ניסויים ובדיקות קמפיינים, גיבויים ושימושים תפעוליים, פעילות נדל״ן בנגב המערבי כשהוגדר במפורש לקמפיין, ושימוש אישי. משמש כמספר קשר רק בקמפיין שהגדיר אותו במפורש.\",\n      \"owner\": \"yoram\"\n    }\n  },\n  \"profiles\": {\n    \"excelent_finance\": {\n      \"label\": \"אקסלנט משכנתאות ופיננסים\",\n      \"brand\": \"אקסלנט יועצי משכנתאות ופיננסים\",\n      \"nameInMessages\": \"יורם פלד\",\n      \"allowedNames\": [\n        \"יורם\",\n        \"יורם פלד\",\n        \"יורם אקסלנט\"\n      ],\n      \"allowedContactPhones\": [\n        \"excelent_contact\"\n      ],\n      \"allowedTestPhones\": [\n        \"excelent_contact\",\n        \"backup\",\n        \"yoram_050\"\n      ]\n    },\n    \"negev_real_estate\": {\n      \"label\": \"נדל״ן בנגב המערבי (נתיבות, אופקים, שדרות)\",\n      \"brand\": null,\n      \"nameInMessages\": \"יורם חדד\",\n      \"allowedNames\": [\n        \"יורם\",\n        \"יורם חדד\"\n      ],\n      \"allowedContactPhones\": [\n        \"yoram_050\",\n        \"excelent_contact\"\n      ],\n      \"allowedTestPhones\": [\n        \"yoram_050\",\n        \"excelent_contact\",\n        \"backup\"\n      ],\n      \"note\": \"משמש רק בקמפיין שבחר בו במפורש. המותג טרם הוגדר.\"\n    }\n  },\n  \"internalAlerts\": {\n    \"whatsappTo\": [\n      \"excelent_contact\",\n      \"backup\"\n    ],\n    \"note\": \"הראשי 055-2783459, העתק לגיבוי 054-8180280\"\n  },\n  \"privacy\": \"שיחות פרטיות ואנשי קשר משפחתיים לא נכנסים למערכת הלידים. מספר בדיקה לא הופך למספר לפרסום בגלל שימוש בניסוי.\",\n  \"people\": {\n    \"yoram\": {\n      \"names\": [\n        \"יורם\",\n        \"יורם פלד\",\n        \"יורם אקסלנט\",\n        \"יורם חדד\"\n      ],\n      \"role\": \"בעלים. מטפל בלידים וחוזר ללקוחות\",\n      \"phones\": [\n        \"excelent_contact\",\n        \"yoram_050\"\n      ]\n    },\n    \"neria\": {\n      \"names\": [\n        \"נריה\",\n        \"נריה חדד\"\n      ],\n      \"role\": \"שותף עסקי. מקבל העתק התראות ובדיקות מאושרות\",\n      \"phones\": [\n        \"backup\"\n      ]\n    }\n  }\n};\nconst MODE = 'test';\nconst IR = CFG.instantReply;\nconst l = $json || {};\nconst now = Date.now();\nconst skip = reason => ({ json: { itemId: l.itemId || null, hasSend: false, send: null, skipped: reason } });\nif (!IR || IR.enabled !== true) return skip('disabled');\nif (!/^\\d{6,}$/.test(String(IR.template.id || ''))) return skip('awaiting_approved_template');\nif (!/^9725\\d{8}$/.test(String(l.phone || ''))) return skip('bad_phone');\nif (!l.grants || l.grants.whatsapp !== true) return skip('no_whatsapp_consent');\n// Same rule as plan.js: only a verified UTILITY template goes out without marketing consent.\nif (IR.template.category !== 'UTILITY' && l.marketing !== true) return skip('no_marketing_consent');\nconst age = (now - Date.parse(l.receivedAt)) / 1000;\n// A late \"instant\" message is worse than none: the regular engine takes over.\nif (!Number.isFinite(age) || age < 0 || age > IR.withinSeconds) return skip('window_missed');\nif (MODE === 'test' && !/^TEST/.test(l.name || '')) return skip('test_mode_real_lead');\nconst sd = $getWorkflowStaticData('global'); sd.sent = sd.sent || {};\nfor (const [k, t] of Object.entries(sd.sent)) if (now - t > 86400000) delete sd.sent[k];\nif (sd.sent[l.itemId]) return skip('already_sent');\nsd.sent[l.itemId] = now;\nconst vars = (IR.template.vars || ['first']).map(() => l.firstName || 'שלום');\nreturn { json: { itemId: l.itemId, hasSend: true, live: MODE !== 'test', send: { to: l.phone, from: BIZ.phones.gambot_sender.e164, templateId: String(IR.template.id), variables: vars } } };\n"
+   }
+  },
+  {
+   "id": "3436224c-4802-361e-ec65-077359255de8",
+   "name": "Has send?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    400,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "8ed1b0f8-f863-b159-4bb3-06cd8fe46f21",
+       "leftValue": "={{ $json.hasSend }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "62123dea-764d-0464-10af-8bb2e5f8ae99",
+   "name": "Live?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    600,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "919f6935-c4af-c5f2-ad10-91dddf63309a",
+       "leftValue": "={{ $json.live }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "3f86b1dd-0015-23c8-4da6-104e89532933",
+   "name": "Send WhatsApp",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "disabled": true,
+   "position": [
+    800,
+    -100
+   ],
+   "onError": "continueRegularOutput",
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "6hr28GsvQQrGzjwx",
+     "name": "Header Auth account"
+    }
+   },
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.gambot.co.il/api/v1/messages/send-template",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($('Has send?').item.json.send) }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 30000
+    }
+   }
+  },
+  {
+   "id": "711acfc4-3460-410f-0473-ca4c83cacbc9",
+   "name": "Simulated send",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    800,
+    100
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};"
+   }
+  }
+ ],
+ "connections": {
+  "From intake": {
+   "main": [
+    [
+     {
+      "node": "Instant reply",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Instant reply": {
+   "main": [
+    [
+     {
+      "node": "Has send?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Has send?": {
+   "main": [
+    [
+     {
+      "node": "Live?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Live?": {
+   "main": [
+    [
+     {
+      "node": "Send WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Simulated send",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ }
+}

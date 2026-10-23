@@ -13,7 +13,7 @@ Landing pages for אקסלנט (site/), the lead funnel sources for n8n (src/), 
 | `src/services/funnel/` | Shared multi-campaign funnel engine (plan, send, reconcile, personal links, Calendly match) and `build-workflows.js`; built n8n JSON in `dist/` |
 | `src/services/lifecycle/` | Isolated lifecycle orchestration, consent, voluntary feedback, CRM sandbox projection, metrics |
 | `src/integrations/` | Reserved for new provider adapters (Monday, Gambot, Calendly, Meta). Existing adapters still live inside their service module; move them only together with their tests |
-| `campaigns/<id>.json` | One file per campaign or niche: identity, Monday board and columns, stages, messages |
+| `src/config/campaigns/<id>.json` | One file per campaign or niche: identity, Monday board and columns, intake mapping, channels and opt-out, instant reply, stages, messages |
 | `config/` | Cross-campaign data: `business.json` (phones, people, profiles), `lead-service.json` (owner-approved response SLA), `lifecycle/` |
 | `site/` | Static landing pages served by nginx (`site/lp1v2` is live) |
 | `deploy/`, `docker-compose.yml` | nginx config and the VPS container. Production mounts only `site/` and `deploy/` |
@@ -28,14 +28,16 @@ Landing pages for אקסלנט (site/), the lead funnel sources for n8n (src/), 
 - `npm run test:site` runs browser and accessibility checks against site/lp1v2 with a mock API.
 - `npm run test:deploy` needs nginx on PATH or `NGINX_BINARY`. CI installs it.
 - `scripts/verify.sh --changed` runs only the suites whose files changed.
-- Build workflow JSON: `node src/services/funnel/build-workflows.js test|live` (`CAMPAIGN=<id>` picks `campaigns/<id>.json`, default `refi`).
+- Build workflow JSON: `node src/services/funnel/build-workflows.js test|live` (`CAMPAIGN=<id>` picks `src/config/campaigns/<id>.json`, default `refi`).
 - Environment variables are listed in `.env.example`. Real secrets never enter the repo.
 
 ## Modularity principles (multi-niche)
 
-- Everything campaign or niche specific comes from `campaigns/<id>.json` (or `config/`). Engine code in `src/` never hardcodes a niche name, board id, column id, phone, message or price.
+- Everything campaign or niche specific comes from `src/config/campaigns/<id>.json` (or `config/`). Engine code in `src/` never hardcodes a niche name, board id, column id, phone, message or price.
 - A new niche is a new campaign file plus tests, not a code fork. If the engine cannot express it, extend the engine generically for all campaigns.
-- Monday.com is the single source of truth for lead state. Column ids live only in the campaign file under `columns` and `crmFields`. `tests/funnel/board-columns.json` is a read-back of the real board; `tests/funnel/crm-fields.test.js` fails when a configured column is missing from it.
+- Monday.com is the single source of truth for lead state. Board, group and column ids live only in the campaign file (`board`, `columns`, `intake`, `crmFields`). Intake Code nodes get them as `__INTAKE__` through `src/webhooks/intake/source.js`; engine nodes get `__CONFIG__`, `__CRM_FIELDS__` and `__CHANNELS__` from build-workflows.js. Every harness that loads these sources must inject the same placeholders.
+- Global opt-out: `channels.optOut.label` (today "הסר" on the funnel status) on any item stops every item with that phone on every channel. Fallback order is `channels.cascade`; a channel is used only with explicit consent and a configured provider. SMS and email have no provider (owner decision: deferred in config/lead-service.json).
+- Instant reply (`instantReply`, src/services/funnel/instant-reply.js) is a first WhatsApp template within 60 seconds, called only from the intake workflow. It stays off until the owner approves a Gambot template id and enables it. `tests/funnel/board-columns.json` is a read-back of the real board; `tests/funnel/crm-fields.test.js` fails when a configured column is missing from it.
 - Logical fields Lead_Temperature (HOT/WARM/COLD from heat), Niche_Segment and Churn_Reason are computed by `src/services/funnel/crm-fields.js`. A field with `"column": null` is never written.
 - One phone rule: the single-line `norm` in validate.js, build-mutation.js, plan.js and calendly.js must stay identical (`tests/funnel/phone.test.js`). The WhatsApp sender comes only from `config/business.json` phones.gambot_sender.
 - Response time targets come from `config/lead-service.json`, which records owner decisions. Do not change them without an explicit owner instruction.

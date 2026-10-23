@@ -37,6 +37,31 @@
     "email": "fn_email",
     "source": "refi_source"
   },
+  "intake": {
+    "group": "topics",
+    "newStage": "ליד חדש",
+    "columns": {
+      "balance": "refi_balance",
+      "goal": "refi_goal",
+      "goal2": "color_mm88h0j8",
+      "otherLoans": "refi_other_loans",
+      "pay": "color_mm88h799",
+      "left": "color_mm885m0t",
+      "when": "color_mm88cffb",
+      "ask": "color_mm88fzyb",
+      "doc": "color_mm88catt",
+      "heatLabel": "color_mm88xpa8",
+      "heatDetail": "long_text_mm88pfdv",
+      "answers": "long_text_mm88xzfe",
+      "complexity": "long_text_mm88cs6f",
+      "hasMortgage": "dropdown_mm88dkb2",
+      "serviceRequestAt": "date_mm88hmw2",
+      "marketingAt": "date_mm88qwfm",
+      "messageReceived": "boolean_mm88aae4",
+      "entered": "refi_entered",
+      "feasibility": "color_mm88hss3"
+    }
+  },
   "stages": {
     "human": [
       "נוצר קשר",
@@ -392,6 +417,16 @@
     "heatAtLeast": 70,
     "onReply": true,
     "onBooking": true
+  },
+  "channels": {
+    "cascade": ["whatsapp", "sms", "email"],
+    "providers": { "whatsapp": "gambot", "sms": null, "email": null },
+    "optOut": { "label": "הסר", "keywords": "הסר|הסירו|להסיר|stop" }
+  },
+  "instantReply": {
+    "enabled": false,
+    "withinSeconds": 60,
+    "template": { "id": null, "category": "UTILITY", "vars": ["first"] }
   },
   "crmFields": {
     "leadTemperature": {

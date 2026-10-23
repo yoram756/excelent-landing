@@ -2,7 +2,7 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
 const {leadTemperature,crmFields}=require('../../src/services/funnel/crm-fields');
 const board=require('./board-columns.json');
-const campaign=id=>JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../campaigns',id+'.json'),'utf8'));
+const campaign=id=>JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns',id+'.json'),'utf8'));
 const IDS=['refi','consolidation'];
 const band=new Function(fs.readFileSync(path.resolve(__dirname,'../../src/webhooks/intake/validate.js'),'utf8').split(/\r?\n/).find(l=>/^const band\s*=/.test(l))+';return band;')();
 

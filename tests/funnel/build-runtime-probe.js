@@ -2,9 +2,9 @@
 const fs=require('fs'),path=require('path');
 const sourceDir=path.resolve(__dirname,'../../src/services/funnel');
 const read=n=>fs.readFileSync(path.join(sourceDir,n+'.js'),'utf8').replace(/\r\n/g,'\n');
-const cfg=fs.readFileSync(path.join(__dirname,'../../campaigns/refi.json'),'utf8');
+const cfg=fs.readFileSync(path.join(__dirname,'../../src/config/campaigns/refi.json'),'utf8');
 const biz=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8');
-const plan=read('plan').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
+const plan=read('plan').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
 const js=`function planner($){${plan}}
 function collect($input){${read('collect-pages')}}
 function resolve($){${read('go').replace('__CONFIG__',cfg)}}

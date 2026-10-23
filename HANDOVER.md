@@ -1,39 +1,32 @@
 # HANDOVER
 
-## TASK-01 closed
-- Commit 282f73a "refactor: complete TASK-01 modular folder structure and build tests" was merged into main (fast-forward) and pushed. origin/main moved 919f3d5..282f73a, which also contains PR #2 (ebb3bde).
-- Architect decisions recorded: the 60 second window is a first automatic WhatsApp message (approved HSM template); the human SLA stays 30 to 60 minutes (config/lead-service.json). Monday fields are mapped in TASK-02.
+History: TASK-01 (src/ layout, 282f73a) and TASK-02 (phone rule and Monday field mapping, 1e5143a) are on main.
+Architect decisions: the 60 second window is a first automatic WhatsApp template (HSM); the human SLA stays 30 to 60 minutes.
 
-## TASK-02 Monday and phone alignment (2026-10-23)
+## TASK-03 n8n build, omni-channel and multi-niche config (2026-10-23)
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| Phone gap found and closed | PASS (code and tests) | Four normalizers disagreed. `00972501234567` became `9720972501234567` in the engine, `+972-0501234567` became `9720501234567`, and intake rejected both plus `050.123.4567`. One canonical `norm` now lives in validate.js, build-mutation.js, plan.js and calendly.js |
-| WhatsApp sender is the active number | PASS | plan.js sends `from: BIZ.phones.gambot_sender.e164` = 972559881245 from config/business.json. The test fails if `9881245` is hardcoded in any src JS file |
-| Monday column ids from the API | PASS | get_board_info on board 5106246268 (read only), saved as tests/funnel/board-columns.json (52 columns) |
-| Field mapping in src/services/funnel | PASS (computed, not written) | `crmFields` in campaigns/refi.json and consolidation.json plus src/services/funnel/crm-fields.js |
-| Tests | PASS | See below |
-
-### Mapping
-
-| Logical field | Source | Monday column | Written now |
-|---|---|---|---|
-| Lead_Temperature | heat `numeric_mm883h9v`: HOT >= 70, WARM 40 to 69, COLD < 40 | none (column null) | no |
-| Niche_Segment | campaign value (`refi`, `consolidation`) | none, the board has no such column | no |
-| Churn_Reason | close reason | `refi_close_reason` (text, "סיבת סגירה") | only when the code is wired in |
-
-The thresholds are not new: they match the existing intake bands (>= 85 רותח and >= 70 חם מאוד = HOT, >= 40 חם = WARM, below = מתעניין = COLD) and handoff.heatAtLeast 70. A test checks this for every heat value from 0 to 120.
+| crm-fields.js wired into build-workflows.js | PASS | Injected into the Plan node as `__CRM_FIELDS__`; each planned item carries `leadTemperature` and `nicheSegment`. Nothing is written to Monday while those columns are null |
+| Deploy or update the workflows in n8n | BLOCKED | This environment has no n8n API access, and AGENTS.md requires explicit approval from יורם for anything that reaches real leads. The built files are ready in src/services/funnel/dist/ |
+| Column ids out of build-mutation.js | PASS | Board, group, new stage and 21 column ids moved to `intake` in src/config/campaigns/refi.json and are injected as `__INTAKE__` by src/webhooks/intake/source.js (also find-query.js). Golden check: find-query, create and update output is byte identical before and after for two leads |
+| Per-niche config in src/config/campaigns/ | PASS | campaigns/ moved with git mv; every reference updated |
+| Fallback WhatsApp to SMS to Email | PASS (decision and notification); sending BLOCKED | src/services/funnel/channels.js picks the next channel that has explicit consent and a configured provider. After the third WhatsApp failure, After send passes the decision to Yoram as a Monday notification (`Fallback?` and `Notify fallback` nodes). SMS and email have no provider (owner decision: deferred), so nothing is sent on them |
+| Global opt-out | PASS | `channels.optOut.label` ("הסר", the existing funnel status, so no new Monday label) on any item stops every item with the same phone and blocks re-enrollment |
+| Instant WhatsApp HSM within 60 seconds | PASS (prepared, off) | src/services/funnel/instant-reply.js and dist/instant-reply-test.json. It can only be called by the intake workflow (Execute Workflow Trigger, no public webhook), sends from 972559881245 once per lead, only with WhatsApp consent and within 60 seconds. Off until a Gambot template id is approved and `instantReply.enabled` is set |
 
 ### Test output
-- Linux container (node 22, nginx 1.22.1), the same as CI: `npm run test:funnel` 272/272 pass (264 before plus 8 new); `npm run test:deploy` 2/2 pass.
+- Linux container (node 22, nginx 1.22.1), the same as CI: `npm run test:funnel` 286/286 pass; `npm run test:deploy` 2/2 pass.
 - Windows: `npm run test:site` 55/55.
-- The new tests fail on the previous code: run against HEAD sources with PHONE_SOURCE_ROOT, 2 of the 4 phone tests fail (`every copy of norm...`, `intake accepts every common mobile format...`).
-- dist/*.json was rebuilt in Linux. All 27 changed lines are the new norm or the crmFields block.
+- Total: 343/343.
+- New tests: tests/funnel/omni-channel.test.js (10 tests) and 4 structure tests in tests/funnel/build.test.js (placeholders replaced in every Code node, fallback wiring, no SMS or email HTTP node, instant reply trigger and disabled send).
+- Mutation check: removing the global opt-out from plan.js makes the opt-out test fail.
+- dist/*.json was rebuilt in Linux and contains no carriage returns.
 
 ## Open items, need a decision
-1. Not deployed: the n8n intake and engine workflows still run the old code. Applying the new phone rule live needs the approved deploy path (patch-export / build-workflows) and an owner decision.
-2. No .env override for the sender number was added. AGENTS.md binds phones to a single source (config/business.json), and n8n Code nodes do not read the repo .env.
-3. Lead_Temperature and Niche_Segment have no Monday column. Choose: a new status column (a Monday write that needs approval), or reuse the Hebrew label column `color_mm88xpa8`, which has five tiers.
-4. crm-fields.js is a Node module and is not yet called from an n8n Code node. Wiring it in means injecting it in build-workflows.js.
-5. Found, not in scope: build-mutation.js hardcodes refi column ids (refi_phone, color_mm88..., etc.), which breaks the multi-niche rule. It should move to the campaign config in a separate task.
-6. The 60 second automatic WhatsApp (HSM) is decided but not built. It needs an approved Gambot template and owner approval for live sends.
+1. Deploy: n8n access (an API key, or importing the dist files) plus approval from יורם to replace the live intake and engine workflows. Importing the intake workflow goes through src/webhooks/intake/patch-export.js.
+2. Instant reply and the engine first message: the engine already sends its first template within 5 minutes. When the instant reply is enabled, choose whether it replaces the engine's first message or both are sent. Otherwise a lead gets two openers.
+3. SMS and email providers: none chosen. They are deferred in config/lead-service.json. A provider plus consent wording is required before `providers.sms` or `providers.email` is set.
+4. The fallback reacts to Gambot refusals (send failures), not to delivery status callbacks, which are not tracked today.
+5. Out of scope, still hardcoded: pick-overdue.js and patch-reminder-export.js (the SLA reminder workflow) use refi column ids and the board id.
+6. Lead_Temperature and Niche_Segment still have no Monday column. Creating one is a Monday write that needs approval.

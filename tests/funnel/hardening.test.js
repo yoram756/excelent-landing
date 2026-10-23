@@ -1,10 +1,10 @@
 const test=require('node:test');const assert=require('node:assert/strict');
 const fs=require('fs'),path=require('path');
 const root=process.env.HARDENING_SOURCE_ROOT||path.resolve(__dirname,'../../src/services/funnel');
-const cfg=fs.readFileSync(path.resolve(__dirname,'../../campaigns/refi.json'),'utf8');
+const cfg=fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns/refi.json'),'utf8');
 const biz=fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8');
 const {item}=require('./load');
-const source=n=>fs.readFileSync(path.join(root,n+'.js'),'utf8').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__PILOT__','').replace('__GO_LIVE__','2026-10-20T07:00:00Z');
+const source=n=>fs.readFileSync(path.join(root,n+'.js'),'utf8').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource).replace('__GO_LIVE__','2026-10-20T07:00:00Z');
 const page=(items,cursor=null)=>({json:{data:{me:{id:'1'},boards:[{items_page:{items,cursor}}]}}});
 const collect=pages=>new Function('$input',source('collect-pages'))({all:()=>pages})[0].json;
 const go=(items,c='abcdefghjkq')=>new Function('$',source('go'))(n=>({first:()=>({json:n==='Link'?{query:{c}}:page(items).json})}))[0].json;

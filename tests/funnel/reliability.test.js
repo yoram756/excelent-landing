@@ -11,7 +11,7 @@ test('a lead with a pending send is never planned again, only reconciled',()=>{c
   const [r]=plan({items:[item({cols:active({fn_path:'B',fn_step:'M1',fn_next:due,fn_opens:JSON.stringify(st)})})],now:NOW});assert.equal(r.reconcile,true);assert.equal(r.send,null);});
 test('unknown send result keeps the pending send (no blind resend)',()=>{const [r]=plan({items:[item({cols:active({fn_path:'B',fn_step:'M1',fn_next:due})})],now:NOW});const a=afterSend(r,{});assert.equal(a.sendUnknown,true);assert.equal(a.colsJson,'{}');});
 test('Gambot refusal clears the pending send and retries later',()=>{const [r]=plan({items:[item({cols:active({fn_path:'B',fn_step:'M1',fn_next:due})})],now:NOW});const c=JSON.parse(afterSend(r,{success:false,message:'x'}).colsJson);assert.equal(JSON.parse(c.fn_opens.text).pending,undefined);assert.equal(c.fn_step,'M1');});
-const colmap=require('../../campaigns/refi.json').columns;
+const colmap=require('../../src/config/campaigns/refi.json').columns;
 const pend=(at)=>({itemId:'1',colmap,pendingJson:JSON.stringify({key:'1:M2:1',tpl:'2866421103739060',code:'M2',at,adv:{fn_step:'M2',fn_path:'C'}}),stJson:JSON.stringify({pending:{},mkt:true})});
 test('reconcile: message found in Gambot applies the update, no resend',()=>{const at=Date.now()-60000;const r=reconcile(pend(at),{data:{messages:[{direction:'outgoing',templateId:'2866421103739060',time:new Date(at+5000).toISOString()}]}});assert.equal(r.outcome,'confirmed');const c=JSON.parse(r.colsJson);assert.equal(c.fn_step,'M2');assert.equal(JSON.parse(c.fn_opens.text).pending,undefined);});
 test('reconcile: not found yet and recent, waits',()=>{const r=reconcile(pend(Date.now()-60000),{data:{messages:[]}});assert.equal(r.outcome,'wait');assert.equal(r.colsJson,'{}');});
@@ -35,7 +35,7 @@ test('callback consent alone cannot send a MARKETING acknowledgment or followup'
 });
 test('callback consent permits a verified UTILITY booking confirmation',()=>{
  const r=plan({items:[item({cols:{refi_phone:'0500000040',boolean_mm8848pn:{checked:true},fn_status:'פעיל',fn_token:'abcdefghjk',refi_stage:'פגישה נקבעה',refi_meeting:{date:'2026-10-22',time:'07:00:00'}}})],now:NOW});
- assert.equal(r[0].send.templateId,require('../../campaigns/refi.json').templates.M10.id);
+ assert.equal(r[0].send.templateId,require('../../src/config/campaigns/refi.json').templates.M10.id);
 });
 test('two new leads never get the same token, and an existing token is never reused',()=>{const items=[item({id:'1',cols:base}),item({id:'2',cols:{...base,refi_phone:'0500000041'}}),item({id:'3',cols:{...base,refi_phone:'0500000042',fn_status:'פעיל',fn_token:'abcdefghjk'}})];
   for(let i=0;i<50;i++){const r=plan({items,now:NOW});const toks=r.filter(x=>JSON.parse(x.colsJson).fn_token).map(x=>JSON.parse(x.colsJson).fn_token);assert.equal(new Set(toks).size,toks.length);assert.ok(!toks.includes('abcdefghjk'));}});

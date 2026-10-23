@@ -1,9 +1,13 @@
 // Shared funnel engine planner (all campaigns). Runs inside the n8n Code node "Plan".
-// Everything campaign specific comes from CFG (campaigns/<id>.json), injected by build-workflows.js.
+// Everything campaign specific comes from CFG (src/config/campaigns/<id>.json), injected by build-workflows.js.
 // MODE: 'test' handles only items named TEST and never calls Gambot; 'pilot' sends only to listed
 // internal phones; 'live' handles real leads only.
 const CFG = __CONFIG__;
 const BIZ = __BUSINESS__;
+// Lead_Temperature, Niche_Segment, Churn_Reason from CFG.crmFields (src/services/funnel/crm-fields.js, injected by the build).
+const CRM = __CRM_FIELDS__;
+// Global opt-out and the WhatsApp -> SMS -> Email fallback decision (src/services/funnel/channels.js).
+const CH = __CHANNELS__, OPT = CFG.channels.optOut;
 const SENDER = BIZ.phones.gambot_sender.number;
 const CONTACT = CFG.identity&&CFG.identity.contactPhone ? BIZ.phones[CFG.identity.contactPhone].number : 'לא הוגדר מספר קשר לקמפיין';
 const MODE = '__MODE__';
@@ -59,11 +63,14 @@ const dateVal=v=>{try{const j=JSON.parse(v||'null');if(!j||!j.date)return null;r
 const toDate=ts=>{if(!ts)return null;const d=new Date(ts).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};
 const checked=v=>{try{return JSON.parse(v||'null')?.checked==='true'||JSON.parse(v||'null')?.checked===true;}catch(e){return false;}};
 
-const out=[];
+const out=[],temps={};
 // phones already in the funnel: a second item with the same phone never starts its own series
 const owner={};
 const usedTokens=new Set(items.map(it=>(it.column_values.find(c=>c.id===C.token)||{}).text).filter(Boolean));
 for(const it of items){const cv={};for(const c of it.column_values)cv[c.id]=c;const ph=norm(col(cv,'phone').text);if(ph&&col(cv,'status').text&&!owner[ph])owner[ph]=it.id;}
+// A person who opted out on any item is opted out everywhere: every item with that phone stops, on every channel.
+const optedOut=new Set();
+for(const it of items){const cv={};for(const c of it.column_values)cv[c.id]=c;const ph=norm(col(cv,'phone').text);if(ph&&col(cv,'status').text===OPT.label)optedOut.add(ph);}
 for(const it of items){
   const cv={};for(const c of it.column_values)cv[c.id]=c;
   const isTest=/^TEST/.test(it.name||'');
@@ -86,14 +93,15 @@ for(const it of items){
   const quiz=CFG.quizDonePattern ? new RegExp(CFG.quizDonePattern).test(quizText) : quizText.length>0;
   const meeting=dateVal(col(cv,'meeting').value);
   let heat=Number(col(cv,'heat').text||0);
+  const temp=()=>{temps[it.id]=CRM.crmFields({heat:(col(cv,'heat').text||heat)?heat:''},CFG).values.Lead_Temperature;};temp();
   // Corrupt state may hide an unresolved send; never reset it and send again.
   let st;try{st=JSON.parse(col(cv,'state').text||'{}');if(!st||typeof st!=='object'||Array.isArray(st))continue;}catch(e){continue;}
   const first=(it.name||'').replace(/^TEST\s*/,'').trim().split(/\s+/)[0]||'שלום';
-  const cols={};let send=null;let notify=null;let changed=false;
+  const cols={};let send=null;let notify=null;let changed=false;let fallback=null;
   const set=(k,v)=>{cols[k]=v;changed=true;};
 
   if(!status){
-    if(!whatsappAllowed)continue;
+    if(!whatsappAllowed||optedOut.has(phone))continue;
     // Do not enroll a lead already handled by a person, even with no funnel status.
     if(HUMAN.includes(stage)||(col(cv,'firstReply').text||'').trim())continue;
     if(!(mkt||svc))continue;
@@ -109,14 +117,16 @@ for(const it of items){
   if(stage===SG.paid&&status!=='לקוח'){set(C.status,{label:'לקוח'});set(C.next,{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}
   if(stage===SG.notRelevant&&status==='פעיל'){set(C.status,{label:'נעצר'});set(C.next,{});out.push({itemId:it.id,phone,cols,send:null,notify:null});continue;}
 
+  if(status==='פעיל'&&optedOut.has(phone)){status=OPT.label;set(C.status,{label:OPT.label});set(C.next,{});out.push({itemId:it.id,phone,cols,send:null,notify:'הסרה גלובלית: המספר ביקש הסרה בפנייה אחרת, כל הערוצים נעצרו גם כאן.'});continue;}
+
   const cvn=convos[phone];
   if(status==='פעיל'&&cvn&&cvn.time>(last||0)+120000&&cvn.time>(st.reply||0)&&(cvn.dir==='incoming'||last)){
     st.reply=cvn.time;const t=cvn.text.trim();
-    if(/הסר|הסירו|להסיר|stop/i.test(t)){status='הסר';set(C.status,{label:'הסר'});set(C.next,{});notify='ביקש הסרה מהודעות: "'+t.slice(0,80)+'"';}
+    if(new RegExp(OPT.keywords,'i').test(t)){status=OPT.label;optedOut.add(phone);set(C.status,{label:OPT.label});set(C.next,{});notify='ביקש הסרה מהודעות: "'+t.slice(0,80)+'"';}
     else if(/^פחות/.test(t)){status='פחות';set(C.status,{label:'פחות'});notify='ביקש לקבל פחות הודעות';}
     else if(cvn.dir!=='incoming'){status='ענה';set(C.status,{label:'ענה'});notify='יש שיחה ידנית פעילה עם הליד במספר השליחה '+SENDER+', ולכן ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+CONTACT+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
     else{status='ענה';set(C.status,{label:'ענה'});heat+=10;set(C.heat,String(heat));notify='ענה בוואטסאפ למספר השליחה '+SENDER+': "'+t.slice(0,120)+'". ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+CONTACT+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
-    set(C.state,{text:JSON.stringify(st)});
+    set(C.state,{text:JSON.stringify(st)});temp();
   }
   if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}
   if(!whatsappAllowed){set(C.status,{label:'נעצר'});set(C.next,{});out.push({itemId:it.id,phone,cols,send:null,notify:'אין אישור WhatsApp מתועד לערוץ זה; הסדרה נעצרה.'});continue;}
@@ -157,6 +167,9 @@ for(const it of items){
       const vars=(CFG.templates[code].vars||['first']).map(v=>v==='when'?whenText(meeting):v==='link'?token+DEST[code]:first);
       send={to:phone,from:BIZ.phones.gambot_sender.e164,templateId:T[code],variables:vars};
       if(DEST[code]&&CFG.templates[code].linkMode!=='body')send.buttonVariables=[token+DEST[code]];
+      // Decided now, used by After send only if WhatsApp finally fails. Leads without a channel receipt have no other consented channel.
+      const grants=channelProof&&channelProof.phone===phone&&channelProof.grants?channelProof.grants:{whatsapp:whatsappAllowed};
+      fallback=CH.nextChannel({status,failed:['whatsapp'],grants},CFG);
       set(C.last,toDate(now));
     }
   }
@@ -171,6 +184,6 @@ for(const it of items){
     send.key=key;
     set(C.state,{text:JSON.stringify({...st,lastKey:key})});
   }
-  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st)});
+  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st),fallbackJson:fallback?JSON.stringify(fallback):null});
 }
-return out.map(o=>({json:{...o,campaign:CFG.id,colmap:C,hasSend:!!o.send,reconcile:!!o.reconcile,live:MODE!=='test',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));
+return out.map(o=>({json:{...o,campaign:CFG.id,leadTemperature:temps[o.itemId]??null,nicheSegment:CFG.crmFields.nicheSegment.value,colmap:C,hasSend:!!o.send,reconcile:!!o.reconcile,live:MODE!=='test',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));

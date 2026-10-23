@@ -3,6 +3,8 @@ node_modules/
 tests/out/
 src/services/funnel/dist/engine-pilot.json
 src/services/funnel/dist/engine-live.json
+src/services/funnel/dist/instant-reply-pilot.json
+src/services/funnel/dist/instant-reply-live.json
 src/services/lifecycle/runtime/
 *.sqlite
 *.sqlite-wal

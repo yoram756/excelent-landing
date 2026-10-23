@@ -2,6 +2,16 @@ const test=require('node:test');const assert=require('node:assert/strict');const
 const D=path.resolve(__dirname,'../../src/services/funnel');
 execFileSync('node',[D+'/build-workflows.js','test']);
 const wfs=['engine-test','go','calendly'].map(f=>require(D+'/dist/'+f+'.json'));
+const instantWf=require(D+'/dist/instant-reply-test.json');
+test('every injected library and config placeholder is replaced in every Code node',()=>{for(const w of [...wfs,instantWf])for(const x of w.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|CRM_FIELDS|CHANNELS|MODE|PILOT|GO_LIVE|INTAKE)__/,w.name+' / '+x.name);});
+test('engine Plan carries the CRM field mapping and the channel decision',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.match(p,/leadTemperature/);assert.match(p,/nextChannel/);});
+test('a final WhatsApp failure notifies the fallback after the Monday update, with no SMS or email sender node',()=>{const e=wfs[0];
+  assert.deepEqual(e.connections['Update item (sent)'].main[0].map(x=>x.node),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Notify fallback']);
+  for(const n of e.nodes)if(n.type==='n8n-nodes-base.httpRequest')assert.match(n.parameters.url,/monday\.com|gambot\.co\.il|hebcal\.com/,n.name);});
+test('instant reply runs only from the intake workflow and cannot send from a test build or without an approved template',()=>{const w=instantWf;
+  const names=new Set(w.nodes.map(x=>x.name));for(const [a,c] of Object.entries(w.connections)){assert.ok(names.has(a),a);for(const br of c.main)for(const x of br)assert.ok(names.has(x.node),x.node);}
+  assert.equal(w.nodes[0].type,'n8n-nodes-base.executeWorkflowTrigger');assert.ok(!w.nodes.some(n=>n.type==='n8n-nodes-base.webhook'));
+  assert.equal(w.nodes.find(n=>n.name==='Send WhatsApp').disabled,true);});
 test('every connection points at an existing node',()=>{for(const w of wfs){const n=new Set(w.nodes.map(x=>x.name));for(const [a,c] of Object.entries(w.connections)){assert.ok(n.has(a),a);for(const br of c.main)for(const x of br)assert.ok(n.has(x.node),x.node);}}});
 test('no expression contains a run of closing braces (n8n breaks on it)',()=>{for(const w of wfs)for(const x of w.nodes){const b=x.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{'))assert.ok(!/\}\}/.test(b.slice(3,-2)),w.name+' / '+x.name);}});
 test('test build never contains a live engine',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.ok(p.includes("MODE = 'test'"));});

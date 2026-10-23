@@ -1,5 +1,5 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('fs');
-const policy=require('../../config/lead-service.json'),cfg=require('../../campaigns/refi.json');
+const policy=require('../../config/lead-service.json'),cfg=require('../../src/config/campaigns/refi.json');
 const source=fs.readFileSync(__dirname+'/../../src/webhooks/intake/pick-overdue.js','utf8').replace('__SERVICE__',JSON.stringify(policy)).replace('__QUIZ_PATTERN__',JSON.stringify(cfg.quizDonePattern));
 const ack=fs.readFileSync(__dirname+'/../../src/webhooks/intake/ack-reminder.js','utf8');
 const lead=(created,extra={})=>({id:'1',name:'TEST SLA',created_at:created,column_values:Object.entries({refi_source:'קליטת LP1',refi_stage:'ליד חדש',...extra}).map(([id,v])=>({id,text:typeof v==='string'?v:'',value:typeof v==='string'?null:JSON.stringify(v)}))});

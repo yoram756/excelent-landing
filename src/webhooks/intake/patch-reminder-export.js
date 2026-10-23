@@ -4,7 +4,7 @@ const [input,output]=process.argv.slice(2);if(!input||!output)throw Error('usage
 const w=JSON.parse(fs.readFileSync(input,'utf8'));
 if(w.id!=='kiHHRdm7KzMEuXlO'||w.nodes.length!==8)throw Error('Unexpected reminder workflow');
 const service=fs.readFileSync(path.join(__dirname,'../../../config/lead-service.json'),'utf8');
-const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../../../campaigns/refi.json'),'utf8'));
+const cfg=JSON.parse(fs.readFileSync(path.join(__dirname,'../../config/campaigns/refi.json'),'utf8'));
 const node=name=>{const a=w.nodes.filter(n=>n.name===name);if(a.length!==1)throw Error('Node ownership '+name);return a[0];};
 node('Pick overdue').parameters.jsCode=fs.readFileSync(path.join(__dirname,'pick-overdue.js'),'utf8').replace('__SERVICE__',service).replace('__QUIZ_PATTERN__',JSON.stringify(cfg.quizDonePattern));
 node('New leads').parameters.jsonBody='={{ JSON.stringify({query:'+JSON.stringify('query { boards(ids: 5106246268) { groups(ids: ["topics"]) { items_page(limit: 500) { cursor items { id name created_at column_values(ids: ["refi_stage", "refi_first_reply", "refi_source", "refi_phone", "date_mm88hmw2", "long_text_mm88xzfe"]) { id text value } } } } } }')+'}) }}';

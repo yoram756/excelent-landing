@@ -1,5 +1,5 @@
 // Logical CRM fields (Lead_Temperature, Niche_Segment, Churn_Reason) derived from a campaign's crmFields block.
-// Pure: no transport. Column ids come only from campaigns/<id>.json; a field whose column is null is computed
+// Pure: no transport. Column ids come only from src/config/campaigns/<id>.json; a field whose column is null is computed
 // but never written, so nothing reaches Monday until a real column id is configured.
 const leadTemperature = (heat, cfg) => {
   if (heat === '' || heat == null) return null;
@@ -23,4 +23,7 @@ const crmFields = ({ heat, churnReason }, cfg) => {
   return { values, columns };
 };
 
-module.exports = { leadTemperature, crmFields };
+// This file as an expression the build injects into plan.js; n8n Code nodes cannot require repo files.
+const inlineSource = () => '(()=>{const module={exports:{}};\n' + require('fs').readFileSync(__filename, 'utf8').replace(/\r\n/g, '\n') + '\nreturn module.exports;})()';
+
+module.exports = { leadTemperature, crmFields, inlineSource };

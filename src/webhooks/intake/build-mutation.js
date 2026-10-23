@@ -1,10 +1,12 @@
 // Decide create or update (same phone within 24 hours) and build the Monday mutation with variables.
+// Board, group, stage and column ids come from the campaign's intake block (injected as __INTAKE__ by source.js).
+const K = __INTAKE__, KC = K.columns;
 const v = $('Validate').first().json;
 const response=$input.first().json;
 const page=response.data?.items_page_by_column_values;
 if(response.errors?.length || !Array.isArray(page?.items) || page.cursor)throw new Error('Monday lookup failed or incomplete; refusing duplicate-prone create');
 const norm=s=>{let d=String(s||'').replace(/\D/g,'');if(d.startsWith('00'))d=d.slice(2);else if(d.startsWith('0'))d='972'+d.slice(1);if(d.startsWith('9720'))d='972'+d.slice(4);return d.length>=11?d:'';};
-const found=page.items.filter(it=>norm(it.column_values?.find(c=>c.id==='refi_phone')?.text)===v.phone);
+const found=page.items.filter(it=>norm(it.column_values?.find(c=>c.id===KC.phone)?.text)===v.phone);
 const dayAgo = Date.now() - 24*3600e3;
 const sd = $getWorkflowStaticData('global'); sd.phones = sd.phones || {};
 for (const [k,x] of Object.entries(sd.phones)) if (Date.now() - x.t > 24*3600e3) delete sd.phones[k];
@@ -16,34 +18,34 @@ const dt = iso => { const d = new Date(iso); return { date: d.toISOString().slic
 const goals = Array.isArray(A.goal) ? A.goal : (A.goal ? [A.goal] : []);
 const cv = {};
 const st = (col, label) => { if (label) cv[col] = { label: String(label).slice(0,30) }; };
-st('refi_source', v.source);
-st('refi_balance', L.bal);
-if (goals[0]) st('refi_goal', v.goalNames[0]);
-if (goals[1]) st('color_mm88h0j8', v.goalNames[1]);
-if (A.loans === 'n') st('refi_other_loans', 'לא'); else if (A.loans && A.loans !== 'na') st('refi_other_loans', 'כן');
-st('color_mm88h799', L.pay); st('color_mm885m0t', L.left); st('color_mm88cffb', L.when); st('color_mm88fzyb', L.ask); st('color_mm88catt', L.doc);
-cv.numeric_mm883h9v = String(s.score);
-st('color_mm88xpa8', s.label);
-cv.long_text_mm88pfdv = { text: `גרסה ${s.version}, חושב ${s.computedAt}, שלמות ${s.completeness}\n${s.reasons.join('\n')}${s.missing.length ? '\nחסר: ' + s.missing.join(', ') : ''}` };
-cv.long_text_mm88xzfe = { text: `מוצר: ${v.productName} (${v.product})\nמידע כספי צורף: ${v.money_included ? 'כן' : 'לא'}\n${v.readable}` };
-cv.long_text_mm88cs6f = { text: s.complexity.length ? s.complexity.join('\n') : 'לא זוהתה מורכבות מיוחדת' };
-if (A.has) cv.dropdown_mm88dkb2 = { labels: [L.has] };
-cv.boolean_mm8848pn = { checked: 'true' };
-cv.date_mm88hmw2 = dt(v.service_request_at);
-if (v.marketing_consent) { cv.boolean_mm88mzry = { checked: 'true' }; cv.date_mm88qwfm = dt(v.marketing_consent_at); }
-if (v.email) cv.fn_email = { email:v.email, text:v.email };
+st(KC.source, v.source);
+st(KC.balance, L.bal);
+if (goals[0]) st(KC.goal, v.goalNames[0]);
+if (goals[1]) st(KC.goal2, v.goalNames[1]);
+if (A.loans === 'n') st(KC.otherLoans, 'לא'); else if (A.loans && A.loans !== 'na') st(KC.otherLoans, 'כן');
+st(KC.pay, L.pay); st(KC.left, L.left); st(KC.when, L.when); st(KC.ask, L.ask); st(KC.doc, L.doc);
+cv[KC.heat] = String(s.score);
+st(KC.heatLabel, s.label);
+cv[KC.heatDetail] = { text: `גרסה ${s.version}, חושב ${s.computedAt}, שלמות ${s.completeness}\n${s.reasons.join('\n')}${s.missing.length ? '\nחסר: ' + s.missing.join(', ') : ''}` };
+cv[KC.answers] = { text: `מוצר: ${v.productName} (${v.product})\nמידע כספי צורף: ${v.money_included ? 'כן' : 'לא'}\n${v.readable}` };
+cv[KC.complexity] = { text: s.complexity.length ? s.complexity.join('\n') : 'לא זוהתה מורכבות מיוחדת' };
+if (A.has) cv[KC.hasMortgage] = { labels: [L.has] };
+cv[KC.consentService] = { checked: 'true' };
+cv[KC.serviceRequestAt] = dt(v.service_request_at);
+if (v.marketing_consent) { cv[KC.consentMarketing] = { checked: 'true' }; cv[KC.marketingAt] = dt(v.marketing_consent_at); }
+if (v.email) cv[KC.email] = { email:v.email, text:v.email };
 if (v.contact_permissions) {
-  cv.long_text_mm8ag9s = { text:JSON.stringify(v.contact_permissions) };
+  cv[KC.permissions] = { text:JSON.stringify(v.contact_permissions) };
   // A modern form can withdraw WhatsApp consent while keeping email/SMS consent.
-  cv.boolean_mm88mzry = { checked:v.contact_permissions.grants.whatsapp?'true':'false' };
-  if (!v.contact_permissions.grants.whatsapp) cv.date_mm88qwfm = {};
+  cv[KC.consentMarketing] = { checked:v.contact_permissions.grants.whatsapp?'true':'false' };
+  if (!v.contact_permissions.grants.whatsapp) cv[KC.marketingAt] = {};
 }
-if (v.channel === 'וואטסאפ') cv.boolean_mm88aae4 = { checked: 'true' };
+if (v.channel === 'וואטסאפ') cv[KC.messageReceived] = { checked: 'true' };
 if (recent) {
-  return [{ json: { mode: 'update', itemId: recent.id, query: 'mutation($item: ID!, $vals: JSON!){ change_multiple_column_values(board_id: 5106246268, item_id: $item, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { item: String(recent.id), vals: JSON.stringify(cv) } } }];
+  return [{ json: { mode: 'update', itemId: recent.id, query: 'mutation($item: ID!, $vals: JSON!){ change_multiple_column_values(board_id: ' + K.board + ', item_id: $item, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { item: String(recent.id), vals: JSON.stringify(cv) } } }]
 }
-cv.refi_phone = { phone: v.phone, countryShortName: 'IL' };
-cv.refi_entered = dt(new Date().toISOString());
-cv.refi_stage = { label: 'ליד חדש' };
-cv.color_mm88hss3 = { label: s.feasibility };
-return [{ json: { mode: 'create', query: 'mutation($name: String!, $vals: JSON!){ create_item(board_id: 5106246268, group_id: "topics", item_name: $name, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { name: `${v.name} ${v.phoneLocal}`, vals: JSON.stringify(cv) } } }];
+cv[KC.phone] = { phone: v.phone, countryShortName: 'IL' };
+cv[KC.entered] = dt(new Date().toISOString());
+cv[KC.stage] = { label: K.newStage };
+cv[KC.feasibility] = { label: s.feasibility };
+return [{ json: { mode: 'create', query: 'mutation($name: String!, $vals: JSON!){ create_item(board_id: ' + K.board + ', group_id: "' + K.group + '", item_name: $name, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { name: `${v.name} ${v.phoneLocal}`, vals: JSON.stringify(cv) } } }];

@@ -2,8 +2,8 @@ const test=require('node:test');const assert=require('node:assert/strict');const
 const {planner,item}=require('./load');
 const NOW='2026-10-20T09:00:00Z';const base={refi_phone:'0500000040',boolean_mm88mzry:{checked:'true'}};
 const REQ=['id','name','service','goal','status','board','columns','stages','templates','entry','sequences','meeting','rules','links','handoff','kpiTargets'];
-for(const f of fs.readdirSync(path.resolve(__dirname,'../../campaigns')).filter(f=>f.endsWith('.json'))){
-  const c=require('../../campaigns/'+f);
+for(const f of fs.readdirSync(path.resolve(__dirname,'../../src/config/campaigns')).filter(f=>f.endsWith('.json'))){
+  const c=require('../../src/config/campaigns/'+f);
   test('campaign '+c.id+' config is complete and consistent',()=>{
     for(const k of REQ)assert.ok(k in c,c.id+' missing '+k);
     const codes=new Set(Object.keys(c.templates));
@@ -14,7 +14,7 @@ for(const f of fs.readdirSync(path.resolve(__dirname,'../../campaigns')).filter(
 }
 test('a second campaign runs on the same engine with its own messages',()=>{const cons=planner('test','2026-10-20T07:00:00Z','','consolidation');
   const [r]=cons({items:[item({cols:base})],now:NOW});assert.equal(r.campaign,'consolidation');assert.equal(r.send,null,'template not approved, nothing is sent');assert.ok(r.notifyText.includes('A1'));});
-test('consolidation with an approved id would send its own first message',()=>{const c=require('../../campaigns/consolidation.json');const tmp=path.resolve(__dirname,'../../campaigns/_tmp_test.json');
+test('consolidation with an approved id would send its own first message',()=>{const c=require('../../src/config/campaigns/consolidation.json');const tmp=path.resolve(__dirname,'../../src/config/campaigns/_tmp_test.json');
   const x=JSON.parse(JSON.stringify(c));x.id='_tmp_test';x.templates.A1.id='1111111111';fs.writeFileSync(tmp,JSON.stringify(x));
   try{const p=planner('test','2026-10-20T07:00:00Z','','_tmp_test');const [r]=p({items:[item({cols:base})],now:NOW});assert.equal(r.send.templateId,'1111111111');assert.equal(r.code,'A1');}finally{fs.unlinkSync(tmp);}});
 test('building a campaign does not touch the shared engine code and writes separate workflows',()=>{
@@ -24,7 +24,7 @@ test('building a campaign does not touch the shared engine code and writes separ
   assert.equal(require(d+'/go.json').nodes.find(n=>n.name==='Link').parameters.path,'go-consolidation');});
 
 test('refinance link templates match the approved v2 inventory and use body variables',()=>{
- const c=require('../../campaigns/refi.json');
+ const c=require('../../src/config/campaigns/refi.json');
  const inventory=require('../../docs/evidence/20261020/gambot-refi-v2-templates.json');
  const linked=Object.values(c.templates).filter(t=>t.dest);assert.equal(linked.length,12);
  for(const t of linked){

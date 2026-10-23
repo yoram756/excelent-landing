@@ -2,7 +2,8 @@
 const fs=require('fs'),path=require('path'),{execFileSync}=require('child_process');
 const root=path.resolve(__dirname,'../..');
 execFileSync(process.execPath,[path.join(__dirname,'build-sandbox-journey.js')]);
-const read=p=>fs.readFileSync(path.join(root,p),'utf8').replace(/\r\n/g,'\n');
+const {inject}=require('../../src/webhooks/intake/source');
+const read=p=>inject(fs.readFileSync(path.join(root,p),'utf8').replace(/\r\n/g,'\n'));
 const S=JSON.parse(read('tests/funnel/sandbox-columns.json')),M=S.columns,B=S.board;
 if(B!=='5106403803'||B===S.productionBoardForbidden)throw Error('Private board required');
 const remap=s=>Object.entries(M).reduce((v,[a,b])=>v.split(a).join(b),s).split(S.productionBoardForbidden).join(B);

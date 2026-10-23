@@ -197,6 +197,16 @@
     "onReply": true,
     "onBooking": true
   },
+  "channels": {
+    "cascade": ["whatsapp", "sms", "email"],
+    "providers": { "whatsapp": "gambot", "sms": null, "email": null },
+    "optOut": { "label": "הסר", "keywords": "הסר|הסירו|להסיר|stop" }
+  },
+  "instantReply": {
+    "enabled": false,
+    "withinSeconds": 60,
+    "template": { "id": null, "category": "UTILITY", "vars": ["first"] }
+  },
   "crmFields": {
     "leadTemperature": {
       "from": "heat",

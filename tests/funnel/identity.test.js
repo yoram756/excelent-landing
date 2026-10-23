@@ -2,7 +2,7 @@
 const test=require('node:test');const assert=require('node:assert/strict');const fs=require('fs');const path=require('path');const {execFileSync}=require('child_process');
 const ROOT=path.resolve(__dirname,'../..');const BIZ=require(ROOT+'/config/business.json');
 const P=BIZ.phones;const forms=k=>[P[k].number,P[k].e164,'0'+P[k].e164.slice(3)];
-const campaigns=fs.readdirSync(ROOT+'/campaigns').filter(f=>f.endsWith('.json')).map(f=>require(ROOT+'/campaigns/'+f));
+const campaigns=fs.readdirSync(ROOT+'/src/config/campaigns').filter(f=>f.endsWith('.json')).map(f=>require(ROOT+'/src/config/campaigns/'+f));
 const build=(mode,campaign,...args)=>{try{execFileSync('node',[ROOT+'/src/services/funnel/build-workflows.js',mode,...args],{env:{...process.env,CAMPAIGN:campaign},stdio:'pipe'});return 'ok';}catch(e){return String(e.stderr);}};
 test('every phone key used by profiles and alerts exists',()=>{for(const p of Object.values(BIZ.profiles))for(const k of [...p.allowedContactPhones,...p.allowedTestPhones])assert.ok(P[k],k);for(const k of BIZ.internalAlerts.whatsappTo)assert.ok(P[k],k);assert.equal(BIZ.internalAlerts.whatsappTo[0],'excelent_contact');});
 test('every campaign has its own identity block',()=>{for(const c of campaigns){assert.ok(c.identity,c.id);if(c.identity.approved){const prof=BIZ.profiles[c.identity.profile];assert.ok(prof,c.id+' profile');assert.ok(prof.allowedContactPhones.includes(c.identity.contactPhone),c.id+' contact');for(const t of c.identity.testPhones)assert.ok(prof.allowedTestPhones.includes(t),c.id+' test phone '+t);assert.ok(prof.allowedNames.includes(c.identity.nameInMessages),c.id+' name');}}});

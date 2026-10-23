@@ -4,7 +4,7 @@
 const fs=require('fs');const path=require('path');const crypto=require('crypto');
 // Usage: build-workflows.js test | pilot <go-live ISO> <phone,phone> | live <go-live ISO>   (env CAMPAIGN=<id>, default refi)
 const CAMPAIGN=process.env.CAMPAIGN||'refi';
-const CFG=JSON.parse(fs.readFileSync(path.join(__dirname,'../../../campaigns',CAMPAIGN+'.json'),'utf8'));
+const CFG=JSON.parse(fs.readFileSync(path.join(__dirname,'../../config/campaigns',CAMPAIGN+'.json'),'utf8'));
 const CFGS=JSON.stringify(CFG);
 const BIZS=fs.readFileSync(path.join(__dirname,'../../../config/business.json'),'utf8').replace(/\r\n/g,'\n');
 const MODE=process.argv[2]||'test';if(!['test','pilot','live'].includes(MODE))throw new Error('mode must be test, pilot or live');
@@ -21,7 +21,8 @@ if(MODE!=='test'){
   if(!prof.allowedContactPhones.includes(ID.contactPhone))throw new Error('contact phone not allowed for profile');
   if(MODE==='pilot'){const ok=ID.testPhones.map(k=>BIZ0.phones[k].e164);for(const ph of PILOT.split(','))if(!ok.includes(ph))throw new Error('pilot phone '+ph+' is not an approved test phone of '+CFG.id);}
 }
-const D=__dirname;const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS);
+const D=__dirname;const CRMS=require('./crm-fields').inlineSource(),CHS=require('./channels').inlineSource();
+const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS);
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
@@ -67,6 +68,12 @@ const engine={name:PFX+'מנוע הודעות'+tag,settings:{executionOrder:'v1'
  ifTrue('Notify?',[1400,150],"={{ $('Has send?').item.json.hasNotify }}",'n8n-nodes-base.filter'),
  monday('Notify Yoram',[1600,150],notify("$('Has send?').item.json"))],
  connections:{'Every 5 min':L('Shabbat'),'Run test':L('Shabbat'),'Shabbat':L('Items'),'Items':L('Convos'),'Convos':L('Plan'),'Plan':L('Route'),'Route':L('Gambot history','Has send?'),'Gambot history':L('Reconcile'),'Reconcile':L('Update item (reconciled)'),'Has send?':L('Reserve send','Update item'),'Reserve send':L('Reserved?'),'Reserved?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('After send'),'Simulated send':L('After send'),'After send':L('Update item (sent)'),'Update item':L('Notify?'),'Notify?':L('Notify Yoram')}};
+
+// WhatsApp finally failed: tell Yoram which fallback channel applies. SMS and email have no provider yet, so nothing is sent.
+engine.nodes.push(ifTrue('Fallback?',[2000,-100],"={{ $('After send').item.json.hasFallback }}",'n8n-nodes-base.filter'));
+engine.nodes.push(monday('Notify fallback',[2200,-100],notify("$('After send').item.json")));
+engine.connections['Update item (sent)']=L('Fallback?');
+engine.connections['Fallback?']=L('Notify fallback');
 
 engine.nodes.push(code('Token candidates',[500,100],src('token-candidates.js')));
 engine.nodes.push({id:id(),name:'Secure tokens',type:'n8n-nodes-base.crypto',typeVersion:1,position:[600,100],parameters:{action:'generate',dataPropertyName:'secureToken',encodingType:'hex',stringLength:32}});
@@ -128,9 +135,22 @@ for (const w of [engine,go,cal]) {
   w.connections['Fetch pages']=L('Items');
 }
 
+// 4. Instant reply: first WhatsApp template within instantReply.withinSeconds of a saved intake lead.
+// Called only by the intake workflow (Execute Workflow), never a public webhook. Sends stay disabled
+// unless the build is live and the campaign enables it with an approved template id.
+const IR=CFG.instantReply;const irLive=MODE!=='test'&&IR&&IR.enabled===true&&/^\d{6,}$/.test(String(IR.template.id||''));
+const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
+ {id:id(),name:'From intake',type:'n8n-nodes-base.executeWorkflowTrigger',typeVersion:1.1,position:[0,0],parameters:{inputSource:'passthrough'}},
+ code('Instant reply',[200,0],src('instant-reply.js').replace('__MODE__',MODE),'runOnceForEachItem'),
+ ifTrue('Has send?',[400,0],'={{ $json.hasSend }}'),
+ ifTrue('Live?',[600,0],'={{ $json.live }}'),
+ {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:!irLive,position:[800,-100],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'POST',url:'https://api.gambot.co.il/api/v1/messages/send-template',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:30000}}},
+ code('Simulated send',[800,100],"const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};",'runOnceForEachItem')],
+ connections:{'From intake':L('Instant reply'),'Instant reply':L('Has send?'),'Has send?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send')}};
+
 // Final guard: no run of two closing braces inside an expression body.
-for(const w of [engine,go,cal])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
+for(const w of [engine,go,cal,instant])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 console.log('built',MODE,fs.readdirSync(out).join(' '));

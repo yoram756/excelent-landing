@@ -1,8 +1,8 @@
 // Manual compute-only n8n acceptance; actual sources, synthetic adapters only.
 const fs=require('fs'),path=require('path');
-const root=path.resolve(__dirname,'../..'),read=n=>fs.readFileSync(path.join(root,n),'utf8');
-const cfg=read('campaigns/refi.json'),biz=read('config/business.json');
-const src=n=>read('src/services/funnel/'+n+'.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','');
+const root=path.resolve(__dirname,'../..'),read=n=>require('../../src/webhooks/intake/source').inject(fs.readFileSync(path.join(root,n),'utf8'));
+const cfg=read('src/config/campaigns/refi.json'),biz=read('config/business.json');
+const src=n=>read('src/services/funnel/'+n+'.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
 const suite=read('tests/funnel/acceptance.test.js').split('\n').slice(2).join('\n');
 const slaPolicy=JSON.parse(read('config/lead-service.json'));
 const slaSource=read('src/webhooks/intake/pick-overdue.js').replace('__SERVICE__',JSON.stringify(slaPolicy)).replace('__QUIZ_PATTERN__',JSON.stringify(JSON.parse(cfg).quizDonePattern));
