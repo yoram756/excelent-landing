@@ -3,6 +3,9 @@
   "boardId": "5106246268",
   "boardName": "לידים מחזור 2026",
   "fetchedAt": "2026-10-23",
+  "statusLabels": {
+    "color_mm88xpa8": ["רותח", "חם מאוד", "חם", "מתעניין", "אין מספיק מידע"]
+  },
   "columns": {
     "name": "name",
     "refi_phone": "phone",

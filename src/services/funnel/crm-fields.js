@@ -9,7 +9,15 @@ const leadTemperature = (heat, cfg) => {
   return band ? band.value : null;
 };
 
-const crmFields = ({ heat, churnReason }, cfg) => {
+// Monday value for the temperature column. With a labels map, only existing board labels are written, and a
+// current label that already fits the tier is kept (so "רותח" set by intake is never downgraded to "חם מאוד").
+const temperatureValue = (tier, currentLabel, lt) => {
+  if (!lt.labels) return tier;
+  const l = lt.labels[tier];
+  return l.accept.includes(currentLabel || '') ? null : { label: l.write };
+};
+
+const crmFields = ({ heat, churnReason, currentLabel }, cfg) => {
   const f = cfg.crmFields;
   const values = {
     Lead_Temperature: leadTemperature(heat, cfg),
@@ -17,7 +25,10 @@ const crmFields = ({ heat, churnReason }, cfg) => {
     Churn_Reason: churnReason ? String(churnReason).trim() : null
   };
   const columns = {};
-  if (f.leadTemperature.column && values.Lead_Temperature) columns[f.leadTemperature.column] = values.Lead_Temperature;
+  if (f.leadTemperature.column && values.Lead_Temperature) {
+    const t = temperatureValue(values.Lead_Temperature, currentLabel, f.leadTemperature);
+    if (t) columns[f.leadTemperature.column] = t;
+  }
   if (f.nicheSegment.column) columns[f.nicheSegment.column] = values.Niche_Segment;
   if (f.churnReason.column && values.Churn_Reason) columns[f.churnReason.column] = values.Churn_Reason;
   return { values, columns };

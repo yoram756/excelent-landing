@@ -108,9 +108,15 @@ for(const it of items){
     if(owner[phone]&&owner[phone]!==it.id)continue;
     owner[phone]=it.id;
     if(Date.parse(it.created_at)<GO_LIVE)continue;
+    // The instant reply (instant-reply.js) replaces the entry message. Give it graceMinutes to mark fn_last;
+    // if it went out, start after it; if it never did, the entry message goes out as before. Never both.
+    const IR=CFG.instantReply,irOn=!!IR&&IR.enabled===true&&/^\d{6,}$/.test(String(IR.template.id||''));
+    if(irOn&&!last&&now-Date.parse(it.created_at)<IR.graceMinutes*60000)continue;
     token=rand(it.id);if(usedTokens.has(token))throw new Error('Secure token collision; abort enrollment');usedTokens.add(token);status='פעיל';
     if(quiz){path=CFG.entry.quizDone.path;step=CFG.entry.quizDone.step;}else{path=CFG.entry.default.path;step=CFG.entry.default.step;}
     next=now;st.mkt=mkt;st.tokenIssuedAt=now;st.tokenExpiresAt=now+90*D;
+    if(irOn&&last){const seq=CFG.sequences[path]||[];const nx=seq[seq.findIndex(x=>x.code===step)+1];
+      if(nx){step=nx.code;next=due(nx.next,last);if(nx.thenPath)path=nx.thenPath;}st.instantReplyAt=last;}
     set(C.state,{text:JSON.stringify(st)});
     set(C.status,{label:'פעיל'});set(C.token,token);
   }
@@ -125,7 +131,7 @@ for(const it of items){
     if(new RegExp(OPT.keywords,'i').test(t)){status=OPT.label;optedOut.add(phone);set(C.status,{label:OPT.label});set(C.next,{});notify='ביקש הסרה מהודעות: "'+t.slice(0,80)+'"';}
     else if(/^פחות/.test(t)){status='פחות';set(C.status,{label:'פחות'});notify='ביקש לקבל פחות הודעות';}
     else if(cvn.dir!=='incoming'){status='ענה';set(C.status,{label:'ענה'});notify='יש שיחה ידנית פעילה עם הליד במספר השליחה '+SENDER+', ולכן ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+CONTACT+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
-    else{status='ענה';set(C.status,{label:'ענה'});heat+=10;set(C.heat,String(heat));notify='ענה בוואטסאפ למספר השליחה '+SENDER+': "'+t.slice(0,120)+'". ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+CONTACT+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
+    else{status='ענה';set(C.status,{label:'ענה'});heat+=10;set(C.heat,String(heat));for(const [k,v] of Object.entries(CRM.crmFields({heat,currentLabel:cv[CFG.crmFields.leadTemperature.column]?.text},CFG).columns))set(k,v);notify='ענה בוואטסאפ למספר השליחה '+SENDER+': "'+t.slice(0,120)+'". ההודעות האוטומטיות נעצרו. לחזרה ללקוח: '+CONTACT+'. כדי להחזיר אותו למשפך: סטטוס משפך = פעיל.';}
     set(C.state,{text:JSON.stringify(st)});temp();
   }
   if(status!=='פעיל'){if(changed)out.push({itemId:it.id,phone,cols,send:null,notify});continue;}

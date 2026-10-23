@@ -40,6 +40,10 @@
   "intake": {
     "group": "topics",
     "newStage": "ליד חדש",
+    "reminder": {
+      "sourcePattern": "LP1|מטא|וואטסאפ",
+      "openStages": ["ליד חדש", "התקבל", ""]
+    },
     "columns": {
       "balance": "refi_balance",
       "goal": "refi_goal",
@@ -426,12 +430,18 @@
   "instantReply": {
     "enabled": false,
     "withinSeconds": 60,
+    "graceMinutes": 2,
     "template": { "id": null, "category": "UTILITY", "vars": ["first"] }
   },
   "crmFields": {
     "leadTemperature": {
       "from": "heat",
-      "column": null,
+      "column": "color_mm88xpa8",
+      "labels": {
+        "HOT": { "write": "חם מאוד", "accept": ["רותח", "חם מאוד"] },
+        "WARM": { "write": "חם", "accept": ["חם"] },
+        "COLD": { "write": "מתעניין", "accept": ["מתעניין", "אין מספיק מידע"] }
+      },
       "bands": [
         { "atLeast": 70, "value": "HOT" },
         { "atLeast": 40, "value": "WARM" },

@@ -1,5 +1,7 @@
 // Internal callback SLA only. No messaging provider is called by this code.
 const policy=__SERVICE__;
+// Column ids, sources and open stages come from the campaign's intake block (__INTAKE__ via source.js).
+const K=__INTAKE__,KC=K.columns,R=K.reminder;
 const quizPattern=new RegExp(__QUIZ_PATTERN__);
 const response=$input.first().json;
 const page=response.data?.boards?.[0]?.groups?.[0]?.items_page;
@@ -15,17 +17,17 @@ const out=[];
 for(const it of page.items){
  const cv=Object.fromEntries((it.column_values||[]).map(c=>[c.id,c]));
  const text=id=>cv[id]?.text||'';
- if(!/LP1|מטא|וואטסאפ/i.test(text('refi_source')))continue;
- if(!['ליד חדש','התקבל',''].includes(text('refi_stage'))||text('refi_first_reply').trim())continue;
+ if(!new RegExp(R.sourcePattern,'i').test(text(KC.source)))continue;
+ if(!R.openStages.includes(text(KC.stage))||text(KC.firstReply).trim())continue;
  let requested=Date.parse(it.created_at);
- try{const d=JSON.parse(cv.date_mm88hmw2?.value||'null');if(d?.date)requested=Date.parse(d.date+'T'+(d.time||'00:00:00')+'Z');}catch(e){continue;}
+ try{const d=JSON.parse(cv[KC.serviceRequestAt]?.value||'null');if(d?.date)requested=Date.parse(d.date+'T'+(d.time||'00:00:00')+'Z');}catch(e){continue;}
  if(!Number.isFinite(requested)||requested>now||now-requested>3*86400000)continue;
- const questionnaire=quizPattern.test(text('long_text_mm88xzfe'));
+ const questionnaire=quizPattern.test(text(KC.answers));
  const limit=questionnaire?policy.responseMinutes.questionnaireSubmittedWithKnownAnswers:policy.responseMinutes.withoutQuestionnaire;
  const key=String(it.id)+':'+requested+':'+limit;
  if(sd.reminded?.[key]||Number(sd.reminded?.[it.id]||0)>=requested)continue;
  if(elapsed(requested,now,limit*60000)<limit*60000)continue;
- out.push({json:{item:String(it.id),reminderKey:key,requestedAt:requested,thresholdMinutes:limit,questionnaire,leadName:it.name,source:text('refi_source'),phone:text('refi_phone'),text:`תזכורת ליורם פלד: פנייה ${it.id} טרם טופלה לאחר ${limit} דקות פעילות (${questionnaire?'נשלחו תשובות שאלון':'ללא תשובות שאלון'}). שעות הפעילות א׳–ה׳ 08:30–20:00.`}});
+ out.push({json:{item:String(it.id),reminderKey:key,requestedAt:requested,thresholdMinutes:limit,questionnaire,leadName:it.name,source:text(KC.source),phone:text(KC.phone),text:`תזכורת ליורם פלד: פנייה ${it.id} טרם טופלה לאחר ${limit} דקות פעילות (${questionnaire?'נשלחו תשובות שאלון':'ללא תשובות שאלון'}). שעות הפעילות א׳–ה׳ 08:30–20:00.`}});
 }
 // Cache acknowledgment belongs after confirmed internal notification, never here.
 return out;

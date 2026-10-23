@@ -26,9 +26,18 @@ test('missing or broken heat gives no temperature',()=>{
   assert.equal(leadTemperature('75',c),'HOT');
 });
 
-test('fields without a configured column are computed but never written',()=>{
+test('fields are written only to configured columns, and Niche_Segment (no column) never',()=>{
   for(const id of IDS){const c=campaign(id);const r=crmFields({heat:72,churnReason:'  בחר בנק אחר '},c);
     assert.deepEqual(r.values,{Lead_Temperature:'HOT',Niche_Segment:id,Churn_Reason:'בחר בנק אחר'});
-    assert.deepEqual(r.columns,{refi_close_reason:'בחר בנק אחר'});
+    assert.deepEqual(r.columns,{color_mm88xpa8:{label:'חם מאוד'},refi_close_reason:'בחר בנק אחר'});
     assert.deepEqual(crmFields({heat:''},c).columns,{});}
+});
+
+test('Lead_Temperature writes only existing board labels and never downgrades a label that already fits',()=>{
+  const labels=board.statusLabels.color_mm88xpa8;
+  for(const id of IDS){const c=campaign(id),lt=c.crmFields.leadTemperature;assert.equal(lt.column,'color_mm88xpa8');
+    for(const t of ['HOT','WARM','COLD']){assert.ok(labels.includes(lt.labels[t].write),t);for(const a of lt.labels[t].accept)assert.ok(labels.includes(a),a);}
+    const col=(heat,currentLabel)=>crmFields({heat,currentLabel},c).columns.color_mm88xpa8;
+    assert.equal(col(90,'רותח'),undefined);assert.equal(col(75,'חם מאוד'),undefined);assert.deepEqual(col(75,'חם'),{label:'חם מאוד'});
+    assert.deepEqual(col(45,'מתעניין'),{label:'חם'});assert.equal(col(20,'אין מספיק מידע'),undefined);assert.deepEqual(col(20,'חם'),{label:'מתעניין'});}
 });

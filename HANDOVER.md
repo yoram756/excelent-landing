@@ -1,32 +1,27 @@
 # HANDOVER
 
-History: TASK-01 (src/ layout, 282f73a) and TASK-02 (phone rule and Monday field mapping, 1e5143a) are on main.
-Architect decisions: the 60 second window is a first automatic WhatsApp template (HSM); the human SLA stays 30 to 60 minutes.
+History on main: TASK-01 (src/ layout, 282f73a), TASK-02 (phone rule and Monday mapping, 1e5143a), TASK-03 (omni-channel, opt-out, instant reply, intake config, 9d3cab7).
 
-## TASK-03 n8n build, omni-channel and multi-niche config (2026-10-23)
+## TASK-04 SQLite engine, atomic dedup, reminder config, instant reply replaces the opener (2026-10-23)
 
 | Requirement | Status | Evidence |
 |---|---|---|
-| crm-fields.js wired into build-workflows.js | PASS | Injected into the Plan node as `__CRM_FIELDS__`; each planned item carries `leadTemperature` and `nicheSegment`. Nothing is written to Monday while those columns are null |
-| Deploy or update the workflows in n8n | BLOCKED | This environment has no n8n API access, and AGENTS.md requires explicit approval from יורם for anything that reaches real leads. The built files are ready in src/services/funnel/dist/ |
-| Column ids out of build-mutation.js | PASS | Board, group, new stage and 21 column ids moved to `intake` in src/config/campaigns/refi.json and are injected as `__INTAKE__` by src/webhooks/intake/source.js (also find-query.js). Golden check: find-query, create and update output is byte identical before and after for two leads |
-| Per-niche config in src/config/campaigns/ | PASS | campaigns/ moved with git mv; every reference updated |
-| Fallback WhatsApp to SMS to Email | PASS (decision and notification); sending BLOCKED | src/services/funnel/channels.js picks the next channel that has explicit consent and a configured provider. After the third WhatsApp failure, After send passes the decision to Yoram as a Monday notification (`Fallback?` and `Notify fallback` nodes). SMS and email have no provider (owner decision: deferred), so nothing is sent on them |
-| Global opt-out | PASS | `channels.optOut.label` ("הסר", the existing funnel status, so no new Monday label) on any item stops every item with the same phone and blocks re-enrollment |
-| Instant WhatsApp HSM within 60 seconds | PASS (prepared, off) | src/services/funnel/instant-reply.js and dist/instant-reply-test.json. It can only be called by the intake workflow (Execute Workflow Trigger, no public webhook), sends from 972559881245 once per lead, only with WhatsApp consent and within 60 seconds. Off until a Gambot template id is approved and `instantReply.enabled` is set |
+| Instant HSM replaces the engine's 5 minute opener | PASS (code and tests; still off) | After a confirmed send the instant workflow writes `fn_last` (`Sent?`, `Mark sent`, `Update item (instant)`). On enrollment the engine waits `graceMinutes` (2) for that mark, then starts after the opener (M1 counted as sent at the instant time). If the instant reply never went out, the regular opener goes out once. Never both |
+| SMS and Email stay disabled | PASS | providers.sms and providers.email remain null |
+| Hardcoded ids out of the reminder | PASS | pick-overdue.js and patch-reminder-export.js read board, group, columns, sources and open stages from `intake.reminder` and `columns` in src/config/campaigns/refi.json. There is no `work.js` in the repo; patch-reminder-export.js is the reminder's other hardcoded file. The query built from config is byte identical to the deployed one (tests/funnel/reminder-config.test.js) |
+| Lead_Temperature in color_mm88xpa8 | PASS | The column holds Hebrew labels. HOT, WARM and COLD map to existing labels (HOT writes "חם מאוד", WARM "חם", COLD "מתעניין"), so no new label is created. A label that already fits (for example "רותח") is not downgraded. The engine writes only when heat changes (a reply, +10) |
+| SQLite engine src/services/lifecycle/db.js | PASS (local) | Tables `incoming_webhooks` (raw text), `lead_dedup_locks` (normalized phone, 60 seconds) and `lifecycle_events` (lead_received, duplicate_blocked, status, heat) |
+| Atomic lock before Monday or WhatsApp | PASS (mechanism); production wiring BLOCKED | `admitLead` records the raw webhook, takes the lock with one conditional UPSERT and logs the outcome in a single `BEGIN IMMEDIATE` transaction. Production intake runs in n8n Code nodes, which cannot open SQLite, so a service that n8n calls before "Find query" is needed, and deploying it needs approval |
 
 ### Test output
-- Linux container (node 22, nginx 1.22.1), the same as CI: `npm run test:funnel` 286/286 pass; `npm run test:deploy` 2/2 pass.
-- Windows: `npm run test:site` 55/55.
-- Total: 343/343.
-- New tests: tests/funnel/omni-channel.test.js (10 tests) and 4 structure tests in tests/funnel/build.test.js (placeholders replaced in every Code node, fallback wiring, no SMS or email HTTP node, instant reply trigger and disabled send).
-- Mutation check: removing the global opt-out from plan.js makes the opt-out test fail.
+- Linux container (node 22.23, nginx 1.22.1), the same as CI: `npm run test:funnel` 299/299 pass; `npm run test:deploy` 2/2 pass.
+- Windows: `npm run test:site` 55/55. Total: 356/356, 0 failures.
+- Atomic dedup: 8 separate processes race on one SQLite file for the same phone in two formats. Exactly 1 is admitted, 8 raw webhooks are stored, and the events are 1 lead_received and 7 duplicate_blocked.
+- Mutation checks: removing the lock's expiry condition fails 3 tests (including the race); removing the transaction fails the no-partial-record test. Removing the global opt-out (TASK-03) still fails its test.
 - dist/*.json was rebuilt in Linux and contains no carriage returns.
 
-## Open items, need a decision
-1. Deploy: n8n access (an API key, or importing the dist files) plus approval from יורם to replace the live intake and engine workflows. Importing the intake workflow goes through src/webhooks/intake/patch-export.js.
-2. Instant reply and the engine first message: the engine already sends its first template within 5 minutes. When the instant reply is enabled, choose whether it replaces the engine's first message or both are sent. Otherwise a lead gets two openers.
-3. SMS and email providers: none chosen. They are deferred in config/lead-service.json. A provider plus consent wording is required before `providers.sms` or `providers.email` is set.
-4. The fallback reacts to Gambot refusals (send failures), not to delivery status callbacks, which are not tracked today.
-5. Out of scope, still hardcoded: pick-overdue.js and patch-reminder-export.js (the SLA reminder workflow) use refi column ids and the board id.
-6. Lead_Temperature and Niche_Segment still have no Monday column. Creating one is a Monday write that needs approval.
+## Open items
+1. Deploy (n8n plus a small lock service): needs n8n access and approval from יורם.
+2. The instant reply stays off until a Gambot template id is approved; then set `instantReply.enabled` and `template.id`.
+3. The 60 second lock blocks rapid duplicates only. The existing 24 hour same-phone update in build-mutation.js is unchanged.
+4. Niche_Segment still has no Monday column.

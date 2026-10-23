@@ -1,7 +1,8 @@
 // Loads the n8n Code node sources with a fake $() so the funnel logic can be tested outside n8n.
 const fs=require('fs');const path=require('path');
 const SRC=path.resolve(__dirname,'../../src/services/funnel');
-const cfg=(id='refi')=>fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns/'+id+'.json'),'utf8');
+// A campaign id reads src/config/campaigns/<id>.json; an object is used as the campaign config itself.
+const cfg=(id='refi')=>typeof id==='object'?JSON.stringify(id):fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns/'+id+'.json'),'utf8');
 function planner(mode='test',goLive='2026-10-20T07:00:00Z',pilot='',campaign='refi'){
   const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__CONFIG__',cfg(campaign)).replace('__BUSINESS__',fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8')).replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot).replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
   return ({items,convos=[],now,shabbat=[],convosDown=false})=>{

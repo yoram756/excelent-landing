@@ -63,3 +63,26 @@ test('instant reply sends once, within 60 seconds, from the Gambot sender, only 
   assert.equal(instant(on,'live')({...lead,name:'דנה כהן'}).live,true);
   const mkt={...on,instantReply:{...on.instantReply,template:{...on.instantReply.template,category:'MARKETING'}}};
   assert.equal(instant(mkt)(lead).skipped,'no_marketing_consent');assert.equal(instant(mkt)({...lead,marketing:true}).hasSend,true);});
+
+// The instant reply replaces the engine's entry message (architect decision, TASK-04).
+const irOn={...refi,instantReply:{...refi.instantReply,enabled:true,template:{...refi.instantReply.template,id:'1234567890'}}};
+const planOn=planner('test','2026-10-20T07:00:00Z','',irOn);
+const fresh=(createdMinAgo,o={})=>{const created=new Date(Date.parse(NOW)-createdMinAgo*60000).toISOString();
+  return item({created,cols:{refi_phone:'0500000040',boolean_mm88mzry:{checked:'true'},long_text_mm8ag9s:JSON.stringify({...proof,receivedAt:created}),...o}});};
+const at=minAgo=>{const d=new Date(Date.parse(NOW)-minAgo*60000).toISOString();return {date:d.slice(0,10),time:d.slice(11,19)};};
+test('with the instant reply on, the engine waits for it instead of sending its own opener',()=>{
+  assert.equal(planOn({items:[fresh(1)],now:NOW}).length,0);});
+test('after the instant reply went out, the engine starts after the opener and never repeats it',()=>{
+  const [r]=planOn({items:[fresh(3,{fn_last:at(2)})],now:NOW});const c=JSON.parse(r.colsJson);
+  assert.equal(r.hasSend,false);assert.equal(c.fn_status.label,'פעיל');assert.equal(c.fn_step,'M1');assert.equal(JSON.parse(c.fn_opens.text).instantReplyAt,Date.parse(NOW)-120000);
+  assert.deepEqual(c.fn_next,at(-3),'next message 5 minutes after the instant reply');});
+test('if the instant reply never went out, the regular opener still goes out once',()=>{
+  const [r]=planOn({items:[fresh(3)],now:NOW});assert.equal(r.hasSend,true);assert.equal(r.send.templateId,refi.templates.M1.id);});
+test('with the instant reply off (repo default) the engine sends its opener at once',()=>{
+  const [r]=plan({items:[fresh(1)],now:NOW});assert.equal(r.send.templateId,refi.templates.M1.id);});
+
+test('a reply that raises heat updates the temperature label, never downgrading one that fits',()=>{
+  const reply=[{phone:'972500000040',lastMessageDirection:'incoming',lastMessageTime:new Date(Date.parse(NOW)-60000).toISOString(),lastMessage:'מעוניין'}];
+  const run=o=>JSON.parse(plan({items:[item({cols:active({fn_last:at(600),...o})})],convos:reply,now:NOW})[0].colsJson);
+  const up=run({numeric_mm883h9v:'65',color_mm88xpa8:'חם'});assert.equal(up.numeric_mm883h9v,'75');assert.deepEqual(up.color_mm88xpa8,{label:'חם מאוד'});
+  const keep=run({numeric_mm883h9v:'85',color_mm88xpa8:'רותח'});assert.equal(keep.numeric_mm883h9v,'95');assert.equal(keep.color_mm88xpa8,undefined);});

@@ -45,6 +45,8 @@ const tag=MODE==='live'?'':' (מצב בדיקה)';const PFX='משפך '+CFG.name
 // 1. Engine
 const engineCols=['firstReply','phone','stage','meeting','consentMarketing','consentService','quizDone','heat','status','path','step','next','last','token','state'].map(k=>COLS[k]);
 if(CFG.contactPermissions)engineCols.push(CFG.contactPermissions.column);
+// Current temperature label, so the engine never downgrades it (crm-fields.js).
+if(CFG.crmFields.leadTemperature.column)engineCols.push(CFG.crmFields.leadTemperature.column);
 const engine={name:PFX+'מנוע הודעות'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
  {id:id(),name:'Every 5 min',type:'n8n-nodes-base.scheduleTrigger',typeVersion:1.2,position:[0,0],parameters:{rule:{interval:[{field:'minutes',minutesInterval:5}]}}},
  hook('Run test',[0,200],'__TEST_PATH__engine'),
@@ -145,8 +147,12 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
  ifTrue('Has send?',[400,0],'={{ $json.hasSend }}'),
  ifTrue('Live?',[600,0],'={{ $json.live }}'),
  {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:!irLive,position:[800,-100],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'POST',url:'https://api.gambot.co.il/api/v1/messages/send-template',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:30000}}},
- code('Simulated send',[800,100],"const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};",'runOnceForEachItem')],
- connections:{'From intake':L('Instant reply'),'Instant reply':L('Has send?'),'Has send?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send')}};
+ code('Simulated send',[800,100],"const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};",'runOnceForEachItem'),
+ // Only a confirmed send marks "sent at"; the engine then skips its entry message for this lead (plan.js).
+ ifTrue('Sent?',[1000,0],'={{ $json.success === true }}','n8n-nodes-base.filter'),
+ code('Mark sent',[1200,0],"const d=new Date().toISOString();return {json:{itemId:$('Has send?').item.json.itemId,colsJson:JSON.stringify({"+JSON.stringify(COLS.last)+":{date:d.slice(0,10),time:d.slice(11,19)}})}};",'runOnceForEachItem'),
+ monday('Update item (instant)',[1400,0],update('$json'))],
+ connections:{'From intake':L('Instant reply'),'Instant reply':L('Has send?'),'Has send?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('Sent?'),'Simulated send':L('Sent?'),'Sent?':L('Mark sent'),'Mark sent':L('Update item (instant)')}};
 
 // Final guard: no run of two closing braces inside an expression body.
 for(const w of [engine,go,cal,instant])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
