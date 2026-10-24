@@ -47,7 +47,7 @@ E. Test with TEST leads (names start with TEST, phones 0500000040 and up)
 14. A "הסר" reply stops every item with that phone. Then delete all TEST items.
 
 F. Go live (only after explicit approval from יורם)
-15. Pilot: `node src/services/funnel/build-workflows.js pilot <go-live ISO> <phones>`. The phones must be in the campaign's identity.testPhones: for refi that is excelent_contact (972552783459) and backup (972548180280). FINAL_HANDOVER.md step 3 names 972502234052, which is not in refi testPhones, so that build would be refused. This is a contradiction to settle, not something I changed.
+15. Pilot: `node src/services/funnel/build-workflows.js pilot <go-live ISO> <phones>`. The phones must be in the campaign's identity.testPhones: for refi that is excelent_contact (972552783459), backup (972548180280) and yoram_050 (972502234052, added on request after TASK-08, see FINAL_EXECUTION_REPORT.md).
 16. Live: `node src/services/funnel/build-workflows.js live <go-live ISO>`, import engine-live.json (gitignored) and activate the intake, reminder, engine, go and Calendly workflows.
 17. Instant reply: after Gambot approves the template, set `instantReply.template.id` and `enabled: true` in src/config/campaigns/refi.json, run `npm test` and the package, build live, import instant-reply-live.json and activate it.
 18. First 48 hours: watch Monday notifications and Gambot. Rollback: deactivate the workflows, re-import the exports from step 1, `docker stop lock-server`.
