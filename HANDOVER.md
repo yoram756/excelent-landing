@@ -1,6 +1,28 @@
 # HANDOVER
 
-History on main: TASK-01 282f73a, TASK-02 1e5143a, TASK-03 9d3cab7, TASK-04 b7fc051, TASK-05 5f50816. Full overview: FINAL_HANDOVER.md.
+History on main: TASK-01 282f73a, TASK-02 1e5143a, TASK-03 9d3cab7, TASK-04 b7fc051, TASK-05 5f50816, TASK-06 bba0efb. Full overview: FINAL_HANDOVER.md.
+
+## TASK-07 Gambot HSM payload, consolidation config and intake wiring (2026-10-24)
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| src/config/campaigns/consolidation.json | PASS | The file already existed (draft, identity not approved). Added `meta: {campaignIds: [], adAccount: null}`: no Meta id was invented, so Meta leads still never map to consolidation. Test checks nothing is inherited from refi |
+| src/services/funnel/gambot-hsm.js | PASS (Gambot SIMULATED) | `templatePayload` (recipient 9725XXXXXXXX, sender from config/business.json gambot_sender, numeric approved template id) and `instantPayload` (enabled, approved id, WhatsApp consent, UTILITY or marketing consent, receivedAt within 60 seconds, TEST names only in test mode). instant-reply.js now uses it, injected by build-workflows.js; behavior unchanged (existing tests pass) |
+| HSM send node in dist | PASS (build) | dist/instant-reply-test.json and dist/consolidation/instant-reply-test.json rebuilt with the module; "Send WhatsApp" posts to send-template and stays disabled in test builds |
+| Lock call before the Monday lookup | PASS (synthetic export) | The real intake workflow is a private n8n export, not in dist (it holds the webhook path), so the wiring lives in src/webhooks/intake/patch-export.js: Lock (POST LOCK_SERVER_URL/lock, Header Auth credential) then Locked? then Restore intake then Find query; a lost lock answers "Reply locked" (200, duplicate, pending) with no write. No continue on fail: if the service is down the request fails instead of saving without the lock |
+| Instant reply call from the intake | PASS (synthetic export) | After "Reply saved", in parallel with the alert: "Instant reply input" (src/webhooks/intake/instant-reply-input.js, new items only, receivedAt = server receipt time) then Execute Workflow "Instant reply" (no wait, continue on error) |
+| Real n8n import and run | BLOCKED | No n8n access; needs approval from יורם |
+
+### Test output
+- Linux container (node v22.23.4, nginx 1.22.1): `npm run test:funnel` exit 0, 323/323; `npm run test:deploy` exit 0, 2/2. Windows: `npm run test:site` 55/55. Total 380/380, 0 failures.
+- New: tests/funnel/gambot-hsm.test.js (7 tests).
+- Mutation checks: routing a lost lock to Find query, adding continue on fail to the Lock node, and removing the 60 second window each make tests fail.
+
+### Deploy steps (need approval from יורם)
+1. Run lock-server.js where n8n can reach it (LOCK_SERVER_HOST on the internal Docker network, not 127.0.0.1 of the host). In n8n create a Header Auth credential "Lock server": Authorization = Bearer <LOCK_SERVER_TOKEN>.
+2. Import dist/instant-reply-<mode>.json and note its workflow id.
+3. Export the intake workflow, then: `LOCK_SERVER_URL=http://<host>:8787 LOCK_CREDENTIAL_ID=<id> INSTANT_REPLY_WORKFLOW_ID=<id> node src/webhooks/intake/patch-export.js in.json out.json`. Keep both files out of git.
+4. The instant reply sends nothing until a Gambot template is approved and `instantReply.template.id` and `enabled` are set.
 
 ## TASK-06 HTTP lock service and Meta Lead Ads adapter (2026-10-23)
 

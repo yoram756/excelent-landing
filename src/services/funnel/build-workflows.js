@@ -21,8 +21,8 @@ if(MODE!=='test'){
   if(!prof.allowedContactPhones.includes(ID.contactPhone))throw new Error('contact phone not allowed for profile');
   if(MODE==='pilot'){const ok=ID.testPhones.map(k=>BIZ0.phones[k].e164);for(const ph of PILOT.split(','))if(!ok.includes(ph))throw new Error('pilot phone '+ph+' is not an approved test phone of '+CFG.id);}
 }
-const D=__dirname;const CRMS=require('./crm-fields').inlineSource(),CHS=require('./channels').inlineSource();
-const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS);
+const D=__dirname;const CRMS=require('./crm-fields').inlineSource(),CHS=require('./channels').inlineSource(),HSMS=require('./gambot-hsm').inlineSource();
+const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS).split('__GAMBOT_HSM__').join(HSMS);
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
@@ -157,6 +157,6 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
 // Final guard: no run of two closing braces inside an expression body.
 for(const w of [engine,go,cal,instant])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__GAMBOT_HSM__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 console.log('built',MODE,fs.readdirSync(out).join(' '));

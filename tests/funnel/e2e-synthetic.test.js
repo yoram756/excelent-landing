@@ -49,7 +49,7 @@ test('synthetic Meta lead: lock, intake, Monday mutation with heat label, instan
 
     // 4. Instant WhatsApp within 60 seconds (template approval SIMULATED; the repo keeps it off).
     const irOn={...refi,instantReply:{...refi.instantReply,enabled:true,template:{...refi.instantReply.template,id:'1234567890'}}};
-    const code=read('src/services/funnel/instant-reply.js').replace('__CONFIG__',JSON.stringify(irOn)).replace('__BUSINESS__',read('config/business.json')).replace('__MODE__','test');
+    const code=read('src/services/funnel/instant-reply.js').replace('__CONFIG__',JSON.stringify(irOn)).replace('__BUSINESS__',read('config/business.json')).replace('__GAMBOT_HSM__',require('../../src/services/funnel/gambot-hsm').inlineSource()).replace('__MODE__','test');
     const lead={itemId:saved.request_id,name:v.name,firstName:v.name.replace(/^TEST\s*/,'').split(' ')[0],phone:v.phone,receivedAt:new Date(now).toISOString(),grants:v.contact_permissions.grants,marketing:v.marketing_consent};
     const sent=new Function('$json','$getWorkflowStaticData','Date',code)(lead,()=>({}),Date).json;
     assert.equal(sent.hasSend,true,JSON.stringify(sent));assert.equal(sent.live,false);

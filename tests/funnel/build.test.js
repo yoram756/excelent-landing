@@ -3,7 +3,7 @@ const D=path.resolve(__dirname,'../../src/services/funnel');
 execFileSync('node',[D+'/build-workflows.js','test']);
 const wfs=['engine-test','go','calendly'].map(f=>require(D+'/dist/'+f+'.json'));
 const instantWf=require(D+'/dist/instant-reply-test.json');
-test('every injected library and config placeholder is replaced in every Code node',()=>{for(const w of [...wfs,instantWf])for(const x of w.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|CRM_FIELDS|CHANNELS|MODE|PILOT|GO_LIVE|INTAKE)__/,w.name+' / '+x.name);});
+test('every injected library and config placeholder is replaced in every Code node',()=>{for(const w of [...wfs,instantWf])for(const x of w.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|CRM_FIELDS|CHANNELS|GAMBOT_HSM|MODE|PILOT|GO_LIVE|INTAKE)__/,w.name+' / '+x.name);});
 test('engine Plan carries the CRM field mapping and the channel decision',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.match(p,/leadTemperature/);assert.match(p,/nextChannel/);});
 test('a final WhatsApp failure notifies the fallback after the Monday update, with no SMS or email sender node',()=>{const e=wfs[0];
   assert.deepEqual(e.connections['Update item (sent)'].main[0].map(x=>x.node),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Notify fallback']);

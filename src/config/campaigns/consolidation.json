@@ -230,6 +230,10 @@
     "costPerPayingClient": null,
     "costPerMeeting": null
   },
+  "meta": {
+    "campaignIds": [],
+    "adAccount": null
+  },
   "notes": "טיוטה להוכחת התשתית. מסרים, שאלון ויעדים טרם הוגדרו עסקית. אין להפעיל לפני אישור יורם.",
   "identity": {
     "profile": null,

@@ -45,8 +45,9 @@ test('Lead_Temperature and Niche_Segment travel with every planned item',()=>{
   const [r]=plan({items:[item({cols:active({numeric_mm883h9v:'72'})})],now:NOW});assert.equal(r.leadTemperature,'HOT');assert.equal(r.nicheSegment,'refi');
   const [c]=plan({items:[item({cols:active()})],now:NOW});assert.equal(c.leadTemperature,null);});
 
+const hsm=require('../../src/services/funnel/gambot-hsm').inlineSource();
 const biz=fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8');
-const instant=(c,mode='test')=>{const code=fs.readFileSync(path.resolve(__dirname,'../../src/services/funnel/instant-reply.js'),'utf8').replace('__CONFIG__',JSON.stringify(c)).replace('__BUSINESS__',biz).replace('__MODE__',mode);
+const instant=(c,mode='test')=>{const code=fs.readFileSync(path.resolve(__dirname,'../../src/services/funnel/instant-reply.js'),'utf8').replace('__CONFIG__',JSON.stringify(c)).replace('__BUSINESS__',biz).replace('__GAMBOT_HSM__',hsm).replace('__MODE__',mode);
   const store={};return (lead,now='2026-10-21T09:00:30Z')=>{const D=class extends Date{static now(){return Date.parse(now);}};return new Function('$json','$getWorkflowStaticData','Date',code)(lead,()=>store,D).json;};};
 const on={...refi,instantReply:{...refi.instantReply,enabled:true,template:{...refi.instantReply.template,id:'1234567890'}}};
 const lead={itemId:'77',name:'TEST דנה',firstName:'דנה',phone:'972500000040',receivedAt:'2026-10-21T09:00:00Z',grants:{whatsapp:true},marketing:false};
