@@ -50,6 +50,8 @@ Code cleanliness:
 
 ## 4. Deploy checklist for יורם
 
+Superseded by the TASK-08 steps in HANDOVER.md. The two "not built yet" items below were built in TASK-06 and TASK-07.
+
 Each step that reaches real leads, Monday or Gambot needs your explicit approval (AGENTS.md).
 
 1. Decide and approve
