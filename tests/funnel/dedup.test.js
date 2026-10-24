@@ -51,3 +51,12 @@ test('concurrent processes racing for the same phone: exactly one is admitted',a
   assert.equal(count(db,"SELECT count(*) n FROM lifecycle_events WHERE type='lead_received'"),1);
   assert.equal(count(db,"SELECT count(*) n FROM lifecycle_events WHERE type='duplicate_blocked'"),N-1);
   db.close();fs.rmSync(dir,{recursive:true,force:true});});
+
+test('absolute database paths are normalized before validation and opening',()=>{
+  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'dedup-path-'));
+  const file=path.join(dir,'locks.sqlite');
+  const supplied=dir.replace(/\\/g,'/')+'/unused/../locks.sqlite/.';
+  let db;
+  try{db=new LifecycleDb(supplied);assert.ok(fs.existsSync(file));assert.equal(admit(db,'0500000040',0).admitted,true);}
+  finally{if(db)db.close();fs.rmSync(dir,{recursive:true,force:true});}
+});

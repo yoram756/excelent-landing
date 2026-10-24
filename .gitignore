@@ -10,3 +10,6 @@ src/services/lifecycle/runtime/
 *.sqlite
 *.sqlite-wal
 *.sqlite-shm
+
+# Private n8n original export
+/src/services/funnel/dist/intake-base.json

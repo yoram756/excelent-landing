@@ -1,0 +1,11 @@
+**
+!src/
+!src/services/
+!src/services/lifecycle/
+!src/services/lifecycle/db.js
+!src/services/lifecycle/lock-server.js
+!deploy/
+!deploy/lock/
+!deploy/lock/start.cjs
+!deploy/lock/Dockerfile
+!deploy/lock/Dockerfile.dockerignore

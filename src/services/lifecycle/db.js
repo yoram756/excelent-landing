@@ -13,8 +13,14 @@ const iso=v=>{const t=typeof v==='number'?v:Date.parse(v);if(!Number.isFinite(t)
 
 class LifecycleDb{
   constructor(path){
-    if(path!==':memory:'&&(typeof path!=='string'||!nodePath.isAbsolute(path)||!path.endsWith('.sqlite')))throw Error('Absolute .sqlite path or :memory: required');
-    this.db=new DatabaseSync(path);
+    let dbPath=path;
+    if(path!==':memory:'){
+      // Validate before resolve: relative paths must not silently become absolute.
+      if(typeof path!=='string'||!nodePath.isAbsolute(path))throw Error('Absolute .sqlite path or :memory: required');
+      dbPath=nodePath.resolve(nodePath.normalize(path));
+      if(!dbPath.endsWith('.sqlite'))throw Error('Absolute .sqlite path or :memory: required');
+    }
+    this.db=new DatabaseSync(dbPath);
     this.db.exec('PRAGMA busy_timeout=10000; PRAGMA journal_mode=WAL; PRAGMA synchronous=FULL;');
     this.db.exec(`
       CREATE TABLE IF NOT EXISTS incoming_webhooks(
