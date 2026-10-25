@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "preparedAt": "2026-10-25",
+  "submissionOnly": true,
+  "autoSubmit": false,
+  "autoSend": false,
+  "categoryDecision": "Meta determines the final category; UTILITY assumes a specific prior request.",
+  "sources": [
+    "https://www.postman.com/meta/whatsapp-business-platform/request/mr3xwmr/create-template-w-location-header-text-body-text-footer-and-a-website-buttons",
+    "https://whatsappbusiness.com/wp-content/uploads/2026/04/Best-Practices-for-Marketing-Messages-on-WhatsApp-.pdf"
+  ],
+  "templates": [
+    {
+      "product_slug": "bank_refused_mortgage",
+      "status": "DRAFT_NOT_SUBMITTED",
+      "enabled": false,
+      "metaTemplateId": null,
+      "submission": {
+        "name": "exc_bank_refused_ack_v1",
+        "language": "he",
+        "category": "UTILITY",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "שלום {{1}}, כאן אקסלנט. קיבלנו את בקשתך לשיחה בנושא בדיקת אפשרויות מימון. מספר הפנייה שלך: {{2}}. נציג יחזור אליך בהתאם לזמן הטיפול שנמסר בפנייה.",
+            "example": {
+              "body_text": [
+                [
+                  "דנה",
+                  "TEST1042"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "FOOTER",
+            "text": "להפסקת הודעות, השיבו הסר."
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "QUICK_REPLY",
+                "text": "עדכון זמן חזרה"
+              },
+              {
+                "type": "QUICK_REPLY",
+                "text": "ביטול הבקשה"
+              }
+            ]
+          }
+        ]
+      },
+      "bindings": {
+        "1": "lead.firstName",
+        "2": "lead.requestReference"
+      },
+      "eligibility": {
+        "priorRequestedServiceRequired": true,
+        "explicitWhatsAppConsentRequired": true,
+        "explicitMarketingConsentRequired": false,
+        "globalOptOutBlocks": true,
+        "humanApprovalRequired": true
+      },
+      "releaseBlockers": [
+        "owner_copy_approval",
+        "meta_category_and_approval",
+        "quick_reply_handlers_verified",
+        "opt_out_end_to_end_verified",
+        "sender_policy_allows_delivery"
+      ]
+    },
+    {
+      "product_slug": "bank_refused_mortgage",
+      "status": "DRAFT_NOT_SUBMITTED",
+      "enabled": false,
+      "metaTemplateId": null,
+      "submission": {
+        "name": "exc_bank_refused_intro_v1",
+        "language": "he",
+        "category": "MARKETING",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "שלום {{1}}, יורם מאקסלנט כאן. סירוב קודם לבקשת מימון אינו מסביר לבדו אילו אפשרויות עומדות בפניך. בשיחת היכרות נוכל להבין את הבקשה ואת המידע שחסר לבדיקה. אפשר לתאם שיחת היכרות בנושא {{2}}, אם זה מתאים לך.",
+            "example": {
+              "body_text": [
+                [
+                  "דנה",
+                  "בדיקת אפשרויות מימון"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "FOOTER",
+            "text": "להפסקת הודעות, השיבו הסר."
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "QUICK_REPLY",
+                "text": "אשמח לפרטים"
+              },
+              {
+                "type": "QUICK_REPLY",
+                "text": "הסר"
+              }
+            ]
+          }
+        ]
+      },
+      "bindings": {
+        "1": "lead.firstName",
+        "2": "approvedProductDisplayName"
+      },
+      "eligibility": {
+        "priorRequestedServiceRequired": false,
+        "explicitWhatsAppConsentRequired": true,
+        "explicitMarketingConsentRequired": true,
+        "globalOptOutBlocks": true,
+        "humanApprovalRequired": true
+      },
+      "releaseBlockers": [
+        "owner_copy_approval",
+        "meta_category_and_approval",
+        "quick_reply_handlers_verified",
+        "opt_out_end_to_end_verified",
+        "sender_policy_allows_delivery"
+      ]
+    },
+    {
+      "product_slug": "debt_consolidation_unsecured",
+      "status": "DRAFT_NOT_SUBMITTED",
+      "enabled": false,
+      "metaTemplateId": null,
+      "submission": {
+        "name": "exc_debt_unsecured_ack_v1",
+        "language": "he",
+        "category": "UTILITY",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "שלום {{1}}, כאן אקסלנט. קיבלנו את בקשתך לשיחה בנושא איחוד הלוואות ללא שעבוד נכס. מספר הפנייה שלך: {{2}}. נציג יחזור אליך בהתאם לזמן הטיפול שנמסר בפנייה.",
+            "example": {
+              "body_text": [
+                [
+                  "דנה",
+                  "TEST1042"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "FOOTER",
+            "text": "להפסקת הודעות, השיבו הסר."
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "QUICK_REPLY",
+                "text": "עדכון זמן חזרה"
+              },
+              {
+                "type": "QUICK_REPLY",
+                "text": "ביטול הבקשה"
+              }
+            ]
+          }
+        ]
+      },
+      "bindings": {
+        "1": "lead.firstName",
+        "2": "lead.requestReference"
+      },
+      "eligibility": {
+        "priorRequestedServiceRequired": true,
+        "explicitWhatsAppConsentRequired": true,
+        "explicitMarketingConsentRequired": false,
+        "globalOptOutBlocks": true,
+        "humanApprovalRequired": true
+      },
+      "releaseBlockers": [
+        "owner_copy_approval",
+        "meta_category_and_approval",
+        "quick_reply_handlers_verified",
+        "opt_out_end_to_end_verified",
+        "sender_policy_allows_delivery"
+      ]
+    },
+    {
+      "product_slug": "debt_consolidation_unsecured",
+      "status": "DRAFT_NOT_SUBMITTED",
+      "enabled": false,
+      "metaTemplateId": null,
+      "submission": {
+        "name": "exc_debt_unsecured_intro_v1",
+        "language": "he",
+        "category": "MARKETING",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "שלום {{1}}, יורם מאקסלנט כאן. באיחוד הלוואות ללא שעבוד נכס חשוב לבחון גם את העלות הכוללת ואת משך ההחזר, לצד ההחזר החודשי. אפשר לתאם שיחת היכרות בנושא {{2}}, אם זה מתאים לך.",
+            "example": {
+              "body_text": [
+                [
+                  "דנה",
+                  "איחוד הלוואות ללא שעבוד נכס"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "FOOTER",
+            "text": "להפסקת הודעות, השיבו הסר."
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "QUICK_REPLY",
+                "text": "אשמח לפרטים"
+              },
+              {
+                "type": "QUICK_REPLY",
+                "text": "הסר"
+              }
+            ]
+          }
+        ]
+      },
+      "bindings": {
+        "1": "lead.firstName",
+        "2": "approvedProductDisplayName"
+      },
+      "eligibility": {
+        "priorRequestedServiceRequired": false,
+        "explicitWhatsAppConsentRequired": true,
+        "explicitMarketingConsentRequired": true,
+        "globalOptOutBlocks": true,
+        "humanApprovalRequired": true
+      },
+      "releaseBlockers": [
+        "owner_copy_approval",
+        "meta_category_and_approval",
+        "quick_reply_handlers_verified",
+        "opt_out_end_to_end_verified",
+        "sender_policy_allows_delivery"
+      ]
+    },
+    {
+      "product_slug": "reverse_mortgage",
+      "status": "DRAFT_NOT_SUBMITTED",
+      "enabled": false,
+      "metaTemplateId": null,
+      "submission": {
+        "name": "exc_reverse_mortgage_ack_v1",
+        "language": "he",
+        "category": "UTILITY",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "שלום {{1}}, כאן אקסלנט. קיבלנו את בקשתך לשיחה בנושא משכנתא הפוכה. מספר הפנייה שלך: {{2}}. נציג יחזור אליך בהתאם לזמן הטיפול שנמסר בפנייה.",
+            "example": {
+              "body_text": [
+                [
+                  "דנה",
+                  "TEST1042"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "FOOTER",
+            "text": "להפסקת הודעות, השיבו הסר."
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "QUICK_REPLY",
+                "text": "עדכון זמן חזרה"
+              },
+              {
+                "type": "QUICK_REPLY",
+                "text": "ביטול הבקשה"
+              }
+            ]
+          }
+        ]
+      },
+      "bindings": {
+        "1": "lead.firstName",
+        "2": "lead.requestReference"
+      },
+      "eligibility": {
+        "priorRequestedServiceRequired": true,
+        "explicitWhatsAppConsentRequired": true,
+        "explicitMarketingConsentRequired": false,
+        "globalOptOutBlocks": true,
+        "humanApprovalRequired": true
+      },
+      "releaseBlockers": [
+        "owner_copy_approval",
+        "meta_category_and_approval",
+        "quick_reply_handlers_verified",
+        "opt_out_end_to_end_verified",
+        "sender_policy_allows_delivery"
+      ]
+    },
+    {
+      "product_slug": "reverse_mortgage",
+      "status": "DRAFT_NOT_SUBMITTED",
+      "enabled": false,
+      "metaTemplateId": null,
+      "submission": {
+        "name": "exc_reverse_mortgage_intro_v1",
+        "language": "he",
+        "category": "MARKETING",
+        "components": [
+          {
+            "type": "BODY",
+            "text": "שלום {{1}}, יורם מאקסלנט כאן. לפני בחינת משכנתא הפוכה כדאי להבין כיצד הריבית והתקופה עשויות להשפיע על יתרת החוב, ומהן החלופות. אפשר לתאם שיחת היכרות בנושא {{2}}, אם זה מתאים לך.",
+            "example": {
+              "body_text": [
+                [
+                  "דנה",
+                  "משכנתא הפוכה"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "FOOTER",
+            "text": "להפסקת הודעות, השיבו הסר."
+          },
+          {
+            "type": "BUTTONS",
+            "buttons": [
+              {
+                "type": "QUICK_REPLY",
+                "text": "אשמח לפרטים"
+              },
+              {
+                "type": "QUICK_REPLY",
+                "text": "הסר"
+              }
+            ]
+          }
+        ]
+      },
+      "bindings": {
+        "1": "lead.firstName",
+        "2": "approvedProductDisplayName"
+      },
+      "eligibility": {
+        "priorRequestedServiceRequired": false,
+        "explicitWhatsAppConsentRequired": true,
+        "explicitMarketingConsentRequired": true,
+        "globalOptOutBlocks": true,
+        "humanApprovalRequired": true
+      },
+      "releaseBlockers": [
+        "owner_copy_approval",
+        "meta_category_and_approval",
+        "quick_reply_handlers_verified",
+        "opt_out_end_to_end_verified",
+        "sender_policy_allows_delivery"
+      ]
+    }
+  ]
+}

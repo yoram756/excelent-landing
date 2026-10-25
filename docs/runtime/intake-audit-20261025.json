@@ -1,0 +1,61 @@
+{
+  "capturedAtDate": "2026-10-25",
+  "timezone": "Asia/Jerusalem",
+  "n8nVersion": "2.40.7",
+  "captureMode": "read_only_sqlite_and_installed_source",
+  "installedSource": {
+    "path": "/usr/local/lib/node_modules/n8n/dist/execution-lifecycle/execution-lifecycle-hooks.js",
+    "sha256": "1d9b4d9c48a80c2bfe65605de9b952d0bb4c740bd5daf733a2e34bfc769d5946",
+    "lines": [
+      432,
+      433,
+      434
+    ],
+    "behavior": "manual execution with saveSettings.manual=false and no waitTill invokes softDelete and returns before full execution update"
+  },
+  "parents": [
+    {
+      "id": "30220",
+      "rawStatus": "running",
+      "mode": "manual",
+      "stoppedAt": null,
+      "deletedAt": "2026-10-25 12:25:25",
+      "effectiveState": "excluded_from_history"
+    },
+    {
+      "id": "30311",
+      "rawStatus": "running",
+      "mode": "manual",
+      "stoppedAt": null,
+      "deletedAt": "2026-10-25 12:39:07",
+      "effectiveState": "excluded_from_history"
+    }
+  ],
+  "children": [
+    {
+      "id": "30221",
+      "status": "success",
+      "mode": "integrated",
+      "stoppedAt": "2026-10-25 12:25:25.058",
+      "deletedAt": null
+    },
+    {
+      "id": "30312",
+      "status": "success",
+      "mode": "integrated",
+      "stoppedAt": "2026-10-25 12:39:07.112",
+      "deletedAt": null
+    }
+  ],
+  "nonDeletedParentCount": 0,
+  "priorFunctionalEvidence": {
+    "httpStatus": 200,
+    "privateReadbackVerified": true,
+    "childSendExecuted": false,
+    "sourceReport": "outputs/product-e2e-report-20261025.txt"
+  },
+  "documentationGapStatus": "PASS",
+  "databaseChanged": false,
+  "loggingEnabled": false,
+  "productionReadiness": "NOT TESTED"
+}
