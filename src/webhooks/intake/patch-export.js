@@ -55,7 +55,7 @@ const patchIntake=(w,{campaign='refi',lockUrl,lockCredentialId,instantWorkflowId
  w.nodes.push(
   {id:nodeId('Instant reply input'),name:'Instant reply input',type:'n8n-nodes-base.code',typeVersion:2,position:[rx+200,ry+200],parameters:{jsCode:intakeSource('instant-reply-input.js',campaign)}},
   {id:nodeId('Instant reply'),name:'Instant reply',type:'n8n-nodes-base.executeWorkflow',typeVersion:1.1,position:[rx+400,ry+200],onError:'continueRegularOutput',
-   parameters:{source:'database',workflowId:instantWorkflowId,options:{waitForSubWorkflow:false}}});
+   parameters:{source:'database',workflowId:{__rl:true,value:instantWorkflowId,mode:'id'},options:{waitForSubWorkflow:false}}});
  w.connections['Reply saved'].main[0].push({node:'Instant reply input',type:'main',index:0});
  w.connections['Instant reply input']=link('Instant reply');
  // State and saved execution data are deliberately excluded from the import file.

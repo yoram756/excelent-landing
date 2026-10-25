@@ -74,7 +74,7 @@ test('intake wiring: the instant reply is called after the response, only for a 
   assert.deepEqual(next(w,'Saved?')[0],['Reply saved']);assert.deepEqual(next(w,'Reply saved'),[['Alert query','Instant reply input']]);
   assert.deepEqual(next(w,'Instant reply input'),[['Instant reply']]);
   const call=w.nodes.find(n=>n.name==='Instant reply');
-  assert.equal(call.type,'n8n-nodes-base.executeWorkflow');assert.equal(call.parameters.workflowId,'InstantWf0001');
+  assert.equal(call.type,'n8n-nodes-base.executeWorkflow');assert.deepEqual(call.parameters.workflowId,{__rl:true,value:'InstantWf0001',mode:'id'});
   assert.equal(call.parameters.options.waitForSubWorkflow,false);assert.equal(call.onError,'continueRegularOutput');
   const code=w.nodes.find(n=>n.name==='Instant reply input').parameters.jsCode;assert.equal(code,intakeSource('instant-reply-input.js','refi'));
   const v={name:'TEST דנה כהן',phone:'972500000040',marketing_consent:false,contact_permissions:{receivedAt:'2026-10-24T09:00:00Z',grants:{whatsapp:true,email:false,sms:false}}};
@@ -129,4 +129,11 @@ test('intake wiring rejects unknown or parallel success routes',()=>{
   w.connections['Reply saved']={main:[[{node:'Alert query',type:'main',index:0}]]};
   w.connections['Alert Yoram']={main:[[{node:'Email alert',type:'main',index:0},{node:'Save to Monday',type:'main',index:0}]]};
   assert.throws(()=>patchIntake(w,opts),/Unexpected success routing/);
+});
+
+test('intake subworkflow reference matches the installed n8n 1.1 value-object contract',()=>{
+ const w=patchIntake(exportFixture(),opts);const call=w.nodes.find(n=>n.name==='Instant reply');
+ const {value}=call.parameters.workflowId;
+ assert.equal(value,opts.instantWorkflowId,'n8n 1.1 reads workflowId.value');
+ assert.equal(call.parameters.workflowId.mode,'id');
 });
