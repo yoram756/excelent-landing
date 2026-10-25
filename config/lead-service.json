@@ -24,7 +24,14 @@
     "realCustomersAllowed": false,
     "groupsAllowed": false
   },
-  "deferred": ["SMS", "email nurturing", "WhatsApp tips group"],
+  "deferred": ["SMS outside the refi WhatsApp fallback", "email nurturing", "WhatsApp tips group"],
+  "channelFallback": {
+    "approvedByOwner": "2026-10-25",
+    "campaigns": ["refi"],
+    "channels": ["sms", "email"],
+    "trigger": "WhatsApp failed 3 times or the 24 hour window is closed, only with explicit channel consent",
+    "liveSending": "not enabled: TextMe and SendGrid credentials stay PENDING until a separate owner approval"
+  },
   "notes": [
     "Questionnaire answers may include unknown or skipped details; do not demand financial documents before returning to the lead.",
     "This file records owner decisions. See the release report for the deployed reminder version; a callback or appointment still requires operational evidence.",

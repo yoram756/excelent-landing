@@ -3,11 +3,19 @@ const D=path.resolve(__dirname,'../../src/services/funnel');
 execFileSync('node',[D+'/build-workflows.js','test']);
 const wfs=['engine-test','go','calendly'].map(f=>require(D+'/dist/'+f+'.json'));
 const instantWf=require(D+'/dist/instant-reply-test.json');
-test('every injected library and config placeholder is replaced in every Code node',()=>{for(const w of [...wfs,instantWf])for(const x of w.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|CRM_FIELDS|CHANNELS|GAMBOT_HSM|MODE|PILOT|GO_LIVE|INTAKE)__/,w.name+' / '+x.name);});
+const smsWf=require(D+'/dist/sms-inbound-test.json');
+test('SMS inbound: every placeholder injected, every connection valid, opt-out writes only after a match',()=>{const names=new Set(smsWf.nodes.map(x=>x.name));
+  for(const x of smsWf.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|TEXTME|FALLBACK)__/,x.name);
+  for(const [a,c] of Object.entries(smsWf.connections)){assert.ok(names.has(a),a);for(const br of c.main)for(const x of br)assert.ok(names.has(x.node),x.node);}
+  assert.deepEqual(smsWf.connections['Opt-out?'].main[0].map(x=>x.node),['Find by phone']);assert.equal(smsWf.nodes.find(x=>x.type==='n8n-nodes-base.webhook').parameters.path,'__SMS_INBOUND_PATH__');});
+test('every injected library and config placeholder is replaced in every Code node',()=>{for(const w of [...wfs,instantWf])for(const x of w.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|CRM_FIELDS|CHANNELS|GAMBOT_HSM|FALLBACK|TEXTME|MODE|PILOT|GO_LIVE|INTAKE)__/,w.name+' / '+x.name);});
 test('engine Plan carries the CRM field mapping and the channel decision',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.match(p,/leadTemperature/);assert.match(p,/nextChannel/);});
-test('a final WhatsApp failure notifies the fallback after the Monday update, with no SMS or email sender node',()=>{const e=wfs[0];
-  assert.deepEqual(e.connections['Update item (sent)'].main[0].map(x=>x.node),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Notify fallback']);
-  for(const n of e.nodes)if(n.type==='n8n-nodes-base.httpRequest')assert.match(n.parameters.url,/monday\.com|gambot\.co\.il|hebcal\.com/,n.name);});
+test('a final WhatsApp failure notifies the fallback after the Monday update; SMS and email senders exist only disabled without a provider or in a test build',()=>{const e=wfs[0];
+  assert.deepEqual(e.connections['Update item (sent)'].main[0].map(x=>x.node),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Notify fallback','Fallback channel']);
+  assert.deepEqual(e.connections['Fallback channel'].main.map(br=>br.map(x=>x.node)),[['Send SMS'],['Send email']]);
+  for(const n of e.nodes)if(n.type==='n8n-nodes-base.httpRequest'){
+    if(n.name==='Send SMS'||n.name==='Send email'){assert.equal(n.disabled,true,n.name);assert.match(n.parameters.url,/fallbackSend\.request\.url/,n.name);}
+    else assert.match(n.parameters.url,/monday\.com|gambot\.co\.il|hebcal\.com/,n.name);}});
 test('instant reply runs only from the intake workflow and cannot send from a test build or without an approved template',()=>{const w=instantWf;
   const names=new Set(w.nodes.map(x=>x.name));for(const [a,c] of Object.entries(w.connections)){assert.ok(names.has(a),a);for(const br of c.main)for(const x of br)assert.ok(names.has(x.node),x.node);}
   assert.equal(w.nodes[0].type,'n8n-nodes-base.executeWorkflowTrigger');assert.ok(!w.nodes.some(n=>n.type==='n8n-nodes-base.webhook'));

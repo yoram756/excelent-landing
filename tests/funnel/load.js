@@ -14,7 +14,7 @@ function planner(mode='test',goLive='2026-10-20T07:00:00Z',pilot='',campaign='re
   };
 }
 function afterSend(planOut,response){
-  const code=fs.readFileSync(SRC+'/after-send.js','utf8');
+  const code=fs.readFileSync(SRC+'/after-send.js','utf8').replace('__CONFIG__',cfg(planOut.campaign||'refi')).replace('__BUSINESS__',fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8')).replace('__FALLBACK__',()=>require(SRC+'/fallback').bundleSource());
   const $=()=>({item:{json:planOut}});
   return new Function('$','$json',code)($,response).json;
 }

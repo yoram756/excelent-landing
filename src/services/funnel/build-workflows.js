@@ -22,7 +22,9 @@ if(MODE!=='test'){
   if(MODE==='pilot'){const ok=ID.testPhones.map(k=>BIZ0.phones[k].e164);for(const ph of PILOT.split(','))if(!ok.includes(ph))throw new Error('pilot phone '+ph+' is not an approved test phone of '+CFG.id);}
 }
 const D=__dirname;const CRMS=require('./crm-fields').inlineSource(),CHS=require('./channels').inlineSource(),HSMS=require('./gambot-hsm').inlineSource();
-const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS).split('__GAMBOT_HSM__').join(HSMS);
+// Fallback providers and drafts, inlined for the After send node (fallback.js).
+const FBS=require('./fallback').bundleSource();
+const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS).split('__GAMBOT_HSM__').join(HSMS).split('__FALLBACK__').join(FBS).split('__TEXTME__').join(require('../sms/textme').inlineSource());
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
@@ -44,6 +46,8 @@ const tag=MODE==='live'?'':' (מצב בדיקה)';const PFX='משפך '+CFG.name
 
 // 1. Engine
 const engineCols=['firstReply','phone','stage','meeting','consentMarketing','consentService','quizDone','heat','status','path','step','next','last','token','state'].map(k=>COLS[k]);
+// Email address for the email fallback (fallback.js), only when the campaign maps one.
+if(COLS.email)engineCols.push(COLS.email);
 if(CFG.contactPermissions)engineCols.push(CFG.contactPermissions.column);
 // Current temperature label, so the engine never downgrades it (crm-fields.js).
 if(CFG.crmFields.leadTemperature.column)engineCols.push(CFG.crmFields.leadTemperature.column);
@@ -76,6 +80,14 @@ engine.nodes.push(ifTrue('Fallback?',[2000,-100],"={{ $('After send').item.json.
 engine.nodes.push(monday('Notify fallback',[2200,-100],notify("$('After send').item.json")));
 engine.connections['Update item (sent)']=L('Fallback?');
 engine.connections['Fallback?']=L('Notify fallback');
+// Controlled fallback send. Enabled only in live mode and only for a channel whose provider the campaign configures;
+// the request body was built by fallback.js, the provider token comes from the n8n credential.
+const FBCRED={sms:{httpHeaderAuth:{id:'PENDING_TEXTME',name:'TextMe Bearer'}},email:{httpHeaderAuth:{id:'PENDING_SENDGRID',name:'SendGrid Bearer'}}};
+const fbSend=(name,ch,pos)=>({id:id(),name,type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:MODE!=='live'||!CFG.channels.providers[ch],position:pos,onError:'continueRegularOutput',credentials:FBCRED[ch],parameters:{method:'POST',url:"={{ $('After send').item.json.fallbackSend.request.url }}",authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('After send').item.json.fallbackSend.request.body) }}",options:{response:{response:{neverError:true}},timeout:30000}}});
+engine.nodes.push({id:id(),name:'Fallback channel',type:'n8n-nodes-base.switch',typeVersion:3,position:[2200,-300],parameters:{rules:{values:['sms','email'].map(ch=>({conditions:{options:{caseSensitive:true,leftValue:'',typeValidation:'loose'},conditions:[{id:id(),leftValue:"={{ $('After send').item.json.fallbackSend?.channel }}",rightValue:ch,operator:{type:'string',operation:'equals'}}],combinator:'and'},renameOutput:true,outputKey:ch}))},options:{}}});
+engine.nodes.push(fbSend('Send SMS','sms',[2400,-400]),fbSend('Send email','email',[2400,-200]));
+engine.connections['Fallback?']=L('Notify fallback');engine.connections['Fallback?'].main[0].push({node:'Fallback channel',type:'main',index:0});
+engine.connections['Fallback channel']=L('Send SMS','Send email');
 
 engine.nodes.push(code('Token candidates',[500,100],src('token-candidates.js')));
 engine.nodes.push({id:id(),name:'Secure tokens',type:'n8n-nodes-base.crypto',typeVersion:1,position:[600,100],parameters:{action:'generate',dataPropertyName:'secureToken',encodingType:'hex',stringLength:32}});
@@ -154,10 +166,21 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
  monday('Update item (instant)',[1400,0],update('$json'))],
  connections:{'From intake':L('Instant reply'),'Instant reply':L('Has send?'),'Has send?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('Sent?'),'Simulated send':L('Sent?'),'Sent?':L('Mark sent'),'Mark sent':L('Update item (instant)')}};
 
+// 5. SMS inbound (TextMe DLR and replies). The path is a placeholder filled in at deploy time, like the test paths.
+// A reply with an opt-out keyword sets the global opt-out label on every item with that phone; DLRs stay in the execution log.
+const smsIn={name:PFX+'קליטת SMS'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
+ hook('TextMe webhook',[0,0],'__SMS_INBOUND_PATH__'),
+ code('Parse SMS',[200,0],src('../sms/inbound.js'),'runOnceForEachItem'),
+ ifTrue('Opt-out?',[400,0],'={{ $json.optOut }}','n8n-nodes-base.filter'),
+ monday('Find by phone',[600,0],'={{ JSON.stringify({query:"query($b:ID!,$v:[String]!){ items_page_by_column_values(board_id:$b,limit:50,columns:[{column_id:\"'+COLS.phone+'\",column_values:$v}]){ items{ id } } }",variables:{b:"'+BOARD+'",v:[$json.local,$json.phone,"+"+$json.phone]}}) }}'),
+ code('Mark opt-out',[800,0],src('../sms/mark-optout.js')),
+ monday('Update item',[1000,0],update('$json'))],
+ connections:{'TextMe webhook':L('Parse SMS'),'Parse SMS':L('Opt-out?'),'Opt-out?':L('Find by phone'),'Find by phone':L('Mark opt-out'),'Mark opt-out':L('Update item')}};
+
 // Final guard: no run of two closing braces inside an expression body.
-for(const w of [engine,go,cal,instant])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
+for(const w of [engine,go,cal,instant,smsIn])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__GAMBOT_HSM__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__GAMBOT_HSM__|__FALLBACK__|__TEXTME__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 fs.copyFileSync(path.join(__dirname,'../../config/products.json'),path.join(out,'product-dictionary.json'));
 console.log('built',MODE,fs.readdirSync(out).join(' '));

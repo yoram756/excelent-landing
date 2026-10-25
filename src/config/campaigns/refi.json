@@ -1,6 +1,7 @@
 {
   "id": "refi",
   "name": "מחזור משכנתא",
+  "product": "refi",
   "service": "בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות",
   "goal": "לקוח שחתם והעביר מקדמה",
   "audience": "בעלי משכנתא קיימת המבקשים לבדוק מחזור; מיקוד Meta בפועל מתועד ב-docs/meta-campaign-audit-20261020.md",
@@ -424,7 +425,9 @@
   },
   "channels": {
     "cascade": ["whatsapp", "sms", "email"],
-    "providers": { "whatsapp": "gambot", "sms": null, "email": null },
+    "providers": { "whatsapp": "gambot", "sms": "textme", "email": "sendgrid" },
+    "sms": { "source": "Excelent" },
+    "email": { "from": "office@excelent.co.il" },
     "optOut": { "label": "הסר", "keywords": "הסר|הסירו|להסיר|stop" }
   },
   "instantReply": {

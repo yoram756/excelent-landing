@@ -58,7 +58,7 @@ assert(!cv.boolean_mm88mzry.value||![true,'true'].includes(JSON.parse(cv.boolean
 assert(cv.refi_source.text==='קליטת LP1','LP1 source');
 assert(plan().every(p=>!p.send),'Service-only lead must not get marketing');
 const [p]=plan({boolean_mm88mzry:{checked:true}});assert(p?.send&&!p.live,'Simulated outbound plan');
-function after($,$json){${read('src/services/funnel/after-send.js')}}
+function after($,$json){${read('src/services/funnel/after-send.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__FALLBACK__',()=>require('../../src/services/funnel/fallback').bundleSource())}}
 const a=after(()=>({item:{json:p}}),{success:true,simulated:true}).json;
 assert(a.sendOk&&a.simulated,'Mock provider acknowledgment');
 return mutation({...JSON.parse(a.colsJson),boolean_mm88mzry:{checked:true}});`);

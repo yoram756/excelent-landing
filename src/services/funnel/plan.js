@@ -190,6 +190,6 @@ for(const it of items){
     send.key=key;
     set(C.state,{text:JSON.stringify({...st,lastKey:key})});
   }
-  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st),fallbackJson:fallback?JSON.stringify(fallback):null});
+  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st),fallbackJson:fallback?JSON.stringify(fallback):null,email:col(cv,'email').text||null,first});
 }
 return out.map(o=>({json:{...o,campaign:CFG.id,leadTemperature:temps[o.itemId]??null,nicheSegment:CFG.crmFields.nicheSegment.value,colmap:C,hasSend:!!o.send,reconcile:!!o.reconcile,live:MODE!=='test',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));

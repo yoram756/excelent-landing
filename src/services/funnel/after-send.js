@@ -3,6 +3,7 @@
 // success false -> Gambot refused: keep the position, retry in 30 minutes, stop after 3 refusals
 // no answer     -> result unknown: keep the pending send, the reconcile step checks Gambot before any resend
 const p = $('Has send?').item.json;
+const CFG = __CONFIG__, BIZ = __BUSINESS__, FB = __FALLBACK__;
 const r = $json || {};
 const C = p.colmap;
 const ok = r.success === true;
@@ -17,14 +18,21 @@ if (refused) {
   cols = { [C.path]: p.prevPath, [C.step]: p.prevStep };
   const t = new Date(Date.now() + 30 * 60000).toISOString();
   cols[C.next] = { date: t.slice(0, 10), time: t.slice(11, 19) };
-  if (st.fails >= 3) {
+  // A closed 24 hour window will not reopen on retry: fall back at once. Any other refusal gets 3 tries.
+  const windowClosed = FB.plan.isWindowClosed(r);
+  if (windowClosed || st.fails >= 3) {
     cols[C.status] = { label: 'נעצר' }; cols[C.next] = {};
-    // WhatsApp finally failed: hand the planned fallback (channels.js) to Yoram. No other channel sends from here.
+    // WhatsApp finally failed: the planned decision (channels.js) becomes a provider request (fallback.js).
+    // "Send SMS" / "Send email" send it only in live mode with a configured provider; Yoram is told either way.
     try { fallback = JSON.parse(p.fallbackJson || 'null'); } catch (e) {}
-    if (fallback && fallback.action !== 'STOP') fallbackText = 'משפך: WhatsApp נכשל 3 פעמים ונעצר. ערוץ חלופי: ' + (fallback.action === 'SEND' ? fallback.channel : (fallback.channels || []).join(', ') + ' (אין ספק מוגדר, טיפול ידני)') + '.';
+    if (fallback && fallback.action !== 'STOP') {
+      fallback = FB.plan.planFallback({ decision: fallback, lead: { phone: p.phone, email: p.email, first: p.first }, cfg: CFG, biz: BIZ, drafts: FB.drafts }, { sms: FB.sms, email: FB.email });
+      const why = windowClosed ? 'חלון 24 השעות סגור' : 'WhatsApp נכשל 3 פעמים';
+      fallbackText = 'משפך: ' + why + ', נעצר. ערוץ חלופי: ' + (fallback.action === 'SEND' ? fallback.channel + ' נשלח אוטומטית' : (fallback.channel || (fallback.channels || []).join(', ')) + ' לא נשלח (' + fallback.reason + '), טיפול ידני') + '.';
+    }
   }
   cols[C.state] = { text: JSON.stringify(st) };
 } else if (!ok) {
   cols = {};
 }
-return { json: { ...p, colsJson: JSON.stringify(cols), sendOk: ok, sendUnknown: !ok && !refused, simulated: !!r.simulated, fallback, hasFallback: !!fallbackText, notifyText: fallbackText || p.notifyText } };
+return { json: { ...p, colsJson: JSON.stringify(cols), sendOk: ok, sendUnknown: !ok && !refused, simulated: !!r.simulated, fallback, hasFallback: !!fallbackText, fallbackSend: fallback && fallback.action === 'SEND' ? fallback : null, notifyText: fallbackText || p.notifyText } };

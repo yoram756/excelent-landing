@@ -6,7 +6,7 @@
  },
  "nodes": [
   {
-   "id": "70f15ab4-0e5a-bab7-8af1-6796831ad332",
+   "id": "919f6935-c4af-c5f2-ad10-91dddf63309a",
    "name": "From intake",
    "type": "n8n-nodes-base.executeWorkflowTrigger",
    "typeVersion": 1.1,
@@ -19,7 +19,7 @@
    }
   },
   {
-   "id": "3c3392bf-1865-4810-9137-4cb6eda66a80",
+   "id": "3f86b1dd-0015-23c8-4da6-104e89532933",
    "name": "Instant reply",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -33,7 +33,7 @@
    }
   },
   {
-   "id": "3436224c-4802-361e-ec65-077359255de8",
+   "id": "711acfc4-3460-410f-0473-ca4c83cacbc9",
    "name": "Has send?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -50,7 +50,7 @@
      },
      "conditions": [
       {
-       "id": "8ed1b0f8-f863-b159-4bb3-06cd8fe46f21",
+       "id": "d5378b35-5f1d-0480-caf4-abce3a347f87",
        "leftValue": "={{ $json.hasSend }}",
        "rightValue": true,
        "operator": {
@@ -66,7 +66,7 @@
    }
   },
   {
-   "id": "62123dea-764d-0464-10af-8bb2e5f8ae99",
+   "id": "5825aeb5-eecf-b08e-91ab-21e05826036c",
    "name": "Live?",
    "type": "n8n-nodes-base.if",
    "typeVersion": 2,
@@ -83,7 +83,7 @@
      },
      "conditions": [
       {
-       "id": "919f6935-c4af-c5f2-ad10-91dddf63309a",
+       "id": "15eff5b6-8336-a55e-6e97-dc66608d9f85",
        "leftValue": "={{ $json.live }}",
        "rightValue": true,
        "operator": {
@@ -99,7 +99,7 @@
    }
   },
   {
-   "id": "3f86b1dd-0015-23c8-4da6-104e89532933",
+   "id": "46261877-a887-8e93-cf83-9b42288e822f",
    "name": "Send WhatsApp",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -134,7 +134,7 @@
    }
   },
   {
-   "id": "711acfc4-3460-410f-0473-ca4c83cacbc9",
+   "id": "735933ca-49f0-de86-67fd-5041ff8a8709",
    "name": "Simulated send",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -148,7 +148,7 @@
    }
   },
   {
-   "id": "d5378b35-5f1d-0480-caf4-abce3a347f87",
+   "id": "7045d2e1-cafc-c6c4-594c-4f44273f3da5",
    "name": "Sent?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -165,7 +165,7 @@
      },
      "conditions": [
       {
-       "id": "5825aeb5-eecf-b08e-91ab-21e05826036c",
+       "id": "b87ce8ed-b274-4c91-7d44-c944da408c53",
        "leftValue": "={{ $json.success === true }}",
        "rightValue": true,
        "operator": {
@@ -181,7 +181,7 @@
    }
   },
   {
-   "id": "15eff5b6-8336-a55e-6e97-dc66608d9f85",
+   "id": "3573c5f1-46b7-688f-5d95-fda964f06ae6",
    "name": "Mark sent",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -195,7 +195,7 @@
    }
   },
   {
-   "id": "46261877-a887-8e93-cf83-9b42288e822f",
+   "id": "190c7f90-9695-520c-19ba-24b8667769c3",
    "name": "Update item (instant)",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,

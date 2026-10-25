@@ -4,6 +4,8 @@ const {planner,afterSend,item}=require('./load');
 const {nextChannel}=require('../../src/services/funnel/channels');
 const cfg=id=>JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns',id+'.json'),'utf8'));
 const refi=cfg('refi');const plan=planner('test');
+// The same campaign with no SMS or email provider: the decision must block, never invent one.
+const noProv={...refi,channels:{...refi.channels,providers:{...refi.channels.providers,sms:null,email:null}}};
 const NOW='2026-10-21T09:00:00Z',due={date:'2026-10-21',time:'08:00:00'};
 const active=o=>({refi_phone:'0500000040',boolean_mm88mzry:{checked:'true'},fn_status:'פעיל',fn_token:'abcdefghjk',fn_path:'B',fn_step:'M1',fn_next:due,...o});
 const all={whatsapp:true,sms:true,email:true};
@@ -11,15 +13,18 @@ const all={whatsapp:true,sms:true,email:true};
 test('global opt-out outranks every channel and consent',()=>{
   assert.deepEqual(nextChannel({status:'הסר',grants:all},refi),{action:'STOP',reason:'global_optout'});});
 test('fallback skips the failed channel and channels without consent, and never invents a provider',()=>{
-  assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:all},refi),{action:'BLOCKED',reason:'no_provider',channels:['sms','email']});
-  assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:{whatsapp:true,email:true}},refi),{action:'BLOCKED',reason:'no_provider',channels:['email']});
+  assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:all},noProv),{action:'BLOCKED',reason:'no_provider',channels:['sms','email']});
+  assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:{whatsapp:true,email:true}},noProv),{action:'BLOCKED',reason:'no_provider',channels:['email']});
   assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:{whatsapp:true}},refi),{action:'STOP',reason:'no_channel_left'});
-  const withSms={...refi,channels:{...refi.channels,providers:{...refi.channels.providers,sms:'provider'}}};
+  const withSms={...noProv,channels:{...noProv.channels,providers:{...noProv.channels.providers,sms:'provider'}}};
   assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:all},withSms),{action:'SEND',channel:'sms'});
   assert.deepEqual(nextChannel({status:'פעיל',failed:['whatsapp'],grants:{...all,sms:'yes'}},withSms).action,'BLOCKED');});
 test('every campaign declares the cascade, providers and one opt-out label that exists on the board',()=>{
+  // refi: providers enabled by Yoram (2026-10-25). consolidation stays without SMS and email.
+  const want={refi:{sms:'textme',email:'sendgrid'},consolidation:{sms:null,email:null}};
   for(const id of ['refi','consolidation']){const c=cfg(id).channels;assert.deepEqual(c.cascade,['whatsapp','sms','email']);
-    assert.equal(c.providers.sms,null);assert.equal(c.providers.email,null);assert.equal(c.optOut.label,'הסר');}});
+    assert.equal(c.providers.sms,want[id].sms,id);assert.equal(c.providers.email,want[id].email,id);assert.equal(c.optOut.label,'הסר');}
+  assert.equal(cfg('refi').channels.sms.source,'Excelent');assert.equal(cfg('refi').channels.email.from,'office@excelent.co.il');});
 
 test('an opt-out on one item stops every other item with the same phone and blocks new enrollment',()=>{
   const out=plan({items:[item({id:'1',cols:{refi_phone:'0500000040',fn_status:'הסר'}}),item({id:'2',cols:active({refi_phone:'+972 50-000-0040'})}),
@@ -31,11 +36,13 @@ test('a different phone keeps sending',()=>{
   assert.equal(out.find(o=>o.itemId==='2').hasSend,true);});
 
 const proof={version:'lp1-channels-20261020',phone:'972500000040',receivedAt:'2026-10-21T08:00:00Z',grants:{whatsapp:true,sms:true,email:true}};
-test('the third WhatsApp failure hands the consented fallback channels to Yoram and sends nothing else',()=>{
+test('the third WhatsApp failure builds the consented SMS fallback with the approved refi text and tells Yoram',()=>{
   const [r]=plan({items:[item({created:'2026-10-21T08:00:00Z',cols:active({long_text_mm8ag9s:JSON.stringify(proof),fn_opens:JSON.stringify({fails:2})})})],now:NOW});
-  assert.deepEqual(JSON.parse(r.fallbackJson),{action:'BLOCKED',reason:'no_provider',channels:['sms','email']});
+  assert.deepEqual(JSON.parse(r.fallbackJson),{action:'SEND',channel:'sms'});
   const a=afterSend(r,{success:false});assert.equal(JSON.parse(a.colsJson).fn_status.label,'נעצר');
-  assert.equal(a.hasFallback,true);assert.match(a.notifyText,/sms, email/);
+  assert.equal(a.hasFallback,true);assert.match(a.notifyText,/sms נשלח אוטומטית/);
+  assert.equal(a.fallbackSend.request.url,'https://my.textme.co.il/api');assert.equal(a.fallbackSend.request.body.source,'Excelent');
+  assert.deepEqual(a.fallbackSend.request.body.destinations,['972500000040']);assert.match(a.fallbackSend.request.body.message,/^שלום דני, פנייתך לבחינת מחזור משכנתא.*לבחינת כדאיות והתנאים/);
   assert.equal(afterSend({...r,stJson:JSON.stringify({fails:0})},{success:false}).hasFallback,false,'first failure only retries');});
 test('a lead without a channel receipt has no fallback channel',()=>{
   const [r]=plan({items:[item({cols:active({fn_opens:JSON.stringify({fails:2})})})],now:NOW});
