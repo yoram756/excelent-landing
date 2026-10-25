@@ -13,8 +13,12 @@ const templatePayload = ({ to, from, templateId, variables = [] }) => {
 // First template within cfg.instantReply.withinSeconds of a saved intake lead.
 // lead: {itemId, name, firstName, phone, receivedAt, grants, marketing}. Returns {ok:true, payload} or {ok:false, reason}.
 const instantPayload = ({ lead, cfg, biz, now, mode }) => {
-  const IR = cfg.instantReply;
   const l = lead || {};
+  const slug=l.product_slug;
+  if(slug && l.funnel_type && slug!==l.funnel_type)return {ok:false,reason:'conflicting_product'};
+  // A different product must never borrow the campaign default template.
+  const IR = slug && slug!==(cfg.crmFields?.nicheSegment?.value||cfg.id) ? cfg.productInstantReplies?.[slug] : cfg.instantReply;
+  if(slug && !IR)return {ok:false,reason:'product_template_unconfigured'};
   if (!IR || IR.enabled !== true) return { ok: false, reason: 'disabled' };
   if (!/^\d{6,}$/.test(String(IR.template.id || ''))) return { ok: false, reason: 'awaiting_approved_template' };
   if (!/^9725\d{8}$/.test(String(l.phone || ''))) return { ok: false, reason: 'bad_phone' };

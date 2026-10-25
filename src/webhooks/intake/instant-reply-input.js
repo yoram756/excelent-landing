@@ -4,5 +4,5 @@
 const v = $('Validate').first().json; const m = $('Build mutation').first().json; const s = $('Check save').first().json;
 if (s.saved !== true || m.mode !== 'create') return [];
 const p = v.contact_permissions || {};
-return [{ json: { itemId: s.request_id, name: v.name, firstName: v.name.replace(/^TEST\s*/, '').split(' ')[0], phone: v.phone,
+return [{ json: { itemId: s.request_id, name: v.name, firstName: v.name.replace(/^TEST\s*/, '').split(' ')[0], phone: v.phone, ...(v.product_slug ? {product_slug:v.product_slug,funnel_type:v.funnel_type} : {}),
   receivedAt: p.receivedAt || null, grants: p.grants || {}, marketing: v.marketing_consent === true } }];

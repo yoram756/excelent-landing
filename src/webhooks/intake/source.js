@@ -2,15 +2,15 @@
 // Used by patch-export.js, patch-reminder-export.js and the test harnesses, so n8n and the tests run the same code.
 const fs=require('fs'),path=require('path');
 const intakeConfig=(id='refi')=>{
-  const c=JSON.parse(fs.readFileSync(path.join(__dirname,'../../config/campaigns',id+'.json'),'utf8'));
+  const c=typeof id==='object'?id:JSON.parse(fs.readFileSync(path.join(__dirname,'../../config/campaigns',id+'.json'),'utf8'));
   if(!c.intake)throw new Error('campaign '+id+' has no intake block');
   if(!/^\d+$/.test(c.board)||!/^\w+$/.test(c.intake.group))throw new Error('campaign '+id+' has an invalid board or group id');
   const C=c.columns;
-  return {campaign:c.id,board:c.board,group:c.intake.group,newStage:c.intake.newStage,reminder:c.intake.reminder||null,
+  return {productSlugs:c.intake.productSlugs||[c.id],productColumns:c.intake.productColumns||{},campaign:c.id,board:c.board,group:c.intake.group,newStage:c.intake.newStage,reminder:c.intake.reminder||null,
     columns:{...c.intake.columns,phone:C.phone,stage:C.stage,source:C.source,heat:C.heat,firstReply:C.firstReply,consentMarketing:C.consentMarketing,
       consentService:C.consentService,email:C.email,permissions:c.contactPermissions.column}};
 };
-const inject=(code,id)=>code.split('__INTAKE__').join(JSON.stringify(intakeConfig(id)));
+const inject=(code,id)=>code.split('__INTAKE__').join(JSON.stringify(intakeConfig(id))).split('__PRODUCT_CATALOG__').join(fs.readFileSync(path.join(__dirname,'../../config/products.json'),'utf8'));
 const intakeSource=(file,id)=>inject(fs.readFileSync(path.join(__dirname,file),'utf8').replace(/\r\n/g,'\n'),id);
 // Monday query of the callback SLA reminder workflow ("New leads" node).
 const reminderQuery=id=>{const K=intakeConfig(id),C=K.columns;

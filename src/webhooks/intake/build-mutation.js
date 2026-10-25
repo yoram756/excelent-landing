@@ -17,6 +17,8 @@ const L = v.labels, A = v.answers, s = v.score;
 const dt = iso => { const d = new Date(iso); return { date: d.toISOString().slice(0,10), time: d.toISOString().slice(11,19) }; };
 const goals = Array.isArray(A.goal) ? A.goal : (A.goal ? [A.goal] : []);
 const cv = {};
+// Write segmentation only to explicitly configured, verified text columns.
+for(const [field,column] of Object.entries(K.productColumns||{})){if(!['product_slug','funnel_type'].includes(field)||!column)continue;cv[column]=v[field];}
 const st = (col, label) => { if (label) cv[col] = { label: String(label).slice(0,30) }; };
 st(KC.source, v.source);
 st(KC.balance, L.bal);
@@ -27,7 +29,7 @@ st(KC.pay, L.pay); st(KC.left, L.left); st(KC.when, L.when); st(KC.ask, L.ask); 
 cv[KC.heat] = String(s.score);
 st(KC.heatLabel, s.label);
 cv[KC.heatDetail] = { text: `גרסה ${s.version}, חושב ${s.computedAt}, שלמות ${s.completeness}\n${s.reasons.join('\n')}${s.missing.length ? '\nחסר: ' + s.missing.join(', ') : ''}` };
-cv[KC.answers] = { text: `מוצר: ${v.productName} (${v.product})\nמידע כספי צורף: ${v.money_included ? 'כן' : 'לא'}\n${v.readable}` };
+cv[KC.answers] = { text: `מוצר: ${v.productName} (${v.product})\nסיווג: ${v.product_slug || v.product}\nמידע כספי צורף: ${v.money_included ? 'כן' : 'לא'}\n${v.readable}` };
 cv[KC.complexity] = { text: s.complexity.length ? s.complexity.join('\n') : 'לא זוהתה מורכבות מיוחדת' };
 if (A.has) cv[KC.hasMortgage] = { labels: [L.has] };
 cv[KC.consentService] = { checked: 'true' };
