@@ -15,6 +15,7 @@ test('private runtime test retains source logic and real Lock, isolates CRM and 
  const out=run(m,v)[0].json;assert.match(out.query,/board_id:5106494186/);assert.ok(!out.query.includes(k.board));assert.equal(JSON.parse(out.variables.vals).phone_mm8crjmj.phone,v.phone);
  assert.throws(()=>run(m,{...v,name:'Real person'}),/Synthetic write guard/);assert.throws(()=>run({...m,mode:'update'},v),/Synthetic write guard/);
  const fresh=n('Guard fresh synthetic phone').parameters.jsCode;assert.throws(()=>new Function('$input',fresh)({first:()=>({json:{data:{items_page_by_column_values:{items:[{id:'123'}],cursor:null}}}})}),/already exists/);
+ const prepare=new Function('$input',n('Prepare private readback').parameters.jsCode);assert.deepEqual(prepare({first:()=>({json:{saved:true,request_id:'3301234567'}})})[0].json.variables.ids,['3301234567']);assert.throws(()=>prepare({first:()=>({json:{saved:false,request_id:'3301234567'}})}),/Save failed/);
  const names=new Set(w.nodes.map(x=>x.name));for(const [from,c]of Object.entries(w.connections)){assert.ok(names.has(from));for(const rows of Object.values(c))for(const row of rows)for(const edge of row)assert.ok(names.has(edge.node));}
  for(const node of w.nodes)if(node.type==='n8n-nodes-base.code')new Function(node.parameters.jsCode);
 });
