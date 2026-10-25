@@ -81,7 +81,7 @@ for (const [k,v] of Object.entries(answers)) {
 // contains normalized contact/answers in internal workflow state. Receipts are
 // eligible for replay for 48 hours and are pruned lazily on a later validation;
 // this is not a timed deletion guarantee. Do not export workflow static data.
-const replayBinding = JSON.stringify({version:1,product,product_slug,funnel_type:P.funnel_type,campaign:P.campaign,purpose:'callback',name,phone,email:email||null,
+const replayBinding = JSON.stringify({version:1,product,campaign:P.campaign,purpose:'callback',name,phone,email:email||null,
   answers:Object.fromEntries(Object.keys(P.labels).filter(k=>Object.hasOwn(clean,k)).map(k=>[k,clean[k]])),
   money_included:b.money_included===true,service_request:true,marketing_consent:b.marketing_consent===true,
   marketing_channels:contactPermissions ? contactPermissions.grants : null});

@@ -159,4 +159,5 @@ for(const w of [engine,go,cal,instant])for(const n of w.nodes){const b=n.paramet
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__GAMBOT_HSM__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
+fs.copyFileSync(path.join(__dirname,'../../config/products.json'),path.join(out,'product-dictionary.json'));
 console.log('built',MODE,fs.readdirSync(out).join(' '));
