@@ -104,3 +104,29 @@ test('the built instant reply workflow carries the HSM module and posts to the G
   const store={};const D=class extends Date{static now(){return at(10);}};
   const r=new Function('$json','$getWorkflowStaticData','Date',node.replace(/"enabled":false,"withinSeconds":60,"graceMinutes":2,"template":\{"id":null/,'"enabled":true,"withinSeconds":60,"graceMinutes":2,"template":{"id":"1234567890"'))(lead,()=>store,D).json;
   assert.deepEqual(r,{itemId:'77',hasSend:true,live:false,send:{to:'972500000040',from:'972559881245',templateId:'1234567890',variables:['דנה']}});});
+
+test('intake wiring accepts the original export with response already before notifications',()=>{
+  const w=exportFixture();
+  const L=n=>({main:[[{node:n,type:'main',index:0}]]});
+  w.connections['Saved?'].main[0]=L('Reply saved').main[0];
+  w.connections['Reply saved']=L('Alert query');
+  w.connections['Alert Yoram']=L('Email alert');
+  const out=patchIntake(w,opts);
+  assert.deepEqual(next(out,'Saved?')[0],['Reply saved']);
+  assert.deepEqual(next(out,'Reply saved'),[['Alert query','Instant reply input']]);
+  assert.deepEqual(next(out,'Alert Yoram'),[['Email alert']]);
+  assert.equal(out.nodes.length,24);
+});
+test('intake wiring rejects unknown or parallel success routes',()=>{
+  for(const variant of ['unknown','parallel']){
+    const w=exportFixture();
+    if(variant==='unknown')w.connections['Saved?'].main[0][0].node='Save to Monday';
+    else w.connections['Saved?'].main[0].push({node:'Reply saved',type:'main',index:0});
+    assert.throws(()=>patchIntake(w,opts),/Unexpected success routing/);
+  }
+  const w=exportFixture();
+  w.connections['Saved?'].main[0]=[{node:'Reply saved',type:'main',index:0}];
+  w.connections['Reply saved']={main:[[{node:'Alert query',type:'main',index:0}]]};
+  w.connections['Alert Yoram']={main:[[{node:'Email alert',type:'main',index:0},{node:'Save to Monday',type:'main',index:0}]]};
+  assert.throws(()=>patchIntake(w,opts),/Unexpected success routing/);
+});

@@ -20,7 +20,11 @@ const patchIntake=(w,{campaign='refi',lockUrl,lockCredentialId,instantWorkflowId
   matches[0].parameters.jsCode=intakeSource(file,campaign);
  }
  // Respond after the confirmed save, before optional internal notification delivery.
- if(w.connections['Saved?']?.main?.[0]?.[0]?.node!=='Alert query'||w.connections['Alert Yoram']?.main?.[0]?.[0]?.node!=='Reply saved')throw Error('Unexpected success routing');
+ // Accept only the two known success layouts; parallel or unknown routes need review.
+ const exactly=(from,to)=>{const out=w.connections[from]?.main?.[0];return out?.length===1&&out[0].node===to&&out[0].type==='main'&&out[0].index===0;};
+ const legacy=exactly('Saved?','Alert query')&&exactly('Alert Yoram','Reply saved');
+ const responseFirst=exactly('Saved?','Reply saved')&&exactly('Reply saved','Alert query')&&exactly('Alert Yoram','Email alert');
+ if(!legacy&&!responseFirst)throw Error('Unexpected success routing');
  w.connections['Saved?'].main[0]=[{node:'Reply saved',type:'main',index:0}];
  w.connections['Reply saved']=link('Alert query');
  w.connections['Alert Yoram']=link('Email alert');
