@@ -1,0 +1,466 @@
+{
+ "name": "משפך מחזור משכנתא: פגישות מ Calendly",
+ "settings": {
+  "executionOrder": "v1",
+  "timezone": "Asia/Jerusalem"
+ },
+ "nodes": [
+  {
+   "id": "476e8fee-5fc1-7dc8-8162-650f945c1fce",
+   "name": "Every 5 min",
+   "type": "n8n-nodes-base.scheduleTrigger",
+   "typeVersion": 1.2,
+   "position": [
+    0,
+    0
+   ],
+   "parameters": {
+    "rule": {
+     "interval": [
+      {
+       "field": "minutes",
+       "minutesInterval": 5
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "741eba6c-54d2-371f-b991-2782ad05d58c",
+   "name": "Calendly mails",
+   "type": "n8n-nodes-base.gmail",
+   "typeVersion": 2.1,
+   "position": [
+    200,
+    0
+   ],
+   "credentials": {
+    "gmailOAuth2": {
+     "id": "1H4YGm5Z2UFN4IeE",
+     "name": "Gmail account"
+    }
+   },
+   "onError": "continueRegularOutput",
+   "alwaysOutputData": true,
+   "parameters": {
+    "resource": "message",
+    "operation": "getAll",
+    "returnAll": false,
+    "limit": 20,
+    "simple": false,
+    "filters": {
+     "q": "from:notifications@calendly.com newer_than:2d"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "858fc2c6-16b8-aac8-ba65-12643173d55a",
+   "name": "Run test",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    200
+   ],
+   "webhookId": "f597c14a-6cd5-88f1-1fff-011ff2687ddb",
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "__TEST_PATH__calendly",
+    "responseMode": "onReceived",
+    "options": {}
+   }
+  },
+  {
+   "id": "fc84d21e-615e-d00e-e4ec-87b99dafca64",
+   "name": "Fetch pages",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    400,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "executeOnce": true,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "{\"query\":\"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\",\\\"refi_stage\\\",\\\"refi_meeting\\\"]){ id text value } } } } }\"}",
+    "options": {
+     "pagination": {
+      "pagination": {
+       "paginationMode": "updateAParameterInEachRequest",
+       "parameters": {
+        "parameters": [
+         {
+          "type": "body",
+          "name": "query",
+          "value": "={{ $pageCount === 0 ? \"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\",\\\"refi_stage\\\",\\\"refi_meeting\\\"]){ id text value } } } } }\" : \"query{ me{ id } boards(ids:[5106246268]){ items_page(limit:500,cursor:\" + JSON.stringify($response.body.data.boards[0].items_page.cursor) + \"){ cursor items{ id name created_at column_values(ids:[\\\"refi_phone\\\",\\\"fn_email\\\",\\\"refi_stage\\\",\\\"refi_meeting\\\"]){ id text value } } } } }\" }}"
+         }
+        ]
+       },
+       "paginationCompleteWhen": "other",
+       "completeExpression": "={{ !!$response.body.errors?.length || !$response.body.data?.boards?.[0]?.items_page?.cursor }}",
+       "limitPagesFetched": true,
+       "maxRequests": 50,
+       "requestInterval": 250
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "dc363b9f-d7fb-38ae-d38c-d928ade43e5e",
+   "name": "Match bookings",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    600,
+    0
+   ],
+   "parameters": {
+    "jsCode": "// n8n Code node \"Match bookings\" in the Calendly workflow. Source of truth: this file.\n// Input: Calendly notification emails (Gmail) or a test body. Output: Monday updates for matched leads.\nconst CFG = {\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"product\":\"refi\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת המבקשים לבדוק מחזור; מיקוד Meta בפועל מתועד ב-docs/meta-campaign-audit-20261020.md\",\"quizDonePattern\":\"(?:^|\\\\n)(?:יש לכם היום משכנתא|מה המטרה העיקרית|מה יתרת המשכנתא בקירוב|מה ההחזר החודשי היום|כמה זמן נשאר לתשלום|מתי תרצו לפעול|מה אתם מבקשים כרגע|יש לכם דוח יתרות לסילוק עדכני|יש הלוואות נוספות מלבד המשכנתא|צפוי שינוי בהכנסה בשנים הקרובות|מתוכננים מכירה של הנכס או פירעון גדול|יש קושי בתשלומים היום)\\\\? .+\",\"status\":\"internal-test\",\"contactPermissions\":{\"column\":\"long_text_mm8ag9s\",\"version\":\"lp1-channels-20261020\",\"requiredAfter\":\"2026-10-20T19:40:00Z\"},\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88xzfe\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"intake\":{\"group\":\"topics\",\"newStage\":\"ליד חדש\",\"reminder\":{\"sourcePattern\":\"LP1|מטא|וואטסאפ\",\"openStages\":[\"ליד חדש\",\"התקבל\",\"\"]},\"columns\":{\"balance\":\"refi_balance\",\"goal\":\"refi_goal\",\"goal2\":\"color_mm88h0j8\",\"otherLoans\":\"refi_other_loans\",\"pay\":\"color_mm88h799\",\"left\":\"color_mm885m0t\",\"when\":\"color_mm88cffb\",\"ask\":\"color_mm88fzyb\",\"doc\":\"color_mm88catt\",\"heatLabel\":\"color_mm88xpa8\",\"heatDetail\":\"long_text_mm88pfdv\",\"answers\":\"long_text_mm88xzfe\",\"complexity\":\"long_text_mm88cs6f\",\"hasMortgage\":\"dropdown_mm88dkb2\",\"serviceRequestAt\":\"date_mm88hmw2\",\"marketingAt\":\"date_mm88qwfm\",\"messageReceived\":\"boolean_mm88aae4\",\"entered\":\"refi_entered\",\"feasibility\":\"color_mm88hss3\"}},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\",\"category\":\"MARKETING\"},\"M2\":{\"id\":\"2157972271457704\",\"name\":\"exc_refi_m02_quiz_v2\",\"dest\":\"q\",\"legacyId\":\"2866421103739060\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M3\":{\"id\":\"2017016385642572\",\"name\":\"exc_refi_m03_reviews_v2\",\"dest\":\"b\",\"legacyId\":\"2306286663247344\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M4\":{\"id\":\"1840616890627890\",\"name\":\"exc_refi_m04_call_v2\",\"dest\":\"c\",\"legacyId\":\"991655264017502\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M5\":{\"id\":\"1089275163875623\",\"name\":\"exc_refi_m05_case_v2\",\"dest\":\"q\",\"legacyId\":\"1861514208308620\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\",\"category\":\"MARKETING\"},\"M7\":{\"id\":\"1915186253195181\",\"name\":\"exc_refi_m07_thanks_v2\",\"dest\":\"c\",\"legacyId\":\"1695504292330742\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M8\":{\"id\":\"28923882683911966\",\"name\":\"exc_refi_m08_remind_v2\",\"dest\":\"c\",\"legacyId\":\"1456261889708463\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M9\":{\"id\":\"1819887545875725\",\"name\":\"exc_refi_m09_wait_v2\",\"dest\":\"c\",\"legacyId\":\"1825910702064350\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"],\"category\":\"UTILITY\"},\"M10R\":{\"id\":\"4665876823677509\",\"name\":\"exc_refi_m10r_reminder_v2\",\"vars\":[\"first\",\"when\",\"link\"],\"dest\":\"c\",\"legacyId\":\"4090685337891850\",\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M11\":{\"id\":\"4430944130505180\",\"name\":\"exc_refi_m11_noshow_v2\",\"dest\":\"c\",\"legacyId\":\"1462992419096031\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M12\":{\"id\":\"1586746399324895\",\"name\":\"exc_refi_m12_google_v2\",\"dest\":\"g\",\"legacyId\":\"1152794754084561\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M13\":{\"id\":\"4667983876817219\",\"name\":\"exc_refi_m13_midrag_v2\",\"dest\":\"m\",\"legacyId\":\"1022323597539469\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\",\"category\":\"MARKETING\"},\"M15\":{\"id\":\"1111684781346512\",\"name\":\"exc_refi_m15_offer_v2\",\"dest\":\"c\",\"legacyId\":\"1150212394355928\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"channels\":{\"cascade\":[\"whatsapp\",\"sms\",\"email\"],\"providers\":{\"whatsapp\":\"gambot\",\"sms\":\"textme\",\"email\":\"sendgrid\"},\"sms\":{\"source\":\"Excelent\"},\"email\":{\"from\":\"office@excelent.co.il\"},\"optOut\":{\"label\":\"הסר\",\"keywords\":\"הסר|הסירו|להסיר|stop\"}},\"instantReply\":{\"enabled\":false,\"withinSeconds\":60,\"graceMinutes\":2,\"template\":{\"id\":null,\"category\":\"UTILITY\",\"vars\":[\"first\"]}},\"crmFields\":{\"leadTemperature\":{\"from\":\"heat\",\"column\":\"color_mm88xpa8\",\"labels\":{\"HOT\":{\"write\":\"חם מאוד\",\"accept\":[\"רותח\",\"חם מאוד\"]},\"WARM\":{\"write\":\"חם\",\"accept\":[\"חם\"]},\"COLD\":{\"write\":\"מתעניין\",\"accept\":[\"מתעניין\",\"אין מספיק מידע\"]}},\"bands\":[{\"atLeast\":70,\"value\":\"HOT\"},{\"atLeast\":40,\"value\":\"WARM\"},{\"atLeast\":0,\"value\":\"COLD\"}]},\"nicheSegment\":{\"value\":\"refi\",\"column\":null},\"churnReason\":{\"column\":\"refi_close_reason\"}},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\",\"yoram_050\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"},\"linkTokenExamples\":[\"a1b2c3d4e5q\"]}; const C = CFG.columns;\nconst norm = s => { let d = String(s || '').replace(/\\D/g, ''); if (d.startsWith('00')) d = d.slice(2); else if (d.startsWith('0')) d = '972' + d.slice(1); if (d.startsWith('9720')) d = '972' + d.slice(4); return d.length >= 11 ? d : ''; };\nconst MONTHS = {January:1,February:2,March:3,April:4,May:5,June:6,July:7,August:8,September:9,October:10,November:11,December:12};\nfunction israelToUtc(y, mo, d, hh, mm) {\n  const guess = Date.UTC(y, mo - 1, d, hh, mm);\n  const p = {}; new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false }).formatToParts(new Date(guess)).forEach(x => p[x.type] = x.value);\n  const off = Date.UTC(+p.year, +p.month - 1, +p.day, +(p.hour === '24' ? 0 : p.hour), +p.minute) - guess;\n  return guess - off;\n}\nfunction parse(subject, text) {\n  const t = String(text || '').replace(/\\s+/g, ' ');\n  const kind = /^(New Event|TEST New Event)/i.test(subject) ? 'new' : /^(Canceled|Cancelled)/i.test(subject) ? 'cancel' : '';\n  if (!kind) return null;\n  const name = (t.match(/Invitee: (.+?) Invitee Email:/) || [])[1] || '';\n  const email = ((t.match(/Invitee Email: ([^\\s\\[]+)/) || [])[1] || '').toLowerCase();\n  const dm = t.match(/Event Date\\/Time: (\\d{1,2}):(\\d{2})\\s*(am|pm)?\\s*-?[^,]*, (\\d{1,2}) ([A-Za-z]+) (\\d{4}) \\(Israel Time\\)/i);\n  const loc = (t.match(/Location: (\\+?[\\d\\s\\-]{9,20})/) || [])[1] || '';\n  const phoneQ = (t.match(/(\\+?972[\\d\\s\\-]{8,14}|05\\d[\\d\\s\\-]{7,10})/) || [])[1] || '';\n  if (!dm) return null;\n  let hh=+dm[1];const mm=+dm[2],day=+dm[4],mo=MONTHS[dm[5]],year=+dm[6];\n  if(!mo||mm>59||(dm[3]?(hh<1||hh>12):hh>23))return null;\n  if(dm[3])hh=hh%12+(dm[3].toLowerCase()==='pm'?12:0);\n  const check=new Date(Date.UTC(year,mo-1,day));\n  if(check.getUTCFullYear()!==year||check.getUTCMonth()!==mo-1||check.getUTCDate()!==day)return null;\n  const at = israelToUtc(year,mo,day,hh,mm);\n  return { kind, name, email, phone: norm(loc) || norm(phoneQ), at };\n}\nconst sd = $getWorkflowStaticData('global'); sd.seen = sd.seen || {};\nconst mails = [];\ntry { const b = $('Run test').first().json.body; if (b && b.subject) mails.push({ id: 'test-' + (b.id || Date.now()), subject: b.subject, text: b.text }); } catch (e) {}\ntry { for (const m of $('Calendly mails').all()) if (m.json && m.json.id) mails.push({ id: m.json.id, subject: m.json.subject || m.json.headers?.subject || '', text: m.json.text || m.json.snippet || '' }); } catch (e) {}\nconst items = $('Items').first().json.data.boards[0].items_page.items;\nconst out = [];\nconst inBatch=new Set();\nfor (const mail of mails) {\n  if (sd.seen[mail.id]||inBatch.has(mail.id)) continue;\n  inBatch.add(mail.id);\n  const ev = parse(mail.subject, mail.text);\n  if (!ev) continue;\n  const matches=[];\n  for (const it of items) {\n    const cv = {}; for (const c of it.column_values) cv[c.id] = c;\n    if ((ev.phone && norm(cv[C.phone]?.text) === ev.phone) || (ev.email && (cv[C.email]?.text || '').toLowerCase() === ev.email)) matches.push(it);\n  }\n  // Conflicting identities and duplicate owners require manual resolution.\n  if(matches.length>1||(!ev.phone&&!ev.email))continue;\n  const lead=matches[0]||null;\n  if (!lead && ev.kind === 'cancel') continue; // a cancel for someone we do not know creates nothing\n  const cv=Object.fromEntries((lead?.column_values||[]).map(c=>[c.id,c]));\n  if(cv[C.stage]?.text===CFG.stages.paid)continue;\n  if(ev.kind==='cancel'&&cv[C.meeting]?.value){\n    let mt;try{mt=JSON.parse(cv[C.meeting].value);}catch(e){continue;}\n    if(mt?.date&&Date.parse(mt.date+'T'+(mt.time||'00:00:00')+'Z')!==ev.at)continue;\n  }\n  const d = new Date(ev.at).toISOString();\n  const cols = ev.kind === 'new'\n    ? { [C.stage]: { label: CFG.stages.booked }, [C.meeting]: { date: d.slice(0, 10), time: d.slice(11, 19) } }\n    : { [C.stage]: { label: CFG.stages.noShow[0] }, [C.meeting]: {} };\n  if (ev.email) cols[C.email] = { email: ev.email, text: ev.email };\n  out.push({ json: { kind: ev.kind, matched: !!lead, itemId: lead ? lead.id : null, name: ev.name, phone: ev.phone, colsJson: JSON.stringify(cols), mailId: mail.id } });\n}\n// keep the dedupe store small\nconst cutoff = Date.now() - 30 * 86400000; for (const k of Object.keys(sd.seen)) if (sd.seen[k] < cutoff) delete sd.seen[k];\nreturn out;\n"
+   }
+  },
+  {
+   "id": "09241b96-7816-e6d6-16ab-f0429628b9d0",
+   "name": "Matched?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    800,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "bfdc315a-b7a2-f52f-3bb8-4241c41443f1",
+       "leftValue": "={{ $json.matched }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "d23858a1-76d6-c923-9e1a-6d6554d72a8c",
+   "name": "Update lead",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1000,
+    -100
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.itemId),v:$json.colsJson} }) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "226bf34f-1d8c-ce3e-e292-783dcea9e6f1",
+   "name": "Create lead",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1000,
+    100
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$g:String!,$n:String!,$v:JSON!){ create_item(board_id:$b,group_id:$g,item_name:$n,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",g:\"group_mm883gr6\",n:($json.name||\"פגישה מהיומן\"),v:JSON.stringify(Object.assign(JSON.parse($json.colsJson),{[\"refi_phone\"]:$json.phone?{phone:$json.phone,countryShortName:\"IL\"}:undefined,[\"refi_source\"]:{label:\"יומן\"} }))} }) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "d1e741ab-6fcc-eb16-90b8-f519432cd168",
+   "name": "Wait for board automation",
+   "type": "n8n-nodes-base.wait",
+   "typeVersion": 1.1,
+   "position": [
+    1200,
+    100
+   ],
+   "webhookId": "32e8384e-ae20-b5bf-fad2-86d3cb338aeb",
+   "parameters": {
+    "amount": 15,
+    "unit": "seconds"
+   }
+  },
+  {
+   "id": "60e8c0d4-effd-9fb5-f470-878c9c67aa39",
+   "name": "Set meeting stage",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1400,
+    100
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.data.create_item.id),v:JSON.stringify({[\"refi_stage\"]:JSON.parse($('Match bookings').item.json.colsJson)[\"refi_stage\"]})} }) }}",
+    "options": {}
+   }
+  },
+  {
+   "id": "710e3367-e442-69c8-171c-5b69a9f46057",
+   "name": "Acknowledge booking",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1600,
+    0
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "// Acknowledge only after the final Monday write. This cache is not a durable lock.\nconst r=$json||{};\nconst id=r.data?.change_multiple_column_values?.id;\nif(r.errors?.length||!id)throw new Error('Calendly write not confirmed; mail remains retryable');\nconst mail=$('Match bookings').item.json;\nif(mail.itemId&&String(id)!==String(mail.itemId))throw new Error('Calendly write target mismatch');\nconst sd=$getWorkflowStaticData('global');sd.seen=sd.seen||{};sd.seen[mail.mailId]=Date.now();\nreturn {json:{saved:true,itemId:String(id),mailId:mail.mailId}};\n"
+   }
+  },
+  {
+   "id": "ed715474-0198-bdde-9581-5ec0b258d01f",
+   "name": "Items",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    400,
+    100
+   ],
+   "parameters": {
+    "jsCode": "// n8n Code node \"Items\": validate every page before any attribution or write.\nconst pages = $input.all();\nif (!pages.length) throw new Error('Monday returned no pages');\nconst items = [], ids = new Set(), cursors = new Set();\nlet me;\nfor (let i = 0; i < pages.length; i++) {\n  const body = pages[i].json;\n  if (body.errors?.length) throw new Error('Monday GraphQL errors: refusing partial results');\n  const data = body.data;\n  const page = data?.boards?.[0]?.items_page;\n  if (!data?.me?.id || !Array.isArray(page?.items) || !Object.hasOwn(page, 'cursor') ||\n      (page.cursor !== null && (typeof page.cursor !== 'string' || !page.cursor))) {\n    throw new Error('Invalid Monday page');\n  }\n  if (me && me.id !== data.me.id) throw new Error('Monday identity changed between pages');\n  me = data.me;\n  if (i < pages.length - 1 && !page.cursor) throw new Error('Unexpected page after terminal cursor');\n  if (page.cursor && cursors.has(page.cursor)) throw new Error('Repeated Monday cursor');\n  if (page.cursor) cursors.add(page.cursor);\n  if (i === pages.length - 1 && page.cursor) throw new Error('Monday result truncated at pagination limit');\n  for (const item of page.items) {\n    if (!item.id || !Array.isArray(item.column_values) || ids.has(String(item.id))) {\n      throw new Error('Invalid or duplicate Monday item across pages');\n    }\n    ids.add(String(item.id)); items.push(item);\n  }\n}\nreturn [{json:{data:{me,boards:[{items_page:{items,cursor:null}}]}}}];\n"
+   }
+  }
+ ],
+ "connections": {
+  "Every 5 min": {
+   "main": [
+    [
+     {
+      "node": "Calendly mails",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Calendly mails": {
+   "main": [
+    [
+     {
+      "node": "Fetch pages",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Run test": {
+   "main": [
+    [
+     {
+      "node": "Fetch pages",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Items": {
+   "main": [
+    [
+     {
+      "node": "Match bookings",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Match bookings": {
+   "main": [
+    [
+     {
+      "node": "Matched?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Matched?": {
+   "main": [
+    [
+     {
+      "node": "Update lead",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Create lead",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Create lead": {
+   "main": [
+    [
+     {
+      "node": "Wait for board automation",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Wait for board automation": {
+   "main": [
+    [
+     {
+      "node": "Set meeting stage",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Update lead": {
+   "main": [
+    [
+     {
+      "node": "Acknowledge booking",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Set meeting stage": {
+   "main": [
+    [
+     {
+      "node": "Acknowledge booking",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Fetch pages": {
+   "main": [
+    [
+     {
+      "node": "Items",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ }
+}
