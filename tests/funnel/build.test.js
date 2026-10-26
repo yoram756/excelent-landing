@@ -9,6 +9,22 @@ test('SMS inbound: every placeholder injected, every connection valid, opt-out w
   for(const [a,c] of Object.entries(smsWf.connections)){assert.ok(names.has(a),a);for(const br of c.main)for(const x of br)assert.ok(names.has(x.node),x.node);}
   assert.deepEqual(smsWf.connections['Opt-out?'].main[0].map(x=>x.node),['Find by phone']);assert.equal(smsWf.nodes.find(x=>x.type==='n8n-nodes-base.webhook').parameters.path,'__SMS_INBOUND_PATH__');});
 test('every injected library and config placeholder is replaced in every Code node',()=>{for(const w of [...wfs,instantWf])for(const x of w.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|CRM_FIELDS|CHANNELS|GAMBOT_HSM|FALLBACK|TEXTME|MODE|PILOT|GO_LIVE|INTAKE)__/,w.name+' / '+x.name);});
+
+test('every workflow JSON body expression compiles, including SMS inbound',()=>{
+  for(const w of [...wfs,instantWf,smsWf])for(const n of w.nodes){
+    const b=n.parameters.jsonBody;
+    if(typeof b==='string'&&b.startsWith('={{'))assert.doesNotThrow(()=>new Function('return ('+b.slice(3,-2)+')'),w.name+' / '+n.name);
+  }
+});
+
+test('SMS phone lookup evaluates to the configured column and all normalized phone forms',()=>{
+  const cfg=require('../../src/config/campaigns/refi.json');
+  const expression=smsWf.nodes.find(n=>n.name==='Find by phone').parameters.jsonBody;
+  const body=JSON.parse(new Function('$json','return ('+expression.slice(3,-2)+')')({local:'0500000040',phone:'972500000040'}));
+  assert.ok(body.query.includes('column_id:'+JSON.stringify(cfg.columns.phone)));
+  assert.equal(body.variables.b,String(cfg.board));
+  assert.deepEqual(body.variables.v,['0500000040','972500000040','+972500000040']);
+});
 test('engine Plan carries the CRM field mapping and the channel decision',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.match(p,/leadTemperature/);assert.match(p,/nextChannel/);});
 test('a final WhatsApp failure notifies the fallback after the Monday update; SMS and email senders exist only disabled without a provider or in a test build',()=>{const e=wfs[0];
   assert.deepEqual(e.connections['Update item (sent)'].main[0].map(x=>x.node),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Notify fallback','Fallback channel']);

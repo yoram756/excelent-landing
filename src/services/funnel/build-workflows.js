@@ -174,11 +174,12 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
 
 // 5. SMS inbound (TextMe DLR and replies). The path is a placeholder filled in at deploy time, like the test paths.
 // A reply with an opt-out keyword sets the global opt-out label on every item with that phone; DLRs stay in the execution log.
+const smsPhoneQuery=gq('query($b:ID!,$v:[String]!){ items_page_by_column_values(board_id:$b,limit:50,columns:[{column_id:'+JSON.stringify(COLS.phone)+',column_values:$v}]){ items{ id } } }');
 const smsIn={name:PFX+'קליטת SMS'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
  hook('TextMe webhook',[0,0],'__SMS_INBOUND_PATH__'),
  code('Parse SMS',[200,0],src('../sms/inbound.js'),'runOnceForEachItem'),
  ifTrue('Opt-out?',[400,0],'={{ $json.optOut }}','n8n-nodes-base.filter'),
- monday('Find by phone',[600,0],'={{ JSON.stringify({query:"query($b:ID!,$v:[String]!){ items_page_by_column_values(board_id:$b,limit:50,columns:[{column_id:\"'+COLS.phone+'\",column_values:$v}]){ items{ id } } }",variables:{b:"'+BOARD+'",v:[$json.local,$json.phone,"+"+$json.phone]}}) }}'),
+ monday('Find by phone',[600,0],'={{ JSON.stringify({query:'+JSON.stringify(smsPhoneQuery)+',variables:{b:'+JSON.stringify(String(BOARD))+',v:[$json.local,$json.phone,"+"+$json.phone]}}) }}'),
  code('Mark opt-out',[800,0],src('../sms/mark-optout.js')),
  monday('Update item',[1000,0],update('$json'))],
  connections:{'TextMe webhook':L('Parse SMS'),'Parse SMS':L('Opt-out?'),'Opt-out?':L('Find by phone'),'Find by phone':L('Mark opt-out'),'Mark opt-out':L('Update item')}};
