@@ -1,0 +1,144 @@
+{
+  "refi": {
+    "name": "מחזור משכנתא",
+    "funnel_type": "refi",
+    "aliases": [
+      "LP1"
+    ],
+    "campaign": "refi",
+    "instantReplyTemplate": null
+  },
+  "consolidation": {
+    "name": "איחוד הלוואות עם שעבוד נכס",
+    "funnel_type": "consolidation",
+    "aliases": [],
+    "campaign": "consolidation",
+    "instantReplyTemplate": null
+  },
+  "reverse_mortgage": {
+    "name": "משכנתא הפוכה",
+    "funnel_type": "reverse_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "pension_mortgage": {
+    "name": "משכנתא פנסיונית",
+    "funnel_type": "pension_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "any_purpose_mortgage": {
+    "name": "משכנתא או הלוואה לכל מטרה",
+    "funnel_type": "any_purpose_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "self_build_mortgage": {
+    "name": "בניה עצמית",
+    "funnel_type": "self_build_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "renovation_mortgage": {
+    "name": "שיפוצים",
+    "funnel_type": "renovation_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "bank_refused_mortgage": {
+    "name": "מסורבי בנקים",
+    "funnel_type": "bank_refused_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "return_to_banking": {
+    "name": "חזרה למערכת הבנקאית",
+    "funnel_type": "return_to_banking",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "second_hand_mortgage": {
+    "name": "רכישה יד שניה",
+    "funnel_type": "second_hand_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "developer_purchase_mortgage": {
+    "name": "רכישה מקבלן",
+    "funnel_type": "developer_purchase_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "land_purchase_mortgage": {
+    "name": "רכישת קרקע לבניה",
+    "funnel_type": "land_purchase_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "bridge_loan_mortgage": {
+    "name": "הלוואות גישור",
+    "funnel_type": "bridge_loan_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "housing_upgraders_mortgage": {
+    "name": "משפרי דיור",
+    "funnel_type": "housing_upgraders_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "commercial_business_mortgage": {
+    "name": "משכנתא מסחרית או עסקית",
+    "funnel_type": "commercial_business_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "business_financing_secured": {
+    "name": "מימון עסקי עם שעבוד נכס",
+    "funnel_type": "business_financing_secured",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "business_financing_unsecured": {
+    "name": "מימון עסקי ללא שעבוד נכס",
+    "funnel_type": "business_financing_unsecured",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "debt_consolidation_unsecured": {
+    "name": "איחוד הלוואות ללא שעבוד נכס",
+    "funnel_type": "debt_consolidation_unsecured",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "solo_loans": {
+    "name": "הלוואות סולו",
+    "funnel_type": "solo_loans",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  },
+  "disability_mortgage": {
+    "name": "משכנתא לבעלי מוגבלויות",
+    "funnel_type": "disability_mortgage",
+    "aliases": [],
+    "campaign": null,
+    "instantReplyTemplate": null
+  }
+}

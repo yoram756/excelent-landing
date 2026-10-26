@@ -1,0 +1,333 @@
+{
+ "name": "משפך מחזור משכנתא: מענה מיידי",
+ "settings": {
+  "executionOrder": "v1",
+  "timezone": "Asia/Jerusalem"
+ },
+ "nodes": [
+  {
+   "id": "4cbca983-c325-92a9-e398-42605540b3a3",
+   "name": "From intake",
+   "type": "n8n-nodes-base.executeWorkflowTrigger",
+   "typeVersion": 1.1,
+   "position": [
+    0,
+    0
+   ],
+   "parameters": {
+    "inputSource": "passthrough"
+   }
+  },
+  {
+   "id": "9b320049-bb81-4bab-3568-92730eb23715",
+   "name": "Instant reply",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    200,
+    0
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "// n8n Code node \"Instant reply\" (mode: run once for each item). Source of truth: this file.\n// First automatic WhatsApp template (HSM) within CFG.instantReply.withinSeconds of a saved intake lead.\n// Input from the intake workflow (Execute Workflow): {itemId, name, firstName, phone, receivedAt, grants, marketing}.\n// Off until the owner approves a Meta template (id and name) and sets instantReply.enabled; the human SLA is unchanged.\n// The send decision and the Meta Cloud API body come from meta-hsm.js, injected by build-workflows.js.\nconst CFG = {\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"product\":\"refi\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת המבקשים לבדוק מחזור; מיקוד Meta בפועל מתועד ב-docs/meta-campaign-audit-20261020.md\",\"quizDonePattern\":\"(?:^|\\\\n)(?:יש לכם היום משכנתא|מה המטרה העיקרית|מה יתרת המשכנתא בקירוב|מה ההחזר החודשי היום|כמה זמן נשאר לתשלום|מתי תרצו לפעול|מה אתם מבקשים כרגע|יש לכם דוח יתרות לסילוק עדכני|יש הלוואות נוספות מלבד המשכנתא|צפוי שינוי בהכנסה בשנים הקרובות|מתוכננים מכירה של הנכס או פירעון גדול|יש קושי בתשלומים היום)\\\\? .+\",\"status\":\"internal-test\",\"contactPermissions\":{\"column\":\"long_text_mm8ag9s\",\"version\":\"lp1-channels-20261020\",\"requiredAfter\":\"2026-10-20T19:40:00Z\"},\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88xzfe\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"intake\":{\"group\":\"topics\",\"newStage\":\"ליד חדש\",\"reminder\":{\"sourcePattern\":\"LP1|מטא|וואטסאפ\",\"openStages\":[\"ליד חדש\",\"התקבל\",\"\"]},\"columns\":{\"balance\":\"refi_balance\",\"goal\":\"refi_goal\",\"goal2\":\"color_mm88h0j8\",\"otherLoans\":\"refi_other_loans\",\"pay\":\"color_mm88h799\",\"left\":\"color_mm885m0t\",\"when\":\"color_mm88cffb\",\"ask\":\"color_mm88fzyb\",\"doc\":\"color_mm88catt\",\"heatLabel\":\"color_mm88xpa8\",\"heatDetail\":\"long_text_mm88pfdv\",\"answers\":\"long_text_mm88xzfe\",\"complexity\":\"long_text_mm88cs6f\",\"hasMortgage\":\"dropdown_mm88dkb2\",\"serviceRequestAt\":\"date_mm88hmw2\",\"marketingAt\":\"date_mm88qwfm\",\"messageReceived\":\"boolean_mm88aae4\",\"entered\":\"refi_entered\",\"feasibility\":\"color_mm88hss3\"}},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\",\"category\":\"MARKETING\"},\"M2\":{\"id\":\"2157972271457704\",\"name\":\"exc_refi_m02_quiz_v2\",\"dest\":\"q\",\"legacyId\":\"2866421103739060\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M3\":{\"id\":\"2017016385642572\",\"name\":\"exc_refi_m03_reviews_v2\",\"dest\":\"b\",\"legacyId\":\"2306286663247344\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M4\":{\"id\":\"1840616890627890\",\"name\":\"exc_refi_m04_call_v2\",\"dest\":\"c\",\"legacyId\":\"991655264017502\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M5\":{\"id\":\"1089275163875623\",\"name\":\"exc_refi_m05_case_v2\",\"dest\":\"q\",\"legacyId\":\"1861514208308620\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\",\"category\":\"MARKETING\"},\"M7\":{\"id\":\"1915186253195181\",\"name\":\"exc_refi_m07_thanks_v2\",\"dest\":\"c\",\"legacyId\":\"1695504292330742\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M8\":{\"id\":\"28923882683911966\",\"name\":\"exc_refi_m08_remind_v2\",\"dest\":\"c\",\"legacyId\":\"1456261889708463\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M9\":{\"id\":\"1819887545875725\",\"name\":\"exc_refi_m09_wait_v2\",\"dest\":\"c\",\"legacyId\":\"1825910702064350\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"],\"category\":\"UTILITY\"},\"M10R\":{\"id\":\"4665876823677509\",\"name\":\"exc_refi_m10r_reminder_v2\",\"vars\":[\"first\",\"when\",\"link\"],\"dest\":\"c\",\"legacyId\":\"4090685337891850\",\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M11\":{\"id\":\"4430944130505180\",\"name\":\"exc_refi_m11_noshow_v2\",\"dest\":\"c\",\"legacyId\":\"1462992419096031\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M12\":{\"id\":\"1586746399324895\",\"name\":\"exc_refi_m12_google_v2\",\"dest\":\"g\",\"legacyId\":\"1152794754084561\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M13\":{\"id\":\"4667983876817219\",\"name\":\"exc_refi_m13_midrag_v2\",\"dest\":\"m\",\"legacyId\":\"1022323597539469\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\",\"category\":\"MARKETING\"},\"M15\":{\"id\":\"1111684781346512\",\"name\":\"exc_refi_m15_offer_v2\",\"dest\":\"c\",\"legacyId\":\"1150212394355928\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"channels\":{\"cascade\":[\"whatsapp\",\"sms\",\"email\"],\"providers\":{\"whatsapp\":\"gambot\",\"sms\":\"textme\",\"email\":\"sendgrid\"},\"sms\":{\"source\":\"Excelent\"},\"email\":{\"from\":\"office@excelent.co.il\"},\"optOut\":{\"label\":\"הסר\",\"keywords\":\"הסר|הסירו|להסיר|stop\"}},\"instantReply\":{\"enabled\":false,\"withinSeconds\":60,\"graceMinutes\":2,\"template\":{\"id\":null,\"category\":\"UTILITY\",\"vars\":[\"first\"]}},\"crmFields\":{\"leadTemperature\":{\"from\":\"heat\",\"column\":\"color_mm88xpa8\",\"labels\":{\"HOT\":{\"write\":\"חם מאוד\",\"accept\":[\"רותח\",\"חם מאוד\"]},\"WARM\":{\"write\":\"חם\",\"accept\":[\"חם\"]},\"COLD\":{\"write\":\"מתעניין\",\"accept\":[\"מתעניין\",\"אין מספיק מידע\"]}},\"bands\":[{\"atLeast\":70,\"value\":\"HOT\"},{\"atLeast\":40,\"value\":\"WARM\"},{\"atLeast\":0,\"value\":\"COLD\"}]},\"nicheSegment\":{\"value\":\"refi\",\"column\":null},\"churnReason\":{\"column\":\"refi_close_reason\"}},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\",\"yoram_050\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"},\"linkTokenExamples\":[\"a1b2c3d4e5q\"]};\nconst BIZ = {\n  \"_doc\": \"פרטי העסק הקבועים: מספרים, שמות ופרופילים עסקיים. כל קמפיין בוחר פרופיל ופרטי קשר במפורש בקובץ שלו. שינוי כאן רק לפי הנחיה מפורשת של יורם.\",\n  \"owner\": {\n    \"knownNames\": [\n      \"יורם\",\n      \"יורם פלד\",\n      \"יורם אקסלנט\",\n      \"יורם חדד\"\n    ],\n    \"note\": \"יורם חדד הוא זהות מוכרת של יורם (משפחה ופעילות נדל״ן בנגב המערבי). אין להחליף שם אחד באחר באופן אוטומטי.\"\n  },\n  \"phones\": {\n    \"excelent_contact\": {\n      \"number\": \"055-2783459\",\n      \"e164\": \"972552783459\",\n      \"role\": \"המספר הראשי לחזרה ללקוחות בקמפייני המשכנתאות והפיננסים של אקסלנט: מענה, חזרה טלפונית ותיאום המשך.\",\n      \"owner\": \"yoram\"\n    },\n    \"backup\": {\n      \"number\": \"054-8180280\",\n      \"e164\": \"972548180280\",\n      \"role\": \"המספר של נריה חדד, שותף עסקי: העתק התראות פנימיות ובדיקות מאושרות. לא מספר קשר ללקוחות.\",\n      \"owner\": \"neria\"\n    },\n    \"gambot_sender\": {\n      \"number\": \"055-9881245\",\n      \"e164\": \"972559881245\",\n      \"role\": \"מספר שליחה טכני מחובר ל Gambot. ממנו יוצאות הודעות אוטומטיות ואליו מגיעות תשובות. לא משנים ולא מנתקים בלי אישור.\",\n      \"owner\": \"business\"\n    },\n    \"yoram_050\": {\n      \"number\": \"050-2234052\",\n      \"e164\": \"972502234052\",\n      \"role\": \"מספר של יורם: ניסויים ובדיקות קמפיינים, גיבויים ושימושים תפעוליים, פעילות נדל״ן בנגב המערבי כשהוגדר במפורש לקמפיין, ושימוש אישי. משמש כמספר קשר רק בקמפיין שהגדיר אותו במפורש.\",\n      \"owner\": \"yoram\"\n    }\n  },\n  \"profiles\": {\n    \"excelent_finance\": {\n      \"label\": \"אקסלנט משכנתאות ופיננסים\",\n      \"brand\": \"אקסלנט יועצי משכנתאות ופיננסים\",\n      \"nameInMessages\": \"יורם פלד\",\n      \"allowedNames\": [\n        \"יורם\",\n        \"יורם פלד\",\n        \"יורם אקסלנט\"\n      ],\n      \"allowedContactPhones\": [\n        \"excelent_contact\"\n      ],\n      \"allowedTestPhones\": [\n        \"excelent_contact\",\n        \"backup\",\n        \"yoram_050\"\n      ]\n    },\n    \"negev_real_estate\": {\n      \"label\": \"נדל״ן בנגב המערבי (נתיבות, אופקים, שדרות)\",\n      \"brand\": null,\n      \"nameInMessages\": \"יורם חדד\",\n      \"allowedNames\": [\n        \"יורם\",\n        \"יורם חדד\"\n      ],\n      \"allowedContactPhones\": [\n        \"yoram_050\",\n        \"excelent_contact\"\n      ],\n      \"allowedTestPhones\": [\n        \"yoram_050\",\n        \"excelent_contact\",\n        \"backup\"\n      ],\n      \"note\": \"משמש רק בקמפיין שבחר בו במפורש. המותג טרם הוגדר.\"\n    }\n  },\n  \"internalAlerts\": {\n    \"whatsappTo\": [\n      \"excelent_contact\",\n      \"backup\"\n    ],\n    \"note\": \"הראשי 055-2783459, העתק לגיבוי 054-8180280\"\n  },\n  \"privacy\": \"שיחות פרטיות ואנשי קשר משפחתיים לא נכנסים למערכת הלידים. מספר בדיקה לא הופך למספר לפרסום בגלל שימוש בניסוי.\",\n  \"people\": {\n    \"yoram\": {\n      \"names\": [\n        \"יורם\",\n        \"יורם פלד\",\n        \"יורם אקסלנט\",\n        \"יורם חדד\"\n      ],\n      \"role\": \"בעלים. מטפל בלידים וחוזר ללקוחות\",\n      \"phones\": [\n        \"excelent_contact\",\n        \"yoram_050\"\n      ]\n    },\n    \"neria\": {\n      \"names\": [\n        \"נריה\",\n        \"נריה חדד\"\n      ],\n      \"role\": \"שותף עסקי. מקבל העתק התראות ובדיקות מאושרות\",\n      \"phones\": [\n        \"backup\"\n      ]\n    }\n  }\n};\nconst HSM = (()=>{const module={exports:{}};\n// WhatsApp template (HSM) body for the Meta Cloud API: POST https://graph.facebook.com/<version>/<phone_number_id>/messages.\n// Pure: no transport and no clock of its own. build-workflows.js injects it into plan.js and instant-reply.js.\nconst GRAPH_VERSION = 'v23.0';\n// The sender is the phone number id in the URL (env META_WA_PHONE_NUMBER_ID at build time); the body has no from field.\n// A missing id keeps a visible placeholder: build-workflows.js refuses pilot and live builds without it.\nconst sendUrl = phoneNumberId => 'https://graph.facebook.com/' + GRAPH_VERSION + '/' + (/^\\d{6,}$/.test(String(phoneNumberId || '')) ? phoneNumberId : '{phone_number_id}') + '/messages';\n\n// Body of one template send. Templates are identified by name and language; variables fill the body\n// in order, buttonVariables fill URL buttons in order.\nconst templatePayload = ({ to, name, language = 'he', variables = [], buttonVariables = [] }) => {\n  if (!/^9725\\d{8}$/.test(String(to || ''))) throw Error('bad_recipient');\n  if (!/^(?=[a-z0-9_]*[a-z])[a-z0-9_]{1,512}$/.test(String(name || ''))) throw Error('bad_template_name');\n  if (!/^[a-z]{2,3}(_[A-Z]{2})?$/.test(String(language || ''))) throw Error('bad_language');\n  const text = v => ({ type: 'text', text: String(v) });\n  const components = [];\n  if (variables.length) components.push({ type: 'body', parameters: variables.map(text) });\n  buttonVariables.forEach((v, i) => components.push({ type: 'button', sub_type: 'url', index: String(i), parameters: [text(v)] }));\n  return { messaging_product: 'whatsapp', recipient_type: 'individual', to, type: 'template', template: { name, language: { code: language }, ...(components.length ? { components } : {}) } };\n};\n\n// First template within cfg.instantReply.withinSeconds of a saved intake lead.\n// lead: {itemId, name, firstName, phone, receivedAt, grants, marketing}. Returns {ok:true, payload} or {ok:false, reason}.\nconst instantPayload = ({ lead, cfg, now, mode }) => {\n  const l = lead || {};\n  const slug=l.product_slug;\n  if(slug && l.funnel_type && slug!==l.funnel_type)return {ok:false,reason:'conflicting_product'};\n  // A different product must never borrow the campaign default template.\n  const IR = slug && slug!==(cfg.crmFields?.nicheSegment?.value||cfg.id) ? cfg.productInstantReplies?.[slug] : cfg.instantReply;\n  if(slug && !IR)return {ok:false,reason:'product_template_unconfigured'};\n  if (!IR || IR.enabled !== true) return { ok: false, reason: 'disabled' };\n  // The numeric Meta template id is the approval mark; the send itself uses the template name.\n  if (!/^\\d{6,}$/.test(String(IR.template.id || ''))) return { ok: false, reason: 'awaiting_approved_template' };\n  if (!/^(?=[a-z0-9_]*[a-z])[a-z0-9_]{1,512}$/.test(String(IR.template.name || ''))) return { ok: false, reason: 'template_name_missing' };\n  if (!/^9725\\d{8}$/.test(String(l.phone || ''))) return { ok: false, reason: 'bad_phone' };\n  if (!l.grants || l.grants.whatsapp !== true) return { ok: false, reason: 'no_whatsapp_consent' };\n  // Same rule as plan.js: only a verified UTILITY template goes out without marketing consent.\n  if (IR.template.category !== 'UTILITY' && l.marketing !== true) return { ok: false, reason: 'no_marketing_consent' };\n  const age = (now - Date.parse(l.receivedAt)) / 1000;\n  // A late \"instant\" message is worse than none: the regular engine takes over.\n  if (!Number.isFinite(age) || age < 0 || age > IR.withinSeconds) return { ok: false, reason: 'window_missed' };\n  if (mode === 'test' && !/^TEST/.test(l.name || '')) return { ok: false, reason: 'test_mode_real_lead' };\n  const variables = (IR.template.vars || ['first']).map(() => l.firstName || 'שלום');\n  return { ok: true, payload: templatePayload({ to: l.phone, name: IR.template.name, language: IR.template.language || 'he', variables }) };\n};\n\n// Standard Meta webhook body (object whatsapp_business_account, entry[].changes[].value.messages) -> the\n// conversation rows plan.js reads ({phone, lastMessageDirection, lastMessageTime, lastMessage}), latest per phone.\n// Only incoming messages count: Meta statuses (sent, delivered, read) are our own sends and carry no template,\n// so they would look like a manual conversation in plan.js and cannot confirm a send in reconcile.js.\nconst conversationsFromWebhook = (body, phoneNumberId) => {\n  const rows = {};\n  if (!body || body.object !== 'whatsapp_business_account') return [];\n  for (const e of body.entry || []) for (const c of e.changes || []) {\n    const v = c && c.field === 'messages' ? c.value || {} : {};\n    if (phoneNumberId && String(v.metadata?.phone_number_id || '') !== String(phoneNumberId)) continue;\n    for (const m of v.messages || []) {\n      const phone = String(m.from || '').replace(/\\D/g, '');\n      const time = Number(m.timestamp) * 1000;\n      if (!phone || !Number.isFinite(time) || time <= 0) continue;\n      const text = m.text?.body ?? m.button?.text ?? m.interactive?.button_reply?.title ?? m.interactive?.list_reply?.title ?? '';\n      if (rows[phone] && Date.parse(rows[phone].lastMessageTime) >= time) continue;\n      rows[phone] = { phone, lastMessageDirection: 'incoming', lastMessageTime: new Date(time).toISOString(), lastMessage: String(text) };\n    }\n  }\n  return Object.values(rows);\n};\n\n// This file as an expression the build injects into Code nodes; n8n Code nodes cannot require repo files.\nconst inlineSource = () => '(()=>{const module={exports:{}};\\n' + require('fs').readFileSync(__filename, 'utf8').replace(/\\r\\n/g, '\\n') + '\\nreturn module.exports;})()';\n\nmodule.exports = { GRAPH_VERSION, sendUrl, templatePayload, instantPayload, conversationsFromWebhook, inlineSource };\n\nreturn module.exports;})();\nconst MODE = 'live';\nconst l = $json || {};\nconst now = Date.now();\nconst skip = reason => ({ json: { itemId: l.itemId || null, hasSend: false, send: null, skipped: reason } });\nconst r = HSM.instantPayload({ lead: l, cfg: CFG, now, mode: MODE });\nif (!r.ok) return skip(r.reason);\nconst sd = $getWorkflowStaticData('global'); sd.sent = sd.sent || {};\nfor (const [k, t] of Object.entries(sd.sent)) if (now - t > 86400000) delete sd.sent[k];\nif (sd.sent[l.itemId]) return skip('already_sent');\nsd.sent[l.itemId] = now;\nreturn { json: { itemId: l.itemId, hasSend: true, live: MODE !== 'test', send: r.payload } };\n"
+   }
+  },
+  {
+   "id": "990c56d4-2404-392a-7cc7-a230ddc702b3",
+   "name": "Has send?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    400,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "540ff8b4-d10d-d326-90bf-56514ffcda12",
+       "leftValue": "={{ $json.hasSend }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "d31816c5-1363-d596-7b3a-78ba07d1e930",
+   "name": "Live?",
+   "type": "n8n-nodes-base.if",
+   "typeVersion": 2,
+   "position": [
+    600,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "bbb8f159-7388-66af-ab04-766ad2704b9f",
+       "leftValue": "={{ $json.live }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "cac0485f-0644-e5c4-0b8c-c9b0443651f6",
+   "name": "Send WhatsApp",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "disabled": true,
+   "position": [
+    800,
+    -100
+   ],
+   "onError": "continueRegularOutput",
+   "credentials": {
+    "httpHeaderAuth": {
+     "id": "2392gTlqAQR49WRY",
+     "name": "Meta WhatsApp Cloud"
+    }
+   },
+   "parameters": {
+    "method": "POST",
+    "url": "https://graph.facebook.com/v23.0/1350440204809114/messages",
+    "authentication": "genericCredentialType",
+    "genericAuthType": "httpHeaderAuth",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($('Has send?').item.json.send) }}",
+    "options": {
+     "response": {
+      "response": {
+       "neverError": true
+      }
+     },
+     "timeout": 30000
+    }
+   }
+  },
+  {
+   "id": "b81a6b13-deca-18ca-3764-14d778274cdc",
+   "name": "Simulated send",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    800,
+    100
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "const s=$('Has send?').item.json.send;return {json:{messages:[{id:'simulated'}],simulated:true,template:s.template.name,to:s.to}};"
+   }
+  },
+  {
+   "id": "660f4242-d24e-5a1b-7b78-ba1091a046e5",
+   "name": "Sent?",
+   "type": "n8n-nodes-base.filter",
+   "typeVersion": 2,
+   "position": [
+    1000,
+    0
+   ],
+   "parameters": {
+    "conditions": {
+     "options": {
+      "caseSensitive": true,
+      "leftValue": "",
+      "typeValidation": "loose"
+     },
+     "conditions": [
+      {
+       "id": "55747771-0851-a4df-bcdd-f7511ae7b767",
+       "leftValue": "={{ !!($json.messages && $json.messages[0] && $json.messages[0].id) }}",
+       "rightValue": true,
+       "operator": {
+        "type": "boolean",
+        "operation": "true",
+        "singleValue": true
+       }
+      }
+     ],
+     "combinator": "and"
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "16ee75ae-22e2-a6b3-9612-0cad65735828",
+   "name": "Mark sent",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1200,
+    0
+   ],
+   "parameters": {
+    "mode": "runOnceForEachItem",
+    "jsCode": "const d=new Date().toISOString();return {json:{itemId:$('Has send?').item.json.itemId,colsJson:JSON.stringify({\"fn_last\":{date:d.slice(0,10),time:d.slice(11,19)}})}};"
+   }
+  },
+  {
+   "id": "abfe1706-7c9a-a57a-8877-fa94f1f85ce2",
+   "name": "Update item (instant)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    1400,
+    0
+   ],
+   "credentials": {
+    "mondayComApi": {
+     "id": "Un7HBqZvldpVYUaB",
+     "name": "Monday.com account"
+    }
+   },
+   "retryOnFail": true,
+   "maxTries": 3,
+   "waitBetweenTries": 2000,
+   "parameters": {
+    "method": "POST",
+    "url": "https://api.monday.com/v2",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "mondayComApi",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "API-Version",
+       "value": "2024-10"
+      }
+     ]
+    },
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify({query:\"mutation($b:ID!,$i:ID!,$v:JSON!){ change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){ id } }\",variables:{b:\"5106246268\",i:String($json.itemId),v:$json.colsJson} }) }}",
+    "options": {}
+   }
+  }
+ ],
+ "connections": {
+  "From intake": {
+   "main": [
+    [
+     {
+      "node": "Instant reply",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Instant reply": {
+   "main": [
+    [
+     {
+      "node": "Has send?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Has send?": {
+   "main": [
+    [
+     {
+      "node": "Live?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Live?": {
+   "main": [
+    [
+     {
+      "node": "Send WhatsApp",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Simulated send",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Send WhatsApp": {
+   "main": [
+    [
+     {
+      "node": "Sent?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Simulated send": {
+   "main": [
+    [
+     {
+      "node": "Sent?",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Sent?": {
+   "main": [
+    [
+     {
+      "node": "Mark sent",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Mark sent": {
+   "main": [
+    [
+     {
+      "node": "Update item (instant)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ }
+}
