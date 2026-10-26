@@ -21,15 +21,21 @@ if(MODE!=='test'){
   if(!prof.allowedContactPhones.includes(ID.contactPhone))throw new Error('contact phone not allowed for profile');
   if(MODE==='pilot'){const ok=ID.testPhones.map(k=>BIZ0.phones[k].e164);for(const ph of PILOT.split(','))if(!ok.includes(ph))throw new Error('pilot phone '+ph+' is not an approved test phone of '+CFG.id);}
 }
-const D=__dirname;const CRMS=require('./crm-fields').inlineSource(),CHS=require('./channels').inlineSource(),HSMS=require('./gambot-hsm').inlineSource();
+const D=__dirname;const CRMS=require('./crm-fields').inlineSource(),CHS=require('./channels').inlineSource(),HSM=require('./meta-hsm'),HSMS=HSM.inlineSource();
 // Fallback providers and drafts, inlined for the After send node (fallback.js).
 const FBS=require('./fallback').bundleSource();
-const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS).split('__GAMBOT_HSM__').join(HSMS).split('__FALLBACK__').join(FBS).split('__TEXTME__').join(require('../sms/textme').inlineSource());
+const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split('__CONFIG__').join(CFGS).split('__BUSINESS__').join(BIZS).split('__CRM_FIELDS__').join(CRMS).split('__CHANNELS__').join(CHS).split('__META_HSM__').join(HSMS).split('__FALLBACK__').join(FBS).split('__TEXTME__').join(require('../sms/textme').inlineSource());
 // Deterministic ids, so rebuilding does not change the committed files.
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
 const MON={mondayComApi:{id:'Un7HBqZvldpVYUaB',name:'Monday.com account'}};
 const GAM={httpHeaderAuth:{id:'6hr28GsvQQrGzjwx',name:'Header Auth account'}};
+// WhatsApp sends go to the Meta Cloud API. The phone number id and the n8n credential (header Authorization: Bearer <token>)
+// come from env at build time; test builds keep a placeholder (their send nodes are disabled), pilot and live refuse to build without them.
+const WA_ID=process.env.META_WA_PHONE_NUMBER_ID||'',WA_CRED=process.env.META_WA_CREDENTIAL_ID||'';
+if(MODE!=='test'&&(!/^\d{6,}$/.test(WA_ID)||!WA_CRED))throw new Error('pilot and live builds need META_WA_PHONE_NUMBER_ID and META_WA_CREDENTIAL_ID');
+const WA_URL=HSM.sendUrl(WA_ID);
+const META=WA_CRED?{httpHeaderAuth:{id:WA_CRED,name:'Meta WhatsApp Cloud'}}:undefined;
 const GMAIL={gmailOAuth2:{id:'1H4YGm5Z2UFN4IeE',name:'Gmail account'}};
 const monday=(name,pos,body,extra={})=>({id:id(),name,type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:pos,credentials:MON,retryOnFail:true,maxTries:3,waitBetweenTries:2000,...extra,parameters:{method:'POST',url:'https://api.monday.com/v2',authentication:'predefinedCredentialType',nodeCredentialType:'mondayComApi',sendHeaders:true,headerParameters:{parameters:[{name:'API-Version',value:'2024-10'}]},sendBody:true,specifyBody:'json',jsonBody:body,options:{}}});
 // GraphQL braces are spaced out: n8n expressions break on runs of closing braces.
@@ -66,8 +72,8 @@ const engine={name:PFX+'מנוע הודעות'+tag,settings:{executionOrder:'v1'
  monday('Reserve send',[1100,-100],'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v){id}}",variables:{b:"'+BOARD+'",i:String($json.itemId),v:$json.reserveJson}}) }}',{onError:'continueRegularOutput'}),
  ifTrue('Reserved?',[1150,-100],'={{ !!($json.data && $json.data.change_multiple_column_values && $json.data.change_multiple_column_values.id) }}'),
  ifTrue('Live?',[1200,-100],"={{ $('Has send?').item.json.live }}"),
- {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:MODE==='test',position:[1400,-200],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'POST',url:'https://api.gambot.co.il/api/v1/messages/send-template',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:60000,batching:{batch:{batchSize:1,batchInterval:1500}}}}},
- code('Simulated send',[1400,0],"const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};",'runOnceForEachItem'),
+ {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:MODE==='test',position:[1400,-200],onError:'continueRegularOutput',credentials:META,parameters:{method:'POST',url:WA_URL,authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:60000,batching:{batch:{batchSize:1,batchInterval:1500}}}}},
+ code('Simulated send',[1400,0],"const s=$('Has send?').item.json.send;return {json:{messages:[{id:'simulated'}],simulated:true,template:s.template.name,to:s.to}};",'runOnceForEachItem'),
  code('After send',[1600,-100],src('after-send.js'),'runOnceForEachItem'),
  monday('Update item (sent)',[1800,-100],update('$json')),
  monday('Update item',[1200,150],update("$('Has send?').item.json")),
@@ -158,10 +164,10 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
  code('Instant reply',[200,0],src('instant-reply.js').replace('__MODE__',MODE),'runOnceForEachItem'),
  ifTrue('Has send?',[400,0],'={{ $json.hasSend }}'),
  ifTrue('Live?',[600,0],'={{ $json.live }}'),
- {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:!irLive,position:[800,-100],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'POST',url:'https://api.gambot.co.il/api/v1/messages/send-template',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:30000}}},
- code('Simulated send',[800,100],"const s=$('Has send?').item.json.send;return {json:{success:true,simulated:true,templateId:s.templateId,to:s.to}};",'runOnceForEachItem'),
+ {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:!irLive,position:[800,-100],onError:'continueRegularOutput',credentials:META,parameters:{method:'POST',url:WA_URL,authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:30000}}},
+ code('Simulated send',[800,100],"const s=$('Has send?').item.json.send;return {json:{messages:[{id:'simulated'}],simulated:true,template:s.template.name,to:s.to}};",'runOnceForEachItem'),
  // Only a confirmed send marks "sent at"; the engine then skips its entry message for this lead (plan.js).
- ifTrue('Sent?',[1000,0],'={{ $json.success === true }}','n8n-nodes-base.filter'),
+ ifTrue('Sent?',[1000,0],'={{ !!($json.messages && $json.messages[0] && $json.messages[0].id) }}','n8n-nodes-base.filter'),
  code('Mark sent',[1200,0],"const d=new Date().toISOString();return {json:{itemId:$('Has send?').item.json.itemId,colsJson:JSON.stringify({"+JSON.stringify(COLS.last)+":{date:d.slice(0,10),time:d.slice(11,19)}})}};",'runOnceForEachItem'),
  monday('Update item (instant)',[1400,0],update('$json'))],
  connections:{'From intake':L('Instant reply'),'Instant reply':L('Has send?'),'Has send?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('Sent?'),'Simulated send':L('Sent?'),'Sent?':L('Mark sent'),'Mark sent':L('Update item (instant)')}};
@@ -180,7 +186,7 @@ const smsIn={name:PFX+'קליטת SMS'+tag,settings:{executionOrder:'v1',timezon
 // Final guard: no run of two closing braces inside an expression body.
 for(const w of [engine,go,cal,instant,smsIn])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});
-for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__GAMBOT_HSM__|__FALLBACK__|__TEXTME__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
+for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__META_HSM__|__FALLBACK__|__TEXTME__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 fs.copyFileSync(path.join(__dirname,'../../config/products.json'),path.join(out,'product-dictionary.json'));
 console.log('built',MODE,fs.readdirSync(out).join(' '));

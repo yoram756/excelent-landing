@@ -16,7 +16,7 @@ test('a second campaign runs on the same engine with its own messages',()=>{cons
   const [r]=cons({items:[item({cols:base})],now:NOW});assert.equal(r.campaign,'consolidation');assert.equal(r.send,null,'template not approved, nothing is sent');assert.ok(r.notifyText.includes('A1'));});
 test('consolidation with an approved id would send its own first message',()=>{const c=require('../../src/config/campaigns/consolidation.json');const tmp=path.resolve(__dirname,'../../src/config/campaigns/_tmp_test.json');
   const x=JSON.parse(JSON.stringify(c));x.id='_tmp_test';x.templates.A1.id='1111111111';fs.writeFileSync(tmp,JSON.stringify(x));
-  try{const p=planner('test','2026-10-20T07:00:00Z','','_tmp_test');const [r]=p({items:[item({cols:base})],now:NOW});assert.equal(r.send.templateId,'1111111111');assert.equal(r.code,'A1');}finally{fs.unlinkSync(tmp);}});
+  try{const p=planner('test','2026-10-20T07:00:00Z','','_tmp_test');const [r]=p({items:[item({cols:base})],now:NOW});assert.equal(r.send.template.name,'exc_cons_a1_ack');assert.equal(r.code,'A1');}finally{fs.unlinkSync(tmp);}});
 test('building a campaign does not touch the shared engine code and writes separate workflows',()=>{
   execFileSync('node',[path.resolve(__dirname,'../../src/services/funnel/build-workflows.js'),'test'],{env:{...process.env,CAMPAIGN:'consolidation'}});
   const d=path.resolve(__dirname,'../../src/services/funnel/dist/consolidation');const w=require(d+'/engine-test.json');

@@ -1,20 +1,20 @@
 // n8n Code node "After send" (mode: run once for each item). Source of truth: this file.
-// success true  -> apply the planned update (advance, clear the pending send)
-// success false -> Gambot refused: keep the position, retry in 30 minutes, stop after 3 refusals
-// no answer     -> result unknown: keep the pending send, the reconcile step checks Gambot before any resend
+// messages[0].id -> Meta accepted: apply the planned update (advance, clear the pending send)
+// Meta error     -> refused (HTTP 4xx {error:{code}}): keep the position, retry in 30 minutes, stop after 3 refusals
+// anything else  -> result unknown: keep the pending send, the reconcile step checks before any resend
 const p = $('Has send?').item.json;
 const CFG = __CONFIG__, BIZ = __BUSINESS__, FB = __FALLBACK__;
 const r = $json || {};
 const C = p.colmap;
-const ok = r.success === true;
-const refused = r.success === false;
+const ok = Array.isArray(r.messages) && typeof r.messages[0]?.id === 'string' && r.messages[0].id !== '';
+const refused = !ok && FB.plan.isMetaError(r);
 let cols = JSON.parse(p.colsJson);
 let fallback = null, fallbackText = '';
 if (refused) {
   let st = {}; try { st = JSON.parse(p.stJson || '{}'); } catch (e) {}
   delete st.pending;
   st.fails = (st.fails || 0) + 1;
-  st.lastError = String(r.message || r.error || 'unknown').slice(0, 160);
+  st.lastError = String(r.error.code + ' ' + (r.error.message || '')).slice(0, 160);
   cols = { [C.path]: p.prevPath, [C.step]: p.prevStep };
   const t = new Date(Date.now() + 30 * 60000).toISOString();
   cols[C.next] = { date: t.slice(0, 10), time: t.slice(11, 19) };

@@ -4,7 +4,7 @@ const sourceDir=path.resolve(__dirname,'../../src/services/funnel');
 const read=n=>fs.readFileSync(path.join(sourceDir,n+'.js'),'utf8').replace(/\r\n/g,'\n');
 const cfg=fs.readFileSync(path.join(__dirname,'../../src/config/campaigns/refi.json'),'utf8');
 const biz=fs.readFileSync(path.join(__dirname,'../../config/business.json'),'utf8');
-const plan=read('plan').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
+const plan=read('plan').replace('__CONFIG__',cfg).replace('__META_HSM__',()=>require('../../src/services/funnel/meta-hsm').inlineSource()).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
 const js=`function planner($){${plan}}
 function collect($input){${read('collect-pages')}}
 function resolve($){${read('go').replace('__CONFIG__',cfg)}}
@@ -29,7 +29,7 @@ const stored=JSON.parse(JSON.parse(planned[0].json.colsJson).fn_opens.text);
 const activeLead=item(1,{refi_phone:'0500000040',fn_status:'פעיל',fn_path:'B',fn_step:'M1',fn_token:tokens[0],fn_opens:JSON.stringify(stored)});
 activeLead.column_values.push({id:'boolean_mm88mzry',text:'',value:JSON.stringify({checked:true})},{id:'fn_next',text:'',value:JSON.stringify({date:'2026-10-20',time:'08:00:00'})});
 const followup=planner(n=>({all:()=>n==='Secure tokens'?tokenRows:[],first:()=>({json:n==='Items'?page([activeLead]).json:n==='Run test'?{body:{now:'2026-10-20T09:00:00Z'}}:n==='Convos'?{data:{items:[]}}:{items:[]}})}))[0].json;
-results.bodyLinkMapping=followup.send.variables[1]===tokens[0]+'q'&&followup.send.buttonVariables===undefined&&followup.send.templateId===${JSON.stringify(JSON.parse(cfg).templates.M2.id)};
+results.bodyLinkMapping=followup.send.template.components[0].parameters[1].text===tokens[0]+'q'&&!followup.send.template.components.some(c=>c.type==='button')&&followup.send.template.name===${JSON.stringify(JSON.parse(cfg).templates.M2.name)};
 const serviceOnly={...lead,column_values:lead.column_values.filter(c=>c.id!=='boolean_mm88mzry').concat([{id:'boolean_mm8848pn',text:'',value:JSON.stringify({checked:true})}])};
 const servicePlan=planner(n=>({all:()=>n==='Secure tokens'?tokenRows:[],first:()=>({json:n==='Items'?page([serviceOnly]).json:n==='Run test'?{body:{now:'2026-10-20T09:00:00Z'}}:n==='Convos'?{data:{items:[]}}:{items:[]}})}));
 results.noMarketingWithoutConsent=servicePlan.length>0&&servicePlan.every(x=>!x.json.send);

@@ -2,7 +2,7 @@
 const test=require('node:test');const assert=require('node:assert/strict');const fs=require('fs');const path=require('path');
 const R=p=>path.resolve(__dirname,'../..',p);
 const TM=require(R('src/services/sms/textme')),SG=require(R('src/services/email/sendgrid')),FB=require(R('src/services/funnel/fallback'));
-const {afterSend}=require('./load');
+const {afterSend,metaOk,metaErr}=require('./load');
 const cfg=JSON.parse(fs.readFileSync(R('src/config/campaigns/refi.json'),'utf8')),biz=JSON.parse(fs.readFileSync(R('config/business.json'),'utf8'));
 const drafts=()=>JSON.parse(fs.readFileSync(R('src/services/email/drafts.json'),'utf8'));
 const KW=cfg.channels.optOut.keywords;
@@ -44,14 +44,16 @@ test('planFallback never sends without an approved draft, a product or a configu
   assert.equal(s.action,'SEND');assert.match(s.request.body.message,/^שלום דני, /);assert.match(s.request.body.message,/055-2783459/);
   const anon=FB.planFallback({decision:dec,lead:{phone:'0500000040',first:'שלום'},cfg:live(),biz,drafts:ok},P);
   assert.match(anon.request.body.message,/^שלום, /);});
-test('only a Meta 131047 / re-engagement refusal counts as a closed window',()=>{
-  assert.equal(FB.isWindowClosed({success:false,message:'(#131047) Re-engagement message'}),true);
-  assert.equal(FB.isWindowClosed({success:false,code:131047}),true);
-  assert.equal(FB.isWindowClosed({success:false,message:'template paused for 24h'}),false);
-  assert.equal(FB.isWindowClosed({success:true,message:'131047'}),false);});
+test('only a Meta error.code 131047 counts as a closed window',()=>{
+  assert.equal(FB.isWindowClosed(metaErr(131047,'(#131047) Re-engagement message')),true);
+  assert.equal(FB.isWindowClosed(metaErr(131026,'Message undeliverable')),false);
+  assert.equal(FB.isWindowClosed(metaErr(132015,'template paused for 24h')),false);
+  assert.equal(FB.isWindowClosed({error:{message:'(#131047) Re-engagement message',code:'131047'}}),false,'a string code is not a Meta error');
+  assert.equal(FB.isWindowClosed({error:{message:'timeout',code:'ECONNABORTED'}}),false,'an n8n transport error is unknown, not refused');
+  assert.equal(FB.isWindowClosed(metaOk()),false);assert.equal(FB.isWindowClosed(null),false);});
 test('After send: a closed window stops at the first refusal, any other refusal retries',()=>{
   const base={colmap:{path:'p',step:'s',next:'n',status:'st',state:'o'},colsJson:'{}',prevPath:'A',prevStep:'X',stJson:'{}',phone:'972500000040',first:'דני',campaign:'refi',fallbackJson:JSON.stringify({action:'SEND',channel:'sms'}),notifyText:''};
-  const a=afterSend(base,{success:false,message:'(#131047) Re-engagement message'});
+  const a=afterSend(base,metaErr(131047,'(#131047) Re-engagement message'));
   assert.equal(JSON.parse(a.colsJson).st.label,'נעצר');assert.equal(a.hasFallback,true);assert.equal(a.fallbackSend.channel,'sms');
-  const b=afterSend(base,{success:false,message:'rate limit'});
+  const b=afterSend(base,metaErr(130429,'Rate limit hit'));
   assert.equal(JSON.parse(b.colsJson).st,undefined);assert.equal(b.hasFallback,false);});

@@ -48,12 +48,12 @@ test('synthetic Meta lead: lock, intake, Monday mutation with heat label, instan
     assert.equal(saved.saved,true);assert.equal(saved.request_id,'900001');
 
     // 4. Instant WhatsApp within 60 seconds (template approval SIMULATED; the repo keeps it off).
-    const irOn={...refi,instantReply:{...refi.instantReply,enabled:true,template:{...refi.instantReply.template,id:'1234567890'}}};
-    const code=read('src/services/funnel/instant-reply.js').replace('__CONFIG__',JSON.stringify(irOn)).replace('__BUSINESS__',read('config/business.json')).replace('__GAMBOT_HSM__',require('../../src/services/funnel/gambot-hsm').inlineSource()).replace('__MODE__','test');
+    const irOn={...refi,instantReply:{...refi.instantReply,enabled:true,template:{...refi.instantReply.template,id:'1234567890',name:'exc_refi_instant_test'}}};
+    const code=read('src/services/funnel/instant-reply.js').replace('__CONFIG__',JSON.stringify(irOn)).replace('__BUSINESS__',read('config/business.json')).replace('__META_HSM__',require('../../src/services/funnel/meta-hsm').inlineSource()).replace('__MODE__','test');
     const lead={itemId:saved.request_id,name:v.name,firstName:v.name.replace(/^TEST\s*/,'').split(' ')[0],phone:v.phone,receivedAt:new Date(now).toISOString(),grants:v.contact_permissions.grants,marketing:v.marketing_consent};
     const sent=new Function('$json','$getWorkflowStaticData','Date',code)(lead,()=>({}),Date).json;
     assert.equal(sent.hasSend,true,JSON.stringify(sent));assert.equal(sent.live,false);
-    assert.deepEqual(sent.send,{to:'972500000040',from:'972559881245',templateId:'1234567890',variables:['דנה']});
+    assert.deepEqual(sent.send,{messaging_product:'whatsapp',recipient_type:'individual',to:'972500000040',type:'template',template:{name:'exc_refi_instant_test',language:{code:'he'},components:[{type:'body',parameters:[{type:'text',text:'דנה'}]}]}});
 
     // 5. A second identical Meta delivery 20 seconds later is blocked before Monday or WhatsApp.
     const dup=db.admitLead({source:'meta_lead_ads',raw,phone:'0500000040',now:now+20000});

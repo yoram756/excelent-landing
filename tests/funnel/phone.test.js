@@ -24,11 +24,12 @@ test('intake rejects letters, landlines and short numbers',()=>{
   for(const p of ['05O0000040','050abc0000040','036000000','0500000','','+1 212 555 0100'])assert.equal(validate({phone:p}).ok,false,p);
 });
 
-test('WhatsApp sends come from the configured Gambot sender, never a hardcoded number',()=>{
+// Meta Cloud API: the sender is the phone number id in the send URL (META_WA_PHONE_NUMBER_ID at build time), never a number in the body.
+test('WhatsApp sends name no sender in the body and no hardcoded number',()=>{
   const biz=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8'));
   assert.equal(biz.phones.gambot_sender.e164,'972559881245');
   const plan=fs.readFileSync(path.join(root,'services/funnel/plan.js'),'utf8');
-  assert.match(plan,/from:BIZ\.phones\.gambot_sender\.e164/);
+  assert.match(plan,/HSM\.templatePayload\(\{to:phone,/);assert.doesNotMatch(plan,/\bfrom:/);
   const js=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?(e.name==='dist'?[]:js(path.join(d,e.name))):e.name.endsWith('.js')?[path.join(d,e.name)]:[]);
   for(const f of js(root))assert.doesNotMatch(fs.readFileSync(f,'utf8'),/9881245/,f);
 });

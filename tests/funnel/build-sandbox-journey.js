@@ -6,7 +6,7 @@ const S=JSON.parse(read('tests/funnel/sandbox-columns.json')),M=S.columns,B=S.bo
 if(B===S.productionBoardForbidden||B!=='5106403803')throw Error('Unexpected sandbox target');
 const remap=s=>Object.entries(M).reduce((s,[a,b])=>s.split(a).join(b),s).split(S.productionBoardForbidden).join(B);
 const cfg=read('src/config/campaigns/refi.json'),biz=read('config/business.json');
-const planner=read('src/services/funnel/plan.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
+const planner=read('src/services/funnel/plan.js').replace('__CONFIG__',cfg).replace('__META_HSM__',()=>require('../../src/services/funnel/meta-hsm').inlineSource()).replace('__BUSINESS__',biz).replace('__MODE__','test').replace('__GO_LIVE__','2026-10-20T07:00:00Z').replace('__PILOT__','').replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
 const calendar=read('src/services/funnel/calendly.js').replace('__CONFIG__',cfg);
 const pre=`const M=${JSON.stringify(M)},B='${B}';
 const back=Object.fromEntries(Object.entries(M).map(([a,b])=>[b,a]));
@@ -59,7 +59,7 @@ assert(cv.refi_source.text==='קליטת LP1','LP1 source');
 assert(plan().every(p=>!p.send),'Service-only lead must not get marketing');
 const [p]=plan({boolean_mm88mzry:{checked:true}});assert(p?.send&&!p.live,'Simulated outbound plan');
 function after($,$json){${read('src/services/funnel/after-send.js').replace('__CONFIG__',cfg).replace('__BUSINESS__',biz).replace('__FALLBACK__',()=>require('../../src/services/funnel/fallback').bundleSource())}}
-const a=after(()=>({item:{json:p}}),{success:true,simulated:true}).json;
+const a=after(()=>({item:{json:p}}),{messages:[{id:'simulated'}],simulated:true}).json;
 assert(a.sendOk&&a.simulated,'Mock provider acknowledgment');
 return mutation({...JSON.parse(a.colsJson),boolean_mm88mzry:{checked:true}});`);
 http('Apply simulated send',dynamic);

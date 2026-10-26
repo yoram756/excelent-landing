@@ -5,7 +5,7 @@
  },
  "nodes": [
   {
-   "id": "be199ba4-87ee-d848-7ef4-f0fce1b7b8d2",
+   "id": "2169a2b6-1615-87d4-f15d-cb8ecc792b63",
    "name": "Link",
    "type": "n8n-nodes-base.webhook",
    "typeVersion": 2,
@@ -13,7 +13,7 @@
     0,
     0
    ],
-   "webhookId": "faba424a-5a74-7976-b698-12238d57fb40",
+   "webhookId": "22453f29-e7d5-a188-7d72-e707427cbd59",
    "parameters": {
     "httpMethod": "GET",
     "path": "go",
@@ -22,7 +22,7 @@
    }
   },
   {
-   "id": "b2af5925-1b9e-e6b1-2d83-e1721d488bc9",
+   "id": "7ed9bc8f-f442-d02f-f593-6569664cbbd2",
    "name": "Fetch pages",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -80,7 +80,7 @@
    }
   },
   {
-   "id": "45720f50-e385-0c6c-d703-e7f7048bc079",
+   "id": "c83c1f2a-bd27-cf68-91cc-0143c2080a10",
    "name": "Resolve",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,
@@ -93,7 +93,7 @@
    }
   },
   {
-   "id": "229692fc-05fb-d600-aa1e-79f35a8d7177",
+   "id": "526d5950-ef26-09f3-751b-b12883ea1e1c",
    "name": "Redirect",
    "type": "n8n-nodes-base.respondToWebhook",
    "typeVersion": 1.1,
@@ -110,7 +110,7 @@
    }
   },
   {
-   "id": "288a9e22-3a3e-3a00-af3b-3ff57e8c18e3",
+   "id": "942e93cb-08e7-ecab-29c7-08e9bc7fb111",
    "name": "Found?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -127,7 +127,7 @@
      },
      "conditions": [
       {
-       "id": "2266ffe8-4267-dba1-578a-89d18cd7a76c",
+       "id": "993f3ae8-0b38-1d2f-36ba-045602966a30",
        "leftValue": "={{ $('Resolve').item.json.found }}",
        "rightValue": true,
        "operator": {
@@ -143,7 +143,7 @@
    }
   },
   {
-   "id": "55972fd8-2e95-707d-a594-e2a8ab7ccee7",
+   "id": "1b2eb10d-3e2b-2119-c955-617eb5975fa1",
    "name": "Update opens",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -181,7 +181,7 @@
    }
   },
   {
-   "id": "77d81467-b789-c66a-423d-4f3bff4a451e",
+   "id": "bf98e923-1a15-a509-5363-6bf48d50d227",
    "name": "Hot?",
    "type": "n8n-nodes-base.filter",
    "typeVersion": 2,
@@ -198,7 +198,7 @@
      },
      "conditions": [
       {
-       "id": "b41b3ef7-bb9d-422e-6b41-58f723e4b963",
+       "id": "4fc85863-c49c-8bcc-ef21-0118e3eea7d9",
        "leftValue": "={{ $('Resolve').item.json.notify }}",
        "rightValue": true,
        "operator": {
@@ -214,7 +214,7 @@
    }
   },
   {
-   "id": "08e09334-fb69-73d7-44e4-412c899f06fb",
+   "id": "cb6e4db8-4093-1803-00b2-1418ba3ed88b",
    "name": "Notify Yoram",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
@@ -252,7 +252,7 @@
    }
   },
   {
-   "id": "19e7fdd3-afaf-07d3-f302-33f382b4ddd8",
+   "id": "8ed1b0f8-f863-b159-4bb3-06cd8fe46f21",
    "name": "Items",
    "type": "n8n-nodes-base.code",
    "typeVersion": 2,

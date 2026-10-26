@@ -4,7 +4,7 @@ const SRC=path.resolve(__dirname,'../../src/services/funnel');
 // A campaign id reads src/config/campaigns/<id>.json; an object is used as the campaign config itself.
 const cfg=(id='refi')=>typeof id==='object'?JSON.stringify(id):fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns/'+id+'.json'),'utf8');
 function planner(mode='test',goLive='2026-10-20T07:00:00Z',pilot='',campaign='refi'){
-  const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__CONFIG__',cfg(campaign)).replace('__BUSINESS__',fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8')).replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot).replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
+  const code=fs.readFileSync(SRC+'/plan.js','utf8').replace('__CONFIG__',cfg(campaign)).replace('__META_HSM__',()=>require('../../src/services/funnel/meta-hsm').inlineSource()).replace('__BUSINESS__',fs.readFileSync(path.resolve(__dirname,'../../config/business.json'),'utf8')).replace('__MODE__',mode).replace('__GO_LIVE__',goLive).replace('__PILOT__',pilot).replace('__CRM_FIELDS__',require('../../src/services/funnel/crm-fields').inlineSource).replace('__CHANNELS__',require('../../src/services/funnel/channels').inlineSource);
   return ({items,convos=[],now,shabbat=[],convosDown=false})=>{
     const generated=items.map(it=>({json:{itemId:String(it.id),secureToken:require('crypto').randomBytes(16).toString('hex')}}));
     const $=n=>({all:()=>n==='Secure tokens'?generated:[],first:()=>({json:n==='Shabbat'?{items:shabbat}:n==='Convos'?(convosDown?{error:'down'}:{data:{items:convos}}):n==='Run test'?{body:{now}}:{data:{me:{id:1},boards:[{items_page:{items}}]}}})});
@@ -29,3 +29,8 @@ function calendly({body,mails=[],items,store={}}){const code=require('fs').readF
 module.exports.goLink=goLink;module.exports.calendly=calendly;
 function reconcile(planOut,gambot){const code=require('fs').readFileSync(SRC+'/reconcile.js','utf8');return new Function('$','$json',code)(()=>({item:{json:planOut}}),gambot).json;}
 module.exports.reconcile=reconcile;
+// Meta Cloud API shapes: the template body plan.js builds, a send Meta accepted, and a Meta refusal (HTTP 4xx body).
+const V=send=>((send&&send.template.components||[]).find(c=>c.type==='body')||{parameters:[]}).parameters.map(p=>p.text);
+const metaOk=(id='wamid.TEST')=>({messaging_product:'whatsapp',contacts:[{input:'972500000040',wa_id:'972500000040'}],messages:[{id}]});
+const metaErr=(code,message='refused')=>({error:{message,type:'OAuthException',code,fbtrace_id:'ATESTtrace'}});
+module.exports.V=V;module.exports.metaOk=metaOk;module.exports.metaErr=metaErr;

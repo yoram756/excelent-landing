@@ -15,6 +15,7 @@ test('a final WhatsApp failure notifies the fallback after the Monday update; SM
   assert.deepEqual(e.connections['Fallback channel'].main.map(br=>br.map(x=>x.node)),[['Send SMS'],['Send email']]);
   for(const n of e.nodes)if(n.type==='n8n-nodes-base.httpRequest'){
     if(n.name==='Send SMS'||n.name==='Send email'){assert.equal(n.disabled,true,n.name);assert.match(n.parameters.url,/fallbackSend\.request\.url/,n.name);}
+    else if(n.name==='Send WhatsApp'){assert.match(n.parameters.url,/^https:\/\/graph\.facebook\.com\/v\d+\.\d+\/\{phone_number_id\}\/messages$/,n.name);assert.equal(n.disabled,true,'a test build never sends');}
     else assert.match(n.parameters.url,/monday\.com|gambot\.co\.il|hebcal\.com/,n.name);}});
 test('instant reply runs only from the intake workflow and cannot send from a test build or without an approved template',()=>{const w=instantWf;
   const names=new Set(w.nodes.map(x=>x.name));for(const [a,c] of Object.entries(w.connections)){assert.ok(names.has(a),a);for(const br of c.main)for(const x of br)assert.ok(names.has(x.node),x.node);}

@@ -5,12 +5,10 @@
 // - content comes only from an approved draft of the campaign product (src/services/email/drafts.json)
 // - SMS source and email sender come only from the campaign file (channels.sms.source, channels.email.from)
 
-const isWindowClosed = r => {
-  if (!r || r.success !== false) return false;
-  const code = String(r.code ?? r.errorCode ?? r.error?.code ?? '');
-  const msg = String(r.message || r.error?.message || r.error || '');
-  return code === '131047' || /\b131047\b|re-?engagement message/i.test(msg);
-};
+// A Meta Cloud API refusal: the HTTP 4xx body {error:{message,type,code,fbtrace_id}}, read with neverError.
+// An n8n transport error (timeout, DNS) has no numeric code: its result is unknown, not refused.
+const isMetaError = r => !!r && !!r.error && typeof r.error === 'object' && Number.isInteger(r.error.code);
+const isWindowClosed = r => isMetaError(r) && r.error.code === 131047;
 
 // decision: channels.nextChannel output. lead: { phone, email, first }. P: { sms, email } provider modules.
 const planFallback = ({ decision, lead, cfg, biz, drafts }, P) => {
@@ -39,4 +37,4 @@ const bundleSource = () => {
     ',drafts:' + fs.readFileSync(path.join(__dirname, '../email/drafts.json'), 'utf8').replace(/\r\n/g, '\n') + '})';
 };
 
-module.exports = { isWindowClosed, planFallback, inlineSource, bundleSource };
+module.exports = { isMetaError, isWindowClosed, planFallback, inlineSource, bundleSource };

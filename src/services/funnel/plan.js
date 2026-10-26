@@ -1,6 +1,6 @@
 // Shared funnel engine planner (all campaigns). Runs inside the n8n Code node "Plan".
 // Everything campaign specific comes from CFG (src/config/campaigns/<id>.json), injected by build-workflows.js.
-// MODE: 'test' handles only items named TEST and never calls Gambot; 'pilot' sends only to listed
+// MODE: 'test' handles only items named TEST and never sends WhatsApp; 'pilot' sends only to listed
 // internal phones; 'live' handles real leads only.
 const CFG = __CONFIG__;
 const BIZ = __BUSINESS__;
@@ -8,6 +8,8 @@ const BIZ = __BUSINESS__;
 const CRM = __CRM_FIELDS__;
 // Global opt-out and the WhatsApp -> SMS -> Email fallback decision (src/services/funnel/channels.js).
 const CH = __CHANNELS__, OPT = CFG.channels.optOut;
+// Meta Cloud API template body (src/services/funnel/meta-hsm.js, injected by the build).
+const HSM = __META_HSM__;
 const SENDER = BIZ.phones.gambot_sender.number;
 const CONTACT = CFG.identity&&CFG.identity.contactPhone ? BIZ.phones[CFG.identity.contactPhone].number : 'לא הוגדר מספר קשר לקמפיין';
 const MODE = '__MODE__';
@@ -160,8 +162,8 @@ for(const it of items){
       if(nx){code=nx.code;nNext=due(nx.next,now);if(nx.thenPath)nPath=nx.thenPath;}else{nNext=now+CFG.rules.holdDays*D;}}
     else if(seq){nNext=now+CFG.rules.holdDays*D;}
     if(code&&sameDay&&CFG.rules.onePerDayPaths.includes(path)&&!CFG.rules.sameDayAllowed.includes(code)){code=null;nNext=atLocal(now,1,9,30);nPath=path;nStep=step;}
-    // a template without an approved Meta id is never sent: the lead waits and Yoram is told
-    if(code&&!/^\d{6,}$/.test(String(T[code]||''))){notify='תבנית '+code+' עוד לא אושרה בקמפיין '+CFG.name+', ההודעה לא נשלחה.';code=null;nPath=path;nStep=step;nNext=now+D;}
+    // a template without an approved Meta id (the approval mark) or a name to send by is never sent: the lead waits and Yoram is told
+    if(code&&(!/^\d{6,}$/.test(String(T[code]||''))||!/^(?=[a-z0-9_]*[a-z])[a-z0-9_]{1,512}$/.test(String(CFG.templates[code].name||'')))){notify='תבנית '+code+' עוד לא אושרה בקמפיין '+CFG.name+', ההודעה לא נשלחה.';code=null;nPath=path;nStep=step;nNext=now+D;}
     // A callback request is not marketing opt-in. Unknown template categories
     // also require marketing consent; only a verified UTILITY category is exempt.
     if(code&&!mkt&&CFG.templates[code].category!=='UTILITY'){
@@ -171,8 +173,11 @@ for(const it of items){
     if(code){
       if(!fixed)nStep=code;
       const vars=(CFG.templates[code].vars||['first']).map(v=>v==='when'?whenText(meeting):v==='link'?token+DEST[code]:first);
-      send={to:phone,from:BIZ.phones.gambot_sender.e164,templateId:T[code],variables:vars};
-      if(DEST[code]&&CFG.templates[code].linkMode!=='body')send.buttonVariables=[token+DEST[code]];
+      // A body Meta would refuse (not a mobile number, bad name) stops this lead only, never the whole run.
+      try{send=HSM.templatePayload({to:phone,name:CFG.templates[code].name,language:CFG.templates[code].language||'he',variables:vars,buttonVariables:DEST[code]&&CFG.templates[code].linkMode!=='body'?[token+DEST[code]]:[]});}
+      catch(e){notify='הודעה '+code+' לא נשלחה ('+e.message+'), טיפול ידני.';code=null;nPath=path;nStep=step;nNext=null;}
+    }
+    if(code){
       // Decided now, used by After send only if WhatsApp finally fails. Leads without a channel receipt have no other consented channel.
       const grants=channelProof&&channelProof.phone===phone&&channelProof.grants?channelProof.grants:{whatsapp:whatsappAllowed};
       fallback=CH.nextChannel({status,failed:['whatsapp'],grants},CFG);
@@ -182,14 +187,15 @@ for(const it of items){
   if(nPath!==(col(cv,'path').text||''))set(C.path,nPath);
   if(nStep!==(col(cv,'step').text||''))set(C.step,nStep);
   if(nNext!==dateVal(col(cv,'next').value))set(C.next,nNext?toDate(nNext):{});
-  let reserveJson=null;
+  // The reservation key travels beside the Meta body, never inside it.
+  let reserveJson=null,sendKey=null;
   if(send){
     const key=it.id+':'+code+':'+now;
     const adv={...cols};delete adv[C.state];
-    reserveJson=JSON.stringify({[C.state]:{text:JSON.stringify({...st,pending:{key,tpl:send.templateId,code,at:now,adv}})}});
-    send.key=key;
+    reserveJson=JSON.stringify({[C.state]:{text:JSON.stringify({...st,pending:{key,tpl:T[code],code,at:now,adv}})}});
+    sendKey=key;
     set(C.state,{text:JSON.stringify({...st,lastKey:key})});
   }
-  if(changed)out.push({itemId:it.id,phone,cols,send,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st),fallbackJson:fallback?JSON.stringify(fallback):null,email:col(cv,'email').text||null,first});
+  if(changed)out.push({itemId:it.id,phone,cols,send,sendKey,code,notify,reserveJson,prevPath:path,prevStep:step,stJson:JSON.stringify(st),fallbackJson:fallback?JSON.stringify(fallback):null,email:col(cv,'email').text||null,first});
 }
 return out.map(o=>({json:{...o,campaign:CFG.id,leadTemperature:temps[o.itemId]??null,nicheSegment:CFG.crmFields.nicheSegment.value,colmap:C,hasSend:!!o.send,reconcile:!!o.reconcile,live:MODE!=='test',hasNotify:!!o.notify,colsJson:JSON.stringify(o.cols),meId,notifyText:o.notify?('משפך מחזור: '+o.notify):''}}));
