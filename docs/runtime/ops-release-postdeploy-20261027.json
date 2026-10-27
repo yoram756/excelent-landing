@@ -1,0 +1,206 @@
+{
+  "date": "2026-10-27T19:54:11.485Z",
+  "overall": "BLOCKED",
+  "scope": "Deployment verified. Full live CAPI event_id trace is not verified; pending clarification whether target is Monday persistence or a Meta CAPI receipt.",
+  "operationsCommit": "6d7114aa10855238ad3b12de377cd470cb6e3201",
+  "deployedCodeCommit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+  "observedServerHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+  "branch": "codex/lock-service-20261025",
+  "publication": {
+    "status": "PASS",
+    "method": "Authenticated GitHub connector, expected-head checks, force=false; independent branch readback",
+    "note": "Local Git index and CLI network were blocked; no claim of a successful CLI git push"
+  },
+  "review": {
+    "status": "PASS",
+    "operationsFiles": 24,
+    "cacheFollowupFiles": 3,
+    "unrelatedPendingChanges": "Excluded from our commits. Concurrent CRO commit d3faec2 preserved in branch history.",
+    "secrets": "Existing scanner passed in exact candidate; final combined run includes scanner"
+  },
+  "tests": {
+    "isolatedCandidate": {
+      "status": "PASS",
+      "exitCode": 0,
+      "total": 443,
+      "log": "tests/out/ops-release-20261027/npm-test-candidate.log"
+    },
+    "cacheFollowup": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 59,
+      "log": "tests/out/ops-release-20261027/site-cache-followup.log"
+    },
+    "postDeployEventIdLogic": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 32,
+      "command": "node --test tests/funnel/intake.test.js",
+      "scope": "Local validation, replay and Monday mutation construction, using source proven unchanged from the deployed version; no live form POST"
+    },
+    "finalCombined": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 445,
+      "breakdown": {
+        "operations": 16,
+        "funnel": 366,
+        "site": 59,
+        "nginx": 4
+      },
+      "log": "tests/out/ops-release-20261027/final-combined-tests.log"
+    },
+    "reactUnit": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 6,
+      "log": "tests/out/ops-release-20261027/final-web-unit.log"
+    },
+    "reactBrowser": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 22,
+      "scope": "Local browser scenarios with controlled transports; not a live Meta receipt",
+      "log": "tests/out/ops-release-20261027/final-web-e2e.log"
+    },
+    "reactLint": {
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "tests/out/ops-release-20261027/final-web-lint.log"
+    }
+  },
+  "build": {
+    "isolatedPackage": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node src/deploy/package.js"
+    },
+    "isolatedOperations": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node src/services/business-ops/build-workflow.js"
+    },
+    "finalReact": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "npm run build --prefix apps/refi-landing",
+      "log": "tests/out/ops-release-20261027/final-web-build-retry.log",
+      "environmentWorkaround": "Initial run failed in tsx temporary-directory naming: uv_os_get_passwd ENOMEM. Retry used an ignored local NODE_OPTIONS preload that falls back to the existing Windows USERNAME only for this OS error. No application code, permissions or test assertions were changed.",
+      "artifactComparison": "git diff ccbeaab86e9724ba205fc85f8f5552c8212efbea --stat -- site/refi-cro returned no differences after rebuild"
+    },
+    "finalPackage": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node src/deploy/package.js",
+      "log": "tests/out/ops-release-20261027/final-package-build.log"
+    }
+  },
+  "deployment": {
+    "status": "PASS",
+    "directory": "/docker/lp",
+    "image": "nginx:1.27-alpine",
+    "imageVerification": "Actual running image ID matched the installed nginx:1.27-alpine image ID before finalization",
+    "nginxDisposable": "PASS",
+    "nginxRunningContainer": "PASS",
+    "lpRecreated": true,
+    "otherServicesChanged": false,
+    "receipt": "/docker/lp-release-backups/ops-247ff6406012/deployment.json",
+    "serverScreenshot": "tests/out/ops-release-20261027/server-post-deploy.png",
+    "note": "Concurrent deployment had already pulled target. This task revalidated it, made independent backups, performed exact-target git pull, disposable nginx test, LP-only recreation and independent HTTPS checks."
+  },
+  "http": {
+    "status": "PASS",
+    "origin": "https://refi.excelentfinance.com",
+    "routes": [
+      {
+        "route": "/",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/index",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/privacy.html",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/accessibility.html",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/partners.html",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/assets/v2.js?v=eventid-20261027",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/assets/partners.js?v=eventid-20261027",
+        "status": 200,
+        "exactBytesMatch": true
+      },
+      {
+        "route": "/thank-you",
+        "status": 200,
+        "exactBytesMatch": true
+      }
+    ],
+    "postRequests": 0
+  },
+  "browser": {
+    "status": "PASS",
+    "url": "https://refi.excelentfinance.com/index",
+    "checks": [
+      "Rendered LP1 v2",
+      "Quick skip opens the contact form",
+      "Service/marketing choices remain unchecked",
+      "Actual script src is assets/v2.js?v=eventid-20261027"
+    ],
+    "formSubmitted": false,
+    "screenshot": "tests/out/ops-release-20261027/lp1-post-deploy.png"
+  },
+  "capi": {
+    "clientScript": {
+      "status": "PASS",
+      "scope": "Correct event_id-aware deployed assets and cache-busting URLs"
+    },
+    "localMetadataAndReplay": {
+      "status": "PASS",
+      "tests": 32
+    },
+    "liveMondayPersistence": {
+      "status": "NOT TESTED"
+    },
+    "liveMetaReceipt": {
+      "status": "NOT TESTED",
+      "reason": "No live event was sent; verified CAPI dataset/pixel, test_event_code and sending connection absent from this release evidence"
+    }
+  },
+  "rollback": {
+    "status": "PASS",
+    "scope": "Prepared and verified readable archives and valid shell syntax; restore not executed",
+    "commit": "d3faec2d315d32efc3de8a8b9eecfa0f1512e9cd",
+    "directory": "/docker/lp-release-backups/ops-247ff6406012",
+    "script": "/docker/lp-release-backups/ops-247ff6406012/rollback.sh",
+    "files": [
+      "runtime-before.tar.gz",
+      "previous-commit.tar.gz",
+      "checkpoint.json",
+      "rollback.sh"
+    ],
+    "restoreTest": "NOT TESTED"
+  },
+  "limitations": [
+    "Operations source deployed, but recurring source intake and ops runtime are still disabled/unconfigured.",
+    "No WhatsApp sends, source-side message changes, n8n settings changes, Meta campaign activation, or new paid services.",
+    "Initial image ID transcription failed a preflight guard before mutation; final image verification used Docker's actual runtime/tag equality."
+  ]
+}
