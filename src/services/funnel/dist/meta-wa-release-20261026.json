@@ -1,0 +1,136 @@
+{
+  "campaign": "refi",
+  "builtAt": "2026-10-26T13:13:29.564Z",
+  "goLiveCutoff": "2026-10-26T13:13:29.564Z",
+  "sourceBaseCommit": "9202e59055922914706f931926288e328ceb504e",
+  "builderSha256": "32a1b993d9a335578edd2753af88acb5bab5e344f556c48544ecb82e90ee9cf6",
+  "phoneNumberId": "1350440204809114",
+  "credentialId": "2392gTlqAQR49WRY",
+  "pilotPhone": "972502234052",
+  "active": false,
+  "verification": {
+    "build": "PASS",
+    "artifactValidation": "PASS",
+    "localRuntime": "PASS",
+    "funnelSuite": {
+      "status": "PASS",
+      "tests": 345,
+      "passed": 345,
+      "failed": 0,
+      "exitCode": 0,
+      "command": "npm run test:funnel",
+      "logSha256": "50932ee1744b18f61b2fe3b5a95a7b8f70ccd362df71b9ef0871012f585b532a",
+      "localLog": "tests/out/meta-wa-funnel-20261026.log"
+    },
+    "productionE2E": "BLOCKED",
+    "activation": "NOT TESTED",
+    "goLive": "BLOCKED"
+  },
+  "deploymentBlockers": [
+    "Requested E2E phone 0559881245 is the technical sender, outside the approved pilot allowlist; no messages were sent.",
+    "Live fallback Send SMS references PENDING_TEXTME and Send email references PENDING_SENDGRID; delivery is not verified.",
+    "Artifacts are inactive and were not imported or activated in n8n."
+  ],
+  "liveReadback": {
+    "n8nCredential": {
+      "status": "PASS",
+      "url": "https://n8n-qhxa.srv1604140.hstgr.cloud/home/credentials/2392gTlqAQR49WRY",
+      "name": "Meta WhatsApp Cloud",
+      "type": "Header Auth",
+      "header": "Authorization",
+      "allowedDomain": "graph.facebook.com",
+      "tokenInspected": false
+    },
+    "mondayLookup": {
+      "status": "PASS",
+      "boardId": "5106246268",
+      "column": "refi_phone",
+      "requestedPhone": "972559881245",
+      "itemsScanned": 4,
+      "hasMore": false,
+      "matches": 0,
+      "method": "monday.com connector get_board_items_page; read only"
+    },
+    "requestedE2E": {
+      "status": "BLOCKED",
+      "reason": "Requested 0559881245 is the technical sender and is outside campaign identity.testPhones; WhatsApp is read/draft only under AGENTS instructions.",
+      "pilotGateExitCode": 1,
+      "messagingDelivery": "NOT TESTED"
+    }
+  },
+  "regression": {
+    "command": "node --test --test-name-pattern='JSON body expression|SMS phone lookup' tests/funnel/build.test.js",
+    "beforeFix": {
+      "exitCode": 1,
+      "failed": 2,
+      "reason": "SyntaxError: Unexpected identifier 'refi_phone'"
+    },
+    "afterFix": {
+      "status": "PASS",
+      "coveredByFullSuite": true
+    }
+  },
+  "files": [
+    {
+      "path": "src/services/funnel/dist/pilot/engine-pilot.json",
+      "bytes": 108347,
+      "sha256": "2461cbad0f2aaf92c5e55f7904db4d2450d74df236b59f425dd269a46c5e5cd2"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/go.json",
+      "bytes": 23186,
+      "sha256": "26c1ee336c1239e0016bdafab10391d5075cd1a35a1a9a891339056bd85a6ab2"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/calendly.json",
+      "bytes": 26425,
+      "sha256": "34ac9c15f369c62c3698d47ffa182771925a315a3d4021a2e7c3d920eb8f8152"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/instant-reply-pilot.json",
+      "bytes": 27265,
+      "sha256": "cd13cf7d9c1f83c7a18cc2167dc6e40c655fb5b744b50c49ee5d3254ed3fbaf0"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/sms-inbound-pilot.json",
+      "bytes": 27583,
+      "sha256": "01e566a91bbf1dea7d9183954556c7a2beab94a626a42001825a181566060c22"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/product-dictionary.json",
+      "bytes": 3973,
+      "sha256": "8b8a024e4ed76a02d59cc2739b72cfd0b9fc63b82a62110b76874b95e48f1455"
+    },
+    {
+      "path": "src/services/funnel/dist/live/engine-live.json",
+      "bytes": 108316,
+      "sha256": "dd0ee543d2476135340ca6e3159cc030c4dafb7e990939a5a07bb01d7aa76338"
+    },
+    {
+      "path": "src/services/funnel/dist/live/go.json",
+      "bytes": 23186,
+      "sha256": "1e20876522f957a9a3bebbbd6d9338b156014a8039a15c552cf4b7d3b90b2a17"
+    },
+    {
+      "path": "src/services/funnel/dist/live/calendly.json",
+      "bytes": 26425,
+      "sha256": "c77c29182e6ba6728308ec9ed7f6199e33a7cbebf2394fe6c3a3283a43efcb67"
+    },
+    {
+      "path": "src/services/funnel/dist/live/instant-reply-live.json",
+      "bytes": 27244,
+      "sha256": "b6439ff55e646c7c5be05faac22decfc0b6284080cc697ee9576eab271597c8d"
+    },
+    {
+      "path": "src/services/funnel/dist/live/sms-inbound-live.json",
+      "bytes": 27563,
+      "sha256": "a2d810c1b2e5f60a5afe7caf50a701800e839d2ed9da27a2ca0e10713a584e51"
+    },
+    {
+      "path": "src/services/funnel/dist/live/product-dictionary.json",
+      "bytes": 3973,
+      "sha256": "8b8a024e4ed76a02d59cc2739b72cfd0b9fc63b82a62110b76874b95e48f1455"
+    }
+  ],
+  "hashEncoding": "Git blob bytes; LF line endings"
+}

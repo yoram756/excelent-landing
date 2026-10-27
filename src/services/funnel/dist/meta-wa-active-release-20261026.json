@@ -1,0 +1,138 @@
+{
+  "campaign": "refi",
+  "builtAt": "2026-10-26T16:08:56.417Z",
+  "goLiveCutoff": "2026-10-26T16:08:56.417Z",
+  "sourceBaseCommit": "e2cd9ab73c8dc10250d4c058ffd2cdfb83b434f0",
+  "builderSha256": "32a1b993d9a335578edd2753af88acb5bab5e344f556c48544ecb82e90ee9cf6",
+  "phoneNumberId": "1350440204809114",
+  "credentialId": "2392gTlqAQR49WRY",
+  "pilotPhone": "972502234052",
+  "active": false,
+  "verification": {
+    "build": "PASS",
+    "artifactValidation": "PASS",
+    "localRuntime": "PASS",
+    "funnelSuite": {
+      "status": "PASS",
+      "tests": 345,
+      "passed": 345,
+      "failed": 0,
+      "exitCode": 0,
+      "command": "npm run test:funnel",
+      "logSha256": "bb8035eec584ae6f3cc5d58ea5c3966172ecb6fe212a6354b6f403248a30a857",
+      "localLog": "tests/out/meta-wa-active-funnel-20261026.log"
+    },
+    "crmIntegration": "PASS",
+    "productionE2E": "BLOCKED",
+    "activation": "NOT TESTED",
+    "goLive": "BLOCKED"
+  },
+  "registrationGate": {
+    "released": true,
+    "basis": "Owner confirmed Meta status Active and requested a new build, E2E and push.",
+    "ownerReportedMetaStatus": "Active",
+    "independentMetaReadback": "NOT TESTED"
+  },
+  "crmIntegrationEvidence": {
+    "status": "PASS",
+    "workflowId": "LWFe2zjdHrvRsbYc",
+    "workflowUrl": "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/LWFe2zjdHrvRsbYc",
+    "source": "src/services/funnel/dist/sandbox-journey.json at sourceBaseCommit; local regeneration matches the Git blob",
+    "executionMethod": "Manual run in n8n; final Confirm archive output read back from the UI",
+    "board": "5106403803",
+    "syntheticPhone": "0500000040",
+    "itemId": "3310629937",
+    "passed": true,
+    "archived": true,
+    "archiveRequestId": "ec413c56-d3a6-9d5e-a875-98876ccfc77a",
+    "independentCleanupReadback": {
+      "method": "monday.com get_board_items_page",
+      "remainingItems": 0,
+      "hasMore": false
+    },
+    "checks": [
+      "intake-save-readback",
+      "separate-consents",
+      "mock-outbound-ack-readback",
+      "mock-inbound-handoff-readback",
+      "optout-readback",
+      "mock-booking-Israel-PM-readback",
+      "booking-write-acknowledgment",
+      "mock-cancellation-clear-date",
+      "human-stop-readback",
+      "mock-paid-stop-readback"
+    ],
+    "scope": "Actual n8n HTTP and Monday private board; synthetic input; WhatsApp, Calendly and paid events simulated. This is not production messaging E2E."
+  },
+  "deploymentBlockers": [
+    "WhatsApp read/draft-only instruction remains in effect; a single-message exception has been requested from the owner.",
+    "Live fallback credentials remain PENDING_TEXTME and PENDING_SENDGRID; provider delivery is not verified."
+  ],
+  "buildCommands": [
+    "node src/services/funnel/build-workflows.js pilot 2026-10-26T16:08:56.417Z 972502234052",
+    "node src/services/funnel/build-workflows.js live 2026-10-26T16:08:56.417Z"
+  ],
+  "files": [
+    {
+      "path": "src/services/funnel/dist/pilot/engine-pilot.json",
+      "bytes": 108347,
+      "sha256": "8cbf9ce15ad9d4fc21c122f5b84fa0826457944dc71de1883f2bc9cc22646d62"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/go.json",
+      "bytes": 23186,
+      "sha256": "26c1ee336c1239e0016bdafab10391d5075cd1a35a1a9a891339056bd85a6ab2"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/calendly.json",
+      "bytes": 26425,
+      "sha256": "34ac9c15f369c62c3698d47ffa182771925a315a3d4021a2e7c3d920eb8f8152"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/instant-reply-pilot.json",
+      "bytes": 27265,
+      "sha256": "cd13cf7d9c1f83c7a18cc2167dc6e40c655fb5b744b50c49ee5d3254ed3fbaf0"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/sms-inbound-pilot.json",
+      "bytes": 27583,
+      "sha256": "01e566a91bbf1dea7d9183954556c7a2beab94a626a42001825a181566060c22"
+    },
+    {
+      "path": "src/services/funnel/dist/pilot/product-dictionary.json",
+      "bytes": 3973,
+      "sha256": "8b8a024e4ed76a02d59cc2739b72cfd0b9fc63b82a62110b76874b95e48f1455"
+    },
+    {
+      "path": "src/services/funnel/dist/live/engine-live.json",
+      "bytes": 108316,
+      "sha256": "28f0f96c648fee11c2c8d013e492b7e131cf8983921269701616adf228122f18"
+    },
+    {
+      "path": "src/services/funnel/dist/live/go.json",
+      "bytes": 23186,
+      "sha256": "1e20876522f957a9a3bebbbd6d9338b156014a8039a15c552cf4b7d3b90b2a17"
+    },
+    {
+      "path": "src/services/funnel/dist/live/calendly.json",
+      "bytes": 26425,
+      "sha256": "c77c29182e6ba6728308ec9ed7f6199e33a7cbebf2394fe6c3a3283a43efcb67"
+    },
+    {
+      "path": "src/services/funnel/dist/live/instant-reply-live.json",
+      "bytes": 27244,
+      "sha256": "b6439ff55e646c7c5be05faac22decfc0b6284080cc697ee9576eab271597c8d"
+    },
+    {
+      "path": "src/services/funnel/dist/live/sms-inbound-live.json",
+      "bytes": 27563,
+      "sha256": "a2d810c1b2e5f60a5afe7caf50a701800e839d2ed9da27a2ca0e10713a584e51"
+    },
+    {
+      "path": "src/services/funnel/dist/live/product-dictionary.json",
+      "bytes": 3973,
+      "sha256": "8b8a024e4ed76a02d59cc2739b72cfd0b9fc63b82a62110b76874b95e48f1455"
+    }
+  ],
+  "hashEncoding": "Git blob bytes; LF line endings"
+}
