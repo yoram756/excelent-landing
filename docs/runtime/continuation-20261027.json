@@ -1,0 +1,148 @@
+{
+  "date": "2026-10-27T21:32:28.567Z",
+  "overall": "BLOCKED",
+  "branch": "codex/lock-service-20261025",
+  "startingRemoteHead": "d88663a473855af67ec2d3f69b5b822ad88f65cb",
+  "startingServerHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+  "gap": {
+    "status": "PASS",
+    "aheadBy": 4,
+    "cause": "Earlier publication added documentation and local business-ops code. It intentionally did not redeploy the site because there were no site/deploy changes. Repository HEAD remained behind while the served site files already matched the branch.",
+    "siteAndRoutingFilesChangedBetweenHeads": false
+  },
+  "deployment": {
+    "status": "BLOCKED",
+    "firstAttempt": {
+      "status": "FAIL",
+      "target": "d88663a473855af67ec2d3f69b5b822ad88f65cb",
+      "previous": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+      "httpFailure": {
+        "url": "https://refi.excelentfinance.com/index",
+        "status": 502,
+        "body": "Not captured in first attempt; no invented response body"
+      },
+      "disposableNginx": "PASS",
+      "runningNginx": "PASS",
+      "backup": "/docker/lp-release-backups/continuation-d88663a47385",
+      "automaticRollback": "PASS",
+      "rollbackExitCode": 0,
+      "observedRestoredHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+      "restoredPublicAndDirectNginx": "Both / and /index returned the expected files; public HTTP 200; direct wget exit 0",
+      "startedAt": "2026-10-27T21:20:15.892822+00:00",
+      "finishedAt": "2026-10-27T21:20:23.305688+00:00"
+    },
+    "diagnosis": {
+      "confirmed": "Docker create events showed one-off nginx-test containers with traefik.enable=true and the same lp1prod Host rule as the real site.",
+      "notProven": "No retained proxy error identified the exact backend that served the first 502. Container publication/readiness race is an inference, not a proven unique cause.",
+      "routingChanged": false,
+      "fix": "Disable Traefik discovery only on disposable config-test containers; require two consecutive byte-matching public/direct-Nginx observations before final verification.",
+      "procedure": "docs/runtime/LP_DEPLOYMENT_PROCEDURE.md"
+    },
+    "retry": {
+      "status": "NOT TESTED",
+      "reason": "Pending publication of the verified readiness helper and review-queue code"
+    }
+  },
+  "pixelAndCapi": {
+    "eventIdSource": "PASS",
+    "sourceEvidence": "site/lp1v2/assets/v2.js sets body.event_id=body.idempotency_key",
+    "pixelSend": "BLOCKED",
+    "reason": "No Meta Pixel call/library exists in the current LP1 source; verified LP1 dataset and authorized CAPI sender binding remain unavailable. Updating Git HEAD cannot create that missing integration.",
+    "metaReceipt": "NOT TESTED",
+    "browserServerEventNameAndId": "NOT TESTED",
+    "metaDeduplication": "NOT TESTED",
+    "newMetaEventsSent": 0,
+    "reference": "docs/runtime/capi-test-events-20261027.json"
+  },
+  "businessOperations": {
+    "localStatus": "PASS",
+    "productionStatus": "BLOCKED",
+    "implementation": [
+      "src/services/business-ops/store.js",
+      "src/services/business-ops/ingestion.js",
+      "src/services/business-ops/proposals.js",
+      "src/services/business-ops/server.js"
+    ],
+    "newWork": "Durable proposal/review queue; untrusted suggestions cannot execute tasks. Approval uses the existing separate review role. Source quotes required; evidence certification cannot be proposed; rejected/competing proposals cannot create tasks.",
+    "syntheticJourney": {
+      "channels": [
+        "transkriptor",
+        "gmail",
+        "calendar",
+        "whatsapp"
+      ],
+      "createdTasks": 1,
+      "updatedTasks": 2,
+      "stableTaskId": true,
+      "customerLinked": true,
+      "initialOwner": "neria",
+      "handoverOwner": "yoram",
+      "handoverContextRequired": true,
+      "duplicates": 0,
+      "unauthorizedApprovalHttpStatus": 401,
+      "claimedDocumentSendCompletesTask": false
+    },
+    "evidence": "tests/out/continuation-20261027/review-journey.json",
+    "scope": "Actual local loopback HTTP and SQLite; explicit synthetic reviewed observations. No live provider or Monday writes and no model inference.",
+    "activationBlockers": [
+      "Provider read contracts and approved business-only selection",
+      "Private deployment, case-scoped access and personal reviewer identity",
+      "Individual Monday People mappings for Yoram and Neria",
+      "Model connection, budget and extraction evaluation"
+    ],
+    "dispatchEnabled": false,
+    "newProductionServiceStarted": false,
+    "repositoryEvidence": "docs/evidence/20261027-continuation/review-journey.json"
+  },
+  "validation": {
+    "predeployRegression": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 456,
+      "log": "tests/out/continuation-20261027/predeploy-tests.log"
+    },
+    "finalRegression": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 461,
+      "breakdown": {
+        "operations": 32,
+        "funnel": 366,
+        "site": 59,
+        "nginx": 4
+      },
+      "log": "tests/out/continuation-20261027/final-tests.log"
+    },
+    "readinessUnit": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 6,
+      "command": "Existing uv-managed Python 3.14, -B tests/deploy/lp_readiness_test.py",
+      "log": "tests/out/continuation-20261027/readiness-unit.log"
+    },
+    "negativeControls": {
+      "status": "PASS",
+      "scope": "Four earlier in-memory store/ingestion mutations and one new missing-source-quote guard control"
+    },
+    "syntax": {
+      "status": "PASS",
+      "exitCode": 0,
+      "files": [
+        "src/services/business-ops/proposals.js",
+        "src/services/business-ops/server.js"
+      ]
+    }
+  },
+  "publication": {
+    "status": "NOT TESTED",
+    "reason": "Pending scoped commit and expected-head publication"
+  },
+  "safety": {
+    "newLeadPosts": 0,
+    "newMondayItems": 0,
+    "customerMessages": 0,
+    "newPaidServices": 0,
+    "permissionExpansion": false,
+    "unrelatedLocalChangesPreserved": true
+  }
+}

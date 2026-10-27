@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "verifiedAt": "2026-10-27T21:28:30.988Z",
+  "scope": "Actual loopback HTTP and SQLite; synthetic reviewed fixtures; no model/source-provider/Monday network calls",
+  "trace": [
+    {
+      "source": "transkriptor",
+      "eventKey": "transkriptor:TEST-review-call",
+      "taskId": "task:f91c2e9cc2381eaf255b28a9",
+      "owner": "neria",
+      "state": "waiting_customer"
+    },
+    {
+      "source": "gmail",
+      "eventKey": "gmail:TEST-review-mail",
+      "taskId": "task:f91c2e9cc2381eaf255b28a9",
+      "owner": "neria",
+      "state": "waiting_customer"
+    },
+    {
+      "source": "calendar",
+      "eventKey": "calendar:TEST-review-calendar",
+      "taskId": "task:f91c2e9cc2381eaf255b28a9",
+      "owner": "yoram",
+      "state": "in_progress"
+    },
+    {
+      "source": "whatsapp",
+      "eventKey": "whatsapp:TEST-review-wa",
+      "taskId": "task:f91c2e9cc2381eaf255b28a9",
+      "owner": "yoram",
+      "state": "in_progress"
+    }
+  ],
+  "checks": {
+    "clientLinked": true,
+    "initialOwner": "neria",
+    "updatedOwner": "yoram",
+    "stableTaskId": true,
+    "tasksCreated": 1,
+    "tasksUpdated": 2,
+    "duplicates": 0,
+    "ingestRoleApprovalDenied": 401,
+    "claimedSendDidNotCompleteTask": true
+  },
+  "caseId": "TEST-case-001",
+  "customerId": "TEST-customer-001",
+  "taskIds": [
+    "task:f91c2e9cc2381eaf255b28a9"
+  ],
+  "dispatchEnabled": false,
+  "rawArtifactSha256": "81a0ee73a2d63c0109a11a7c8942b8ff77f03fd7d5adc46c8b217c6914ac3754"
+}

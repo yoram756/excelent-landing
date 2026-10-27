@@ -48,22 +48,21 @@
       "status": "PASS",
       "command": "npm run test:business-ops",
       "exitCode": 0,
-      "passed": 27,
-      "log": "tests/out/business-ops-overnight-20261027/ops-final.log"
+      "passed": 32,
+      "log": "tests/out/continuation-20261027/ops-final.log"
     },
     "fullRepository": {
       "status": "PASS",
       "command": "npm test",
       "exitCode": 0,
-      "passed": 456,
+      "passed": 461,
       "breakdown": {
-        "operations": 27,
+        "operations": 32,
         "funnel": 366,
         "site": 59,
         "nginx": 4
       },
-      "log": "tests/out/business-ops-overnight-20261027/npm-test.log",
-      "note": "Operations suite revalidated after final source-envelope and recovery hardening"
+      "log": "tests/out/continuation-20261027/final-tests.log"
     },
     "negativeControls": {
       "status": "PASS",
@@ -158,5 +157,17 @@
     "readTimeoutMs": 5000,
     "productionWorkerDeployed": false,
     "documentation": "SOURCE_CHECKPOINTS.md"
+  },
+  "reviewQueue": {
+    "status": "PASS",
+    "scope": "Local HTTP and SQLite synthetic fixtures only",
+    "documentation": "REVIEW_QUEUE.md",
+    "created": 1,
+    "updated": 2,
+    "duplicates": 0,
+    "initialOwner": "neria",
+    "handoverOwner": "yoram",
+    "productionServiceEnabled": false,
+    "personalMondayIdentityVerified": false
   }
 }
