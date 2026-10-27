@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-27",
+  "scope": "LP1 v2 JavaScript cache invalidation for the already committed event_id fix",
+  "parentCommit": "d3faec2d315d32efc3de8a8b9eecfa0f1512e9cd",
+  "finding": {
+    "status": "PASS",
+    "observedAssetCacheControl": "public, max-age=604800",
+    "observedOldMainUrl": "assets/v2.js?v=channels-20261020",
+    "observedOldPartnerUrl": "assets/partners.js?v=1"
+  },
+  "change": {
+    "files": [
+      "site/lp1v2/index.html",
+      "site/lp1v2/partners.html"
+    ],
+    "version": "eventid-20261027",
+    "behavior": "Force a new asset URL when HTML revalidates; do not modify client behavior or enable outbound integrations"
+  },
+  "validation": {
+    "status": "PASS",
+    "command": "npm run test:site",
+    "passed": 59,
+    "exitCode": 0,
+    "log": "tests/out/ops-release-20261027/site-cache-followup.log"
+  },
+  "deployment": "NOT TESTED",
+  "operationsCommit": "6d7114aa10855238ad3b12de377cd470cb6e3201",
+  "concurrentRelease": "Preserve the concurrently published and deployed CRO release"
+}
