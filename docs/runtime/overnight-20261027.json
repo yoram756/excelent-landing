@@ -46,7 +46,8 @@
       "No verified LP1-to-Pixel/dataset mapping among multiple similarly named Meta sources",
       "No established CAPI sender with a verified credential binding to the selected LP1 destination",
       "No Meta Pixel event path in LP1; current CRO analytics targets PostHog, not Meta"
-    ]
+    ],
+    "evidenceFormat": "Sanitized authenticated UI text snapshots; no Meta receipt or deduplication result is claimed"
   },
   "businessOperations": {
     "status": "BLOCKED",
@@ -146,6 +147,13 @@
       "exitCode": 0,
       "command": "node src/services/business-ops/build-workflow.js",
       "scope": "Unchanged builder in isolated candidate; generated inactive artifact, not a live n8n execution"
+    },
+    "secrets": {
+      "status": "PASS",
+      "existingScannerTests": 3,
+      "exactAllowlistFilesReviewed": 9,
+      "secretShapes": 0,
+      "trailingWhitespace": 0
     }
   },
   "deployment": {
@@ -173,11 +181,16 @@
       "branchReadbackVerified": true
     },
     "sourceMilestone": {
-      "status": "NOT TESTED",
-      "reason": "Pending scoped final commit after successful checks"
+      "status": "PASS",
+      "commit": "728d538163579aae3c026380a1064b4ad8de1859",
+      "push": "PASS",
+      "branchReadbackVerified": true,
+      "reviewedFiles": 9,
+      "scope": "Only business-ops code/tests/docs and this checkpoint; no landing or routing files"
     },
     "method": "Authenticated GitHub connector, force=false and expected-head lease; no claim of successful CLI git push"
   },
   "nextAction": "Choose/verify the LP1 dataset and authorized CAPI credential binding, implement a test-only paired Pixel/server path, and verify both copies in Test Events. Separately verify business source read contracts and private deployment prerequisites before enabling any real source worker.",
-  "stopReason": "Local synthetic milestone and documentation complete. Remaining activation steps depend on unverified account bindings, deployment/security prerequisites or owner identities. No new paid services, permissions, messaging, campaigns or bulk real-data processing were introduced."
+  "stopReason": "Local synthetic milestone and documentation complete. Remaining activation steps depend on unverified account bindings, deployment/security prerequisites or owner identities. No new paid services, permissions, messaging, campaigns or bulk real-data processing were introduced.",
+  "completedAt": "2026-10-27T20:45:13.572Z"
 }

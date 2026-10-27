@@ -139,7 +139,9 @@
     "method": "Authenticated GitHub connector; expected head and no force",
     "coreCommit": "6d7114aa10855238ad3b12de377cd470cb6e3201",
     "intakeAndCapiReportsCommit": "ebbc81eb068362a5cbfd0347e73d17bedd378c09",
-    "latestSourceUpdate": "See docs/runtime/overnight-20261027.json and branch history"
+    "latestSourceUpdate": "See docs/runtime/overnight-20261027.json and branch history",
+    "latestSourceCommit": "728d538163579aae3c026380a1064b4ad8de1859",
+    "latestSourcePush": "PASS"
   },
   "initialRepositoryCheckpoint": {
     "status": "BLOCKED",
