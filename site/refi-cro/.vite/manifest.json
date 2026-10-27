@@ -1,0 +1,33 @@
+{
+  "index.html": {
+    "file": "cro-assets/index-BhnCkur-.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "dynamicImports": [
+      "src/lib/analytics.ts"
+    ]
+  },
+  "node_modules/posthog-js/dist/module.mjs": {
+    "file": "cro-assets/module-CG6JmjG1.js",
+    "name": "module",
+    "src": "node_modules/posthog-js/dist/module.mjs",
+    "isDynamicEntry": true
+  },
+  "src/lib/analytics.ts": {
+    "file": "cro-assets/analytics-C0z8W-q9.js",
+    "name": "analytics",
+    "src": "src/lib/analytics.ts",
+    "isDynamicEntry": true,
+    "imports": [
+      "index.html"
+    ],
+    "dynamicImports": [
+      "node_modules/posthog-js/dist/module.mjs"
+    ]
+  },
+  "style.css": {
+    "file": "cro-assets/style-BSRjpfHe.css",
+    "src": "style.css"
+  }
+}

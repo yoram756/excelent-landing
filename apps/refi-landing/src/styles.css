@@ -1,0 +1,62 @@
+@import "tailwindcss" source(none);
+@source "./";
+
+@font-face { font-family: Assistant; font-style: normal; font-weight: 400; font-display: swap; src: url('/cro-assets/assistant-hebrew-400.woff2') format('woff2'); unicode-range: U+0590-05FF,U+20AA,U+25CC; }
+@font-face { font-family: Assistant; font-style: normal; font-weight: 600; font-display: swap; src: url('/cro-assets/assistant-hebrew-600.woff2') format('woff2'); unicode-range: U+0590-05FF,U+20AA,U+25CC; }
+@font-face { font-family: Assistant; font-style: normal; font-weight: 800; font-display: swap; src: url('/cro-assets/assistant-hebrew-800.woff2') format('woff2'); unicode-range: U+0590-05FF,U+20AA,U+25CC; }
+@font-face { font-family: Assistant; font-style: normal; font-weight: 400; font-display: swap; src: url('/cro-assets/assistant-latin-400.woff2') format('woff2'); unicode-range: U+0000-00FF; }
+@font-face { font-family: Assistant; font-style: normal; font-weight: 600; font-display: swap; src: url('/cro-assets/assistant-latin-600.woff2') format('woff2'); unicode-range: U+0000-00FF; }
+@font-face { font-family: Assistant; font-style: normal; font-weight: 800; font-display: swap; src: url('/cro-assets/assistant-latin-800.woff2') format('woff2'); unicode-range: U+0000-00FF; }
+
+@theme inline {
+  --font-sans: Assistant, Arial, sans-serif;
+  --color-paper: #f7f5ef;
+  --color-sand: #eae5d8;
+  --color-ink: #18373e;
+  --color-gold-light: #e8ce91;
+  --color-accent-strong: #8b6526;
+  --color-background: #ffffff;
+  --color-foreground: #18373e;
+  --color-primary: #e6c079;
+  --color-primary-foreground: #142d33;
+  --color-secondary: #f2efe6;
+  --color-secondary-foreground: #18373e;
+  --color-accent: #f2efe6;
+  --color-accent-foreground: #18373e;
+  --color-muted: #f4f2ec;
+  --color-muted-foreground: #59676a;
+  --color-border: #d6dcd9;
+  --color-input: #b4bfbd;
+  --color-ring: #8b6526;
+  --color-destructive: #a12424;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.65rem;
+  --radius-lg: 0.85rem;
+  --radius-xl: 1.1rem;
+}
+
+@layer base {
+  html { font-family: var(--font-sans); color: var(--color-ink); background: var(--color-paper); }
+  body { min-inline-size: 320px; font-size: 17px; line-height: 1.7; }
+  h1, h2, h3, h4, h5, h6 { line-height: 1.4; }
+  button, input { font: inherit; }
+  a, button, input { -webkit-tap-highlight-color: transparent; }
+  a:focus-visible, input[type='checkbox']:focus-visible { outline: 3px solid var(--color-ring); outline-offset: 4px; }
+  ::selection { color: var(--color-ink); background: var(--color-gold-light); }
+  bdi { unicode-bidi: isolate; }
+}
+
+@layer components {
+  .page-width { inline-size: min(100% - 2.5rem, 1160px); margin-inline: auto; }
+  .section-space { padding-block: 4.5rem; }
+  .eyebrow { font-size: 0.875rem; font-weight: 800; }
+  .mobile-cta { padding-block-end: max(0.75rem, env(safe-area-inset-bottom)); }
+  .skip-link { position: fixed; z-index: 60; inset-block-start: 1rem; inset-inline-start: 1rem; padding: 0.7rem 1rem; background: white; border: 2px solid var(--color-ink); border-radius: 0.5rem; transform: translateY(-200%); }
+  .skip-link:focus { transform: none; }
+}
+
+@media (min-width: 768px) { .section-space { padding-block: 5.5rem; } }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}

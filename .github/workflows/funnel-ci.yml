@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'src/**'
+      - 'apps/refi-landing/**'
       - 'config/**'
       - 'tests/**'
       - 'site/**'
@@ -16,6 +17,29 @@ on:
 permissions:
   contents: read
 jobs:
+  cro-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            apps/refi-landing/package-lock.json
+      - name: Install dependencies
+        run: npm ci && npm ci --prefix apps/refi-landing
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Build, lint and verify React landing
+        run: |
+          npm run build --prefix apps/refi-landing
+          npm run lint --prefix apps/refi-landing
+          npm test --prefix apps/refi-landing
+          node apps/refi-landing/scripts/verify-negative.cjs
+          npm run test:e2e --prefix apps/refi-landing
   integration-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 15

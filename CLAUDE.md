@@ -2,6 +2,8 @@
 
 @AGENTS.md
 
+The React CRO landing implementation and its audit commands are documented in SKILL.md.
+
 All project rules, commands and the folder layout live in AGENTS.md. Claude Code specifics only:
 
 - The Stop hook in .claude/settings.json runs `scripts/verify.sh --changed` and blocks the end of a turn on failure (once per turn).

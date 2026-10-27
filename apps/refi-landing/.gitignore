@@ -1,0 +1,8 @@
+node_modules/
+.env.local
+.env.*.local
+src/generated/
+public/assets/
+public/cro-assets/
+public/analytics-config.json
+.vite/

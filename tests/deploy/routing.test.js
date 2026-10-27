@@ -48,7 +48,7 @@ function request(port, host, url, method = 'GET', body, extraHeaders = {}) {
   });
 }
 
-async function fixture(t, sharedStagingRoute = false) {
+async function fixture(t, sharedStagingRoute = false, missingCroRoute = false) {
   const version = spawnSync(nginx, ['-v'], { encoding: 'utf8' });
   assert.equal(version.status, 0, `nginx is required for proxy verification; install it or set NGINX_BINARY. ${version.error?.message || version.stderr}`);
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lp1-proxy-')).replace(/\\/g, '/');
@@ -77,10 +77,20 @@ async function fixture(t, sharedStagingRoute = false) {
   const upstreamPort = await listen(upstream);
   const port = await freePort();
   fs.writeFileSync(path.join(dir, 'index.html'), 'Synthetic local page');
+  for (const name of ['privacy.html', 'accessibility.html', 'partners.html']) fs.copyFileSync(path.join(root, 'site/lp1v2', name), path.join(dir, name));
+  fs.mkdirSync(path.join(dir, 'assets'));
+  for (const name of ['v2.css', 'v2.js', 'partners.js']) fs.copyFileSync(path.join(root, 'site/lp1v2/assets', name), path.join(dir, 'assets', name));
   fs.writeFileSync(path.join(dir, 'htpasswd'), 'synthetic:{SHA}' + createHash('sha1').update('local-test-only').digest('base64') + '\n');
   for (const name of ['client', 'proxy', 'fastcgi', 'uwsgi', 'scgi']) fs.mkdirSync(path.join(dir, name));
 
   let config = fs.readFileSync(path.join(root, 'deploy/nginx.conf'), 'utf8');
+  const croInclude = 'include /site/refi-cro/nginx-site.inc;';
+  assert.equal(config.split(croInclude).length, 2, 'React build must be included exactly once');
+  if (missingCroRoute) config = config.replace(croInclude, '');
+  else config = config.replace(croInclude, `include ${dir}/cro-build.inc;`);
+  const builtInclude = fs.readFileSync(path.join(root, 'site/refi-cro/nginx-site.inc'), 'utf8')
+    .replaceAll('/site/refi-cro', path.join(root, 'site/refi-cro').replace(/\\/g, '/'));
+  fs.writeFileSync(path.join(dir, 'cro-build.inc'), builtInclude);
   if (sharedStagingRoute) {
     // Reintroduce the original defect: the protected host gets operational API routes.
     const blockedLocation = /location \^~ \/api\/ \{\s*default_type application\/json;\s*return 503 '[^']+';\s*\}/g;
@@ -177,4 +187,38 @@ test('the same HTTP isolation check detects the original shared staging route', 
     await assert.rejects(() => assertStagingIsolated(f, route), { code: 'ERR_ASSERTION', message: /private staging forwarded/ });
   }
   assert.equal(f.calls.length, 3, 'negative control actually forwarded all three test requests');
+});
+
+async function assertCroPublished(f) {
+  const home = await request(f.port, publicHost, '/');
+  assert.equal(home.status, 200);
+  assert.ok(home.body.includes('data-section="hero"'), 'public root did not serve the verified React build');
+  const entry = /src="(\/cro-assets\/index-[^"]+\.js)"/.exec(home.body)?.[1];
+  assert.ok(entry, 'entry bundle must use its isolated asset prefix');
+  assert.equal((await request(f.port, publicHost, entry)).status, 200);
+  assert.match(home.headers['content-security-policy'], /style-src 'self' 'sha256-/);
+  assert.equal(home.headers['cache-control'], 'no-cache');
+  for (const route of ['/thank-you', '/thank-you/']) {
+    const thanks = await request(f.port, publicHost, route);
+    assert.equal(thanks.status, 200); assert.ok(thanks.body.includes('נשארים בקשר'));
+  }
+  assert.deepEqual(JSON.parse((await request(f.port, publicHost, '/analytics-config.json')).body), { key: '', host: '' });
+}
+
+test('real nginx serves the React release alongside LP1 v2 legal and partner pages', { timeout: 20000 }, async t => {
+  const f = await fixture(t);
+  await assertCroPublished(f);
+  for (const file of ['privacy.html', 'accessibility.html', 'partners.html', 'assets/v2.css', 'assets/partners.js']) {
+    const legacy = await request(f.port, publicHost, '/' + file);
+    assert.equal(legacy.status, 200, file);
+    assert.equal(legacy.body, fs.readFileSync(path.join(root, 'site/lp1v2', file), 'utf8'), file);
+  }
+  const protectedPage = await request(f.port, staging, '/', 'GET', undefined, { Authorization: auth });
+  assert.equal(protectedPage.body, 'Synthetic local page', 'public React route leaked into staging');
+  assert.equal(f.calls.length, 0, 'static verification must never call intake');
+});
+
+test('release verification detects an omitted React include', { timeout: 20000 }, async t => {
+  const f = await fixture(t, false, true);
+  await assert.rejects(() => assertCroPublished(f), { code: 'ERR_ASSERTION', message: /public root did not serve/ });
 });

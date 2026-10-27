@@ -1,0 +1,127 @@
+{
+  "date": "2026-10-27",
+  "overallPublicationStatus": "BLOCKED",
+  "scope": "Local React landing implementation. Mock intake and analytics transport; real Chromium and PostHog SDK. No deployment or live provider verification.",
+  "source": "apps/refi-landing",
+  "content": "config/landing/refi.json",
+  "output": "site/refi-cro",
+  "report": "docs/runtime/REFI_CRO_READINESS.md",
+  "evidenceDirectory": "tests/out/refi-cro-20261027",
+  "localChecks": {
+    "build": {
+      "status": "PASS",
+      "command": "npm run build --prefix apps/refi-landing",
+      "exitCode": 0
+    },
+    "lint": {
+      "status": "PASS",
+      "command": "npm run lint --prefix apps/refi-landing",
+      "exitCode": 0
+    },
+    "unit": {
+      "status": "PASS",
+      "command": "npm test --prefix apps/refi-landing",
+      "exitCode": 0,
+      "passed": 6
+    },
+    "browser": {
+      "status": "PASS",
+      "command": "npm run test:e2e --prefix apps/refi-landing",
+      "exitCode": 0,
+      "passed": 22,
+      "backend": "mock"
+    },
+    "legacySite": {
+      "status": "PASS",
+      "command": "npm run test:site",
+      "exitCode": 0,
+      "passed": 59,
+      "backend": "mock"
+    },
+    "secretPatterns": {
+      "status": "PASS",
+      "command": "node --test tests/funnel/secrets.test.js",
+      "exitCode": 0,
+      "passed": 3
+    },
+    "negativeControl": {
+      "status": "PASS",
+      "command": "node apps/refi-landing/scripts/verify-negative.cjs",
+      "exitCode": 0,
+      "mutatedTestExitCode": 1
+    },
+    "axe": {
+      "status": "PASS",
+      "landingViolations": 0,
+      "thankYouViolations": 0
+    },
+    "clientDispatch": {
+      "status": "PASS",
+      "dispatchMs": 1.1000000014901161,
+      "limitMs": 2000,
+      "scope": "Local browser dispatch to mock API, not end-to-end provider latency"
+    },
+    "lighthouse": {
+      "status": "PASS",
+      "command": "npm run audit --prefix apps/refi-landing",
+      "exitCode": 0,
+      "version": "13.5.0",
+      "scope": "Local production build, default mobile simulated throttling, all three runs below 2500ms; not field data",
+      "lcpMs": [
+        2460.6633,
+        2450.55965,
+        1833.3172
+      ],
+      "performanceScores": [
+        96,
+        96,
+        99
+      ],
+      "accessibilityScores": [
+        100,
+        100,
+        100
+      ],
+      "maxCls": 0.0001970332152906662,
+      "maxTbtMs": 75
+    },
+    "nginxRouting": {
+      "status": "PASS",
+      "command": "npm run test:deploy",
+      "exitCode": 0,
+      "passed": 4,
+      "scope": "Real local nginx with controlled loopback upstreams, positive coexistence and negative controls"
+    }
+  },
+  "remainingRequirements": [
+    {
+      "requirement": "Authentic customer videos",
+      "status": "BLOCKED",
+      "reason": "No approved source clips supplied; targeted connected Drive search returned no results. Authentic written testimonials are shown instead."
+    },
+    {
+      "requirement": "Live PostHog conversion read-back",
+      "status": "BLOCKED",
+      "reason": "Public project key and host missing; analytics disabled in the production output."
+    },
+    {
+      "requirement": "Live webhook completion under two seconds",
+      "status": "NOT TESTED",
+      "reason": "No deployment or live intake/CRM request performed for this frontend task."
+    },
+    {
+      "requirement": "Deployed or field LCP under 2.5 seconds",
+      "status": "NOT TESTED",
+      "reason": "Only the local production build was audited."
+    }
+  ],
+  "sideEffects": {
+    "deployed": false,
+    "n8nModified": false,
+    "whatsappSent": false,
+    "mondayItemsCreated": 0
+  },
+  "preview": "http://127.0.0.1:4186",
+  "previewBackend": "mock",
+  "robots": "noindex,nofollow"
+}
