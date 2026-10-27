@@ -140,7 +140,9 @@
     "intakeAndCapiReportsCommit": "ebbc81eb068362a5cbfd0347e73d17bedd378c09",
     "latestSourceUpdate": "See docs/runtime/overnight-20261027.json and branch history",
     "latestSourceCommit": "728d538163579aae3c026380a1064b4ad8de1859",
-    "latestSourcePush": "PASS"
+    "latestSourcePush": "PASS",
+    "latestReviewQueueCommit": "5d6bb08328f9757490d5fa5599653d1bdcb1f2bf",
+    "latestReviewQueuePush": "PASS"
   },
   "initialRepositoryCheckpoint": {
     "status": "BLOCKED",

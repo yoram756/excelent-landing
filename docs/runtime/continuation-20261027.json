@@ -11,7 +11,7 @@
     "siteAndRoutingFilesChangedBetweenHeads": false
   },
   "deployment": {
-    "status": "BLOCKED",
+    "status": "PASS",
     "firstAttempt": {
       "status": "FAIL",
       "target": "d88663a473855af67ec2d3f69b5b822ad88f65cb",
@@ -19,7 +19,8 @@
       "httpFailure": {
         "url": "https://refi.excelentfinance.com/index",
         "status": 502,
-        "body": "Not captured in first attempt; no invented response body"
+        "body": null,
+        "bodyUnavailableReason": "First run raised urllib HTTPError before response-body capture; no body is invented"
       },
       "disposableNginx": "PASS",
       "runningNginx": "PASS",
@@ -39,8 +40,54 @@
       "procedure": "docs/runtime/LP_DEPLOYMENT_PROCEDURE.md"
     },
     "retry": {
-      "status": "NOT TESTED",
-      "reason": "Pending publication of the verified readiness helper and review-queue code"
+      "status": "PASS",
+      "releaseCodeCommit": "5d6bb08328f9757490d5fa5599653d1bdcb1f2bf",
+      "serverHeadVerifiedBeforeReportCommit": "5d6bb08328f9757490d5fa5599653d1bdcb1f2bf",
+      "branch": "codex/lock-service-20261025",
+      "trackedClean": true,
+      "disposableNginx": "PASS",
+      "runningNginx": "PASS",
+      "readiness": {
+        "status": "PASS",
+        "attempts": 2,
+        "consecutiveReady": 2,
+        "scope": "Both public and container-direct / and /index match deployed files"
+      },
+      "http": {
+        "status": "PASS",
+        "verifiedRoutes": 8,
+        "paths": [
+          "/",
+          "/index",
+          "/privacy.html",
+          "/accessibility.html",
+          "/partners.html",
+          "/assets/v2.js?v=eventid-20261027",
+          "/assets/partners.js?v=eventid-20261027",
+          "/thank-you"
+        ],
+        "allStatus200": true,
+        "allBytesMatch": true
+      },
+      "oneoffContainerReadback": {
+        "name": "lp-lp-run-785a7d8d27e2",
+        "traefikEnable": "false"
+      },
+      "backup": "/docker/lp-release-backups/continuation-5d6bb08328f9-verified",
+      "serverReceipt": "/docker/lp-release-backups/continuation-5d6bb08328f9-verified/deployment.json",
+      "rollbackSyntax": "PASS",
+      "archivesReadable": true,
+      "currentBackupRestoreTest": "NOT TESTED",
+      "browser": {
+        "status": "PASS",
+        "url": "https://refi.excelentfinance.com/index",
+        "script": "assets/v2.js?v=eventid-20261027",
+        "quickSkipOpensForm": true,
+        "formSubmitted": false,
+        "screenshot": "tests/out/continuation-20261027/lp1-after-deploy.png"
+      },
+      "routingChanged": false,
+      "newOpsServiceActivated": false
     }
   },
   "pixelAndCapi": {
@@ -52,7 +99,10 @@
     "browserServerEventNameAndId": "NOT TESTED",
     "metaDeduplication": "NOT TESTED",
     "newMetaEventsSent": 0,
-    "reference": "docs/runtime/capi-test-events-20261027.json"
+    "reference": "docs/runtime/capi-test-events-20261027.json",
+    "actualServerEventId": "PASS",
+    "actualServerPixelCodePresent": false,
+    "browserPixelReferenceFound": false
   },
   "businessOperations": {
     "localStatus": "PASS",
@@ -131,11 +181,32 @@
         "src/services/business-ops/proposals.js",
         "src/services/business-ops/server.js"
       ]
+    },
+    "deploymentPackageBuild": {
+      "status": "PASS",
+      "exitCode": 0,
+      "scope": "Unchanged builder/config inputs in isolated candidate; no unrelated generated files overwritten",
+      "log": "tests/out/continuation-20261027/package-build.log"
+    },
+    "inactiveOpsDraftBuild": {
+      "status": "PASS",
+      "exitCode": 0,
+      "log": "tests/out/continuation-20261027/ops-draft-build.log"
+    },
+    "secrets": {
+      "status": "PASS",
+      "existingScannerPassed": 3,
+      "scopedFilesReviewed": 11,
+      "secretShapes": 0
     }
   },
   "publication": {
-    "status": "NOT TESTED",
-    "reason": "Pending scoped commit and expected-head publication"
+    "status": "PASS",
+    "sourceCommit": "5d6bb08328f9757490d5fa5599653d1bdcb1f2bf",
+    "push": "PASS",
+    "independentBranchReadback": true,
+    "force": false,
+    "method": "Authenticated GitHub connector with expected-head checks"
   },
   "safety": {
     "newLeadPosts": 0,
@@ -144,5 +215,13 @@
     "newPaidServices": 0,
     "permissionExpansion": false,
     "unrelatedLocalChangesPreserved": true
-  }
+  },
+  "completedAt": "2026-10-27T21:36:38.815Z",
+  "remainingBlocked": [
+    "Verified LP1 Pixel/dataset and authorized CAPI sender binding; missing Pixel implementation before paired Test Events verification",
+    "Provider read contracts, private ops deployment and case-scoped personal review access",
+    "Individual Monday People mappings and model/budget/evaluation"
+  ],
+  "stopCondition": "Scoped implementation and synthetic acceptance requirements completed; activation and Meta receipt remain blocked by the listed dependencies",
+  "reportSyncPolicy": "After this documentation commit is published, synchronize the server repository again and verify it; releaseCodeCommit identifies the tested executable source without a self-referencing report SHA"
 }

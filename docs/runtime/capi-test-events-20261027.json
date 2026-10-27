@@ -157,5 +157,16 @@
     "https://github.com/facebookarchive/Facebook-Server-Side-API-Swagger/blob/main/server-side-api.yaml"
   ],
   "documentationFetch": "Current developers.facebook.com pages returned HTTP 429 to the documentation reader; the Meta-owned schema describes the matching event_name and eventID/event_id fields. No old timing guidance was used to claim a result.",
-  "preservedIntakeEvidence": "docs/runtime/intake-single-test-20261027.json"
+  "preservedIntakeEvidence": "docs/runtime/intake-single-test-20261027.json",
+  "latestDeploymentCheck": {
+    "status": "BLOCKED",
+    "observedCodeCommit": "5d6bb08328f9757490d5fa5599653d1bdcb1f2bf",
+    "eventIdAssignmentPresent": true,
+    "pixelCodeInHtmlAndJs": false,
+    "browserScript": "assets/v2.js?v=eventid-20261027",
+    "metaRequestSent": false,
+    "metaReceipt": "NOT TESTED",
+    "deduplication": "NOT TESTED",
+    "evidence": "docs/runtime/continuation-20261027.json"
+  }
 }
