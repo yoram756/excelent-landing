@@ -1,0 +1,183 @@
+{
+  "date": "2026-10-27T20:42:50.090Z",
+  "overall": "BLOCKED",
+  "scope": "Available local reliability work completed; Meta delivery and business-operations production activation remain blocked by verified missing bindings and private deployment prerequisites.",
+  "branch": "codex/lock-service-20261025",
+  "startingPoint": {
+    "status": "PASS",
+    "agentsRead": true,
+    "localHead": "4b0956e265ad5e8b615a4ba50c93130d4783f2dc",
+    "initialRemoteHead": "910931962054746d778768cf6c93723815e309e5",
+    "serverHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+    "applicationCommit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+    "workingTreePreserved": true,
+    "note": "Local checkout and remote branch differ and local work is pending. No reset, clean, force push, checkout of user files, or permission changes used. Scoped publication uses GitHub compare and expected-head checks."
+  },
+  "intake": {
+    "status": "PASS",
+    "scope": "Verified prior synthetic production request, not a new request overnight",
+    "endpoint": "https://refi.excelentfinance.com/api/lead",
+    "httpStatus": 200,
+    "responseBody": {
+      "request_id": "3313490475"
+    },
+    "n8nExecutionId": "52394",
+    "mondayBoardId": "5106246268",
+    "testItemId": "3313490475",
+    "eventId": "evt-TEST-20261027-opsverify-001",
+    "cleanupReadback": "deleted",
+    "newOvernightPostRequests": 0,
+    "report": "docs/runtime/intake-single-test-20261027.json"
+  },
+  "metaCapi": {
+    "status": "BLOCKED",
+    "eventsManagerAccess": "PASS",
+    "testEventsAccess": "PASS",
+    "testCodeAvailable": true,
+    "testCodeStored": false,
+    "requestConstructionAndSend": "BLOCKED",
+    "metaResponse": "NOT TESTED",
+    "testEventsReceipt": "NOT TESTED",
+    "browserServerEventNameAndId": "BLOCKED",
+    "deduplication": "NOT TESTED",
+    "testEventsSent": 0,
+    "report": "docs/runtime/capi-test-events-20261027.json",
+    "blockers": [
+      "No verified LP1-to-Pixel/dataset mapping among multiple similarly named Meta sources",
+      "No established CAPI sender with a verified credential binding to the selected LP1 destination",
+      "No Meta Pixel event path in LP1; current CRO analytics targets PostHog, not Meta"
+    ]
+  },
+  "businessOperations": {
+    "status": "BLOCKED",
+    "scope": "Production integration is not active. Local synthetic milestone is complete.",
+    "localMilestone": {
+      "status": "PASS",
+      "files": [
+        "src/services/business-ops/ingestion.js",
+        "src/services/business-ops/store.js",
+        "scripts/business-ops-source-demo.js"
+      ],
+      "features": [
+        "Atomic event page, durable receipt and checkpoint in existing SQLite",
+        "Account namespaces, replay conflict detection and immutable source history",
+        "Exclusive expiring leases; stale workers cannot overwrite a newer worker",
+        "Bounded read timeout, at most three failures then a human-reviewed recovery",
+        "Independent source rounds and separate never-connected/stale/blocked health",
+        "Strict synthetic envelope allowlist; no authorization/model review fields accepted",
+        "No timers/polling service deployed, no new HTTP endpoint, no outbound messaging"
+      ],
+      "syntheticJourney": {
+        "pages": 3,
+        "events": 3,
+        "tasks": 2,
+        "completedWithEvidence": 1,
+        "nextBankerTask": "not_started",
+        "neverConnectedSources": 3
+      },
+      "semanticExtraction": "Explicit synthetic reviewed observations, not an LLM result",
+      "liveSourceRecordsRead": 0,
+      "liveMondayItemsCreated": 0,
+      "documentation": "docs/business-ops/SOURCE_CHECKPOINTS.md"
+    },
+    "activationBlockers": [
+      "Verified provider read/event contracts and business-only inclusion rules",
+      "Private service path from n8n, protected volume, scoped case access and verified recovery/backup procedure",
+      "Individual verified Monday People mappings for Yoram and Neria",
+      "Model proposal integration, agreed budget and independent extraction/assignment evaluation"
+    ],
+    "dispatchEnabled": false,
+    "workerDeployed": false,
+    "n8nDraftActive": false
+  },
+  "validation": {
+    "fullRepository": {
+      "status": "PASS",
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 456,
+      "breakdown": {
+        "operations": 27,
+        "funnel": 366,
+        "site": 59,
+        "nginx": 4
+      },
+      "log": "tests/out/business-ops-overnight-20261027/npm-test.log"
+    },
+    "finalOperations": {
+      "status": "PASS",
+      "exitCode": 0,
+      "passed": 27,
+      "log": "tests/out/business-ops-overnight-20261027/ops-final.log",
+      "note": "Re-run after final envelope/recovery/test-cleanup hardening; unrelated regression suites unchanged"
+    },
+    "negativeControls": {
+      "status": "PASS",
+      "exitCode": 0,
+      "detected": 4,
+      "commands": [
+        "node tests/business-ops/mutation-check.js",
+        "node tests/business-ops/ingestion-mutation-check.js"
+      ]
+    },
+    "sourceDemo": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node scripts/business-ops-source-demo.js",
+      "artifact": "tests/out/business-ops-overnight-20261027/source-demo.json"
+    },
+    "syntax": {
+      "status": "PASS",
+      "exitCode": 0,
+      "commands": [
+        "node --check src/services/business-ops/ingestion.js",
+        "node --check src/services/business-ops/store.js"
+      ]
+    },
+    "deploymentPackageBuild": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node src/deploy/package.js",
+      "scope": "Isolated candidate, 25 build inputs compared exactly after CRLF normalization with no differences; avoids overwriting unrelated generated work",
+      "log": "tests/out/business-ops-overnight-20261027/package-build.log"
+    },
+    "n8nDraftBuild": {
+      "status": "PASS",
+      "exitCode": 0,
+      "command": "node src/services/business-ops/build-workflow.js",
+      "scope": "Unchanged builder in isolated candidate; generated inactive artifact, not a live n8n execution"
+    }
+  },
+  "deployment": {
+    "status": "PASS",
+    "scope": "Actual existing application was rechecked read-only; no new site/intake fix required deployment",
+    "url": "https://refi.excelentfinance.com",
+    "lp1v2Url": "https://refi.excelentfinance.com/index",
+    "applicationCommit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+    "serverHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+    "nginxTestExitCode": 0,
+    "httpChecks": 3,
+    "allHttp200AndBytesMatchServerFiles": true,
+    "routingChanged": false,
+    "newDeploymentPerformed": false,
+    "operationsRuntimeActivation": "NOT TESTED",
+    "existingRollback": "/docker/lp-release-backups/ops-247ff6406012/rollback.sh",
+    "rollbackEvidence": "docs/runtime/ops-release-postdeploy-20261027.json",
+    "rollbackRestorePerformed": false
+  },
+  "publication": {
+    "intakeAndCapiReports": {
+      "status": "PASS",
+      "commit": "ebbc81eb068362a5cbfd0347e73d17bedd378c09",
+      "push": "PASS",
+      "branchReadbackVerified": true
+    },
+    "sourceMilestone": {
+      "status": "NOT TESTED",
+      "reason": "Pending scoped final commit after successful checks"
+    },
+    "method": "Authenticated GitHub connector, force=false and expected-head lease; no claim of successful CLI git push"
+  },
+  "nextAction": "Choose/verify the LP1 dataset and authorized CAPI credential binding, implement a test-only paired Pixel/server path, and verify both copies in Test Events. Separately verify business source read contracts and private deployment prerequisites before enabling any real source worker.",
+  "stopReason": "Local synthetic milestone and documentation complete. Remaining activation steps depend on unverified account bindings, deployment/security prerequisites or owner identities. No new paid services, permissions, messaging, campaigns or bulk real-data processing were introduced."
+}

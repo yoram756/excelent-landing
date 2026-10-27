@@ -4,7 +4,7 @@
   "mode": "sandbox",
   "dispatchEnabled": false,
   "repo": "C:/Users/User/excelent-landing",
-  "nextAction": "Verify Blueticks read access; verify Monday personal identities and private n8n service path before live ingestion",
+  "nextAction": "Verify provider read contracts and business-only filters, configure private service reachability and individual Monday identities; keep synthetic-only mode and all outbound dispatch disabled",
   "stages": [
     {
       "id": 1,
@@ -16,7 +16,7 @@
       "id": 2,
       "name": "ingestion_and_identity",
       "status": "BLOCKED",
-      "evidence": "Local SQLite and loopback HTTP tests PASS. No recurring live source ingestion"
+      "evidence": "Local atomic pages, durable cursors, account namespaces, bounded retries and source health PASS. Live recurring source ingestion and private deployment remain BLOCKED"
     },
     {
       "id": 3,
@@ -48,17 +48,22 @@
       "status": "PASS",
       "command": "npm run test:business-ops",
       "exitCode": 0,
-      "passed": 15,
-      "log": "tests/out/business-ops-20261027/ops-final.log"
+      "passed": 27,
+      "log": "tests/out/business-ops-overnight-20261027/ops-final.log"
     },
     "fullRepository": {
       "status": "PASS",
       "command": "npm test",
       "exitCode": 0,
-      "scope": "Full run included 14 operations tests, 366 funnel, 59 site, 2 nginx. Following canonical-link-only adjustment, operations suite rerun with 15/15.",
-      "passed": 441,
-      "log": "tests/out/business-ops-20261027/npm-test-serial.log",
-      "environment": "Existing Meta identifiers (not tokens), existing nginx executable, TEMP/TMP inside workspace"
+      "passed": 456,
+      "breakdown": {
+        "operations": 27,
+        "funnel": 366,
+        "site": 59,
+        "nginx": 4
+      },
+      "log": "tests/out/business-ops-overnight-20261027/npm-test.log",
+      "note": "Operations suite revalidated after final source-envelope and recovery hardening"
     },
     "negativeControls": {
       "status": "PASS",
@@ -82,6 +87,28 @@
       "command": "node --test tests/funnel/secrets.test.js",
       "exitCode": 0,
       "passed": 3
+    },
+    "initialOperations": {
+      "status": "PASS",
+      "command": "npm run test:business-ops",
+      "exitCode": 0,
+      "passed": 15,
+      "log": "tests/out/business-ops-20261027/ops-final.log"
+    },
+    "initialFullRepository": {
+      "status": "PASS",
+      "command": "npm test",
+      "exitCode": 0,
+      "scope": "Full run included 14 operations tests, 366 funnel, 59 site, 2 nginx. Following canonical-link-only adjustment, operations suite rerun with 15/15.",
+      "passed": 441,
+      "log": "tests/out/business-ops-20261027/npm-test-serial.log",
+      "environment": "Existing Meta identifiers (not tokens), existing nginx executable, TEMP/TMP inside workspace"
+    },
+    "sourceNegativeControls": {
+      "status": "PASS",
+      "command": "node tests/business-ops/ingestion-mutation-check.js",
+      "exitCode": 0,
+      "killed": 2
     }
   },
   "metrics": {
@@ -108,9 +135,26 @@
     }
   ],
   "repositoryCheckpoint": {
+    "status": "PASS",
+    "method": "Authenticated GitHub connector; expected head and no force",
+    "coreCommit": "6d7114aa10855238ad3b12de377cd470cb6e3201",
+    "intakeAndCapiReportsCommit": "ebbc81eb068362a5cbfd0347e73d17bedd378c09",
+    "latestSourceUpdate": "See docs/runtime/overnight-20261027.json and branch history"
+  },
+  "initialRepositoryCheckpoint": {
     "status": "BLOCKED",
     "filesSaved": true,
     "commitCreated": false,
     "reason": "git add could not create .git/index.lock: Permission denied. No permission changes or escalation attempted."
+  },
+  "sourceCheckpoint": {
+    "status": "PASS",
+    "scope": "Local synthetic read-only adapters only",
+    "atomicPages": true,
+    "accountNamespaces": true,
+    "boundedRetries": 3,
+    "readTimeoutMs": 5000,
+    "productionWorkerDeployed": false,
+    "documentation": "SOURCE_CHECKPOINTS.md"
   }
 }

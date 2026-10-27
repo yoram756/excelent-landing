@@ -40,7 +40,15 @@ class OperationsStore{
  get(sql,...args){return this.db.prepare(sql).get(...args);}
  all(sql,...args){return this.db.prepare(sql).all(...args);}
  run(sql,...args){return this.db.prepare(sql).run(...args);}
- tx(fn){this.db.exec('BEGIN IMMEDIATE');try{const r=fn();this.db.exec('COMMIT');return r;}catch(e){this.db.exec('ROLLBACK');throw e;}}
+ tx(fn){
+  // Page ingestion groups existing per-event transactions under a savepoint.
+  // Everything stays synchronous: an async callback must never commit early.
+  const level=this.transactionDepth||0,savepoint='ops_nested_'+level;
+  this.db.exec(level?'SAVEPOINT '+savepoint:'BEGIN IMMEDIATE');this.transactionDepth=level+1;
+  try{const r=fn();if(r&&typeof r.then==='function')throw Error('Synchronous transaction callback required');this.db.exec(level?'RELEASE SAVEPOINT '+savepoint:'COMMIT');return r;}
+  catch(e){this.db.exec(level?'ROLLBACK TO SAVEPOINT '+savepoint:'ROLLBACK');if(level)this.db.exec('RELEASE SAVEPOINT '+savepoint);throw e;}
+  finally{this.transactionDepth=level;}
+ }
  audit(actor,action,detail,at){this.run('INSERT INTO ops_audit(at,actor,action,detail) VALUES(?,?,?,?)',stamp(at),id(actor),action,encode(detail));}
  registerPerson(p){id(p.id);const phones=(p.phones||[]).map(norm),emails=(p.emails||[]).map(email);if(phones.some(x=>!x)||emails.some(x=>!x))throw Error('Invalid contact identifier');this.run('INSERT INTO ops_people VALUES(?,?,?)',p.id,encode(phones),encode(emails));}
  registerCase(c){
