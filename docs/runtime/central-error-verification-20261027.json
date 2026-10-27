@@ -1,0 +1,208 @@
+{
+  "date": "2026-10-27",
+  "status": "PASS",
+  "scope": "Central error workflow configuration and controlled synthetic verification using real n8n, Gmail and Monday services",
+  "workflow": {
+    "name": "Central Error Handler",
+    "id": "4bLJ8LvpNYnoCB8t",
+    "versionId": "d2daab90-a137-4b49-9ec3-82f8a4e69707",
+    "published": true,
+    "errorWorkflow": null
+  },
+  "bindings": [
+    {
+      "role": "leadIntake",
+      "id": "8W7MymUCLpPnilJs",
+      "nodes": 37,
+      "active": true,
+      "versionId": "ba23a0f5-5446-4486-a97d-7bb081f03f79",
+      "status": "PASS",
+      "errorWorkflow": "4bLJ8LvpNYnoCB8t"
+    },
+    {
+      "role": "lpSignup",
+      "id": "I58fPCQOqTrNrbZw",
+      "nodes": 29,
+      "active": true,
+      "versionId": "5c40b2a9-3ef9-4e36-8e75-bffb410d7be2",
+      "status": "PASS",
+      "errorWorkflow": "4bLJ8LvpNYnoCB8t"
+    },
+    {
+      "role": "whatsappEngine",
+      "id": "ZnIureJBIqYN52Zw",
+      "nodes": 52,
+      "active": false,
+      "versionId": "0c6bbdf1-3725-4596-9d15-36e29c338731",
+      "status": "PASS",
+      "errorWorkflow": "4bLJ8LvpNYnoCB8t"
+    }
+  ],
+  "recipient": "office@kho.org.il",
+  "monday": {
+    "board": "5106246268",
+    "statusColumn": "fn_status",
+    "statusLabel": "נעצר / כשל",
+    "statusLabelIndex": 7,
+    "protectedLabels": [
+      "הסר",
+      "לקוח"
+    ],
+    "protectedStage": "לקוח משלם"
+  },
+  "executions": [
+    {
+      "case": "existing verified TEST item",
+      "source": "49769",
+      "handler": "49770",
+      "itemId": "3312632872",
+      "status": "PASS"
+    },
+    {
+      "case": "missing item id",
+      "source": "49778",
+      "handler": "49779",
+      "itemId": "3312643416",
+      "status": "PASS"
+    },
+    {
+      "case": "lead security",
+      "source": "49802",
+      "handler": "49803",
+      "itemId": "3312663286",
+      "httpStatus": 400,
+      "status": "PASS"
+    },
+    {
+      "case": "signup security",
+      "source": "49811",
+      "handler": "49812",
+      "itemId": "3312669204",
+      "httpStatus": 200,
+      "status": "PASS"
+    },
+    {
+      "case": "legacy lookup expression failure detected, later fixed",
+      "source": "49852",
+      "handler": "49853",
+      "itemId": "3312690485",
+      "status": "PASS"
+    },
+    {
+      "case": "signup duplicate replay",
+      "source": "49870",
+      "handler": "49871",
+      "itemId": "3312683359",
+      "requestId": "CMVQR480K",
+      "httpStatus": 200,
+      "duplicate": true,
+      "status": "PASS"
+    },
+    {
+      "case": "signup input API rate limit, synthetic IP",
+      "source": "49883",
+      "handler": "49884",
+      "itemId": "3312690449",
+      "httpStatus": 429,
+      "status": "PASS"
+    }
+  ],
+  "mailEvidence": {
+    "handlerExecution": "49884",
+    "messageId": "1a17da84cb69743b",
+    "labels": [
+      "SENT",
+      "INBOX",
+      "UNREAD"
+    ],
+    "deliveryClaim": "Message accepted by Gmail and shown in the mailbox; no separate delivery callback claimed",
+    "status": "PASS"
+  },
+  "cleanup": {
+    "status": "PASS",
+    "items": [
+      {
+        "id": "3312632872",
+        "state": "deleted"
+      },
+      {
+        "id": "3312643416",
+        "state": "deleted"
+      },
+      {
+        "id": "3312663286",
+        "state": "deleted"
+      },
+      {
+        "id": "3312669204",
+        "state": "deleted"
+      },
+      {
+        "id": "3312683359",
+        "state": "deleted"
+      },
+      {
+        "id": "3312689214",
+        "state": "deleted"
+      },
+      {
+        "id": "3312690449",
+        "state": "deleted"
+      },
+      {
+        "id": "3312690485",
+        "state": "deleted"
+      }
+    ],
+    "boards": [
+      {
+        "id": "5106283814",
+        "activeItems": 1,
+        "remainingSessionTests": 0
+      },
+      {
+        "id": "5106246268",
+        "activeItems": 4,
+        "remainingSessionTests": 0
+      }
+    ],
+    "temporaryWorkflow": {
+      "id": "Mbh2qKPB1FzE3yWK",
+      "published": false,
+      "removedFromHandlerAllowlist": true
+    }
+  },
+  "tests": {
+    "command": "npm test",
+    "exitCode": 0,
+    "funnel": 366,
+    "site": 59,
+    "nginx": 2,
+    "total": 427,
+    "status": "PASS",
+    "log": "tests/out/central-error-20261027/npm-test.log",
+    "negativeControls": [
+      "tests/out/central-error-20261027/mutation-target-guard.log",
+      "tests/out/central-error-20261027/build-red.log",
+      "tests/out/central-error-20261027/legacy-expression-red.log"
+    ],
+    "deployedComparison": {
+      "command": "node tests/out/central-error-20261027/verify-deployed.cjs",
+      "exitCode": 0,
+      "status": "PASS"
+    }
+  },
+  "limits": [
+    {
+      "requirement": "Actual third-party provider rate limiting",
+      "status": "NOT TESTED",
+      "detail": "No external provider was overloaded. Exported guards were executed locally with HTTP 429/403/transport failures; the signup endpoint emitted an actual controlled 429."
+    },
+    {
+      "requirement": "Live WhatsApp delivery",
+      "status": "NOT TESTED",
+      "detail": "The existing engine remains inactive in test mode; send nodes remain disabled."
+    }
+  ],
+  "goLiveReady": false
+}

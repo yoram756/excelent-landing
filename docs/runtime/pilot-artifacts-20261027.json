@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-27T12:12:58.532Z",
+  "at": "2026-10-27T14:02:57.775Z",
   "status": "PASS",
   "scope": "Local artifact syntax, connections, inactive flag and Meta binding only",
   "goLiveReady": false,
@@ -7,52 +7,52 @@
     {
       "file": "src/services/funnel/dist/pilot/calendly.json",
       "nodes": 12,
-      "sha256": "61514d9ea3f5d0e06ba4e8896cd7f7176b8f41c8338889170204ed6124ef2921"
+      "sha256": "f0659fe34149aa2fd78862545e3493700f02aa9e6435aa6f56ee46bb0e546030"
     },
     {
       "file": "src/services/funnel/dist/pilot/engine-pilot.json",
-      "nodes": 29,
-      "sha256": "aefd334620ceaa6b5773ee9030a4d02b229aa08c62c7372bdfe711b7bb0b3cfd"
+      "nodes": 63,
+      "sha256": "abfcc4f98ca2d3f90aded68113d9caca2aa4fd18da598856e08e238b8c9b41aa"
     },
     {
       "file": "src/services/funnel/dist/pilot/go.json",
       "nodes": 9,
-      "sha256": "de20a8bb106329a58cdd906f49e6eba86a6d9fcee602b4987e8a8413d9ef43d1"
+      "sha256": "f9100e584756f9f92ad78380d34d805bc1deefab496938ab80381857d490e18e"
     },
     {
       "file": "src/services/funnel/dist/pilot/instant-reply-pilot.json",
       "nodes": 9,
-      "sha256": "546da4f4527c40232b37d797f3da398613d14e3f585b02b200c9c38eae96ec4e"
+      "sha256": "2fc97d4be4bd04101ea715e844619a30ec46557c49f9ae27f67068f48ff1bd68"
     },
     {
       "file": "src/services/funnel/dist/pilot/sms-inbound-pilot.json",
       "nodes": 6,
-      "sha256": "cfeb75c58cb3339115495c39b04cb88bbe74d390be35945c59412fb5b05c0dca"
+      "sha256": "a3490232b103b1e3e32673d95495aec5ddf32a5f77d72ab5f0b26874f86c60c4"
     },
     {
       "file": "src/services/funnel/dist/live/calendly.json",
       "nodes": 12,
-      "sha256": "cd3a3f5a0b1f59dc3a4c697784b05cba3fb8a0371c8ca9fb5b05db421a0e078e"
+      "sha256": "5df9daed32b830308af5bfbbdd97213a03b67cbc98b28cec151c090f4f75083c"
     },
     {
       "file": "src/services/funnel/dist/live/engine-live.json",
-      "nodes": 29,
-      "sha256": "2b94d559c7c0ff535862cda4653d61937f54847a1adb9ed4ad5365b735e5caca"
+      "nodes": 63,
+      "sha256": "f4fbd7916b02f363c804990724d3982e00919d09fd745d1fb92960fdc82db784"
     },
     {
       "file": "src/services/funnel/dist/live/go.json",
       "nodes": 9,
-      "sha256": "55bc78bee5f1b22ddfaf5eaa2a475a5805f7977d184d4849f28f54d35f66abae"
+      "sha256": "1558c55ff0ccd71177c0ffc930a8c3271b5c2f70be01187459247bf6c7c2e017"
     },
     {
       "file": "src/services/funnel/dist/live/instant-reply-live.json",
       "nodes": 9,
-      "sha256": "c2763066bb2ff1d248e50b99f7ab2a5d32232fb411e3aea664ee340c5d6a7b8e"
+      "sha256": "e7b278e1ecf567f33fb335e95c9059edf0022f65ddbe1ea9a06eaa08f9587d56"
     },
     {
       "file": "src/services/funnel/dist/live/sms-inbound-live.json",
       "nodes": 6,
-      "sha256": "10a064a62b83b3e2db97a20b0dbbca950c2abd1d90a56f177179a650e310975a"
+      "sha256": "fb4e992ea6458a741216367070108180e5371cabaa686476e906d2a93982439f"
     }
   ],
   "enabledPendingCredentials": []

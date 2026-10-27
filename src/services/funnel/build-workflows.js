@@ -186,6 +186,11 @@ const smsIn={name:PFX+'קליטת SMS'+tag,settings:{executionOrder:'v1',timezon
 
 // A configured provider name alone does not bind a credential. Deferred integrations stay disabled.
 for(const w of [engine,go,cal,instant,smsIn])for(const n of w.nodes)if(Object.values(n.credentials||{}).some(c=>!c.id||String(c.id).startsWith('PENDING')))n.disabled=true;
+// Keep the central error routes when rebuilding the core engine. Other campaigns opt in through config.
+if(CFG.errorHandling){
+ const errorGlobal=require('../../../config/error-handler.json');
+ require('./error-workflow-patch').patch(engine,{campaign:CFG,global:errorGlobal,role:'whatsappEngine'});
+}
 // Final guard: no run of two closing braces inside an expression body.
 for(const w of [engine,go,cal,instant,smsIn])for(const n of w.nodes){const b=n.parameters.jsonBody;if(typeof b==='string'&&b.startsWith('={{')){let inner=b.slice(3,-2);while(/\}\}/.test(inner))inner=inner.replace(/\}\}/g,'} }');n.parameters.jsonBody='={{'+inner+'}}';}}
 const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{recursive:true});

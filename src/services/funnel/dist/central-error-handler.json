@@ -1,0 +1,391 @@
+{
+  "name": "Central Error Handler",
+  "nodes": [
+    {
+      "id": "29762d9e-202b-6d79-7bdf-cff1a29522c8",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "15bdb4e5-bddc-4360-0f5e-afceaf4f379c",
+      "name": "Prepare alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Pure central-error contract. No transport, credentials, filesystem or implicit item lookup.\nconst id=x=>typeof x==='string'&&/^[1-9]\\d{0,18}$/.test(x)?x:null;\nconst clean=(x,max=2000)=>String(x??'').replace(/Bearer\\s+[^\\s\"'<>]+/gi,'Bearer [REDACTED]').replace(/EAA[A-Za-z0-9]{30,}/g,'[REDACTED]').replace(/((?:access_token|api_key|token|authorization)[\"']?\\s*[:=]\\s*[\"']?)[^\\s\"'&,<>]+/gi,'$1[REDACTED]').replace(/[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f]/g,'').slice(0,max);\nconst gql=s=>s.replace(/\\{/g,'{ ').replace(/\\}/g,' }');\nconst hash=s=>{let n=2166136261;for(const c of s){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return(n>>>0).toString(36);};\nconst classify=(r,{provider=false}={})=>{\n if(!r||typeof r!=='object')return null;\n if(r.__centralFailure)return r.__centralFailure;\n if(r.body&&typeof r.body==='object')r={...r,...r.body};\n if(r.duplicate===true)return {code:'duplicate_lead',message:'Duplicate lead execution stopped',httpStatus:200};\n const raw=r.error;\n const status=Number(r.statusCode||r.httpCode||r.status||r.error?.httpCode||r.error?.statusCode||(/^\\d{3}\\b/.exec(raw?.message||'')||[])[0]);\n const key=typeof raw==='string'?raw:String(raw?.code||'');\n if(status===429||['4','17','32','613','80007','130429'].includes(key))return {code:'api_rate_limit',message:'API rate limit reached',httpStatus:429};\n if([401,403].includes(status)||['190','key','bad_body','bad_key','bad_event_id','rejected','unknown_campaign','conflicting_product','idempotency_unverified','idempotency_conflict','idempotency_mismatch','idempotency_store_invalid'].includes(key))return {code:'security_violation',message:clean(typeof raw==='string'?raw:raw?.message||'Security guard rejected execution'),httpStatus:status>=400&&status<600?status:403};\n if(Array.isArray(r.errors)&&r.errors.length){\n  const rate=r.errors.some(e=>/rate|complexity|limit|budget/i.test(String(e.extensions?.code||e.extensions?.error_code||e.message||'')));\n  return {code:rate?'api_rate_limit':'provider_error',message:rate?'API rate limit reached':'Provider returned GraphQL errors',httpStatus:rate?429:502};\n }\n if(raw&&(provider||typeof raw==='object'))return {code:'provider_error',message:clean(typeof raw==='string'?raw:raw.message||'Provider request failed'),httpStatus:502};\n return null;\n};\nfunction prepare(input,{campaign:c,global:g,state,selfId,now}){\n const wf=input?.workflow||{},ex=input?.execution||{},err=ex.error||input?.trigger?.error||{};\n const wfId=String(wf.id||'');\n if(!Object.values(g.bindings).includes(wfId)||wfId===String(selfId)||wfId===String(g.workflowId))return null;\n if(!err||typeof err!=='object')return null;\n const executionId=id(String(ex.id||'')),lastNode=clean(ex.lastNodeExecuted||'Trigger',200),message=clean(err.message||'Unknown workflow failure');\n // n8n's Code sandbox does not expose the browser URL constructor. Accept only the exact internal execution path.\n const expected=g.n8nBaseUrl.replace(/\\/$/,'')+'/workflow/'+encodeURIComponent(wfId)+'/executions/'+executionId;\n const url=executionId&&typeof ex.url==='string'&&ex.url.split(/[?#]/,1)[0]===expected?expected:'';\n const triggerStamp=Number(err.timestamp);\n const suffix=executionId||hash(JSON.stringify([lastNode,message,Number.isFinite(triggerStamp)?triggerStamp:Math.floor(now/300000)]));\n const key='n8n-'+wfId+'-'+suffix;\n if(!state.handled||typeof state.handled!=='object'||Array.isArray(state.handled))state.handled={};\n const cutoff=now-g.retentionHours*3600000;\n for(const [k,v]of Object.entries(state.handled))if(!Number.isFinite(v?.at)||v.at<cutoff)delete state.handled[k];\n if(state.handled[key])return null;\n const metadata=err.context?.metadata;\n const trusted=lastNode===g.controlledStopNode&&metadata?.schema==='central-error-v1'&&metadata.workflowId===wfId&&String(metadata.boardId)===String(c.board)&&metadata.verifiedItem===true;\n const itemId=trusted?id(String(metadata.itemId||metadata.pulseId||'')):null;\n const workflowName=clean(wf.name||wfId,160).replace(/[\\r\\n]/g,' ');\n const body=['שם התהליך: '+workflowName,'מזהה התהליך: '+wfId,'הרכיב שנכשל: '+lastNode,'הודעת השגיאה: '+message,'מזהה הרצה: '+(executionId||'Trigger'),'קישור להרצה ב-n8n: '+(url||'לא זמין'),'מזהה פריט מאומת: '+(itemId||'אין')].join('\\n');\n const columns={[c.columns.status]:{label:c.errorHandling.statusLabel},[c.intake.columns.eventId]:key,[c.intake.columns.answers]:{text:body}};\n if(c.intake.columns.assignee&&c.intake.assignees?.length)columns[c.intake.columns.assignee]={personsAndTeams:c.intake.assignees};\n const updateValues={[c.columns.status]:{label:c.errorHandling.statusLabel},[c.columns.next]:{}};\n return {key,workflow:{id:wfId,name:workflowName},execution:{id:executionId,url,lastNodeExecuted:lastNode,error:{message}},lastNode,message,itemId,subject:g.subjectPrefix+workflowName,body,\n  lookupRequest:itemId?{query:gql('query($ids:[ID!]!){items(ids:$ids){id state board{id} column_values(ids:'+JSON.stringify([c.columns.status,c.columns.stage])+'){id text}}}'),variables:{ids:[itemId]}}:null,\n  updateRequest:itemId?{query:gql('mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}'),variables:{b:String(c.board),i:itemId,v:JSON.stringify(updateValues)}}:null,\n  createRequest:{query:gql('mutation($b:ID!,$g:String!,$name:String!,$vals:JSON!){create_item(board_id:$b,group_id:$g,item_name:$name,column_values:$vals,create_labels_if_missing:true){id}}'),variables:{b:String(c.board),g:c.intake.group,name:c.errorHandling.alertNamePrefix+workflowName+' '+(executionId||'Trigger'),vals:JSON.stringify(columns)}}};\n}\nfunction canUpdate(response,a,c){\n if(response?.errors?.length||!a?.itemId||!Array.isArray(response?.data?.items)||response.data.items.length!==1)return false;\n const item=response.data.items[0],cv=Object.fromEntries((item.column_values||[]).map(x=>[x.id,x.text]));\n return String(item.id)===a.itemId&&String(item.board?.id)===String(c.board)&&item.state==='active'&&Object.hasOwn(cv,c.columns.status)&&Object.hasOwn(cv,c.columns.stage)&&!c.errorHandling.protectedStatusLabels.includes(cv[c.columns.status])&&cv[c.columns.stage]!==c.stages.paid;\n}\nfunction finish(response,mail,a,state,now){\n const updated=id(String(response?.data?.change_multiple_column_values?.id||'')),created=id(String(response?.data?.create_item?.id||''));\n if(response?.errors?.length||(!created&&(!updated||updated!==a.itemId)))throw Error('Monday error handling write not confirmed');\n if(mail?.error||!mail?.id)throw Error('Error alert email not confirmed; Monday receipt exists');\n state.handled=state.handled||{};state.handled[a.key]={at:now,itemId:created||updated,mailId:String(mail.id)};\n const keys=Object.keys(state.handled).sort((x,y)=>state.handled[y].at-state.handled[x].at);\n for(const key of keys.slice(2000))delete state.handled[key];\n return {handled:true,key:a.key,itemId:created||updated,action:created?'created_alert':'stopped_item',emailAccepted:true};\n}\n\n\nconst a=prepare($input.first().json,{campaign:{\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"product\":\"refi\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת המבקשים לבדוק מחזור; מיקוד Meta בפועל מתועד ב-docs/meta-campaign-audit-20261020.md\",\"quizDonePattern\":\"(?:^|\\\\n)(?:יש לכם היום משכנתא|מה המטרה העיקרית|מה יתרת המשכנתא בקירוב|מה ההחזר החודשי היום|כמה זמן נשאר לתשלום|מתי תרצו לפעול|מה אתם מבקשים כרגע|יש לכם דוח יתרות לסילוק עדכני|יש הלוואות נוספות מלבד המשכנתא|צפוי שינוי בהכנסה בשנים הקרובות|מתוכננים מכירה של הנכס או פירעון גדול|יש קושי בתשלומים היום)\\\\? .+\",\"status\":\"internal-test\",\"contactPermissions\":{\"column\":\"long_text_mm8ag9s\",\"version\":\"lp1-channels-20261020\",\"requiredAfter\":\"2026-10-20T19:40:00Z\"},\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"errorHandling\":{\"statusLabel\":\"נעצר / כשל\",\"protectedStatusLabels\":[\"הסר\",\"לקוח\"],\"alertNamePrefix\":\"[n8n ERROR] \"},\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88xzfe\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"intake\":{\"group\":\"topics\",\"newStage\":\"ליד חדש\",\"assignees\":[{\"id\":75075191,\"kind\":\"person\"}],\"reminder\":{\"sourcePattern\":\"LP1|מטא|וואטסאפ\",\"openStages\":[\"ליד חדש\",\"התקבל\",\"\"]},\"columns\":{\"eventId\":\"text_mm8c3r4v\",\"assignee\":\"multiple_person_mm8c8hfp\",\"balance\":\"refi_balance\",\"goal\":\"refi_goal\",\"goal2\":\"color_mm88h0j8\",\"otherLoans\":\"refi_other_loans\",\"pay\":\"color_mm88h799\",\"left\":\"color_mm885m0t\",\"when\":\"color_mm88cffb\",\"ask\":\"color_mm88fzyb\",\"doc\":\"color_mm88catt\",\"heatLabel\":\"color_mm88xpa8\",\"heatDetail\":\"long_text_mm88pfdv\",\"answers\":\"long_text_mm88xzfe\",\"complexity\":\"long_text_mm88cs6f\",\"hasMortgage\":\"dropdown_mm88dkb2\",\"serviceRequestAt\":\"date_mm88hmw2\",\"marketingAt\":\"date_mm88qwfm\",\"messageReceived\":\"boolean_mm88aae4\",\"entered\":\"refi_entered\",\"feasibility\":\"color_mm88hss3\"}},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\",\"category\":\"MARKETING\"},\"M2\":{\"id\":\"2157972271457704\",\"name\":\"exc_refi_m02_quiz_v2\",\"dest\":\"q\",\"legacyId\":\"2866421103739060\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M3\":{\"id\":\"2017016385642572\",\"name\":\"exc_refi_m03_reviews_v2\",\"dest\":\"b\",\"legacyId\":\"2306286663247344\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M4\":{\"id\":\"1840616890627890\",\"name\":\"exc_refi_m04_call_v2\",\"dest\":\"c\",\"legacyId\":\"991655264017502\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M5\":{\"id\":\"1089275163875623\",\"name\":\"exc_refi_m05_case_v2\",\"dest\":\"q\",\"legacyId\":\"1861514208308620\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\",\"category\":\"MARKETING\"},\"M7\":{\"id\":\"1915186253195181\",\"name\":\"exc_refi_m07_thanks_v2\",\"dest\":\"c\",\"legacyId\":\"1695504292330742\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M8\":{\"id\":\"28923882683911966\",\"name\":\"exc_refi_m08_remind_v2\",\"dest\":\"c\",\"legacyId\":\"1456261889708463\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M9\":{\"id\":\"1819887545875725\",\"name\":\"exc_refi_m09_wait_v2\",\"dest\":\"c\",\"legacyId\":\"1825910702064350\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"],\"category\":\"UTILITY\"},\"M10R\":{\"id\":\"4665876823677509\",\"name\":\"exc_refi_m10r_reminder_v2\",\"vars\":[\"first\",\"when\",\"link\"],\"dest\":\"c\",\"legacyId\":\"4090685337891850\",\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M11\":{\"id\":\"4430944130505180\",\"name\":\"exc_refi_m11_noshow_v2\",\"dest\":\"c\",\"legacyId\":\"1462992419096031\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M12\":{\"id\":\"1586746399324895\",\"name\":\"exc_refi_m12_google_v2\",\"dest\":\"g\",\"legacyId\":\"1152794754084561\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M13\":{\"id\":\"4667983876817219\",\"name\":\"exc_refi_m13_midrag_v2\",\"dest\":\"m\",\"legacyId\":\"1022323597539469\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\",\"category\":\"MARKETING\"},\"M15\":{\"id\":\"1111684781346512\",\"name\":\"exc_refi_m15_offer_v2\",\"dest\":\"c\",\"legacyId\":\"1150212394355928\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"channels\":{\"cascade\":[\"whatsapp\",\"sms\",\"email\"],\"providers\":{\"whatsapp\":\"gambot\",\"sms\":\"textme\",\"email\":\"sendgrid\"},\"sms\":{\"source\":\"Excelent\"},\"email\":{\"from\":\"office@excelent.co.il\"},\"optOut\":{\"label\":\"הסר\",\"keywords\":\"הסר|הסירו|להסיר|stop\"}},\"instantReply\":{\"enabled\":false,\"withinSeconds\":60,\"graceMinutes\":2,\"template\":{\"id\":null,\"category\":\"UTILITY\",\"vars\":[\"first\"]}},\"crmFields\":{\"leadTemperature\":{\"from\":\"heat\",\"column\":\"color_mm88xpa8\",\"labels\":{\"HOT\":{\"write\":\"חם מאוד\",\"accept\":[\"רותח\",\"חם מאוד\"]},\"WARM\":{\"write\":\"חם\",\"accept\":[\"חם\"]},\"COLD\":{\"write\":\"מתעניין\",\"accept\":[\"מתעניין\",\"אין מספיק מידע\"]}},\"bands\":[{\"atLeast\":70,\"value\":\"HOT\"},{\"atLeast\":40,\"value\":\"WARM\"},{\"atLeast\":0,\"value\":\"COLD\"}]},\"nicheSegment\":{\"value\":\"refi\",\"column\":null},\"churnReason\":{\"column\":\"refi_close_reason\"}},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\",\"yoram_050\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"},\"linkTokenExamples\":[\"a1b2c3d4e5q\"]},global:{\"name\":\"Central Error Handler\",\"recipientEmail\":\"office@kho.org.il\",\"subjectPrefix\":\"[EMERGENCY ALERT] n8n Workflow Failed: \",\"n8nBaseUrl\":\"https://n8n-qhxa.srv1604140.hstgr.cloud\",\"gmailCredentialId\":\"1H4YGm5Z2UFN4IeE\",\"mondayCredentialId\":\"Un7HBqZvldpVYUaB\",\"workflowId\":\"4bLJ8LvpNYnoCB8t\",\"bindings\":{\"leadIntake\":\"8W7MymUCLpPnilJs\",\"lpSignup\":\"I58fPCQOqTrNrbZw\",\"whatsappEngine\":\"ZnIureJBIqYN52Zw\"},\"controlledStopNode\":\"Stop And Error\",\"retentionHours\":168,\"maxReceipts\":2000},state:$getWorkflowStaticData(\"global\"),selfId:$workflow.id,now:Date.now()});return a?[{json:a}]:[];"
+      }
+    },
+    {
+      "id": "ac3cead1-a491-a9d7-1085-c4f5f52665c0",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        480,
+        0
+      ],
+      "onError": "continueRegularOutput",
+      "retryOnFail": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "1H4YGm5Z2UFN4IeE",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "office@kho.org.il",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      }
+    },
+    {
+      "id": "07ff3c8f-836a-57dc-8b7a-7f1097542714",
+      "name": "Has item id?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "3aadead3-a66a-6086-0620-c8c733fcb466",
+              "leftValue": "={{ !!$('Prepare alert').first().json.itemId }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "3fb28d75-fb87-bbb5-6cdb-1ad5383c6bc8",
+      "name": "Read Monday target",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        960,
+        -140
+      ],
+      "retryOnFail": false,
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Prepare alert').first().json.lookupRequest) }}",
+        "options": {
+          "timeout": 20000
+        }
+      }
+    },
+    {
+      "id": "c40f4cb2-53cd-609d-129c-122a7bb70aba",
+      "name": "Validate Monday target",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        -140
+      ],
+      "parameters": {
+        "jsCode": "// Pure central-error contract. No transport, credentials, filesystem or implicit item lookup.\nconst id=x=>typeof x==='string'&&/^[1-9]\\d{0,18}$/.test(x)?x:null;\nconst clean=(x,max=2000)=>String(x??'').replace(/Bearer\\s+[^\\s\"'<>]+/gi,'Bearer [REDACTED]').replace(/EAA[A-Za-z0-9]{30,}/g,'[REDACTED]').replace(/((?:access_token|api_key|token|authorization)[\"']?\\s*[:=]\\s*[\"']?)[^\\s\"'&,<>]+/gi,'$1[REDACTED]').replace(/[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f]/g,'').slice(0,max);\nconst gql=s=>s.replace(/\\{/g,'{ ').replace(/\\}/g,' }');\nconst hash=s=>{let n=2166136261;for(const c of s){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return(n>>>0).toString(36);};\nconst classify=(r,{provider=false}={})=>{\n if(!r||typeof r!=='object')return null;\n if(r.__centralFailure)return r.__centralFailure;\n if(r.body&&typeof r.body==='object')r={...r,...r.body};\n if(r.duplicate===true)return {code:'duplicate_lead',message:'Duplicate lead execution stopped',httpStatus:200};\n const raw=r.error;\n const status=Number(r.statusCode||r.httpCode||r.status||r.error?.httpCode||r.error?.statusCode||(/^\\d{3}\\b/.exec(raw?.message||'')||[])[0]);\n const key=typeof raw==='string'?raw:String(raw?.code||'');\n if(status===429||['4','17','32','613','80007','130429'].includes(key))return {code:'api_rate_limit',message:'API rate limit reached',httpStatus:429};\n if([401,403].includes(status)||['190','key','bad_body','bad_key','bad_event_id','rejected','unknown_campaign','conflicting_product','idempotency_unverified','idempotency_conflict','idempotency_mismatch','idempotency_store_invalid'].includes(key))return {code:'security_violation',message:clean(typeof raw==='string'?raw:raw?.message||'Security guard rejected execution'),httpStatus:status>=400&&status<600?status:403};\n if(Array.isArray(r.errors)&&r.errors.length){\n  const rate=r.errors.some(e=>/rate|complexity|limit|budget/i.test(String(e.extensions?.code||e.extensions?.error_code||e.message||'')));\n  return {code:rate?'api_rate_limit':'provider_error',message:rate?'API rate limit reached':'Provider returned GraphQL errors',httpStatus:rate?429:502};\n }\n if(raw&&(provider||typeof raw==='object'))return {code:'provider_error',message:clean(typeof raw==='string'?raw:raw.message||'Provider request failed'),httpStatus:502};\n return null;\n};\nfunction prepare(input,{campaign:c,global:g,state,selfId,now}){\n const wf=input?.workflow||{},ex=input?.execution||{},err=ex.error||input?.trigger?.error||{};\n const wfId=String(wf.id||'');\n if(!Object.values(g.bindings).includes(wfId)||wfId===String(selfId)||wfId===String(g.workflowId))return null;\n if(!err||typeof err!=='object')return null;\n const executionId=id(String(ex.id||'')),lastNode=clean(ex.lastNodeExecuted||'Trigger',200),message=clean(err.message||'Unknown workflow failure');\n // n8n's Code sandbox does not expose the browser URL constructor. Accept only the exact internal execution path.\n const expected=g.n8nBaseUrl.replace(/\\/$/,'')+'/workflow/'+encodeURIComponent(wfId)+'/executions/'+executionId;\n const url=executionId&&typeof ex.url==='string'&&ex.url.split(/[?#]/,1)[0]===expected?expected:'';\n const triggerStamp=Number(err.timestamp);\n const suffix=executionId||hash(JSON.stringify([lastNode,message,Number.isFinite(triggerStamp)?triggerStamp:Math.floor(now/300000)]));\n const key='n8n-'+wfId+'-'+suffix;\n if(!state.handled||typeof state.handled!=='object'||Array.isArray(state.handled))state.handled={};\n const cutoff=now-g.retentionHours*3600000;\n for(const [k,v]of Object.entries(state.handled))if(!Number.isFinite(v?.at)||v.at<cutoff)delete state.handled[k];\n if(state.handled[key])return null;\n const metadata=err.context?.metadata;\n const trusted=lastNode===g.controlledStopNode&&metadata?.schema==='central-error-v1'&&metadata.workflowId===wfId&&String(metadata.boardId)===String(c.board)&&metadata.verifiedItem===true;\n const itemId=trusted?id(String(metadata.itemId||metadata.pulseId||'')):null;\n const workflowName=clean(wf.name||wfId,160).replace(/[\\r\\n]/g,' ');\n const body=['שם התהליך: '+workflowName,'מזהה התהליך: '+wfId,'הרכיב שנכשל: '+lastNode,'הודעת השגיאה: '+message,'מזהה הרצה: '+(executionId||'Trigger'),'קישור להרצה ב-n8n: '+(url||'לא זמין'),'מזהה פריט מאומת: '+(itemId||'אין')].join('\\n');\n const columns={[c.columns.status]:{label:c.errorHandling.statusLabel},[c.intake.columns.eventId]:key,[c.intake.columns.answers]:{text:body}};\n if(c.intake.columns.assignee&&c.intake.assignees?.length)columns[c.intake.columns.assignee]={personsAndTeams:c.intake.assignees};\n const updateValues={[c.columns.status]:{label:c.errorHandling.statusLabel},[c.columns.next]:{}};\n return {key,workflow:{id:wfId,name:workflowName},execution:{id:executionId,url,lastNodeExecuted:lastNode,error:{message}},lastNode,message,itemId,subject:g.subjectPrefix+workflowName,body,\n  lookupRequest:itemId?{query:gql('query($ids:[ID!]!){items(ids:$ids){id state board{id} column_values(ids:'+JSON.stringify([c.columns.status,c.columns.stage])+'){id text}}}'),variables:{ids:[itemId]}}:null,\n  updateRequest:itemId?{query:gql('mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}'),variables:{b:String(c.board),i:itemId,v:JSON.stringify(updateValues)}}:null,\n  createRequest:{query:gql('mutation($b:ID!,$g:String!,$name:String!,$vals:JSON!){create_item(board_id:$b,group_id:$g,item_name:$name,column_values:$vals,create_labels_if_missing:true){id}}'),variables:{b:String(c.board),g:c.intake.group,name:c.errorHandling.alertNamePrefix+workflowName+' '+(executionId||'Trigger'),vals:JSON.stringify(columns)}}};\n}\nfunction canUpdate(response,a,c){\n if(response?.errors?.length||!a?.itemId||!Array.isArray(response?.data?.items)||response.data.items.length!==1)return false;\n const item=response.data.items[0],cv=Object.fromEntries((item.column_values||[]).map(x=>[x.id,x.text]));\n return String(item.id)===a.itemId&&String(item.board?.id)===String(c.board)&&item.state==='active'&&Object.hasOwn(cv,c.columns.status)&&Object.hasOwn(cv,c.columns.stage)&&!c.errorHandling.protectedStatusLabels.includes(cv[c.columns.status])&&cv[c.columns.stage]!==c.stages.paid;\n}\nfunction finish(response,mail,a,state,now){\n const updated=id(String(response?.data?.change_multiple_column_values?.id||'')),created=id(String(response?.data?.create_item?.id||''));\n if(response?.errors?.length||(!created&&(!updated||updated!==a.itemId)))throw Error('Monday error handling write not confirmed');\n if(mail?.error||!mail?.id)throw Error('Error alert email not confirmed; Monday receipt exists');\n state.handled=state.handled||{};state.handled[a.key]={at:now,itemId:created||updated,mailId:String(mail.id)};\n const keys=Object.keys(state.handled).sort((x,y)=>state.handled[y].at-state.handled[x].at);\n for(const key of keys.slice(2000))delete state.handled[key];\n return {handled:true,key:a.key,itemId:created||updated,action:created?'created_alert':'stopped_item',emailAccepted:true};\n}\n\n\nreturn [{json:{safe:canUpdate($input.first().json,$(\"Prepare alert\").first().json,{\"id\":\"refi\",\"name\":\"מחזור משכנתא\",\"product\":\"refi\",\"service\":\"בדיקת היתכנות ראשונית למחזור משכנתא ללא עלות\",\"goal\":\"לקוח שחתם והעביר מקדמה\",\"audience\":\"בעלי משכנתא קיימת המבקשים לבדוק מחזור; מיקוד Meta בפועל מתועד ב-docs/meta-campaign-audit-20261020.md\",\"quizDonePattern\":\"(?:^|\\\\n)(?:יש לכם היום משכנתא|מה המטרה העיקרית|מה יתרת המשכנתא בקירוב|מה ההחזר החודשי היום|כמה זמן נשאר לתשלום|מתי תרצו לפעול|מה אתם מבקשים כרגע|יש לכם דוח יתרות לסילוק עדכני|יש הלוואות נוספות מלבד המשכנתא|צפוי שינוי בהכנסה בשנים הקרובות|מתוכננים מכירה של הנכס או פירעון גדול|יש קושי בתשלומים היום)\\\\? .+\",\"status\":\"internal-test\",\"contactPermissions\":{\"column\":\"long_text_mm8ag9s\",\"version\":\"lp1-channels-20261020\",\"requiredAfter\":\"2026-10-20T19:40:00Z\"},\"sources\":[\"LP1 טופס\",\"קליטת LP1\",\"טופס מטא\",\"יומן\"],\"board\":\"5106246268\",\"errorHandling\":{\"statusLabel\":\"נעצר / כשל\",\"protectedStatusLabels\":[\"הסר\",\"לקוח\"],\"alertNamePrefix\":\"[n8n ERROR] \"},\"columns\":{\"phone\":\"refi_phone\",\"stage\":\"refi_stage\",\"meeting\":\"refi_meeting\",\"firstReply\":\"refi_first_reply\",\"consentMarketing\":\"boolean_mm88mzry\",\"consentService\":\"boolean_mm8848pn\",\"quizDone\":\"long_text_mm88xzfe\",\"heat\":\"numeric_mm883h9v\",\"status\":\"fn_status\",\"path\":\"fn_path\",\"step\":\"fn_step\",\"next\":\"fn_next\",\"last\":\"fn_last\",\"token\":\"fn_token\",\"state\":\"fn_opens\",\"email\":\"fn_email\",\"source\":\"refi_source\"},\"intake\":{\"group\":\"topics\",\"newStage\":\"ליד חדש\",\"assignees\":[{\"id\":75075191,\"kind\":\"person\"}],\"reminder\":{\"sourcePattern\":\"LP1|מטא|וואטסאפ\",\"openStages\":[\"ליד חדש\",\"התקבל\",\"\"]},\"columns\":{\"eventId\":\"text_mm8c3r4v\",\"assignee\":\"multiple_person_mm8c8hfp\",\"balance\":\"refi_balance\",\"goal\":\"refi_goal\",\"goal2\":\"color_mm88h0j8\",\"otherLoans\":\"refi_other_loans\",\"pay\":\"color_mm88h799\",\"left\":\"color_mm885m0t\",\"when\":\"color_mm88cffb\",\"ask\":\"color_mm88fzyb\",\"doc\":\"color_mm88catt\",\"heatLabel\":\"color_mm88xpa8\",\"heatDetail\":\"long_text_mm88pfdv\",\"answers\":\"long_text_mm88xzfe\",\"complexity\":\"long_text_mm88cs6f\",\"hasMortgage\":\"dropdown_mm88dkb2\",\"serviceRequestAt\":\"date_mm88hmw2\",\"marketingAt\":\"date_mm88qwfm\",\"messageReceived\":\"boolean_mm88aae4\",\"entered\":\"refi_entered\",\"feasibility\":\"color_mm88hss3\"}},\"stages\":{\"human\":[\"נוצר קשר\",\"בטיפול\",\"התקבל\",\"נבדק\",\"דוח התקבל\"],\"booked\":\"פגישה נקבעה\",\"met\":\"פגישה התקיימה\",\"noShow\":[\"פגישה בוטלה\",\"לא הגיע\"],\"paid\":\"לקוח משלם\",\"notRelevant\":\"לא רלוונטי\"},\"templates\":{\"M1\":{\"id\":\"2146929776251168\",\"name\":\"exc_refi_m01_ack\",\"category\":\"MARKETING\"},\"M2\":{\"id\":\"2157972271457704\",\"name\":\"exc_refi_m02_quiz_v2\",\"dest\":\"q\",\"legacyId\":\"2866421103739060\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M3\":{\"id\":\"2017016385642572\",\"name\":\"exc_refi_m03_reviews_v2\",\"dest\":\"b\",\"legacyId\":\"2306286663247344\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M4\":{\"id\":\"1840616890627890\",\"name\":\"exc_refi_m04_call_v2\",\"dest\":\"c\",\"legacyId\":\"991655264017502\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M5\":{\"id\":\"1089275163875623\",\"name\":\"exc_refi_m05_case_v2\",\"dest\":\"q\",\"legacyId\":\"1861514208308620\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M6\":{\"id\":\"922497660829094\",\"name\":\"exc_refi_m06_close\",\"category\":\"MARKETING\"},\"M7\":{\"id\":\"1915186253195181\",\"name\":\"exc_refi_m07_thanks_v2\",\"dest\":\"c\",\"legacyId\":\"1695504292330742\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M8\":{\"id\":\"28923882683911966\",\"name\":\"exc_refi_m08_remind_v2\",\"dest\":\"c\",\"legacyId\":\"1456261889708463\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M9\":{\"id\":\"1819887545875725\",\"name\":\"exc_refi_m09_wait_v2\",\"dest\":\"c\",\"legacyId\":\"1825910702064350\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M10\":{\"id\":\"1517902547031884\",\"name\":\"exc_refi_m10_booked\",\"vars\":[\"first\",\"when\"],\"category\":\"UTILITY\"},\"M10R\":{\"id\":\"4665876823677509\",\"name\":\"exc_refi_m10r_reminder_v2\",\"vars\":[\"first\",\"when\",\"link\"],\"dest\":\"c\",\"legacyId\":\"4090685337891850\",\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M11\":{\"id\":\"4430944130505180\",\"name\":\"exc_refi_m11_noshow_v2\",\"dest\":\"c\",\"legacyId\":\"1462992419096031\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M12\":{\"id\":\"1586746399324895\",\"name\":\"exc_refi_m12_google_v2\",\"dest\":\"g\",\"legacyId\":\"1152794754084561\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M13\":{\"id\":\"4667983876817219\",\"name\":\"exc_refi_m13_midrag_v2\",\"dest\":\"m\",\"legacyId\":\"1022323597539469\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"},\"M14\":{\"id\":\"1665753921818083\",\"name\":\"exc_refi_m14_block\",\"category\":\"MARKETING\"},\"M15\":{\"id\":\"1111684781346512\",\"name\":\"exc_refi_m15_offer_v2\",\"dest\":\"c\",\"legacyId\":\"1150212394355928\",\"vars\":[\"first\",\"link\"],\"linkMode\":\"body\",\"approvedStatus\":\"APPROVED\",\"category\":\"MARKETING\"}},\"entry\":{\"default\":{\"path\":\"B\",\"step\":\"NEW\"},\"quizDone\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"sequences\":{\"B\":[{\"code\":\"M1\",\"next\":{\"minutes\":5}},{\"code\":\"M2\",\"next\":{\"hours\":3},\"thenPath\":\"C\"}],\"C\":[{\"code\":\"M3\",\"next\":{\"days\":1,\"at\":\"10:00\"}},{\"code\":\"M4\",\"next\":{\"days\":2,\"at\":\"10:00\"}},{\"code\":\"M5\",\"next\":{\"days\":4,\"at\":\"10:00\"}},{\"code\":\"M6\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"D\":[{\"code\":\"M7\",\"next\":{\"days\":1}},{\"code\":\"M8\",\"next\":{\"days\":2}},{\"code\":\"M9\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"G\":[{\"code\":\"M12\",\"next\":{\"days\":3}},{\"code\":\"M13\",\"next\":{\"days\":5}},{\"code\":\"M14\",\"next\":{\"days\":11}},{\"code\":\"M15\",\"next\":{\"days\":14},\"thenPath\":\"L\"}],\"L\":[]},\"quizUpgrade\":{\"fromPaths\":[\"B\",\"C\"],\"to\":{\"path\":\"D\",\"step\":\"QUIZ\"}},\"meeting\":{\"booked\":\"M10\",\"reminder\":\"M10R\",\"noShow\":\"M11\",\"after\":{\"path\":\"G\",\"step\":\"MET\",\"next\":{\"days\":2,\"at\":\"10:00\"}},\"noShowLimit\":2,\"holdPath\":\"L\"},\"rules\":{\"onePerDayPaths\":[\"C\",\"D\",\"G\"],\"sameDayAllowed\":[\"M2\",\"M3\",\"M7\"],\"holdDays\":14},\"links\":{\"q\":\"https://refi.excelentfinance.com/?utm_source=whatsapp&utm_medium=funnel&utm_campaign=refi_funnel#check\",\"c\":\"https://calendly.com/excellnet/15min\",\"g\":\"https://share.google/L6zPPGazOqwdvB1pH\",\"m\":\"https://www.midrag.co.il/SpCard/Sp/94658\",\"b\":\"https://www.bizreviews.co.il/provider/peled-yoram\"},\"handoff\":{\"heatAtLeast\":70,\"onReply\":true,\"onBooking\":true},\"channels\":{\"cascade\":[\"whatsapp\",\"sms\",\"email\"],\"providers\":{\"whatsapp\":\"gambot\",\"sms\":\"textme\",\"email\":\"sendgrid\"},\"sms\":{\"source\":\"Excelent\"},\"email\":{\"from\":\"office@excelent.co.il\"},\"optOut\":{\"label\":\"הסר\",\"keywords\":\"הסר|הסירו|להסיר|stop\"}},\"instantReply\":{\"enabled\":false,\"withinSeconds\":60,\"graceMinutes\":2,\"template\":{\"id\":null,\"category\":\"UTILITY\",\"vars\":[\"first\"]}},\"crmFields\":{\"leadTemperature\":{\"from\":\"heat\",\"column\":\"color_mm88xpa8\",\"labels\":{\"HOT\":{\"write\":\"חם מאוד\",\"accept\":[\"רותח\",\"חם מאוד\"]},\"WARM\":{\"write\":\"חם\",\"accept\":[\"חם\"]},\"COLD\":{\"write\":\"מתעניין\",\"accept\":[\"מתעניין\",\"אין מספיק מידע\"]}},\"bands\":[{\"atLeast\":70,\"value\":\"HOT\"},{\"atLeast\":40,\"value\":\"WARM\"},{\"atLeast\":0,\"value\":\"COLD\"}]},\"nicheSegment\":{\"value\":\"refi\",\"column\":null},\"churnReason\":{\"column\":\"refi_close_reason\"}},\"kpiTargets\":{\"costPerPayingClient\":1400,\"costPerMeeting\":350},\"meta\":{\"campaignIds\":[\"120252891592490603\"],\"adAccount\":\"287081049104797\"},\"groups\":{\"meetings\":\"group_mm883gr6\"},\"identity\":{\"profile\":\"excelent_finance\",\"nameInMessages\":\"יורם פלד\",\"contactPhone\":\"excelent_contact\",\"testPhones\":[\"excelent_contact\",\"backup\",\"yoram_050\"],\"approved\":true,\"approvedBy\":\"יורם\",\"approvedAt\":\"2026-10-20\",\"source\":\"הנחיות יורם בשיחה מ 20.10.2026\"},\"linkTokenExamples\":[\"a1b2c3d4e5q\"]})}}];"
+      }
+    },
+    {
+      "id": "a3aa6264-9225-c6b4-1522-651f0850d86b",
+      "name": "Safe target?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1440,
+        -140
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "cdd1f74a-11ba-4455-b00a-2b7d6579382a",
+              "leftValue": "={{ $json.safe === true }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "a48c0895-657a-b58c-e0ca-cd6a5e3df80e",
+      "name": "Monday Update Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        -260
+      ],
+      "retryOnFail": false,
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Prepare alert').first().json.updateRequest) }}",
+        "options": {
+          "timeout": 20000
+        }
+      }
+    },
+    {
+      "id": "2ce7d286-804e-3cc0-7bc2-a34e97a31b01",
+      "name": "Monday Create Item",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1680,
+        160
+      ],
+      "retryOnFail": false,
+      "onError": "continueRegularOutput",
+      "credentials": {
+        "mondayComApi": {
+          "id": "Un7HBqZvldpVYUaB",
+          "name": "Monday.com account"
+        }
+      },
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.monday.com/v2",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "mondayComApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "API-Version",
+              "value": "2024-10"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($('Prepare alert').first().json.createRequest) }}",
+        "options": {
+          "timeout": 20000
+        }
+      }
+    },
+    {
+      "id": "6872d9a8-d0f9-b7c4-4200-11a6b8b2acf1",
+      "name": "Confirm handling",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1920,
+        0
+      ],
+      "parameters": {
+        "jsCode": "// Pure central-error contract. No transport, credentials, filesystem or implicit item lookup.\nconst id=x=>typeof x==='string'&&/^[1-9]\\d{0,18}$/.test(x)?x:null;\nconst clean=(x,max=2000)=>String(x??'').replace(/Bearer\\s+[^\\s\"'<>]+/gi,'Bearer [REDACTED]').replace(/EAA[A-Za-z0-9]{30,}/g,'[REDACTED]').replace(/((?:access_token|api_key|token|authorization)[\"']?\\s*[:=]\\s*[\"']?)[^\\s\"'&,<>]+/gi,'$1[REDACTED]').replace(/[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f]/g,'').slice(0,max);\nconst gql=s=>s.replace(/\\{/g,'{ ').replace(/\\}/g,' }');\nconst hash=s=>{let n=2166136261;for(const c of s){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return(n>>>0).toString(36);};\nconst classify=(r,{provider=false}={})=>{\n if(!r||typeof r!=='object')return null;\n if(r.__centralFailure)return r.__centralFailure;\n if(r.body&&typeof r.body==='object')r={...r,...r.body};\n if(r.duplicate===true)return {code:'duplicate_lead',message:'Duplicate lead execution stopped',httpStatus:200};\n const raw=r.error;\n const status=Number(r.statusCode||r.httpCode||r.status||r.error?.httpCode||r.error?.statusCode||(/^\\d{3}\\b/.exec(raw?.message||'')||[])[0]);\n const key=typeof raw==='string'?raw:String(raw?.code||'');\n if(status===429||['4','17','32','613','80007','130429'].includes(key))return {code:'api_rate_limit',message:'API rate limit reached',httpStatus:429};\n if([401,403].includes(status)||['190','key','bad_body','bad_key','bad_event_id','rejected','unknown_campaign','conflicting_product','idempotency_unverified','idempotency_conflict','idempotency_mismatch','idempotency_store_invalid'].includes(key))return {code:'security_violation',message:clean(typeof raw==='string'?raw:raw?.message||'Security guard rejected execution'),httpStatus:status>=400&&status<600?status:403};\n if(Array.isArray(r.errors)&&r.errors.length){\n  const rate=r.errors.some(e=>/rate|complexity|limit|budget/i.test(String(e.extensions?.code||e.extensions?.error_code||e.message||'')));\n  return {code:rate?'api_rate_limit':'provider_error',message:rate?'API rate limit reached':'Provider returned GraphQL errors',httpStatus:rate?429:502};\n }\n if(raw&&(provider||typeof raw==='object'))return {code:'provider_error',message:clean(typeof raw==='string'?raw:raw.message||'Provider request failed'),httpStatus:502};\n return null;\n};\nfunction prepare(input,{campaign:c,global:g,state,selfId,now}){\n const wf=input?.workflow||{},ex=input?.execution||{},err=ex.error||input?.trigger?.error||{};\n const wfId=String(wf.id||'');\n if(!Object.values(g.bindings).includes(wfId)||wfId===String(selfId)||wfId===String(g.workflowId))return null;\n if(!err||typeof err!=='object')return null;\n const executionId=id(String(ex.id||'')),lastNode=clean(ex.lastNodeExecuted||'Trigger',200),message=clean(err.message||'Unknown workflow failure');\n // n8n's Code sandbox does not expose the browser URL constructor. Accept only the exact internal execution path.\n const expected=g.n8nBaseUrl.replace(/\\/$/,'')+'/workflow/'+encodeURIComponent(wfId)+'/executions/'+executionId;\n const url=executionId&&typeof ex.url==='string'&&ex.url.split(/[?#]/,1)[0]===expected?expected:'';\n const triggerStamp=Number(err.timestamp);\n const suffix=executionId||hash(JSON.stringify([lastNode,message,Number.isFinite(triggerStamp)?triggerStamp:Math.floor(now/300000)]));\n const key='n8n-'+wfId+'-'+suffix;\n if(!state.handled||typeof state.handled!=='object'||Array.isArray(state.handled))state.handled={};\n const cutoff=now-g.retentionHours*3600000;\n for(const [k,v]of Object.entries(state.handled))if(!Number.isFinite(v?.at)||v.at<cutoff)delete state.handled[k];\n if(state.handled[key])return null;\n const metadata=err.context?.metadata;\n const trusted=lastNode===g.controlledStopNode&&metadata?.schema==='central-error-v1'&&metadata.workflowId===wfId&&String(metadata.boardId)===String(c.board)&&metadata.verifiedItem===true;\n const itemId=trusted?id(String(metadata.itemId||metadata.pulseId||'')):null;\n const workflowName=clean(wf.name||wfId,160).replace(/[\\r\\n]/g,' ');\n const body=['שם התהליך: '+workflowName,'מזהה התהליך: '+wfId,'הרכיב שנכשל: '+lastNode,'הודעת השגיאה: '+message,'מזהה הרצה: '+(executionId||'Trigger'),'קישור להרצה ב-n8n: '+(url||'לא זמין'),'מזהה פריט מאומת: '+(itemId||'אין')].join('\\n');\n const columns={[c.columns.status]:{label:c.errorHandling.statusLabel},[c.intake.columns.eventId]:key,[c.intake.columns.answers]:{text:body}};\n if(c.intake.columns.assignee&&c.intake.assignees?.length)columns[c.intake.columns.assignee]={personsAndTeams:c.intake.assignees};\n const updateValues={[c.columns.status]:{label:c.errorHandling.statusLabel},[c.columns.next]:{}};\n return {key,workflow:{id:wfId,name:workflowName},execution:{id:executionId,url,lastNodeExecuted:lastNode,error:{message}},lastNode,message,itemId,subject:g.subjectPrefix+workflowName,body,\n  lookupRequest:itemId?{query:gql('query($ids:[ID!]!){items(ids:$ids){id state board{id} column_values(ids:'+JSON.stringify([c.columns.status,c.columns.stage])+'){id text}}}'),variables:{ids:[itemId]}}:null,\n  updateRequest:itemId?{query:gql('mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v,create_labels_if_missing:true){id}}'),variables:{b:String(c.board),i:itemId,v:JSON.stringify(updateValues)}}:null,\n  createRequest:{query:gql('mutation($b:ID!,$g:String!,$name:String!,$vals:JSON!){create_item(board_id:$b,group_id:$g,item_name:$name,column_values:$vals,create_labels_if_missing:true){id}}'),variables:{b:String(c.board),g:c.intake.group,name:c.errorHandling.alertNamePrefix+workflowName+' '+(executionId||'Trigger'),vals:JSON.stringify(columns)}}};\n}\nfunction canUpdate(response,a,c){\n if(response?.errors?.length||!a?.itemId||!Array.isArray(response?.data?.items)||response.data.items.length!==1)return false;\n const item=response.data.items[0],cv=Object.fromEntries((item.column_values||[]).map(x=>[x.id,x.text]));\n return String(item.id)===a.itemId&&String(item.board?.id)===String(c.board)&&item.state==='active'&&Object.hasOwn(cv,c.columns.status)&&Object.hasOwn(cv,c.columns.stage)&&!c.errorHandling.protectedStatusLabels.includes(cv[c.columns.status])&&cv[c.columns.stage]!==c.stages.paid;\n}\nfunction finish(response,mail,a,state,now){\n const updated=id(String(response?.data?.change_multiple_column_values?.id||'')),created=id(String(response?.data?.create_item?.id||''));\n if(response?.errors?.length||(!created&&(!updated||updated!==a.itemId)))throw Error('Monday error handling write not confirmed');\n if(mail?.error||!mail?.id)throw Error('Error alert email not confirmed; Monday receipt exists');\n state.handled=state.handled||{};state.handled[a.key]={at:now,itemId:created||updated,mailId:String(mail.id)};\n const keys=Object.keys(state.handled).sort((x,y)=>state.handled[y].at-state.handled[x].at);\n for(const key of keys.slice(2000))delete state.handled[key];\n return {handled:true,key:a.key,itemId:created||updated,action:created?'created_alert':'stopped_item',emailAccepted:true};\n}\n\n\nreturn [{json:finish($input.first().json,$(\"Send Email\").first().json,$(\"Prepare alert\").first().json,$getWorkflowStaticData(\"global\"),Date.now())}];"
+      }
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare alert": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Email": {
+      "main": [
+        [
+          {
+            "node": "Has item id?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has item id?": {
+      "main": [
+        [
+          {
+            "node": "Read Monday target",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Monday Create Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Monday target": {
+      "main": [
+        [
+          {
+            "node": "Validate Monday target",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Monday target": {
+      "main": [
+        [
+          {
+            "node": "Safe target?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Safe target?": {
+      "main": [
+        [
+          {
+            "node": "Monday Update Item",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Monday Create Item",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monday Update Item": {
+      "main": [
+        [
+          {
+            "node": "Confirm handling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Monday Create Item": {
+      "main": [
+        [
+          {
+            "node": "Confirm handling",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all"
+  },
+  "pinData": {}
+}

@@ -4,6 +4,19 @@ execFileSync('node',[D+'/build-workflows.js','test']);
 const wfs=['engine-test','go','calendly'].map(f=>require(D+'/dist/'+f+'.json'));
 const instantWf=require(D+'/dist/instant-reply-test.json');
 const smsWf=require(D+'/dist/sms-inbound-test.json');
+const afterGuard=(w,name)=>{
+ const guard='Guard provider: '+name,branch=guard+'?';
+ assert.deepEqual(w.connections[name].main[0].map(x=>x.node),[guard]);
+ assert.deepEqual(w.connections[guard].main[0].map(x=>x.node),[branch]);
+ assert.deepEqual(w.connections[branch].main[0].map(x=>x.node),['Stop And Error']);
+ return w.connections[branch].main[1].map(x=>x.node);
+};
+test('engine rebuild retains central error binding and controlled provider failures',()=>{
+ const e=wfs[0],g=require('../../config/error-handler.json');
+ assert.equal(e.settings.errorWorkflow,g.workflowId);
+ assert.ok(e.nodes.some(n=>n.type==='n8n-nodes-base.stopAndError'));
+ assert.deepEqual(afterGuard(e,'Fetch pages'),['Items']);
+});
 
 test('live fallback nodes remain disabled while their credential ids are PENDING',t=>{
   const fs=require('fs'),os=require('os'),root=path.resolve(__dirname,'../..');
@@ -43,7 +56,8 @@ test('SMS phone lookup evaluates to the configured column and all normalized pho
 });
 test('engine Plan carries the CRM field mapping and the channel decision',()=>{const p=wfs[0].nodes.find(x=>x.name==='Plan').parameters.jsCode;assert.match(p,/leadTemperature/);assert.match(p,/nextChannel/);});
 test('a final WhatsApp failure notifies the fallback after the Monday update; SMS and email senders exist only disabled without a provider or in a test build',()=>{const e=wfs[0];
-  assert.deepEqual(e.connections['Update item (sent)'].main[0].map(x=>x.node),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Notify fallback','Fallback channel']);
+  assert.deepEqual(afterGuard(e,'Update item (sent)'),['Fallback?']);assert.deepEqual(e.connections['Fallback?'].main[0].map(x=>x.node),['Error context: Notify fallback','Fallback channel']);
+  assert.deepEqual(e.connections['Error context: Notify fallback'].main[0].map(x=>x.node),['Notify fallback']);
   assert.deepEqual(e.connections['Fallback channel'].main.map(br=>br.map(x=>x.node)),[['Send SMS'],['Send email']]);
   for(const n of e.nodes)if(n.type==='n8n-nodes-base.httpRequest'){
     if(n.name==='Send SMS'||n.name==='Send email'){assert.equal(n.disabled,true,n.name);assert.match(n.parameters.url,/fallbackSend\.request\.url/,n.name);}
@@ -75,7 +89,7 @@ test('Monday pagination requests the next cursor and stops on terminal/error res
     assert.equal(evaluate(p.completeExpression,0,next),false);
     assert.equal(evaluate(p.completeExpression,1,{data:{boards:[{items_page:{items:[],cursor:null}}]}}),true);
     assert.equal(evaluate(p.completeExpression,1,{errors:[{message:'failed'}]}),true);
-    assert.deepEqual(w.connections['Fetch pages'].main[0].map(x=>x.node),['Items']);
+    assert.deepEqual(w===wfs[0]?afterGuard(w,'Fetch pages'):w.connections['Fetch pages'].main[0].map(x=>x.node),['Items']);
     assert.equal(w.nodes.find(n=>n.name==='Items').type,'n8n-nodes-base.code');
   }
 });

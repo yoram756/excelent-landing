@@ -19,6 +19,11 @@
     "יומן"
   ],
   "board": "5106246268",
+  "errorHandling": {
+    "statusLabel": "נעצר / כשל",
+    "protectedStatusLabels": ["הסר", "לקוח"],
+    "alertNamePrefix": "[n8n ERROR] "
+  },
   "columns": {
     "phone": "refi_phone",
     "stage": "refi_stage",

@@ -1,0 +1,17 @@
+{
+  "name": "Central Error Handler",
+  "recipientEmail": "office@kho.org.il",
+  "subjectPrefix": "[EMERGENCY ALERT] n8n Workflow Failed: ",
+  "n8nBaseUrl": "https://n8n-qhxa.srv1604140.hstgr.cloud",
+  "gmailCredentialId": "1H4YGm5Z2UFN4IeE",
+  "mondayCredentialId": "Un7HBqZvldpVYUaB",
+  "workflowId": "4bLJ8LvpNYnoCB8t",
+  "bindings": {
+    "leadIntake": "8W7MymUCLpPnilJs",
+    "lpSignup": "I58fPCQOqTrNrbZw",
+    "whatsappEngine": "ZnIureJBIqYN52Zw"
+  },
+  "controlledStopNode": "Stop And Error",
+  "retentionHours": 168,
+  "maxReceipts": 2000
+}
