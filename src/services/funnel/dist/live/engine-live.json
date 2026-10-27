@@ -767,7 +767,7 @@
    "name": "Send SMS",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
-   "disabled": false,
+   "disabled": true,
    "position": [
     2400,
     -400
@@ -802,7 +802,7 @@
    "name": "Send email",
    "type": "n8n-nodes-base.httpRequest",
    "typeVersion": 4.2,
-   "disabled": false,
+   "disabled": true,
    "position": [
     2400,
     -200

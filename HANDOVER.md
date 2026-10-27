@@ -1,5 +1,63 @@
 # HANDOVER
 
+## מצב נוכחי, 27.10.2026
+
+החלטת מוכנות: BLOCKED. המערכת אינה מוכנה להפעלה. הסעיפים בהמשך הקובץ הם היסטוריים; אישור Build או שדה liveReady בבדיקת תצורה אינם אישור לתפעול בייצור.
+
+היקף הבדיקה הנוכחית הוא קמפיין refi, לוח 5106246268 והענף codex/lock-service-20261025. לא הופעל מנוע live ולא נשלחה הודעת WhatsApp. מספר השליחה לא שונה ולא נותק.
+
+| דרישה | סטטוס | ראיה וגבול האימות |
+|---|---|---|
+| 1.1 שני המפתחות ב־Payload של n8n | PASS | הצומת הפרוס נקרא Save to Monday. תוספת text_mm8c3r4v ו־multiple_person_mm8c8hfp פורסמה ואומתה בבדיקה המתועדת ב־docs/runtime/monday-dry-run-capi-20261027.json |
+| 1.2 יצירה וקריאה חוזרת של שבעה שדות | PASS | n8n יצר TEST מספר 3312154790. Monday החזיר התאמה של 7/7 שדות, כולל TEST_CAPI_EVENT_12345 ואחראי 75075191. קלט סינתטי, כתיבה אמיתית ל־CRM |
+| 1.3 מחיקת הפריט | PASS | delete_item הצליח; קריאה חוזרת החזירה state=deleted והפריט אינו ברשימת הלוח הפעילה |
+| 2.1 טפסים ו־Payload מלא דרך האתר הפרוס | NOT TESTED | מקומית עברו שלושת נתיבי nginx ושמירת גוף הבקשה. בייצור שלוש בקשות ללא טלפון נדחו ב־HTTP 400. לא בוצעה יצירה חיובית דרך האתר הפרוס, ותיקון event_id המקומי טרם נפרס |
+| 2.2 מניעת כפילות לפי event_id בייצור | BLOCKED | התיקון המקומי עבר בדיקות replay ובדיקות שליליות. ב־Workflow הפרוס 8W7MymUCLpPnilJs יש 18 צמתים ואין צומת Lock. לא הוכחה מניעה אטומית בייצור |
+| 3.1 הודעת WhatsApp במסלול Coexistence | BLOCKED | קריאת Meta אמיתית דרך Credential 2392gTlqAQR49WRY החזירה id=1350440204809114, display_phone_number=+972 55-988-1245, is_on_biz_app=false. צומת השליחה נשאר כבוי |
+| 3.2 Delivered ושיוך ההודעה לליד | NOT TESTED | לא נשלחה הודעה ולא התקבל callback. אישור קבלת בקשה אינו הוכחת מסירה |
+| 4.1 Calendly ועדכון פגישה אמיתית ב־Monday | NOT TESTED | Workflow wEYSZMNU2JqeEoGZ נקרא מצב בדיקה בלי סריקת מייל. הצומת Calendly mails אינו מחובר למסלול. Get Many מול notifications@calendly.com ביומיים האחרונים החזיר פריט ריק; אין אירוע אמיתי שניתן לאמת |
+| 4.2 שידור Conversion Event ל־Meta CAPI | BLOCKED | לא סופקו Dataset או Pixel, חיבור שידור מתאים ו־test_event_code. שמירת CAPI Event ID ב־CRM אינה הוכחת שידור |
+| 5.1 Build של pilot ושל live | PASS | שישה קבצים לכל מצב, מהם חמישה Workflows ומילון מוצרים. docs/runtime/pilot-artifacts-20261027.json מכיל SHA256 ובדיקת תחביר, קישורים ושיוך Meta |
+| 5.2 כל הסוויטה המקומית | PASS | npm test, exit 0: מנוע וקליטה 354/354, אתר 59/59, nginx אמיתי 2/2. סך הכול 415/415. שירותים חיצוניים בבדיקות המקומיות מדומים |
+| 5.3א בדיקות מקומיות וסודות | PASS | סוויטה מלאה וסריקת secrets עברו. לא נכתבו access tokens לקוד. Credential ID אינו מפתח API |
+| 5.3ב ניקוי פריטי הבדיקה הנוכחית | PASS | הפריטים 3312144932 ו־3312154790 נמחקו. ברשימה המלאה של הלוח, cursor=null, אין שמות המתחילים ב־TEST |
+| 5.3ג היעדר כל רשומת בדיקה היסטורית | BLOCKED | קיימת רשומה קודמת 3291304369 בשם בדיקה CHG018c. היא קדמה להרצה ולא נמחקה כהשערה. דרושה הכרעה אם זו רשומה לשימור או למחיקה |
+| 5.4 commit ו־push לענף המבוקש | PASS | c5bae8d ומיזוג b1eac9f נדחפו ל־origin/codex/lock-service-20261025, exit 0. התיקון האחרון והדוחות נמסרים ב־commit ההשלמה; יש להשוות HEAD ל־ls-remote אחרי ה־push |
+| 5.5 דוח מוכנות והכרזת Go Live | BLOCKED | הדוחות נוצרו. החוסמים לעיל אינם מאפשרים הכרזת GO-LIVE READY |
+
+### שינויים בקוד
+
+1. הטפסים שולחים event_id יציב השווה למפתח הבקשה. retry ללא שינוי תוכן שומר על אותו מזהה.
+2. Validate משתמש ב־event_id או eventId כמפתח replay, דוחה מזהים לא תקינים או סותרים, ושומר תאימות לבקשות ישנות. שימוש חוזר במזהה עבור נמען או תוכן שונים נדחה.
+3. Build mutation מעביר את מזהה האירוע אל ביטוי ה־Payload. מיפויי העמודות והאחראי נשארים בתצורת הקמפיין.
+4. מצב test אינו יורש את חיבור Meta החי מהסביבה. Credentials שמתחילים ב־PENDING משאירים את צומת הספק כבוי, בהתאם לדחיית SMS ומייל.
+5. הבנאי כותב גם לתיקיות pilot ו־live, ובדיקת nginx הותאמה לנתיבי Windows בלי לשנות את בדיקות הבידוד.
+
+### בדיקה עצמית חוזרת
+
+```powershell
+$env:META_WA_PHONE_NUMBER_ID="1350440204809114"
+$env:META_WA_CREDENTIAL_ID="2392gTlqAQR49WRY"
+# יש להגדיר NGINX_BINARY לקובץ nginx מותקן לפני npm test
+npm test
+node src/deploy/package.js
+node src/services/funnel/build-workflows.js pilot 2026-10-26T16:08:56.417Z 972502234052
+node src/services/funnel/build-workflows.js live 2026-10-26T16:08:56.417Z
+node src/services/funnel/build-workflows.js test
+node --test tests/funnel/secrets.test.js
+git diff --check
+```
+
+תאריך החיתוך בבנייה נשמר מה־release הקודם; הוא אינו אישור להפעלה. המענה המיידי נשאר כבוי בתצורת הקמפיין. consolidation נשאר טיוטה ואינו נכלל באישור כלשהו.
+
+בדיקות שליליות: שני מבחני event_id נכשלו מול הקוד הישן; הסרת event_id מהטפסים הכשילה ארבע בדיקות דפדפן; צומת fallback פעיל עם Credential מסוג PENDING הכשיל את המבחן החדש; בדיקת nginx מזהה את נתיב ה־staging השגוי. לא הוסרו assertions כדי להשיג הצלחה.
+
+להשלמה נדרשים אימות Coexistence וקבלת Delivered אמיתי, חיבור Lock והמקורות המעודכנים ל־Intake, פריסת האתר לאחר בדיקת nginx במכולה זמנית, אירוע Calendly אמיתי ושידור CAPI עם קבלה תואמת. נדרשים כינוי SSH ונתיב המאגר לפריסה, וכן פרטי חיבור CAPI שאינם סודיים. אין לשלוח מפתח סודי בצ'אט.
+
+הקובץ PILOT_READINESS.md והראיה docs/runtime/pilot-readiness-20261027.json מרכזים את ההחלטה. שינויי Cosend וה־hook שהיו בתיקייה לפני המשימה אינם כלולים ב־commit של המשפך.
+
+## תיעוד היסטורי
+
 History on main: TASK-01 282f73a, TASK-02 1e5143a, TASK-03 9d3cab7, TASK-04 b7fc051, TASK-05 5f50816, TASK-06 bba0efb, TASK-07 caaf845. Full overview: FINAL_HANDOVER.md. The deploy steps below replace section 4 of FINAL_HANDOVER.md.
 
 ## TASK-08 Production readiness and deployment package (2026-10-24)

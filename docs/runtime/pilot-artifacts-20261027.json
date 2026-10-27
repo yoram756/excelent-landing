@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-27T11:59:27.725Z",
+  "at": "2026-10-27T12:12:58.532Z",
   "status": "PASS",
   "scope": "Local artifact syntax, connections, inactive flag and Meta binding only",
   "goLiveReady": false,
@@ -37,7 +37,7 @@
     {
       "file": "src/services/funnel/dist/live/engine-live.json",
       "nodes": 29,
-      "sha256": "53d6f5a998f38c86c5148b8c2f4799a0577f56e57d3a6a58014d544350a15fcf"
+      "sha256": "2b94d559c7c0ff535862cda4653d61937f54847a1adb9ed4ad5365b735e5caca"
     },
     {
       "file": "src/services/funnel/dist/live/go.json",
@@ -55,14 +55,5 @@
       "sha256": "10a064a62b83b3e2db97a20b0dbbca950c2abd1d90a56f177179a650e310975a"
     }
   ],
-  "enabledPendingCredentials": [
-    {
-      "file": "src/services/funnel/dist/live/engine-live.json",
-      "node": "Send SMS"
-    },
-    {
-      "file": "src/services/funnel/dist/live/engine-live.json",
-      "node": "Send email"
-    }
-  ]
+  "enabledPendingCredentials": []
 }

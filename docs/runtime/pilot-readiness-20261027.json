@@ -1,0 +1,227 @@
+{
+  "at": "2026-10-27T12:13:54.799Z",
+  "status": "BLOCKED",
+  "goLiveReady": false,
+  "branch": "codex/lock-service-20261025",
+  "baseCodeCommit": "b1eac9fe720d16de49952275d81fd35d999bdeb3",
+  "requirements": [
+    {
+      "id": "1.1",
+      "status": "PASS",
+      "evidence": "Published n8n Save to Monday payload; see monday-dry-run-capi-20261027.json"
+    },
+    {
+      "id": "1.2",
+      "status": "PASS",
+      "evidence": "Synthetic node input; actual Monday create and 7/7 readback, item 3312154790"
+    },
+    {
+      "id": "1.3",
+      "status": "PASS",
+      "evidence": "Deletion read back as deleted; absent from active board"
+    },
+    {
+      "id": "2.1",
+      "status": "NOT TESTED",
+      "evidence": "Local nginx and browser payload checks passed; production negative requests returned 400. Positive full deployed form submission not run; event_id changes not deployed"
+    },
+    {
+      "id": "2.2",
+      "status": "BLOCKED",
+      "evidence": "Local event_id replay regression passed. Published production intake has no Lock node and new sources are not deployed"
+    },
+    {
+      "id": "3.1",
+      "status": "BLOCKED",
+      "evidence": "Actual Meta sender GET returned is_on_biz_app=false; no send attempted"
+    },
+    {
+      "id": "3.2",
+      "status": "NOT TESTED",
+      "evidence": "No message sent, no Delivered callback or message-to-CRM receipt"
+    },
+    {
+      "id": "4.1",
+      "status": "NOT TESTED",
+      "evidence": "Deployed Calendly mail node disconnected; manual Get Many returned an empty item, not a real appointment"
+    },
+    {
+      "id": "4.2",
+      "status": "BLOCKED",
+      "evidence": "Dataset/Pixel, CAPI sending connection and test_event_code not supplied"
+    },
+    {
+      "id": "5.1",
+      "status": "PASS",
+      "evidence": "12 rebuilt release files: 10 workflow JSONs plus two product dictionaries; compiled and Meta binding checked"
+    },
+    {
+      "id": "5.2",
+      "status": "PASS",
+      "evidence": "npm test exit 0: 354 funnel, 59 browser, 2 real local nginx; 415 total; external transports simulated in local tests"
+    },
+    {
+      "id": "5.3.tests",
+      "status": "PASS",
+      "evidence": "All local tests passed; meaningful negative controls recorded"
+    },
+    {
+      "id": "5.3.secrets",
+      "status": "PASS",
+      "evidence": "secrets.test.js exit 0, 3/3; current source and staged deliverables, not an all-history audit"
+    },
+    {
+      "id": "5.3.currentTestCleanup",
+      "status": "PASS",
+      "evidence": "Both current TEST items deleted; complete active board page had no TEST-prefixed names"
+    },
+    {
+      "id": "5.3.allHistoricalTestCleanup",
+      "status": "BLOCKED",
+      "evidence": "Pre-existing item 3291304369 named בדיקה CHG018c was not deleted by assumption"
+    },
+    {
+      "id": "5.3.dist",
+      "status": "PASS",
+      "evidence": "No enabled PENDING credential; test builds carry no live Meta credential"
+    },
+    {
+      "id": "5.4",
+      "status": "PASS",
+      "evidence": "Code commits c5bae8d and merge b1eac9f pushed to origin/codex/lock-service-20261025 with exit 0; final reporting commit pushed separately"
+    },
+    {
+      "id": "5.5",
+      "status": "BLOCKED",
+      "evidence": "Reports delivered; GO-LIVE READY declaration withheld because required production evidence is missing"
+    }
+  ],
+  "localTests": {
+    "command": "npm test",
+    "exitCode": 0,
+    "funnel": 354,
+    "site": 59,
+    "nginx": 2,
+    "total": 415,
+    "failed": 0,
+    "logSha256": "2280abf5e27f22a79ef3370689d51c8f4cc6d7fe3821d9cef32fdf6aba707c71"
+  },
+  "negativeControls": {
+    "intakeBeforeFix": {
+      "exitCode": 1,
+      "failed": 2
+    },
+    "siteWithoutEventId": {
+      "exitCode": 1,
+      "failed": 4,
+      "logSha256": "8a9811016b34973f0a4d2f7bc38c04a30cf4475420dee0d71de7dbdd1883cf6e"
+    },
+    "pendingCredentialBeforeFix": {
+      "exitCode": 1,
+      "failed": 1
+    },
+    "nginxOriginalStagingDefect": "detected by the negative control in routing.test.js"
+  },
+  "metaPreflight": {
+    "workflowId": "saKuHqTDTBepgzcL",
+    "phoneNumberId": "1350440204809114",
+    "displayPhoneNumber": "+972 55-988-1245",
+    "is_on_biz_app": false,
+    "sendDisabled": true,
+    "sent": false
+  },
+  "productionIntake": {
+    "workflowId": "8W7MymUCLpPnilJs",
+    "nodes": [
+      "Lead webhook",
+      "Validate",
+      "Needs save?",
+      "Reply early",
+      "Find query",
+      "Find by phone",
+      "Build mutation",
+      "Save to Monday",
+      "Check save",
+      "Saved?",
+      "Reply saved",
+      "Reply failed",
+      "Alert query",
+      "Who am I",
+      "Alert Yoram",
+      "Email alert",
+      "WhatsApp recipients",
+      "WhatsApp alert"
+    ],
+    "lockInstalled": false
+  },
+  "publicRoutes": [
+    {
+      "route": "/api/lead",
+      "httpStatus": 400,
+      "response": "{\"error\":\"unknown_product\"}",
+      "request_id": "TEST-route-lead-20261027",
+      "expected": "validation rejection; no valid phone or consent supplied"
+    },
+    {
+      "route": "/api/club",
+      "httpStatus": 400,
+      "response": "{\"error\":\"phone\"}",
+      "request_id": "TEST-route-club-20261027",
+      "expected": "validation rejection; no valid phone or consent supplied"
+    },
+    {
+      "route": "/api/partner",
+      "httpStatus": 400,
+      "response": "{\"error\":\"phone\"}",
+      "request_id": "TEST-route-partner-20261027",
+      "expected": "validation rejection; no valid phone or consent supplied"
+    }
+  ],
+  "calendly": {
+    "workflowId": "wEYSZMNU2JqeEoGZ",
+    "mailNodeConnected": false,
+    "filter": "from:notifications@calendly.com newer_than:2d",
+    "manualResult": "empty_item",
+    "productionAppointmentVerified": false
+  },
+  "artifacts": {
+    "manifest": "docs/runtime/pilot-artifacts-20261027.json",
+    "workflowCount": 10,
+    "enabledPendingCredentials": 0,
+    "activationPerformed": false
+  },
+  "sourceHashes": {
+    "src/webhooks/intake/validate.js": "5f3a7a2f9f67cbde3ebf3f12b0cf80aad218f6d0dffcd0b8af1dad216f208440",
+    "src/webhooks/intake/build-mutation.js": "5ba02b9aad62234751d98a4262014ac73f140c7cd2961853e5b0c9f060b57c3a",
+    "src/webhooks/intake/monday-payload.js": "a6216a7f8d0f9bcae2e3f7c8c9cd58366121d91b2a79bf7781053554767838b6",
+    "src/services/funnel/build-workflows.js": "f6d5c402144faa7f35c7c6154f74b3a0ea5c4c8a04d0d11ba4bc7cd1653daaca",
+    "site/lp1v2/assets/v2.js": "9064c4aa376400058d4796e21821846936ee539d286b16331ba61cdaeaafb778",
+    "site/lp1v2/assets/partners.js": "a6a09ea518ecafecc0151c16cadcda693b0978216822b4056772e11b90ba4680"
+  },
+  "testCleanup": {
+    "boardId": "5106246268",
+    "currentTestItems": [
+      "3312144932",
+      "3312154790"
+    ],
+    "deleted": true,
+    "activeTestPrefixItems": 0,
+    "pageComplete": true,
+    "historicalRecordRequiresReview": {
+      "id": "3291304369",
+      "name": "בדיקה CHG018c"
+    }
+  },
+  "notDeployed": [
+    "LP1 v2 event_id source update",
+    "updated intake sources and Lock wiring",
+    "live engine activation"
+  ],
+  "missingExternalConfiguration": [
+    "Coexistence confirmation",
+    "real Delivered callback",
+    "SSH alias and repository path for controlled deployment",
+    "real Calendly appointment receipt and CRM update",
+    "CAPI Dataset/Pixel, sending connection and test_event_code"
+  ]
+}

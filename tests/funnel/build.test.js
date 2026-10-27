@@ -4,6 +4,22 @@ execFileSync('node',[D+'/build-workflows.js','test']);
 const wfs=['engine-test','go','calendly'].map(f=>require(D+'/dist/'+f+'.json'));
 const instantWf=require(D+'/dist/instant-reply-test.json');
 const smsWf=require(D+'/dist/sms-inbound-test.json');
+
+test('live fallback nodes remain disabled while their credential ids are PENDING',t=>{
+  const fs=require('fs'),os=require('os'),root=path.resolve(__dirname,'../..');
+  const temporaryRoot=fs.mkdtempSync(path.join(os.tmpdir(),'funnel-live-build-'));
+  t.after(()=>{assert.ok(path.resolve(temporaryRoot).startsWith(path.resolve(os.tmpdir())+path.sep+'funnel-live-build-'));fs.rmSync(temporaryRoot,{recursive:true,force:true});});
+  fs.cpSync(root+'/src',temporaryRoot+'/src',{recursive:true,filter:p=>!/[\\/](dist|runtime)([\\/]|$)/.test(p)});
+  fs.cpSync(root+'/config',temporaryRoot+'/config',{recursive:true});
+  const temporaryD=temporaryRoot+'/src/services/funnel';
+  execFileSync('node',[temporaryD+'/build-workflows.js','live','2026-10-26T16:08:56.417Z'],{env:{...process.env,CAMPAIGN:'refi',META_WA_PHONE_NUMBER_ID:'100000000000001',META_WA_CREDENTIAL_ID:'TestMetaCred01'},stdio:'pipe'});
+  const live=JSON.parse(fs.readFileSync(temporaryD+'/dist/live/engine-live.json','utf8'));
+  for(const name of ['Send SMS','Send email']){
+    const n=live.nodes.find(n=>n.name===name);
+    assert.ok(n.credentials.httpHeaderAuth.id.startsWith('PENDING'));
+    assert.equal(n.disabled,true,name+' cannot run without a real credential');
+  }
+});
 test('SMS inbound: every placeholder injected, every connection valid, opt-out writes only after a match',()=>{const names=new Set(smsWf.nodes.map(x=>x.name));
   for(const x of smsWf.nodes)if(x.type==='n8n-nodes-base.code')assert.doesNotMatch(x.parameters.jsCode,/__(CONFIG|BUSINESS|TEXTME|FALLBACK)__/,x.name);
   for(const [a,c] of Object.entries(smsWf.connections)){assert.ok(names.has(a),a);for(const br of c.main)for(const x of br)assert.ok(names.has(x.node),x.node);}
