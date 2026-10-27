@@ -1,0 +1,116 @@
+{
+  "updatedAt": "2026-10-27",
+  "overall": "BLOCKED",
+  "mode": "sandbox",
+  "dispatchEnabled": false,
+  "repo": "C:/Users/User/excelent-landing",
+  "nextAction": "Verify Blueticks read access; verify Monday personal identities and private n8n service path before live ingestion",
+  "stages": [
+    {
+      "id": 1,
+      "name": "connection_and_responsibility_mapping",
+      "status": "BLOCKED",
+      "evidence": "README.md: current-session capability matrix; Blueticks and personal Monday identity remain unverified"
+    },
+    {
+      "id": 2,
+      "name": "ingestion_and_identity",
+      "status": "BLOCKED",
+      "evidence": "Local SQLite and loopback HTTP tests PASS. No recurring live source ingestion"
+    },
+    {
+      "id": 3,
+      "name": "task_extraction_and_monday",
+      "status": "BLOCKED",
+      "evidence": "Local reviewed structured observations PASS; real Monday sandbox projection 3/3 PASS; model and production task writes absent"
+    },
+    {
+      "id": 4,
+      "name": "ownership_and_internal_updates",
+      "status": "BLOCKED",
+      "evidence": "Logical single owners and unsent digests PASS; People mapping and internal delivery not tested"
+    },
+    {
+      "id": 5,
+      "name": "response_preparation",
+      "status": "PASS",
+      "evidence": "Local draft planning with recipient/context checks, availability gate and one channel; no outbound transport"
+    },
+    {
+      "id": 6,
+      "name": "authorized_automatic_actions",
+      "status": "BLOCKED",
+      "evidence": "New source worker not deployed; WhatsApp policy remains read/draft only"
+    }
+  ],
+  "validation": {
+    "operations": {
+      "status": "PASS",
+      "command": "npm run test:business-ops",
+      "exitCode": 0,
+      "passed": 15,
+      "log": "tests/out/business-ops-20261027/ops-final.log"
+    },
+    "fullRepository": {
+      "status": "PASS",
+      "command": "npm test",
+      "exitCode": 0,
+      "scope": "Full run included 14 operations tests, 366 funnel, 59 site, 2 nginx. Following canonical-link-only adjustment, operations suite rerun with 15/15.",
+      "passed": 441,
+      "log": "tests/out/business-ops-20261027/npm-test-serial.log",
+      "environment": "Existing Meta identifiers (not tokens), existing nginx executable, TEMP/TMP inside workspace"
+    },
+    "negativeControls": {
+      "status": "PASS",
+      "command": "node tests/business-ops/mutation-check.js",
+      "exitCode": 0,
+      "killed": 2
+    },
+    "monday": {
+      "status": "PASS",
+      "scope": "one synthetic sandbox item, local processing and orchestrated connector writes, not a deployed end-to-end worker",
+      "versionsVerified": 3,
+      "itemId": "3313413683",
+      "evidence": "../runtime/business-ops-monday-20261027.json"
+    },
+    "n8n": {
+      "status": "NOT TESTED",
+      "scope": "Generated inactive import artifact. Local boundary and receipt guards tested; no deployment or runtime execution"
+    },
+    "secrets": {
+      "status": "PASS",
+      "command": "node --test tests/funnel/secrets.test.js",
+      "exitCode": 0,
+      "passed": 3
+    }
+  },
+  "metrics": {
+    "productionAccuracy": null,
+    "productionResponseTime": null,
+    "productionManualInterventions": null,
+    "syntheticTasks": 2,
+    "syntheticCompletedTasks": 1,
+    "syntheticRemainingTasks": 1,
+    "semanticDuplicateRate": null
+  },
+  "knownFailures": [
+    {
+      "status": "FAIL",
+      "scope": "first full test attempt",
+      "reason": "nginx denied access to OS temporary directory",
+      "resolution": "Rerun with workspace TEMP/TMP passed, no web configuration changes"
+    },
+    {
+      "status": "FAIL",
+      "scope": "second full test attempt",
+      "reason": "Existing concurrent fixtures copied src while _tmp_test.json was removed",
+      "resolution": "Funnel test files now run with --test-concurrency=1; full suite passed"
+    }
+  ],
+  "repositoryCheckpoint": {
+    "status": "BLOCKED",
+    "filesSaved": true,
+    "commitCreated": false,
+    "reason": "git add could not create .git/index.lock: Permission denied. No permission changes or escalation attempted."
+  }
+}

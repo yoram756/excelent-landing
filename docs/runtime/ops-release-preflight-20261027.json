@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-27",
+  "scope": "Operations sandbox release only; LP1 v2 and CAPI are regression checks, not permission to enable messaging or CAPI production delivery",
+  "branch": "codex/lock-service-20261025",
+  "baseCommit": "5f106c3852ac20cdd1ab31a2cf233ad793959e1e",
+  "baseTree": "77c35fe38000653fd51f71cca62a25d68191add1",
+  "files": [
+    ".env.example",
+    ".env.production.example",
+    "HANDOVER.md",
+    "package.json",
+    "src/deploy/package.js",
+    "config/business-ops.json",
+    "docs/business-ops/README.md",
+    "docs/business-ops/status.json",
+    "docs/runtime/business-ops-monday-20261027.json",
+    "scripts/business-ops-demo.js",
+    "src/services/business-ops/EXTRACTION_PROMPT.txt",
+    "src/services/business-ops/build-workflow.js",
+    "src/services/business-ops/monday.js",
+    "src/services/business-ops/response-plan.js",
+    "src/services/business-ops/server.js",
+    "src/services/business-ops/store.js",
+    "src/services/business-ops/workflow.draft.json",
+    "tests/business-ops/mutation-check.js",
+    "tests/business-ops/operations.test.js",
+    "tests/business-ops/response.test.js",
+    "tests/business-ops/scenario.js",
+    "tests/business-ops/server.test.js",
+    "tests/business-ops/workflow.test.js"
+  ],
+  "excluded": [
+    "deploy/nginx.conf local CRO include",
+    "tests/deploy/routing.test.js local CRO tests",
+    "apps/refi-landing",
+    "site/refi-cro",
+    "config/landing",
+    "Cosend changes",
+    ".claude and CLAUDE changes",
+    "unrelated funnel generated exports"
+  ],
+  "review": {
+    "status": "PASS",
+    "fixes": [
+      "Bind historical Monday acknowledgement to the exact verified item",
+      "Reject non-synthetic case/customer/participant identifiers before a sandbox request",
+      "Validate projection size before reserving the case queue"
+    ],
+    "secrets": "PASS in isolated candidate, no credentials included"
+  },
+  "tests": {
+    "status": "PASS",
+    "command": "npm test",
+    "exitCode": 0,
+    "operations": 16,
+    "funnel": 366,
+    "site": 59,
+    "nginx": 2,
+    "total": 443,
+    "log": "tests/out/ops-release-20261027/npm-test-candidate.log",
+    "environment": "Candidate from base git archive plus exact allowlist; workspace temporary directory and existing nginx binary"
+  },
+  "build": {
+    "status": "PASS",
+    "commands": [
+      "node src/deploy/package.js",
+      "node src/services/business-ops/build-workflow.js",
+      "node tests/business-ops/mutation-check.js"
+    ],
+    "exitCode": 0,
+    "scope": "test workflow artifacts and inactive ops draft only"
+  },
+  "publication": {
+    "status": "NOT TESTED",
+    "transport": "GitHub connector planned because local .git and CLI network access are blocked"
+  },
+  "deployment": {
+    "status": "NOT TESTED",
+    "observedRepository": "/docker/lp",
+    "observedBranch": "release/lp1-funnel-hardening-20261020",
+    "observedCommit": "b7fbd76967cf60d3b79cb9cd6a7f8b413d44af77",
+    "localChanges": "Existing staging nginx override and untracked staging/auth setup files; must preserve",
+    "imageId": "sha256:65645c7bb6a0661892a8b038b9d0743208a18dd2f3f17a54ef4b76b8ef2a10"
+  },
+  "postDeploy": {
+    "lp1v2": "NOT TESTED",
+    "capiEventId": "NOT TESTED",
+    "metaDelivery": "BLOCKED: dataset/pixel, test code and existing credentials have not been verified"
+  },
+  "rollback": {
+    "status": "NOT TESTED",
+    "required": "Record running commit/image; archive existing runtime files and staging override before any pull; test restored nginx before restart"
+  }
+}

@@ -1,0 +1,15 @@
+'use strict';
+// Integration artifact only. The existing WA receiver/CRM worker stays unchanged.
+const fs=require('node:fs'),path=require('node:path');
+function build(){return {
+ name:'DRAFT Excellent case operations intake NO MESSAGES',active:false,
+ nodes:[
+  {id:'ops-input',name:'Verified normalized source event',type:'n8n-nodes-base.executeWorkflowTrigger',typeVersion:1.1,position:[0,0],parameters:{inputSource:'passthrough'}},
+  {id:'ops-validate',name:'Business event boundary',type:'n8n-nodes-base.code',typeVersion:2,position:[260,0],parameters:{jsCode:"const rows=$input.all(); for(const r of rows){const e=r.json;if(e.scope!=='business'||!['transkriptor','gmail','whatsapp','calendar','drive','manual'].includes(e.source)||typeof e.id!=='string'||typeof e.text!=='string'||typeof e.url!=='string')throw Error('Normalized business source event required'); if(e.observations||e.token||e.authorization||e.verified)throw Error('Source cannot grant authority');} return rows;"}},
+  {id:'ops-ingest',name:'Durable ingestion CONFIGURE PRIVATE SERVICE AND INGEST CREDENTIAL',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[520,0],disabled:true,parameters:{method:'POST',url:'http://127.0.0.1:8791/events',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:'={{ $json }}',options:{timeout:10000}}},
+  {id:'ops-receipt',name:'Require ingestion receipt',type:'n8n-nodes-base.code',typeVersion:2,position:[780,0],parameters:{jsCode:"return $input.all().map(r=>{if(typeof r.json.eventKey!=='string'||!r.json.resolution)throw Error('No durable ingestion receipt; do not advance source cursor');return r;});"}}
+ ],connections:{'Verified normalized source event':{main:[[{node:'Business event boundary',type:'main',index:0}]]},'Business event boundary':{main:[[{node:'Durable ingestion CONFIGURE PRIVATE SERVICE AND INGEST CREDENTIAL',type:'main',index:0}]]},'Durable ingestion CONFIGURE PRIVATE SERVICE AND INGEST CREDENTIAL':{main:[[{node:'Require ingestion receipt',type:'main',index:0}]]}},settings:{executionOrder:'v1',saveDataSuccessExecution:'none',saveDataErrorExecution:'none',saveManualExecutions:false},
+ meta:{status:'BLOCKED',reason:'Private service reachability and ingest-only credential are not verified. HTTP node disabled. No source cursor or production worker changed.'}
+};}
+if(require.main===module){const output=path.resolve(__dirname,'workflow.draft.json');fs.writeFileSync(output,JSON.stringify(build(),null,2)+'\n');console.log(JSON.stringify({output,status:'build_only',active:false}));}
+module.exports={build};

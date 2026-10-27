@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "mode": "sandbox",
+  "timezone": "Asia/Jerusalem",
+  "authority": {
+    "outbound": "draft_only",
+    "whatsappMutations": false,
+    "externalSend": false,
+    "professionalDecisions": "human",
+    "productionWrites": false
+  },
+  "monday": {
+    "customerBoard": "5105009813",
+    "caseBoard": "5106315262",
+    "sandbox": {
+      "boardId": "5106494186",
+      "groupId": "topics",
+      "markerColumn": "text_mm8cgqcw",
+      "snapshotColumn": "long_text_mm8c7vr",
+      "statusColumn": "color_mm8c4hcq",
+      "labels": {"open": "Working on it", "blocked": "Stuck", "completed": "Done"}
+    }
+  },
+  "responsibility": {
+    "neria": {"mondayUserId": null, "mappingStatus": "BLOCKED", "role": "case_operations_proposed"},
+    "yoram": {"mondayUserId": null, "mappingStatus": "NOT TESTED", "role": "professional_review_proposed"}
+  },
+  "alerts": {"delivery": "draft_only", "digestLocalTime": "08:30", "urgentWithinHours": 24, "staleSourceHours": 24, "unchangedDigest": "suppress"}
+}

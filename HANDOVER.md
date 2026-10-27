@@ -1,5 +1,11 @@
 # HANDOVER
 
+## מערכת תפעול מתוכן שיחות, 27.10.2026
+
+מצב המערכת המלאה: BLOCKED. נבנתה ליבת ניסיון נפרדת תחת `src/services/business-ops`: שיוך תיק לפי מזהים, משימות ותלויות, ראיות השלמה, היסטוריה, API לפי תפקידים, טיוטות וסיכומים. מסע סינתטי של שיחה, מייל ו־WhatsApp עודכן באותה רשומת Monday ונקרא בחזרה בשלוש גרסאות. אין חיבור רציף למקורות, מודל פעיל או כתיבת משימות ייצור. WhatsApp נשאר קריאה וטיוטות בלבד. לא שונו תהליכי n8n הקיימים.
+
+מפה, אחריות, סמכויות, פערי חיבור, תחזוקה והמשך: [docs/business-ops/README.md](docs/business-ops/README.md). ראיות חיות מצומצמות: [docs/runtime/business-ops-monday-20261027.json](docs/runtime/business-ops-monday-20261027.json). בדיקה: `npm run test:business-ops`; הדגמה מקומית: `npm run demo:business-ops`.
+
 ## עדכון טיפול מרכזי בשגיאות, 27.10.2026
 
 PASS: Central Error Handler פורסם וחובר לשלושת תהליכי הליבה. אומתו מיילים, עדכון ויצירת רשומות Monday, חריגות אבטחה, כפילות ו־HTTP 429 בבקשות בדיקה. שמונת פריטי הבדיקה נמחקו. `npm test` עבר עם 427 בדיקות. הדוח המפורט: [CENTRAL_ERROR_HANDLER.md](docs/runtime/CENTRAL_ERROR_HANDLER.md).

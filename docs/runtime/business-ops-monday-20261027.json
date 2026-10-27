@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "scope": "synthetic reviewed observations processed locally; actual connector writes and independent readback of one Monday sandbox item; no live source intake",
+  "boardId": "5106494186",
+  "itemId": "3313413683",
+  "itemUrl": "https://kho566440.monday.com/boards/5106494186/pulses/3313413683",
+  "dispatchEnabled": false,
+  "assignment": "logical neria only; no people-column assignment",
+  "stages": [
+    {
+      "stage": "call",
+      "verified": true,
+      "itemId": "3313413683",
+      "version": 1,
+      "tasks": [
+        {
+          "id": "task:32051c30bd7fff8a16c3319b",
+          "key": "contact-banker",
+          "owner": "neria",
+          "state": "blocked",
+          "evidenceCount": 0
+        },
+        {
+          "id": "task:f91c2e9cc2381eaf255b28a9",
+          "key": "collect-documents",
+          "owner": "neria",
+          "state": "waiting_customer",
+          "evidenceCount": 0
+        }
+      ],
+      "hash": "a617046dbd11bed4d466df8b44bfa20c738eeb19c81c624181d65d66b3f8a401"
+    },
+    {
+      "stage": "mail",
+      "verified": true,
+      "itemId": "3313413683",
+      "version": 2,
+      "tasks": [
+        {
+          "id": "task:32051c30bd7fff8a16c3319b",
+          "key": "contact-banker",
+          "owner": "neria",
+          "state": "blocked",
+          "evidenceCount": 0
+        },
+        {
+          "id": "task:f91c2e9cc2381eaf255b28a9",
+          "key": "collect-documents",
+          "owner": "neria",
+          "state": "waiting_customer",
+          "evidenceCount": 1
+        }
+      ],
+      "hash": "2d454242f0ccd820d858deddced8b8b7f6f493223b201f56ecbda1d2c575f0ce"
+    },
+    {
+      "stage": "whatsapp",
+      "verified": true,
+      "itemId": "3313413683",
+      "version": 3,
+      "tasks": [
+        {
+          "id": "task:32051c30bd7fff8a16c3319b",
+          "key": "contact-banker",
+          "owner": "neria",
+          "state": "not_started",
+          "evidenceCount": 0
+        },
+        {
+          "id": "task:f91c2e9cc2381eaf255b28a9",
+          "key": "collect-documents",
+          "owner": "neria",
+          "state": "completed",
+          "evidenceCount": 2
+        }
+      ],
+      "hash": "fcd229ba153ebc0e9f7b1e3e2750223b0f5f3133eb23c3328b9eaae40482b2ac"
+    }
+  ]
+}
