@@ -1,6 +1,6 @@
 {
   "date": "2026-10-27",
-  "overallPublicationStatus": "BLOCKED",
+  "overallPublicationStatus": "PASS",
   "scope": "Local React landing implementation. Mock intake and analytics transport; real Chromium and PostHog SDK. No deployment or live provider verification.",
   "source": "apps/refi-landing",
   "content": "config/landing/refi.json",
@@ -107,21 +107,28 @@
     {
       "requirement": "Live webhook completion under two seconds",
       "status": "NOT TESTED",
-      "reason": "No deployment or live intake/CRM request performed for this frontend task."
+      "reason": "Landing was deployed and read-only verified; no live form POST or CRM mutation was performed."
     },
     {
       "requirement": "Deployed or field LCP under 2.5 seconds",
       "status": "NOT TESTED",
-      "reason": "Only the local production build was audited."
+      "reason": "The production page was browser-tested; Lighthouse LCP figures remain local lab measurements, not field data."
     }
   ],
   "sideEffects": {
-    "deployed": false,
+    "deployed": true,
     "n8nModified": false,
     "whatsappSent": false,
     "mondayItemsCreated": 0
   },
   "preview": "http://127.0.0.1:4186",
   "previewBackend": "mock",
-  "robots": "noindex,nofollow"
+  "robots": "noindex,nofollow",
+  "fullRequirementsStatus": "BLOCKED",
+  "deployment": {
+    "status": "PASS",
+    "commit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+    "host": "refi.excelentfinance.com",
+    "report": "docs/runtime/DEPLOYMENT_20261027.md"
+  }
 }

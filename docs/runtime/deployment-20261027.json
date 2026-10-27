@@ -1,0 +1,331 @@
+{
+  "date": "2026-10-27T19:45:26.065Z",
+  "status": "PASS",
+  "host": "refi.excelentfinance.com",
+  "server": "srv1604140.hstgr.cloud",
+  "directory": "/docker/lp",
+  "branch": "codex/lock-service-20261025",
+  "deployedCodeCommit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+  "croCommit": "d3faec2d315d32efc3de8a8b9eecfa0f1512e9cd",
+  "capiAndLp1FixCommit": "c5bae8dfd09070bc12e5e7acd61234090f28ae5c",
+  "requirements": [
+    {
+      "requirement": "Commit and push verified fixes to the requested branch",
+      "status": "PASS",
+      "evidence": "Push d3faec2 succeeded without force after preserving concurrent commit 6d7114a. Follow-up LP1 cache fix 247ff64 was fetched and deployed. CAPI/LP1 c5bae8d is an ancestor."
+    },
+    {
+      "requirement": "Deploy built artifacts to the VPS",
+      "status": "PASS",
+      "evidence": "git pull --ff-only; nginx test in disposable compose container exit 0; only service lp recreated; active nginx configuration test succeeded; byte-for-byte public artifact verification passed."
+    },
+    {
+      "requirement": "Final deployment confirmation",
+      "status": "PASS",
+      "evidence": "29 real HTTPS checks and 8 live browser checks; homepage, thank-you, assets and legacy partner/legal pages verified."
+    }
+  ],
+  "serverEvidence": {
+    "previousCommit": "b7fbd76967cf60d3b79cb9cd6a7f8b413d44af77",
+    "previousBranch": "release/lp1-funnel-hardening-20261020",
+    "backup": "/docker/lp-release-backups/20261027-cro-d3faec2",
+    "backupMode": "0700",
+    "preservedStash": "pre-cro-d3faec2",
+    "container": "lp-lp-1",
+    "service": "lp",
+    "image": "nginx:1.27-alpine",
+    "preflightExitCode": 0,
+    "activeNginxTest": "successful",
+    "publicDirectoryMode": "0755",
+    "publicFileMode": "0644",
+    "homepageSha256": "65de8ac54924f1c767df81e8f60c9abe8947180e8cb814dbeb10676a75f2eb09"
+  },
+  "resolvedIncident": {
+    "finding": "Private backup umask persisted into the first checkout, preventing nginx worker reads and causing an initial 404.",
+    "correction": "Restored umask 022; public site directories 0755 and Git-tracked public files 0644; private backup remains 0700. All final checks passed.",
+    "prevention": "Future private backup commands must run in a subshell; establish umask 022 before git checkout/pull."
+  },
+  "http": {
+    "status": "PASS",
+    "date": "2026-10-27T19:44:46.515Z",
+    "releaseCommit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+    "origin": "https://refi.excelentfinance.com",
+    "scope": "Read-only deployed HTTP and byte-for-byte artifact verification. No form POST, CRM mutation or message send.",
+    "checks": [
+      {
+        "name": "public homepage",
+        "route": "/",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "65de8ac54924f1c767df81e8f60c9abe8947180e8cb814dbeb10676a75f2eb09",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "explicit homepage",
+        "route": "/index.html",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "65de8ac54924f1c767df81e8f60c9abe8947180e8cb814dbeb10676a75f2eb09",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "thank-you",
+        "route": "/thank-you",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "97ececf844de5bff5ed0e3211932299b0fa4537edcfe8a3828b9b6d8ae3de887",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "thank-you",
+        "route": "/thank-you/",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "97ececf844de5bff5ed0e3211932299b0fa4537edcfe8a3828b9b6d8ae3de887",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/analytics-C0z8W-q9.js",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "59c0fdabdfce906f1986407f3f6c1f7d5bcfc31771744c5e3da0e10e841393e4",
+        "contentType": "application/javascript; charset=utf-8"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/assistant-hebrew-400.woff2",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "98c5fce6ce1a4e8e5326e7f9a0fb97b4baebb1672050cee28638165cd8e6a4f6",
+        "contentType": "font/woff2"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/assistant-hebrew-600.woff2",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "6dc8d91d85e39cb87a73953ac41340b26f82d900daa1bfdbbbffec569a888f9c",
+        "contentType": "font/woff2"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/assistant-hebrew-800.woff2",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "014171bc5f12c4ea2d186ddfa9867c445807fd25e685da88e7cbbb0dee7e055b",
+        "contentType": "font/woff2"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/assistant-latin-400.woff2",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "b47a10ae5f5e7bef146f7a90d98a34aac00722c03322b041224014ae58082520",
+        "contentType": "font/woff2"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/assistant-latin-600.woff2",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "16e7a0f3152470c6cb0487ff58e167c9c3af27fa2d0c475c557227896379ce15",
+        "contentType": "font/woff2"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/assistant-latin-800.woff2",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "31c7956daa41455214291045dd928f4f0ab49fed871e5b1c8acbc17131c9ba71",
+        "contentType": "font/woff2"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/clients.webp",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "e46c383a813b8c6689121ae79318026d4e5fe7521d1fc8f7ab5a2b6d0836fda3",
+        "contentType": "image/webp"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/favicon.svg",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "0d72fe49dda340c2acd6d0ba6dbdcc0f0c12810c01a1565fb118e20102a8b59a",
+        "contentType": "image/svg+xml"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/index-BhnCkur-.js",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "20390eae96294a74fb4fc9c4bde9769d1cee18982b8d73c5ca1831dfbd3c3e33",
+        "contentType": "application/javascript; charset=utf-8"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/logo.png",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "ce90b249b7073054b796c151ccfdab0f49fff3a65c9bdb7f3f59b1cfd2829f5d",
+        "contentType": "image/png"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/module-CG6JmjG1.js",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "f64a7bd0abe0614d8c315e71b00f8d5d5993d11453daa788fce2ad874a453335",
+        "contentType": "application/javascript; charset=utf-8"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/portrait-480.webp",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "2f45b8d3f6812e320ba8cce82c5aca412537f19206af0c64f63680ed68db0978",
+        "contentType": "image/webp"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/portrait.webp",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "818c1cbf0e4466287e753da454f9817ab943dc8b0dbec57b32449e1ffd667e16",
+        "contentType": "image/webp"
+      },
+      {
+        "name": "release asset",
+        "route": "/cro-assets/style-BSRjpfHe.css",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "68ed51c6c515bef8cd0abb311ac045fbface599b5b6fd2eb1a60afb55093b3bc",
+        "contentType": "text/css"
+      },
+      {
+        "name": "analytics config remains explicitly unconfigured",
+        "route": "/analytics-config.json",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "702310b56bf9578e37d0ea5cffae3de9af70c069975bb62a4a965757d032a0e8",
+        "contentType": "application/json"
+      },
+      {
+        "name": "preserved LP1 v2 file",
+        "route": "/privacy.html",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "f8ebfb6cb605da83fb7c0db5d1c0de6122c9836a9a74462e2b962892b6fdb4ac",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "preserved LP1 v2 file",
+        "route": "/accessibility.html",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "a7dd6d7c9c784697a62c574c536a81cc8e477bf10c1d13d2ba0c2b4a38b88da7",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "preserved LP1 v2 file",
+        "route": "/partners.html",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "c4a66e96c49e36674219b3b13d19aff410d1519666b5b3ab623d36812382296e",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "preserved LP1 v2 file",
+        "route": "/assets/v2.css",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "30c5731e5155478b828902a950eb43b3e6bea4b3beb58ed401d1f99667f16f70",
+        "contentType": "text/css"
+      },
+      {
+        "name": "preserved LP1 v2 file",
+        "route": "/assets/partners.js",
+        "status": "PASS",
+        "httpStatus": 200,
+        "sha256": "6853b77033f6104ab25ec0ca59fcff0bdd7d7e9a5d6174692b1910274f880e7e",
+        "contentType": "application/javascript; charset=utf-8"
+      },
+      {
+        "name": "GET denied before operational intake",
+        "route": "/api/lead",
+        "status": "PASS",
+        "httpStatus": 403,
+        "sha256": "32f2fa940d4b4fe19aca1e53a24e5aac29c57b7c5ee78588325b87f1b649c864",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "GET denied before operational intake",
+        "route": "/api/club",
+        "status": "PASS",
+        "httpStatus": 403,
+        "sha256": "32f2fa940d4b4fe19aca1e53a24e5aac29c57b7c5ee78588325b87f1b649c864",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "GET denied before operational intake",
+        "route": "/api/partner",
+        "status": "PASS",
+        "httpStatus": 403,
+        "sha256": "32f2fa940d4b4fe19aca1e53a24e5aac29c57b7c5ee78588325b87f1b649c864",
+        "contentType": "text/html; charset=utf-8"
+      },
+      {
+        "name": "staging remains protected",
+        "route": "/",
+        "status": "PASS",
+        "httpStatus": 401,
+        "sha256": "9371176869a945e2958e43b349397210a1b72b83f11c67e02e0be1f950254ef2",
+        "contentType": "text/html; charset=utf-8"
+      }
+    ]
+  },
+  "browser": {
+    "status": "PASS",
+    "scope": "Actual deployed HTTPS page in Chromium. Read-only UI, no form submission or mocked transport.",
+    "checks": [
+      "HTTP 200",
+      "RTL",
+      "seven sections",
+      "React hydration and working FAQ",
+      "mobile layout and sticky CTA",
+      "direct thank-you does not invent success",
+      "no console or CSP error",
+      "no outgoing write requests"
+    ],
+    "screenshots": [
+      "public-desktop.png",
+      "public-mobile.png"
+    ],
+    "errors": [],
+    "writes": []
+  },
+  "limitations": [
+    {
+      "requirement": "Live form POST through n8n and Monday after this deployment",
+      "status": "NOT TESTED",
+      "reason": "Deployment verification was read-only. No leads or messages created."
+    },
+    {
+      "requirement": "Live PostHog conversion receipt",
+      "status": "BLOCKED",
+      "reason": "Project host and public key still missing; shipped analytics config is unconfigured."
+    },
+    {
+      "requirement": "Authentic video testimonials",
+      "status": "BLOCKED",
+      "reason": "Approved clips still missing; the page shows existing authentic written testimonials."
+    }
+  ],
+  "scope": "Landing deployment only. No n8n settings, main-site, OpenClaw, Hermes or messaging changes.",
+  "workingCopies": {
+    "release": "tests/out/deployment-20261027/release-tree",
+    "primary": "Primary checkout and its unrelated pending work were preserved. Publication used an isolated worktree to integrate concurrent branch updates."
+  }
+}
