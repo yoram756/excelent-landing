@@ -1,0 +1,100 @@
+    - button "Add to chat":
+    - button "More actions":
+    - generic: "Guard provider: Alert Yoram"
+    - generic: "true"
+    - generic: "false"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: "Guard provider: Alert Yoram?"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: "Error context: Email alert"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: "Guard provider: Email alert"
+    - generic: "true"
+    - generic: "false"
+    - generic: 1 item
+    - button "Add to chat":
+    - button "More actions":
+    - generic: "Guard provider: Email alert?"
+    - button "Zoom to Fit":
+    - button "Zoom In":
+    - button "Zoom Out":
+    - generic: Logs
+    - generic: Success in 3.22s
+    - radiogroup:
+      - radio "Overview"
+      - radio "Details" [checked]
+    - tree:
+      - treeitem "Find query":
+        - generic: Find query
+      - 'treeitem "Error context: Find by phone"':
+        - generic: "Error context: Find by phone"
+      - treeitem "Find by phone":
+        - generic: Find by phone
+      - 'treeitem "Guard provider: Find by phone"':
+        - generic: "Guard provider: Find by phone"
+      - 'treeitem "Guard provider: Find by phone?"':
+        - generic: "Guard provider: Find by phone?"
+      - treeitem "Build mutation":
+        - generic: Build mutation
+      - 'treeitem "Error context: Save to Monday"':
+        - generic: "Error context: Save to Monday"
+      - treeitem "Save to Monday Open..." [active] [selected]:
+        - generic: Save to Monday
+        - button "Open...":
+      - 'treeitem "Guard provider: Save to Monday"':
+        - generic: "Guard provider: Save to Monday"
+      - 'treeitem "Guard provider: Save to Monday?"':
+        - generic: "Guard provider: Save to Monday?"
+      - treeitem "Check save":
+        - generic: Check save
+      - treeitem "Saved?":
+        - generic: Saved?
+      - treeitem "Reply saved":
+        - generic: Reply saved
+      - treeitem "Alert query":
+        - generic: Alert query
+      - 'treeitem "Error context: Who am I"':
+        - generic: "Error context: Who am I"
+      - treeitem "Who am I":
+        - generic: Who am I
+    - generic: Save to Monday
+    - generic: Success in 787ms
+    - button "Input":
+      - generic: Input
+    - button "Output":
+      - generic: Output
+    - button "Actions":
+    - button "Collapse panel":
+    - generic: Output
+    - textbox "Search (Ctrl+F)"
+    - radiogroup:
+      - radio "Schema":
+      - radio "Table" [checked]:
+      - radio "JSON":
+    - generic: 1 item
+    - table:
+      - rowgroup:
+        - row "data Collapse rows extensions Collapse rows":
+          - columnheader "data Collapse rows":
+            - generic: data
+            - button "Collapse rows":
+          - columnheader "extensions Collapse rows":
+            - generic: extensions
+            - button "Collapse rows":
+          - columnheader
+      - rowgroup:
+        - row "create_item id:3313490475 request_id:14e3561b-fbba-975b-b5de-f6b1a91a8965":
+          - cell "create_item id:3313490475":
+            - generic: create_item
+            - generic: id
+            - text: ":"
+            - generic: "3313490475"
+          - cell "request_id:14e3561b-fbba-975b-b5de-f6b1a91a8965":
+            - generic: request_id
+            - text: ":"
+            - generic: 14e3561b-fbba-975b-b5de-f6b1a91a8965
+          - cell
+- complementary

@@ -1,0 +1,216 @@
+{
+  "date": "2026-10-27T20:20:45.147Z",
+  "status": "PASS",
+  "scope": "One new synthetic TEST verifies public API -> n8n -> Monday. No Meta CAPI delivery was tested.",
+  "endpoint": "https://refi.excelentfinance.com/api/lead",
+  "method": "POST",
+  "previousReports": [
+    "docs/runtime/live-lead-final-20261027.json",
+    "docs/runtime/live-lead-final-20261027-repair.json"
+  ],
+  "diagnosis": {
+    "component": "n8n workflow 8W7MymUCLpPnilJs / Validate",
+    "original": {
+      "httpStatus": 400,
+      "body": "{\"error\":\"bad_name\"}",
+      "executionId": "52230",
+      "liveUiVerified": true,
+      "lastNode": "Reply early"
+    },
+    "intermediate": {
+      "httpStatus": 400,
+      "body": "{\"error\":\"bad_key\"}",
+      "executionId": "52333",
+      "evidence": "Existing local repair report"
+    },
+    "priorCorrected": {
+      "httpStatus": 200,
+      "body": "{\"request_id\":\"3313486808\"}",
+      "executionId": "52343",
+      "evidence": "Existing local repair report; TEST item was already deleted"
+    },
+    "cause": "Request fields did not match canonical contract. first_name and service_request=true required; published legacy idempotency_key accepts letters/digits/hyphens only.",
+    "fix": "New TEST uses canonical fields and one identical hyphenated event_id/idempotency_key accepted by the published validator.",
+    "routingChanged": false,
+    "workflowChanged": false,
+    "credentialsChanged": false,
+    "notFoundOrGatewayFailureObserved": false
+  },
+  "request": {
+    "first_name": "TEST LP1 trace 20261027",
+    "phone": "0500000097",
+    "event_id": "evt-TEST-20261027-opsverify-001",
+    "idempotency_key": "evt-TEST-20261027-opsverify-001",
+    "service_request": true,
+    "marketing_consent": false,
+    "marketing_channels": [],
+    "postsAttempted": 1,
+    "automaticRetry": false
+  },
+  "response": {
+    "endpoint": "https://refi.excelentfinance.com/api/lead",
+    "httpStatus": 200,
+    "body": "{\"request_id\":\"3313490475\"}",
+    "contentType": "application/json; charset=utf-8",
+    "startedAt": "2026-10-27T20:18:38.942664+00:00",
+    "finishedAt": "2026-10-27T20:18:40.560472+00:00",
+    "durationMs": 1617,
+    "evidence": "tests/out/intake-verify-20261027/http-receipt.png",
+    "serverFile": "/docker/lp-release-backups/test-intake-20261027-opsverify/response.json"
+  },
+  "n8n": {
+    "status": "PASS",
+    "workflowId": "8W7MymUCLpPnilJs",
+    "executionId": "52394",
+    "executionStatus": "Succeeded",
+    "durationMs": 3220,
+    "versionId": "ba23a0f5-5446-4486-a97d-7bb081f03f79",
+    "url": "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/52394",
+    "node": "Save to Monday",
+    "observedCreateItemId": "3313490475",
+    "mondayApiRequestId": "14e3561b-fbba-975b-b5de-f6b1a91a8965",
+    "identityEvidence": "Validate output showed the exact synthetic TEST name, phone and event key",
+    "evidence": [
+      "tests/out/intake-verify-20261027/n8n-save-readback.png",
+      "tests/out/intake-verify-20261027/n8n-save-readback.txt"
+    ]
+  },
+  "monday": {
+    "status": "PASS",
+    "boardId": "5106246268",
+    "itemId": "3313490475",
+    "before": {
+      "eventMatches": 0,
+      "phoneMatches": 0
+    },
+    "after": {
+      "eventMatches": 1
+    },
+    "rawReadback": {
+      "items": [
+        {
+          "id": "3313490475",
+          "name": "TEST LP1 trace 20261027 0500000097",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "evt-TEST-20261027-opsverify-001",
+              "value": "\"evt-TEST-20261027-opsverify-001\""
+            }
+          ]
+        }
+      ]
+    },
+    "pageReadback": {
+      "board": {
+        "id": "5106246268",
+        "name": "לידים מחזור 2026",
+        "hierarchy_type": "classic"
+      },
+      "items": [
+        {
+          "id": "3313490475",
+          "name": "TEST LP1 trace 20261027 0500000097",
+          "url": "https://kho566440.monday.com/boards/5106246268/pulses/3313490475",
+          "created_at": "2026-10-27T20:18:40Z",
+          "updated_at": "2026-10-27T20:18:44Z",
+          "column_values": {
+            "refi_phone": "972500000097",
+            "boolean_mm8848pn": "v",
+            "boolean_mm88mzry": {
+              "checked": false
+            },
+            "multiple_person_mm8c8hfp": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "text_mm8c3r4v": "evt-TEST-20261027-opsverify-001",
+            "long_text_mm8ag9s": "{\"version\":\"lp1-channels-20261020\",\"source\":\"LP1 callback form\",\"receivedAt\":\"2026-10-27T20:18:39.041Z\",\"requestId\":\"evt-TEST-20261027-opsverify-001\",\"phone\":\"972500000097\",\"email\":null,\"grants\":{\"whatsapp\":false,\"email\":false,\"sms\":false}}",
+            "fn_status": null
+          },
+          "group": {
+            "id": "topics",
+            "title": "לידים חדשים"
+          }
+        }
+      ],
+      "pagination": {
+        "has_more": false,
+        "nextCursor": null,
+        "count": 1
+      },
+      "source": "query-api"
+    }
+  },
+  "checks": [
+    {
+      "requirement": "Exactly one new production POST",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Canonical input accepted by saved published validator",
+      "status": "PASS"
+    },
+    {
+      "requirement": "HTTP response contains created item id",
+      "status": "PASS"
+    },
+    {
+      "requirement": "n8n execution succeeded and Save to Monday returned same id",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Independent Monday readback on requested board and exact event_id",
+      "status": "PASS"
+    },
+    {
+      "requirement": "No duplicate item for this event",
+      "status": "PASS"
+    },
+    {
+      "requirement": "Meta CAPI receipt",
+      "status": "NOT TESTED"
+    }
+  ],
+  "cleanup": {
+    "status": "PASS",
+    "itemId": "3313490475",
+    "scope": "Only the synthetic TEST from this exact request, removed after live readback and evidence capture",
+    "verifiedAt": "2026-10-27T20:21:07.917Z",
+    "readback": {
+      "items": [
+        {
+          "id": "3313490475",
+          "name": "TEST LP1 trace 20261027 0500000097",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          }
+        }
+      ]
+    },
+    "mutation": {
+      "delete_item": {
+        "id": "3313490475",
+        "state": "active"
+      }
+    }
+  },
+  "limits": [
+    "No route, production code, workflow, credential or permission was changed.",
+    "No direct WhatsApp send, scheduling, group write or read-state change.",
+    "Existing workflow generated its internal notifications as part of the authorized TEST.",
+    "This verifies Monday event_id persistence; not Meta CAPI delivery."
+  ],
+  "repositoryEvidence": {
+    "n8n": "docs/evidence/20261027-capi/intake-n8n-save-readback.txt",
+    "http": "docs/evidence/20261027-capi/intake-http-receipt.json",
+    "monday": "Independent readback is embedded in this report"
+  }
+}

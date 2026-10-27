@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-27T20:33:35.887Z",
+  "status": "BLOCKED",
+  "scope": "Read-only Meta Test Events readiness investigation. No CAPI or Pixel test event was sent and no lead was created in this stage.",
+  "branch": "codex/lock-service-20261025",
+  "start": {
+    "localHead": "4b0956e265ad5e8b615a4ba50c93130d4783f2dc",
+    "remoteHead": "910931962054746d778768cf6c93723815e309e5",
+    "serverHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+    "deployedApplicationCommit": "247ff6406012ec81794b070b14b3d4625f04b68c",
+    "trackedServerChanges": false,
+    "localPendingWorkPreserved": true
+  },
+  "access": {
+    "eventsManager": "PASS",
+    "testEventsPage": "PASS",
+    "businessId": "745355029428233",
+    "inspectedCandidate": {
+      "name": "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance",
+      "id": "1822147178482498",
+      "approvedLp1Destination": false,
+      "testEventsUrl": "https://eventsmanager.facebook.com/events_manager2/list/dataset/1822147178482498/test_events?business_id=745355029428233",
+      "testCodeVisible": true,
+      "testCodeStored": false,
+      "observedOverview": [
+        "סיום ההגדרה של ה-API 'המרות' ל-CRM",
+        "סדרת הנתונים שלך לא קיבלה שום פעילות",
+        "עליך לסיים את הגדרת האינטגרציה כדי להתחיל לשלוח פעילות אירוע מהשרת, מהאתר או מהאפליקציה."
+      ],
+      "evidence": "docs/evidence/20261027-capi/meta-finance-overview.txt",
+      "testEventsEvidence": "docs/evidence/20261027-capi/meta-test-events-sanitized.txt"
+    },
+    "otherRelevantCandidates": [
+      {
+        "id": "942079746535788",
+        "finding": "No integrations or websites; no observed event activity"
+      },
+      {
+        "id": "1868636864296246",
+        "name": "Excellent n8n Leads",
+        "finding": "Shown by Meta as an inactive application, not an established website Pixel destination"
+      }
+    ],
+    "credentialSearch": "n8n CAPI-named credential search returned No credentials found. This does not establish that no token exists elsewhere; no authorized CAPI credential binding was verified."
+  },
+  "sourceAudit": {
+    "files": [
+      "site/lp1v2/index.html",
+      "site/lp1v2/assets/v2.js",
+      "site/refi-cro/index.html",
+      "apps/refi-landing/src/lib/analytics.ts"
+    ],
+    "lp1MetaPixelReferences": 0,
+    "liveLp1DomScripts": [
+      "assets/v2.js?v=eventid-20261027"
+    ],
+    "savedIntakeWorkflow": "8W7MymUCLpPnilJs",
+    "savedPublishedVersion": "ba23a0f5-5446-4486-a97d-7bb081f03f79",
+    "savedIntakeCapiNodes": 0,
+    "n8nWorkflowSearch": {
+      "CAPI": "No workflows found",
+      "Meta": "Four matching TEST workflows; names describe read-only lead diagnostics and send-disabled readiness, not an established LP1 CAPI route"
+    },
+    "analyticsDistinction": "The CRO analytics module emits quote_submitted to PostHog when configured and consented. That is not Meta Pixel/CAPI.",
+    "envInspection": "Only variable names in example env files inspected; no real .env file present in the checkout and no secret value collected",
+    "csp": "Existing LP1 script-src/connect-src do not permit a Meta Pixel library/collector. No policy changed.",
+    "fileSha256": {
+      "site/lp1v2/index.html": "d01503b562548ea996d51660a62678ee2b152e2f7014b1730b60817d785a35f9",
+      "site/lp1v2/assets/v2.js": "9064c4aa376400058d4796e21821846936ee539d286b16331ba61cdaeaafb778",
+      "site/refi-cro/index.html": "65de8ac54924f1c767df81e8f60c9abe8947180e8cb814dbeb10676a75f2eb09",
+      "apps/refi-landing/src/lib/analytics.ts": "9193e83c1d42cbbe38a71c51f92454c2dc924bea49c8070e26f89517611d8b4f"
+    }
+  },
+  "request": {
+    "sent": false,
+    "httpStatus": null,
+    "responseBody": null,
+    "metaTraceId": null,
+    "browserEventName": null,
+    "serverEventName": null,
+    "browserEventId": null,
+    "serverEventId": null
+  },
+  "requirements": [
+    {
+      "requirement": "Read Meta Events Manager and Test Events",
+      "status": "PASS",
+      "evidence": "Authenticated UI; website channel and server test instructions opened; a test_event_code was visible and intentionally omitted from artifacts"
+    },
+    {
+      "requirement": "Verify LP1 destination Pixel/dataset",
+      "status": "BLOCKED",
+      "reason": "Multiple similarly named sources; no verified LP1-to-dataset binding in deployed browser code, config or intake workflow"
+    },
+    {
+      "requirement": "Build and send authorized synthetic CAPI request",
+      "status": "BLOCKED",
+      "reason": "No established CAPI sender and verified credential binding for the approved LP1 dataset; creating credentials or broadening permissions was not attempted"
+    },
+    {
+      "requirement": "Read actual Meta response",
+      "status": "NOT TESTED",
+      "reason": "No request sent; null is intentional, not HTTP 200"
+    },
+    {
+      "requirement": "Observe this event in Test Events",
+      "status": "NOT TESTED",
+      "reason": "No synthetic event sent"
+    },
+    {
+      "requirement": "Match browser/server event_name and event_id",
+      "status": "BLOCKED",
+      "reason": "LP1 has no Meta Pixel call and intake has no verified CAPI send path. CRM event_id persistence cannot establish the two Meta copies"
+    },
+    {
+      "requirement": "Prove Meta deduplication",
+      "status": "NOT TESTED",
+      "reason": "No paired browser/server events or Meta duplicate-discard receipt"
+    },
+    {
+      "requirement": "Preserve tested routing and avoid new leads",
+      "status": "PASS",
+      "evidence": "No routing edits, no form POST, no new Monday item, no messaging in this stage"
+    }
+  ],
+  "deploymentReadback": {
+    "status": "PASS",
+    "scope": "Read-only checks against actual VPS; no redeployment necessary for documentation",
+    "nginxTestExitCode": 0,
+    "routes": [
+      {
+        "path": "/",
+        "httpStatus": 200,
+        "bytesMatchServerFile": true
+      },
+      {
+        "path": "/index",
+        "httpStatus": 200,
+        "bytesMatchServerFile": true
+      },
+      {
+        "path": "/assets/v2.js?v=eventid-20261027",
+        "httpStatus": 200,
+        "bytesMatchServerFile": true
+      }
+    ]
+  },
+  "nextActions": [
+    "Verify the intended LP1 Pixel/dataset explicitly; do not infer it from a display name.",
+    "Bind an existing authorized CAPI credential through the approved secret store; never paste it into chat or Git. If none exists, account-owner setup is required.",
+    "Implement/review a consent-aware Pixel and CAPI pair sharing one event_name and one event identifier; use a synthetic test-only path that cannot create CRM leads.",
+    "Use the chosen dataset's current Test Events code from the UI; record sanitized Meta status/body and trace id, then browser/server event details and an explicit deduplication result if Meta exposes one.",
+    "Do not reuse the prior CRM test event as a new Meta conversion or treat HTTP 200/CRM storage as deduplication evidence."
+  ],
+  "references": [
+    "https://developers.facebook.com/docs/marketing-api/conversions-api/deduplicate-pixel-and-server-events/",
+    "https://github.com/facebookarchive/Facebook-Server-Side-API-Swagger/blob/main/server-side-api.yaml"
+  ],
+  "documentationFetch": "Current developers.facebook.com pages returned HTTP 429 to the documentation reader; the Meta-owned schema describes the matching event_name and eventID/event_id fields. No old timing guidance was used to claim a result.",
+  "preservedIntakeEvidence": "docs/runtime/intake-single-test-20261027.json"
+}
