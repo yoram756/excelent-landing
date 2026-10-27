@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-27",
+  "scope": "n8n intake Monday create payload only",
+  "requirements": [
+    {
+      "requirement": "Add event id and assignee to n8n payload",
+      "status": "PASS",
+      "workflowId": "8W7MymUCLpPnilJs",
+      "nodeName": "Save to Monday",
+      "publishedVersionName": "Intake payload event and assignee 20261027",
+      "source": "src/webhooks/intake/monday-payload.js"
+    },
+    {
+      "requirement": "Create TEST Item with the updated n8n payload",
+      "status": "PASS",
+      "itemId": "3312144932",
+      "requestId": "b1d0d26b-4377-9414-8e7c-54fdadab9fc2",
+      "method": "Manual Execute step in n8n, synthetic pinned Lead webhook and Build mutation inputs, actual Monday HTTP request. No downstream notification nodes executed."
+    },
+    {
+      "requirement": "Read back seven fields and delete TEST Item",
+      "status": "PASS",
+      "checks": {
+        "phone": true,
+        "email": true,
+        "source": true,
+        "stage": true,
+        "serviceRequest": true,
+        "eventId": true,
+        "assignee": true
+      },
+      "readback": {
+        "id": "3312144932",
+        "name": "TEST Payload 7 fields 20261027",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000199",
+            "value": "{\"phone\":\"972500000199\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "refi_source",
+            "text": "LP1 טופס",
+            "value": "{\"index\":3}"
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "v",
+            "value": "{\"checked\":true}"
+          },
+          {
+            "id": "fn_email",
+            "text": "payload-test@example.invalid",
+            "value": "{\"text\":\"payload-test@example.invalid\",\"email\":\"payload-test@example.invalid\"}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-payload-20261027-1101",
+            "value": "\"TEST-payload-20261027-1101\""
+          }
+        ]
+      },
+      "deletion": {
+        "delete_item": {
+          "id": "3312144932"
+        }
+      },
+      "deletedState": "deleted",
+      "absentFromActiveBoard": true
+    },
+    {
+      "requirement": "Close the payload gap",
+      "status": "PASS"
+    }
+  ],
+  "validation": {
+    "command": "node --test tests/funnel/intake.test.js",
+    "exitCode": 0,
+    "passed": 30
+  },
+  "limits": {
+    "wholeFunnel": "NOT TESTED",
+    "inputScope": "Synthetic inputs; actual n8n expression evaluation and actual Monday API creation/readback/deletion",
+    "fiveExistingFields": "refi_phone, fn_email, refi_source, refi_stage, boolean_mm8848pn"
+  },
+  "cleanup": {
+    "itemDeleted": true,
+    "temporaryPinsRemoved": true
+  }
+}

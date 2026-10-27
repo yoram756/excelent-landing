@@ -4,6 +4,52 @@ const {inject}=require('../../src/webhooks/intake/source');
 const read=n=>inject(fs.readFileSync(path.join(root,n+'.js'),'utf8'));
 const base={product:'LP1',first_name:'TEST פנימי',phone:'0500000040',idempotency_key:'test-intake-001',service_request:true,marketing_consent:false,answers:{ask:'check',when:'week'}};
 const validate=(b,store={})=>new Function('$input','$getWorkflowStaticData',read('validate'))({first:()=>({json:{body:b,headers:{}}})},()=>store)[0].json;
+test('event_id is the canonical replay key even if a sender changes its legacy key',()=>{
+ const store={},body={...base,event_id:'TEST_CAPI_EVENT_12345'};
+ const v=validate(body,store);assert.equal(v.key,body.event_id);assert.equal(v.eventId,body.event_id);
+ assert.equal(save(v,store).saved,true);
+ const replay=validate({...body,idempotency_key:'different-retry-key'},store);
+ assert.equal(replay.duplicate,true);assert.equal(replay.request_id,'123');
+ assert.equal(validate({...body,phone:'0500000041'},store).status,409);
+});
+test('event aliases are validated and cannot disagree',()=>{
+ assert.equal(validate({...base,eventId:'TEST_CAPI_EVENT_12345'}).eventId,'TEST_CAPI_EVENT_12345');
+ for(const event_id of ['',{},['TEST-event-123'],true,'x'.repeat(81),'bad event id'])assert.equal(validate({...base,event_id}).ok,false);
+ assert.equal(validate({...base,event_id:'TEST-event-123',eventId:'TEST-event-456'}).ok,false);
+ assert.equal(validate(base).eventId,base.idempotency_key);
+});
+const {createPayloadExpression}=require('../../src/webhooks/intake/monday-payload');
+const payload=(input,body={},campaign='refi')=>JSON.parse(new Function('$json','$','return ('+createPayloadExpression(campaign).slice(3,-2)+')')(input,name=>{assert.equal(name,'Lead webhook');return {first:()=>({json:{body}})};}));
+const createInput=(extra={})=>({mode:'create',query:'mutation($name:String!,$vals:JSON!){ create_item(board_id:5106246268,item_name:$name,column_values:$vals){id} }',variables:{name:'TEST mapping',vals:JSON.stringify({refi_phone:{phone:'972500000198',countryShortName:'IL'},fn_email:{email:'test@example.invalid',text:'test@example.invalid'}})},...extra});
+
+test('Monday create payload preserves existing fields and writes the event and configured assignee',()=>{
+ const input=createInput({eventId:'TEST-primary',event_id:'TEST-secondary'}),out=payload(input),cols=JSON.parse(out.variables.vals);
+ assert.equal(cols.text_mm8c3r4v,'TEST-primary');
+ assert.deepEqual(cols.multiple_person_mm8c8hfp,{personsAndTeams:[{id:75075191,kind:'person'}]});
+ assert.deepEqual(cols.refi_phone,JSON.parse(input.variables.vals).refi_phone);assert.deepEqual(cols.fn_email,JSON.parse(input.variables.vals).fn_email);
+ assert.equal(out.query,input.query);assert.equal(out.variables.name,input.variables.name);
+ assert.equal(JSON.parse(input.variables.vals).text_mm8c3r4v,undefined,'input is not mutated');
+});
+test('Monday event accepts event_id and the original webhook when intermediate nodes omit metadata',()=>{
+ assert.equal(JSON.parse(payload(createInput({event_id:'TEST-snake'})).variables.vals).text_mm8c3r4v,'TEST-snake');
+ assert.equal(JSON.parse(payload(createInput(),{eventId:'TEST-webhook'}).variables.vals).text_mm8c3r4v,'TEST-webhook');
+ assert.equal(JSON.parse(payload(createInput(),{event_id:'TEST-webhook-snake'}).variables.vals).text_mm8c3r4v,'TEST-webhook-snake');
+});
+test('Monday update does not overwrite an existing event or assignee',()=>{
+ const input=createInput({mode:'update',eventId:'TEST-new'});input.variables.vals=JSON.stringify({text_mm8c3r4v:'original',multiple_person_mm8c8hfp:{personsAndTeams:[{id:123,kind:'person'}]}});
+ assert.deepEqual(payload(input),{query:input.query,variables:input.variables});
+});
+test('Monday create mapping uses campaign ids and people, not hardcoded engine settings',()=>{
+ const cfg=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../src/config/campaigns/refi.json'),'utf8'));
+ cfg.intake.columns.eventId='custom_event';cfg.intake.columns.assignee='custom_person';cfg.intake.assignees=[{id:123,kind:'person'}];
+ const cols=JSON.parse(payload(createInput({eventId:'TEST-generic'}),{},cfg).variables.vals);
+ assert.equal(cols.custom_event,'TEST-generic');assert.deepEqual(cols.custom_person,{personsAndTeams:[{id:123,kind:'person'}]});
+ assert.equal(cols.text_mm8c3r4v,undefined);
+});
+test('Monday create omits a missing event and refuses malformed event values',()=>{
+ const cols=JSON.parse(payload(createInput(),{idempotency_key:'not-an-event'}).variables.vals);assert.equal(cols.text_mm8c3r4v,undefined);
+ for(const eventId of [{id:'bad'},['bad'],true])assert.throws(()=>payload(createInput({eventId})),/event id/);
+});
 const save=(v,store={},response={data:{create_item:{id:'123'}}})=>new Function('$input','$','$getWorkflowStaticData',read('check-save'))(
  {first:()=>({json:response})},n=>({first:()=>({json:n==='Validate'?v:{mode:'create'}})}),()=>store)[0].json;
 test('form source cannot impersonate a received WhatsApp message',()=>{const a=validate(base),b=validate({...base,source:'LP1 וואטסאפ'});assert.equal(b.channel,'טופס');assert.equal(b.score.score,a.score.score);});

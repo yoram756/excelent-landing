@@ -103,7 +103,7 @@
     },
     "sendBody": true,
     "specifyBody": "json",
-    "jsonBody": "={{ JSON.stringify({query:\"query($b:ID!,$v:[String]!){ items_page_by_column_values(board_id:$b,limit:50,columns:[{column_id:\"refi_phone\",column_values:$v}]){ items{ id } } }\",variables:{b:\"5106246268\",v:[$json.local,$json.phone,\"+\"+$json.phone]} }) }}",
+    "jsonBody": "={{ JSON.stringify({query:\"query($b:ID!,$v:[String]!){  items_page_by_column_values(board_id:$b,limit:50,columns:[{ column_id:\\\"refi_phone\\\",column_values:$v }]){  items{  id  }  }  }\",variables:{b:\"5106246268\",v:[$json.local,$json.phone,\"+\"+$json.phone]} }) }}",
     "options": {}
    }
   },

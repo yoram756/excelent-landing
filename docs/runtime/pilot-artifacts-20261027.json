@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-27T11:36:00.288Z",
+  "status": "PASS",
+  "scope": "Local artifact syntax, connections, inactive flag and Meta binding only",
+  "goLiveReady": false,
+  "files": [
+    {
+      "file": "src/services/funnel/dist/pilot/calendly.json",
+      "nodes": 12,
+      "sha256": "61514d9ea3f5d0e06ba4e8896cd7f7176b8f41c8338889170204ed6124ef2921"
+    },
+    {
+      "file": "src/services/funnel/dist/pilot/engine-pilot.json",
+      "nodes": 29,
+      "sha256": "aefd334620ceaa6b5773ee9030a4d02b229aa08c62c7372bdfe711b7bb0b3cfd"
+    },
+    {
+      "file": "src/services/funnel/dist/pilot/go.json",
+      "nodes": 9,
+      "sha256": "de20a8bb106329a58cdd906f49e6eba86a6d9fcee602b4987e8a8413d9ef43d1"
+    },
+    {
+      "file": "src/services/funnel/dist/pilot/instant-reply-pilot.json",
+      "nodes": 9,
+      "sha256": "546da4f4527c40232b37d797f3da398613d14e3f585b02b200c9c38eae96ec4e"
+    },
+    {
+      "file": "src/services/funnel/dist/pilot/sms-inbound-pilot.json",
+      "nodes": 6,
+      "sha256": "cfeb75c58cb3339115495c39b04cb88bbe74d390be35945c59412fb5b05c0dca"
+    },
+    {
+      "file": "src/services/funnel/dist/live/calendly.json",
+      "nodes": 12,
+      "sha256": "cd3a3f5a0b1f59dc3a4c697784b05cba3fb8a0371c8ca9fb5b05db421a0e078e"
+    },
+    {
+      "file": "src/services/funnel/dist/live/engine-live.json",
+      "nodes": 29,
+      "sha256": "53d6f5a998f38c86c5148b8c2f4799a0577f56e57d3a6a58014d544350a15fcf"
+    },
+    {
+      "file": "src/services/funnel/dist/live/go.json",
+      "nodes": 9,
+      "sha256": "55bc78bee5f1b22ddfaf5eaa2a475a5805f7977d184d4849f28f54d35f66abae"
+    },
+    {
+      "file": "src/services/funnel/dist/live/instant-reply-live.json",
+      "nodes": 9,
+      "sha256": "c2763066bb2ff1d248e50b99f7ab2a5d32232fb411e3aea664ee340c5d6a7b8e"
+    },
+    {
+      "file": "src/services/funnel/dist/live/sms-inbound-live.json",
+      "nodes": 6,
+      "sha256": "10a064a62b83b3e2db97a20b0dbbca950c2abd1d90a56f177179a650e310975a"
+    }
+  ],
+  "enabledPendingCredentials": [
+    {
+      "file": "src/services/funnel/dist/live/engine-live.json",
+      "node": "Send SMS"
+    },
+    {
+      "file": "src/services/funnel/dist/live/engine-live.json",
+      "node": "Send email"
+    }
+  ]
+}

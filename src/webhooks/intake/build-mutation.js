@@ -50,4 +50,4 @@ cv[KC.phone] = { phone: v.phone, countryShortName: 'IL' };
 cv[KC.entered] = dt(new Date().toISOString());
 cv[KC.stage] = { label: K.newStage };
 cv[KC.feasibility] = { label: s.feasibility };
-return [{ json: { mode: 'create', query: 'mutation($name: String!, $vals: JSON!){ create_item(board_id: ' + K.board + ', group_id: "' + K.group + '", item_name: $name, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { name: `${v.name} ${v.phoneLocal}`, vals: JSON.stringify(cv) } } }];
+return [{ json: { mode: 'create', eventId:v.eventId, query: 'mutation($name: String!, $vals: JSON!){ create_item(board_id: ' + K.board + ', group_id: "' + K.group + '", item_name: $name, column_values: $vals, create_labels_if_missing: true){ id } }', variables: { name: `${v.name} ${v.phoneLocal}`, vals: JSON.stringify(cv) } } }];

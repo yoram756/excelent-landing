@@ -56,6 +56,7 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   await p.locator('#fSubmit').dblclick();await p.waitForTimeout(900);
   const log=JSON.parse(await get('/__log'));
   ok('double click sends one request',log.length===1,log.length);
+  ok('lead event_id matches the stable idempotency key',log[0].body.event_id===log[0].body.idempotency_key);
   ok('phone normalized',log[0]&&log[0].body.phone==='972500000001');
   ok('marketing consent false by default',log[0]&&log[0].body.marketing_consent===false);
   ok('success only after server id',(await p.locator('#fStatus').textContent()).includes('R'));
@@ -87,6 +88,7 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   await get('/__mode?m=ok');await p.click('#fSubmit');await p.waitForTimeout(800);
   const k2=JSON.parse(await get('/__log'))[0].body.idempotency_key;
   ok('retry without edits reuses idempotency key',k1===k2);
+  ok('retry event_id stays equal to the first idempotency key',JSON.parse(await get('/__log'))[0].body.event_id===k1);
   ok('retry succeeds',(await p.locator('#fStatus').getAttribute('data-state'))==='success');
   await b.close();}
  // 4 urgent + has none
@@ -100,12 +102,14 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   await p.click('#cSubmit');ok('club consent required',(await p.locator('#cConsentErr').textContent()).length>0);
   await p.fill('#cName','בדיקה');await p.fill('#cPhone','0500000003');await p.check('#cConsent');await p.click('#cSubmit');await p.waitForTimeout(700);
   const l=JSON.parse(await get('/__log'));ok('club posts to /api/club with kind club',l[0].path==='/api/club'&&l[0].body.kind==='club');
+  ok('club event_id matches its idempotency key',l[0].body.event_id===l[0].body.idempotency_key);
   ok('club success message',(await p.locator('#cStatus').textContent()).includes('רשימת ההמתנה'));
   await p.goto('http://localhost:8090/partners.html',{waitUntil:'networkidle'});await get('/__mode?m=ok');
   await p.click('#pSubmit');ok('partner validation',(await p.locator('#pFieldErr').textContent()).length>0);
   await p.fill('#pName','עו״ד בדיקה');await p.fill('#pPhone','0500000004');await p.selectOption('#pField','lawyer');await p.selectOption('#pArea','center');await p.selectOption('#pType','mutual');await p.check('#pConsent');
   await p.click('#pSubmit');await p.waitForTimeout(700);
   const l2=JSON.parse(await get('/__log'));ok('partner posts to /api/partner',l2[0].path==='/api/partner'&&l2[0].body.field==='lawyer');
+  ok('partner event_id matches its idempotency key',l2[0].body.event_id===l2[0].body.idempotency_key);
   ok('partner success',(await p.locator('#pStatus').getAttribute('data-state'))==='success');
   
   await b.close();}

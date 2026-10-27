@@ -6,7 +6,7 @@ const intakeConfig=(id='refi')=>{
   if(!c.intake)throw new Error('campaign '+id+' has no intake block');
   if(!/^\d+$/.test(c.board)||!/^\w+$/.test(c.intake.group))throw new Error('campaign '+id+' has an invalid board or group id');
   const C=c.columns;
-  return {productSlugs:c.intake.productSlugs||[c.id],productColumns:c.intake.productColumns||{},campaign:c.id,board:c.board,group:c.intake.group,newStage:c.intake.newStage,reminder:c.intake.reminder||null,
+  return {productSlugs:c.intake.productSlugs||[c.id],productColumns:c.intake.productColumns||{},campaign:c.id,board:c.board,group:c.intake.group,newStage:c.intake.newStage,reminder:c.intake.reminder||null,assignees:c.intake.assignees||[],
     columns:{...c.intake.columns,phone:C.phone,stage:C.stage,source:C.source,heat:C.heat,firstReply:C.firstReply,consentMarketing:C.consentMarketing,
       consentService:C.consentService,email:C.email,permissions:c.contactPermissions.column}};
 };

@@ -19,7 +19,7 @@ f.addEventListener('submit',async function(ev){ev.preventDefault();if(done||bt.d
   if(!ok){ss.dataset.state='error';ss.textContent='יש לתקן את השדות שסומנו.';return;}
   bt.disabled=true;ss.removeAttribute('data-state');ss.textContent='שולחים…';
   try{
-    var r=await fetch('/api/partner',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'partner',idempotency_key:k,full_name:name,phone:m,field:fd.value,area:ar.value,coop:tp.value,email:mail,consent:true,consent_at:new Date().toISOString(),website:hp.value})});
+    var r=await fetch('/api/partner',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'partner',idempotency_key:k,event_id:k,full_name:name,phone:m,field:fd.value,area:ar.value,coop:tp.value,email:mail,consent:true,consent_at:new Date().toISOString(),website:hp.value})});
     var j=null;try{j=await r.json();}catch(e){}
     if(!r.ok||!j||!(j.request_id||j.id))throw new Error('fail');
     done=true;ss.dataset.state='success';ss.textContent='הבקשה נקלטה. יורם יחזור אליכם לשיחת היכרות.';bt.textContent='הבקשה נשלחה';f.querySelectorAll('input,select').forEach(function(i){i.disabled=true;});track('partner_submit_ok');

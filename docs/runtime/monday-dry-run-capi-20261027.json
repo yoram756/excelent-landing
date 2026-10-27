@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-27T11:07:01.471Z",
+  "scope": "Synthetic node-level n8n to Monday CRM test; actual temporary CRM item",
+  "workflowId": "8W7MymUCLpPnilJs",
+  "node": "Save to Monday",
+  "requestedEventId": "TEST_CAPI_EVENT_12345",
+  "requirements": [
+    {
+      "requirement": "Send synthetic payload through n8n Monday create node",
+      "status": "PASS",
+      "itemId": "3312154790",
+      "mondayRequestId": "b02f5683-0964-9f8a-a9f4-1092a7bdcc8b",
+      "method": "Execute step with synthetic pinned Lead webhook and Build mutation inputs; actual Monday HTTP request; execution stops at Save to Monday"
+    },
+    {
+      "requirement": "Read back all seven supplied fields",
+      "status": "PASS",
+      "checks": {
+        "phone": true,
+        "email": true,
+        "source": true,
+        "stage": true,
+        "serviceRequest": true,
+        "eventId": true,
+        "assignee": true
+      },
+      "readback": {
+        "id": "3312154790",
+        "name": "TEST Dry Run CAPI 12345",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000200",
+            "value": "{\"phone\":\"972500000200\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "refi_source",
+            "text": "LP1 טופס",
+            "value": "{\"index\":3}"
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "v",
+            "value": "{\"checked\":true}"
+          },
+          {
+            "id": "fn_email",
+            "text": "dry-run@example.invalid",
+            "value": "{\"text\":\"dry-run@example.invalid\",\"email\":\"dry-run@example.invalid\"}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST_CAPI_EVENT_12345",
+            "value": "\"TEST_CAPI_EVENT_12345\""
+          }
+        ]
+      }
+    },
+    {
+      "requirement": "Delete TEST item",
+      "status": "PASS",
+      "mutation": {
+        "delete_item": {
+          "id": "3312154790"
+        }
+      },
+      "readbackState": "deleted",
+      "absentFromActiveBoard": true
+    },
+    {
+      "requirement": "Remove temporary pinned test inputs",
+      "status": "PASS",
+      "evidence": "n8n UI changed to Pin data for Lead webhook and Build mutation after unpin"
+    }
+  ],
+  "notTested": [
+    {
+      "requirement": "LP1 v2 form end-to-end",
+      "status": "NOT TESTED"
+    },
+    {
+      "requirement": "Meta CAPI delivery",
+      "status": "NOT TESTED",
+      "reason": "This checks CRM persistence of the event ID, not Meta delivery"
+    }
+  ],
+  "proof": "tests/out/dry-run-capi-20261027/n8n-created.png"
+}

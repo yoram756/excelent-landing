@@ -32,7 +32,7 @@ const MON={mondayComApi:{id:'Un7HBqZvldpVYUaB',name:'Monday.com account'}};
 const GAM={httpHeaderAuth:{id:'6hr28GsvQQrGzjwx',name:'Header Auth account'}};
 // WhatsApp sends go to the Meta Cloud API. The phone number id and the n8n credential (header Authorization: Bearer <token>)
 // come from env at build time; test builds keep a placeholder (their send nodes are disabled), pilot and live refuse to build without them.
-const WA_ID=process.env.META_WA_PHONE_NUMBER_ID||'',WA_CRED=process.env.META_WA_CREDENTIAL_ID||'';
+const WA_ID=MODE==='test'?'':process.env.META_WA_PHONE_NUMBER_ID||'',WA_CRED=MODE==='test'?'':process.env.META_WA_CREDENTIAL_ID||'';
 if(MODE!=='test'&&(!/^\d{6,}$/.test(WA_ID)||!WA_CRED))throw new Error('pilot and live builds need META_WA_PHONE_NUMBER_ID and META_WA_CREDENTIAL_ID');
 const WA_URL=HSM.sendUrl(WA_ID);
 const META=WA_CRED?{httpHeaderAuth:{id:WA_CRED,name:'Meta WhatsApp Cloud'}}:undefined;
@@ -174,11 +174,12 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
 
 // 5. SMS inbound (TextMe DLR and replies). The path is a placeholder filled in at deploy time, like the test paths.
 // A reply with an opt-out keyword sets the global opt-out label on every item with that phone; DLRs stay in the execution log.
+const smsPhoneQuery=gq('query($b:ID!,$v:[String]!){ items_page_by_column_values(board_id:$b,limit:50,columns:[{column_id:'+JSON.stringify(COLS.phone)+',column_values:$v}]){ items{ id } } }');
 const smsIn={name:PFX+'קליטת SMS'+tag,settings:{executionOrder:'v1',timezone:'Asia/Jerusalem'},nodes:[
  hook('TextMe webhook',[0,0],'__SMS_INBOUND_PATH__'),
  code('Parse SMS',[200,0],src('../sms/inbound.js'),'runOnceForEachItem'),
  ifTrue('Opt-out?',[400,0],'={{ $json.optOut }}','n8n-nodes-base.filter'),
- monday('Find by phone',[600,0],'={{ JSON.stringify({query:"query($b:ID!,$v:[String]!){ items_page_by_column_values(board_id:$b,limit:50,columns:[{column_id:\"'+COLS.phone+'\",column_values:$v}]){ items{ id } } }",variables:{b:"'+BOARD+'",v:[$json.local,$json.phone,"+"+$json.phone]}}) }}'),
+ monday('Find by phone',[600,0],'={{ JSON.stringify({query:'+JSON.stringify(smsPhoneQuery)+',variables:{b:'+JSON.stringify(String(BOARD))+',v:[$json.local,$json.phone,"+"+$json.phone]}}) }}'),
  code('Mark opt-out',[800,0],src('../sms/mark-optout.js')),
  monday('Update item',[1000,0],update('$json'))],
  connections:{'TextMe webhook':L('Parse SMS'),'Parse SMS':L('Opt-out?'),'Opt-out?':L('Find by phone'),'Find by phone':L('Mark opt-out'),'Mark opt-out':L('Update item')}};
@@ -189,4 +190,9 @@ const out=path.join(D,'dist',CAMPAIGN==='refi'?'':CAMPAIGN);fs.mkdirSync(out,{re
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])for(const n of w.nodes)if(/__CONFIG__|__BUSINESS__|__CRM_FIELDS__|__CHANNELS__|__META_HSM__|__FALLBACK__|__TEXTME__/.test(JSON.stringify(n)))throw new Error('config not injected in '+n.name);
 for(const [f,w] of [['engine-'+MODE+'.json',engine],['go.json',go],['calendly.json',cal],['instant-reply-'+MODE+'.json',instant],['sms-inbound-'+MODE+'.json',smsIn]])fs.writeFileSync(path.join(out,f),JSON.stringify(w,null,1));
 fs.copyFileSync(path.join(__dirname,'../../config/products.json'),path.join(out,'product-dictionary.json'));
+// Keep each release mode together; preserve the legacy root outputs for existing importers.
+if(MODE!=='test'){
+ const releaseOut=path.join(out,MODE);fs.mkdirSync(releaseOut,{recursive:true});
+ for(const file of ['engine-'+MODE+'.json','go.json','calendly.json','instant-reply-'+MODE+'.json','sms-inbound-'+MODE+'.json','product-dictionary.json'])fs.copyFileSync(path.join(out,file),path.join(releaseOut,file));
+}
 console.log('built',MODE,fs.readdirSync(out).join(' '));

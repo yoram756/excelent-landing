@@ -4,6 +4,7 @@
 // Env for the CLI: LOCK_SERVER_URL (n8n's address of the lock service), LOCK_CREDENTIAL_ID (n8n Header Auth credential
 // holding "Authorization: Bearer <LOCK_SERVER_TOKEN>"), INSTANT_REPLY_WORKFLOW_ID (the imported instant reply workflow).
 const fs=require('fs'),crypto=require('crypto'),{intakeSource}=require('./source');
+const {createPayloadExpression}=require('./monday-payload');
 const link=name=>({main:[[{node:name,type:'main',index:0}]]});
 const nodeId=name=>{const h=crypto.createHash('sha1').update('intake:'+name).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const ifTrue=(name,pos,expr)=>({id:nodeId(name),name,type:'n8n-nodes-base.if',typeVersion:2,position:pos,parameters:{conditions:{options:{caseSensitive:true,leftValue:'',typeValidation:'strict'},conditions:[{id:nodeId(name+':c'),leftValue:expr,rightValue:true,operator:{type:'boolean',operation:'true',singleValue:true}}],combinator:'and'},options:{}}});
@@ -19,6 +20,9 @@ const patchIntake=(w,{campaign='refi',lockUrl,lockCredentialId,instantWorkflowId
   if(matches.length!==1)throw Error('Missing/ambiguous source node '+name);
   matches[0].parameters.jsCode=intakeSource(file,campaign);
  }
+ const save=w.nodes.filter(n=>n.name==='Save to Monday'&&n.type==='n8n-nodes-base.httpRequest');
+ if(save.length!==1)throw Error('Missing/ambiguous Save to Monday node');
+ save[0].parameters={...save[0].parameters,jsonBody:createPayloadExpression(campaign)};
  // Respond after the confirmed save, before optional internal notification delivery.
  // Accept only the two known success layouts; parallel or unknown routes need review.
  const exactly=(from,to)=>{const out=w.connections[from]?.main?.[0];return out?.length===1&&out[0].node===to&&out[0].type==='main'&&out[0].index===0;};

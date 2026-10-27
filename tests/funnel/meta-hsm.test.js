@@ -47,6 +47,7 @@ const exportFixture=()=>{
   const names=['Webhook','Validate','Valid?','Find query','Find by phone','Build mutation','Save to Monday','Check save','Saved?','Reply saved','Alert query','Alert data','Alert Yoram','Email alert','Reply error','Reply duplicate','Duplicate?','Save error'];
   const nodes=names.map((name,i)=>({id:'n'+i,name,type:['Validate','Find query','Build mutation','Check save'].includes(name)?'n8n-nodes-base.code':'n8n-nodes-base.noOp',position:[i*200,0],parameters:{jsCode:'old'}}));
   nodes.find(n=>n.name==='Reply saved').type='n8n-nodes-base.respondToWebhook';
+  nodes.find(n=>n.name==='Save to Monday').type='n8n-nodes-base.httpRequest';
   const L=(...n)=>({main:n.map(x=>x?[{node:x,type:'main',index:0}]:[])});
   return {id:'8W7MymUCLpPnilJs',name:'Intake',settings:{executionOrder:'v1'},staticData:{idem:{secret:1}},nodes,connections:{
     'Webhook':L('Validate'),'Validate':L('Valid?'),'Valid?':L('Find query','Reply error'),'Find query':L('Find by phone'),'Find by phone':L('Build mutation'),
@@ -54,6 +55,15 @@ const exportFixture=()=>{
     'Alert data':L('Alert Yoram'),'Alert Yoram':L('Reply saved')}};};
 const opts={lockUrl:'http://lock-server:8787',lockCredentialId:'LockCred0001',instantWorkflowId:'InstantWf0001'};
 const next=(w,n)=>(w.connections[n]?.main||[]).map(br=>br.map(x=>x.node));
+
+test('intake wiring installs the campaign create payload and rejects a wrong save node',()=>{
+ const original=exportFixture();original.nodes.find(n=>n.name==='Save to Monday').credentials={mondayComApi:{id:'testCredential',name:'Monday'}};
+ const w=patchIntake(original,opts),save=w.nodes.find(n=>n.name==='Save to Monday');
+ assert.equal(save.parameters.jsonBody,require('../../src/webhooks/intake/monday-payload').createPayloadExpression('refi'));
+ assert.deepEqual(save.credentials,{mondayComApi:{id:'testCredential',name:'Monday'}});
+ const broken=exportFixture();broken.nodes.find(n=>n.name==='Save to Monday').type='n8n-nodes-base.noOp';
+ assert.throws(()=>patchIntake(broken,opts),/Save to Monday/);
+});
 
 test('intake wiring: the lock runs before the Monday lookup and a lost lock never reaches a write',()=>{
   const w=patchIntake(exportFixture(),opts);

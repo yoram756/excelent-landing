@@ -41,11 +41,14 @@
   "intake": {
     "group": "topics",
     "newStage": "ליד חדש",
+    "assignees": [{ "id": 75075191, "kind": "person" }],
     "reminder": {
       "sourcePattern": "LP1|מטא|וואטסאפ",
       "openStages": ["ליד חדש", "התקבל", ""]
     },
     "columns": {
+      "eventId": "text_mm8c3r4v",
+      "assignee": "multiple_person_mm8c8hfp",
       "balance": "refi_balance",
       "goal": "refi_goal",
       "goal2": "color_mm88h0j8",

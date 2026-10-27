@@ -51,7 +51,8 @@ function request(port, host, url, method = 'GET', body, extraHeaders = {}) {
 async function fixture(t, sharedStagingRoute = false) {
   const version = spawnSync(nginx, ['-v'], { encoding: 'utf8' });
   assert.equal(version.status, 0, `nginx is required for proxy verification; install it or set NGINX_BINARY. ${version.error?.message || version.stderr}`);
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lp1-proxy-'));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lp1-proxy-')).replace(/\\/g, '/');
+  fs.mkdirSync(path.join(dir, 'logs'));
   const calls = [];
   const upstream = http.createServer((req, res) => {
     let body = '';
@@ -110,7 +111,7 @@ async function fixture(t, sharedStagingRoute = false) {
     assert.match(username, /^[a-z_][a-z0-9_-]*$/i);
     sameUser = `user ${username};\n`;
   }
-  const fullConfig = `${sameUser}daemon off;\nmaster_process off;\npid ${dir}/nginx.pid;\nerror_log ${dir}/error.log;\nevents {}\nhttp {\naccess_log off;\n${tempPaths}\n${config}\n}\n`;
+  const fullConfig = `${sameUser}daemon off;\nmaster_process off;\npid ${dir}/nginx.pid;\nerror_log ${dir}/error.log;\nevents {}\nhttp {\nserver_names_hash_bucket_size 64;\naccess_log off;\n${tempPaths}\n${config}\n}\n`;
   const confPath = path.join(dir, 'test.conf');
   fs.writeFileSync(confPath, fullConfig);
   const checked = spawnSync(nginx, ['-p', dir + '/', '-c', confPath, '-t'], { encoding: 'utf8' });
