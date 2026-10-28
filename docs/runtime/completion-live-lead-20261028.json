@@ -1,0 +1,118 @@
+{
+  "status": "PASS",
+  "scope": "Actual production browser submission with synthetic contact; no WhatsApp",
+  "itemId": "3315939649",
+  "eventId": "ad715ed4-b205-41f8-8e12-f08754e28b4a",
+  "httpEvidence": {
+    "nginx": [
+      {
+        "time": "2026-10-28T17:15:36Z",
+        "status": 200
+      },
+      {
+        "time": "2026-10-28T17:17:17Z",
+        "status": 200
+      }
+    ]
+  },
+  "readback": {
+    "items": [
+      {
+        "id": "3315939649",
+        "name": "TEST השלמת פריסה 20261028 0500000073",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000073",
+            "value": "{\"phone\":\"972500000073\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "refi_source",
+            "text": "קליטת LP1",
+            "value": "{\"index\":6}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "ad715ed4-b205-41f8-8e12-f08754e28b4a",
+            "value": "\"ad715ed4-b205-41f8-8e12-f08754e28b4a\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "completion_20261028",
+            "value": "\"completion_20261028\""
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "campaign_bundle_allinone",
+            "value": "\"campaign_bundle_allinone\""
+          }
+        ]
+      }
+    ]
+  },
+  "replay": {
+    "board": {
+      "id": "5106246268",
+      "name": "לידים מחזור 2026",
+      "hierarchy_type": "classic"
+    },
+    "items": [
+      {
+        "id": "3315939649",
+        "name": "TEST השלמת פריסה 20261028 0500000073",
+        "url": "https://kho566440.monday.com/boards/5106246268/pulses/3315939649",
+        "created_at": "2026-10-28T19:15:36Z",
+        "updated_at": "2026-10-28T19:15:40Z",
+        "column_values": {
+          "text_mm8c3r4v": "ad715ed4-b205-41f8-8e12-f08754e28b4a",
+          "text_mm8j144k": "completion_20261028",
+          "text_mm8j3b0k": "campaign_bundle_allinone",
+          "multiple_person_mm8c8hfp": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "refi_phone": "972500000073"
+        },
+        "group": {
+          "id": "topics",
+          "title": "לידים חדשים"
+        }
+      }
+    ],
+    "pagination": {
+      "has_more": false,
+      "nextCursor": null,
+      "count": 1
+    },
+    "source": "query-api"
+  },
+  "cleanup": [
+    {
+      "id": "3315939649",
+      "state": "deleted"
+    },
+    {
+      "id": "3315998923",
+      "state": "deleted"
+    }
+  ],
+  "whatsappMessagesSent": 0,
+  "limitation": "Sequential replay returns same item; atomic production intake still unverified because active workflow lacks Lock",
+  "replayHttp": {
+    "httpStatus": 200,
+    "requestId": "3315939649",
+    "durationMs": 833
+  },
+  "controlledError": {
+    "executionId": "60730",
+    "message": "Duplicate lead execution stopped",
+    "alertId": "3315998923",
+    "status": "נעצר / כשל"
+  }
+}

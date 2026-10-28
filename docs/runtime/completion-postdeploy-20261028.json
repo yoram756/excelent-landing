@@ -1,0 +1,121 @@
+{
+  "status": "PASS",
+  "releaseCommit": "19ae97cbc4cc33dc77a96cec4d765df8a22497d2",
+  "branch": "codex/lock-service-20261025",
+  "host": "refi.excelentfinance.com",
+  "whatsappMessagesSent": 0,
+  "servicesChanged": [
+    "lp-lp-1",
+    "excelent-lock-lock-server-1"
+  ],
+  "backup": {
+    "directory": "/docker/lp-backups/completion-20261028",
+    "directoryMode": "700",
+    "files": [
+      "site-deploy.tgz",
+      "previous-head",
+      "lock.sqlite"
+    ],
+    "previousLockImageTag": "excelent-lock-lock-server:pre-completion-20261028"
+  },
+  "nginxTest": {
+    "command": "docker run --rm --label traefik.enable=false --network n8n-qhxa_default [read-only mounts] nginx:1.27-alpine nginx -t",
+    "result": "syntax is ok; test is successful"
+  },
+  "publicRoutes": [
+    {
+      "route": "/",
+      "httpStatus": 200,
+      "sha256MatchesServerFile": true
+    },
+    {
+      "route": "/index",
+      "httpStatus": 200,
+      "sha256MatchesServerFile": true
+    },
+    {
+      "route": "/thank-you",
+      "httpStatus": 200,
+      "sha256MatchesServerFile": true
+    },
+    {
+      "route": "/cro-assets/index-D153bevu.js",
+      "httpStatus": 200,
+      "sha256MatchesServerFile": true
+    }
+  ],
+  "lockService": {
+    "status": "PASS",
+    "health": 200,
+    "unauthorized": 401,
+    "invalidKey": 400,
+    "parallelRequests": 20,
+    "claimed": 1,
+    "duplicates": 19,
+    "whatsappSendAttempted": false,
+    "limitation": "Endpoint is deployed, but production Intake still lacks a Lock node"
+  },
+  "browser": {
+    "lang": "he",
+    "dir": "rtl",
+    "sections": [
+      "hero",
+      "trust",
+      "benefits",
+      "testimonials",
+      "lead-form",
+      "faq",
+      "mobile-cta"
+    ],
+    "hydratedFaqExpanded": true,
+    "consoleWarningsOrErrors": [],
+    "syntheticFormSubmittedOnce": true,
+    "thankYouRequestId": "3315939649"
+  },
+  "negativeRoutes": [
+    {
+      "route": "/api/lead",
+      "status": 400,
+      "error": "unknown_product"
+    },
+    {
+      "route": "/api/club",
+      "status": 400,
+      "error": "phone"
+    },
+    {
+      "route": "/api/partner",
+      "status": 400,
+      "error": "phone"
+    }
+  ],
+  "replay": {
+    "status": "PASS",
+    "httpStatus": 200,
+    "requestId": "3315939649",
+    "durationMs": 833,
+    "activeMatchingLeadsBeforeCleanup": 1,
+    "atomicConcurrencyProven": false,
+    "controlledFailureExecution": "60730",
+    "controlledFailureMessage": "Duplicate lead execution stopped",
+    "centralAlertItemId": "3315998923",
+    "centralAlertStatus": "נעצר / כשל"
+  },
+  "ownedTestCleanup": [
+    {
+      "id": "3315939649",
+      "state": "deleted"
+    },
+    {
+      "id": "3315998923",
+      "state": "deleted"
+    }
+  ],
+  "historicalRecord": {
+    "id": "3291304369",
+    "name": "בדיקה CHG018c",
+    "status": "BLOCKED",
+    "reason": "Pre-existing historical test retained; no authorization assumed to remove an unrelated record"
+  },
+  "goLiveReady": false
+}

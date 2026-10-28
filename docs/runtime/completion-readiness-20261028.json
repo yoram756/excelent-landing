@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T17:12:19.249Z",
+  "generatedAt": "2026-10-28T17:21:21.588Z",
   "goLiveReady": false,
   "whatsappMessagesSent": 0,
   "requirements": [
@@ -79,7 +79,7 @@
     {
       "id": "atomic_lock_intake_wiring",
       "status": "BLOCKED",
-      "evidence": "Production Lead Intake version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f has 37 nodes and no Lock node. Local lock/replay contracts pass; production concurrency not proven."
+      "evidence": "Production Lead Intake version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f has 37 nodes and no Lock node. Local lock/replay contracts pass; production concurrency not proven. Existing patch-export.js only accepts an 18-node workflow; current production has 37 nodes and controlled-error routes. A tested migration that preserves these routes is required before publishing; no global n8n settings/restart was performed."
     },
     {
       "id": "approved_video_testimonials",
@@ -88,18 +88,29 @@
     },
     {
       "id": "vps_release",
-      "status": "NOT TESTED",
-      "evidence": "Prepared scoped release; deployment readback to follow"
+      "status": "PASS",
+      "evidence": "completion-postdeploy-20261028.json; actual VPS readback, nginx test, public byte hashes, private service 20-way race, live browser lead and deleted CRM readback"
     },
     {
       "id": "lock_service_release",
-      "status": "NOT TESTED",
-      "evidence": "Existing private lock service observed healthy; /internal-alert/claim not yet deployed"
+      "status": "PASS",
+      "evidence": "completion-postdeploy-20261028.json; actual VPS readback, nginx test, public byte hashes, private service 20-way race, live browser lead and deleted CRM readback"
     },
     {
       "id": "postdeploy_browser_monday",
-      "status": "NOT TESTED",
-      "evidence": "Fresh production browser submission/readback/cleanup to follow"
+      "status": "PASS",
+      "evidence": "completion-postdeploy-20261028.json; actual VPS readback, nginx test, public byte hashes, private service 20-way race, live browser lead and deleted CRM readback"
+    },
+    {
+      "id": "controlled_duplicate_alert",
+      "status": "PASS",
+      "evidence": "Replay HTTP 200 same item; execution 60730 Stop And Error; alert 3315998923 read back with fn_status=נעצר / כשל; both owned fixtures deleted"
+    },
+    {
+      "id": "historical_test_record",
+      "status": "BLOCKED",
+      "evidence": "Pre-existing בדיקה CHG018c, id 3291304369, remains unchanged; requires a keep/delete decision. Current task fixtures were deleted."
     }
-  ]
+  ],
+  "deployedSourceCommit": "19ae97cbc4cc33dc77a96cec4d765df8a22497d2"
 }
