@@ -1,0 +1,129 @@
+{
+  "observedDate": "2026-10-28",
+  "evidenceType": "primary_agent_terminal_and_ui_observations",
+  "rawServerReportsCopiedToThisFile": false,
+  "verificationScope": "Frozen 0.2.0 snapshot only; not subsequent concurrent canonical source changes",
+  "canonicalSourcePublication": {
+    "status": "BLOCKED",
+    "reason": "Concurrent edits detected in the same source directory and AGENTS.md; preserved without overwriting or publishing them as our verified work",
+    "frozenSourceArchive": "verified-source.zip",
+    "frozenSourceSha256": "3503c5b73f4a91d639ac18d60a8be02d8ebeb300c069034af2f21d9f98152de5"
+  },
+  "sourceArchive": {
+    "sha256": "8a40a936083014670d832640f69d8677111e9d59417c00d881730be8360bbb37",
+    "manifestFilesVerified": 21,
+    "status": "PASS"
+  },
+  "localChecks": {
+    "node": "v24.21.0",
+    "unitTestsPassed": 63,
+    "unitTestsFailed": 0,
+    "negativeControlsDetected": 8,
+    "serviceSmokePassed": 16,
+    "workflowBuildCount": 3,
+    "commandsExit": 0
+  },
+  "vpsCandidateChecks": {
+    "status": "PASS",
+    "node": "v26.7.0",
+    "unitTestsPassed": 63,
+    "unitTestsFailed": 0,
+    "unitExit": 0,
+    "serviceSmokePassed": 16,
+    "serviceSmokeExit": 0,
+    "rawServerFiles": [
+      "/docker/excelent-wa-isolated-20261028/candidate-tests.log",
+      "/docker/excelent-wa-isolated-20261028/smoke.json"
+    ]
+  },
+  "deployedV1Probe": {
+    "status": "PASS",
+    "beforeRestart": {"exit": 0, "checksPassed": 6},
+    "dockerRestartExit": 0,
+    "afterRestart": {"exit": 0, "checksPassed": 6},
+    "proofImage": "deployed-service-probe.png",
+    "rawServerFile": "/docker/excelent-wa-isolated-20261028/deployed-probe.json"
+  },
+  "deployedV2": {
+    "version": "0.2.0-isolated.20261028",
+    "container": "excelent-wa-isolated-20261028-v2",
+    "containerIdObservedPrefix": "4ff7cbb95c48",
+    "image": "sha256:ffeb52485f78b1b06c9a832205853cf75da72a07a514c9a27724df85979d6c34",
+    "health": {"status": "PASS", "http": 200, "mode": "ISOLATED_NO_SEND"},
+    "brokerAndServerBytesEqualV1BeforeReplacement": true,
+    "networkMode": "none",
+    "publishedPorts": [],
+    "source": "/docker/excelent-wa-release-20261028/src/services/wa-assistant",
+    "fullPostdeploymentProbe": {
+      "status": "BLOCKED",
+      "reason": "Console disconnected; replacement tab control failed. Do not substitute health for full flow verification."
+    },
+    "dockerHealthyStateReadback": "NOT TESTED",
+    "rawServerFile": "/docker/excelent-wa-isolated-20261028/v2-deployment.json",
+    "rollback": "/docker/excelent-wa-isolated-20261028/rollback-v2.sh"
+  },
+  "existingN8nPolicyExecution": {
+    "status": "PASS",
+    "workflowId": "0nesgH42OpyQdncL",
+    "executionId": 59677,
+    "executionStatus": "success",
+    "passed": 24,
+    "failed": 0,
+    "policySha256": "1de6b37196a4532dddff7c4fff5ebedd7eebfadb89bd10da710262436a147f39",
+    "scope": "Synthetic policy subset only, no provider/model calls"
+  },
+  "isolatedN8nV1": {
+    "httpAndCliChecksPassed": 9,
+    "exit": 0,
+    "finalExecutionStateProof": "NOT TESTED",
+    "observedStatuses": "six running snapshots",
+    "rawServerFile": "/docker/excelent-wa-isolated-20261028/n8n-synthetic-output/n8n-raw-result.json"
+  },
+  "isolatedN8nV2": {
+    "status": "PASS",
+    "checksPassed": 10,
+    "checksFailed": 0,
+    "workflowId": "syntheticWATst001",
+    "scope": "Separate disposable database and owner; not production execution IDs",
+    "executionsBeforeAndAfterShutdown": [
+      {"id": 1, "status": "success"},
+      {"id": 2, "status": "success"},
+      {"id": 3, "status": "success"},
+      {"id": 4, "status": "success"},
+      {"id": 5, "status": "success"},
+      {"id": 6, "status": "error", "expected": true, "scenario": "broker unavailable"}
+    ],
+    "assertedResponses": [
+      {"scenario": "original whitespace bytes signed and durably committed", "http": 202, "code": "durably_stored"},
+      {"scenario": "duplicate", "http": 200, "code": "duplicate_event"},
+      {"scenario": "invalid signature", "http": 401, "code": "invalid_signature"},
+      {"scenario": "storage failure", "http": 503},
+      {"scenario": "storage recovery", "http": 202},
+      {"scenario": "broker unavailable", "assertion": "HTTP >= 400 and not 404; exact status not independently transcribed"}
+    ],
+    "rawServerFile": "/docker/excelent-wa-isolated-20261028/n8n-synthetic-output-v2/n8n-raw-result.json"
+  },
+  "backupRestore": {
+    "status": "PASS",
+    "privateBackup": "/docker/excelent-wa-backups/20261028-preflight",
+    "backupSha256": "6151dcc94e73ff5a2bf7372d3040cc3081af70c683b7c511b3fb9c2e35ab87b7",
+    "restoredCopyIntegrity": "ok",
+    "tables": ["wa_candidate_events", "wa_candidate_scans"],
+    "productionDatabaseRestored": false
+  },
+  "routingAudit": {
+    "reportedCrmWorkerId": "QEGe2prEvnA4i47J",
+    "observedRole": "Refinance instant reply workflow, preserved",
+    "actualCrmWorkerName": "Excellent WA CRM worker NO MESSAGES",
+    "actualCrmWorkerActive": true,
+    "actualCrmWorkerId": null,
+    "idNote": "Exact ID remains in the server report; not guessed from a screenshot",
+    "serverDependenciesReport": "/docker/excelent-wa-isolated-20261028/service-dependencies.json"
+  },
+  "lastVerifiedProductionGitHead": "5305b5365dfffa547735b5b53f560f56753c3f89",
+  "productionWorkflowsEdited": [],
+  "productionWebhooksRegistered": 0,
+  "liveMessagesSent": 0,
+  "liveModelCalls": 0,
+  "liveProjectStatus": "BLOCKED"
+}

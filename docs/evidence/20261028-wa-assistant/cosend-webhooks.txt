@@ -1,0 +1,39 @@
+Browser tab: 148911190, Title: "Settings › Developer · Cosend", URL: "https://dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ#settings/developer/webhooks".
+0 AXWebArea Settings › Developer · Cosend, URL: dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ#settings/developer/webhooks
+	1 container root
+		2 container
+			3 text אקסלנט יועצים · +972 55 988 1245: Limited by WhatsApp. From Meta: Your display name has not been approved yet. Your message limit will increase after the display name is approved.
+			4 button View number
+		5 container
+			6 container Settings
+				7 container Settings sections
+					8 text Settings Workspace
+					9 content list
+						10 button General
+						11 button Members
+						12 button Billing & plan
+						13 button Usage
+						14 button Developer
+						15 button Data & privacy
+					16 text You
+					17 content list
+						18 button Profile
+						19 button Appearance
+				20 container Developer
+					21 container
+						22 heading Developer, Value: 2, ID: settings-section-title
+							23 text Developer
+						31 button Deliveries
+						32 button Add endpoint
+						24 button Close
+					25 tab group
+						26 tab (selectable, settable, boolean) API keys, Value: 0
+						27 tab (selected, settable, boolean) Webhooks, Value: 1
+						28 tab (selectable, settable, boolean) Approvals, Value: 0
+						29 tab (selectable, settable, boolean) Audit, Value: 0
+						30 tab (selectable, settable, boolean) Numbers, Value: 0
+					33 text No endpoints yet.
+					34 text Add one to receive events at your own URL.
+					35 button Add endpoint
+
+The focused UI element is 27 tab (selected, settable, boolean) Webhooks, Value: 1

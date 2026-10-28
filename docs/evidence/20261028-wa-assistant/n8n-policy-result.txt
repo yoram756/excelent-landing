@@ -1,0 +1,269 @@
+Browser tab: 148911181, Title: "▶️ EXCELENT WA v1 - ACCEPTANCE ONLY - NO SEND - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/0nesgH42OpyQdncL/executions/59677".
+1 AXWebArea ▶️ EXCELENT WA v1 - ACCEPTANCE ONLY - NO SEND - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/0nesgH42OpyQdncL/executions/59677
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text EXCELENT WA v1 - ACCEPTANCE ONLY - NO SEND
+					10 button More actions
+					11 button (disabled) Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 0
+				14 radio button Description: Executions, Value: 1
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 link n8n-qhxa.srv1604140.hstgr.cloud/home
+				18 menu bar
+					19 (collapsed) Add new item, Secondary Actions: Expand
+						20 button Add new item
+				21 button Open command palette
+				22 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				23 container
+					24 Description: n8n Assistant, ID: instance-ai
+						25 text n8n Assistant
+						26 text Preview
+					27 Description: Overview, ID: home
+						28 text Overview
+				29 Description: Templates, ID: templates
+					30 text Templates
+				31 Description: Insights, ID: insights
+					32 text Insights
+				33 Description: Help, ID: help
+					34 text Help
+				35 Description: Settings, ID: settings
+					36 text Settings
+			37 container
+				38 heading Executions, Value: 2
+					39 text Executions
+				40 checkbox Description: Auto refresh, Value: 1, ID: v-0-21
+				41 text Auto refresh
+				42 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-0-22, Secondary Actions: Expand
+				43 link Description: Oct 28, 16:39:11 Succeededin 95ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/0nesgH42OpyQdncL/executions/59677
+				44 link Description: Oct 28, 16:02:27 Succeededin 156ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/0nesgH42OpyQdncL/executions/59423
+				45 text Which executions is this workflow saving?
+				46 container
+					47 text Oct 28, 16:39:11 Succeeded in 95ms  | 12KB  | ID#59677  | 
+					48 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/0nesgH42OpyQdncL/history/2fd51209-c9da-4c7c-8f47-a95c3bb23642
+					49 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/0nesgH42OpyQdncL/debug/59677
+					50 button Delete this execution
+				51 container
+					52 container
+						53 container
+							54 image
+								55 container Edge from 3e5a983b-49ff-49c7-be1a-3cbb578a29a0 to 32b527fb-1aca-4b69-abe5-b243a33417ec
+							56 text 1 item
+							57 container
+								58 button Add to chat
+								59 button More actions
+								60 text Manual test only
+							61 container
+								62 text 1 item
+								63 button Add to chat
+								64 button More actions
+								65 text Synthetic policy acceptance - NO NETWORK
+							66 container
+								67 button More actions
+								68 container
+									69 heading EXCELENT - ISOLATED DRAFT, Value: 2
+										70 text EXCELENT - ISOLATED DRAFT
+									71 text Manual synthetic policy tests only. No customer data, credentials, Webhook registration, model call or send.
+									72 text Cosend native AI currently answers +972559881245. Do not publish a second responder.
+									73 text Source and durable broker tests supplied in the handoff package.
+						74 image
+						75 image
+						76 container
+							77 button Zoom to Fit
+							78 button Zoom In
+							79 button Zoom Out
+					80 container
+						81 container
+							82 text Logs Success in 95ms
+							83 outline
+								84 row (selectable, collapsed) Manual test only, Secondary Actions: Expand
+									85 text Manual test only
+								86 row (selected, collapsed) Synthetic policy acceptance - NO NETWORK, Secondary Actions: Expand
+									87 text Synthetic policy acceptance - NO NETWORK
+						88 container
+							89 text Synthetic policy acceptance - NO NETWORK Success in 17ms
+							90 button Input
+							91 button Output
+							92 button Actions
+							93 button Collapse panel
+						94 container
+							95 text OUTPUT
+							96 container
+								97 text field (settable)
+								98 radio button Description: Schema, Value: 0
+								99 radio button Description: Table, Value: 1
+								100 radio button Description: JSON, Value: 0
+							101 text 1 item
+							102 table
+								103 row
+									104 cell
+										105 container
+											106 text mode
+											107 button Collapse rows
+									108 cell
+										109 container
+											110 text policySha256
+											111 button Collapse rows
+									112 cell
+										113 container
+											114 text passed
+											115 button Collapse rows
+									116 cell
+										117 container
+											118 text failed
+											119 button Collapse rows
+									120 cell
+										121 container
+											122 text results
+											123 button Collapse rows
+									124 cell
+										125 container
+											126 text limitations
+											127 button Collapse rows
+								128 row
+									129 cell
+										130 text SYNTHETIC_NO_NETWORK_NO_SEND
+									131 cell
+										132 text 1de6b37196a4532dddff7c4fff5ebedd7eebfadb89bd10da710262436a147f39
+									133 cell
+										134 text 24
+									135 cell
+										136 text 0
+									137 cell
+										138 text 0
+										139 container
+											140 text name : hours
+										141 container
+											142 text pass : true
+										143 text 1
+										144 container
+											145 text name : booking
+										146 container
+											147 text pass : true
+										148 text 2
+										149 container
+											150 text name : reviews
+										151 container
+											152 text pass : true
+										153 text 3
+										154 container
+											155 text name : rate
+										156 container
+											157 text pass : true
+										158 text 4
+										159 container
+											160 text name : loan
+										161 container
+											162 text pass : true
+										163 text 5
+										164 container
+											165 text name : price
+										166 container
+											167 text pass : true
+										168 text 6
+										169 container
+											170 text name : pension
+										171 container
+											172 text pass : true
+										173 text 7
+										174 container
+											175 text name : representative
+										176 container
+											177 text pass : true
+										178 text 8
+										179 container
+											180 text name : optout
+										181 container
+											182 text pass : true
+										183 text 9
+										184 container
+											185 text name : injection
+										186 container
+											187 text pass : true
+										188 text 10
+										189 container
+											190 text name : unknown
+										191 container
+											192 text pass : true
+										193 text 11
+										194 container
+											195 text name : business_echo
+										196 container
+											197 text pass : true
+										198 text 12
+										199 container
+											200 text name : delivery_status
+										201 container
+											202 text pass : true
+										203 text 13
+										204 container
+											205 text name : history_import
+										206 container
+											207 text pass : true
+										208 text 14
+										209 container
+											210 text name : suppression
+										211 container
+											212 text pass : true
+										213 text 15
+										214 container
+											215 text name : closed_window
+										216 container
+											217 text pass : true
+										218 text 16
+										219 container
+											220 text name : human_owns
+										221 container
+											222 text pass : true
+										223 text 17
+										224 container
+											225 text name : hours_open
+										226 container
+											227 text pass : true
+										228 text 18
+										229 container
+											230 text name : hours_closed
+										231 container
+											232 text pass : true
+										233 text 19
+										234 container
+											235 text name : summer_open
+										236 container
+											237 text pass : true
+										238 text 20
+										239 container
+											240 text name : winter_open_after_dst
+										241 container
+											242 text pass : true
+										243 text 21
+										244 container
+											245 text name : weekend_closed
+										246 container
+											247 text pass : true
+										248 text 22
+										249 container
+											250 text name : english
+										251 container
+											252 text pass : true
+										253 text 23
+										254 container
+											255 text name : only_requested_link
+										256 container
+											257 text pass : true
+									258 cell
+										259 container
+											260 text 0 : No real webhook or provider delivery tested
+										261 container
+											262 text 1 : Durability and concurrency tested separately in local SQLite suite
+										263 container
+											264 text 2 : No live model call; approved credential missing
+										265 container
+											266 text 3 : Cosend native AI is currently ON; activation prohibited
+
+The focused UI element is 86 row (selected, collapsed) Synthetic policy acceptance - NO NETWORK, Secondary Actions: Expand

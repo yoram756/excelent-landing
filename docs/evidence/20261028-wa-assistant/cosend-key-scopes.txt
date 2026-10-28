@@ -1,0 +1,87 @@
+Browser tab: 148911190, Title: "Settings › Developer · Cosend", URL: "https://dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ#settings/developer/api-keys".
+0 AXWebArea Settings › Developer · Cosend, URL: dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ#settings/developer/api-keys
+	1 container root
+		2 container
+			3 text אקסלנט יועצים · +972 55 988 1245: Limited by WhatsApp. From Meta: Your display name has not been approved yet. Your message limit will increase after the display name is approved.
+			4 button View number
+		5 container
+			6 container Settings
+				7 container Settings sections
+					8 text Settings Workspace
+					9 content list
+						10 button General
+						11 button Members
+						12 button Billing & plan
+						13 button Usage
+						14 button Developer
+						15 button Data & privacy
+					16 text You
+					17 content list
+						18 button Profile
+						19 button Appearance
+				20 container Developer
+					21 container
+						22 heading Developer, Value: 2, ID: settings-section-title
+							23 text Developer
+						31 button Create key
+						24 button Close
+					25 tab group
+						26 tab (selected, settable, boolean) API keys, Value: 1
+						27 tab (selectable, settable, boolean) Webhooks, Value: 0
+						28 tab (selectable, settable, boolean) Approvals, Value: 0
+						29 tab (selectable, settable, boolean) Audit, Value: 0
+						30 tab (selectable, settable, boolean) Numbers, Value: 0
+					32 container Connection keys
+						33 text Connection keys
+						34 text Only the numbers they were given
+						35 table
+							36 row
+								37 cell
+									38 text Name
+								39 cell
+									40 text Works on
+								41 cell
+									42 text Scopes
+								43 cell
+									44 text Last used
+								45 cell
+									46 text Created
+							47 row
+								48 cell
+									49 text n8n-Cosend-acceptance-readonly-20261028
+									50 text [KEY_PREFIX_REDACTED]
+								51 cell
+									52 text אקסלנט יועצים · +972 55 988 1245
+								53 cell
+									54 container Scopes: connections:read
+										55 text Read numbers connections:read
+								56 cell
+									57 text לפני 36 דקות
+								58 cell
+									59 text 28 באוק׳ 2026
+								60 cell
+									61 button Rotate
+									62 button Revoke
+							63 row
+								64 cell
+									65 text גרוק
+									66 text [KEY_PREFIX_REDACTED]
+								67 cell
+									68 text אקסלנט יועצים · +972 55 988 1245
+								69 cell
+									70 container Scopes: messages:read, messages:write, contacts:read, contacts:write, templates:read, templates:write, notifications:read, notifications:write, automations:read, automations:write, runs:read, runs:write, connections:read, connections:write, connectors:read, connectors:write, webhooks:read, webhooks:write, usage:read, members:read, billing:read, billing:write, approvals:read, approvals:write, settings:read, runtime:proxy
+										71 text Read messages, Send messages messages:read messages:write +24 more
+								72 cell
+									73 text לפני 4 שעות
+								74 cell
+									75 text 27 באוק׳ 2026
+								76 cell
+									77 button Rotate
+									78 button Revoke
+						79 text 2 rows
+					80 container Workspace keys
+						81 text Workspace keys
+						82 text The whole workspace
+						83 text No rows
+
+The focused UI element is 14 button Developer

@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "frozen synthetic-only source, not the current canonical working directory",
+  "sha256": "3503c5b73f4a91d639ac18d60a8be02d8ebeb300c069034af2f21d9f98152de5",
+  "files": 31,
+  "secretScan": "known secret shapes and original webhook path: no matches",
+  "tests": {
+    "passed": 63,
+    "failed": 0,
+    "exit": 0
+  }
+}
