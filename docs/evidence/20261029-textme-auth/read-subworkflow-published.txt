@@ -1,0 +1,94 @@
+Browser tab: 3, Title: "▶️ DRAFT TextMe restricted reads for dot NO SEND 20261028 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD".
+0 AXWebArea ▶️ DRAFT TextMe restricted reads for dot NO SEND 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text DRAFT TextMe restricted reads for dot NO SEND 20261028
+					10 button More actions
+					11 button (disabled) Published
+					12 button More actions
+				13 radio button Description: Editor, Value: 1
+				14 radio button Description: Executions, Value: 0
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (collapsed) Add new item, Secondary Actions: Expand
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container content
+				30 container
+					31 container
+						32 container
+							33 image
+								34 container Edge from 5fad0860-f60e-4b6d-b4db-5f86ee8d8f78 to b31bd829-9eb2-4fab-895d-0e667c8dba51
+							35 image
+								36 container Edge from b31bd829-9eb2-4fab-895d-0e667c8dba51 to 033ce248-58b2-4ba0-9e29-4c50aa3fe571
+							37 image
+								38 container Edge from 033ce248-58b2-4ba0-9e29-4c50aa3fe571 to c3325cbf-1891-4d92-8290-daf879328444
+							39 container
+								40 button Execute step
+								41 button Deactivate
+								42 button Delete
+								43 button Add to chat
+								44 button More actions
+								45 text Restricted read input
+								46 container
+									47 button Execute workflow
+							48 container
+								49 button Execute step
+								50 button Deactivate
+								51 button Delete
+								52 button Add to chat
+								53 button More actions
+								54 text Validate read operation
+							55 container
+								56 button Execute step
+								57 button Deactivate
+								58 button Delete
+								59 button Add to chat
+								60 button More actions
+								61 container
+									62 text TextMe read only POST: https://my.textme.co.il/api
+							63 container
+								64 button Execute step
+								65 button Deactivate
+								66 button Delete
+								67 button Add to chat
+								68 button More actions
+								69 text Validate and minimize result
+						70 image
+						71 image
+						72 container
+							73 button Zoom to Fit
+							74 button Zoom In
+							75 button Zoom Out
+							76 button Tidy Up
+								77 image
+					78 button Execute workflow
+					79 button Open nodes panel
+					80 button Command bar
+					81 button Add sticky note
+					82 button Open side panel
+					83 button n8n AI
+						84 image
+				85 container
+					86 container
+						87 text Logs
+						88 button Actions
+						89 button Collapse panel
+						90 text Nothing to display yet. Execute the workflow to see execution logs.
+	1 container
+
+The focused UI element is 1 container

@@ -1,0 +1,541 @@
+
+> test
+> npm run test:business-ops && npm run test:funnel && npm run test:site && npm run test:deploy
+
+
+> test:business-ops
+> node --test tests/business-ops/*.test.js
+
+✔ cursor and event receipts survive restart; repeated pages cannot duplicate or rewind a checkpoint (111.3811ms)
+✔ a failed page rolls back its earlier events and cursor together; no audit falsely records acceptance (3.8453ms)
+✔ account namespaces prevent native-ID collisions, including the maximum supported identifier length (3.7908ms)
+✔ a changed page replay fails and cannot change the established cursor or original event (6.1635ms)
+✔ leases exclude concurrent readers; an expired reader cannot overwrite or fail the newer lease (3.9638ms)
+✔ source failure has bounded retries and no raw secrets; another channel proceeds independently (3.9553ms)
+✔ never-connected streams are visible and a slow reader reports lease loss without crashing other sources (2.1011ms)
+✔ private/real envelopes and source-granted authority are refused before any durable acceptance (8.0882ms)
+✔ a source that never responds times out, releases its lease and does not block another channel (18.1728ms)
+✔ paged call → email → WhatsApp joins the same case; only separate review completes evidence-dependent work (14.0832ms)
+✔ nested savepoints roll back only their scope and async transaction callbacks are rejected (2.0023ms)
+✔ call → email → spouse WhatsApp completes one task with proof and unblocks the next (34.6807ms)
+✔ same event id with changed content is rejected and whole invalid review rolls back (3.8963ms)
+✔ names alone, multiple cases and conflicting identifiers never merge (2.1409ms)
+✔ unknown identity requires a reasoned human resolution with audit history (5.2855ms)
+✔ reported send, unverified artifact and wrong artifact cannot complete a task (7.5307ms)
+✔ duplicate commitments, dependency cycles, false completed status and missing handover are rejected (6.8833ms)
+✔ proposed deadlines stay distinct and history survives a newer correction (8.6755ms)
+✔ private/school sources and unsafe source URLs are rejected (1.6007ms)
+✔ canonical Gmail message anchors and Drive sharing links remain traceable (1.6008ms)
+✔ restart preserves events, evidence, task identity and replay deduplication (60.1189ms)
+✔ Monday sandbox adapter verifies independent readback and quarantines lost responses (12.6274ms)
+✔ Monday sandbox rejects real case identifiers before reserving a remote write (2.8542ms)
+✔ HTTP synthetic four-channel journey: draft, separate approval, same-task update, owner handover and deduplication (284.4857ms)
+✔ draft proposals cannot certify artifacts, invent a quote or smuggle reviewer authority (4.6154ms)
+✔ invalid acceptance rolls back, rejection is audited, and competing proposals cannot both execute (11.3283ms)
+✔ unresolved identity is shown for review and cannot create tasks until a separate identity decision (5.4734ms)
+✔ negative control detects a deliberately removed source-quote guard in memory (8.9024ms)
+✔ draft plans require existing context, choose one channel and check calendar availability (1.6654ms)
+✔ owner digests suppress unchanged state, retain proposed dates as proposed, and change after new proof (27.6408ms)
+✔ real loopback HTTP: role separation, ingestion/review, source failure isolation and no send endpoint (241.0177ms)
+✔ n8n draft cannot advance a cursor without a durable receipt and cannot accept source authority (4.255ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 553.1581
+
+> test:funnel
+> node --test --test-concurrency=1 tests/funnel/plan.test.js tests/funnel/links.test.js tests/funnel/build.test.js tests/funnel/reliability.test.js tests/funnel/campaigns.test.js tests/funnel/identity.test.js tests/funnel/hardening.test.js tests/funnel/intake.test.js tests/funnel/acceptance.test.js tests/funnel/calendly-ack.test.js tests/funnel/sla.test.js tests/funnel/lifecycle.test.js tests/funnel/lifecycle-simulation.test.js tests/funnel/atomic.test.js tests/funnel/atomic-mutation.test.js tests/funnel/feedback-http.test.js tests/funnel/lp1-adapter.test.js tests/funnel/backup.test.js tests/funnel/crm-sandbox.test.js tests/funnel/crm-snapshot.test.js tests/funnel/campaign-metrics.test.js tests/funnel/phone.test.js tests/funnel/crm-fields.test.js tests/funnel/omni-channel.test.js tests/funnel/reminder-config.test.js tests/funnel/dedup.test.js tests/funnel/e2e-synthetic.test.js tests/funnel/lock-server.test.js tests/funnel/meta-adapter.test.js tests/funnel/secrets.test.js tests/funnel/meta-hsm.test.js tests/funnel/deploy-package.test.js tests/funnel/fallback.test.js tests/funnel/error-handler.test.js tests/funnel/internal-alert.test.js tests/funnel/cosend-migration.test.js tests/funnel/atomic-intake.test.js
+
+✔ corrupt planner state fails closed rather than forgetting pending sends (76.0016ms)
+✔ opt-out takes priority over pending send reconciliation (6.159ms)
+✔ paid and human-handled leads never reconcile stale pending advancement (3.6447ms)
+✔ Calendly 12-hour PM is converted to Israel afternoon (2.9235ms)
+✔ Calendly noon and midnight are distinct (2.3419ms)
+✔ invalid Calendly date, time and unsupported timezone never write (1.7343ms)
+✔ Calendly conflicting phone and email never select the first lead (2.8256ms)
+✔ Calendly duplicate phone owners never receive a booking (2.2789ms)
+✔ Calendly cancellation clears date and cannot cancel a newer meeting (1.774ms)
+✔ Calendly cannot downgrade a paying client (1.3216ms)
+✔ Calendly parse does not acknowledge a failed or unattempted write (1.1271ms)
+✔ 37-node migration preserves every original node, error path, setting and disabled send (22.1043ms)
+✔ migration rejects changed topology, enabled WhatsApp, duplicate names and incorrect error handler without mutations (33.7289ms)
+✔ unverified admissions and transport failures reach existing controlled Stop And Error with no CRM write (4.7221ms)
+✔ incremental editor import retains 37 nodes and requires the explicit three-link rewiring plan (8.5687ms)
+✔ two real HTTP workers share a SQLite lock: 20 concurrent executions permit one simulated CRM write (216.9407ms)
+✔ regressions detect removed policy, consent, recovery and CRM safeguards (6944.1092ms)
+ℹ shared_pause: broken implementation rejected
+ℹ optout: broken implementation rejected
+ℹ unknown_retry: broken implementation rejected
+ℹ adapter_grants: broken implementation rejected
+ℹ enrollment_anchor: broken implementation rejected
+ℹ restore_gate: broken implementation rejected
+ℹ crm_readback: broken implementation rejected
+ℹ crm_unknown_retry: broken implementation rejected
+ℹ crm_snapshot: broken implementation rejected
+ℹ metrics_denominator: broken implementation rejected
+ℹ metrics_null: broken implementation rejected
+ℹ metrics_attribution: broken implementation rejected
+✔ atomic store refuses implicit production use and persists intake across reopen (50.1466ms)
+✔ 16 simultaneous intake processes create one enrollment and one CRM event (715.0408ms)
+✔ a replay with changed contents rolls back and aliases cannot silently merge people (19.5749ms)
+✔ 16 simultaneous workers across campaigns and channels reserve exactly one contact (1075.72ms)
+✔ a crashed reservation is recovered with fencing and the stale worker cannot dispatch (202.03ms)
+✔ a crash after dispatch began becomes unknown and blocks all channels after restart (148.7827ms)
+✔ timeout never triggers fallback; confirmed failure blocks the current milestone (22.6928ms)
+✔ optout after reservation revokes preflight and stops every campaign despite fresh intake (27.7607ms)
+✔ concurrent optout and preflight have a durable serial order, never a second contact (148.979ms)
+✔ recipient preferences are read again before dispatch and original horizon cannot renew (23.1849ms)
+✔ reply, booking and handoff pause all enrollments for this contact (27.8543ms)
+✔ a confirmed mock delivery imposes one shared cooldown across campaigns (23.0057ms)
+✔ CRM projection retries are ordered and acknowledge only a current lease and remote receipt (141.4834ms)
+✔ CRM claims by competing processes expose one current lease for one event (331.7712ms)
+✔ feedback is saved and read after reopen without undoing optout, even when empty (30.8985ms)
+✔ full synthetic journey persists questionnaire, CRM, reply, meeting, cancellation, handoff and paid events (35.69ms)
+✔ competitor feedback stops all campaigns and is distinct from an unsolicited invitation (21.9759ms)
+✔ partial storage failure rolls back subject, enrollment, inbox, event and projection together (21.5501ms)
+✔ invalid cadence fails closed even at night and with no marketing grants (17.7009ms)
+✔ a blocked CRM enrollment does not starve independent enrollment projections (27.2511ms)
+✔ a competitor stop and feedback save roll back together on a projection write failure (25.6641ms)
+✔ stale cancellation and cancellation of another meeting cannot clear the current booking (26.8234ms)
+✔ late booking replay cannot revive an already cancelled meeting at the same timestamp (25.2083ms)
+✔ intake rejects personal text in attribution before storing any data (19.2523ms)
+✔ live WAL backup preserves optout, feedback, consent, events and inbox across offline restore (108.9227ms)
+✔ snapshot itself is quarantined before manifest publication, not just after a restore completes (51.1412ms)
+✔ inflight attempts remain unknown and inherited contact/CRM leases are revoked on restore (80.7546ms)
+✔ post-snapshot optout is not invented; the restored copy remains blocked until reconciliation (70.9797ms)
+✔ restored inflight CRM write becomes unknown and retains its reconciliation frame and target binding (75.731ms)
+✔ checksum and manifest mismatch fail before creating a recovery destination (53.6628ms)
+✔ truncated backup fails checksum and existing targets are never overwritten (50.4385ms)
+✔ recovery paths reject traversal, URI filenames and a source path outside the explicit root (18.9883ms)
+✔ schema one migrates atomically without losing intake, and recovery requires schema three (51.0218ms)
+✔ crash after VACUUM leaves only a non-runtime staging file, never an unblocked published snapshot (145.9826ms)
+✔ existing destination sidecars are preserved and reject both backup and restore (64.6169ms)
+✔ unexpected backup-source sidecars are rejected without altering their contents (41.4476ms)
+✔ a checksum-valid source without quarantine cannot be accepted as a recovery snapshot (47.9427ms)
+✔ crash at the beginning of restore copying cannot publish an empty runtime database (174.1033ms)
+✔ engine rebuild retains central error binding and controlled provider failures (3.1313ms)
+✔ live build is blocked even with legacy credentials and test fallbacks remain disabled (633.0049ms)
+✔ SMS inbound: every placeholder injected, every connection valid, opt-out writes only after a match (0.4634ms)
+✔ every injected library and config placeholder is replaced in every Code node (0.4255ms)
+✔ every workflow JSON body expression compiles, including SMS inbound (0.7328ms)
+✔ SMS phone lookup evaluates to the configured column and all normalized phone forms (1.0303ms)
+✔ engine Plan carries the CRM field mapping and the channel decision (0.1586ms)
+✔ a final WhatsApp failure notifies the fallback after the Monday update; SMS and email senders exist only disabled without a provider or in a test build (0.3716ms)
+✔ instant reply runs only from the intake workflow and cannot send from a test build or without an approved template (0.2758ms)
+✔ every connection points at an existing node (0.4282ms)
+✔ no expression contains a run of closing braces (n8n breaks on it) (0.1998ms)
+✔ test build never contains a live engine (0.0986ms)
+✔ test build physically disables the WhatsApp HTTP node (0.0721ms)
+✔ no secret test path is baked into the build (0.1285ms)
+✔ rebuilding gives identical files (no churn in git) (110.7483ms)
+✔ Monday pagination requests the next cursor and stops on terminal/error responses (0.6395ms)
+✔ runtime probe has only manual trigger, Crypto and computation, with no credentials (115.9505ms)
+✔ isolated intake probe has no messaging endpoints or automatic triggers (89.7998ms)
+✔ acceptance exports are manual only and sandbox transport cannot call messaging providers (576.5121ms)
+✔ successful final Monday write acknowledges mail once (2.652ms)
+✔ GraphQL partial failure does not acknowledge Calendly mail (1.3372ms)
+✔ missing or wrong write target does not acknowledge Calendly mail (0.2911ms)
+✔ platform result cost is distinct from attributed and qualified enrollment denominators (25.5772ms)
+✔ unreported dash stays null and never becomes zero conversations or a zero cost (0.3471ms)
+✔ zero results and zero qualified denominator produce unavailable metrics, while verified zero spend is valid (0.7593ms)
+✔ incomplete attribution prevents qualified CPL even if verified subset looks successful (0.4088ms)
+✔ partial cohort or spend never implies a complete lead denominator (0.7884ms)
+✔ unknown qualification blocks qualified cost but preserves complete attributed enrollment cost (0.3819ms)
+✔ account campaign period and reporting timezone must match before joining spend (1.0409ms)
+✔ identical enrollment replay deduplicates while conflicting status duplicates require reconciliation (5.3176ms)
+✔ entry cohort is half-open and later qualification cannot pull historical leads into denominator (0.9211ms)
+✔ invalid or contradictory monetary coverage assessment and clock assertions fail closed (2.0655ms)
+✔ aggregate report never emits enrollment identifiers contact data or free-text payloads (0.5208ms)
+✔ equivalent UTC timestamps normalize to the same window without timezone relabeling (0.3501ms)
+✔ impossible calendar dates and timezone-free timestamps cannot be silently normalized (0.1649ms)
+✔ later qualification observation must be separately visible from spend snapshot clock (0.3372ms)
+✔ partial platform cost is visibly provisional and exposes incomplete period coverage (0.2691ms)
+✔ mismatched cohort counts retain their own account campaign and window metadata (0.3089ms)
+✔ a positive cost below one minor unit never rounds into a false zero (0.2375ms)
+✔ campaign consolidation config is complete and consistent (3.0068ms)
+✔ campaign refi config is complete and consistent (0.1936ms)
+✔ a second campaign runs on the same engine with its own messages (32.5019ms)
+✔ consolidation with an approved id would send its own first message (10.2003ms)
+✔ building a campaign does not touch the shared engine code and writes separate workflows (130.4242ms)
+✔ refinance link templates match the approved v2 inventory and use body variables (7.0809ms)
+✔ current provider binding uses Cosend without changing the technical number or contact roles (0.7732ms)
+✔ fresh test exports never call Gambot or direct Meta messages and carry no send credential (216.8988ms)
+✔ all live and pilot generation stays blocked even if old Meta environment variables exist (163.3241ms)
+✔ internal alert preparation uses a native Cosend body and stable event/item idempotency key (5.4058ms)
+✔ every Monday column a campaign uses exists on the board with the right type (4.0787ms)
+✔ Lead_Temperature follows the intake heat bands and the handoff threshold (0.8484ms)
+✔ missing or broken heat gives no temperature (0.3889ms)
+✔ fields are written only to configured columns, and Niche_Segment (no column) never (1.3099ms)
+✔ Lead_Temperature writes only existing board labels and never downgrades a label that already fits (0.8218ms)
+✔ LP1 to SQLite to CRM exact readback acknowledges one preallocated item and deduplicates intake (39.9728ms)
+✔ CRM readback mismatch never acknowledges and cannot be retried after lease expiry (11.5759ms)
+✔ lost response after remote commit remains unknown with no automatic write replay (6.2167ms)
+✔ readback exception, partial item, wrong event or missing column cannot produce success (19.319ms)
+✔ wrong board, item, TEST name, owner, recipient and future remote version refuse writes (34.3156ms)
+✔ wrong configured target and expired prewrite lease cannot reach remote write (11.3476ms)
+✔ remote ownership is checked again after write before acknowledgment (4.5572ms)
+✔ consent changed between frozen frame and begin-write refuses stale CRM write (7.86ms)
+✔ optout in another campaign between frame and write refuses stale CRM subject state (6.433ms)
+✔ consent withdrawal and optout update same CRM item in order without expanding grants (11.8127ms)
+✔ target binding is immutable and cannot be shared by different enrollments (12.8554ms)
+✔ process exit after beginning CRM write preserves unknown state on restart and does not starve other leads (193.4927ms)
+✔ schema two migrates to three while old CRM reservations remain valid only before write (32.6792ms)
+✔ CRM snapshot frontier and consent cannot mix two committed database versions (64.519ms)
+✔ the three tables exist (2.8198ms)
+✔ a second lead with the same phone in any format inside 60 seconds is blocked; after 60 seconds it is admitted (5.6045ms)
+✔ every incoming event is stored raw, and each outcome is a lifecycle event (6.7612ms)
+✔ an invalid phone is rejected and leaves no partial record (0.7732ms)
+✔ only absolute .sqlite paths or :memory: can be opened (0.275ms)
+✔ concurrent processes racing for the same phone: exactly one is admitted (1722.5012ms)
+✔ absolute database paths are normalized before validation and opening (30.8033ms)
+✔ campaigns validate but Cosend activation remains blocked (11.735ms)
+✔ a broken campaign file is rejected (5.7277ms)
+✔ .env.production.example is generated, lists every env var the code reads, and holds no secret value (16.3782ms)
+✔ the package validates, builds importable n8n workflows for every campaign and is deterministic (269.9295ms)
+✔ synthetic Meta lead: lock, intake, Monday mutation with heat label, instant WhatsApp, no duplicate opener (71.7678ms)
+✔ standard error fields, trusted target and exact email subject are preserved (6.3202ms)
+✔ trigger failures and untrusted item ids create an alert rather than touching a lead (0.5727ms)
+✔ manual sample, unknown workflow and self-error cannot send alerts recursively (0.1766ms)
+✔ safe target requires exact item, correct board, active state and no protected status (0.3329ms)
+✔ error messages redact secrets and reject an external execution link (0.2053ms)
+✔ only confirmed mail and Monday writes mark an execution handled (0.5637ms)
+✔ duplicates, security errors and API rate limits have controlled codes (0.3109ms)
+✔ missing, paid, foreign and incomplete Monday targets fail closed (0.3277ms)
+✔ HTTP exceptions, nested duplicate replies and GraphQL complexity limits are classified (0.2579ms)
+✔ workflow graph binds error handling and preserves disabled send and request contract (16.9588ms)
+✔ legacy provider expression braces cannot truncate the n8n expression (1.3196ms)
+✔ textme request: endpoint, E.164 destinations, no token in the body (4.2977ms)
+✔ textme send adds the Bearer header through the injected transport (0.5436ms)
+✔ textme webhook: urlencoded reply with only an opt-out word opts out; a sentence or a DLR does not (0.9762ms)
+✔ sendgrid request: v3 shape, invalid addresses refused, 202 is success (0.5648ms)
+✔ refi draft is approved with the owner text; the three product drafts stay unapproved (1.617ms)
+✔ planFallback never sends without an approved draft, a product or a configured sender (2.3288ms)
+✔ only a Meta error.code 131047 counts as a closed window (0.2307ms)
+✔ After send: a closed window stops at the first refusal, any other refusal retries (13.0424ms)
+✔ real loopback GET renders a voluntary RTL form and never removes a contact (168.5993ms)
+✔ removal commits before optional feedback and remains after invalid feedback (52.1559ms)
+✔ empty feedback is accepted once and an identical network retry is idempotent (36.1421ms)
+✔ competitor feedback stops contact and stores voluntary answers without renewed consent (16.7084ms)
+✔ wrong CSRF and cross-origin submissions cannot change anything (27.8242ms)
+✔ expired, invalid and unknown links cannot disclose a lead or change preferences (19.8338ms)
+✔ unsupported methods and media types never perform GET side effects (15.1229ms)
+✔ links are stored as hashes and rendered values are escaped (4.322ms)
+✔ owner beyond item 500 is found after complete pagination (9.6566ms)
+✔ partial pages and GraphQL failure never permit attribution (2.6874ms)
+✔ repeated cursors, repeated items and unexpected extra pages fail closed (1.8381ms)
+✔ missing and malformed stored click state never writes or awards heat (5.9198ms)
+✔ human-handled lead with blank funnel status never enrolls (53.9412ms)
+✔ planner fails closed if its secure random source is unavailable (11.0802ms)
+✔ new tokens require a valid expiry and revocation prevents attribution (2.3117ms)
+✔ an unsubscribed lead cannot earn click heat (5.6913ms)
+✔ every phone key used by profiles and alerts exists (1.1722ms)
+✔ every campaign has its own identity block (0.2971ms)
+✔ refinance uses the Excelent finance profile and 055-2783459 (0.1308ms)
+✔ a campaign without approved identity cannot be built for pilot or live (237.2694ms)
+✔ pilot phone ownership is checked before the Cosend activation freeze (341.1266ms)
+✔ legacy Meta credentials cannot bypass the Cosend activation freeze (501.3962ms)
+✔ the refinance landing page shows only the Excelent contact number (5.4784ms)
+✔ finance profile campaigns never use the Negev identity or the 050 number (0.3388ms)
+✔ the funnel code never hard codes a phone number or a name (2.3318ms)
+✔ the engine tells Yoram the campaign contact number, not the sending number, for call backs (43.7617ms)
+✔ every phone has an owner listed among the people, and people own only existing phones (0.2771ms)
+✔ Neria and Yoram are separate people with separate phones (0.1116ms)
+✔ event_id is the canonical replay key even if a sender changes its legacy key (19.5088ms)
+✔ event aliases are validated and cannot disagree (23.8176ms)
+✔ Monday create payload preserves existing fields and writes the event and configured assignee (1.9706ms)
+✔ Monday event accepts event_id and the original webhook when intermediate nodes omit metadata (2.4578ms)
+✔ Monday update does not overwrite an existing event or assignee (0.8683ms)
+✔ Monday create mapping uses campaign ids and people, not hardcoded engine settings (0.9616ms)
+✔ Monday create omits a missing event and refuses malformed event values (5.3571ms)
+✔ form source cannot impersonate a received WhatsApp message (5.5426ms)
+✔ money requires explicit boolean consent and marketing is independent (3.622ms)
+✔ invalid dates and inherited answer names are rejected (9.4668ms)
+✔ same idempotency key returns the saved id, not a new create (6.8556ms)
+✔ Monday lookup failure cannot fall back to create (13.2866ms)
+✔ partial GraphQL save failure never returns success (2.6407ms)
+✔ phone lookup declares the required non-null list and sends one unformatted number (2.6658ms)
+✔ partial lookup cannot create and a normalized exact phone updates the existing item (11.3704ms)
+✔ channel receipt binds choices to recipient and server receipt time (3.2084ms)
+✔ email-only consent cannot authorize WhatsApp or SMS (2.4176ms)
+✔ empty choices preserve callback request without marketing permission (6.331ms)
+✔ legacy generic consent never invents channel-specific proof (4.4582ms)
+✔ invalid or contradictory channel payloads are rejected (14.934ms)
+✔ invalid email and header injection are rejected; optional email stays optional (7.8738ms)
+✔ modern consent and email persist in the mutation and clear prior WhatsApp opt-in (7.5037ms)
+✔ replayed key cannot acknowledge a different recipient (4.0982ms)
+✔ replayed key cannot silently discard changed request or consent (44.9049ms)
+✔ bound replay accepts normalized identity and reordered fields despite regenerated timestamps (4.9648ms)
+✔ legacy unbound receipt never acknowledges a request or creates a replacement (1.7287ms)
+✔ failed Monday save does not create a replay receipt (3.7815ms)
+✔ reused key cannot cross the supported product or campaign (11.9137ms)
+✔ save confirmation requires the bound validated request (2.8124ms)
+✔ malformed replay receipts fail closed without exposing the cached item (31.9078ms)
+✔ malformed Monday item identifiers never return success or prime the replay cache (23.6174ms)
+✔ expired bound receipt is pruned before accepting a fresh request (6.2751ms)
+✔ the nested attribution config never prematurely terminates the n8n expression (2.9226ms)
+✔ all three campaign classifications survive validation and the actual Monday expression (22.6056ms)
+✔ malformed attribution and unknown reserved campaign ids fail closed (13.2036ms)
+✔ an event cannot be replayed as a different campaign (6.8495ms)
+✔ only a confirmed new lead prepares one alert for the configured primary phone (29.4335ms)
+✔ durable alert claim survives process restart and has no blind timeout retry (32.5282ms)
+✔ separate worker processes race to claim exactly one synthetic alert (266.1004ms)
+✔ HTTP alert claim requires auth and blocks twelve concurrent duplicates (207.0485ms)
+✔ retired Gambot workflow patch refuses all activation and preserves the input (0.6124ms)
+✔ a provider acknowledgment is never reported as Delivered and ambiguous responses fail (23.4163ms)
+✔ the retired Gambot manual probe refuses generation even when explicitly armed (1.4298ms)
+✔ 18-month synthetic timelines across consent combinations and campaign identities preserve contact invariants (14901.3432ms)
+ℹ {"timelines":189,"evaluations":111321,"draftCandidates":1449,"scope":"Pure lifecycle policy; synthetic acknowledgments and ledgers only"}
+✔ lifecycle preview produces one authorized-channel draft and cannot enable dispatch (21.6076ms)
+✔ global optout and competitor stop every channel ahead of malformed ledgers and fresh consent (0.2034ms)
+✔ eighteen calendar months are clamped safely across month ends and leap years (0.3242ms)
+✔ consent is bound to campaign, recipient, channel and server chronology (0.9285ms)
+✔ email withdrawal cannot fall back to another unapproved channel (0.6311ms)
+✔ unknown sends and incomplete ledgers block a second contact across channels (0.7001ms)
+✔ human response, active meeting and the preferred future date pause commercial contact (0.7229ms)
+✔ one shared contact cap applies across channels and campaigns (0.6056ms)
+✔ missed months never produce a catchup burst or replay an acknowledged milestone (4.9678ms)
+✔ acknowledged current content never exposes skipped older messages after cooldown (0.9933ms)
+✔ night and weekend previews wait without broadening provider hours (0.8442ms)
+✔ malformed cadence fails closed (0.9451ms)
+✔ equivalent enrollment timestamps use one stable idempotency key (0.6089ms)
+✔ malformed or conflicting ledger rows never permit a draft (0.3703ms)
+✔ exit feedback is voluntary and cannot grant consent or reopen the lead (1.4988ms)
+✔ insights deduplicate events and count distinct enrollments without leaking PII (1.874ms)
+✔ unknown attribution and missing denominator remain unknown; partial exports are rejected (0.2286ms)
+✔ exit coverage and meeting conversion use actual cohort intersections (0.3268ms)
+✔ aggregate attribution never reflects contact details supplied in source or ad fields (0.167ms)
+✔ token link goes to its destination and counts the open (5.0128ms)
+✔ quiz link carries the token (1.3357ms)
+✔ reaching 70 notifies Yoram (0.6851ms)
+✔ repeat open of the same link adds no more heat (2.8737ms)
+✔ a phone number in the link is never used to identify a lead (2.9984ms)
+✔ the template example value is never treated as a real token (0.6294ms)
+✔ an unknown token is not attributed and does not trust its destination letter (0.4609ms)
+✔ corrupt link state never changes heat or engagement (0.8608ms)
+✔ a token shared by two items is never attributed (0.5218ms)
+✔ each destination letter goes to its own correct address (2.3677ms)
+✔ repeat clicks do not inflate heat beyond the cap (2.3979ms)
+✔ links never contain a phone number (1.9389ms)
+✔ unknown code still redirects to the quiz (0.7593ms)
+✔ Calendly booking is parsed and matched by phone (23.9146ms)
+✔ Calendly cancel sets cancelled (2.4726ms)
+✔ acknowledged email is processed once (0.6611ms)
+✔ booking from unknown person is returned unmatched (0.776ms)
+✔ a cancel from an unknown person creates nothing (0.7965ms)
+✔ health answers without auth (132.5302ms)
+✔ POST /lock needs the bearer token (25.7604ms)
+✔ first caller wins for 60 seconds, any phone format, then the lock is free again (27.6843ms)
+✔ parallel requests for one phone: exactly one gets the lock (35.8941ms)
+✔ bad input is rejected without a lock (15.9915ms)
+✔ the service refuses to start without a strong token or a valid database path (177.0112ms)
+✔ actual LP1 Validate output maps explicit email-only proof into durable intake and CRM outbox (32.8573ms)
+✔ generic legacy checkbox, missing proof and forged client output never invent grants (1.9184ms)
+✔ receipt is bound to product, request id, recipient and explicit campaign mapping (0.6328ms)
+✔ all seven grant combinations plus callback-only retain exact independent choices (2.4632ms)
+✔ unknown, missing, truthy and contradictory grants fail closed (3.4557ms)
+✔ original server receipt anchors the horizon even after an eighteen-month processing delay (3.2364ms)
+✔ equivalent receipt timestamps replay but changing enrollment origin conflicts (2.5075ms)
+✔ long request ids are not truncated into collisions and financial answers never cross this adapter (0.5112ms)
+✔ future server dates and malformed or inconsistent enrollment clocks cannot enter the store (1.5554ms)
+✔ repeat LP1 form can withdraw grants atomically without renewing the horizon or reviving withdrawn channels (8.6811ms)
+✔ repeat-form withdrawal rolls back its consent and reservation changes when audit persistence fails (5.5377ms)
+✔ X-Hub-Signature-256 is verified on the exact raw body (4.2987ms)
+✔ subscription challenge is echoed only for the verify token (0.2355ms)
+✔ only leadgen changes become events (1.1124ms)
+✔ Graph fetch puts the token in the Authorization header, never in the URL, and fails closed (3.7968ms)
+✔ a lead is normalized to the intake shape with its campaign, ids and no assumed marketing consent (4.2515ms)
+✔ unknown campaign, bad phone, bad name or bad email are rejected (2.3302ms)
+✔ chain: signed webhook to Graph lead to normalized intake to the HTTP lock, duplicate delivery blocked (99.8482ms)
+✔ template payload: Meta Cloud API endpoint, recipient, template name, language and components (3.1111ms)
+✔ instant payload goes out only inside 60 seconds, by approved template name, with consent (0.6545ms)
+✔ consolidation is its own modular campaign file: no Meta ids, identity or instant reply inherited from refi (1.5879ms)
+✔ intake wiring installs the campaign create payload and rejects a wrong save node (25.8897ms)
+✔ intake wiring: the lock runs before the Monday lookup and a lost lock never reaches a write (12.1025ms)
+✔ intake wiring: the instant reply is called after the response, only for a new saved item, and cannot fail the intake (9.4822ms)
+✔ intake wiring: refuses a missing setting or an unexpected export, keeps state out, and every connection resolves (17.9445ms)
+✔ the built instant reply preserves template simulation and only carries a disabled Cosend endpoint (126.9671ms)
+✔ inbound Meta webhook: incoming messages become conversation rows, statuses and other numbers are ignored (1.4166ms)
+✔ inbound Meta webhook rows drive the planner exactly like a reply: stop the series, or opt out on הסר (30.1254ms)
+✔ intake wiring accepts the original export with response already before notifications (9.8744ms)
+✔ intake wiring rejects unknown or parallel success routes (31.8318ms)
+✔ intake subworkflow reference matches the installed n8n 1.1 value-object contract (13.1864ms)
+✔ global opt-out outranks every channel and consent (1.4639ms)
+✔ fallback skips the failed channel and channels without consent, and never invents a provider (0.2497ms)
+✔ every campaign declares the cascade, providers and one opt-out label that exists on the board (1.3552ms)
+✔ an opt-out on one item stops every other item with the same phone and blocks new enrollment (24.4926ms)
+✔ a different phone keeps sending (6.2957ms)
+✔ the third WhatsApp failure builds the consented SMS fallback with the approved refi text and tells Yoram (9.3342ms)
+✔ a lead without a channel receipt has no fallback channel (6.0584ms)
+✔ Lead_Temperature and Niche_Segment travel with every planned item (1.5368ms)
+✔ instant reply is off in the repo and waits for an approved template (2.633ms)
+✔ instant reply sends once, within 60 seconds, as a Meta template by name, only with WhatsApp consent (13.243ms)
+✔ with the instant reply on, the engine waits for it instead of sending its own opener (4.456ms)
+✔ after the instant reply went out, the engine starts after the opener and never repeats it (8.4801ms)
+✔ if the instant reply never went out, the regular opener still goes out once (5.458ms)
+✔ with the instant reply off (repo default) the engine sends its opener at once (1.1149ms)
+✔ a reply that raises heat updates the temperature label, never downgrading one that fits (1.423ms)
+✔ every copy of norm gives the same canonical number (3.6149ms)
+✔ intake accepts every common mobile format and stores the canonical number (8.079ms)
+✔ intake rejects letters, landlines and short numbers (1.8939ms)
+✔ WhatsApp sends name no sender in the body and no hardcoded number (15.9877ms)
+✔ new form lead gets M1 and a token (36.5381ms)
+✔ WhatsApp body is a Meta template message without a sender field (15.5419ms)
+✔ new cohort requires recipient-bound explicit WhatsApp proof (2.2998ms)
+✔ withdrawn channel proof stops an active WhatsApp series before stale pending reconciliation (0.6458ms)
+✔ landing page lead with submitted questionnaire answers starts at M7 (0.7065ms)
+✔ callback score explanation and product metadata do not pretend a questionnaire was answered (0.9824ms)
+✔ a submitted unknown answer qualifies even when financial details were skipped (4.7584ms)
+✔ lead without any consent is not contacted (0.8507ms)
+✔ lead created before go live is not contacted (0.6063ms)
+✔ lead without phone is skipped (0.902ms)
+✔ M2 carries the personal link code (0.7836ms)
+✔ nothing is sent before the due time (no double send) (0.5456ms)
+✔ second message in the same day is postponed for C path (1.1383ms)
+✔ no sends on Shabbat (0.424ms)
+✔ no sends at night (0.3275ms)
+✔ a reply stops the series and notifies (0.535ms)
+✔ a reply that was already handled is not handled again (0.3452ms)
+✔ remove request stops everything (0.4473ms)
+✔ less request moves to פחות (0.3716ms)
+✔ booking sends M10 with the meeting time (0.6247ms)
+✔ reminder a day before, then an hour before (1.3572ms)
+✔ cancelled meeting sends M11 once, second no show goes to long funnel (0.7765ms)
+✔ after a meeting M12 is scheduled two days later (2.5952ms)
+✔ paying client stops all messages (2.5797ms)
+✔ not relevant stops the funnel (0.7249ms)
+✔ test mode never touches real leads (0.4744ms)
+✔ live mode never touches TEST items (0.4222ms)
+✔ live mode marks sends as live, test mode as not live (1.2072ms)
+✔ failed send keeps position and retries in 30 minutes (5.1079ms)
+✔ three failed sends stop the lead (3.4199ms)
+✔ successful send advances (6.4963ms)
+✔ filling the quiz on the same day still sends M7 right away (1.0661ms)
+✔ a second item with the same phone does not start a second series (0.501ms)
+✔ two new items with the same phone: only the first starts (0.5248ms)
+✔ when Gambot conversations cannot be read, nothing is sent (1.978ms)
+✔ a manual message in the chat after our last send stops the series (0.6853ms)
+✔ our own send a few seconds later is not mistaken for a manual chat (0.6005ms)
+✔ every send is reserved in Monday first, with a unique key (33.9889ms)
+✔ a lead with a pending send is never planned again, only reconciled (3.6116ms)
+✔ unknown send result keeps the pending send (no blind resend) (11.2615ms)
+✔ Meta refusal clears the pending send and retries later (3.4321ms)
+✔ reconcile: message found in Gambot applies the update, no resend (0.5975ms)
+✔ reconcile: not found yet and recent, waits (0.4126ms)
+✔ reconcile: Gambot history unreadable, waits (0.3035ms)
+✔ reconcile: confirmed absent after 10 minutes, released for retry (0.4406ms)
+✔ Monday update failing after a send cannot cause a second send (2.0152ms)
+✔ manual stage stops automatic messages (5.0604ms)
+✔ a recorded human first reply stops automatic messages (1.3957ms)
+✔ pilot touches only the listed internal phone and sends live (2.9968ms)
+✔ new link tokens are cryptographic-length and never contain numbers from phone (0.8077ms)
+✔ callback consent alone cannot send a MARKETING acknowledgment or followup (0.793ms)
+✔ callback consent permits a verified UTILITY booking confirmation (0.657ms)
+✔ two new leads never get the same token, and an existing token is never reused (31.0836ms)
+✔ reminder Monday ids come from the campaign config and match the deployed reminder query (4.7573ms)
+✔ no known secret shape appears in any tracked text file (586.8513ms)
+✔ secret variables in .env.example have no value and .env is ignored (1.7102ms)
+✔ the lock service and the Meta adapter read secrets only from env or their caller (3.9706ms)
+✔ SLA callback-only waits a full 60 business minutes (27.8692ms)
+✔ SLA questionnaire unknown answer is due at 30 minutes (1.6999ms)
+✔ SLA score metadata alone remains callback-only (1.2915ms)
+✔ SLA opening starts at 08:30 Israel and never sends reminders outside hours (2.0673ms)
+✔ SLA carries remaining minutes across Thursday weekend and Israel DST change (35.1869ms)
+✔ SLA after-hours requests start counting on the next business opening (12.1278ms)
+✔ SLA handled, replied, future and stale leads do not alert (1.2521ms)
+✔ SLA new service request resets elapsed time for a repeated submission (0.5274ms)
+✔ SLA incomplete lookup fails closed and planning does not mark delivery (1.6425ms)
+✔ SLA acknowledgment follows confirmed notification; failures remain retryable (4.2773ms)
+ℹ tests 386
+ℹ suites 0
+ℹ pass 386
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 40932.0517
+
+> test:site
+> node tests/site/run.js
+
+PASS goal chooser marks primary/secondary 
+PASS goal not re-asked after choosing above 
+PASS no double advance on double click 
+PASS back keeps answer 
+PASS part 2 intro shows skip-part link 
+PASS brief shows goal, missing and next 
+PASS WA message intent=call 
+PASS WA message excludes money by default 
+PASS WA message includes money when checked 
+PASS summary distinguishes skipped and unknown 
+PASS edit from summary opens question with saved answer 
+PASS goal editable from summary 
+PASS no console/CSP errors 
+PASS quick exit jumps to summary/form 
+PASS validation errors shown 
+PASS double click sends one request 
+PASS lead event_id matches the stable idempotency key 
+PASS lead preserves UTM source and campaign 
+PASS phone normalized 
+PASS marketing consent false by default 
+PASS success only after server id 
+PASS route message for monthly goal 
+PASS payment difficulty route shown 
+PASS payment difficulty → talk to Yoram 
+PASS info intent button label 
+PASS info intent opening line 
+PASS strain not in message without consent 
+PASS after WA click: explains not yet received 
+PASS network failure shows error, no success 
+PASS retry without edits reuses idempotency key 
+PASS retry event_id stays equal to the first idempotency key 
+PASS retry succeeds 
+PASS no-mortgage route 
+PASS no-mortgage next step 
+PASS club consent required 
+PASS club posts to /api/club with kind club 
+PASS club event_id matches its idempotency key 
+PASS club success message 
+PASS partner validation 
+PASS partner posts to /api/partner 
+PASS partner event_id matches its idempotency key 
+PASS partner success 
+PASS skip link first tab stop 
+PASS keyboard selects option and advances 
+PASS axe / 
+PASS axe /partners.html 
+PASS axe /privacy.html 
+PASS axe /accessibility.html 
+PASS all channel choices are unchecked 
+PASS email opt-in requires an email address 
+PASS missing email cannot send intake 
+PASS invalid email is explained 
+PASS email address is submitted 
+PASS email-only consent remains separate 
+PASS email-only callback is saved 
+PASS feedback mobile has no horizontal overflow 
+PASS feedback answers are all optional 
+PASS feedback removal does not require questionnaire 
+PASS feedback explains no automatic re-enrollment 
+PASS axe voluntary feedback 
+60/60
+
+> test:deploy
+> node --test tests/deploy/routing.test.js
+
+✔ real nginx isolates all staging forms and preserves public route behavior (1529.3216ms)
+✔ the same HTTP isolation check detects the original shared staging route (237.4635ms)
+✔ analytics release check rejects empty, wrong-project and expanded network bindings (13.2417ms)
+✔ real nginx serves the React release alongside LP1 v2 legal and partner pages (250.4448ms)
+✔ release verification detects an omitted React include (203.9342ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2344.2609

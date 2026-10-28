@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-29",
+  "checkpoint": "Credential metadata verified; external gateway publication awaiting owner approval; no MCP authentication or delivery success claimed",
+  "files": [
+    {
+      "path": "docs/evidence/20261029-textme-auth/build.txt",
+      "sha256": "9af0a65e4636dad30be19044635f7e8c23705f96d65b756fd8dde0f4d29affa0"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/credential-binding.json",
+      "sha256": "accdda856540411c385d39630ba4857386216f29178d33d6762df85ada9a43d8"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/local-tests.txt",
+      "sha256": "3a31d27dd8aa9a1d695c1b9cf94ce8aa999139a86dc9707a6384e17124a89ba0"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/mcp-probe-sanitized.json",
+      "sha256": "20d2ed0ffb3c8a04de2dd53542f24e1026b29fec96bb8cbfb7c18150a658a54f"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/project-tests.txt",
+      "sha256": "28d112bbdd539886c0dff5f9e71cd486fd576d79b8ab8d0120eedcf73bc0e100"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/publish-review.png",
+      "sha256": "ab371cb29b1856bfaceacd258c32078823426f5aee0c530fbe368249accd6736"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/read-subworkflow-published.png",
+      "sha256": "d1ddcdd46e3421a4d085cb5d31c13baad28d823063a332e7154ec3ed15440fab"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/read-subworkflow-published.txt",
+      "sha256": "c6057170a4cfdd6312ba8dc8b33d26c6966a215a8126a06f08c6a3b335494806"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-auth/secret-review.txt",
+      "sha256": "e846e0642afce21f90533d6dbbe9ca46325d7581d6fe99da932c9c5d85b4d8dc"
+    }
+  ]
+}

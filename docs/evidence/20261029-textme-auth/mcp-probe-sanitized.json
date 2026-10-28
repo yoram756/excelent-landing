@@ -1,0 +1,313 @@
+{
+  "id": "JGdLe9l3ipq00RvK",
+  "name": "TEST TextMe authenticated MCP READ ONLY NO SEND 20261029",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "4a521e6f-d4df-4f1a-be4d-529ce1227641",
+      "name": "Manual MCP read verification",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "DEPLOYMENT_URL_WITHHELD",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "{\"Accept\":\"application/json, text/event-stream\"}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2025-03-26\",\"capabilities\":{},\"clientInfo\":{\"name\":\"excelent-read-verification\",\"version\":\"1.0.0\"}}}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          },
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "190ceb93-7509-4a83-9cf9-e8f2a1d3e921",
+      "name": "MCP initialize",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        224,
+        0
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "7KiT7LjJDAZZyLfW",
+          "name": "TextMe dot caller READ ONLY"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function parseMcpReply(response, expectedId) {\n  if(response?.statusCode!==200)throw Error('MCP_HTTP_'+(Number.isInteger(response?.statusCode)?response.statusCode:'UNKNOWN'));\n  const body=response.body;\n  let messages=[];\n  if(body && typeof body==='object')messages=[body];\n  else if(typeof body==='string'&&body.length<=1000000){\n    const text=body.trim();\n    if(text.startsWith('{'))messages=[JSON.parse(text)];\n    else for(const frame of text.replace(/\\r\\n/g,'\\n').split('\\n\\n')){\n      const data=frame.split('\\n').filter(s=>s.startsWith('data:')).map(s=>s.slice(5).trimStart()).join('\\n');\n      if(data)messages.push(JSON.parse(data));\n    }\n  }\n  const message=messages.find(m=>m?.id===expectedId);\n  if(message?.jsonrpc!=='2.0'||message.error||!message.result||typeof message.result!=='object')throw Error('MCP_INVALID_OR_ERROR_REPLY');\n  return message.result;\n}\nconst r=$input.first().json,result=parseMcpReply(r,1);if(typeof result.protocolVersion!=='string'||!/^\\d{4}-\\d{2}-\\d{2}$/.test(result.protocolVersion))throw Error('MCP_PROTOCOL_MISSING');const sessionId=r.headers?.['mcp-session-id']||'';if(typeof sessionId!=='string'||sessionId.length>200||/[\\r\\n]/.test(sessionId))throw Error('MCP_SESSION_INVALID');return [{json:{protocolVersion:result.protocolVersion,sessionId}}];"
+      },
+      "id": "fe1102af-8e67-455b-bc52-145b7a8a810e",
+      "name": "Validate initialize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        448,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "DEPLOYMENT_URL_WITHHELD",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify({Accept:'application/json, text/event-stream','MCP-Protocol-Version':$('Validate initialize').first().json.protocolVersion,...($('Validate initialize').first().json.sessionId?{'Mcp-Session-Id':$('Validate initialize').first().json.sessionId}:{})}) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"jsonrpc\":\"2.0\",\"method\":\"notifications/initialized\"}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          },
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "5e25f1fe-770f-4696-976b-73ae0f6b172e",
+      "name": "MCP initialized notification",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        672,
+        0
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "7KiT7LjJDAZZyLfW",
+          "name": "TextMe dot caller READ ONLY"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "DEPLOYMENT_URL_WITHHELD",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify({Accept:'application/json, text/event-stream','MCP-Protocol-Version':$('Validate initialize').first().json.protocolVersion,...($('Validate initialize').first().json.sessionId?{'Mcp-Session-Id':$('Validate initialize').first().json.sessionId}:{})}) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"jsonrpc\":\"2.0\",\"id\":2,\"method\":\"tools/list\",\"params\":{}}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          },
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "bcccadc0-4ccd-4195-bc91-90003128cd40",
+      "name": "MCP list tools",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        880,
+        0
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "7KiT7LjJDAZZyLfW",
+          "name": "TextMe dot caller READ ONLY"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function parseMcpReply(response, expectedId) {\n  if(response?.statusCode!==200)throw Error('MCP_HTTP_'+(Number.isInteger(response?.statusCode)?response.statusCode:'UNKNOWN'));\n  const body=response.body;\n  let messages=[];\n  if(body && typeof body==='object')messages=[body];\n  else if(typeof body==='string'&&body.length<=1000000){\n    const text=body.trim();\n    if(text.startsWith('{'))messages=[JSON.parse(text)];\n    else for(const frame of text.replace(/\\r\\n/g,'\\n').split('\\n\\n')){\n      const data=frame.split('\\n').filter(s=>s.startsWith('data:')).map(s=>s.slice(5).trimStart()).join('\\n');\n      if(data)messages.push(JSON.parse(data));\n    }\n  }\n  const message=messages.find(m=>m?.id===expectedId);\n  if(message?.jsonrpc!=='2.0'||message.error||!message.result||typeof message.result!=='object')throw Error('MCP_INVALID_OR_ERROR_REPLY');\n  return message.result;\n}\nfunction verifyReadToolList(response) {\n  const result=parseMcpReply(response,2);\n  if(!Array.isArray(result.tools)||result.tools.length!==1||result.tools[0].name!=='textme_read')throw Error('MCP_UNEXPECTED_TOOL_SURFACE');\n  const schema=result.tools[0].inputSchema;\n  if(schema?.type!=='object'||schema.properties?.requestJson?.type!=='string'||Object.keys(schema.properties).length!==1)throw Error('MCP_UNEXPECTED_INPUT_SCHEMA');\n  return {tools:['textme_read'],readOnlySurfaceVerified:true};\n}\nreturn [{json:verifyReadToolList($input.first().json)}];"
+      },
+      "id": "88492742-9e34-4968-9dab-770971f89dab",
+      "name": "Verify restricted tool surface",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1104,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "DEPLOYMENT_URL_WITHHELD",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "specifyHeaders": "json",
+        "jsonHeaders": "={{ JSON.stringify({Accept:'application/json, text/event-stream','MCP-Protocol-Version':$('Validate initialize').first().json.protocolVersion,...($('Validate initialize').first().json.sessionId?{'Mcp-Session-Id':$('Validate initialize').first().json.sessionId}:{})}) }}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"jsonrpc\":\"2.0\",\"id\":3,\"method\":\"tools/call\",\"params\":{\"name\":\"textme_read\",\"arguments\":{\"requestJson\":\"{\\\"operation\\\":\\\"balance\\\"}\"}}}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          },
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "text"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "b7c76e7c-8e26-4dfc-b232-298b76426965",
+      "name": "MCP call balance only",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1328,
+        0
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "7KiT7LjJDAZZyLfW",
+          "name": "TextMe dot caller READ ONLY"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function parseMcpReply(response, expectedId) {\n  if(response?.statusCode!==200)throw Error('MCP_HTTP_'+(Number.isInteger(response?.statusCode)?response.statusCode:'UNKNOWN'));\n  const body=response.body;\n  let messages=[];\n  if(body && typeof body==='object')messages=[body];\n  else if(typeof body==='string'&&body.length<=1000000){\n    const text=body.trim();\n    if(text.startsWith('{'))messages=[JSON.parse(text)];\n    else for(const frame of text.replace(/\\r\\n/g,'\\n').split('\\n\\n')){\n      const data=frame.split('\\n').filter(s=>s.startsWith('data:')).map(s=>s.slice(5).trimStart()).join('\\n');\n      if(data)messages.push(JSON.parse(data));\n    }\n  }\n  const message=messages.find(m=>m?.id===expectedId);\n  if(message?.jsonrpc!=='2.0'||message.error||!message.result||typeof message.result!=='object')throw Error('MCP_INVALID_OR_ERROR_REPLY');\n  return message.result;\n}\nfunction verifyBalanceToolResult(response) {\n  const result=parseMcpReply(response,3);\n  if(result.isError===true||!Array.isArray(result.content))throw Error('MCP_TOOL_FAILED');\n  const texts=result.content.filter(c=>c.type==='text'&&typeof c.text==='string');\n  if(texts.length!==1)throw Error('MCP_UNEXPECTED_TOOL_CONTENT');\n  let data=JSON.parse(texts[0].text);\n  if(Array.isArray(data)&&data.length===1)data=data[0];\n  if(data?.json)data=data.json;\n  if(data?.provider!=='TextMe'||data.operation!=='balance'||data.httpStatus!==200||data.providerStatus!==0||data.readOnly!==true||!/^\\d+(\\.\\d+)?$/.test(String(data.balance)))throw Error('MCP_BALANCE_PROOF_MISSING');\n  return {provider:'TextMe',operation:'balance',httpStatus:200,providerStatus:0,balancePresent:true,readOnly:true,sentMessages:0};\n}\nreturn [{json:{executionId:String($execution.id),...verifyBalanceToolResult($input.first().json),authenticatedMcp:true,toolSurface:$('Verify restricted tool surface').first().json.tools}}];"
+      },
+      "id": "57d72fe5-baaa-4306-b390-8e039cae8c09",
+      "name": "Minimize MCP proof",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1552,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual MCP read verification": {
+      "main": [
+        [
+          {
+            "node": "MCP initialize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP initialize": {
+      "main": [
+        [
+          {
+            "node": "Validate initialize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate initialize": {
+      "main": [
+        [
+          {
+            "node": "MCP initialized notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP initialized notification": {
+      "main": [
+        [
+          {
+            "node": "MCP list tools",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP list tools": {
+      "main": [
+        [
+          {
+            "node": "Verify restricted tool surface",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verify restricted tool surface": {
+      "main": [
+        [
+          {
+            "node": "MCP call balance only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "MCP call balance only": {
+      "main": [
+        [
+          {
+            "node": "Minimize MCP proof",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "pinData": {}
+}

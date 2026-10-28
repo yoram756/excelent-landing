@@ -1,0 +1,61 @@
+{
+ "ok": true,
+ "reports": [
+  {
+   "campaign": "consolidation",
+   "errors": [],
+   "warnings": [
+    "template A1 (exc_cons_a1_ack) has no verified provider approval",
+    "template A2 (exc_cons_a2_quiz) has no verified provider approval",
+    "template A3 (exc_cons_a3_case) has no verified provider approval",
+    "template A4 (exc_cons_a4_close) has no verified provider approval",
+    "template B1 (exc_cons_b1_booked) has no verified provider approval",
+    "template B2 (exc_cons_b2_reminder) has no verified provider approval",
+    "template B3 (exc_cons_b3_noshow) has no verified provider approval",
+    "template F1 (exc_cons_f1_after) has no verified provider approval",
+    "Cosend activation pending: scoped credentials, exclusive ownership and template approval required",
+    "channel sms has no provider (deferred)",
+    "channel email has no provider (deferred)",
+    "instant reply is off",
+    "no Meta campaign ids: Meta leads are rejected for this campaign",
+    "no intake block: patch-export.js cannot wire the intake for this campaign",
+    "identity not approved by the owner: only test builds",
+    "status is draft"
+   ],
+   "liveReady": false
+  },
+  {
+   "campaign": "refi",
+   "errors": [],
+   "warnings": [
+    "Cosend activation pending: scoped credentials, exclusive ownership and template approval required",
+    "instant reply is off"
+   ],
+   "liveReady": false
+  }
+ ],
+ "crossErrors": [],
+ "built": [
+  {
+   "campaign": "consolidation",
+   "dir": "src/services/funnel/dist/consolidation",
+   "files": [
+    "engine-test.json",
+    "go.json",
+    "calendly.json",
+    "instant-reply-test.json"
+   ]
+  },
+  {
+   "campaign": "refi",
+   "dir": "src/services/funnel/dist",
+   "files": [
+    "engine-test.json",
+    "go.json",
+    "calendly.json",
+    "instant-reply-test.json"
+   ]
+  }
+ ],
+ "env": ".env.production.example"
+}
