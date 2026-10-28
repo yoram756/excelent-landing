@@ -25,7 +25,7 @@
     "gambot_sender": {
       "number": "055-9881245",
       "e164": "972559881245",
-      "role": "מספר שליחה טכני מחובר ל Gambot. ממנו יוצאות הודעות אוטומטיות ואליו מגיעות תשובות. לא משנים ולא מנתקים בלי אישור.",
+      "role": "מספר WhatsApp טכני בחיבור Cosend במצב coexistence. המפתח gambot_sender נשמר לתאימות לקוד ישן בלבד. אין לחבר מחדש, לנתק או לשלוח ללא אישור מתאים.",
       "owner": "business"
     },
     "yoram_050": {
@@ -73,6 +73,12 @@
       ],
       "note": "משמש רק בקמפיין שבחר בו במפורש. המותג טרם הוגדר."
     }
+  },
+  "whatsapp": {
+    "provider": "cosend",
+    "senderPhone": "gambot_sender",
+    "bindingConfig": "src/services/wa-assistant/config/provider.json",
+    "outboundEnabled": false
   },
   "internalAlerts": {
     "whatsappTo": [

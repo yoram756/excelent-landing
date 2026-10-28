@@ -10,11 +10,12 @@ test('every phone key used by profiles and alerts exists',()=>{for(const p of Ob
 test('every campaign has its own identity block',()=>{for(const c of campaigns){assert.ok(c.identity,c.id);if(c.identity.approved){const prof=BIZ.profiles[c.identity.profile];assert.ok(prof,c.id+' profile');assert.ok(prof.allowedContactPhones.includes(c.identity.contactPhone),c.id+' contact');for(const t of c.identity.testPhones)assert.ok(prof.allowedTestPhones.includes(t),c.id+' test phone '+t);assert.ok(prof.allowedNames.includes(c.identity.nameInMessages),c.id+' name');}}});
 test('refinance uses the Excelent finance profile and 055-2783459',()=>{const r=campaigns.find(c=>c.id==='refi');assert.equal(r.identity.profile,'excelent_finance');assert.equal(r.identity.contactPhone,'excelent_contact');assert.equal(r.identity.approved,true);});
 test('a campaign without approved identity cannot be built for pilot or live',()=>{assert.match(build('live','consolidation','2026-10-20T07:00:00Z'),/identity not approved/);assert.equal(build('test','consolidation'),'ok');});
-test('pilot phones must be approved test phones of the campaign',()=>{assert.match(build('pilot','refi','2026-10-20T07:00:00Z','972521234567'),/not an approved test phone/);assert.equal(build('pilot','refi','2026-10-20T07:00:00Z','972552783459'),'ok');assert.equal(build('pilot','refi','2026-10-20T07:00:00Z','972502234052'),'ok','yoram_050 is an approved refi test phone');});
-test('pilot and live builds refuse to run without the Meta phone number id and credential',()=>{
+test('pilot phone ownership is checked before the Cosend activation freeze',()=>{assert.match(build('pilot','refi','2026-10-20T07:00:00Z','972521234567'),/not an approved test phone/);for(const phone of ['972552783459','972502234052'])assert.match(build('pilot','refi','2026-10-20T07:00:00Z',phone),/Cosend activation not verified/);});
+test('legacy Meta credentials cannot bypass the Cosend activation freeze',()=>{
   const bare=(mode,...args)=>{const env={...process.env,CAMPAIGN:'refi'};delete env.META_WA_PHONE_NUMBER_ID;delete env.META_WA_CREDENTIAL_ID;try{execFileSync('node',[ROOT+'/src/services/funnel/build-workflows.js',mode,...args],{env,stdio:'pipe'});return 'ok';}catch(e){return String(e.stderr);}};
-  assert.match(bare('pilot','2026-10-20T07:00:00Z','972552783459'),/META_WA_PHONE_NUMBER_ID/);
-  assert.match(bare('live','2026-10-20T07:00:00Z'),/META_WA_PHONE_NUMBER_ID/);
+  assert.match(bare('pilot','2026-10-20T07:00:00Z','972552783459'),/Cosend activation not verified/);
+  assert.match(bare('live','2026-10-20T07:00:00Z'),/Cosend activation not verified/);
+  assert.match(build('live','refi','2026-10-20T07:00:00Z'),/Cosend activation not verified/);
   assert.equal(bare('test'),'ok');});
 test('the refinance landing page shows only the Excelent contact number',()=>{const files=['index.html','partners.html','privacy.html','accessibility.html','assets/v2.js','assets/partners.js'].map(f=>fs.readFileSync(ROOT+'/site/lp1v2/'+f,'utf8')).join('\n');
   assert.ok(forms('excelent_contact').some(x=>files.includes(x)));for(const k of ['backup','gambot_sender','yoram_050'])for(const x of forms(k))assert.ok(!files.includes(x),k+' on the refinance page');});

@@ -1,6 +1,12 @@
 {
+  "../../../../../../apps/refi-landing/node_modules/posthog-js/dist/module.mjs": {
+    "file": "cro-assets/module-CG6JmjG1.js",
+    "name": "module",
+    "src": "../../../../../../apps/refi-landing/node_modules/posthog-js/dist/module.mjs",
+    "isDynamicEntry": true
+  },
   "index.html": {
-    "file": "cro-assets/index-BhnCkur-.js",
+    "file": "cro-assets/index-D153bevu.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -8,14 +14,8 @@
       "src/lib/analytics.ts"
     ]
   },
-  "node_modules/posthog-js/dist/module.mjs": {
-    "file": "cro-assets/module-CG6JmjG1.js",
-    "name": "module",
-    "src": "node_modules/posthog-js/dist/module.mjs",
-    "isDynamicEntry": true
-  },
   "src/lib/analytics.ts": {
-    "file": "cro-assets/analytics-C0z8W-q9.js",
+    "file": "cro-assets/analytics-DIDzsI3h.js",
     "name": "analytics",
     "src": "src/lib/analytics.ts",
     "isDynamicEntry": true,
@@ -23,7 +23,7 @@
       "index.html"
     ],
     "dynamicImports": [
-      "node_modules/posthog-js/dist/module.mjs"
+      "../../../../../../apps/refi-landing/node_modules/posthog-js/dist/module.mjs"
     ]
   },
   "style.css": {

@@ -3,6 +3,7 @@ export type LeadPayload = {
   first_name: string; phone: string; product: string; product_slug: string; campaign: string;
   source: string; event_id: string; idempotency_key: string; service_request: true;
   service_request_at: string; marketing_consent: false; money_included: false; answers: Record<string, never>;
+  utm_source?: string; utm_campaign?: string;
 };
 export type Receipt = { version: 1; requestId: string; eventId: string; acceptedAt: string; analyticsConsent: boolean };
 export const receiptKey = 'excelent:quote-receipt:v1';
@@ -19,14 +20,17 @@ export function normalizeInput(input: LeadInput) {
   return { name, phone, errors };
 }
 
-export function createPayload(input: LeadInput, identity: { product: string; campaign: string; source: string }, eventId = crypto.randomUUID(), now = new Date()): LeadPayload {
+export function createPayload(input: LeadInput, identity: { product: string; campaign: string; source: string }, eventId = crypto.randomUUID(), now = new Date(), search = typeof location === 'undefined' ? '' : location.search): LeadPayload {
   const normalized = normalizeInput(input);
   if (Object.keys(normalized.errors).length) throw Error('Invalid lead');
+  const attribution = new URLSearchParams(search);
   return {
     first_name: normalized.name, phone: normalized.phone, product: identity.product,
     product_slug: identity.campaign, campaign: identity.campaign, source: identity.source,
     event_id: eventId, idempotency_key: eventId, service_request: true,
     service_request_at: now.toISOString(), marketing_consent: false, money_included: false, answers: {},
+    ...(attribution.get('utm_source') ? { utm_source: attribution.get('utm_source')!.slice(0, 100) } : {}),
+    ...(attribution.get('utm_campaign') ? { utm_campaign: attribution.get('utm_campaign')!.slice(0, 100) } : {}),
   };
 }
 

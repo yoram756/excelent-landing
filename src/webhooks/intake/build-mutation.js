@@ -17,6 +17,7 @@ const L = v.labels, A = v.answers, s = v.score;
 const dt = iso => { const d = new Date(iso); return { date: d.toISOString().slice(0,10), time: d.toISOString().slice(11,19) }; };
 const goals = Array.isArray(A.goal) ? A.goal : (A.goal ? [A.goal] : []);
 const cv = {};
+for(const field of ['source','campaign']){const column=K.attribution?.columns?.[field];if(column&&v['utm_'+field])cv[column]=v['utm_'+field];}
 // Write segmentation only to explicitly configured, verified text columns.
 for(const [field,column] of Object.entries(K.productColumns||{})){if(!['product_slug','funnel_type'].includes(field)||!column)continue;cv[column]=v[field];}
 const st = (col, label) => { if (label) cv[col] = { label: String(label).slice(0,30) }; };

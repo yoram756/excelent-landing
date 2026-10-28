@@ -1,0 +1,69 @@
+{
+  "initialConcurrentRun": {
+    "scope": "Lighthouse mobile lab test of local production build; simulated throttling; not field or deployed API evidence",
+    "status": "FAIL",
+    "runs": [
+      {
+        "run": 1,
+        "lcpMs": 2573.1841000000004,
+        "cls": 0.0001970332152906662,
+        "tbtMs": 28,
+        "performance": 0.96,
+        "accessibility": 1,
+        "lighthouseVersion": "13.5.0"
+      },
+      {
+        "run": 2,
+        "lcpMs": 2508.23335,
+        "cls": 0.0001970332152906662,
+        "tbtMs": 28.5,
+        "performance": 0.96,
+        "accessibility": 1,
+        "lighthouseVersion": "13.5.0"
+      },
+      {
+        "run": 3,
+        "lcpMs": 2487.0786,
+        "cls": 0.0001970332152906662,
+        "tbtMs": 24.5,
+        "performance": 0.97,
+        "accessibility": 1,
+        "lighthouseVersion": "13.5.0"
+      }
+    ]
+  },
+  "isolatedRun": {
+    "scope": "Lighthouse mobile lab test of local production build; simulated throttling; not field or deployed API evidence",
+    "status": "PASS",
+    "runs": [
+      {
+        "run": 1,
+        "lcpMs": 2457.54665,
+        "cls": 0.0001970332152906662,
+        "tbtMs": 80.5,
+        "performance": 0.96,
+        "accessibility": 1,
+        "lighthouseVersion": "13.5.0"
+      },
+      {
+        "run": 2,
+        "lcpMs": 2398.3598,
+        "cls": 0.0001970332152906662,
+        "tbtMs": 94.5,
+        "performance": 0.96,
+        "accessibility": 1,
+        "lighthouseVersion": "13.5.0"
+      },
+      {
+        "run": 3,
+        "lcpMs": 2447.16385,
+        "cls": 0.0001970332152906662,
+        "tbtMs": 39.5,
+        "performance": 0.97,
+        "accessibility": 1,
+        "lighthouseVersion": "13.5.0"
+      }
+    ]
+  },
+  "interpretation": "Identical build and audit settings. First run overlapped root regression; isolated run was performed after regression completed. Lab measurements only, no field-performance claim."
+}

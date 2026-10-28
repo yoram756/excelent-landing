@@ -20,6 +20,16 @@ test('payload matches intake with one canonical event, service purpose and no ma
   assert.equal(payload.email, undefined); assert.equal(payload.analyticsConsent, undefined);
 });
 
+test('all three UTM classifications are preserved separately from the service campaign', async () => {
+  const { createPayload } = await modulePromise;
+  for (const campaign of ['campaign_buyers_south', 'campaign_sellers_south', 'campaign_bundle_allinone']) {
+    const payload = createPayload(input, identity, 'TEST-utm-event', new Date(), '?utm_source=synthetic&utm_campaign=' + campaign);
+    assert.equal(payload.utm_source, 'synthetic'); assert.equal(payload.utm_campaign, campaign); assert.equal(payload.campaign, 'refi');
+  }
+  const without = createPayload(input, identity, 'TEST-no-utm-event', new Date(), '');
+  assert.equal(without.utm_source, undefined); assert.equal(without.utm_campaign, undefined);
+});
+
 test('the actual campaign intake validator accepts the frontend payload and rejects a conflicting campaign', async () => {
   const { createPayload } = await modulePromise;
   const { intakeSource } = require('../../../src/webhooks/intake/source');

@@ -6,11 +6,12 @@ const biz=require(ROOT+'/config/business.json');
 const load=id=>JSON.parse(fs.readFileSync(ROOT+'/src/config/campaigns/'+id+'.json','utf8'));
 const check=(c,file=c.id+'.json')=>pkg.validateCampaign(c,file,biz);
 
-test('refi and consolidation are valid; refi is live ready, consolidation lists what blocks it',()=>{
-  const r=check(load('refi'));assert.deepEqual(r.errors,[]);assert.equal(r.liveReady,true);
+test('campaigns validate but Cosend activation remains blocked',()=>{
+  const r=check(load('refi'));assert.deepEqual(r.errors,[]);assert.equal(r.liveReady,false);
+  assert.ok(r.warnings.some(w=>w.startsWith('Cosend activation pending:')));
   assert.ok(r.warnings.includes('instant reply is off'));
   const c=check(load('consolidation'));assert.deepEqual(c.errors,[]);assert.equal(c.liveReady,false);
-  for(const w of ['identity not approved by the owner: only test builds','template A1 (exc_cons_a1_ack) not approved in Gambot','no Meta campaign ids: Meta leads are rejected for this campaign','no intake block: patch-export.js cannot wire the intake for this campaign','status is draft'])
+  for(const w of ['identity not approved by the owner: only test builds','template A1 (exc_cons_a1_ack) has no verified provider approval','no Meta campaign ids: Meta leads are rejected for this campaign','no intake block: patch-export.js cannot wire the intake for this campaign','status is draft'])
     assert.ok(c.warnings.includes(w),w);
   const all=pkg.validateAll();assert.deepEqual(all.reports.map(x=>x.campaign),['consolidation','refi']);assert.deepEqual(all.crossErrors,[]);});
 
@@ -23,7 +24,8 @@ test('a broken campaign file is rejected',()=>{
   bad(c=>{c.sequences[Object.keys(c.sequences).find(k=>c.sequences[k].length)][0].code='NOPE';},/unknown template NOPE/);
   bad(c=>{c.instantReply.enabled=true;},/enabled without an approved template id/);
   bad(c=>{c.instantReply.withinSeconds=90;},/withinSeconds/);
-  bad(c=>{c.channels.providers.whatsapp='other';},/gambot/);
+  bad(c=>{c.channels.providers.whatsapp='other';},/cosend/);
+  bad(c=>{c.channels.whatsappDeliveryEnabled=true;},/delivery disabled/);
   bad(c=>{c.identity.profile='nope';},/unknown identity profile/);
   bad(c=>{c.identity.contactPhone='yoram_050';},/contact phone not allowed/);
   bad(c=>{c.meta.campaignIds=['12a'];},/meta.campaignIds/);

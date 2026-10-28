@@ -1,0 +1,159 @@
+{
+    "date":  "2026-10-28",
+    "productionStatus":  "BLOCKED",
+    "officialProvider":  "cosend",
+    "productionChangesThisTask":  false,
+    "messagesSentThisTask":  0,
+    "liveModelCalls":  0,
+    "purchases":  0,
+    "authorizedNewBudget":  0,
+    "readOnlyAcceptance":  {
+                               "status":  "PASS",
+                               "workflowId":  "AwCquhPHa4OgjkEo",
+                               "executionId":  "59874",
+                               "verifiedAt":  "2026-10-28T15:08:57.114Z",
+                               "identityHttp":  200,
+                               "connectionHttp":  200,
+                               "organizationId":  "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+                               "connectionId":  "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+                               "phone":  "+972559881245",
+                               "phoneNumberId":  "1138723472651617",
+                               "metaWabaId":  "848287037598986",
+                               "state":  "active",
+                               "mode":  "coexistence",
+                               "credentialKind":  "connection",
+                               "verifiedScopes":  [
+                                                      "connections:read"
+                                                  ],
+                               "scopeEvidence":  "GET /v1/me verified before connection request",
+                               "deliveryModeAndOverrideFreshReadback":  "NOT TESTED",
+                               "limitation":  "No messages, contacts, locks or webhook permission established"
+                           },
+    "providerUiReadback":  {
+                               "status":  "PASS",
+                               "observationWindowUtc":  "2026-10-28T15:30:00Z/2026-10-28T15:34:00Z",
+                               "aiReceptionist":  "On",
+                               "initialReplyHoursAutomation":  "Off",
+                               "developerWebhookEndpoints":  "No endpoints yet",
+                               "doesNotExcludeOtherEventEndpoints":  true,
+                               "cardOnFile":  false,
+                               "aiRemaining":  21,
+                               "aiAllowanceBasis":  "lifetime",
+                               "displayNameApproval":  "pending; UI says Limited by WhatsApp",
+                               "additionalConnectionKey":  "Broad existing key observed; not copied, verified for this integration or used",
+                               "n8nCredentialInventory":  "Only named Cosend credential is the verified read-only connection; generic credentials not assumed to be suitable"
+                           },
+    "existingIntakeAudit":  {
+                                "status":  "PASS",
+                                "mode":  "READ_ONLY_NO_CUSTOMER_CONTENT",
+                                "container":  "excelent-wa-intake",
+                                "appMount":  "/docker/excelent-wa-intake-20261022/app:/app",
+                                "dataMount":  "/docker/excelent-wa-intake-20261022/data:/data",
+                                "command":  [
+                                                "wa-runtime.cjs"
+                                            ],
+                                "port":  8788,
+                                "databaseTables":  [
+                                                       "wa_candidate_events",
+                                                       "wa_candidate_scans"
+                                                   ],
+                                "sqliteQuickCheck":  "ok",
+                                "transaction":  "BEGIN IMMEDIATE; WAL; synchronous=FULL",
+                                "inputProtocol":  "incoming_message wrapper with meta_obj; not native Cosend v1 event envelope",
+                                "providerFetchCallsInSevenCjsFiles":  0,
+                                "fileSha256":  {
+                                                   "wa-runtime.cjs":  "70ebef7a5b0c161357d4024f8d6eeabc80aa12b1077ab08190baa754a398b533",
+                                                   "wa-coordinator.cjs":  "ec1db12a708b63eed4e0fee7bb674a8d396ef12b6d28d0556dbf4f783c7bc85d",
+                                                   "wa-intake-contract.cjs":  "a2bbf0a878c9abe7670b496e33e8facbef568828c11221efb3bbb39f029188cf",
+                                                   "wa-ledger.cjs":  "46656ca250a298583689017b25debdc50c18a0e9a0f41740635c7ee1eed81a48",
+                                                   "wa-crm-contract.cjs":  "5e2dd6c320fbffe2a081de4fb7cf228d8e43a958976825ff8e3511a2881f77e1",
+                                                   "wa-monday-plan.cjs":  "94c523530f4b02a5952b3735af7cbf4385f94eac92441c1087827e90d518253c",
+                                                   "wa-candidate-queue.cjs":  "e303ec14595d690b29bd46a01167b453f66716339c9b4c0744aead54788c0697"
+                                               },
+                                "fullSevenModuleReview":  "PASS",
+                                "reviewedModules":  [
+                                                        "wa-runtime.cjs",
+                                                        "wa-ledger.cjs",
+                                                        "wa-coordinator.cjs",
+                                                        "wa-intake-contract.cjs",
+                                                        "wa-candidate-queue.cjs",
+                                                        "wa-monday-plan.cjs",
+                                                        "wa-crm-contract.cjs"
+                                                    ],
+                                "remainingWork":  "Obtain an approved messages:read credential and authenticated native event/contact sample; validate mapping before a single shared transaction migration on a copy. Never forge the legacy organization value to fit its existing input contract.",
+                                "legacyTenantBinding":  "022188403"
+                            },
+    "existingIsolationReadback":  {
+                                      "status":  "PASS",
+                                      "container":  "excelent-wa-isolated-20261028-v2",
+                                      "imageId":  "sha256:ffeb52485f78b1b06c9a832205853cf75da72a07a514c9a27724df85979d6c34",
+                                      "healthy":  true,
+                                      "network":  "none",
+                                      "ports":  {
+
+                                                },
+                                      "readOnlyRootfs":  true,
+                                      "user":  "1000:1000",
+                                      "capDrop":  [
+                                                      "ALL"
+                                                  ],
+                                      "currentLocalRevisionDeployed":  "NOT TESTED"
+                                  },
+    "localVerification":  {
+                              "funnel":  {
+                                             "status":  "PASS",
+                                             "command":  "npm run test:funnel",
+                                             "exitCode":  0,
+                                             "passed":  381,
+                                             "log":  "tests/out/cosend-migration-20261028/funnel.log"
+                                         },
+                              "assistant":  {
+                                                "status":  "PASS",
+                                                "command":  "npm test --prefix src/services/wa-assistant",
+                                                "exitCode":  0,
+                                                "passed":  84,
+                                                "log":  "tests/out/cosend-migration-20261028/assistant.log"
+                                            },
+                              "assistantMutationControls":  {
+                                                                "status":  "PASS",
+                                                                "exitCode":  0,
+                                                                "detected":  15,
+                                                                "eachMutatedTestExitCode":  1,
+                                                                "report":  "tests/out/cosend-migration-20261028/negative-controls.json"
+                                                            },
+                              "funnelMutationControls":  {
+                                                             "status":  "PASS",
+                                                             "exitCode":  0,
+                                                             "detected":  2,
+                                                             "eachMutatedTestExitCode":  1,
+                                                             "report":  "tests/out/cosend-migration-20261028/migration-negative-controls.json"
+                                                         },
+                              "syntheticServiceHttp":  {
+                                                           "status":  "PASS",
+                                                           "exitCode":  0,
+                                                           "passed":  16,
+                                                           "report":  "tests/out/cosend-migration-20261028/service-smoke.json"
+                                                       },
+                              "testWorkflowPackage":  {
+                                                          "status":  "PASS",
+                                                          "command":  "node src/deploy/package.js",
+                                                          "exitCode":  0,
+                                                          "liveReady":  false
+                                                      },
+                              "productionInferenceAllowed":  false,
+                              "original47AndN8n24AreNotAdditionalTests":  true
+                          },
+    "productionModel":  "BLOCKED",
+    "productionHandoff":  "NOT TESTED",
+    "productionDelivery":  "NOT TESTED",
+    "customerActivation":  "BLOCKED",
+    "requiredActions":  [
+                            "Owner connects a scoped credential through secure Credentials or secret manager, never chat",
+                            "Verify existing Cosend assignee id without purchasing another seat",
+                            "Approve one responder and verify phone/Blueticks behavior before changing ownership",
+                            "Complete a single durable ingress transaction and contact-wide suppression on a copy first",
+                            "Agree model, data policy and spending cap before enabling model HTTP",
+                            "Deploy current revision to isolation before a separately approved single delivery test"
+                        ],
+    "report":  "docs/runtime/COSEND_MIGRATION_20261028.md"
+}

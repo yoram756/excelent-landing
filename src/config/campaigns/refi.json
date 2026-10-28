@@ -45,6 +45,21 @@
   },
   "intake": {
     "group": "topics",
+    "attribution": {
+      "columns": { "source": "text_mm8j144k", "campaign": "text_mm8j3b0k" },
+      "campaigns": {
+        "campaign_buyers_south": "רוכשי דירות בדרום",
+        "campaign_sellers_south": "מוכרי נכסים בדרום",
+        "campaign_bundle_allinone": "באנדל משכנתא, עורך דין ושמאי"
+      }
+    },
+    "internalAlert": {
+      "provider": "cosend",
+      "recipientPhone": "excelent_contact",
+      "senderPhone": "gambot_sender",
+      "legacyTemplateId": "2386590312169194",
+      "mondayBaseUrl": "https://kho566440.monday.com"
+    },
     "newStage": "ליד חדש",
     "assignees": [{ "id": 75075191, "kind": "person" }],
     "reminder": {
@@ -433,7 +448,9 @@
   },
   "channels": {
     "cascade": ["whatsapp", "sms", "email"],
-    "providers": { "whatsapp": "gambot", "sms": "textme", "email": "sendgrid" },
+    "providers": { "whatsapp": "cosend", "sms": "textme", "email": "sendgrid" },
+    "whatsappDeliveryEnabled": false,
+    "templateApprovalProvider": "legacy_gambot_not_cosend_verified",
     "sms": { "source": "Excelent" },
     "email": { "from": "office@excelent.co.il" },
     "optOut": { "label": "הסר", "keywords": "הסר|הסירו|להסיר|stop" }

@@ -1,0 +1,62 @@
+{
+  "observedAt": "2026-10-28T17:10:00Z",
+  "scope": "Read-only authenticated browser, VPS workflow export, repository, connected Drive and Gmail; no WhatsApp send",
+  "cosend": {
+    "discoveryStatus": "PASS",
+    "deliveryStatus": "NOT TESTED",
+    "organizationId": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+    "connectionId": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+    "phoneNumberId": "1138723472651617",
+    "deprecatedPhoneNumberId": "1350440204809114",
+    "credentialId": "jkyKdDJCUBfp6BzC",
+    "credentialName": "Cosend - read-only numbers - 0559881245",
+    "verifiedScopes": ["connections:read"],
+    "readOnlyWorkflow": "AwCquhPHa4OgjkEo",
+    "verifiedExecution": "59874",
+    "readback": "GET /v1/me and approved connection both HTTP 200; active coexistence connection",
+    "blockers": ["No approved scoped delivery credential bound to the funnel", "Exclusive automation ownership not verified; Cosend AI receptionist was on", "Webhook endpoints absent in observed dashboard", "WhatsApp display name approval pending / Limited by WhatsApp", "No delivery test permitted by current instruction"],
+    "source": "src/services/wa-assistant/config/provider.json"
+  },
+  "metaCapi": {
+    "discoveryStatus": "PASS",
+    "productionStatus": "BLOCKED",
+    "datasetId": "1822147178482498",
+    "businessId": "745355029428233",
+    "pageId": "102101428225258",
+    "datasetName": "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance",
+    "settingsReadback": "Owner and linked Page verified. CRM integration incomplete. Overview states no activity received in displayed 2026-09-30 through 2026-10-27 range.",
+    "credentialSearch": "CAPI: No credentials found in n8n Personal project",
+    "blockers": ["LP1 dataset association and event contract not verified", "No CAPI delivery credential or configured sender found in inspected scope", "No test-event receipt or event_id deduplication readback"],
+    "url": "https://eventsmanager.facebook.com/events_manager2/list/dataset/1822147178482498/settings?business_id=745355029428233"
+  },
+  "posthog": {
+    "productionStatus": "BLOCKED",
+    "browser": "https://eu.posthog.com/login; no authenticated project",
+    "localConfiguration": "VITE_POSTHOG_KEY and VITE_POSTHOG_HOST absent; build analyticsConfigured=false",
+    "credentialSearch": "PostHog: No credentials found in n8n Personal project",
+    "connectedSources": "No PostHog account email found in connected yoram@kho.org.il; Drive matches were research recommendations, not project credentials",
+    "blockers": ["No verified project ID, public project key and host", "No live quote_submitted event receipt"],
+    "mockTestsAreProductionEvidence": false
+  },
+  "workflowInventory": {
+    "status": "PASS",
+    "count": 89,
+    "method": "n8n export:workflow --all; private server-only file; sanitized HTTP-node endpoint/credential metadata inspection",
+    "cosendMatches": 2,
+    "posthogMatches": 0,
+    "capiEventsEndpointMatches": 0,
+    "metaReadOnlyCredential": "rXUgCsAiS5wC4iRQ",
+    "metaWhatsAppCredentialIsNotCapiProof": "2392gTlqAQR49WRY"
+  },
+  "intake": {
+    "workflowId": "8W7MymUCLpPnilJs",
+    "publishedVersion": "4842b1ba-5f41-468d-a2df-fb0a5f854c3f",
+    "nodes": 37,
+    "lockNodes": 0,
+    "errorWorkflowId": "4bLJ8LvpNYnoCB8t",
+    "atomicLockProductionStatus": "BLOCKED",
+    "evidence": "Fresh read-only VPS export; no Lock node; existing lock server healthy but /internal-alert/claim not yet deployed"
+  },
+  "whatsappMessagesSent": 0,
+  "secretsCopiedOrPrinted": false
+}

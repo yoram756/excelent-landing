@@ -1,0 +1,174 @@
+{
+  "asOf": "2026-10-28T14:26:50.123Z",
+  "scope": "Handoff after interrupted internal-alert and three-campaign work. This report does not certify production readiness.",
+  "focusedLocalTests": {
+    "status": "PASS",
+    "command": "node --test tests/funnel/internal-alert.test.js tests/funnel/intake.test.js tests/funnel/lock-server.test.js",
+    "exitCode": 0,
+    "passed": 48,
+    "failed": 0,
+    "scope": "Local synthetic/unit/HTTP tests. Elevated rerun after sandbox EACCES on loopback; no production calls.",
+    "fullRegressionStatus": "NOT TESTED",
+    "mutationControlStatus": "NOT TESTED"
+  },
+  "requirements": [
+    {
+      "requirement": "Create and read back Monday UTM Source and UTM Campaign columns",
+      "status": "PASS",
+      "board": "5106246268",
+      "columns": {
+        "source": "text_mm8j144k",
+        "campaign": "text_mm8j3b0k"
+      }
+    },
+    {
+      "requirement": "First real three-campaign UTM round trip",
+      "status": "FAIL",
+      "httpStatuses": [
+        200,
+        200,
+        200
+      ],
+      "reason": "Items were created but both UTM columns read back empty",
+      "executionIds": [
+        "59488",
+        "59489",
+        "59490"
+      ],
+      "version": "a2c97a85-f211-4e7c-8509-58e98a553ea7"
+    },
+    {
+      "requirement": "Real round trip after direct-assignment expression revision",
+      "status": "NOT TESTED",
+      "reason": "A second publish action was issued (version prefix 4842b1ba); no post-fix request marker or response exists. Verify active version before any new test."
+    },
+    {
+      "requirement": "Production internal WhatsApp delivery to business phone",
+      "status": "BLOCKED",
+      "reason": "Internal send nodes remain disabled. Deployment and n8n credential for the new authenticated atomic claim endpoint have not been verified."
+    },
+    {
+      "requirement": "Cleanup the three created synthetic items",
+      "status": "PASS",
+      "verifiedReadback": {
+        "items": [
+          {
+            "id": "3315219833",
+            "state": "deleted",
+            "board": {
+              "id": "5106246268"
+            }
+          },
+          {
+            "id": "3315237312",
+            "state": "deleted",
+            "board": {
+              "id": "5106246268"
+            }
+          },
+          {
+            "id": "3315237627",
+            "state": "deleted",
+            "board": {
+              "id": "5106246268"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "firstReadback": {
+    "items": [
+      {
+        "id": "3315219833",
+        "name": "TEST קמפיין 3 0500000048",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST_campaign_20261028_003",
+            "value": "\"TEST_campaign_20261028_003\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3315237312",
+        "name": "TEST קמפיין 2 0500000047",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST_campaign_20261028_002",
+            "value": "\"TEST_campaign_20261028_002\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3315237627",
+        "name": "TEST קמפיין 1 0500000046",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST_campaign_20261028_001",
+            "value": "\"TEST_campaign_20261028_001\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      }
+    ]
+  },
+  "localEvidence": "tests/out/internal-alert-20261028",
+  "repairRunner": {
+    "file": "tests/out/internal-alert-20261028/repair-attribution-live.cjs",
+    "executed": false,
+    "warning": "Do not run this old repair fixture after cleanup: it references phones/receipts of deleted test items. Use fresh preflighted fixtures."
+  },
+  "git": {
+    "primaryBranch": "codex/lock-service-20261025",
+    "primaryHead": "4b0956e265ad5e8b615a4ba50c93130d4783f2dc",
+    "priorDeploymentWorktreeHead": "ccbeaab86e9724ba205fc85f8f5552c8212efbea",
+    "thisWorkCommitted": false,
+    "warning": "Primary working tree contains substantial unrelated pending work. Preserve it."
+  },
+  "noWhatsAppMessageSent": true,
+  "noLockDeploymentPerformed": true
+}

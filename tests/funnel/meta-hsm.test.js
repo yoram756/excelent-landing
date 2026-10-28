@@ -111,11 +111,11 @@ test('intake wiring: refuses a missing setting or an unexpected export, keeps st
   for(const n of w.nodes)for(const b of [n.parameters.jsonBody,n.parameters.responseBody])if(typeof b==='string'&&b.startsWith('={{'))assert.ok(!/\}\}/.test(b.slice(3,-2)),n.name);
   assert.deepEqual(patchIntake(exportFixture(),opts),w,'deterministic output');});
 
-test('the built instant reply workflow carries the HSM module and posts to the Meta Cloud API endpoint',()=>{
+test('the built instant reply preserves template simulation and only carries a disabled Cosend endpoint',()=>{
   const {execFileSync}=require('child_process');execFileSync('node',[ROOT+'/src/services/funnel/build-workflows.js','test']);
   const w=JSON.parse(fs.readFileSync(ROOT+'/src/services/funnel/dist/instant-reply-test.json','utf8'));
   const node=w.nodes.find(n=>n.name==='Instant reply').parameters.jsCode;assert.match(node,/instantPayload/);assert.doesNotMatch(node,/__META_HSM__/);
-  const send=w.nodes.find(n=>n.name==='Send WhatsApp');assert.equal(send.parameters.url,hsm.sendUrl(''));assert.equal(send.disabled,true);
+  const send=w.nodes.find(n=>n.name==='Send WhatsApp');assert.equal(send.parameters.url,'https://api.cosend.app/v1/messages');assert.equal(send.disabled,true);
   assert.equal(send.credentials,undefined,'a test build carries no Meta credential');
   // Only a Meta message id counts as sent; a refusal or an n8n error leaves fn_last alone.
   const sent=w.nodes.find(n=>n.name==='Sent?').parameters.conditions.conditions[0].leftValue.slice(3,-2);

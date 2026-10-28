@@ -6,7 +6,11 @@ const intakeConfig=(id='refi')=>{
   if(!c.intake)throw new Error('campaign '+id+' has no intake block');
   if(!/^\d+$/.test(c.board)||!/^\w+$/.test(c.intake.group))throw new Error('campaign '+id+' has an invalid board or group id');
   const C=c.columns;
-  return {productSlugs:c.intake.productSlugs||[c.id],productColumns:c.intake.productColumns||{},campaign:c.id,board:c.board,group:c.intake.group,newStage:c.intake.newStage,reminder:c.intake.reminder||null,assignees:c.intake.assignees||[],
+  const business=JSON.parse(fs.readFileSync(path.join(__dirname,'../../../config/business.json'),'utf8'));
+  const alert=c.intake.internalAlert;
+  const provider=JSON.parse(fs.readFileSync(path.join(__dirname,'../../services/wa-assistant/config/provider.json'),'utf8'));
+  if(alert&&(!business.phones[alert.recipientPhone]||!business.phones[alert.senderPhone]||alert.provider!=='cosend'||!/^https:\/\/[\w.-]+\.monday\.com$/.test(alert.mondayBaseUrl)))throw Error('Invalid internal alert configuration');
+  return {productSlugs:c.intake.productSlugs||[c.id],productColumns:c.intake.productColumns||{},campaign:c.id,board:c.board,group:c.intake.group,newStage:c.intake.newStage,reminder:c.intake.reminder||null,assignees:c.intake.assignees||[],attribution:c.intake.attribution||null,internalAlert:alert?{...alert,to:business.phones[alert.recipientPhone].e164,from:business.phones[alert.senderPhone].e164,connectionId:provider.connectionId,apiBaseUrl:provider.apiBaseUrl}:null,
     columns:{...c.intake.columns,phone:C.phone,stage:C.stage,source:C.source,heat:C.heat,firstReply:C.firstReply,consentMarketing:C.consentMarketing,
       consentService:C.consentService,email:C.email,permissions:c.contactPermissions.column}};
 };

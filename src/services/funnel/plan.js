@@ -10,7 +10,7 @@ const CRM = __CRM_FIELDS__;
 const CH = __CHANNELS__, OPT = CFG.channels.optOut;
 // Meta Cloud API template body (src/services/funnel/meta-hsm.js, injected by the build).
 const HSM = __META_HSM__;
-const SENDER = BIZ.phones.gambot_sender.number;
+const SENDER = BIZ.phones[BIZ.whatsapp.senderPhone].number;
 const CONTACT = CFG.identity&&CFG.identity.contactPhone ? BIZ.phones[CFG.identity.contactPhone].number : 'לא הוגדר מספר קשר לקמפיין';
 const MODE = '__MODE__';
 // pilot: real sends, but only to the internal phones listed here (injected by the build)

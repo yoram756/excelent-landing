@@ -1,0 +1,576 @@
+{
+  "generatedAt": "2026-10-28T14:47:21.809Z",
+  "status": "BLOCKED",
+  "scope": "Live Monday/n8n UTM classification verified. Automatic WhatsApp internal alert cannot be activated with the invalid provider credential and an unverified production claim endpoint.",
+  "requirements": [
+    {
+      "requirement": "Immediate automatic internal WhatsApp alert to 055-2783459",
+      "status": "BLOCKED",
+      "reason": "Gambot credential returns HTTP 401 invalid_api_key. Production WhatsApp nodes remain disabled; no message sent."
+    },
+    {
+      "requirement": "Prevent duplicate WhatsApp internal alerts in production",
+      "status": "BLOCKED",
+      "reason": "Durable SQLite reservation and protected HTTP endpoint are implemented and tested locally, but not deployed or connected to production n8n."
+    },
+    {
+      "requirement": "Map three UTM campaign classifications through n8n into Monday",
+      "status": "PASS",
+      "boardId": "5106246268",
+      "columns": {
+        "source": "text_mm8j144k",
+        "campaign": "text_mm8j3b0k"
+      },
+      "campaigns": [
+        "campaign_buyers_south",
+        "campaign_sellers_south",
+        "campaign_bundle_allinone"
+      ],
+      "executionIds": [
+        "59633",
+        "59634",
+        "59635"
+      ],
+      "evidence": "Real HTTP 200 responses and independent raw Monday API readbacks"
+    },
+    {
+      "requirement": "Synthetic test confirms WhatsApp alert delivered to the business phone",
+      "status": "FAIL",
+      "observed": "HTTP 401 invalid_api_key at Read internal template; send node never executed"
+    },
+    {
+      "requirement": "Remove own synthetic CRM items and generated test error alert",
+      "status": "PASS",
+      "itemIds": [
+        "3315361211",
+        "3315359496",
+        "3315360067",
+        "3315319667"
+      ],
+      "evidence": "Deleted state read back independently from Monday"
+    },
+    {
+      "requirement": "Frontend UTM forwarding deployed to VPS",
+      "status": "NOT TESTED",
+      "reason": "LP1 v2 and React source changes and React build are local only in this task. The live tests posted directly to the production API."
+    }
+  ],
+  "production": {
+    "workflowId": "8W7MymUCLpPnilJs",
+    "versionId": "4842b1ba-5f41-468d-a2df-fb0a5f854c3f",
+    "versionName": "UTM direct column assignments 20261028",
+    "change": "Save to Monday JSON body expression only",
+    "workflowSettingsChanged": false,
+    "nginxChanged": false,
+    "credentialsChanged": false,
+    "automaticWhatsAppEnabled": false,
+    "finalResponses": [
+      {
+        "campaign": "campaign_buyers_south",
+        "phone": "0500000066",
+        "eventId": "TEST_direct_20261028_001",
+        "httpStatus": 200,
+        "body": "{\"request_id\":\"3315361211\"}",
+        "durationMs": 2072
+      },
+      {
+        "campaign": "campaign_sellers_south",
+        "phone": "0500000067",
+        "eventId": "TEST_direct_20261028_002",
+        "httpStatus": 200,
+        "body": "{\"request_id\":\"3315359496\"}",
+        "durationMs": 2326
+      },
+      {
+        "campaign": "campaign_bundle_allinone",
+        "phone": "0500000068",
+        "eventId": "TEST_direct_20261028_003",
+        "httpStatus": 200,
+        "body": "{\"request_id\":\"3315360067\"}",
+        "durationMs": 1805
+      }
+    ],
+    "mondayReadback": {
+      "items": [
+        {
+          "id": "3315359496",
+          "name": "TEST קמפיין 2 0500000067",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "refi_phone",
+              "text": "972500000067",
+              "value": "{\"phone\":\"972500000067\",\"countryShortName\":\"IL\"}"
+            },
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_direct_20261028_002",
+              "value": "\"TEST_direct_20261028_002\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "synthetic_20261028",
+              "value": "\"synthetic_20261028\""
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "campaign_sellers_south",
+              "value": "\"campaign_sellers_south\""
+            }
+          ]
+        },
+        {
+          "id": "3315360067",
+          "name": "TEST קמפיין 3 0500000068",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "refi_phone",
+              "text": "972500000068",
+              "value": "{\"phone\":\"972500000068\",\"countryShortName\":\"IL\"}"
+            },
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_direct_20261028_003",
+              "value": "\"TEST_direct_20261028_003\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "synthetic_20261028",
+              "value": "\"synthetic_20261028\""
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "campaign_bundle_allinone",
+              "value": "\"campaign_bundle_allinone\""
+            }
+          ]
+        },
+        {
+          "id": "3315361211",
+          "name": "TEST קמפיין 1 0500000066",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "refi_phone",
+              "text": "972500000066",
+              "value": "{\"phone\":\"972500000066\",\"countryShortName\":\"IL\"}"
+            },
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_direct_20261028_001",
+              "value": "\"TEST_direct_20261028_001\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "synthetic_20261028",
+              "value": "\"synthetic_20261028\""
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "campaign_buyers_south",
+              "value": "\"campaign_buyers_south\""
+            }
+          ]
+        }
+      ]
+    },
+    "cleanup": {
+      "items": [
+        {
+          "id": "3315359496",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          }
+        },
+        {
+          "id": "3315360067",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          }
+        },
+        {
+          "id": "3315361211",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          }
+        }
+      ]
+    }
+  },
+  "internalAlert": {
+    "to": "972552783459",
+    "from": "972559881245",
+    "credentialName": "Header Auth account",
+    "credentialId": "6hr28GsvQQrGzjwx",
+    "provider": "Gambot",
+    "probeWorkflowId": "1WeBNFFkV64UoPNU",
+    "executionId": "59658",
+    "httpStatus": 401,
+    "error": "invalid_api_key",
+    "failedNode": "Read internal template",
+    "executedNodes": [
+      "Manual only",
+      "Read internal template"
+    ],
+    "messagesSent": 0,
+    "allProbeNodesDisabledAfterTest": true,
+    "delivered": false,
+    "providerDocumentation": "https://gambot.co.il/developers/"
+  },
+  "localVerification": [
+    {
+      "status": "PASS",
+      "command": "npm run test:funnel",
+      "exitCode": 0,
+      "tests": 376,
+      "evidence": "tests/out/internal-alert-20261028/funnel-green.log"
+    },
+    {
+      "status": "PASS",
+      "command": "node --test tests/funnel/internal-alert.test.js",
+      "exitCode": 0,
+      "tests": 11,
+      "evidence": "tests/out/internal-alert-20261028/internal-alert-green.log"
+    },
+    {
+      "status": "PASS",
+      "command": "npm run test:site",
+      "exitCode": 0,
+      "checks": 60,
+      "transport": "Mock API; not a production receipt",
+      "evidence": "tests/out/internal-alert-20261028/site-green.log"
+    },
+    {
+      "status": "PASS",
+      "command": "npm run build --prefix apps/refi-landing",
+      "exitCode": 0
+    },
+    {
+      "status": "PASS",
+      "command": "npm run lint --prefix apps/refi-landing",
+      "exitCode": 0
+    },
+    {
+      "status": "PASS",
+      "command": "npm test --prefix apps/refi-landing",
+      "exitCode": 0,
+      "tests": 7
+    },
+    {
+      "status": "PASS",
+      "command": "node --test tests/funnel/secrets.test.js",
+      "exitCode": 0,
+      "tests": 3
+    },
+    {
+      "status": "PASS",
+      "scope": "Negative control: allowing update-mode alerts causes an assertion failure",
+      "brokenExitCode": 1,
+      "evidence": "tests/out/internal-alert-20261028/red.log"
+    },
+    {
+      "status": "PASS",
+      "scope": "Negative control: removing frontend UTM campaign mapping causes ERR_ASSERTION for campaign_buyers_south",
+      "brokenExitCode": 1,
+      "evidence": "tests/out/internal-alert-20261028/cro-red.log"
+    }
+  ],
+  "dedupDesign": {
+    "key": "internal-lead:<board>:<item>:<recipient>",
+    "atomic": "SQLite INSERT ON CONFLICT DO NOTHING",
+    "parallelProcesses": 8,
+    "successfulClaims": 1,
+    "parallelHttpRequests": 12,
+    "successfulHttpClaims": 1,
+    "afterRestart": "A previous claim remains blocked",
+    "unknownDelivery": "Claim is retained permanently; reconcile before any operator retry",
+    "deploymentStatus": "NOT TESTED"
+  },
+  "sourceFiles": [
+    "src/config/campaigns/refi.json",
+    "src/webhooks/intake/source.js",
+    "src/webhooks/intake/monday-payload.js",
+    "src/webhooks/intake/validate.js",
+    "src/webhooks/intake/build-mutation.js",
+    "src/webhooks/intake/internal-alert.js",
+    "src/webhooks/intake/internal-alert-result.js",
+    "src/webhooks/intake/patch-internal-alert.js",
+    "src/services/lifecycle/db.js",
+    "src/services/lifecycle/lock-server.js",
+    "site/lp1v2/assets/v2.js",
+    "apps/refi-landing/src/lib/lead.ts",
+    "tests/funnel/internal-alert.test.js",
+    "tests/funnel/build-internal-alert-probe.js"
+  ],
+  "intermediateEvidence": {
+    "firstRoundResponses": [
+      {
+        "campaign": "campaign_buyers_south",
+        "phone": "0500000046",
+        "eventId": "TEST_campaign_20261028_001",
+        "httpStatus": 200,
+        "body": "{\"request_id\":\"3315237627\"}",
+        "durationMs": 2645
+      },
+      {
+        "campaign": "campaign_sellers_south",
+        "phone": "0500000047",
+        "eventId": "TEST_campaign_20261028_002",
+        "httpStatus": 200,
+        "body": "{\"request_id\":\"3315237312\"}",
+        "durationMs": 1879
+      },
+      {
+        "campaign": "campaign_bundle_allinone",
+        "phone": "0500000048",
+        "eventId": "TEST_campaign_20261028_003",
+        "httpStatus": 200,
+        "body": "{\"request_id\":\"3315219833\"}",
+        "durationMs": 1629
+      }
+    ],
+    "firstRoundReadback": {
+      "items": [
+        {
+          "id": "3315219833",
+          "name": "TEST קמפיין 3 0500000048",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "refi_phone",
+              "text": "972500000048",
+              "value": "{\"phone\":\"972500000048\",\"countryShortName\":\"IL\"}"
+            },
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_campaign_20261028_003",
+              "value": "\"TEST_campaign_20261028_003\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "",
+              "value": null
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "3315237312",
+          "name": "TEST קמפיין 2 0500000047",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "refi_phone",
+              "text": "972500000047",
+              "value": "{\"phone\":\"972500000047\",\"countryShortName\":\"IL\"}"
+            },
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_campaign_20261028_002",
+              "value": "\"TEST_campaign_20261028_002\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "",
+              "value": null
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "3315237627",
+          "name": "TEST קמפיין 1 0500000046",
+          "state": "active",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "refi_phone",
+              "text": "972500000046",
+              "value": "{\"phone\":\"972500000046\",\"countryShortName\":\"IL\"}"
+            },
+            {
+              "id": "multiple_person_mm8c8hfp",
+              "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+              "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+            },
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_campaign_20261028_001",
+              "value": "\"TEST_campaign_20261028_001\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "",
+              "value": null
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "",
+              "value": null
+            }
+          ]
+        }
+      ]
+    },
+    "firstRoundLaterStates": {
+      "items": [
+        {
+          "id": "3315219833",
+          "name": "TEST קמפיין 3 0500000048",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_campaign_20261028_003",
+              "value": "\"TEST_campaign_20261028_003\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "",
+              "value": null
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "3315237312",
+          "name": "TEST קמפיין 2 0500000047",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_campaign_20261028_002",
+              "value": "\"TEST_campaign_20261028_002\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "",
+              "value": null
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "",
+              "value": null
+            }
+          ]
+        },
+        {
+          "id": "3315237627",
+          "name": "TEST קמפיין 1 0500000046",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          },
+          "column_values": [
+            {
+              "id": "text_mm8c3r4v",
+              "text": "TEST_campaign_20261028_001",
+              "value": "\"TEST_campaign_20261028_001\""
+            },
+            {
+              "id": "text_mm8j144k",
+              "text": "",
+              "value": null
+            },
+            {
+              "id": "text_mm8j3b0k",
+              "text": "",
+              "value": null
+            }
+          ]
+        }
+      ]
+    },
+    "repairUpdate": {
+      "at": "2026-10-28T14:30:52.685Z",
+      "campaign": "campaign_buyers_south",
+      "httpStatus": 500,
+      "body": "{\"message\":\"Error in workflow\"}",
+      "automaticRetry": false
+    },
+    "failedExecution": "59617",
+    "error": "Cannot change column value for inactive items",
+    "ownErrorItem": "3315319667",
+    "ownErrorItemCleanup": {
+      "items": [
+        {
+          "id": "3315319667",
+          "state": "deleted",
+          "board": {
+            "id": "5106246268"
+          }
+        }
+      ]
+    }
+  },
+  "remaining": [
+    "Replace or repair the existing Gambot credential in n8n; never paste the API secret into this report or chat.",
+    "Deploy the protected /internal-alert/claim route on the lock service and supply its verified n8n URL and existing Header Auth credential to patch-internal-alert.js.",
+    "Apply the patch to a fresh private production workflow export, verify it, and rerun the one-recipient provider test before enabling automatic delivery.",
+    "Deploy the built frontend UTM forwarding changes through the normal isolated VPS release process."
+  ]
+}

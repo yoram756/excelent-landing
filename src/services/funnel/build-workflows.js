@@ -29,13 +29,14 @@ const src=f=>fs.readFileSync(path.join(D,f),'utf8').replace(/\r\n/g,'\n').split(
 let seq=0;const id=()=>{const h=crypto.createHash('sha1').update(MODE+':'+(seq++)).digest('hex');return h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);};
 const BOARD=CFG.board;const COLS=CFG.columns;
 const MON={mondayComApi:{id:'Un7HBqZvldpVYUaB',name:'Monday.com account'}};
-const GAM={httpHeaderAuth:{id:'6hr28GsvQQrGzjwx',name:'Header Auth account'}};
-// WhatsApp sends go to the Meta Cloud API. The phone number id and the n8n credential (header Authorization: Bearer <token>)
-// come from env at build time; test builds keep a placeholder (their send nodes are disabled), pilot and live refuse to build without them.
-const WA_ID=MODE==='test'?'':process.env.META_WA_PHONE_NUMBER_ID||'',WA_CRED=MODE==='test'?'':process.env.META_WA_CREDENTIAL_ID||'';
-if(MODE!=='test'&&(!/^\d{6,}$/.test(WA_ID)||!WA_CRED))throw new Error('pilot and live builds need META_WA_PHONE_NUMBER_ID and META_WA_CREDENTIAL_ID');
-const WA_URL=HSM.sendUrl(WA_ID);
-const META=WA_CRED?{httpHeaderAuth:{id:WA_CRED,name:'Meta WhatsApp Cloud'}}:undefined;
+// The old provider flow is a simulator during the Cosend migration. Real sends
+// belong to the durable controller after scoped credentials and ownership review.
+const PROVIDER=require('../wa-assistant/config/provider.json');
+if(MODE!=='test')throw new Error('Cosend activation not verified: live and pilot generation is blocked; legacy Meta environment variables cannot enable it');
+if(CFG.channels.providers.whatsapp!=='cosend'||PROVIDER.provider!=='cosend')throw new Error('Current WhatsApp provider must be Cosend');
+const WA_URL=PROVIDER.apiBaseUrl+'/v1/messages';
+const COSEND=undefined; // Never bind the connections:read credential to a send node.
+const cosendBody="={{ JSON.stringify((() => { const p=$('Has send?').item.json; if(!p.outboxId)throw Error('Cosend durable outbox binding required'); return {connection_id:"+JSON.stringify(PROVIDER.connectionId)+",to:p.send.to,type:'template',template:p.send.template,source:'api',send_mode:'strict'}; })()) }}";
 const GMAIL={gmailOAuth2:{id:'1H4YGm5Z2UFN4IeE',name:'Gmail account'}};
 const monday=(name,pos,body,extra={})=>({id:id(),name,type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:pos,credentials:MON,retryOnFail:true,maxTries:3,waitBetweenTries:2000,...extra,parameters:{method:'POST',url:'https://api.monday.com/v2',authentication:'predefinedCredentialType',nodeCredentialType:'mondayComApi',sendHeaders:true,headerParameters:{parameters:[{name:'API-Version',value:'2024-10'}]},sendBody:true,specifyBody:'json',jsonBody:body,options:{}}});
 // GraphQL braces are spaced out: n8n expressions break on runs of closing braces.
@@ -62,24 +63,24 @@ const engine={name:PFX+'מנוע הודעות'+tag,settings:{executionOrder:'v1'
  hook('Run test',[0,200],'__TEST_PATH__engine'),
  {id:id(),name:'Shabbat',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[200,0],onError:'continueRegularOutput',parameters:{method:'GET',url:'https://www.hebcal.com/shabbat?cfg=json&geonameid=281184&M=on',options:{timeout:10000}}},
  monday('Items',[400,0],itemsQuery(engineCols)),
- {id:id(),name:'Convos',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[600,0],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'GET',url:'https://api.gambot.co.il/api/v1/conversations?pageNumber=1&pageSize=100',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',options:{timeout:20000}}},
+ code('Convos',[600,0],"return [{json:{data:{items:[]},simulated:true,provider:'cosend',productionStateVerified:false}}];"),
  code('Plan',[800,0],src('plan.js').replace('__MODE__',MODE).replace('__GO_LIVE__',GO_LIVE).replace('__PILOT__',PILOT)),
  ifTrue('Route',[900,0],'={{ $json.reconcile }}'),
- {id:id(),name:'Gambot history',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,position:[1000,-300],onError:'continueRegularOutput',credentials:GAM,parameters:{method:'GET',url:'={{ "https://api.gambot.co.il/api/v1/conversations/" + $json.phone + "/messages?pageSize=20" }}',authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',options:{response:{response:{neverError:true}},timeout:20000}}},
+ code('Legacy history blocked',[1000,-300],"return {json:{error:'legacy_provider_history_unavailable',requiresOperatorReconciliation:true}};",'runOnceForEachItem'),
  code('Reconcile',[1200,-300],src('reconcile.js'),'runOnceForEachItem'),
  monday('Update item (reconciled)',[1400,-300],update('$json')),
  ifTrue('Has send?',[1000,0],'={{ $json.hasSend }}'),
  monday('Reserve send',[1100,-100],'={{ JSON.stringify({query:"mutation($b:ID!,$i:ID!,$v:JSON!){change_multiple_column_values(board_id:$b,item_id:$i,column_values:$v){id}}",variables:{b:"'+BOARD+'",i:String($json.itemId),v:$json.reserveJson}}) }}',{onError:'continueRegularOutput'}),
  ifTrue('Reserved?',[1150,-100],'={{ !!($json.data && $json.data.change_multiple_column_values && $json.data.change_multiple_column_values.id) }}'),
  ifTrue('Live?',[1200,-100],"={{ $('Has send?').item.json.live }}"),
- {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:MODE==='test',position:[1400,-200],onError:'continueRegularOutput',credentials:META,parameters:{method:'POST',url:WA_URL,authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:60000,batching:{batch:{batchSize:1,batchInterval:1500}}}}},
+ {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:true,position:[1400,-200],onError:'continueRegularOutput',credentials:COSEND,parameters:{method:'POST',url:WA_URL,authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendHeaders:true,headerParameters:{parameters:[{name:'Idempotency-Key',value:"={{ $('Has send?').item.json.outboxId }}"}]},sendBody:true,specifyBody:'json',jsonBody:cosendBody,options:{timeout:8000}}},
  code('Simulated send',[1400,0],"const s=$('Has send?').item.json.send;return {json:{messages:[{id:'simulated'}],simulated:true,template:s.template.name,to:s.to}};",'runOnceForEachItem'),
  code('After send',[1600,-100],src('after-send.js'),'runOnceForEachItem'),
  monday('Update item (sent)',[1800,-100],update('$json')),
  monday('Update item',[1200,150],update("$('Has send?').item.json")),
  ifTrue('Notify?',[1400,150],"={{ $('Has send?').item.json.hasNotify }}",'n8n-nodes-base.filter'),
  monday('Notify Yoram',[1600,150],notify("$('Has send?').item.json"))],
- connections:{'Every 5 min':L('Shabbat'),'Run test':L('Shabbat'),'Shabbat':L('Items'),'Items':L('Convos'),'Convos':L('Plan'),'Plan':L('Route'),'Route':L('Gambot history','Has send?'),'Gambot history':L('Reconcile'),'Reconcile':L('Update item (reconciled)'),'Has send?':L('Reserve send','Update item'),'Reserve send':L('Reserved?'),'Reserved?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('After send'),'Simulated send':L('After send'),'After send':L('Update item (sent)'),'Update item':L('Notify?'),'Notify?':L('Notify Yoram')}};
+ connections:{'Every 5 min':L('Shabbat'),'Run test':L('Shabbat'),'Shabbat':L('Items'),'Items':L('Convos'),'Convos':L('Plan'),'Plan':L('Route'),'Route':L('Legacy history blocked','Has send?'),'Legacy history blocked':L('Reconcile'),'Reconcile':L('Update item (reconciled)'),'Has send?':L('Reserve send','Update item'),'Reserve send':L('Reserved?'),'Reserved?':L('Live?'),'Live?':L('Send WhatsApp','Simulated send'),'Send WhatsApp':L('After send'),'Simulated send':L('After send'),'After send':L('Update item (sent)'),'Update item':L('Notify?'),'Notify?':L('Notify Yoram')}};
 
 // WhatsApp finally failed: tell Yoram which fallback channel applies. SMS and email have no provider yet, so nothing is sent.
 engine.nodes.push(ifTrue('Fallback?',[2000,-100],"={{ $('After send').item.json.hasFallback }}",'n8n-nodes-base.filter'));
@@ -164,7 +165,7 @@ const instant={name:PFX+'מענה מיידי'+tag,settings:{executionOrder:'v1',
  code('Instant reply',[200,0],src('instant-reply.js').replace('__MODE__',MODE),'runOnceForEachItem'),
  ifTrue('Has send?',[400,0],'={{ $json.hasSend }}'),
  ifTrue('Live?',[600,0],'={{ $json.live }}'),
- {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:!irLive,position:[800,-100],onError:'continueRegularOutput',credentials:META,parameters:{method:'POST',url:WA_URL,authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendBody:true,specifyBody:'json',jsonBody:"={{ JSON.stringify($('Has send?').item.json.send) }}",options:{response:{response:{neverError:true}},timeout:30000}}},
+ {id:id(),name:'Send WhatsApp',type:'n8n-nodes-base.httpRequest',typeVersion:4.2,disabled:true,position:[800,-100],onError:'continueRegularOutput',credentials:COSEND,parameters:{method:'POST',url:WA_URL,authentication:'genericCredentialType',genericAuthType:'httpHeaderAuth',sendHeaders:true,headerParameters:{parameters:[{name:'Idempotency-Key',value:"={{ $('Has send?').item.json.outboxId }}"}]},sendBody:true,specifyBody:'json',jsonBody:cosendBody,options:{timeout:8000}}},
  code('Simulated send',[800,100],"const s=$('Has send?').item.json.send;return {json:{messages:[{id:'simulated'}],simulated:true,template:s.template.name,to:s.to}};",'runOnceForEachItem'),
  // Only a confirmed send marks "sent at"; the engine then skips its entry message for this lead (plan.js).
  ifTrue('Sent?',[1000,0],'={{ !!($json.messages && $json.messages[0] && $json.messages[0].id) }}','n8n-nodes-base.filter'),

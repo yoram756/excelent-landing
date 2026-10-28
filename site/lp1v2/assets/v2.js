@@ -141,7 +141,7 @@ function renderSummary(){
 function mobile(v){v=String(v||'').trim().replace(/[\s()\-]/g,'');if(/^05\d{8}$/.test(v))return '972'+v.slice(1);if(/^\+?9725\d{8}$/.test(v))return v.replace(/^\+/,'');return null;}
 function key(){return window.crypto&&crypto.randomUUID?crypto.randomUUID():'k'+Date.now().toString(36)+Math.random().toString(36).slice(2,10);}
 function fieldErr(input,el,msg){if(msg){input.setAttribute('aria-invalid','true');el.textContent=msg;}else{input.removeAttribute('aria-invalid');el.textContent='';}}
-async function post(url,body){body.event_id=body.idempotency_key;var r=await fetch(url,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});var j=null;try{j=await r.json();}catch(e){}var id=j&&(j.request_id||j.id);if(!r.ok||!id){var e=new Error((j&&j.error)||'save_failed');e.status=r.status;throw e;}return id;}
+async function post(url,body){body.event_id=body.idempotency_key;var attribution=new URLSearchParams(location.search);['utm_source','utm_campaign'].forEach(function(k){var v=attribution.get(k);if(v)body[k]=v.slice(0,100);});var r=await fetch(url,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});var j=null;try{j=await r.json();}catch(e){}var id=j&&(j.request_id||j.id);if(!r.ok||!id){var e=new Error((j&&j.error)||'save_failed');e.status=r.status;throw e;}return id;}
 
 /* ===== callback form ===== */
 var formState={key:key(),done:false,retry:false};

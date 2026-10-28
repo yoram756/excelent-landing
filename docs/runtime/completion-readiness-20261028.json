@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-10-28T17:12:19.249Z",
+  "goLiveReady": false,
+  "whatsappMessagesSent": 0,
+  "requirements": [
+    {
+      "id": "local_regression",
+      "status": "PASS",
+      "evidence": "npm test exit 0: business operations 32, funnel 381, site 60, real nginx 4. tests/out/completion-20261028/regression-final.log",
+      "scope": "Local production sources; providers mocked"
+    },
+    {
+      "id": "cosend_pure_contracts",
+      "status": "PASS",
+      "evidence": "node --test tests/funnel/cosend-prepare.test.js exit 0, 4/4; rejects tampered signatures, wrong organizations and unbound connections",
+      "scope": "Local only; no network sends"
+    },
+    {
+      "id": "wa_assistant_contracts",
+      "status": "PASS",
+      "evidence": "npm test --prefix src/services/wa-assistant exit 0, 84/84; tests/out/completion-20261028/wa-readonly-tests.log",
+      "scope": "Local mocks; no delivery proof"
+    },
+    {
+      "id": "cro_build_lint_unit_e2e",
+      "status": "PASS",
+      "evidence": "npm run build/lint/test/test:e2e --prefix apps/refi-landing: each stage exit 0, 7 unit and 22 E2E. completion-e2e-20261028.json; initial combined command failed only at Lighthouse, whose failed result is preserved.",
+      "scope": "Local build and mocked API/analytics transport"
+    },
+    {
+      "id": "mobile_lcp_lab",
+      "status": "PASS",
+      "evidence": "completion-performance-20261028.json: isolated identical-settings run 2457.55, 2398.36, 2447.16 ms; exit 0. Initial concurrent run FAIL preserved.",
+      "scope": "Lab only; no field-performance guarantee"
+    },
+    {
+      "id": "secrets_scan",
+      "status": "PASS",
+      "evidence": "tests/funnel/secrets.test.js in full regression; no secret values entered into tracked files",
+      "scope": "Current source scan, not entire historical Git"
+    },
+    {
+      "id": "production_utm_monday",
+      "status": "PASS",
+      "evidence": "internal-alert-campaigns-20261028.json; executions 59633/59634/59635; three campaign columns, event IDs and person 75075191 read back; all owned TEST items deleted",
+      "scope": "Real production API and CRM, synthetic inputs"
+    },
+    {
+      "id": "cosend_connection_discovery",
+      "status": "PASS",
+      "evidence": "completion-connections-20261028.json; credential jkyKdDJCUBfp6BzC; execution 59874: two HTTP 200 GETs",
+      "scope": "Read-only"
+    },
+    {
+      "id": "whatsapp_delivery",
+      "status": "NOT TESTED",
+      "evidence": "Current instruction forbids WhatsApp sends; no delivery or callback claim"
+    },
+    {
+      "id": "cosend_production_activation",
+      "status": "BLOCKED",
+      "evidence": "Only connections:read verified; scoped credential, ownership, webhook and display-name readiness unverified. Live/pilot generation intentionally refuses activation."
+    },
+    {
+      "id": "meta_capi",
+      "status": "BLOCKED",
+      "evidence": "Dataset 1822147178482498 discovered; Meta shows incomplete CRM integration and no activity; no verified CAPI sender credential or Test Events receipt"
+    },
+    {
+      "id": "posthog",
+      "status": "BLOCKED",
+      "evidence": "Public analytics-config.json HTTP 200 with empty key and host; browser requires login; no verified project or quote_submitted receipt"
+    },
+    {
+      "id": "calendly_live",
+      "status": "NOT TESTED",
+      "evidence": "No real appointment and matching Monday status readback available; previous test workflow mail node disconnected"
+    },
+    {
+      "id": "atomic_lock_intake_wiring",
+      "status": "BLOCKED",
+      "evidence": "Production Lead Intake version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f has 37 nodes and no Lock node. Local lock/replay contracts pass; production concurrency not proven."
+    },
+    {
+      "id": "approved_video_testimonials",
+      "status": "BLOCKED",
+      "evidence": "Build reports approvedVideos=0; authentic approved assets and captions not supplied"
+    },
+    {
+      "id": "vps_release",
+      "status": "NOT TESTED",
+      "evidence": "Prepared scoped release; deployment readback to follow"
+    },
+    {
+      "id": "lock_service_release",
+      "status": "NOT TESTED",
+      "evidence": "Existing private lock service observed healthy; /internal-alert/claim not yet deployed"
+    },
+    {
+      "id": "postdeploy_browser_monday",
+      "status": "NOT TESTED",
+      "evidence": "Fresh production browser submission/readback/cleanup to follow"
+    }
+  ]
+}

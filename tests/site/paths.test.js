@@ -48,6 +48,7 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   await b.close();}
  // 2 info only + form submit success, double click, money exclusion
  {const {b,p}=await fresh(390);await get('/__mode?m=ok');
+  await p.goto('http://localhost:8090/?utm_source=synthetic&utm_campaign=campaign_buyers_south',{waitUntil:'networkidle'});
   await p.click('#quickBtn');await p.waitForTimeout(300);
   ok('quick exit jumps to summary/form',await p.locator('#fName').isVisible());
   await p.click('#fSubmit');
@@ -57,6 +58,7 @@ const legend=p=>p.locator('#steps legend h3').textContent().catch(()=>null);
   const log=JSON.parse(await get('/__log'));
   ok('double click sends one request',log.length===1,log.length);
   ok('lead event_id matches the stable idempotency key',log[0].body.event_id===log[0].body.idempotency_key);
+  ok('lead preserves UTM source and campaign',log[0].body.utm_source==='synthetic'&&log[0].body.utm_campaign==='campaign_buyers_south');
   ok('phone normalized',log[0]&&log[0].body.phone==='972500000001');
   ok('marketing consent false by default',log[0]&&log[0].body.marketing_consent===false);
   ok('success only after server id',(await p.locator('#fStatus').textContent()).includes('R'));

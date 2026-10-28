@@ -61,6 +61,13 @@ const key = eventId;
 if (!(eventFields.length ? /^[A-Za-z0-9_-]{8,80}$/ : /^[A-Za-z0-9-]{8,80}$/).test(key)) return fail('bad_key');
 const email = String(b.email||'').trim();
 if (email && (email.length>254 || !/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email))) return fail('bad_email');
+const utm = {};
+for (const field of ['source','campaign']) {
+  const raw=b['utm_'+field];
+  if (raw!==undefined && (typeof raw!=='string'||raw.length>100||/[\u0000-\u001f\u007f<>{}]/.test(raw))) return fail('bad_utm');
+  utm[field]=typeof raw==='string'?raw.trim():'';
+}
+if(utm.campaign.startsWith('campaign_')&&!Object.hasOwn(ROUTE.attribution?.campaigns||{},utm.campaign))return fail('unknown_attribution_campaign');
 let contactPermissions = null;
 if (b.marketing_channels !== undefined) {
   const channels=b.marketing_channels;
@@ -90,7 +97,7 @@ for (const [k,v] of Object.entries(answers)) {
 const replayBinding = JSON.stringify({version:1,product,campaign:P.campaign,purpose:'callback',name,phone,email:email||null,
   answers:Object.fromEntries(Object.keys(P.labels).filter(k=>Object.hasOwn(clean,k)).map(k=>[k,clean[k]])),
   money_included:b.money_included===true,service_request:true,marketing_consent:b.marketing_consent===true,
-  marketing_channels:contactPermissions ? contactPermissions.grants : null});
+  marketing_channels:contactPermissions ? contactPermissions.grants : null,utm});
 // Rate limit per IP and replay receipts are kept in workflow static data.
 // This cache is not an atomic claim across concurrent executions or workers.
 const sd = $getWorkflowStaticData('global'); const now = Date.now();
@@ -110,7 +117,7 @@ const first = v => Array.isArray(v) ? v[0] : v;
 const lab = (q, v) => v==null ? null : (Array.isArray(v) ? v : [v]).map(x => P.labels[q].o[x]).join(', ');
 const score = scoreLead({ ask:first(clean.ask), when:first(clean.when), doc:first(clean.doc), loans:first(clean.loans), strain:first(clean.strain), income:first(clean.income), has:first(clean.has), messageReceived: channel==='וואטסאפ', requestedRecently:true }, new Date());
 const readable = Object.keys(P.labels).filter(q => clean[q]!=null).map(q => `${P.labels[q].q} ${lab(q, clean[q])}`).join('\n');
-return [{ json: { ok:true, duplicate:false, key, eventId, event_id:eventId, replay_binding:replayBinding, product, product_slug, funnel_type:P.funnel_type, campaign:P.campaign, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),
+return [{ json: { ok:true, duplicate:false, key, eventId, event_id:eventId, replay_binding:replayBinding, utm_source:utm.source, utm_campaign:utm.campaign, product, product_slug, funnel_type:P.funnel_type, campaign:P.campaign, productName:P.name, channel, source:(channel==='טופס' ? `קליטת ${product}` : `${product} וואטסאפ`), name, phone, phoneLocal:'0'+phone.slice(3),
   answers: clean, goalNames: (Array.isArray(clean.goal)?clean.goal:(clean.goal?[clean.goal]:[])).map(x=>P.labels.goal.o[x]), labels: Object.fromEntries(Object.keys(clean).map(q=>[q, lab(q, clean[q])])), readable,
   money_included: b.money_included===true, service_request_at: b.service_request_at || new Date().toISOString(),
   email:email||null, contact_permissions:contactPermissions,

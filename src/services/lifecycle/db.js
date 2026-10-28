@@ -31,6 +31,8 @@ class LifecycleDb{
         id INTEGER PRIMARY KEY AUTOINCREMENT, phone TEXT NOT NULL, item_id TEXT, type TEXT NOT NULL CHECK(type IN ('${EVENT_TYPES.join("','")}')),
         from_value TEXT, to_value TEXT, at TEXT NOT NULL, webhook_id TEXT REFERENCES incoming_webhooks(id));
       CREATE INDEX IF NOT EXISTS lifecycle_events_phone ON lifecycle_events(phone, at);`);
+    this.db.exec(`CREATE TABLE IF NOT EXISTS internal_alert_claims(
+      claim_key TEXT PRIMARY KEY, claimed_at TEXT NOT NULL);`);
   }
   tx(fn){this.db.exec('BEGIN IMMEDIATE');try{const r=fn();this.db.exec('COMMIT');return r;}catch(e){this.db.exec('ROLLBACK');throw e;}}
   // Raw body exactly as received; never parsed or trimmed here.
@@ -66,6 +68,14 @@ class LifecycleDb{
     });
   }
   close(){this.db.close();}
+  // A durable reservation is never automatically released, including on timeout.
+  // This prevents two workers from sending the same internal alert; an unknown
+  // delivery requires operator reconciliation rather than a blind retry.
+  claimInternalAlert(key,now){
+    if(typeof key!=='string'||!/^internal-lead:\d{1,20}:\d{1,20}:\d{11,15}$/.test(key))throw Error('Invalid alert key');
+    const result=this.db.prepare('INSERT INTO internal_alert_claims(claim_key,claimed_at) VALUES(?,?) ON CONFLICT(claim_key) DO NOTHING').run(key,iso(now));
+    return {claimed:result.changes===1,key};
+  }
 }
 
 module.exports={LifecycleDb,LOCK_MS,norm};

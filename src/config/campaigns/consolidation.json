@@ -199,7 +199,9 @@
   },
   "channels": {
     "cascade": ["whatsapp", "sms", "email"],
-    "providers": { "whatsapp": "gambot", "sms": null, "email": null },
+    "providers": { "whatsapp": "cosend", "sms": null, "email": null },
+    "whatsappDeliveryEnabled": false,
+    "templateApprovalProvider": "legacy_gambot_not_cosend_verified",
     "optOut": { "label": "הסר", "keywords": "הסר|הסירו|להסיר|stop" }
   },
   "instantReply": {

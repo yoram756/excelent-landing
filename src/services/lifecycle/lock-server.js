@@ -1,6 +1,8 @@
 // Minimal HTTP service over db.js so n8n can take the 60 second phone lock before "Find query".
 //   POST /lock   {"phone": "...", "source": "..."}  -> {"locked": true|false, ...}; locked=true means this caller won the lock
 //   GET  /health                                   -> {"ok": true}
+//   POST /internal-alert/claim {"key":"internal-lead:<board>:<item>:<recipient>"}
+//       -> {"claimed":true|false,"key":"..."}; durable, no automatic retry after an unknown send
 // POST requires "Authorization: Bearer <LOCK_SERVER_TOKEN>". Listens on 127.0.0.1 unless LOCK_SERVER_HOST says otherwise.
 // Env: LOCK_SERVER_TOKEN (required), LOCK_DB_PATH (absolute .sqlite, required), LOCK_SERVER_HOST, LOCK_SERVER_PORT.
 const http=require('node:http'),crypto=require('node:crypto');
@@ -14,7 +16,7 @@ const createLockServer=({db,token,now=()=>Date.now()})=>{
   const server=http.createServer({requestTimeout:10000,headersTimeout:5000},(req,res)=>{
     const url=new URL(req.url,'http://localhost');
     if(url.pathname==='/health'){if(req.method!=='GET')return send(res,405,{error:'method_not_allowed'});return send(res,200,{ok:true});}
-    if(url.pathname!=='/lock')return send(res,404,{error:'not_found'});
+    if(!['/lock','/internal-alert/claim'].includes(url.pathname))return send(res,404,{error:'not_found'});
     if(req.method!=='POST')return send(res,405,{error:'method_not_allowed'});
     if(!authorized(req,token))return send(res,401,{error:'unauthorized'});
     let raw='',size=0,tooBig=false;
@@ -24,6 +26,10 @@ const createLockServer=({db,token,now=()=>Date.now()})=>{
     req.on('end',()=>{
       if(tooBig)return send(res,413,{error:'too_large'});
       let body;try{body=JSON.parse(raw);}catch(e){return send(res,400,{error:'bad_json'});}
+      if(url.pathname==='/internal-alert/claim'){
+        try{return send(res,200,db.claimInternalAlert(body?.key,now()));}
+        catch(e){return send(res,/Invalid alert key/.test(e.message)?400:500,{error:/Invalid alert key/.test(e.message)?'bad_alert_key':'alert_claim_failed'});}
+      }
       if(!body||typeof body.phone!=='string')return send(res,400,{error:'phone_required'});
       const source=typeof body.source==='string'&&/^[\w-]{1,40}$/.test(body.source)?body.source:'http';
       try{
