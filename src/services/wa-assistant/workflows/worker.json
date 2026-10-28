@@ -1,0 +1,72 @@
+{
+  "name": "EXCELENT WA v1 - WORKER DRAFT - NO SEND",
+  "active": false,
+  "nodes": [
+    {
+      "id": "4e928636-12d6-4d83-b958-b886b5b3f62e",
+      "name": "Manual isolated worker",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "133becf0-eadd-4801-a1bc-0442697c9d5c",
+      "name": "Simulate one durable decision - CREDENTIAL REQUIRED",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        250,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://excelent-wa-draft:8789/simulate-one",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "timeout": 5000
+        }
+      }
+    },
+    {
+      "id": "5b3ce068-a6c1-4918-8b7e-a899f4413f0a",
+      "name": "Read before activation",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -330
+      ],
+      "parameters": {
+        "content": "## ISOLATED WORKER - NO CUSTOMER SEND\nManual trigger only. Requires a separately approved worker Credential, currently unbound.\nDurable broker not deployed; no model Credential has been identified.\nThis route only creates SIMULATED results and durable human handoffs.\nProduction requires provider conversation lock/preflight, opt-out reconciliation and exclusive sender ownership.\nNo Dot memory/API connection is provided.",
+        "height": 270,
+        "width": 600
+      }
+    }
+  ],
+  "connections": {
+    "Manual isolated worker": {
+      "main": [
+        [
+          {
+            "node": "Simulate one durable decision - CREDENTIAL REQUIRED",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem",
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "saveExecutionProgress": false
+  }
+}

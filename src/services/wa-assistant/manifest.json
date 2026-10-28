@@ -1,0 +1,127 @@
+{
+  "version": "0.3.0-isolated.20261028",
+  "scope": "WhatsApp assistant only; no LP1, lead intake, funnel or global configuration deployment",
+  "mode": "ISOLATED_NO_SEND",
+  "files": {
+    ".gitignore": {
+      "sha256": "58cb284fa75424dfcaccca3b15f6324e87b90196f36d2dfbd9d76f0338539042",
+      "bytes": 48
+    },
+    "compose.isolated.yaml": {
+      "sha256": "beeed49af62a216788cdcce82c458938d47d1712c04db24e2aa44dbbc38916ea",
+      "bytes": 637
+    },
+    "config/provider.json": {
+      "sha256": "977a53efa3c611ae8c6daffe19ed05365603f384aa05a65c9f4dfc8e3c9d3b2d",
+      "bytes": 1209
+    },
+    "Dockerfile": {
+      "sha256": "3ee28b220d1cff95809b337cabdd67ef60b1a760614b83520898e837c65df5d3",
+      "bytes": 589
+    },
+    "exports/acceptance-readback.json": {
+      "sha256": "efbfa11468f7f4ed7aa9a83fcc270f2d45178a3483679c8b6b156ebc2531f123",
+      "bytes": 12860
+    },
+    "exports/ingress-readback.json": {
+      "sha256": "6000f1467990551470967c44bac678023814c1886336e0ab54f1eb2dff80d1f5",
+      "bytes": 9929
+    },
+    "exports/worker-readback.json": {
+      "sha256": "10940af716c18b61be0984326ed5316fb6f799ff6f14ff8edc5bd75646686cb9",
+      "bytes": 4252
+    },
+    "MIGRATION.md": {
+      "sha256": "7abc73254044ae5f697269aa0cb1edba3f29ac8d128166b1848f448167f47b0d",
+      "bytes": 5768
+    },
+    "package.json": {
+      "sha256": "a600e6cac69f533225a9d039af97546a6c99de695d520c5366e7a77a42657646",
+      "bytes": 312
+    },
+    "README.md": {
+      "sha256": "a66dcd5755fee449437181e233e831f10d1ae97b45faa92eaa02485a71c234b2",
+      "bytes": 2366
+    },
+    "scripts/deployed-e2e.mjs": {
+      "sha256": "14bbfd6e2ad159a1905c559da16822edfc9ab721e363e0417b75b46bf2325ffa",
+      "bytes": 12579
+    },
+    "scripts/mutation-check.mjs": {
+      "sha256": "f380b02d6db43088c33fa3d36a968d7b729c17dde3a0adbc121871d8b75a48da",
+      "bytes": 5299
+    },
+    "scripts/n8n-isolated-smoke.mjs": {
+      "sha256": "be4f3ed4458992a8b325d0c08831273edc645b811e8736597fb07f2fe68035ba",
+      "bytes": 9396
+    },
+    "scripts/ops-status.mjs": {
+      "sha256": "bbd07ca4be014b83f877aa74a486a2074343284b27c6c2c7d4e0b4df9b4257b7",
+      "bytes": 2487
+    },
+    "scripts/service-smoke.mjs": {
+      "sha256": "0ce4b9e6d17dc49d8fe0075204e515dbb3b2014d6a9243877cd6a57335cef193",
+      "bytes": 8603
+    },
+    "scripts/workflows.mjs": {
+      "sha256": "f599d90c0bafdfc64c63bab2cd3fb13cfafc807eea65c4b7c7b999b381a2bdbf",
+      "bytes": 5409
+    },
+    "src/broker.mjs": {
+      "sha256": "368353aaf6ed81a9e54470d7fb067ba1276142f3383a0e7206094603bb8d7e5c",
+      "bytes": 16205
+    },
+    "src/cosend-adapter.mjs": {
+      "sha256": "8ee4e7c2d6b12da5deb920de8b56d403f4b3e6c0449f6163f99ce637a1cfbbbd",
+      "bytes": 1572
+    },
+    "src/cosend-control.mjs": {
+      "sha256": "bb4f8a2d63d9f442794e747bcc7a977026e35acbef0a60416201a139cc84c7ba",
+      "bytes": 5130
+    },
+    "src/model-adapter.mjs": {
+      "sha256": "a46c1e6763256687b43cd24452eed87415edffd32165d68e5afe004a4470d80f",
+      "bytes": 2165
+    },
+    "src/model-worker.mjs": {
+      "sha256": "5a6a4ac02f5298940af1acc2b28403eaca6d80ec7219b0f7d5d9152c7be9e3b2",
+      "bytes": 536
+    },
+    "src/policy.mjs": {
+      "sha256": "5e32da3461e778a14404f74ca65d00e82c1eb40fcf7cf305b0df6bf8940a9334",
+      "bytes": 7200
+    },
+    "src/server.mjs": {
+      "sha256": "a8e0430e989f4f45c5f4254312173ed97535eae6e88739102cbf0742594b42f2",
+      "bytes": 2598
+    },
+    "test/acceptance.test.mjs": {
+      "sha256": "77948a9c550094aa86f878e96f5093195912841d0dbb72d44975751d7645f56d",
+      "bytes": 12057
+    },
+    "test/migration.test.mjs": {
+      "sha256": "6eb458dadc5349222047b42c750eec2e09643adf2a734c880236a5a87ada8913",
+      "bytes": 10781
+    },
+    "test/ops-status.test.mjs": {
+      "sha256": "1a57acc803aa994c1620760cb51b544d75cca09d01b7e0f94307fb4783e12f03",
+      "bytes": 2227
+    },
+    "test/safety-regressions.test.mjs": {
+      "sha256": "1598c381c01ae8b17a8ac4d244c75b051ad99ebd87beb2afc929e8d899c5a05b",
+      "bytes": 9166
+    },
+    "workflows/acceptance.json": {
+      "sha256": "bc9f4b232af9b4abcb7085a5ef894f7eacd8076ba717197d351e384622016533",
+      "bytes": 9459
+    },
+    "workflows/ingress.json": {
+      "sha256": "1615284590b873c8d8b8ccd9ae68e47f49a2cbe4c884aaca0defcd4e6f205d19",
+      "bytes": 4168
+    },
+    "workflows/worker.json": {
+      "sha256": "dd6490178f5a55bff6b70cbdf31ea5c8143eea64cce2ce1f5c2ad054c4b0cd7e",
+      "bytes": 2101
+    }
+  }
+}

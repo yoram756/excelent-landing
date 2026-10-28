@@ -1,0 +1,14 @@
+{
+  "name": "excelent-wa-isolated-draft",
+  "private": true,
+  "version": "0.3.0-isolated.20261028",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "start": "node src/server.mjs",
+    "build:workflows": "node scripts/workflows.mjs"
+  }
+}

@@ -1,0 +1,85 @@
+{
+    "name":  "EXCELENT WA v1 - WORKER DRAFT - NO SEND",
+    "nodes":  [
+                  {
+                      "parameters":  {
+
+                                     },
+                      "id":  "72747ef5-4e8b-4e9f-aff0-6c865abc8bcc",
+                      "name":  "Manual isolated worker",
+                      "type":  "n8n-nodes-base.manualTrigger",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       336
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "http://excelent-wa-draft:8789/simulate-one",
+                                         "authentication":  "genericCredentialType",
+                                         "genericAuthType":  "httpHeaderAuth",
+                                         "options":  {
+                                                         "timeout":  5000
+                                                     }
+                                     },
+                      "id":  "4c306d41-d588-4ae2-9429-5910476bcb5c",
+                      "name":  "Simulate one durable decision - CREDENTIAL REQUIRED",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       256,
+                                       336
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "## ISOLATED WORKER - NO CUSTOMER SEND\nManual trigger only. Requires a separately approved worker Credential, currently unbound.\nDurable broker not deployed; no model Credential has been identified.\nThis route only creates SIMULATED results and durable human handoffs.\nProduction requires provider conversation lock/preflight, opt-out reconciliation and exclusive sender ownership.\nNo Dot memory/API connection is provided.",
+                                         "height":  270,
+                                         "width":  600
+                                     },
+                      "id":  "9eda2ba7-3444-4f50-bb6f-b14965bba8cf",
+                      "name":  "Read before activation",
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       0
+                                   ]
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "Manual isolated worker":  {
+                                                       "main":  [
+                                                                    [
+                                                                        {
+                                                                            "node":  "Simulate one durable decision - CREDENTIAL REQUIRED",
+                                                                            "type":  "main",
+                                                                            "index":  0
+                                                                        }
+                                                                    ]
+                                                                ]
+                                                   }
+                    },
+    "active":  false,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  true
+                 },
+    "versionId":  "40ae0ff3-6bec-4e4b-8626-218843a19beb",
+    "meta":  {
+                 "instanceId":  "092b337da19d85444561398384a321ab31a85710f19af830716536c516b8705d"
+             },
+    "nodeGroups":  [
+
+                   ],
+    "id":  "wyMfdiAAyfhtDyrP",
+    "tags":  [
+
+             ]
+}

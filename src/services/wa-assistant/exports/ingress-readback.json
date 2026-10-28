@@ -1,0 +1,159 @@
+{
+    "name":  "EXCELENT WA v1 - SIGNED INGRESS DRAFT - DO NOT PUBLISH",
+    "nodes":  [
+                  {
+                      "parameters":  {
+                                         "httpMethod":  "POST",
+                                         "path":  "__REDACTED_UNREGISTERED_DRAFT_PATH__",
+                                         "responseMode":  "responseNode",
+                                         "options":  {
+                                                         "rawBody":  true
+                                                     }
+                                     },
+                      "id":  "b4fc7f49-2232-4711-bb4d-8285ab3c991c",
+                      "name":  "Cosend signed events - UNREGISTERED",
+                      "type":  "n8n-nodes-base.webhook",
+                      "typeVersion":  2,
+                      "position":  [
+                                       0,
+                                       336
+                                   ],
+                      "webhookId":  "6dfdbe89-a1f5-4734-8ffa-0575dd1d82ed"
+                  },
+                  {
+                      "parameters":  {
+                                         "jsCode":  "const item=$input.first(); if(!item.binary?.data) throw new Error(\u0027RAW_BODY_BINARY_REQUIRED\u0027); const bytes=await this.helpers.getBinaryDataBuffer(0,\u0027data\u0027); const sig=item.json.headers?.[\u0027cosend-signature\u0027]; if(typeof sig!==\u0027string\u0027)throw new Error(\u0027SIGNATURE_REQUIRED\u0027); return [{json:{signature:sig},binary:{data:{data:bytes.toString(\u0027base64\u0027),mimeType:\u0027application/octet-stream\u0027}}}];"
+                                     },
+                      "id":  "0c7484bf-2cad-40b7-a253-995b15b4c3b2",
+                      "name":  "Preserve raw bytes",
+                      "type":  "n8n-nodes-base.code",
+                      "typeVersion":  2,
+                      "position":  [
+                                       240,
+                                       336
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "method":  "POST",
+                                         "url":  "http://excelent-wa-draft:8789/ingest",
+                                         "sendHeaders":  true,
+                                         "headerParameters":  {
+                                                                  "parameters":  [
+                                                                                     {
+                                                                                         "name":  "Cosend-Signature",
+                                                                                         "value":  "={{ $json.signature }}"
+                                                                                     }
+                                                                                 ]
+                                                              },
+                                         "sendBody":  true,
+                                         "contentType":  "binaryData",
+                                         "inputDataFieldName":  "data",
+                                         "options":  {
+                                                         "response":  {
+                                                                          "response":  {
+                                                                                           "fullResponse":  true,
+                                                                                           "neverError":  true
+                                                                                       }
+                                                                      },
+                                                         "timeout":  5000
+                                                     }
+                                     },
+                      "id":  "b93b283d-1fba-415b-b469-b606f3af7f60",
+                      "name":  "Durable verify and commit - NOT DEPLOYED",
+                      "type":  "n8n-nodes-base.httpRequest",
+                      "typeVersion":  4.2,
+                      "position":  [
+                                       496,
+                                       336
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "respondWith":  "json",
+                                         "responseBody":  "={{ $json.body }}",
+                                         "options":  {
+                                                         "responseCode":  "={{ $json.statusCode }}"
+                                                     }
+                                     },
+                      "id":  "c94cd658-6741-42ff-baee-ef7118014e90",
+                      "name":  "ACK only durable result",
+                      "type":  "n8n-nodes-base.respondToWebhook",
+                      "typeVersion":  1.4,
+                      "position":  [
+                                       752,
+                                       336
+                                   ]
+                  },
+                  {
+                      "parameters":  {
+                                         "content":  "## BLOCKED - NOT REGISTERED\nThis inactive draft preserves raw binary bytes and forwards them to an isolated durable broker.\nBroker not deployed. Provider signing secret not installed. n8n binary forwarding needs runtime verification before any real data.\nDo not change Cosend delivery mode or its existing webhook.\nNo outbound sending exists in the isolated broker server.",
+                                         "height":  270,
+                                         "width":  600
+                                     },
+                      "id":  "a88a3cfa-5104-4b21-8673-e65ed064e9de",
+                      "name":  "Read before activation",
+                      "type":  "n8n-nodes-base.stickyNote",
+                      "typeVersion":  1,
+                      "position":  [
+                                       0,
+                                       0
+                                   ]
+                  }
+              ],
+    "pinData":  {
+
+                },
+    "connections":  {
+                        "Cosend signed events - UNREGISTERED":  {
+                                                                    "main":  [
+                                                                                 [
+                                                                                     {
+                                                                                         "node":  "Preserve raw bytes",
+                                                                                         "type":  "main",
+                                                                                         "index":  0
+                                                                                     }
+                                                                                 ]
+                                                                             ]
+                                                                },
+                        "Preserve raw bytes":  {
+                                                   "main":  [
+                                                                [
+                                                                    {
+                                                                        "node":  "Durable verify and commit - NOT DEPLOYED",
+                                                                        "type":  "main",
+                                                                        "index":  0
+                                                                    }
+                                                                ]
+                                                            ]
+                                               },
+                        "Durable verify and commit - NOT DEPLOYED":  {
+                                                                         "main":  [
+                                                                                      [
+                                                                                          {
+                                                                                              "node":  "ACK only durable result",
+                                                                                              "type":  "main",
+                                                                                              "index":  0
+                                                                                          }
+                                                                                      ]
+                                                                                  ]
+                                                                     }
+                    },
+    "active":  false,
+    "settings":  {
+                     "executionOrder":  "v1",
+                     "binaryMode":  "separate",
+                     "availableInMCP":  true
+                 },
+    "versionId":  "fade2f33-0add-465a-be10-e2024d87b1f7",
+    "meta":  {
+                 "instanceId":  "092b337da19d85444561398384a321ab31a85710f19af830716536c516b8705d"
+             },
+    "nodeGroups":  [
+
+                   ],
+    "id":  "90jZAb9ZFDOnEQ0e",
+    "tags":  [
+
+             ]
+}

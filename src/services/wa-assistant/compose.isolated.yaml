@@ -1,0 +1,23 @@
+# Not run or deployed. This isolated network is NOT joined to the existing n8n network.
+# Do not add ports, production secrets, or provider subscriptions for a smoke test.
+name: excelent-wa-isolated-draft
+services:
+  excelent-wa-draft:
+    build: .
+    restart: "no"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    labels:
+      traefik.enable: "false"
+    volumes:
+      - draft-state:/state
+    tmpfs:
+      - /tmp
+    networks: [isolated]
+    # No published host port. No provider or model credentials. No outbound-send endpoint.
+volumes:
+  draft-state:
+networks:
+  isolated:
+    internal: true

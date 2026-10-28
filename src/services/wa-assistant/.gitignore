@@ -1,0 +1,5 @@
+state.sqlite*
+*.db
+.env*
+secrets/
+node_modules/

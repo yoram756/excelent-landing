@@ -1,0 +1,148 @@
+{
+  "name": "EXCELENT WA v1 - SIGNED INGRESS DRAFT - DO NOT PUBLISH",
+  "active": false,
+  "nodes": [
+    {
+      "id": "a7c1c330-5ecf-4a70-b38f-2db7b2eecb99",
+      "name": "Cosend signed events - UNREGISTERED",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "__SET_ISOLATED_WEBHOOK_PATH__",
+        "responseMode": "responseNode",
+        "options": {
+          "rawBody": true
+        }
+      },
+      "webhookId": "3acb1ae7-546e-4871-ac6a-fba666fdbfed"
+    },
+    {
+      "id": "7be97b15-6239-4cc5-935a-d0f733c9673a",
+      "name": "Preserve raw bytes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const item=$input.first(); if(!item.binary?.data) throw new Error('RAW_BODY_BINARY_REQUIRED'); const bytes=await this.helpers.getBinaryDataBuffer(0,'data'); const sig=item.json.headers?.['cosend-signature']; if(typeof sig!=='string')throw new Error('SIGNATURE_REQUIRED'); return [{json:{signature:sig},binary:{data:{data:bytes.toString('base64'),mimeType:'application/octet-stream'}}}];"
+      }
+    },
+    {
+      "id": "b7343253-c025-4af5-9d22-8eb461e6d8bf",
+      "name": "Durable verify and commit - NOT DEPLOYED",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        490,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://excelent-wa-draft:8789/ingest",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Cosend-Signature",
+              "value": "={{ $json.signature }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "data",
+        "options": {
+          "timeout": 5000,
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "neverError": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "5bcd3a80-d8d3-47cd-8c76-fb3a54e40a17",
+      "name": "ACK only durable result",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        740,
+        0
+      ],
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json.body }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        }
+      }
+    },
+    {
+      "id": "1964c8b5-a6a1-4873-8778-92217a9978e5",
+      "name": "Read before activation",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -330
+      ],
+      "parameters": {
+        "content": "## BLOCKED - NOT REGISTERED\nThis inactive draft preserves raw binary bytes and forwards them to an isolated durable broker.\nBroker not deployed. Provider signing secret not installed. n8n binary forwarding needs runtime verification before any real data.\nDo not change Cosend delivery mode or its existing webhook.\nNo outbound sending exists in the isolated broker server.",
+        "height": 270,
+        "width": 600
+      }
+    }
+  ],
+  "connections": {
+    "Cosend signed events - UNREGISTERED": {
+      "main": [
+        [
+          {
+            "node": "Preserve raw bytes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preserve raw bytes": {
+      "main": [
+        [
+          {
+            "node": "Durable verify and commit - NOT DEPLOYED",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Durable verify and commit - NOT DEPLOYED": {
+      "main": [
+        [
+          {
+            "node": "ACK only durable result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Asia/Jerusalem",
+    "saveDataErrorExecution": "none",
+    "saveDataSuccessExecution": "none",
+    "saveManualExecutions": false,
+    "saveExecutionProgress": false
+  }
+}
