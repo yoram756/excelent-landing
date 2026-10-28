@@ -1,0 +1,29 @@
+{
+  "scope": "Authenticated usage report reading in the dot cloud browser only",
+  "files": {
+    "docs/evidence/20261028-textme-dot-readback/cloud-report-open.png": {
+      "bytes": 53890,
+      "sha256": "2f6ab8e602ee007fa80a97a106147e0be073874ed0857ca0218cc28cc5cb3fe2"
+    },
+    "docs/evidence/20261028-textme-dot-readback/control-returned.txt": {
+      "bytes": 344,
+      "sha256": "1878da7bacf5c6c8406a8cf3d951ed8a1485d7ef51ce877089027be57be40b1a"
+    },
+    "docs/evidence/20261028-textme-dot-readback/dot-outcome-sanitized.txt": {
+      "bytes": 644,
+      "sha256": "610fe6c2a8b72b547e216a5c3138c7f9a245da09e51359c3cb040c1760b36ece"
+    },
+    "docs/evidence/20261028-textme-dot-readback/dot-report-left-open.txt": {
+      "bytes": 460,
+      "sha256": "42f6706cdd8e63a5e56ec8744c3ad5d2caab676dd7eddfcb4cf6d29ceca4e771"
+    },
+    "docs/runtime/TEXTME_DOT_READBACK_20261028.md": {
+      "bytes": 4329,
+      "sha256": "0fe38d7cc2383546d0ad11cc8c32fbfdcce57ea2f356bfb0f6c413f6d73c2cf4"
+    },
+    "docs/runtime/textme-dot-readback-20261028.json": {
+      "bytes": 1984,
+      "sha256": "228d719140b65eac62680a83b352fad70eb121c35efb032320f49b950c0a1914"
+    }
+  }
+}

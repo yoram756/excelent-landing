@@ -1,0 +1,58 @@
+{
+  "verificationDate": "2026-10-28",
+  "recordedAtUtc": "2026-10-28T21:25:16.457Z",
+  "status": "PASS",
+  "scope": "Authenticated usage report reading in the dot cloud browser only",
+  "plugin": {
+    "id": "plugins_6ae261b29284819185d282ac2fc068d2",
+    "version": "0.1.0",
+    "type": "browser workflow; no MCP/API server"
+  },
+  "target": {
+    "account": "office@kho.org.il",
+    "url": "https://my.textme.co.il/users-usage-report",
+    "reportTitle": "דו״ח שימוש",
+    "dateFrom": "2026-10-01",
+    "dateTo": "2026-10-27"
+  },
+  "evidence": {
+    "dotReportedRead": "PASS",
+    "dotReopenedReportOnExplicitOwnerApproval": "PASS",
+    "independentLiveCloudView": "PASS",
+    "accountVisible": "PASS",
+    "urlVisible": "PASS",
+    "bothReportDatesVisible": "PASS",
+    "controlReturnedToDot": "PASS",
+    "reportLeftOpen": true,
+    "screenshotPath": "docs/evidence/20261028-textme-dot-readback/cloud-report-open.png",
+    "screenshotSha256": "2f6ab8e602ee007fa80a97a106147e0be073874ed0857ca0218cc28cc5cb3fe2",
+    "customerContentExported": false,
+    "detailedBalanceRecorded": false
+  },
+  "operations": {
+    "textmeMessagesSentByThisTest": 0,
+    "textmeCampaignsActivated": 0,
+    "textmeAccountSettingsWrites": 0,
+    "tokensReadOrCreated": 0,
+    "purchases": 0,
+    "providerSupportMessagesSent": 0,
+    "supportOverlayClosed": true,
+    "temporaryViewerControlUsed": true,
+    "viewerControlReturned": true
+  },
+  "limits": {
+    "reportFreshness": "Previous business day; no assertion about activity today",
+    "apiConnection": "NOT TESTED",
+    "sendingPermissions": "NOT TESTED",
+    "httpStatusCaptured": false,
+    "httpStatus": null,
+    "apiResponseBody": null,
+    "unattendedLongTermAvailability": "NOT TESTED"
+  },
+  "previousBrowserSignInBlocker": {
+    "status": "RESOLVED",
+    "previousReport": "docs/runtime/textme-dot-20261028.json",
+    "previousCommit": "289bf8f577678e9563d83c3bb6de386d43c7a532",
+    "historicalFilesModified": false
+  }
+}

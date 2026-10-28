@@ -1,0 +1,6 @@
+Selected accessibility lines from the dot cloud viewer; unrelated conversation content omitted.
+						429 heading העוזר של אקסלנט’s computer, Value: 2
+							430 text העוזר של אקסלנט’s computer
+									462 text העוזר של אקסלנט
+									463 text  has control
+									439 checkbox Take over, Value: 0

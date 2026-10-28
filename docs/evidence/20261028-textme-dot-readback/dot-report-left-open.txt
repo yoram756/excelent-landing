@@ -1,0 +1,5 @@
+Selected accessibility lines from the dot final confirmation.
+										826 link Description: דוח השימוש ב־TextMe, Help: Open link, Value: my.textme.co.il/users-usage-report
+										827 text  פתוח בענן ונשמר פתוח לצפייה. אומתו החשבון
+										828 link Description: office@kho.org.il, Help: Open link, Value: mailto:office@kho.org.il
+										829 text  והטווח הקיים 1–27.10.2026, ללא שינוי.
