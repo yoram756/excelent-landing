@@ -1,0 +1,106 @@
+Browser tab: 1, Title: "▶️ DRAFT TextMe restricted reads for dot NO SEND 20261028 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD/executions/62547".
+1 AXWebArea ▶️ DRAFT TextMe restricted reads for dot NO SEND 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD/executions/62547
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text DRAFT TextMe restricted reads for dot NO SEND 20261028
+					10 button More actions
+					11 button Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 0
+				14 radio button Description: Executions, Value: 1
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (collapsed) Add new item, Secondary Actions: Expand
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container
+				30 heading Executions, Value: 2
+					31 text Executions
+				32 checkbox Description: Auto refresh, Value: 1, ID: v-0-51
+				33 text Auto refresh
+				34 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-0-52, Secondary Actions: Expand
+				35 link Description: Oct 28, 23:50:28 Succeededin 317ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD/executions/62548
+				36 link Description: Oct 28, 23:50:28 Errorin 31ms Actions, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD/executions/62547
+				37 text Which executions is this workflow saving?
+				38 container
+					39 text Oct 28, 23:50:28 Error in 31ms  | 14KB  | ID#62547  | 
+					40 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD/history/896d1684-e542-445b-afc1-ca45f2ad7e59
+					41 link Description: Debug in editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/3K6A1ipS8Qt04WVD/debug/62547
+					168 pop up button (collapsed) Retry execution, ID: el-id-6691-5, Secondary Actions: Expand
+						169 button Retry execution
+					42 button Delete this execution
+				43 container
+					44 container
+						45 container
+							46 image
+								47 container Edge from 5fad0860-f60e-4b6d-b4db-5f86ee8d8f78 to b31bd829-9eb2-4fab-895d-0e667c8dba51
+							48 image
+								49 container Edge from b31bd829-9eb2-4fab-895d-0e667c8dba51 to 033ce248-58b2-4ba0-9e29-4c50aa3fe571
+							50 image
+								51 container Edge from 033ce248-58b2-4ba0-9e29-4c50aa3fe571 to c3325cbf-1891-4d92-8290-daf879328444
+							170 text 1 item
+							55 container
+								56 button Add to chat
+								57 button More actions
+								58 text Restricted read input
+							59 container
+								60 button Add to chat
+								61 button More actions
+								62 text Validate read operation
+							63 container
+								64 button Add to chat
+								65 button More actions
+								66 container
+									67 text TextMe read only POST: https://my.textme.co.il/api
+							68 container
+								70 button Add to chat
+								71 button More actions
+								72 text Validate and minimize result
+						73 image
+						74 image
+						75 container
+							76 button Zoom to Fit
+							77 button Zoom In
+							78 button Zoom Out
+					79 container
+						80 container
+							81 text Logs Error in 31ms
+							82 outline
+								83 row (selectable, collapsed) Restricted read input, Secondary Actions: Expand
+									84 text Restricted read input
+								85 row (selected, collapsed) Validate read operation, Secondary Actions: Expand
+									86 text Validate read operation
+						91 container
+							92 text Validate read operation Error in 12ms
+							93 button Input
+							94 button Output
+							95 button Actions
+							96 button Collapse panel
+						97 container
+							98 text OUTPUT
+							104 text 1 item
+							171 container
+								172 text OPERATION_NOT_ALLOWED [line 14] Error details
+								173 button
+								174 button (collapsed)  Other info, Secondary Actions: Expand
+									175 text  Other info
+		176 container notification_1
+			177 heading Problem in node ‘Validate read operation‘, Value: 2
+				178 text Problem in node ‘Validate read operation‘
+			179 text OPERATION_NOT_ALLOWED [line 14]
+
+The focused UI element is 85 row (selected, collapsed) Validate read operation, Secondary Actions: Expand

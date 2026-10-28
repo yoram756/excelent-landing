@@ -1,0 +1,132 @@
+{
+  "id": "3K6A1ipS8Qt04WVD",
+  "name": "DRAFT TextMe restricted reads for dot NO SEND 20261028",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "requestJson"
+            }
+          ]
+        }
+      },
+      "id": "5fad0860-f60e-4b6d-b4db-5f86ee8d8f78",
+      "name": "Restricted read input",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "function textmeToolInput(input) {\n  if (!input || typeof input !== 'object' || Array.isArray(input) || Object.keys(input).length !== 1 || typeof input.requestJson !== 'string' || input.requestJson.length > 4000) throw Error('REQUEST_JSON_REQUIRED');\n  try { return JSON.parse(input.requestJson); } catch { throw Error('INVALID_REQUEST_JSON'); }\n}\nfunction textmeReadRequest(input, username) {\n  if (!input || typeof input !== 'object' || Array.isArray(input)) throw Error('INVALID_INPUT');\n  if (typeof username !== 'string' || !username.includes('@')) throw Error('ACCOUNT_REQUIRED');\n  const rules = {\n    balance: [], verifiedSenders: [],\n    delivery: ['from', 'to', 'externalIds'],\n    deliveryByDate: ['from', 'to'], incoming: ['from', 'to'], blacklist: ['from', 'to'],\n  };\n  const { operation } = input;\n  if (!Object.hasOwn(rules, operation)) throw Error('OPERATION_NOT_ALLOWED');\n  if (Object.keys(input).some(k => !['operation', ...rules[operation]].includes(k))) throw Error('UNEXPECTED_FIELD');\n  const roots = { balance: 'balance', verifiedSenders: 'getVerifiedPhones', delivery: 'dlr', deliveryByDate: 'dlrByDate', incoming: 'incoming', blacklist: 'blacklist' };\n  const body = { user: { username } };\n  if (rules[operation].includes('from')) {\n    const parse = value => {\n      const m = /^(\\d{2})\\/(\\d{2})\\/(\\d{2}) (\\d{2}):(\\d{2})$/.exec(value || '');\n      if (!m) throw Error('DATE_FORMAT_DDMMYY_HHMM');\n      const [day, month, year, hour, minute] = m.slice(1).map(Number);\n      const date = new Date(Date.UTC(2000 + year, month - 1, day, hour, minute));\n      if (date.getUTCFullYear() !== 2000 + year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day || hour > 23 || minute > 59) throw Error('INVALID_DATE');\n      return +date;\n    };\n    const from = parse(input.from), to = parse(input.to);\n    if (to < from || to - from > 7 * 86400000) throw Error('MAX_SEVEN_DAY_WINDOW');\n    body.from = input.from; body.to = input.to;\n  }\n  if (operation === 'delivery') {\n    if (!Array.isArray(input.externalIds) || input.externalIds.length < 1 || input.externalIds.length > 100 || new Set(input.externalIds).size !== input.externalIds.length || input.externalIds.some(v => typeof v !== 'string' || !/^[A-Za-z0-9_.:-]{1,80}$/.test(v))) throw Error('INVALID_EXTERNAL_IDS');\n    body.transactions = { external_id: input.externalIds };\n  }\n  if (operation === 'deliveryByDate') body.transactions = { external_id: 'null' };\n  return { method: 'POST', url: 'https://my.textme.co.il/api', operation, body: { [roots[operation]]: body } };\n}\nreturn [{json:textmeReadRequest(textmeToolInput($input.first().json),\"office@kho.org.il\")}];"
+      },
+      "id": "b31bd829-9eb2-4fab-895d-0e667c8dba51",
+      "name": "Validate read operation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://my.textme.co.il/api",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json.body) }}",
+        "options": {
+          "redirect": {
+            "redirect": {
+              "followRedirects": false
+            }
+          },
+          "response": {
+            "response": {
+              "fullResponse": true,
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 15000
+        }
+      },
+      "id": "033ce248-58b2-4ba0-9e29-4c50aa3fe571",
+      "name": "TextMe read only",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "retryOnFail": false,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "UZwBuhghOkg9nhfV",
+          "name": "TextMe API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "function textmeReadResponse(operation, response) {\n  const { statusCode, body } = response || {};\n  if (statusCode !== 200 || !body || typeof body !== 'object' || Array.isArray(body)) throw Error('INVALID_PROVIDER_RESPONSE');\n  // No truthy coercion: absent/null/false/empty status is not success.\n  if (body.status !== 0 && body.status !== '0') throw Error('TEXTME_STATUS_' + (/^\\d{1,6}$/.test(String(body.status)) ? body.status : 'UNKNOWN'));\n  if (body.errors !== undefined && (!Array.isArray(body.errors) || body.errors.length)) throw Error('TEXTME_PARTIAL_OR_MALFORMED_RESULT');\n  const rows = value => value == null ? [] : Array.isArray(value) ? value : [value];\n  const select = (row, keys) => Object.fromEntries(keys.filter(k => typeof row?.[k] === 'string' || typeof row?.[k] === 'number').map(k => [k, String(row[k]).slice(0,2000)]));\n  const result = { provider: 'TextMe', operation, httpStatus: 200, providerStatus: 0, readOnly: true };\n  if (operation === 'balance') {\n    if (!/^\\d+(\\.\\d+)?$/.test(String(body.balance))) throw Error('BALANCE_MISSING');\n    result.balance = String(body.balance);\n    if (/^\\d+(\\.\\d+)?$/.test(String(body.international_balance))) result.internationalBalance = String(body.international_balance);\n  } else {\n    const keys = operation === 'verifiedSenders' ? ['PHONE', 'ASSIGNMENT_DATE', 'LAST_UPDATE'] : operation === 'incoming' ? ['source', 'destination', 'message', 'date'] : operation === 'blacklist' ? ['phone', 'date'] : ['external_id', 'source', 'phone', 'status', 'message_he', 'en_message', 'shipment_id', 'date'];\n    const values = rows(operation === 'verifiedSenders' ? body.verified_phones : body.transactions);\n    if (values.some(v => !v || typeof v !== 'object' || Array.isArray(v))) throw Error('MALFORMED_ROWS');\n    result.rows = values.slice(0,100).map(v => select(v,keys));\n    result.truncated = values.length > 100;\n    result.rowCount = values.length;\n    result.contentTrust = 'untrusted_provider_data';\n  }\n  return result;\n}\nconst r=textmeReadResponse($('Validate read operation').first().json.operation,$input.first().json);\nreturn [{json:r}];"
+      },
+      "id": "c3325cbf-1891-4d92-8290-daf879328444",
+      "name": "Validate and minimize result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Restricted read input": {
+      "main": [
+        [
+          {
+            "node": "Validate read operation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate read operation": {
+      "main": [
+        [
+          {
+            "node": "TextMe read only",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "TextMe read only": {
+      "main": [
+        [
+          {
+            "node": "Validate and minimize result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "pinData": {}
+}

@@ -1,0 +1,163 @@
+{
+  "name": "TEST TextMe restricted read E2E NO SEND 20261028",
+  "active": false,
+  "nodes": [
+    {
+      "id": "manual",
+      "name": "Manual no-send acceptance",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "parameters": {},
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "id": "negative",
+      "name": "Synthetic forbidden operation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "return [{json:{requestJson:JSON.stringify({operation:'sms'})}}];"
+      },
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "id": "deny",
+      "name": "Expect read guard to reject write",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "3K6A1ipS8Qt04WVD",
+          "mode": "id"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "position": [
+        440,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "check",
+      "name": "Require rejection then request verified senders",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "const r=$input.first().json;if(!JSON.stringify(r).includes('OPERATION_NOT_ALLOWED'))throw Error('Write rejection not proven; stop');return [{json:{requestJson:JSON.stringify({operation:'verifiedSenders'})}}];"
+      },
+      "position": [
+        660,
+        0
+      ]
+    },
+    {
+      "id": "read",
+      "name": "Call restricted read subworkflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "parameters": {
+        "source": "database",
+        "workflowId": {
+          "__rl": true,
+          "value": "3K6A1ipS8Qt04WVD",
+          "mode": "id"
+        },
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "position": [
+        880,
+        0
+      ]
+    },
+    {
+      "id": "proof",
+      "name": "Minimized read acceptance proof",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "parameters": {
+        "jsCode": "const r=$input.first().json;if(r.provider!=='TextMe'||r.operation!=='verifiedSenders'||r.httpStatus!==200||r.providerStatus!==0||!Array.isArray(r.rows))throw Error('Read acceptance failed');return [{json:{executionId:String($execution.id),readWorkflowId:'3K6A1ipS8Qt04WVD',provider:r.provider,httpStatus:r.httpStatus,providerStatus:r.providerStatus,verifiedSenderCount:r.rows.length,forbiddenWriteRejected:true,sentMessages:0,scope:'Real provider read only; synthetic negative input; no MCP caller authentication or delivery test'}}];"
+      },
+      "position": [
+        1100,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Manual no-send acceptance": {
+      "main": [
+        [
+          {
+            "node": "Synthetic forbidden operation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Synthetic forbidden operation": {
+      "main": [
+        [
+          {
+            "node": "Expect read guard to reject write",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Expect read guard to reject write": {
+      "main": [
+        [
+          {
+            "node": "Require rejection then request verified senders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Require rejection then request verified senders": {
+      "main": [
+        [
+          {
+            "node": "Call restricted read subworkflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call restricted read subworkflow": {
+      "main": [
+        [
+          {
+            "node": "Minimized read acceptance proof",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "pinData": {},
+  "tags": [],
+  "id": "Is1XtE3b6cHSiHN2"
+}

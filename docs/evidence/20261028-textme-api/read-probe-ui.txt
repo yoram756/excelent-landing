@@ -1,0 +1,177 @@
+Browser tab: 1, Title: "▶️ TEST TextMe API balance READ ONLY NO SEND 20261028 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+1 AXWebArea ▶️ TEST TextMe API balance READ ONLY NO SEND 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text TEST TextMe API balance READ ONLY NO SEND 20261028
+					10 button More actions
+					11 button (disabled) Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 1
+				14 radio button Description: Executions, Value: 0
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (collapsed) Add new item, Secondary Actions: Expand
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container content
+				30 container
+					31 container
+						32 container
+							33 image
+								34 container Edge from d38fe068-d2ef-4928-bb18-38e156d3c341 to 25b473a9-15ec-45d7-8ffc-8c57f9cbad2a
+							35 image
+								36 container Edge from 25b473a9-15ec-45d7-8ffc-8c57f9cbad2a to 94c5da2f-d54b-402a-a6af-339946a23abb
+							37 image
+								38 container Edge from 94c5da2f-d54b-402a-a6af-339946a23abb to af46dee6-21e9-4ae5-88d4-793ae4d08bb4
+							39 text 1 item
+							40 text 1 item
+							41 text 1 item
+							42 container
+								43 button Execute step
+								44 button Deactivate
+								45 button Delete
+								46 button Add to chat
+								47 button More actions
+								48 text Manual read only
+								49 container
+									50 button Execute workflow
+							51 container
+								52 button Execute step
+								53 button Deactivate
+								54 button Delete
+								55 button Add to chat
+								56 button More actions
+								57 text Validate read operation
+							58 container
+								59 button Execute step
+								60 button Deactivate
+								61 button Delete
+								62 button Add to chat
+								63 button More actions
+								64 container
+									65 text TextMe read only POST: https://my.textme.co.il/api
+							66 container
+								67 text 1 item
+								68 button Execute step
+								69 button Deactivate
+								70 button Delete
+								71 button Add to chat
+								72 button More actions
+								73 text Validate and minimize result
+							74 button Add 4 nodes to chat
+						75 image
+						76 image
+						77 container
+							78 button Zoom to Fit
+							79 button Zoom In
+							80 button Zoom Out
+							81 button Tidy Up
+								82 image
+					83 button Execute workflow
+					84 button Open nodes panel
+					85 button Command bar
+					86 button Add sticky note
+					87 button Open side panel
+					88 button n8n AI
+						89 image
+				90 container
+					91 container
+						92 text Logs
+						93 button Clear execution
+						94 text Success in 811ms
+						95 outline
+							96 row (selectable, collapsed) Manual read only, Secondary Actions: Expand
+								97 text Manual read only
+							98 row (selectable, collapsed) Validate read operation, Secondary Actions: Expand
+								99 text Validate read operation
+							100 row (selectable, collapsed) TextMe read only, Secondary Actions: Expand
+								101 text TextMe read only
+							102 row (selected, collapsed) Validate and minimize result, Secondary Actions: Expand
+								103 text Validate and minimize result
+					104 container
+						105 text Validate and minimize result Success in 12ms
+						106 button Input
+						107 button Output
+						108 button Actions
+						109 button Collapse panel
+					110 container
+						111 text OUTPUT
+						112 container
+							113 text field (settable)
+							114 radio button Description: Schema, Value: 0
+							115 radio button Description: Table, Value: 1
+							116 radio button Description: JSON, Value: 0
+						117 text 1 item
+						118 table
+							119 row
+								120 cell
+									121 container
+										122 text provider
+										123 button Collapse rows
+								124 cell
+									125 container
+										126 text operation
+										127 button Collapse rows
+								128 cell
+									129 container
+										130 text httpStatus
+										131 button Collapse rows
+								132 cell
+									133 container
+										134 text providerStatus
+										135 button Collapse rows
+								136 cell
+									137 container
+										138 text readOnly
+										139 button Collapse rows
+								140 cell
+									141 container
+										142 text balancePresent
+										143 button Collapse rows
+								144 cell
+									145 container
+										146 text credentialVerified
+										147 button Collapse rows
+								148 cell
+									149 container
+										150 text delivery
+										151 button Collapse rows
+								152 cell
+									153 container
+										154 text sentMessages
+										155 button Collapse rows
+							156 row
+								157 cell
+									158 text TextMe
+								159 cell
+									160 text balance
+								161 cell
+									162 text 200
+								163 cell
+									164 text 0
+								165 cell
+									166 text true
+								167 cell
+									168 text true
+								169 cell
+									170 text true
+								171 cell
+									172 text NOT TESTED
+								173 cell
+									174 text 0
+
+The focused UI element is 1 AXWebArea ▶️ TEST TextMe API balance READ ONLY NO SEND 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list

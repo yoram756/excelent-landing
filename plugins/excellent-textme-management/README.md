@@ -19,3 +19,9 @@ Verified sources:
 * https://docs.textme.co.il/guide/introduction/
 * https://docs.textme.co.il/endpoints/overview/
 * https://learn.chatgpt.com/docs/dots/computers-and-apps
+
+API preparation 28 October 2026: backend balance read verified in n8n execution
+62442 using the existing credential. Restricted reads and disabled authenticated
+MCP draft prepared; separate caller authentication and actual dot MCP tests
+remain BLOCKED. No MCP endpoint is packaged and no send tool is available.
+Repository implementation: src/integrations/textme-dot/.

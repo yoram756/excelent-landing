@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-28",
+  "overall": "BLOCKED",
+  "backendRead": "PASS",
+  "dotAuthenticatedApi": "BLOCKED",
+  "liveSend": "NOT TESTED",
+  "campaignActivation": "NOT TESTED",
+  "sentMessages": 0,
+  "provider": "TextMe",
+  "apiUrl": "https://my.textme.co.il/api",
+  "credentials": {
+    "existingName": "TextMe API",
+    "valuesAccessed": false,
+    "newProviderCredentialCreated": false,
+    "callerBearerCredentialPresent": false
+  },
+  "workflows": {
+    "existingPreserved": "UyusbbjI1hgkZ76k",
+    "balanceProbe": "24CuXS88ao2olgfd",
+    "restrictedRead": "3K6A1ipS8Qt04WVD",
+    "readAcceptance": "Is1XtE3b6cHSiHN2",
+    "disabledMcp": "iKMn0xVxqoBqrBxK",
+    "archivedPrototype": "r1nCwSHsi6CX45ix"
+  },
+  "executions": {
+    "balance": {
+      "id": "62442",
+      "status": "PASS",
+      "httpStatus": 200,
+      "bodyStatus": 0,
+      "balanceFieldValidated": true
+    },
+    "acceptance": {
+      "id": "62546",
+      "status": "PASS",
+      "syntheticForbiddenOperationRejected": true
+    },
+    "expectedNegative": {
+      "id": "62547",
+      "status": "PASS",
+      "n8nOutcome": "error",
+      "error": "OPERATION_NOT_ALLOWED",
+      "providerNodeExecuted": false
+    },
+    "verifiedSenders": {
+      "id": "62548",
+      "status": "PASS",
+      "httpStatus": 200,
+      "bodyStatus": 0,
+      "verifiedSenderCount": 1,
+      "defaultSenderChosen": false
+    }
+  },
+  "tests": {
+    "textmeLocal": {
+      "status": "PASS",
+      "count": 36
+    },
+    "businessOps": {
+      "status": "PASS",
+      "count": 32
+    },
+    "funnel": {
+      "status": "PASS",
+      "count": 386
+    },
+    "site": {
+      "status": "PASS",
+      "count": 60
+    },
+    "deploy": {
+      "status": "PASS",
+      "count": 5,
+      "nginx": "official temporary local Windows 1.30.6"
+    },
+    "build": {
+      "status": "PASS",
+      "command": "node src/deploy/package.js",
+      "exitCode": 0
+    }
+  },
+  "plugin": {
+    "id": "plugins_6ae261b29284819185d282ac2fc068d2",
+    "version": "0.1.1",
+    "release": "pluginrel_6ae26d7702dc8191870e243a93883a05",
+    "mcpPackaged": false
+  },
+  "blocked": [
+    {
+      "action": "Authenticate the actual dot to the MCP gateway",
+      "environment": "n8n gateway iKMn0xVxqoBqrBxK and private dot plugin",
+      "error": "Required Bearer Auth credential absent; gateway disabled and unpublished; no unauthenticated test attempted",
+      "next": "Owner completes separate caller credential securely; approve read access, register authenticated endpoint, verify auth rejection and tools before adding plugin MCP connection"
+    },
+    {
+      "action": "Deploy controlled writes/full management",
+      "error": "No deployed human approval ingress, existing-store wiring, live send transport or list/campaign mutation adapters",
+      "next": "Review existing durable-store schema/backup; integrate separately authenticated human review, sender, consent/opt-out, price, hours and receipts; exact owner message approval before send"
+    }
+  ],
+  "evidence": "docs/evidence/20261028-textme-api/manifest.json"
+}

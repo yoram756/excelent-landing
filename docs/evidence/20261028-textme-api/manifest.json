@@ -1,0 +1,84 @@
+{
+  "date": "2026-10-28",
+  "scope": "Actual TextMe read API through n8n; synthetic negative write; local proposal controls; no send or live MCP",
+  "files": [
+    {
+      "path": "docs/evidence/20261028-textme-api/build.txt",
+      "sha256": "9af0a65e4636dad30be19044635f7e8c23705f96d65b756fd8dde0f4d29affa0"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/deploy-tests.txt",
+      "sha256": "757054aa23ccbacad9d4c72a59db564d711c87dcf1ce9316d9fbdc7f303ceaa3"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/local-tests.txt",
+      "sha256": "4f0629bbbe6aba1c27343149c166e7d35c75ffea4537a13dfc7c8d020d539601"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/mcp-disabled-ui.txt",
+      "sha256": "2884f5e651489a02bafb7764f1ecc49c2d0aedd6044d73805c985e2a69854216"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/mcp-disabled.png",
+      "sha256": "c81d467758cd7641ea8cc0d86ba6e8c994c650eb5b65bebdb9a582601efb1df4"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/project-tests-initial-nginx-missing.txt",
+      "sha256": "4514476504affbd00846bad231fdec910c77435d3da4a6767614e077deb105d3"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/prototype-archived.txt",
+      "sha256": "015b0735adb85395ea4fe9e5d90c06cff692d984fc06657b2d3731a6fc4bc512"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/read-e2e-ui.txt",
+      "sha256": "a81548b284b3e12bc2fbd3e49d3a83a01710c2c3ba89bf0d7a671b90cdbe76d9"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/read-e2e.png",
+      "sha256": "b948ed8c78d1aadd96889d0e048e61f68d6ac799c6a0844e27cb71931b8e6bb7"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/read-execution-ui.txt",
+      "sha256": "20a9a82aa41410731007aa2af538b30efef38b71102778950431e54d19b342f3"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/read-execution.png",
+      "sha256": "8c68eabba376e3668bcde59c21b22d439ca137620e6c000b18ec099f80fe3cae"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/read-probe-ui.txt",
+      "sha256": "4c2413c7cfab7871b67563800b65517dd88f556813e8f7284e709b33305ba6c7"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/read-probe.png",
+      "sha256": "8d81996e3ec06337c9dc372fca08b4f3e6728dc6f7e27ca0c9434b901d40e448"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/secret-review.txt",
+      "sha256": "ae7958c2ff49c991470de9c9231812a4f75168f8e4aaf8e9105f9c240512ff7f"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/subworkflow-executions.txt",
+      "sha256": "291b813a2eb35a1e8e296d11de928bce32103d97dedd84c20a3cb59c4c9c73b2"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/write-rejected-ui.txt",
+      "sha256": "483a5ce9c5acd2236e926cf43818a023d6e8ec594f4044f32036b6f6155a3bd8"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/write-rejected.png",
+      "sha256": "49ad061d8198e8cd7e7447668195c98b652a9337e375e31dee043a54dc5db643"
+    }
+  ],
+  "providerContract": {
+    "url": "https://docs.textme.co.il/openapi.json",
+    "sha256": "fa946d4ed61dbd14fda5ca99224ffd3b09ae3957112b588bddf4c6cee5f19d8f"
+  },
+  "originalWorkflowBackup": {
+    "id": "UyusbbjI1hgkZ76k",
+    "localFile": "Downloads/EXC TextMe SMS Send (sub workflow) (1).json",
+    "sha256": "904b989eb594c3716905d2772ade9c8dc7399d048df134738c241c4088ec94ac",
+    "changed": false
+  }
+}

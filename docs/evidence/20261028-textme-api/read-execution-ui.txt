@@ -1,0 +1,172 @@
+Browser tab: 1, Title: "▶️ TEST TextMe API balance READ ONLY NO SEND 20261028 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd/executions/62442?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list".
+1 AXWebArea ▶️ TEST TextMe API balance READ ONLY NO SEND 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd/executions/62442?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text TEST TextMe API balance READ ONLY NO SEND 20261028
+					10 button More actions
+					11 button (disabled) Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 0
+				14 radio button Description: Executions, Value: 1
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (expanded) Add new item, Secondary Actions: Collapse
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container
+				30 heading Executions, Value: 2
+					31 text Executions
+				32 checkbox Description: Auto refresh, Value: 1, ID: v-1-74
+				33 text Auto refresh
+				34 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-1-75, Secondary Actions: Expand
+				37 link Description: Oct 28, 23:35:04 Succeededin 521ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd/executions/62442?projectId=LmaRyBnHRyfXp2Py&uiContext=workflow_list
+				36 text Which executions is this workflow saving?
+				38 container
+					39 text Oct 28, 23:35:04 Succeeded in 521ms  | 12KB  | ID#62442  | 
+					40 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd/history/1fa7804e-ea87-43b1-89ce-7403c54a4f25
+					41 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/24CuXS88ao2olgfd/debug/62442
+					42 button Delete this execution
+				43 container
+					44 container
+						45 container
+							46 image
+								47 container Edge from d38fe068-d2ef-4928-bb18-38e156d3c341 to 25b473a9-15ec-45d7-8ffc-8c57f9cbad2a
+							48 image
+								49 container Edge from 25b473a9-15ec-45d7-8ffc-8c57f9cbad2a to 94c5da2f-d54b-402a-a6af-339946a23abb
+							50 image
+								51 container Edge from 94c5da2f-d54b-402a-a6af-339946a23abb to af46dee6-21e9-4ae5-88d4-793ae4d08bb4
+							52 text 1 item
+							53 text 1 item
+							54 text 1 item
+							55 container
+								56 button Add to chat
+								57 button More actions
+								58 text Manual read only
+							59 container
+								60 button Add to chat
+								61 button More actions
+								62 text Validate read operation
+							63 container
+								64 button Add to chat
+								65 button More actions
+								66 container
+									67 text TextMe read only POST: https://my.textme.co.il/api
+							68 container
+								69 text 1 item
+								70 button Add to chat
+								71 button More actions
+								72 text Validate and minimize result
+						73 image
+						74 image
+						75 container
+							76 button Zoom to Fit
+							77 button Zoom In
+							78 button Zoom Out
+					79 container
+						80 container
+							81 text Logs Success in 521ms
+							82 outline
+								83 row (selectable, collapsed) Manual read only, Secondary Actions: Expand
+									84 text Manual read only
+								85 row (selectable, collapsed) Validate read operation, Secondary Actions: Expand
+									86 text Validate read operation
+								87 row (selectable, collapsed) TextMe read only, Secondary Actions: Expand
+									88 text TextMe read only
+								89 row (selected, collapsed) Validate and minimize result, Secondary Actions: Expand
+									90 text Validate and minimize result
+						91 container
+							92 text Validate and minimize result Success in 12ms
+							93 button Input
+							94 button Output
+							95 button Actions
+							96 button Collapse panel
+						97 container
+							98 text OUTPUT
+							99 container
+								100 text field (settable)
+								101 radio button Description: Schema, Value: 0
+								102 radio button Description: Table, Value: 1
+								103 radio button Description: JSON, Value: 0
+							104 text 1 item
+							105 table
+								106 row
+									107 cell
+										108 container
+											109 text provider
+											110 button Collapse rows
+									111 cell
+										112 container
+											113 text operation
+											114 button Collapse rows
+									115 cell
+										116 container
+											117 text httpStatus
+											118 button Collapse rows
+									119 cell
+										120 container
+											121 text providerStatus
+											122 button Collapse rows
+									123 cell
+										124 container
+											125 text readOnly
+											126 button Collapse rows
+									127 cell
+										128 container
+											129 text balancePresent
+											130 button Collapse rows
+									131 cell
+										132 container
+											133 text credentialVerified
+											134 button Collapse rows
+									135 cell
+										136 container
+											137 text delivery
+											138 button Collapse rows
+									139 cell
+										140 container
+											141 text sentMessages
+											142 button Collapse rows
+								143 row
+									144 cell
+										145 text TextMe
+									146 cell
+										147 text balance
+									148 cell
+										149 text 200
+									150 cell
+										151 text 0
+									152 cell
+										153 text true
+									154 cell
+										155 text true
+									156 cell
+										157 text true
+									158 cell
+										159 text NOT TESTED
+									160 cell
+										161 text 0
+	162 container New workflow New credential New data table New project Enterprise New AI chat, ID: el-id-7041-12
+		163 content list
+			164 link Description: New workflow, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/new?projectId=LmaRyBnHRyfXp2Py
+			165 link Description: New credential, Value: n8n-qhxa.srv1604140.hstgr.cloud/home/credentials/create
+			166 link Description: New data table, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py/datatables/new
+			167 New project Enterprise
+				168 text New project
+				169 button Enterprise
+			170 link Description: New AI chat, Value: n8n-qhxa.srv1604140.hstgr.cloud/assistant
+
+The focused UI element is 19 button Add new item

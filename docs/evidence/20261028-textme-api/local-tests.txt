@@ -1,0 +1,44 @@
+✔ tool envelope cannot add overrides or malformed/oversized JSON (6.6878ms)
+✔ allowlisted balance (0.3697ms)
+✔ allowlisted verifiedSenders (0.1043ms)
+✔ allowlisted delivery (0.325ms)
+✔ allowlisted deliveryByDate (0.12ms)
+✔ allowlisted incoming (0.1545ms)
+✔ allowlisted blacklist (0.0946ms)
+✔ deny sms (0.328ms)
+✔ deny bulk (0.1255ms)
+✔ deny getApiToken (0.1998ms)
+✔ deny cancel (0.1162ms)
+✔ deny addNumBL (0.1218ms)
+✔ deny __proto__ (0.1387ms)
+✔ deny constructor (0.069ms)
+✔ deny toString (0.0868ms)
+✔ reject injected url (0.1527ms)
+✔ reject injected username (0.0978ms)
+✔ reject injected body (0.0775ms)
+✔ reject injected user (0.0499ms)
+✔ reject injected token (0.0453ms)
+✔ reject injected headers (0.0454ms)
+✔ reject injected is_subs (0.0496ms)
+✔ reject injected timing (0.0449ms)
+✔ calendar dates and seven-day bound enforced (0.2529ms)
+✔ ID list bounded and unique (0.2597ms)
+✔ HTTP 200 with provider error fails closed (0.3184ms)
+✔ HTTP errors and partial results fail closed (0.16ms)
+✔ allowlisted output drops unexpected tokens and caps messages (1.0165ms)
+✔ provider acceptance is not delivery (0.1209ms)
+✔ proposal rejects bulk, schedule, missing consent, price or unknown keys (1.6713ms)
+✔ approval binds exact content, recipient, cost, sender and expiry (10.3654ms)
+✔ no approval or preflight bypass; live disabled by default (0.7204ms)
+✔ durable atomic reservation survives restart and cannot resend UNKNOWN (63.7539ms)
+✔ acceptance needs provider ID and delivery needs definite readback (1.0749ms)
+✔ n8n build has no webhook, scheduler, broad MCP flag or send route (5.4236ms)
+✔ MCP draft requires secure binding, disables trigger and never reuses provider auth (0.3876ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 336.2991

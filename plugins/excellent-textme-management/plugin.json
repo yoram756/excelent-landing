@@ -1,20 +1,23 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "excellent-textme-management",
-  "version": "0.1.0",
+  "author": {
+    "email": "office@kho.org.il",
+    "name": "יורם פלד"
+  },
   "description": "Excellent TextMe account workflow for the dot through an authorized browser session. Read reports, verify account state and prepare campaign proposals. No native MCP or API connection and no automatic sending are included.",
-  "author": { "name": "אקסלנט" },
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "אקסלנט · TextMe",
-        "shortDescription": "דוחות וניהול TextMe בדפדפן",
-        "longDescription": "עבודה מבוקרת בחשבון TextMe של אקסלנט דרך דפדפן מורשה: דוחות, מצב חשבון והכנת הצעות. חיבור API והפעלת משלוחים דורשים השלמה ואישור נפרדים.",
-        "developerName": "אקסלנט",
-        "category": "Communication",
         "capabilities": [],
-        "defaultPrompt": "בדוק בחשבון TextMe של אקסלנט את הדוחות ומצב הגישה, והכן פעולות מוצעות בלי לשלוח או לשנות הגדרות."
+        "category": "Communication",
+        "defaultPrompt": "בדוק בחשבון TextMe של אקסלנט את הדוחות ומצב הגישה, והכן פעולות מוצעות בלי לשלוח או לשנות הגדרות.",
+        "developerName": "יורם פלד",
+        "displayName": "אקסלנט · TextMe",
+        "longDescription": "עבודה מבוקרת בחשבון TextMe של אקסלנט דרך דפדפן מורשה: דוחות, מצב חשבון והכנת הצעות. חיבור API והפעלת משלוחים דורשים השלמה ואישור נפרדים.",
+        "shortDescription": "דוחות וניהול TextMe בדפדפן"
       }
     }
-  }
+  },
+  "name": "excellent-textme-management",
+  "version": "0.1.1"
 }

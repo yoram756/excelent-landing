@@ -1,0 +1,203 @@
+Browser tab: 1, Title: "▶️ TEST TextMe restricted read E2E NO SEND 20261028 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/Is1XtE3b6cHSiHN2?projectId=LmaRyBnHRyfXp2Py".
+1 AXWebArea ▶️ TEST TextMe restricted read E2E NO SEND 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/Is1XtE3b6cHSiHN2?projectId=LmaRyBnHRyfXp2Py
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text TEST TextMe restricted read E2E NO SEND 20261028
+					10 button More actions
+					11 button (disabled) Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 1
+				14 radio button Description: Executions, Value: 0
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (collapsed) Add new item, Secondary Actions: Expand
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container content
+				30 container
+					31 container
+						32 container
+							33 image
+								34 container Edge from 048a94a3-e954-4c89-994e-51b493e93567 to c4e854d3-4c15-43ab-a939-cc23b864fb0b
+							35 image
+								36 container Edge from c4e854d3-4c15-43ab-a939-cc23b864fb0b to 5a85f5db-26d7-4cf3-a775-1795196d3906
+							37 image
+								38 container Edge from 5a85f5db-26d7-4cf3-a775-1795196d3906 to 3e8205f0-be84-4531-ad10-1ecfa1845d8c
+							39 image
+								40 container Edge from 3e8205f0-be84-4531-ad10-1ecfa1845d8c to 79c0e68e-cdf9-4685-8ccc-ffd4854c1377
+							41 image
+								42 container Edge from 79c0e68e-cdf9-4685-8ccc-ffd4854c1377 to a4e6b100-ad6d-4503-b906-416b12bb792f
+							108 text 1 item
+							109 text 1 item
+							110 text 1 item
+							111 text 1 item
+							112 text 1 item
+							43 container
+								44 button Execute step
+								45 button Deactivate
+								46 button Delete
+								47 button Add to chat
+								48 button More actions
+								49 text Manual no-send acceptance
+								50 container
+									51 button Execute workflow
+							52 container
+								53 button Execute step
+								54 button Deactivate
+								55 button Delete
+								56 button Add to chat
+								57 button More actions
+								58 text Synthetic forbidden operation
+							59 container
+								60 button Execute step
+								61 button Deactivate
+								62 button Delete
+								63 button Add to chat
+								64 button More actions
+								65 container
+									66 text Expect read guard to reject write Workflow: 3K6A1ipS8Qt04WVD
+							67 container
+								68 button Execute step
+								69 button Deactivate
+								70 button Delete
+								71 button Add to chat
+								72 button More actions
+								73 text Require rejection then request verified senders
+							74 container
+								75 button Execute step
+								76 button Deactivate
+								77 button Delete
+								78 button Add to chat
+								79 button More actions
+								80 container
+									81 text Call restricted read subworkflow Workflow: 3K6A1ipS8Qt04WVD
+							82 container
+								113 text 1 item
+								83 button Execute step
+								84 button Deactivate
+								85 button Delete
+								86 button Add to chat
+								87 button More actions
+								88 text Minimized read acceptance proof
+							89 button Add 6 nodes to chat
+						90 image
+						91 image
+						92 container
+							93 button Zoom to Fit
+							94 button Zoom In
+							95 button Zoom Out
+							96 button Tidy Up
+								97 image
+					98 button Execute workflow
+					99 button Open nodes panel
+					100 button Command bar
+					101 button Add sticky note
+					102 button Open side panel
+					103 button n8n AI
+						104 image
+				105 container
+					106 container
+						107 text Logs
+						114 button Clear execution
+						115 text Success in 1.017s
+						116 outline
+							117 row (selectable, collapsed) Manual no-send acceptance, Secondary Actions: Expand
+								118 text Manual no-send acceptance
+							119 row (selectable, collapsed) Synthetic forbidden operation, Secondary Actions: Expand
+								120 text Synthetic forbidden operation
+							121 row (selectable, collapsed) Expect read guard to reject write, Secondary Actions: Expand
+								122 text Expect read guard to reject write
+							123 row (selectable, collapsed) Require rejection then request verified senders, Secondary Actions: Expand
+								124 text Require rejection then request verified senders
+							125 row (selectable, collapsed) Call restricted read subworkflow Toggle row, Secondary Actions: Expand
+								126 text Call restricted read subworkflow
+								127 button Toggle row
+							128 row (selected, collapsed) Minimized read acceptance proof, Secondary Actions: Expand
+								129 text Minimized read acceptance proof
+					130 container
+						131 text Minimized read acceptance proof Success in 6ms
+						132 button Input
+						133 button Output
+						134 button Actions
+						135 button Collapse panel
+					136 container
+						137 text OUTPUT
+						138 container
+							139 text field (settable)
+							140 radio button Description: Schema, Value: 0
+							141 radio button Description: Table, Value: 1
+							142 radio button Description: JSON, Value: 0
+						143 text 1 item
+						144 table
+							145 row
+								146 cell
+									147 container
+										148 text executionId
+										149 button Collapse rows
+								150 cell
+									151 container
+										152 text readWorkflowId
+										153 button Collapse rows
+								154 cell
+									155 container
+										156 text provider
+										157 button Collapse rows
+								158 cell
+									159 container
+										160 text httpStatus
+										161 button Collapse rows
+								162 cell
+									163 container
+										164 text providerStatus
+										165 button Collapse rows
+								166 cell
+									167 container
+										168 text verifiedSenderCount
+										169 button Collapse rows
+								170 cell
+									171 container
+										172 text forbiddenWriteRejected
+										173 button Collapse rows
+								174 cell
+									175 container
+										176 text sentMessages
+										177 button Collapse rows
+								178 cell
+									179 container
+										180 text scope
+										181 button Collapse rows
+							182 row
+								183 cell
+									184 text 62546
+								185 cell
+									186 text 3K6A1ipS8Qt04WVD
+								187 cell
+									188 text TextMe
+								189 cell
+									190 text 200
+								191 cell
+									192 text 0
+								193 cell
+									194 text 1
+								195 cell
+									196 text true
+								197 cell
+									198 text 0
+								199 cell
+									200 text Real provider read only; synthetic negative input; no MCP caller authentication or delivery test
+
+The focused UI element is 128 row (selected, collapsed) Minimized read acceptance proof, Secondary Actions: Expand

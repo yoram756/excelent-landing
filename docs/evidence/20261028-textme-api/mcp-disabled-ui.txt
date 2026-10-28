@@ -1,0 +1,82 @@
+Browser tab: 1, Title: "▶️ DRAFT TextMe dot MCP AUTH REQUIRED DO NOT PUBLISH 20261028 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/iKMn0xVxqoBqrBxK".
+1 AXWebArea ▶️ DRAFT TextMe dot MCP AUTH REQUIRED DO NOT PUBLISH 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/iKMn0xVxqoBqrBxK
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text DRAFT TextMe dot MCP AUTH REQUIRED DO NOT PUBLISH 20261028
+					10 button More actions
+					11 button (disabled) Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 1
+				14 radio button Description: Executions, Value: 0
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (collapsed) Add new item, Secondary Actions: Expand
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container content
+				30 container
+					31 container
+						32 container
+							33 image
+								34 container Edge from decd783e-1dee-4a6c-8931-3647b3fa1b4a to 027b0dd4-0367-4de9-8a2e-922179bc6577
+							35 container
+								36 text Tools
+								37 button (disabled) Execute step
+								38 button Activate
+								39 button Delete
+								40 button Add to chat
+								41 button More actions
+								42 container
+									43 text TextMe authenticated MCP (Deactivated)
+								44 container
+									45 button Execute workflow
+							46 container
+								47 text Tool
+								48 button Execute step
+								49 button Deactivate
+								50 button Delete
+								51 button Add to chat
+								52 button More actions
+								53 text textme_read
+							54 container
+								55 button Delete
+								56 container
+									57 color well (settable) #000000
+								58 button More actions
+								80 text BLOCKED: Supply a dedicated owner-approved caller Bearer Auth credential securely. Never use TextMe/Cosend/provider credentials here. Trigger is disabled, unpublished, no listener registered. Authorize secure Dot connection before enabling. Subworkflow must be published and tested; sending remains absent.
+						60 image
+						61 image
+						62 container
+							63 button Zoom to Fit
+							64 button Zoom In
+							65 button Zoom Out
+							66 button Tidy Up
+								67 image
+					68 button Open nodes panel
+					69 button Command bar
+					70 button Add sticky note
+					71 button Open side panel
+					72 button n8n AI
+						73 image
+				74 container
+					75 container
+						76 text Logs
+						77 button Actions
+						78 button Collapse panel
+						79 text Nothing to display yet. Execute the workflow to see execution logs.
+
+The focused UI element is 1 AXWebArea ▶️ DRAFT TextMe dot MCP AUTH REQUIRED DO NOT PUBLISH 20261028 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/iKMn0xVxqoBqrBxK
