@@ -31,7 +31,7 @@ function patchGuardedIntake(input,{lockUrl,lockCredentialId}){
     options:{timeout:5000,response:{response:{fullResponse:true,neverError:true,responseFormat:'json'}}}
   },{typeVersion:4.2,onError:'continueRegularOutput',retryOnFail:false,credentials:{httpHeaderAuth:{id:lockCredentialId,name:'Lock server'}}});
   add('Atomic lock result','n8n-nodes-base.code',[-600,0],{jsCode:fs.readFileSync(path.join(__dirname,'atomic-lock-result.js'),'utf8').replace(/\r\n/g,'\n')});
-  add('Atomic lock failed?','n8n-nodes-base.if',[-400,0],{conditions:{options:{caseSensitive:true,leftValue:'',typeValidation:'strict'},conditions:[{id:id('failed-condition'),leftValue:'={{ !!$json.__centralFailure }}',rightValue:true,operator:{type:'boolean',operation:'true',singleValue:true}}],combinator:'and'},options:{}});
+  add('Atomic lock failed?','n8n-nodes-base.if',[-400,0],{conditions:{options:{caseSensitive:true,leftValue:'',typeValidation:'strict',version:1},conditions:[{id:id('failed-condition'),leftValue:'={{ !!$json.__centralFailure }}',rightValue:true,operator:{type:'boolean',operation:'true',singleValue:true}}],combinator:'and'},options:{}});
   add('Atomic lock response','n8n-nodes-base.respondToWebhook',[-200,250],{respondWith:'json',responseBody:'={{ $json.body }}',options:{responseCode:'={{ $json.status }}'}},{typeVersion:1.1});
   w.connections['Needs save?'].main[0]=[edge('Atomic lock')];
   w.connections['Atomic lock']=link('Atomic lock result');
@@ -42,4 +42,22 @@ function patchGuardedIntake(input,{lockUrl,lockCredentialId}){
   // must retain the current runtime staticData; never import this as a replacement database record.
   return {name:w.name,nodes:w.nodes,connections:w.connections,settings:w.settings,pinData:{}};
 }
-module.exports={patchGuardedIntake};
+// n8n's editor appends imported nodes. This artifact intentionally contains only
+// new nodes and their internal links; the small explicit plan replaces the one
+// existing edge and connects the gate to existing nodes without deleting them.
+function incrementalGuardedIntake(input,options){
+  const full=patchGuardedIntake(input,options),oldIds=new Set(input.nodes.map(n=>n.id));
+  const nodes=full.nodes.filter(n=>!oldIds.has(n.id)),names=new Set(nodes.map(n=>n.name));
+  const connections={},add=[];
+  for(const [from,c] of Object.entries(full.connections)){
+    const main=c.main.map((branch,output)=>branch.filter(e=>{
+      if(names.has(from)&&names.has(e.node))return true;
+      if(names.has(from)||names.has(e.node))add.push({from,output,to:e.node,input:e.index});
+      return false;
+    }));
+    while(main.length&&!main.at(-1).length)main.pop();
+    if(main.length)connections[from]={main};
+  }
+  return {artifact:{nodes,connections,pinData:{}},rewiring:{remove:[{from:'Needs save?',output:0,to:'Find query',input:0}],add,expectedNodeCount:41,settingsChanged:false}};
+}
+module.exports={patchGuardedIntake,incrementalGuardedIntake};

@@ -68,12 +68,17 @@ const patchIntake=(w,{campaign='refi',lockUrl,lockCredentialId,instantWorkflowId
 };
 
 if(require.main===module){
- const [input,output]=process.argv.slice(2);if(!input||!output)throw Error('usage: node patch-export.js input.json output.json');
+ const [input,output,mode]=process.argv.slice(2);if(!input||!output||(mode&&mode!=='--incremental'))throw Error('usage: node patch-export.js input.json output.json [--incremental]');
  const {CAMPAIGN='refi',LOCK_SERVER_URL,LOCK_CREDENTIAL_ID,INSTANT_REPLY_WORKFLOW_ID}=process.env;
  const parsed=JSON.parse(fs.readFileSync(input,'utf8'));const w=Array.isArray(parsed)&&parsed.length===1?parsed[0]:parsed;const id=w.id;
  const result=patchIntake(w,{campaign:CAMPAIGN,lockUrl:LOCK_SERVER_URL,lockCredentialId:LOCK_CREDENTIAL_ID,instantWorkflowId:INSTANT_REPLY_WORKFLOW_ID});
- fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
- console.log(JSON.stringify({sourceWorkflow:id,nodes:result.nodes.length,replaced:w.nodes.length===37?[]:['Validate','Find query','Build mutation','Check save'],lockBefore:'Find query',settingsChanged:false,guardedMigration:w.nodes.length===37,notificationsAfterResponse:true}));
+ let artifact=result;
+ if(mode==='--incremental'){
+  const incremental=require('./atomic-export').incrementalGuardedIntake(w,{lockUrl:LOCK_SERVER_URL,lockCredentialId:LOCK_CREDENTIAL_ID});
+  artifact=incremental.artifact;fs.writeFileSync(output+'.plan.json',JSON.stringify(incremental.rewiring,null,2)+'\n');
+ }
+ fs.writeFileSync(output,JSON.stringify(artifact,null,2)+'\n');
+ console.log(JSON.stringify({sourceWorkflow:id,nodes:artifact.nodes.length,expectedNodes:result.nodes.length,incremental:mode==='--incremental',replaced:w.nodes.length===37?[]:['Validate','Find query','Build mutation','Check save'],lockBefore:'Find query',settingsChanged:false,guardedMigration:w.nodes.length===37,notificationsAfterResponse:true}));
 }
 
 module.exports={patchIntake};

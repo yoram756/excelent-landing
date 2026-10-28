@@ -3,6 +3,7 @@ const {patchIntake}=require('../../src/webhooks/intake/patch-export');
 const {patch}=require('../../src/services/funnel/error-workflow-patch');
 const {LifecycleDb}=require('../../src/services/lifecycle/db');
 const {createLockServer}=require('../../src/services/lifecycle/lock-server');
+const {incrementalGuardedIntake}=require('../../src/webhooks/intake/atomic-export');
 const fixture=()=>patch(JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/intake-before-guards.json'))),{role:'leadIntake'});
 const opts={lockUrl:'http://127.0.0.1:8787',lockCredentialId:'SyntheticLock0001'};
 const lead={ok:true,duplicate:false,key:'TEST_atomic_event_001',eventId:'TEST_atomic_event_001',phone:'972500000081',name:'TEST atomic race'};
@@ -42,6 +43,7 @@ test('37-node migration preserves every original node, error path, setting and d
   assert.equal(w.staticData,undefined);assert.deepEqual(w.pinData,{});
   assert.equal(w.nodes.some(n=>n.name==='Instant reply'),false);
   const lock=w.nodes.find(n=>n.name==='Atomic lock');assert.equal(lock.retryOnFail,false);
+  assert.equal(w.nodes.find(n=>n.name==='Atomic lock failed?').parameters.conditions.options.version,1,'match the n8n serialized IF contract');
   assert.deepEqual(lock.credentials,{httpHeaderAuth:{id:opts.lockCredentialId,name:'Lock server'}});
   assert.deepEqual(lock.parameters.options.response.response,{fullResponse:true,neverError:true,responseFormat:'json'});
   assert.deepEqual(w.connections['Atomic lock response'].main[0],[{node:'Stop And Error',type:'main',index:0}]);
@@ -64,6 +66,29 @@ test('unverified admissions and transport failures reach existing controlled Sto
   for(const status of [401,429,500]){const r=await executeGate(w,{transport:async()=>({status,json:async()=>({error:'provider failure'})})});assert.equal(r.response.status,503);assert.equal(r.stopped,true);}
   const down=await executeGate(w,{transport:async()=>{throw Error('down');}});assert.equal(down.response.status,503);assert.equal(down.failure.code,'provider_error');
   const duplicate=await executeGate(w,{transport:async()=>({status:200,json:async()=>({locked:false,phone:lead.phone,lockedUntil:future})})});assert.equal(duplicate.response.status,409);assert.equal(duplicate.failure.code,'duplicate_lead');
+});
+
+test('incremental editor import retains 37 nodes and requires the explicit three-link rewiring plan',async()=>{
+  const input=fixture(),{artifact,rewiring}=incrementalGuardedIntake(input,opts);
+  assert.equal(artifact.nodes.length,4);assert.equal(artifact.settings,undefined);
+  assert.equal(artifact.nodes.some(n=>input.nodes.some(old=>old.id===n.id||old.name===n.name)),false);
+  assert.equal(rewiring.remove.length,1);assert.equal(rewiring.add.length,3);
+  const names=new Set(artifact.nodes.map(n=>n.name));
+  for(const c of Object.values(artifact.connections))for(const branch of c.main)for(const e of branch)assert.ok(names.has(e.node),'imports cannot silently link existing nodes');
+  const apply=remove=>{
+    const w=structuredClone(input);w.nodes.push(...structuredClone(artifact.nodes));Object.assign(w.connections,structuredClone(artifact.connections));
+    for(const e of remove)w.connections[e.from].main[e.output]=w.connections[e.from].main[e.output].filter(t=>t.node!==e.to);
+    for(const e of rewiring.add){w.connections[e.from]??={main:[]};w.connections[e.from].main[e.output]??=[];w.connections[e.from].main[e.output].push({node:e.to,type:'main',index:e.input});}
+    return w;
+  };
+  const w=apply(rewiring.remove);assert.equal(w.nodes.length,41);assert.deepEqual(w.settings,input.settings);
+  for(const n of input.nodes)assert.deepEqual(w.nodes.find(x=>x.id===n.id),n);
+  const blocked=await executeGate(w,{transport:async()=>{throw Error('down');},write:()=>assert.fail('unverified admission reached CRM')});
+  assert.equal(blocked.stopped,true);assert.equal(blocked.response.status,503);
+  // Negative control: append-only import without removing the old edge bypasses
+  // admission and must be rejected, even though all four new nodes are present.
+  const broken=await executeGate(apply([]),{write:()=>{}});assert.equal(broken.saved,true);
+  assert.throws(()=>assert.equal(broken.saved,false),{code:'ERR_ASSERTION'});
 });
 
 test('two real HTTP workers share a SQLite lock: 20 concurrent executions permit one simulated CRM write',async()=>{
