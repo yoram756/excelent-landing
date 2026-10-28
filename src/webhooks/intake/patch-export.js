@@ -10,6 +10,7 @@ const nodeId=name=>{const h=crypto.createHash('sha1').update('intake:'+name).dig
 const ifTrue=(name,pos,expr)=>({id:nodeId(name),name,type:'n8n-nodes-base.if',typeVersion:2,position:pos,parameters:{conditions:{options:{caseSensitive:true,leftValue:'',typeValidation:'strict'},conditions:[{id:nodeId(name+':c'),leftValue:expr,rightValue:true,operator:{type:'boolean',operation:'true',singleValue:true}}],combinator:'and'},options:{}}});
 
 const patchIntake=(w,{campaign='refi',lockUrl,lockCredentialId,instantWorkflowId})=>{
+ if(w?.nodes?.length===37)return require('./atomic-export').patchGuardedIntake(w,{lockUrl,lockCredentialId});
  if(w.id!=='8W7MymUCLpPnilJs'||w.nodes.length!==18)throw Error('Unexpected intake workflow');
  if(!/^https?:\/\/[\w.-]+(:\d{2,5})?$/.test(String(lockUrl||'')))throw Error('LOCK_SERVER_URL like http://host:8787 required');
  if(!/^\w{8,40}$/.test(String(lockCredentialId||'')))throw Error('LOCK_CREDENTIAL_ID required');
@@ -69,10 +70,10 @@ const patchIntake=(w,{campaign='refi',lockUrl,lockCredentialId,instantWorkflowId
 if(require.main===module){
  const [input,output]=process.argv.slice(2);if(!input||!output)throw Error('usage: node patch-export.js input.json output.json');
  const {CAMPAIGN='refi',LOCK_SERVER_URL,LOCK_CREDENTIAL_ID,INSTANT_REPLY_WORKFLOW_ID}=process.env;
- const w=JSON.parse(fs.readFileSync(input,'utf8'));const id=w.id;
+ const parsed=JSON.parse(fs.readFileSync(input,'utf8'));const w=Array.isArray(parsed)&&parsed.length===1?parsed[0]:parsed;const id=w.id;
  const result=patchIntake(w,{campaign:CAMPAIGN,lockUrl:LOCK_SERVER_URL,lockCredentialId:LOCK_CREDENTIAL_ID,instantWorkflowId:INSTANT_REPLY_WORKFLOW_ID});
  fs.writeFileSync(output,JSON.stringify(result,null,2)+'\n');
- console.log(JSON.stringify({sourceWorkflow:id,nodes:result.nodes.length,replaced:['Validate','Find query','Build mutation','Check save'],lockBefore:'Find query',instantReplyAfter:'Reply saved',responseAfter:'Check save → Saved? true',notificationsAfterResponse:true}));
+ console.log(JSON.stringify({sourceWorkflow:id,nodes:result.nodes.length,replaced:w.nodes.length===37?[]:['Validate','Find query','Build mutation','Check save'],lockBefore:'Find query',settingsChanged:false,guardedMigration:w.nodes.length===37,notificationsAfterResponse:true}));
 }
 
 module.exports={patchIntake};

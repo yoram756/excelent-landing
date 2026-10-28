@@ -1,0 +1,434 @@
+{
+  "id": "8W7MymUCLpPnilJs",
+  "name": "Synthetic guarded intake",
+  "settings": {
+    "executionOrder": "v1",
+    "saveDataErrorExecution": "all",
+    "errorWorkflow": "4bLJ8LvpNYnoCB8t"
+  },
+  "nodes": [
+    {
+      "id": "f4290c7f-2477-4ab9-937b-2a94763a2be5",
+      "name": "Lead webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        96,
+        224
+      ],
+      "disabled": false,
+      "parameters": {}
+    },
+    {
+      "id": "014e1610-a2e4-41aa-b56e-9b9225d948bf",
+      "name": "Validate",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        320,
+        224
+      ],
+      "disabled": false,
+      "parameters": {
+        "jsCode": "return [{json:{fixture:true}}];"
+      }
+    },
+    {
+      "id": "235ac134-a036-413c-aaec-0361a41c88af",
+      "name": "Needs save?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        544,
+        224
+      ],
+      "disabled": false,
+      "parameters": {}
+    },
+    {
+      "id": "4224f3e5-dcfb-4a2c-bc0b-6475c806b0c9",
+      "name": "Reply early",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        768,
+        432
+      ],
+      "disabled": false,
+      "parameters": {}
+    },
+    {
+      "id": "89a4b35e-0f84-4792-821d-96f6410c7a86",
+      "name": "Find query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        768,
+        224
+      ],
+      "disabled": false,
+      "parameters": {
+        "jsCode": "return [{json:{fixture:true}}];"
+      }
+    },
+    {
+      "id": "a67c2cb6-19f8-4b01-b991-3c4bfed885ea",
+      "name": "Find by phone",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        976,
+        224
+      ],
+      "disabled": false,
+      "parameters": {},
+      "credentials": {
+        "mondayComApi": {
+          "id": "SyntheticCredential0001",
+          "name": "Synthetic only"
+        }
+      }
+    },
+    {
+      "id": "8bb1ca13-6a5d-4f6a-9ef8-4d4ff28f1653",
+      "name": "Build mutation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1200,
+        224
+      ],
+      "disabled": false,
+      "parameters": {
+        "jsCode": "return [{json:{fixture:true}}];"
+      }
+    },
+    {
+      "id": "460cc01b-6821-4848-8f21-c92a48909f37",
+      "name": "Save to Monday",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1424,
+        224
+      ],
+      "disabled": false,
+      "parameters": {},
+      "credentials": {
+        "mondayComApi": {
+          "id": "SyntheticCredential0001",
+          "name": "Synthetic only"
+        }
+      }
+    },
+    {
+      "id": "e0fc1ba6-261d-4c26-afd8-b658bdd91c39",
+      "name": "Check save",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        224
+      ],
+      "disabled": false,
+      "parameters": {
+        "jsCode": "return [{json:{fixture:true}}];"
+      }
+    },
+    {
+      "id": "f83c6d46-48da-4932-b9cd-99401214148f",
+      "name": "Saved?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        1856,
+        224
+      ],
+      "disabled": false,
+      "parameters": {}
+    },
+    {
+      "id": "307699a7-48bc-418d-966c-7b4c309f9ef6",
+      "name": "Reply saved",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        224
+      ],
+      "disabled": false,
+      "parameters": {}
+    },
+    {
+      "id": "d7ce41c1-7ff6-425d-982d-4302e6e049b9",
+      "name": "Reply failed",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        2080,
+        432
+      ],
+      "disabled": false,
+      "parameters": {}
+    },
+    {
+      "id": "1f08a06f-ef1f-43f9-83ca-290996f50be3",
+      "name": "Alert query",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2304,
+        224
+      ],
+      "disabled": false,
+      "parameters": {
+        "jsCode": "return [{json:{fixture:true}}];"
+      }
+    },
+    {
+      "id": "0a9c83e4-bd93-493a-a4d8-0ae945628275",
+      "name": "Who am I",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2528,
+        224
+      ],
+      "disabled": false,
+      "parameters": {},
+      "credentials": {
+        "mondayComApi": {
+          "id": "SyntheticCredential0001",
+          "name": "Synthetic only"
+        }
+      }
+    },
+    {
+      "id": "6574b013-588a-4223-8759-4743f134fe59",
+      "name": "Alert Yoram",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2736,
+        224
+      ],
+      "disabled": false,
+      "parameters": {},
+      "credentials": {
+        "mondayComApi": {
+          "id": "SyntheticCredential0001",
+          "name": "Synthetic only"
+        }
+      }
+    },
+    {
+      "id": "ee81d4c4-68ce-42dc-98e8-9cbbb57a8f43",
+      "name": "Email alert",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2960,
+        224
+      ],
+      "disabled": false,
+      "parameters": {},
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SyntheticCredential0001",
+          "name": "Synthetic only"
+        }
+      }
+    },
+    {
+      "id": "e016efc4-c3a0-4134-85e7-024aa6db791b",
+      "name": "WhatsApp recipients",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3184,
+        224
+      ],
+      "disabled": true,
+      "parameters": {
+        "jsCode": "return [{json:{fixture:true}}];"
+      }
+    },
+    {
+      "id": "a544d3ed-9c20-4aff-a5fc-eb7c6c252c3a",
+      "name": "WhatsApp alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        3408,
+        224
+      ],
+      "disabled": true,
+      "parameters": {},
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "SyntheticCredential0001",
+          "name": "Synthetic only"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Lead webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate": {
+      "main": [
+        [
+          {
+            "node": "Needs save?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs save?": {
+      "main": [
+        [
+          {
+            "node": "Find query",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reply early",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find query": {
+      "main": [
+        [
+          {
+            "node": "Find by phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find by phone": {
+      "main": [
+        [
+          {
+            "node": "Build mutation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build mutation": {
+      "main": [
+        [
+          {
+            "node": "Save to Monday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Monday": {
+      "main": [
+        [
+          {
+            "node": "Check save",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check save": {
+      "main": [
+        [
+          {
+            "node": "Saved?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Saved?": {
+      "main": [
+        [
+          {
+            "node": "Reply saved",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reply failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert query": {
+      "main": [
+        [
+          {
+            "node": "Who am I",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Who am I": {
+      "main": [
+        [
+          {
+            "node": "Alert Yoram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert Yoram": {
+      "main": [
+        [
+          {
+            "node": "Email alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply saved": {
+      "main": [
+        [
+          {
+            "node": "Alert query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

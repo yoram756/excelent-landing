@@ -1,0 +1,444 @@
+{
+  "nodes": {
+    "Alert query": "n8n-nodes-base.code",
+    "Alert Yoram": "n8n-nodes-base.httpRequest",
+    "Build mutation": "n8n-nodes-base.code",
+    "Check save": "n8n-nodes-base.code",
+    "Email alert": "n8n-nodes-base.gmail",
+    "Error context: Alert Yoram": "n8n-nodes-base.code",
+    "Error context: Email alert": "n8n-nodes-base.code",
+    "Error context: Find by phone": "n8n-nodes-base.code",
+    "Error context: Save to Monday": "n8n-nodes-base.code",
+    "Error context: Who am I": "n8n-nodes-base.code",
+    "Find by phone": "n8n-nodes-base.httpRequest",
+    "Find query": "n8n-nodes-base.code",
+    "Guard provider: Alert Yoram": "n8n-nodes-base.code",
+    "Guard provider: Alert Yoram?": "n8n-nodes-base.if",
+    "Guard provider: Email alert": "n8n-nodes-base.code",
+    "Guard provider: Email alert?": "n8n-nodes-base.if",
+    "Guard provider: Find by phone": "n8n-nodes-base.code",
+    "Guard provider: Find by phone?": "n8n-nodes-base.if",
+    "Guard provider: Save to Monday": "n8n-nodes-base.code",
+    "Guard provider: Save to Monday?": "n8n-nodes-base.if",
+    "Guard provider: Who am I": "n8n-nodes-base.code",
+    "Guard provider: Who am I?": "n8n-nodes-base.if",
+    "Guard validation": "n8n-nodes-base.code",
+    "Guard validation response": "n8n-nodes-base.respondToWebhook",
+    "Guard validation?": "n8n-nodes-base.if",
+    "Lead webhook": "n8n-nodes-base.webhook",
+    "Needs save?": "n8n-nodes-base.if",
+    "Reply early": "n8n-nodes-base.respondToWebhook",
+    "Reply failed": "n8n-nodes-base.respondToWebhook",
+    "Reply saved": "n8n-nodes-base.respondToWebhook",
+    "Save to Monday": "n8n-nodes-base.httpRequest",
+    "Saved?": "n8n-nodes-base.if",
+    "Stop And Error": "n8n-nodes-base.stopAndError",
+    "Validate": "n8n-nodes-base.code",
+    "WhatsApp alert": "n8n-nodes-base.httpRequest",
+    "WhatsApp recipients": "n8n-nodes-base.code",
+    "Who am I": "n8n-nodes-base.httpRequest"
+  },
+  "connections": {
+    "Lead webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate": {
+      "main": [
+        [
+          {
+            "node": "Guard validation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Needs save?": {
+      "main": [
+        [
+          {
+            "node": "Find query",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reply early",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find query": {
+      "main": [
+        [
+          {
+            "node": "Error context: Find by phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find by phone": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Find by phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build mutation": {
+      "main": [
+        [
+          {
+            "node": "Error context: Save to Monday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save to Monday": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Save to Monday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check save": {
+      "main": [
+        [
+          {
+            "node": "Saved?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Saved?": {
+      "main": [
+        [
+          {
+            "node": "Reply saved",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Reply failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert query": {
+      "main": [
+        [
+          {
+            "node": "Error context: Who am I",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Who am I": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Who am I",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alert Yoram": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Alert Yoram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Reply saved": {
+      "main": [
+        [
+          {
+            "node": "Alert query",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard validation": {
+      "main": [
+        [
+          {
+            "node": "Guard validation?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard validation?": {
+      "main": [
+        [
+          {
+            "node": "Guard validation response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Needs save?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard validation response": {
+      "main": [
+        [
+          {
+            "node": "Stop And Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error context: Find by phone": {
+      "main": [
+        [
+          {
+            "node": "Find by phone",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Find by phone": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Find by phone?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Find by phone?": {
+      "main": [
+        [
+          {
+            "node": "Stop And Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Build mutation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error context: Save to Monday": {
+      "main": [
+        [
+          {
+            "node": "Save to Monday",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Save to Monday": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Save to Monday?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Save to Monday?": {
+      "main": [
+        [
+          {
+            "node": "Stop And Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Check save",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error context: Who am I": {
+      "main": [
+        [
+          {
+            "node": "Who am I",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Who am I": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Who am I?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Who am I?": {
+      "main": [
+        [
+          {
+            "node": "Stop And Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error context: Alert Yoram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error context: Alert Yoram": {
+      "main": [
+        [
+          {
+            "node": "Alert Yoram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Alert Yoram": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Alert Yoram?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Alert Yoram?": {
+      "main": [
+        [
+          {
+            "node": "Stop And Error",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Error context: Email alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error context: Email alert": {
+      "main": [
+        [
+          {
+            "node": "Email alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email alert": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Email alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Email alert": {
+      "main": [
+        [
+          {
+            "node": "Guard provider: Email alert?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guard provider: Email alert?": {
+      "main": [
+        [
+          {
+            "node": "Stop And Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
