@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T17:37:55.525Z",
+  "generatedAt": "2026-10-28T19:42:58.377Z",
   "goLiveReady": false,
   "whatsappMessagesSent": 0,
   "requirements": [
@@ -79,7 +79,7 @@
     {
       "id": "atomic_lock_intake_wiring",
       "status": "BLOCKED",
-      "evidence": "Production Lead Intake version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f has 37 nodes and no Lock node. Local lock/replay contracts pass; production concurrency not proven. Existing patch-export.js only accepts an 18-node workflow; current production has 37 nodes and controlled-error routes. A tested migration that preserves these routes is required before publishing; no global n8n settings/restart was performed."
+      "evidence": "37-node migration implemented and pushed as a27fa05; local funnel 385/385, exit 0, including a 20-way two-worker SQLite race with one simulated CRM write, and fail-closed negative controls. Fresh actual 37-node export produces a 41-node patch preserving original nodes, error routes and settings. Production import is blocked by browser file upload/picker input; no corrected version was published and production concurrency was not tested. Original draft restored using version history; editor readback 37 nodes, zero Atomic lock nodes. Published version remains 4842b1ba-5f41-468d-a2df-fb0a5f854c3f. User confirmed temporary extension permission disabled. See ATOMIC_INTAKE_20261028.md."
     },
     {
       "id": "approved_video_testimonials",

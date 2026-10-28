@@ -208,3 +208,8 @@ F. Go live (only after explicit approval from יורם)
 1. Run lock-server.js on the n8n host (env LOCK_SERVER_TOKEN and LOCK_DB_PATH, port 8787 on 127.0.0.1 or the internal Docker network). In the intake workflow, call `POST /lock` before "Find query"; on locked=false, answer as a duplicate without writing.
 2. Meta: an HTTPS endpoint that receives the webhook with the raw body, calls verifySignature, then leadgenEvents, fetchLead and normalizeLead, then the lock and the intake. Register it in the Meta app (leadgen field) with META_VERIFY_TOKEN, and grant the page access token leads_retrieval. The hosting endpoint itself is not built.
 3. Meta leads currently map only to refi (meta.campaignIds); consolidation has no Meta campaign ids, so its leads are rejected until they are added.
+
+
+## Atomic intake update, 2026-10-28
+
+PASS: 37-node migration and local regression (385/385, exit 0), source commit a27fa05 pushed. BLOCKED: actual n8n import/publication; browser upload and picker input unavailable. NOT TESTED: production concurrency and Monday readback for the new gate. PASS: original draft restored to 37 nodes; published version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f unchanged. No WhatsApp sends. User confirmed temporary extension permission disabled. Details: [ATOMIC_INTAKE_20261028.md](docs/runtime/ATOMIC_INTAKE_20261028.md).

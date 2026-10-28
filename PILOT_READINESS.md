@@ -64,3 +64,8 @@
 לפני שינוי שרת יש להציג את הפקודות, לבצע git pull, לבדוק nginx במכולה זמנית ורק אז להפעיל מחדש. לא שונו האתר הראשי, הגדרות n8n, OpenClaw או Hermes.
 
 המערכת עדיין אינה מוכנה להפעלה. אין בדוח זה הכרזת GO-LIVE READY.
+
+
+## Atomic intake update, 2026-10-28
+
+PASS: 37-node migration and local regression (385/385, exit 0), source commit a27fa05 pushed. BLOCKED: actual n8n import/publication; browser upload and picker input unavailable. NOT TESTED: production concurrency and Monday readback for the new gate. PASS: original draft restored to 37 nodes; published version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f unchanged. No WhatsApp sends. User confirmed temporary extension permission disabled. Details: [ATOMIC_INTAKE_20261028.md](docs/runtime/ATOMIC_INTAKE_20261028.md).
