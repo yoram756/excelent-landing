@@ -12,7 +12,8 @@
     "existingName": "TextMe API",
     "valuesAccessed": false,
     "newProviderCredentialCreated": false,
-    "callerBearerCredentialPresent": false
+    "callerBearerCredentialVerified": false,
+    "callerCredentialAtVerifiedExport": "none"
   },
   "workflows": {
     "existingPreserved": "UyusbbjI1hgkZ76k",
@@ -89,7 +90,7 @@
     {
       "action": "Authenticate the actual dot to the MCP gateway",
       "environment": "n8n gateway iKMn0xVxqoBqrBxK and private dot plugin",
-      "error": "Required Bearer Auth credential absent; gateway disabled and unpublished; no unauthenticated test attempted",
+      "error": "No verified dedicated caller credential; editor later suggested existing CHG017 MCP Bearer, which must not be reused without scope verification and approval. Gateway remains disabled and unpublished.",
       "next": "Owner completes separate caller credential securely; approve read access, register authenticated endpoint, verify auth rejection and tools before adding plugin MCP connection"
     },
     {
@@ -98,5 +99,22 @@
       "next": "Review existing durable-store schema/backup; integrate separately authenticated human review, sender, consent/opt-out, price, hours and receipts; exact owner message approval before send"
     }
   ],
-  "evidence": "docs/evidence/20261028-textme-api/manifest.json"
+  "evidence": "docs/evidence/20261028-textme-api/manifest.json",
+  "secureHandoff": {
+    "date": "2026-10-29",
+    "formTitle": "TextMe dot caller READ ONLY",
+    "tokenEntered": false,
+    "credentialSaved": false,
+    "existingEditorSuggestion": "CHG017 MCP Bearer",
+    "suggestionApprovedOrVerified": false,
+    "gatewayEnabled": false
+  },
+  "versionControl": {
+    "branch": "codex/lock-service-20261025",
+    "implementationCommit": "83914f8c32b0e02b4f80fc2a13e9f214d49d5ef5",
+    "push": "PASS",
+    "remoteHeadReadback": "83914f8c32b0e02b4f80fc2a13e9f214d49d5ef5",
+    "force": false,
+    "localHeadPreserved": "4b0956e265ad5e8b615a4ba50c93130d4783f2dc"
+  }
 }

@@ -69,6 +69,10 @@
     {
       "path": "docs/evidence/20261028-textme-api/write-rejected.png",
       "sha256": "49ad061d8198e8cd7e7447668195c98b652a9337e375e31dee043a54dc5db643"
+    },
+    {
+      "path": "docs/evidence/20261028-textme-api/secure-handoff.png",
+      "sha256": "7a2e081ffaa3dd61251771a3f0538261f4d70f3850b60bef990eb7af8253c32b"
     }
   ],
   "providerContract": {
