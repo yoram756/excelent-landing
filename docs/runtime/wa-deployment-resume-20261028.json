@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "recordType": "UI_OBSERVED_DEPLOYMENT_RESULTS",
+  "date": "2026-10-28",
+  "evidenceLimit": "The raw server reports remain on the private VPS. This is a transcription of observed terminal and application results, supported by unmodified screenshots; it is not an exported copy of the raw reports.",
+  "isolatedDeployment": {
+    "status": "PASS",
+    "version": "0.3.0-isolated.20261028",
+    "sourceCommit": "b7d58be44d470457d6a190531e60324ba5358b55",
+    "finishedAt": "2026-10-28T17:13:32.417465+00:00",
+    "container": "excelent-wa-isolated-20261028-resume",
+    "health": "healthy",
+    "network": "none",
+    "publishedPorts": {},
+    "productionWorkflowsUnchanged": true,
+    "protectedContainersUnchanged": true,
+    "sourceCheckout": "/docker/excelent-wa-resume-20261028/source",
+    "rollback": "/docker/excelent-wa-resume-20261028/rollback.sh",
+    "rollbackExecuted": false
+  },
+  "serverRawReports": {
+    "base": "/docker/excelent-wa-resume-20261028",
+    "files": {
+      "deployment-report.json": "b04bb3275451faae487aa7d8e16d4e37ed80942fc2ee56f2694bd470f6523f06",
+      "preflight.json": "33f07262f50aa1db82ad2dadd2c6164a8c69aa98d7cd51dd2664a3ee4fad3daa",
+      "evidence/before.json": "b19249fb09c60314748472990d84bd2aafe98ba064de03436bc758fdc97931a0",
+      "evidence/after.json": "fff176ab8b456ea29d291be34f6ee7d0fe3992cf06fecdfc62db6777b754181c"
+    }
+  },
+  "tests": {
+    "localUnit": {
+      "status": "PASS",
+      "passed": 84,
+      "failed": 0
+    },
+    "serverUnit": {
+      "status": "PASS",
+      "passed": 84,
+      "failed": 0
+    },
+    "localNegativeControls": {
+      "status": "PASS",
+      "detected": 15,
+      "total": 15
+    },
+    "deployedBefore": {
+      "status": "PASS",
+      "passed": 22,
+      "failed": 0
+    },
+    "deployedAfter": {
+      "status": "PASS",
+      "passed": 12,
+      "failed": 0
+    },
+    "backupRestoreProbe": "PASS",
+    "nginxSyntax": "PASS",
+    "liveProviderCallsInIsolatedTests": 0,
+    "liveModelCalls": 0
+  },
+  "isolatedN8n": {
+    "productionInstance": false,
+    "workflowIds": [
+      "waDeployTest0001",
+      "waDeployWork0001"
+    ],
+    "beforeExecutions": [
+      {
+        "id": 1,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 2,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 3,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 4,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 5,
+        "workflowId": "waDeployWork0001",
+        "status": "success"
+      },
+      {
+        "id": 6,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 7,
+        "workflowId": "waDeployWork0001",
+        "status": "success"
+      },
+      {
+        "id": 8,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 9,
+        "workflowId": "waDeployWork0001",
+        "status": "success"
+      },
+      {
+        "id": 10,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 11,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 12,
+        "workflowId": "waDeployWork0001",
+        "status": "success"
+      }
+    ],
+    "afterExecutions": [
+      {
+        "id": 1,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 2,
+        "workflowId": "waDeployTest0001",
+        "status": "success"
+      },
+      {
+        "id": 3,
+        "workflowId": "waDeployWork0001",
+        "status": "success"
+      }
+    ],
+    "databaseScope": "Two separate fresh synthetic n8n SQLite databases in sidecars; execution IDs are local to each database, not production execution IDs."
+  },
+  "httpObservations": [
+    {
+      "test": "invalid_signature",
+      "method": "POST",
+      "request": "synthetic n8n ingress -> http://127.0.0.1:8789/ingest",
+      "http": 401,
+      "body": {
+        "code": "invalid_signature"
+      }
+    },
+    {
+      "test": "signed_raw_commit_then_ack",
+      "method": "POST",
+      "request": "synthetic n8n ingress -> http://127.0.0.1:8789/ingest",
+      "http": 202,
+      "body": {
+        "code": "durably_stored"
+      },
+      "databaseAssertion": "One committed message exists before processing."
+    },
+    {
+      "test": "event_dedup",
+      "http": 200,
+      "body": {
+        "code": "duplicate_event"
+      }
+    },
+    {
+      "test": "provider_message_dedup",
+      "http": 200,
+      "body": {
+        "code": "duplicate_message"
+      }
+    },
+    {
+      "test": "n8n_process_decide_and_simulate",
+      "method": "POST",
+      "request": "synthetic n8n worker -> http://127.0.0.1:8789/simulate-one",
+      "http": 200,
+      "body": {
+        "prepared": {
+          "id": "8dfc6cc2-b55d-424b-9b29-0855662280da",
+          "route": "reply",
+          "reason": "hours"
+        },
+        "simulated": {
+          "state": "SIMULATED",
+          "network": false
+        },
+        "live": false
+      }
+    },
+    {
+      "test": "n8n_handoff_queue",
+      "http": 200,
+      "body": {
+        "prepared": {
+          "id": null,
+          "route": "handoff",
+          "reason": "handoff"
+        },
+        "simulated": null,
+        "live": false
+      },
+      "databaseAssertion": "One OPEN local handoff, conversation human=1."
+    },
+    {
+      "test": "human_control_blocks_reply",
+      "http": 200,
+      "body": {
+        "prepared": {
+          "id": null,
+          "route": "handoff",
+          "reason": "human_controls_conversation"
+        },
+        "simulated": null,
+        "live": false
+      },
+      "databaseAssertion": "No outbox reply for human-controlled conversation."
+    },
+    {
+      "test": "db_failure_is_503_without_commit",
+      "method": "POST",
+      "request": "synthetic n8n ingress -> http://127.0.0.1:8789/ingest",
+      "http": 503,
+      "body": {
+        "code": "durable_storage_or_processing_failure"
+      },
+      "databaseAssertion": "No event committed; controlled trigger removed afterwards."
+    },
+    {
+      "test": "storage_recovery",
+      "http": 202,
+      "body": {
+        "code": "durably_stored"
+      }
+    },
+    {
+      "test": "restart_preserves_dedup",
+      "http": 200,
+      "body": {
+        "code": "duplicate_event"
+      }
+    },
+    {
+      "test": "restart_preserves_outbox",
+      "databaseAssertion": "The same outbox ID remains SIMULATED."
+    },
+    {
+      "test": "restart_preserves_human_handoff",
+      "http": 200,
+      "body": {
+        "prepared": {
+          "id": null,
+          "route": "handoff",
+          "reason": "human_controls_conversation"
+        },
+        "simulated": null,
+        "live": false
+      }
+    },
+    {
+      "test": "no_send_endpoint",
+      "method": "POST",
+      "request": "http://127.0.0.1:8789/send",
+      "http": 404,
+      "body": {
+        "code": "not_found"
+      },
+      "expected": true
+    }
+  ],
+  "cosend": {
+    "status": "PASS_READ_ONLY_IDENTITY",
+    "productionN8nWorkflow": "AwCquhPHa4OgjkEo",
+    "productionExecution": "60620",
+    "executionStatus": "success",
+    "verifiedAt": "2026-10-28T17:01:37.280Z",
+    "requests": [
+      {
+        "method": "GET",
+        "url": "https://api.cosend.app/v1/me",
+        "http": 200
+      },
+      {
+        "method": "GET",
+        "url": "https://api.cosend.app/v1/connections/conn_01M5YC386Q2N9973TJG1M8H4DQ",
+        "http": 200
+      }
+    ],
+    "organization": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+    "connection": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+    "phone": "+972559881245",
+    "phoneNumberId": "1138723472651617",
+    "waba": "848287037598986",
+    "grantedScopes": [
+      "connections:read"
+    ],
+    "outboundEnabled": false,
+    "activeResponder": "Cosend AI receptionist ON",
+    "customAutomation": "OFF",
+    "verifiedMember": {
+      "name": "יורם פלד",
+      "email": "office@kho.org.il",
+      "role": "Owner",
+      "status": "Active"
+    },
+    "memberSeats": "1 of 1; adding teammates requires plan change; no change made"
+  },
+  "blockers": [
+    {
+      "status": "RESOLVED",
+      "operation": "Inspect/deploy isolated VPS service using Hostinger terminal",
+      "environment": "Hostinger webconsole",
+      "error": "Lost connection to the server; replacement tab CDP focus timeout in previous report",
+      "resolution": "Authorized fresh webconsole and detached checkpointing deployment driver; actual isolated deploy and tests completed."
+    },
+    {
+      "status": "BLOCKED",
+      "operation": "Real Cosend message state, provider conversation lock and handoff assignment",
+      "environment": "Production n8n/Cosend",
+      "missing": "The verified credential grants only connections:read. No approved credential for messages/contacts/assignment/lock operations or verified representative API ID is available.",
+      "next": "Owner installs a connection-scoped credential through secure n8n Credentials, verifies the necessary native Cosend scopes and representative ID; keep outbound false. Do not place credentials in chat or Git."
+    },
+    {
+      "status": "BLOCKED",
+      "operation": "Real approved model invocation",
+      "environment": "Isolated assistant and production candidate",
+      "missing": "No approved model API credential, model selection or spend cap. modelBudgetApproved is false. The deployed HTTP broker currently exposes simulation only; the model worker library is not wired into its runtime.",
+      "next": "Owner selects an existing approved API account/model and budget, installs its credential securely; implement and verify the gated runtime worker before any real pilot."
+    },
+    {
+      "status": "BLOCKED",
+      "operation": "Client-facing responder activation",
+      "environment": "Cosend official connection",
+      "missing": "Cosend AI receptionist is still ON. No approved single-owner cutover, real test approval, or real-data retention/deletion policy has been established.",
+      "next": "Approve a concrete cutover after provider/model/handoff verification; stop the old responder as part of that approved cutover, then permit only one new responder. Preserve Blueticks."
+    }
+  ],
+  "notTested": [
+    "Real WhatsApp delivery",
+    "Real provider lock or representative assignment",
+    "Real model generation",
+    "Production customer webhook registration",
+    "Unexpected process crash recovery beyond controlled container restart",
+    "Operational alert delivery",
+    "Meta CAPI"
+  ],
+  "proposedSingleDelivery": {
+    "status": "NOT APPROVED / NOT SENT",
+    "recipient": "+972502234052",
+    "recipientName": "יורם פלד",
+    "from": "+972559881245",
+    "count": 1,
+    "text": "שלום יורם, זו הודעת בדיקה יחידה של העוזר הדיגיטלי של אקסלנט דרך Cosend. אין צורך למסור פרטים אישיים.",
+    "possibleCost": "Not yet verified. Execute only if a current service window and zero incremental charge are verified and the exact test is approved; otherwise provide the current provider quote first. No paid template fallback."
+  }
+}

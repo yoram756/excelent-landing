@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-28",
+  "sourceCommit": "b7d58be44d470457d6a190531e60324ba5358b55",
+  "scope": "WhatsApp deployment evidence only",
+  "files": {
+    "cosend-execution-60620.txt": {
+      "sha256": "938bbcfdb5c50c485feda63b403750b7c24a95519ee8a0a2c539370b48fbd3b8",
+      "bytes": 11124
+    },
+    "cosend-identity.txt": {
+      "sha256": "51354ff79ff4dc6c9690297e542a86d01f0bcb794f2a46a81c3eece098ca33fe",
+      "bytes": 10103
+    },
+    "cosend-members.png": {
+      "sha256": "5e18d577511abad3aede1efb41815484809d5825b03d5bc22ca1cf9c325b4f75",
+      "bytes": 71476
+    },
+    "cosend-members.txt": {
+      "sha256": "08f341d9fd82c3b2f87ad2fd12d2962acb343670ab9cb4d9ee55e00980f80768",
+      "bytes": 1945
+    },
+    "cosend-response-owner.txt": {
+      "sha256": "4761410a1e9b17480075c6ec50a3b62f6a5342ec9f24f16bbce207d358feb6d0",
+      "bytes": 4124
+    },
+    "deploy-isolated.py": {
+      "sha256": "8c28ab716f56974bcf06a6322000bd11a6aeaff52e048940f277f4c1d3e4b69b",
+      "bytes": 10869
+    },
+    "deployed-http-results.png": {
+      "sha256": "2daad0706eb1d6e259a551fb8feb196d505c1001807917a5c77669539296fc0d",
+      "bytes": 249096
+    },
+    "deployment-pass.png": {
+      "sha256": "e114980b915daf21ca9cfdbca259dd17b0de0f0b4fa6cda9900d27be30b8434c",
+      "bytes": 45815
+    },
+    "deployment-summary.png": {
+      "sha256": "2e228812f2e718f21072efacd703479bfb2521daaaac69687c201d29ef9b147f",
+      "bytes": 261250
+    }
+  }
+}
