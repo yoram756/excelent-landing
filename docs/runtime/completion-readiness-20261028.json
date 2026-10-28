@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T19:42:58.377Z",
+  "generatedAt": "2026-10-28T20:29:20.095Z",
   "goLiveReady": false,
   "whatsappMessagesSent": 0,
   "requirements": [
@@ -78,8 +78,8 @@
     },
     {
       "id": "atomic_lock_intake_wiring",
-      "status": "BLOCKED",
-      "evidence": "37-node migration implemented and pushed as a27fa05; local funnel 385/385, exit 0, including a 20-way two-worker SQLite race with one simulated CRM write, and fail-closed negative controls. Fresh actual 37-node export produces a 41-node patch preserving original nodes, error routes and settings. Production import is blocked by browser file upload/picker input; no corrected version was published and production concurrency was not tested. Original draft restored using version history; editor readback 37 nodes, zero Atomic lock nodes. Published version remains 4842b1ba-5f41-468d-a2df-fb0a5f854c3f. User confirmed temporary extension permission disabled. See ATOMIC_INTAKE_20261028.md."
+      "status": "PASS",
+      "evidence": "atomic-intake-20261028.json: published version 60101067-81e0-4daa-b9b2-d4cfa7b9d736, 41 nodes, original 37 nodes/settings preserved; executions 61968 succeeded and 61969/61970 controlled duplicates; real HTTP [200,409,409], exactly one matching Monday item 3316200363 with event ID and person 75075191; TEST lead and both owned central-error alerts independently confirmed deleted; baseline four records preserved. No WhatsApp sends. Source e494d25; local funnel 386/386, exit 0."
     },
     {
       "id": "approved_video_testimonials",
@@ -110,6 +110,12 @@
       "id": "historical_test_record",
       "status": "BLOCKED",
       "evidence": "Pre-existing בדיקה CHG018c, id 3291304369, remains unchanged; requires a keep/delete decision. Current task fixtures were deleted."
+    },
+    {
+      "id": "atomic_lock_local_regression",
+      "status": "PASS",
+      "evidence": "npm run test:funnel exit 0, 386/386 after incremental migration and explicit IF serialization version 1; tests/out/atomic-intake-20261028/funnel-final.log",
+      "scope": "Local providers mocked; actual concurrent SQLite/HTTP workers and negative controls"
     }
   ],
   "deployedSourceCommit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768"

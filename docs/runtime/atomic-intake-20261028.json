@@ -1,0 +1,277 @@
+{
+  "generatedAt": "2026-10-28T20:27:49.910Z",
+  "status": "PASS",
+  "scope": "Atomic intake lock migration and production duplicate prevention only; not whole-project go-live readiness",
+  "sourceCommit": "e494d25",
+  "workflow": {
+    "id": "8W7MymUCLpPnilJs",
+    "versionId": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
+    "versionName": "Atomic intake gate 20261028",
+    "publishedAtLocal": "2026-10-28 22:20 Asia/Jerusalem",
+    "nodeCount": 41,
+    "originalNodesPreserved": 37,
+    "settingsUnchanged": true,
+    "errorWorkflow": "4bLJ8LvpNYnoCB8t",
+    "disabledWhatsAppNodes": [
+      "WhatsApp recipients",
+      "WhatsApp alert"
+    ]
+  },
+  "requirements": [
+    {
+      "id": "deployment_tool_37_nodes",
+      "status": "PASS",
+      "evidence": "src/webhooks/intake/atomic-export.js and patch-export.js --incremental; four additive nodes, one removed edge and three external links; source e494d25"
+    },
+    {
+      "id": "graph_and_protections",
+      "status": "PASS",
+      "evidence": "Private final-draft export of version 60101067 compared to generated source: all original node objects, settings and final connections match; new IDs/positions assigned by editor. Response has only Stop And Error successor."
+    },
+    {
+      "id": "local_regression",
+      "status": "PASS",
+      "evidence": "npm run test:funnel exit 0, 386/386; tests/out/atomic-intake-20261028/funnel-final.log",
+      "scope": "Local providers mocked; two real HTTP workers on shared SQLite race 20 requests, one simulated CRM boundary write. Broken old-edge bypass is detected."
+    },
+    {
+      "id": "production_publish",
+      "status": "PASS",
+      "evidence": "n8n Publish Timeline shows Active Published Atomic intake gate 20261028 at 22:20; editor Published disabled; runtime executions 61968/61969/61970 include new gate."
+    },
+    {
+      "id": "production_concurrency",
+      "status": "PASS",
+      "evidence": "Three concurrent actual production POSTs: one HTTP 200 request_id 3316200363, two HTTP 409 duplicate_pending. Exactly one Monday item matches the event.",
+      "eventId": "TEST-atomic-production-20261028-001"
+    },
+    {
+      "id": "controlled_error_routing",
+      "status": "PASS",
+      "evidence": "Executions 61969 and 61970 stop at Stop And Error with Atomic lead lock already held; no Monday save nodes in their executed path. Own central-handler alerts 3316177368 and 3316194874 read back fn_status=נעצר / כשל."
+    },
+    {
+      "id": "crm_fields",
+      "status": "PASS",
+      "evidence": "Independent raw Monday API readback: board 5106246268, item 3316200363, normalized phone 972500000081, matching event ID and personsAndTeams user 75075191.",
+      "readback": {
+        "status": "PASS",
+        "eventId": "TEST-atomic-production-20261028-001",
+        "count": 1,
+        "itemId": "3316200363",
+        "personId": 75075191,
+        "normalizedPhone": "972500000081",
+        "alertIds": [
+          "3316177368",
+          "3316194874"
+        ],
+        "errorExecutions": [
+          "61969",
+          "61970"
+        ]
+      }
+    },
+    {
+      "id": "owned_fixture_cleanup",
+      "status": "PASS",
+      "evidence": "Independent API readback confirms TEST lead and both owned error alerts state deleted; all four baseline item IDs remain active.",
+      "states": [
+        {
+          "id": "3291304369",
+          "state": "active"
+        },
+        {
+          "id": "3293511781",
+          "state": "active"
+        },
+        {
+          "id": "3301735356",
+          "state": "active"
+        },
+        {
+          "id": "3304127965",
+          "state": "active"
+        },
+        {
+          "id": "3316177368",
+          "state": "deleted"
+        },
+        {
+          "id": "3316194874",
+          "state": "deleted"
+        },
+        {
+          "id": "3316200363",
+          "state": "deleted"
+        }
+      ]
+    },
+    {
+      "id": "no_whatsapp_sends",
+      "status": "PASS",
+      "evidence": "Both original send nodes remain disabled in exported graph and runtime view; no send node added/enabled; synthetic input marketing_consent=false and marketing_channels=[]; no WhatsApp provider or connector send invoked.",
+      "messagesSent": 0
+    },
+    {
+      "id": "production_lock_service_outage",
+      "status": "NOT TESTED",
+      "evidence": "No outage or n8n settings change induced in production. Fail-closed authentication/provider/transport/expired-response cases covered locally."
+    }
+  ],
+  "executions": {
+    "accepted": {
+      "id": "61968",
+      "status": "Succeeded",
+      "durationSeconds": 4.308,
+      "mondayItemId": "3316200363"
+    },
+    "duplicates": [
+      {
+        "id": "61969",
+        "status": "Error",
+        "durationMs": 394,
+        "lastNode": "Stop And Error",
+        "message": "Atomic lead lock already held",
+        "alertItemId": "3316177368"
+      },
+      {
+        "id": "61970",
+        "status": "Error",
+        "durationMs": 400,
+        "lastNode": "Stop And Error",
+        "message": "Atomic lead lock already held",
+        "alertItemId": "3316194874"
+      }
+    ]
+  },
+  "crmReadback": [
+    {
+      "id": "3316177368",
+      "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 61969",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "",
+          "value": null
+        },
+        {
+          "id": "fn_status",
+          "text": "נעצר / כשל",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "n8n-8W7MymUCLpPnilJs-61969",
+          "value": "\"n8n-8W7MymUCLpPnilJs-61969\""
+        }
+      ]
+    },
+    {
+      "id": "3316194874",
+      "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 61970",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "",
+          "value": null
+        },
+        {
+          "id": "fn_status",
+          "text": "נעצר / כשל",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "n8n-8W7MymUCLpPnilJs-61970",
+          "value": "\"n8n-8W7MymUCLpPnilJs-61970\""
+        }
+      ]
+    },
+    {
+      "id": "3316200363",
+      "name": "TEST atomic intake 20261028 0500000081",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000081",
+          "value": "{\"phone\":\"972500000081\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "fn_status",
+          "text": "",
+          "value": null
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "TEST-atomic-production-20261028-001",
+          "value": "\"TEST-atomic-production-20261028-001\""
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "id": "3291304369",
+      "state": "active"
+    },
+    {
+      "id": "3293511781",
+      "state": "active"
+    },
+    {
+      "id": "3301735356",
+      "state": "active"
+    },
+    {
+      "id": "3304127965",
+      "state": "active"
+    },
+    {
+      "id": "3316177368",
+      "state": "deleted"
+    },
+    {
+      "id": "3316194874",
+      "state": "deleted"
+    },
+    {
+      "id": "3316200363",
+      "state": "deleted"
+    }
+  ],
+  "remainingProjectBlockers": [
+    "Meta CAPI sender credential and receipt",
+    "Calendly live appointment readback",
+    "WhatsApp production activation and delivery (excluded)",
+    "Approved video testimonials",
+    "Decision on pre-existing historical test record 3291304369"
+  ],
+  "preservedProductionContract": "The existing production validator was preserved. The fixture used one hyphen-compatible value for both event_id and the legacy idempotency_key. This release does not replace the existing validator with a different contract."
+}

@@ -65,7 +65,8 @@
 
 המערכת עדיין אינה מוכנה להפעלה. אין בדוח זה הכרזת GO-LIVE READY.
 
+## Atomic lock closure, 2026-10-28
 
-## Atomic intake update, 2026-10-28
+PASS: atomic-intake-20261028.json: published version 60101067-81e0-4daa-b9b2-d4cfa7b9d736, 41 nodes, original 37 nodes/settings preserved; executions 61968 succeeded and 61969/61970 controlled duplicates; real HTTP [200,409,409], exactly one matching Monday item 3316200363 with event ID and person 75075191; TEST lead and both owned central-error alerts independently confirmed deleted; baseline four records preserved. No WhatsApp sends. Source e494d25; local funnel 386/386, exit 0.
 
-PASS: 37-node migration and local regression (385/385, exit 0), source commit a27fa05 pushed. BLOCKED: actual n8n import/publication; browser upload and picker input unavailable. NOT TESTED: production concurrency and Monday readback for the new gate. PASS: original draft restored to 37 nodes; published version 4842b1ba-5f41-468d-a2df-fb0a5f854c3f unchanged. No WhatsApp sends. User confirmed temporary extension permission disabled. Details: [ATOMIC_INTAKE_20261028.md](docs/runtime/ATOMIC_INTAKE_20261028.md).
+Whole-project go-live readiness remains false; unrelated blockers stay open. Details: [atomic intake report](docs/runtime/ATOMIC_INTAKE_20261028.md).
