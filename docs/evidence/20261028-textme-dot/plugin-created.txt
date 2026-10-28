@@ -1,0 +1,51 @@
+Browser tab: 148911660, Title: "אקסלנט · TextMe | ChatGPT Plugins", URL: "https://chatgpt.com/plugins/plugins_6ae261b29284819185d282ac2fc068d2".
+0 AXWebArea אקסלנט · TextMe | ChatGPT Plugins, URL: chatgpt.com/plugins/plugins_6ae261b29284819185d282ac2fc068d2
+	1 container
+		2 container root
+			3 container
+				4 link Description: Skip to content, Value: chatgpt.com/plugins/plugins_6ae261b29284819185d282ac2fc068d2#_R_trcujaaqn75cched5hlb5_
+				5 container
+					6 button (collapsed) Description: Show sidebar, Secondary Actions: Expand
+					7 container Breadcrumb
+						8 link Description: Plugins, Value: chatgpt.com/plugins
+						9 text אקסלנט · TextMe
+					10 container
+						11 heading אקסלנט · TextMe Your cloud plugin, Value: 1
+							12 text אקסלנט · TextMe
+							13 button Your cloud plugin
+								14 image Your cloud plugin
+						15 text By יורם פלד • דוחות וניהול TextMe בדפדפן
+						16 pop up button (collapsed) Description: More actions, ID: radix-_r_c_, Secondary Actions: Expand
+						17 link Description: Manage, Value: chatgpt.com/settings/plugins-settings/plugins_6ae261b29284819185d282ac2fc068d2
+						18 button Try in chat
+							19 image
+							20 text Try in chat
+						21 button אקסלנט · TextMe אקסלנט · TextMe בדוק בחשבון TextMe של אקסלנט את הדוחות ומצב הגישה, והכן פעולות מוצעות בלי לשלוח או לשנות הגדרות.
+							22 image אקסלנט · TextMe
+							23 text אקסלנט · TextMe
+							24 text בדוק בחשבון TextMe של אקסלנט את הדוחות ומצב הגישה, והכן פעולות מוצעות בלי לשלוח או לשנות הגדרות.
+						25 text עבודה מבוקרת בחשבון TextMe של אקסלנט דרך דפדפן מורשה: דוחות, מצב חשבון והכנת הצעות. חיבור API והפעלת משלוחים דורשים השלמה ואישור נפרדים.
+						26 container
+							27 heading Skills 1, Value: 2
+								28 text Skills 1
+							29 button excellent-textme-workflow Use for Excellent's TextMe account at my.textme.co.il: authorized browser inspection of reports and account state, campaign planning and staged integration with the dot.
+								30 text excellent-textme-workflow
+								31 text Use for Excellent's TextMe account at my.textme.co.il: authorized browser inspection of reports and account state, campaign planning and staged integration with the dot.
+						32 container plugin-information
+							33 heading Information, Value: 2
+								34 text Information
+							35 definition list
+								36 container Developer
+									37 text Developer
+								38 text יורם פלד
+								39 container Category
+									40 text Category
+								41 text Communication
+								42 container Version
+									43 text Version
+								44 text 0.1.0
+								45 container Website
+									46 text Website
+								47 text Unavailable
+
+The focused UI element is 0 AXWebArea אקסלנט · TextMe | ChatGPT Plugins, URL: chatgpt.com/plugins/plugins_6ae261b29284819185d282ac2fc068d2

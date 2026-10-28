@@ -1,0 +1,33 @@
+Browser tab: 148911660, Title: "אקסלנט · TextMe", URL: "https://chatgpt.com/settings/plugins-settings/plugins_6ae261b29284819185d282ac2fc068d2".
+0 AXWebArea אקסלנט · TextMe, URL: chatgpt.com/settings/plugins-settings/plugins_6ae261b29284819185d282ac2fc068d2
+	1 container
+		2 container root
+			3 container
+				4 link Description: Skip to content, Value: chatgpt.com/settings/plugins-settings/plugins_6ae261b29284819185d282ac2fc068d2#_r_1i_
+				5 container
+					6 button (collapsed) Description: Show sidebar, Secondary Actions: Expand
+					7 container
+						8 container Breadcrumb
+							9 link Description: Plugin settings, Value: chatgpt.com/settings/plugins-settings
+							10 text אקסלנט · TextMe
+						11 heading אקסלנט · TextMe, Value: 1
+							12 text אקסלנט · TextMe
+						13 text דוחות וניהול TextMe בדפדפן
+						14 link Description: View details, Value: chatgpt.com/plugins/plugins_6ae261b29284819185d282ac2fc068d2
+						15 button Uninstall
+						16 button Delete plugin
+						17 text Skills
+						18 button excellent-textme-workflow Use for Excellent's TextMe account at my.textme.co.il: authorized browser inspection of reports and account state, campaign planning and staged integration with the dot.
+							19 text excellent-textme-workflow
+							20 text Use for Excellent's TextMe account at my.textme.co.il: authorized browser inspection of reports and account state, campaign planning and staged integration with the dot.
+						21 switch Description: Use excellent-textme-workflow, Value: 1
+						22 container plugin-information
+							23 text About
+							24 container
+								25 text Category Communication
+							26 container
+								27 text Developer יורם פלד
+							28 text Version
+							29 text 0.1.0
+
+The focused UI element is 0 AXWebArea אקסלנט · TextMe, URL: chatgpt.com/settings/plugins-settings/plugins_6ae261b29284819185d282ac2fc068d2

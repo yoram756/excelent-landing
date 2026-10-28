@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-28",
+  "status": "BLOCKED",
+  "plugin": {
+    "id": "plugins_6ae261b29284819185d282ac2fc068d2",
+    "releaseId": "pluginrel_6ae261b41d688191a00c609fe86025b2",
+    "url": "https://chatgpt.com/plugins/plugins_6ae261b29284819185d282ac2fc068d2",
+    "version": "0.1.0",
+    "scope": "USER",
+    "private": true,
+    "installed": true,
+    "skillEnabled": true,
+    "skills": 1,
+    "mcpServers": 0,
+    "savedReadback": "PASS"
+  },
+  "browser": {
+    "testedEnvironment": "Owner local Chrome through Codex",
+    "account": "office@kho.org.il",
+    "accountRead": "PASS",
+    "usageReportRead": "PASS",
+    "usageReportUrl": "https://my.textme.co.il/users-usage-report",
+    "reportDataCopiedToRepository": false
+  },
+  "settings": {
+    "observedSendingHours": {
+      "SundayThroughThursday": "09:00-20:00",
+      "Friday": "09:00-13:00",
+      "Saturday": "disabled"
+    },
+    "ipCheckEnabled": false,
+    "existingTokenNames": [
+      "excelent-n8n-prod",
+      "גרוק בוט"
+    ],
+    "tokenValuesRead": false,
+    "settingsChanged": false
+  },
+  "dot": {
+    "cloudComputer": "Ready",
+    "localDeviceStates": [
+      "Disconnected",
+      "Offline"
+    ],
+    "devicesChanged": false,
+    "readTestExplicitlyApproved": true,
+    "requestVisibleInDotConversation": true,
+    "acknowledgedByDot": true,
+    "readTestResult": "BLOCKED",
+    "reason": "AUTHENTICATION_REQUIRED_IN_DOT_CLOUD_BROWSER",
+    "providerLoginPageReached": true,
+    "loginPageVisuallyConfirmed": true,
+    "secureLoginHandoffProvided": true,
+    "openComputerPanelOpened": true,
+    "liveComputerViewerVerified": true,
+    "takeOverClicked": false,
+    "credentialsEntered": false,
+    "loginCompleted": false,
+    "usageReportReadInDot": false,
+    "messageToCustomersSent": false
+  },
+  "api": {
+    "status": "BLOCKED",
+    "newTokenCreated": false,
+    "existingCredentialReused": false,
+    "authenticatedApiCall": false,
+    "missing": [
+      "Restricted authenticated adapter for broad provider token",
+      "Approved current secret-store binding",
+      "Impact-reviewed IP allowlist for existing callers"
+    ]
+  },
+  "customerMessagesSent": 0,
+  "campaignsActivated": 0,
+  "creditsPurchased": false,
+  "localPackageValidation": "PASS",
+  "archiveInspected": true
+}

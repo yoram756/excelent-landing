@@ -1,0 +1,9 @@
+Accessibility excerpt; device names and unrelated conversation content omitted.
+							565 container Your dot’s profile, ID: radix-_r_n0_
+								566 heading Your dot’s profile, Value: 2, ID: radix-_r_n1_
+									567 text Your dot’s profile
+										578 text העוזר של אקסלנט’s computer
+										579 text Ready
+									580 heading Devices, Value: 3
+										584 text Disconnected
+										586 text Offline

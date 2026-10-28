@@ -1,0 +1,9 @@
+Observed reply from העוזר של אקסלנט after the explicitly approved TextMe read test.
+בדיקת TextMe בענן הגיעה למסך כניסה. התחבר כאן לחשבון
+										1146 link Description: office@kho.org.il, Help: Open link, Value: mailto:office@kho.org.il
+										1147 text , ואז אמשיך לאימות החשבון ולדוח השימוש בלבד.
+									1148 container Message actions
+										1149 button (collapsed) Description: Choose a reaction, Help: React, Secondary Actions: Expand
+										1150 button Description: Reply, Help: Reply to message
+									1151 button Open computer
+
