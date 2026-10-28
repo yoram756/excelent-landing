@@ -1,0 +1,44 @@
+Browser tab: 148911361, Title: "Settings › Members · Cosend", URL: "https://dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ#settings/members".
+0 AXWebArea Settings › Members · Cosend, URL: dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ#settings/members
+	1 container root
+		2 container
+			3 text אקסלנט יועצים · +972 55 988 1245: Limited by WhatsApp. From Meta: Your display name has not been approved yet. Your message limit will increase after the display name is approved.
+			4 button View number
+		5 container
+			6 container Settings
+				7 container Settings sections
+					8 text Settings Workspace
+					9 content list
+						10 button General
+						11 button Members
+						12 button Billing & plan
+						13 button Usage
+						14 button Developer
+						15 button Data & privacy
+					16 text You
+					17 content list
+						18 button Profile
+						19 button Appearance
+				20 container Members
+					21 container
+						22 heading Members, Value: 2, ID: settings-section-title
+							23 text Members
+						24 button Close
+					25 container Seats
+						26 text Seats
+						27 text 1 of 1 seats included.
+						28 container
+							29 text Upgrade to add teammates. Inviting teammates is not part of the Free plan. Your messages, contacts and settings stay exactly as they are.
+							30 button Upgrade
+					31 container Requests to join
+						32 text Requests to join
+						33 text People on your email domain who have asked to be let in.
+						34 text Nobody is waiting to join.
+					35 content list Members
+						36 container
+							37 image יורם פלד
+							38 text יורם פלד office@kho.org.il Owner Active Joined שלשום
+							39 text Transfer ownership first
+					40 text You are the only owner, so nobody can remove you. Transfer ownership to someone else first.
+
+The focused UI element is 11 button Members

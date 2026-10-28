@@ -1,0 +1,289 @@
+Browser tab: 148911326, Title: "▶️ DRAFT Cosend - verified read-only account and number - NO SEND - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/60620".
+0 AXWebArea ▶️ DRAFT Cosend - verified read-only account and number - NO SEND - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/60620
+	2 container n8n-app
+		3 container
+			4 container
+				5 container
+					6 link n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					7 text /
+					8 container
+						9 text DRAFT Cosend - verified read-only account and number - NO SEND
+					10 button More actions
+					11 button (disabled) Publish
+					12 button More actions
+				13 radio button Description: Editor, Value: 0
+				14 radio button Description: Executions, Value: 1
+				15 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 link n8n-qhxa.srv1604140.hstgr.cloud/home
+				18 menu bar
+					19 (collapsed) Add new item, Secondary Actions: Expand
+						20 button Add new item
+				21 button Open command palette
+				22 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				23 container
+					24 Description: n8n Assistant, ID: instance-ai
+						25 text n8n Assistant
+						26 text Preview
+					27 Description: Overview, ID: home
+						28 text Overview
+				29 Description: Templates, ID: templates
+					30 text Templates
+				31 Description: Insights, ID: insights
+					32 text Insights
+				33 Description: Help, ID: help
+					34 text Help
+				35 Description: Settings, ID: settings
+					36 text Settings
+			37 container
+				38 heading Executions, Value: 2
+					39 text Executions
+				40 checkbox Description: Auto refresh, Value: 1, ID: v-0-81
+				41 text Auto refresh
+				42 pop up button (collapsed) Description: Filters, ID: reka-popover-trigger-v-0-82, Secondary Actions: Expand
+				43 container
+					44 link Description: Oct 28, 19:01:36 Succeededin 880ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/60620
+					45 link Description: Oct 28, 17:08:56 Succeededin 699ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/59874
+					46 link Description: Oct 28, 16:10:07 Succeededin 741ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/59474
+					47 link Description: Oct 28, 16:03:12 Succeededin 706ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/59429
+					48 link Description: Oct 28, 15:58:57 Succeededin 439ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/59398
+					49 link Description: Oct 28, 15:56:08 Succeededin 281ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/59380
+					50 link Description: Oct 28, 15:40:13 Succeededin 449ms, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/executions/59271
+				51 text Which executions is this workflow saving?
+				52 container
+					53 text Oct 28, 19:01:36 Succeeded in 880ms  | 18KB  | ID#60620  |
+					56 link Description: Autosave, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/history/be7ff341-275d-4ac3-bf92-498d5b99a6d1
+					54 link Description: Copy to editor, Value: n8n-qhxa.srv1604140.hstgr.cloud/workflow/AwCquhPHa4OgjkEo/debug/60620
+					55 button Delete this execution
+				57 container
+					58 container
+						59 container
+							60 image
+								61 container Edge from 55d68f01-b2e8-4ea6-a5d0-32346503835b to b2a98a01-2674-4fa6-a24a-3724a4b21a9f
+							62 image
+								63 container Edge from b2a98a01-2674-4fa6-a24a-3724a4b21a9f to dca1c485-0e69-48bc-8b34-9340c03117e0
+							64 image
+								65 container Edge from dca1c485-0e69-48bc-8b34-9340c03117e0 to 79031498-917d-48fb-9ea0-ada06cef5260
+							66 image
+								67 container Edge from 79031498-917d-48fb-9ea0-ada06cef5260 to 9f678bf4-eb90-4ce8-a464-157eba98526c
+							68 text 1 item
+							69 text 1 item
+							70 text 1 item
+							71 text 1 item
+							72 container
+								73 button More actions
+								74 container
+									75 heading READ ONLY - NO SEND, Value: 2
+										76 text READ ONLY - NO SEND
+									77 text Manual GET /v1/me and GET approved connection. Dedicated n8n Header Auth credential, restricted to api.cosend.app and connections:read for 0559881245 only.
+									78 text Identity and scopes are validated before the number request. Final output is reduced to IDs and acceptance status.
+									79 text Not an inbound assistant. No webhook, schedule, sends, contact updates or routing changes. Do not publish. Cosend AI remains the existing responder.
+									80 text Existing workflows HNvsmdIDsvrHkZuw and QEGe2prEvnA4i47J remain unchanged.
+							81 container
+								82 button Add to chat
+								83 button More actions
+								84 text Manual read-only check
+							85 container
+								86 button Add to chat
+								87 button More actions
+								88 container
+									89 text GET Cosend identity GET: https://api.cosend.app/v1/me
+							90 container
+								91 button Add to chat
+								92 button More actions
+								93 text Verify identity and scope
+							94 container
+								95 button Add to chat
+								96 button More actions
+								97 container
+									98 text GET approved Cosend number GET: https://api.cosend.app/v1/connections/conn_01M5YC386Q2N9973TJG1M8H4DQ
+							99 container
+								100 text 1 item
+								101 button Add to chat
+								102 button More actions
+								103 text Verified read-only result
+						104 image
+						105 image
+						106 container
+							107 button Zoom to Fit
+							108 button Zoom In
+							109 button Zoom Out
+					110 container
+						111 container
+							112 text Logs Success in 880ms
+							113 outline
+								114 row (selectable, collapsed) Manual read-only check, Secondary Actions: Expand
+									115 text Manual read-only check
+								116 row (selectable, collapsed) GET Cosend identity, Secondary Actions: Expand
+									117 text GET Cosend identity
+								118 row (selectable, collapsed) Verify identity and scope, Secondary Actions: Expand
+									119 text Verify identity and scope
+								120 row (selectable, collapsed) GET approved Cosend number, Secondary Actions: Expand
+									121 text GET approved Cosend number
+								122 row (selected, collapsed) Verified read-only result, Secondary Actions: Expand
+									123 text Verified read-only result
+						124 container
+							125 text Verified read-only result Success in 7ms
+							126 button Input
+							127 button Output
+							128 button Actions
+							129 button Collapse panel
+						130 container
+							131 text OUTPUT
+							132 container
+								133 text field (settable)
+								134 radio button Description: Schema, Value: 0
+								135 radio button Description: Table, Value: 1
+								136 radio button Description: JSON, Value: 0
+							137 text 1 item
+							138 table
+								139 row
+									140 cell
+										141 container
+											142 text verifiedAt
+											143 button Collapse rows
+									144 cell
+										145 container
+											146 text identityStatus
+											147 button Collapse rows
+									148 cell
+										149 container
+											150 text workspaceId
+											151 button Collapse rows
+									152 cell
+										153 container
+											154 text workspaceName
+											155 button Collapse rows
+									156 cell
+										157 container
+											158 text timezone
+											159 button Collapse rows
+									160 cell
+										161 container
+											162 text credentialKind
+											163 button Collapse rows
+									164 cell
+										165 container
+											166 text credentialName
+											167 button Collapse rows
+									168 cell
+										169 container
+											170 text grantedScopes
+											171 button Collapse rows
+									172 cell
+										173 container
+											174 text allowedConnectionIds
+											175 button Collapse rows
+									176 cell
+										177 container
+											178 text scopeVerified
+											179 button Collapse rows
+									180 cell
+										181 container
+											182 text aiRemaining
+											183 button Collapse rows
+									184 cell
+										185 container
+											186 text aiAllowanceBasis
+											187 button Collapse rows
+									188 cell
+										189 container
+											190 text readyForProduction
+											191 button Collapse rows
+									192 cell
+										193 container
+											194 text outboundEnabled
+											195 button Collapse rows
+									196 cell
+										197 container
+											198 text connectionStatusCode
+											199 button Collapse rows
+									200 cell
+										201 container
+											202 text numberVerified
+											203 button Collapse rows
+									204 cell
+										205 container
+											206 text connectionId
+											207 button Collapse rows
+									208 cell
+										209 container
+											210 text phone
+											211 button Collapse rows
+									212 cell
+										213 container
+											214 text phoneNumberId
+											215 button Collapse rows
+									216 cell
+										217 container
+											218 text metaWabaId
+											219 button Collapse rows
+									220 cell
+										221 container
+											222 text connectionState
+											223 button Collapse rows
+									224 cell
+										225 container
+											226 text mode
+											227 button Collapse rows
+									228 cell
+										229 container
+											230 text acceptancePassed
+											231 button Collapse rows
+									232 cell
+										233 container
+											234 text nextStep
+											235 button Collapse rows
+								236 row
+									237 cell
+										238 text 2026-10-28T17:01:37.280Z
+									239 cell
+										240 text 200
+									241 cell
+										242 text org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+									243 cell
+										244 text אקסלנט יועצי משכנתאות ופיננסים
+									245 cell
+										246 text Asia/Jerusalem
+									247 cell
+										248 text connection
+									249 cell
+										250 text n8n-Cosend-acceptance-readonly-20261028
+									251 cell
+										252 container
+											253 text 0 : connections:read
+									254 cell
+										255 container
+											256 text 0 : conn_01M5YC386Q2N9973TJG1M8H4DQ
+									257 cell
+										258 text true
+									259 cell
+										260 text 21
+									261 cell
+										262 text lifetime
+									263 cell
+										264 text false
+									265 cell
+										266 text false
+									267 cell
+										268 text 200
+									269 cell
+										270 text true
+									271 cell
+										272 text conn_01M5YC386Q2N9973TJG1M8H4DQ
+									273 cell
+										274 text +972559881245
+									275 cell
+										276 text 1138723472651617
+									277 cell
+										278 text 848287037598986
+									279 cell
+										280 text active
+									281 cell
+										282 text coexistence
+									283 cell
+										284 text true
+									285 cell
+										286 text Read-only account and number acceptance only. No messages, contacts, webhook, schedule or automation changes authorized.
+
+The focused UI element is 122 row (selected, collapsed) Verified read-only result, Secondary Actions: Expand

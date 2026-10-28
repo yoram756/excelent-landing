@@ -1,0 +1,63 @@
+Browser tab: 148911361, Title: "AI & automations · Cosend", URL: "https://dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ".
+0 AXWebArea AI & automations · Cosend, URL: dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ
+	1 container root
+		2 container
+			3 text אקסלנט יועצים · +972 55 988 1245: Limited by WhatsApp. From Meta: Your display name has not been approved yet. Your message limit will increase after the display name is approved.
+			4 button View number
+		5 container
+			6 container Main
+				7 pop up button (collapsed) Description: אקסלנט יועצי משכנתאות ופיננסים, Secondary Actions: Expand
+				8 content list
+					9 link Description: Home, Value: dashboard.cosend.app/home?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+					10 link Description: Inbox · 2 waiting, Value: dashboard.cosend.app/inbox?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+					11 link Description: Contacts, Value: dashboard.cosend.app/contacts?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+					12 link Description: AI & automations, Value: dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+					13 link Description: Templates, Value: dashboard.cosend.app/templates?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+				14 content list
+					15 link Description: Numbers · 1 problem, Value: dashboard.cosend.app/numbers?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+					16 link Description: Integrations, Value: dashboard.cosend.app/integrations?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+				17 button AI conversations · 4 of 25
+				18 button Settings
+				19 pop up button (collapsed) Description: יורם פלד, Owner, Secondary Actions: Expand
+			20 heading AI & automations, Value: 1
+				21 text AI & automations
+			22 text Things that answer or act on their own
+			23 link Description: Activity, Value: dashboard.cosend.app/ai/activity?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z
+			24 link Description: Reminders, Value: dashboard.cosend.app/ai/reminders?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ
+			25 button New automation
+			26 container Who answers first
+				27 text Who answers first
+				28 content list
+					29 container
+						30 AXListMarker 1.
+						31 text AI receptionist answers every other message.
+				32 text The WhatsApp Business app on the phone may also send its own greeting or away message
+				33 text This is the order your automations will run based on your configurations.
+			34 container AI receptionist
+				35 heading AI receptionist On, Value: 2
+					36 link Description: AI receptionist, Value: dashboard.cosend.app/ai/receptionist?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ
+					37 text On
+				38 container
+					39 text It is on and answering your customers. Answered 2 today · handed over 1
+				40 link Description: Edit, Value: dashboard.cosend.app/ai/receptionist?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ
+				41 switch (settable, boolean) Answer customers with the AI receptionist, Value: 1
+				42 text Answer customers with the AI receptionist
+			43 content list Automations
+				44 container
+					45 link Description: אקסלנט - מענה ראשוני ושעות פעילות, Value: dashboard.cosend.app/ai/aut_01M60H69E2KAVZNK3VCM3S9TVJ?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ
+					46 text  · A customer writes  · Set up by יורם פלד
+					47 definition list
+						48 container Status
+							49 text Status
+						50 text Off
+						51 container Last run
+							52 text Last run
+						53 text Not run yet
+						54 container Runs today
+							55 text Runs today
+						56 text 0
+					57 switch (settable, boolean) Switched off: אקסלנט - מענה ראשוני ושעות פעילות, Value: 0
+					58 text Switched off: אקסלנט - מענה ראשוני ושעות פעילות
+			59 button Report a problem
+
+The focused UI element is 0 AXWebArea AI & automations · Cosend, URL: dashboard.cosend.app/ai?org=org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z&number=conn_01M5YC386Q2N9973TJG1M8H4DQ
