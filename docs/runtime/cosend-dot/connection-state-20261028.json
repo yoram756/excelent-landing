@@ -1,0 +1,94 @@
+{
+  "at": "2026-10-28T20:49:46.132Z",
+  "overall": "BLOCKED",
+  "ownerObjective": "Comprehensive correspondence management including automatic sending after separately approved rules and exclusive response ownership",
+  "plugin": {
+    "status": "PASS",
+    "id": "plugins_6ae25e9928508191a54aed2a1c09139a",
+    "releaseId": "pluginrel_6ae25e9ac4d8819199a6334df845e756",
+    "url": "https://chatgpt.com/plugins/plugins_6ae25e9928508191a54aed2a1c09139a",
+    "scope": "USER",
+    "visibility": "PRIVATE",
+    "version": "0.1.0",
+    "savedReadback": "PASS",
+    "uiListsUnderInstalled": true,
+    "appPermissionProbe": "not_installed",
+    "dotAuthenticatedAccess": "NOT TESTED"
+  },
+  "endpoint": {
+    "url": "https://mcp.cosend.app/mcp",
+    "transport": "streamable-http",
+    "authentication": "oauth",
+    "clientMode": "cimd",
+    "oauthCompleted": false,
+    "httpStatus": null,
+    "responseBody": null,
+    "networkError": "ENOTFOUND",
+    "publicDnsStatus": 3,
+    "publicDnsMeaning": "NXDOMAIN",
+    "publicDnsControl": {
+      "host": "cosend.app",
+      "status": 0
+    }
+  },
+  "requestedScopes": [
+    "messages:read",
+    "contacts:read",
+    "automations:read",
+    "templates:read"
+  ],
+  "grantedScopes": "NOT TESTED",
+  "writeScopesRequested": [],
+  "automaticSendingApproved": false,
+  "exclusiveResponderApproved": false,
+  "target": {
+    "workspace": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+    "connection": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+    "phone": "+972559881245",
+    "phoneNumberId": "1138723472651617"
+  },
+  "localValidation": {
+    "status": "PASS",
+    "negativeControls": 8,
+    "secretScan": "PASS",
+    "archiveInspected": true,
+    "archiveFiles": 5
+  },
+  "providerDashboard": {
+    "officialNumberVisible": true,
+    "aiReceptionist": "ON",
+    "customInitialResponseAutomation": "OFF",
+    "changesPerformed": [],
+    "existingConnectionKeyMetadata": [
+      {
+        "name": "n8n-Cosend-acceptance-readonly-20261028",
+        "scopes": [
+          "connections:read"
+        ]
+      },
+      {
+        "name": "n8n-Cosend-replies-0559881245",
+        "scopes": [
+          "messages:read",
+          "messages:write",
+          "connections:read"
+        ]
+      }
+    ],
+    "secretValuesRead": false
+  },
+  "liveConversationReads": 0,
+  "messagesSent": 0,
+  "providerMutations": 0,
+  "newWebhooks": 0,
+  "newServers": 0,
+  "paidModelCalls": 0,
+  "nextAction": "Cosend must repair DNS or provide a working documented MCP endpoint. Then complete secure OAuth, verify whoami and filtered tools for the intended number, and test a small read without changing conversation state.",
+  "activationRules": "docs/runtime/cosend-dot/ACTIVATION_RULES_DRAFT.md",
+  "supportMessageSent": false,
+  "sources": [
+    "https://cosend.app/docs/mcp",
+    "https://cosend.app/mcp",
+    "https://learn.chatgpt.com/docs/dots/computers-and-apps"
+  ]
+}

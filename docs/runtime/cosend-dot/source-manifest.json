@@ -1,0 +1,76 @@
+{
+  "version": "0.1.0",
+  "pluginId": "plugins_6ae25e9928508191a54aed2a1c09139a",
+  "scope": "Cosend dot integration only; no LP1, funnel, n8n or provider configuration changes",
+  "archiveSha256": "f5a97df59562346f0dcf4cdc4085f2b57ab2c65da102d05377354775d9625285",
+  "files": {
+    "plugins/excellent-cosend-official/mcp.json": {
+      "sha256": "9c81eaa687f2fa141da1cd06e33320161ecf3e47669b3ae9e98463c74bfc25ee",
+      "bytes": 546
+    },
+    "plugins/excellent-cosend-official/plugin.json": {
+      "sha256": "cb8f1a03d4cc51f4cd3ca38b40006b110b8755dfaec601ad6e7391c3601eac62",
+      "bytes": 1184
+    },
+    "plugins/excellent-cosend-official/README.md": {
+      "sha256": "f2ed2e5b7f14b03e4dc6e953d223b540f1b9ae4617db54ce39be47994be5ddf0",
+      "bytes": 1509
+    },
+    "plugins/excellent-cosend-official/skills/excellent-official-conversations/references/activation.json": {
+      "sha256": "c998c0c7b15c44b170d1fbc1d1ba720f47887e2cf2934ea00727d56d8f02660f",
+      "bytes": 681
+    },
+    "plugins/excellent-cosend-official/skills/excellent-official-conversations/SKILL.md": {
+      "sha256": "917d41ed6ff6517db2bc9a87fed2191314c76b7d502c6294c340a039d1e7b429",
+      "bytes": 6148
+    },
+    "docs/runtime/cosend-dot/ACTIVATION_RULES_DRAFT.md": {
+      "sha256": "8e17d2a75164c04f89dd80530af1b549c1006894e47926efd06100741ee4396f",
+      "bytes": 6599
+    },
+    "docs/runtime/cosend-dot/connection-state-20261028.json": {
+      "sha256": "fd9a564c86148c64425a35751b81bacebbe0dfe81a1dc53289ddd3651f8ed717",
+      "bytes": 2873
+    },
+    "docs/runtime/cosend-dot/CONNECTION_20261028.md": {
+      "sha256": "cd84e8343d12e351116031bb248a3cc7013783ac9936529017435816207fe633",
+      "bytes": 6347
+    },
+    "docs/runtime/cosend-dot/public-dns-20261028.json": {
+      "sha256": "197d1edee67c32c55673bc0d58ab131b7329fa90d6fc83115c20f49445dfb759",
+      "bytes": 695
+    },
+    "docs/runtime/cosend-dot/public-probe-20261028.json": {
+      "sha256": "fc024bb7e40ba4290036faebc24da5d1c5d3a7ac599e179a72770c20763f3a24",
+      "bytes": 299
+    },
+    "docs/runtime/cosend-dot/validation-20261028.json": {
+      "sha256": "c5b804584da5237daed1a93d5e2f21119c1d5a11569d4f4e6a5afd14b4f5a248",
+      "bytes": 180
+    },
+    "docs/evidence/20261028-dot-cosend/plugin-created.png": {
+      "sha256": "53dcf0c3cfeb0080065e2656801766b268468e711fe2fe134a8c31ab7fac1f87",
+      "bytes": 64651
+    },
+    "docs/evidence/20261028-dot-cosend/plugin-created.txt": {
+      "sha256": "d26ebe4c60306d56804bef9ef6dc89e7c0e9685b725e60984a92417aee156330",
+      "bytes": 4137
+    },
+    "docs/evidence/20261028-dot-cosend/responder-preserved.txt": {
+      "sha256": "0e85d48b22a200ab152755810e5decb3397477cca9363b7c0c5d4a1a32a288b7",
+      "bytes": 4124
+    },
+    "scripts/probe-cosend-dot.mjs": {
+      "sha256": "2203f6a6a17a5beb239cc8046a846e2d8c3098812958d0b1aa446571e41c0b82",
+      "bytes": 1632
+    },
+    "scripts/probe-cosend-dot-dns.mjs": {
+      "sha256": "a3115f8ba1dff2a9d6da463e59f856255231fd04b544437f2b10bbca98d721db",
+      "bytes": 765
+    },
+    "scripts/validate-cosend-dot-plugin.mjs": {
+      "sha256": "4f2073b35968c3b1b98fd17ee2dd7898785fdd4867c35b8122491fe5413e96e6",
+      "bytes": 3261
+    }
+  }
+}

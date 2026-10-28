@@ -1,0 +1,67 @@
+Browser tab: 148911644, Title: "אקסלנט · WhatsApp רשמי | ChatGPT Plugins", URL: "https://chatgpt.com/plugins/plugins_6ae25e9928508191a54aed2a1c09139a".
+0 AXWebArea אקסלנט · WhatsApp רשמי | ChatGPT Plugins, URL: chatgpt.com/plugins/plugins_6ae25e9928508191a54aed2a1c09139a
+	1 container
+		2 container root
+			3 container
+				4 link Description: Skip to content, Value: chatgpt.com/plugins/plugins_6ae25e9928508191a54aed2a1c09139a#_R_trcujaaqn75cched5hlb5_
+				129 container app-shell-sidebar
+					130 container App navigation
+						131 button (collapsed) Home, Secondary Actions: Expand
+						132 button (collapsed) Space, Secondary Actions: Expand
+						133 button (collapsed) Scheduled, Secondary Actions: Expand
+						134 button (collapsed) Plugins, Secondary Actions: Expand
+						135 pop up button (collapsed) Explore, Secondary Actions: Expand
+						136 button Sites
+						137 button (collapsed) Codex, Secondary Actions: Expand
+						138 button monday.com
+						139 button Canva
+						140 container
+							141 pop up button (collapsed) Description: Usage, ID: radix-_r_4u_, Secondary Actions: Expand
+							142 pop up button (collapsed) Description: Open profile menu, ID: radix-_r_a_, Secondary Actions: Expand
+				84 container
+					85 container Breadcrumb
+						86 link Description: Plugins Templates, Value: chatgpt.com/plugins
+						87 text אקסלנט · WhatsApp רשמי
+					88 container
+						89 heading אקסלנט · WhatsApp רשמי Your cloud plugin, Value: 1
+							90 text אקסלנט · WhatsApp רשמי
+							91 button Your cloud plugin
+								92 image Your cloud plugin
+						93 text By יורם פלד • ניהול התכתבויות דרך Cosend
+						94 pop up button (collapsed) Description: More actions, ID: radix-_r_1j_, Secondary Actions: Expand
+						95 link Description: Open in desktop app, Value: chatgpt.com/codex/open-app?target=plugin&plugin_id=plugins_6ae25e9928508191a54aed2a1c09139a
+						96 button אקסלנט · WhatsApp רשמי אקסלנט · WhatsApp רשמי בדוק את זהות חיבור Cosend הרשמי, סכם שיחות פתוחות והצג מה נדרש להמשך במסגרת ההרשאות המאושרות.
+							97 image אקסלנט · WhatsApp רשמי
+							98 text אקסלנט · WhatsApp רשמי
+							99 text בדוק את זהות חיבור Cosend הרשמי, סכם שיחות פתוחות והצג מה נדרש להמשך במסגרת ההרשאות המאושרות.
+						100 text חיבור Cosend הרשמי למספר 0559881245. קריאה, תמונת שיחה, התחייבויות והכנת מענה; הפעלת שליחה תדרוש כללים מאושרים ובעלות יחידה על המענה.
+						101 container plugin-includes
+							102 container
+								103 heading MCP servers 1, Value: 2
+									104 text MCP servers 1
+								105 image Excellent-cosend-official
+								106 text Excellent-cosend-official
+							107 container
+								108 heading Skills 1, Value: 2
+									109 text Skills 1
+								110 button excellent-official-conversations Use for אקסלנט's official WhatsApp 0559881245 through Cosend: manage conversation context, commitments, follow-up proposals and staged response ownership for the dot.
+									111 text excellent-official-conversations
+									112 text Use for אקסלנט's official WhatsApp 0559881245 through Cosend: manage conversation context, commitments, follow-up proposals and staged response ownership for the dot.
+						113 container plugin-information
+							114 heading Information, Value: 2
+								115 text Information
+							116 definition list
+								117 container Developer
+									118 text Developer
+								119 text יורם פלד
+								120 container Category
+									121 text Category
+								122 text Communication
+								123 container Version
+									124 text Version
+								125 text 0.1.0
+								126 container Website
+									127 text Website
+								128 text Unavailable
+
+The focused UI element is 0 AXWebArea אקסלנט · WhatsApp רשמי | ChatGPT Plugins, URL: chatgpt.com/plugins/plugins_6ae25e9928508191a54aed2a1c09139a

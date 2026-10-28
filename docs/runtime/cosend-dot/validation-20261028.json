@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "command": "node scripts/validate-cosend-dot-plugin.mjs",
+  "exitCode": 0,
+  "negativeControlsDetected": 8,
+  "writeScopesRequested": 0,
+  "liveCalls": 0
+}

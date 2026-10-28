@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-28T20:43:34.309Z",
+  "mode": "PUBLIC_DNS_DIAGNOSTIC",
+  "requests": [
+    {
+      "hostname": "cosend.app",
+      "url": "https://dns.google/resolve?name=cosend.app&type=A",
+      "http": 200,
+      "dnsStatus": 0,
+      "answers": [
+        {
+          "name": "cosend.app.",
+          "type": 1,
+          "data": "172.67.182.243"
+        },
+        {
+          "name": "cosend.app.",
+          "type": 1,
+          "data": "104.21.67.234"
+        }
+      ]
+    },
+    {
+      "hostname": "mcp.cosend.app",
+      "url": "https://dns.google/resolve?name=mcp.cosend.app&type=A",
+      "http": 200,
+      "dnsStatus": 3,
+      "answers": []
+    }
+  ],
+  "secretsUsed": false
+}

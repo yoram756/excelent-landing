@@ -1,0 +1,16 @@
+{
+  "provider": "cosend",
+  "workspaceId": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+  "connectionId": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+  "phone": "+972559881245",
+  "phoneNumberId": "1138723472651617",
+  "stage": "READ_ONLY_PREPARATION",
+  "ownerObjective": "Comprehensive management, including automatic sending after separately approved rules and exclusive response ownership",
+  "automaticSendingApproved": false,
+  "exclusiveResponderApproved": false,
+  "writeScopesApproved": [],
+  "responseRulesApproval": null,
+  "realDeliveryTestApproval": null,
+  "existingResponder": "Cosend AI receptionist; preserve current state",
+  "blueticks": "Separate connection; preserve unchanged"
+}

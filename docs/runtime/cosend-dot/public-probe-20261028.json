@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-28T20:42:12.867Z",
+  "mode": "UNAUTHENTICATED_PUBLIC_CAPABILITY_PROBE",
+  "endpoint": "https://mcp.cosend.app/mcp",
+  "requests": [],
+  "secretsUsed": false,
+  "status": "BLOCKED",
+  "error": {
+    "name": "TypeError",
+    "message": "fetch failed",
+    "code": "ENOTFOUND"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "excellent-cosend-official": {
+      "type": "streamable-http",
+      "url": "https://mcp.cosend.app/mcp",
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": { "mode": "cimd" },
+            "baseScopes": ["messages:read", "contacts:read"],
+            "defaultScopes": ["messages:read", "contacts:read", "automations:read", "templates:read"]
+          }
+        }
+      }
+    }
+  }
+}

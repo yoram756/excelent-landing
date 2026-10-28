@@ -1,0 +1,20 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "excellent-cosend-official",
+  "version": "0.1.0",
+  "description": "Connect Excellent's official Cosend WhatsApp account to its dot for staged conversation management. Initial OAuth permissions are read-only; sending requires separately approved rules and exclusive response ownership.",
+  "author": { "name": "אקסלנט" },
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "אקסלנט · WhatsApp רשמי",
+        "shortDescription": "ניהול התכתבויות דרך Cosend",
+        "longDescription": "חיבור Cosend הרשמי למספר 0559881245. קריאה, תמונת שיחה, התחייבויות והכנת מענה; הפעלת שליחה תדרוש כללים מאושרים ובעלות יחידה על המענה.",
+        "developerName": "אקסלנט",
+        "category": "Communication",
+        "capabilities": [],
+        "defaultPrompt": "בדוק את זהות חיבור Cosend הרשמי, סכם שיחות פתוחות והצג מה נדרש להמשך במסגרת ההרשאות המאושרות."
+      }
+    }
+  }
+}
