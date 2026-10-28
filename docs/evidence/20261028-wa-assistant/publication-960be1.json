@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "commit": "960be1bff33b3c656934c020173df3b83dc5f08b",
+  "branch": "codex/lock-service-20261025",
+  "repository": "yoram756/excelent-landing",
+  "previousHead": "5305b5365dfffa547735b5b53f560f56753c3f89",
+  "publicationMethod": "Authenticated GitHub connector: create blobs/tree/commit and update ref with expected previous head",
+  "force": false,
+  "refUpdateSuccess": true,
+  "independentBranchReadback": "960be1bff33b3c656934c020173df3b83dc5f08b",
+  "diffReview": {"addedFiles": 10,"modifiedExistingFiles": 0,"canonicalSourceIncluded": false,"AGENTSIncluded": false},
+  "archiveReadback": {
+    "path": "docs/evidence/20261028-wa-assistant/verified-source.zip",
+    "blobSha": "2948334bb248d40ba069af89cf1ed9a5357c6346",
+    "matchesUploadedBlob": true,
+    "sourceSha256": "3503c5b73f4a91d639ac18d60a8be02d8ebeb300c069034af2f21d9f98152de5"
+  },
+  "localCheckoutReset": false,
+  "productionServerGitHeadAfterPublication": "NOT TESTED",
+  "deploymentClaim": "Only the isolated runtime version and pre-publication code were verified; this commit was not claimed as pulled into the production checkout."
+}

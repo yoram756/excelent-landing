@@ -1,0 +1,215 @@
+Browser tab: 148911181, Title: "▶️ Excellent WA CRM worker NO MESSAGES - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/StS89G1uHOBX2znO".
+1 AXWebArea ▶️ Excellent WA CRM worker NO MESSAGES - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/StS89G1uHOBX2znO
+	2 container n8n-app
+		3 container
+			4 container
+				21 container
+					22 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					23 text /
+					24 container
+						25 text Excellent WA CRM worker NO MESSAGES
+					26 button More actions
+					27 button (disabled) Published
+					28 button More actions
+				5 radio button Description: Editor, Value: 1
+				6 radio button Description: Executions, Value: 0
+				7 radio button Description: Evaluations, Value: 0
+			8 container side-menu
+				9 link n8n-qhxa.srv1604140.hstgr.cloud/home
+				10 menu bar
+					11 (collapsed) Add new item, Secondary Actions: Expand
+						12 button Add new item
+				13 button Open command palette
+				14 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				15 container
+					29 Description: n8n Assistant, ID: instance-ai
+						30 text n8n Assistant
+						31 text Preview
+					32 Description: Overview, ID: home
+						33 text Overview
+				34 Description: Templates, ID: templates
+					35 text Templates
+				36 Description: Insights, ID: insights
+					37 text Insights
+				38 Description: Help, ID: help
+					39 text Help
+				40 Description: Settings, ID: settings
+					41 text Settings
+			16 container content
+				42 container
+					43 container
+						44 container
+							45 image
+								46 container Edge from 9b02f740-3c98-4ee2-a243-020bde2aa0bb to b16e0716-eeec-473d-8a7c-75e976ea7cae
+							47 image
+								48 container Edge from 849d5c7f-4576-435b-b3b4-e3210aeee83e to b16e0716-eeec-473d-8a7c-75e976ea7cae
+							49 image
+								50 container Edge from b16e0716-eeec-473d-8a7c-75e976ea7cae to eccc2f3e-6798-46ab-9fff-3905cf141e5f
+							51 image
+								52 container Edge from eccc2f3e-6798-46ab-9fff-3905cf141e5f to 3c8101b7-de2a-4d80-bfac-a77f0ee53321
+							53 image
+								54 container Edge from 3c8101b7-de2a-4d80-bfac-a77f0ee53321 to 6774a62c-ea9a-44bf-a038-bcc7b927b2be
+							55 image
+								56 container Edge from 6774a62c-ea9a-44bf-a038-bcc7b927b2be to 8fee2ec3-4fff-4351-8853-e99e33b5a18a
+							57 image
+								58 container Edge from 8fee2ec3-4fff-4351-8853-e99e33b5a18a to eccc2f3e-6798-46ab-9fff-3905cf141e5f
+							59 image
+								60 container Edge from 8fee2ec3-4fff-4351-8853-e99e33b5a18a to ea31f97b-5e53-4bf8-8890-f89e5ae8bb7e
+							61 image
+								62 container Edge from ea31f97b-5e53-4bf8-8890-f89e5ae8bb7e to a1946a4f-ff48-4e88-80db-a5b50fee74d9
+							63 image
+								64 container Edge from ea31f97b-5e53-4bf8-8890-f89e5ae8bb7e to c8ee7539-3139-48c9-bff7-b8736b05f4d9
+							65 image
+								66 container Edge from a1946a4f-ff48-4e88-80db-a5b50fee74d9 to d53c92fa-9018-4b61-bc9a-ae9ac09075b8
+							67 image
+								68 container Edge from d53c92fa-9018-4b61-bc9a-ae9ac09075b8 to 96873f93-ae5f-4148-80e3-830877731ad0
+							69 image
+								70 container Edge from 96873f93-ae5f-4148-80e3-830877731ad0 to 89525610-d5c0-4ffe-8b03-902cb412a649
+							71 image
+								72 container Edge from c8ee7539-3139-48c9-bff7-b8736b05f4d9 to 4f7b8891-fb40-4cc8-81fe-3d89baaeb41d
+							73 container
+								74 button Execute step
+								75 button Deactivate
+								76 button Delete
+								77 button Add to chat
+								78 button More actions
+								79 text Manual controlled worker
+								80 container
+									81 button Execute workflow
+							82 container
+								83 button Execute step
+								84 button Deactivate
+								85 button Delete
+								86 button Add to chat
+								87 button More actions
+								88 text Intake worker every 10 seconds
+								89 container
+									90 button Execute workflow
+							91 container
+								92 button Execute step
+								93 button Deactivate
+								94 button Delete
+								95 button Add to chat
+								96 button More actions
+								97 container
+									98 text Claim pending event POST: http://excelent-wa-intake:8788/next
+							99 container
+								100 text true
+								101 text false
+								102 button Execute step
+								103 button Deactivate
+								104 button Delete
+								105 button Add to chat
+								106 button More actions
+								107 text Pending lookup
+							108 container
+								109 button Execute step
+								110 button Deactivate
+								111 button Delete
+								112 button Add to chat
+								113 button More actions
+								114 container
+									115 text Lookup page POST: https://api.monday.com/v2
+							116 container
+								117 button Execute step
+								118 button Deactivate
+								119 button Delete
+								120 button Add to chat
+								121 button More actions
+								122 container
+									123 text Evaluate lookup page POST: http://excelent-wa-intake:8788/lookup
+							124 container
+								125 text true
+								126 text false
+								127 button Execute step
+								128 button Deactivate
+								129 button Delete
+								130 button Add to chat
+								131 button More actions
+								132 text More lookup pages
+							133 container
+								134 text true
+								135 text false
+								136 button Execute step
+								137 button Deactivate
+								138 button Delete
+								139 button Add to chat
+								140 button More actions
+								141 text Creation permitted
+							142 container
+								143 button Execute step
+								144 button Deactivate
+								145 button Delete
+								146 button Add to chat
+								147 button More actions
+								148 container
+									149 text Create once with owner POST: https://api.monday.com/v2
+							150 container
+								151 button Execute step
+								152 button Deactivate
+								153 button Delete
+								154 button Add to chat
+								155 button More actions
+								156 container
+									157 text Prepare readback POST: http://excelent-wa-intake:8788/created
+							158 container
+								159 button Execute step
+								160 button Deactivate
+								161 button Delete
+								162 button Add to chat
+								163 button More actions
+								164 container
+									165 text Independent item read POST: https://api.monday.com/v2
+							166 container
+								167 button Execute step
+								168 button Deactivate
+								169 button Delete
+								170 button Add to chat
+								171 button More actions
+								172 container
+									173 text Confirm verified fields POST: http://excelent-wa-intake:8788/confirmed
+							174 container
+								175 text true
+								176 text false
+								177 button Execute step
+								178 button Deactivate
+								179 button Delete
+								180 button Add to chat
+								181 button More actions
+								182 text Existing event verified
+							183 container
+								184 button Execute step
+								185 button Deactivate
+								186 button Delete
+								187 button Add to chat
+								188 button More actions
+								189 container
+									190 text Reconcile existing event POST: http://excelent-wa-intake:8788/confirm-existing
+						191 image
+						192 image
+						193 container
+							194 button Zoom to Fit
+							195 button Zoom In
+							196 button Zoom Out
+							197 button Tidy Up
+								198 image
+					199 container
+						200 button Execute workflow
+							201 text Execute workflow
+							202 text from 
+							203 text Intake worker eve…seconds
+						204 button Select trigger node
+					205 button Open nodes panel
+					206 button Command bar
+					207 button Add sticky note
+					208 button Open side panel
+					209 button n8n AI
+						210 image
+				17 container
+					18 container
+						211 text Logs
+						19 button Actions
+						20 button Collapse panel
+						212 text Nothing to display yet. Execute the workflow to see execution logs.
+
+The focused UI element is 1 AXWebArea ▶️ Excellent WA CRM worker NO MESSAGES - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/StS89G1uHOBX2znO

@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "evidenceType": "n8n_UI_read_only",
+  "workflowId": "StS89G1uHOBX2znO",
+  "name": "Excellent WA CRM worker NO MESSAGES",
+  "published": true,
+  "url": "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/StS89G1uHOBX2znO",
+  "evidenceFile": "crm-worker-readback.txt",
+  "keyNodes": [
+    "Intake worker every 10 seconds",
+    "Claim pending event",
+    "Create once with owner",
+    "Independent item read",
+    "Confirm verified fields",
+    "Reconcile existing event"
+  ],
+  "workflowExecutedByThisCheck": false,
+  "workflowEditedByThisCheck": false,
+  "correctsReportedCrmWorkerId": "QEGe2prEvnA4i47J",
+  "note": "Earlier observations.json intentionally retained the ID as null rather than guessing from a screenshot. This follow-up verifies it from the actual URL and workflow UI."
+}

@@ -55,7 +55,7 @@ Blueticks: בממשק WhatsApp הקיים נצפה מצב בוטים לא פעי
 
 שלוש הטיוטות 0nesgH42OpyQdncL, 90jZAb9ZFDOnEQ0e, wyMfdiAAyfhtDyrP נמצאו inactive וללא Credentials. הן לא יובאו שוב לשרת הייצור. בדיקת הקריאה AwCquhPHa4OgjkEo נשמרה. HNvsmdIDsvrHkZuw נמצא active.
 
-נמצא פער במסירה: QEGe2prEvnA4i47J הוא תהליך המענה המיידי של משפך המחזור. הצמתים כוללים Instant reply, Has send?, Live?, Send WhatsApp ו־Update item (instant). הוא לא סווג מחדש כעובד CRM ולא שונה. העובד האמיתי נקרא Excellent WA CRM worker NO MESSAGES, נמצא active ומכיל Claim pending event, Create once with owner, Independent item read ו־Reconcile existing event. המזהה המדויק נשמר בדוח התלויות בשרת ולא הועתק ידנית מתמונה כאשר לא ניתן היה לאמת כל תו. התלות מתועדת ב־/docker/excelent-wa-isolated-20261028/service-dependencies.json.
+נמצא פער במסירה: QEGe2prEvnA4i47J הוא תהליך המענה המיידי של משפך המחזור. הצמתים כוללים Instant reply, Has send?, Live?, Send WhatsApp ו־Update item (instant). הוא לא סווג מחדש כעובד CRM ולא שונה. העובד האמיתי הוא StS89G1uHOBX2znO, בשם Excellent WA CRM worker NO MESSAGES. הוא Published ומכיל Claim pending event, Create once with owner, Independent item read ו־Reconcile existing event. המזהה אומת בהמשך מתוך כתובת התהליך והממשק, בלי להריץ או לערוך אותו. ראיה נוספת: docs/evidence/20261028-wa-assistant/crm-worker-readback.json. התצפית הקודמת שהשאירה את המזהה לא ידוע נשמרה כהיסטוריה.
 
 ## השינויים בקוד
 
@@ -122,5 +122,9 @@ flowchart TD
 ## מקורות ספק
 
 תיעוד שנקרא מחדש: [Cosend Webhooks](https://cosend.app/docs/webhooks), [API reference](https://cosend.app/docs/reference), [Runtime API](https://cosend.app/docs/runtime-api), [n8n Server CLI](https://docs.n8n.io/hosting/cli-commands/). הבדיקה המבודדת השתמשה בחתימת אירועי v1 על t.raw_body; היא אינה אימות של חתימת Meta או Raw Relay.
+
+## שמירה במאגר
+
+הדוח, חבילת המקור הקפואה והראיות נשמרו ב־commit `960be1bff33b3c656934c020173df3b83dc5f08b`. הענף codex/lock-service-20261025 עודכן ללא force, עם בדיקת HEAD צפוי, ולאחר מכן נקרא מחדש מהשרת. גם קובץ ה־ZIP נקרא מחדש ונמצא תואם ל־blob שהועלה. ראיית הפרסום: docs/evidence/20261028-wa-assistant/publication-960be1.json. אין כאן איפוס של ה־checkout המקומי או הכללה של שינויים מקבילים במקור הקנוני. אימות מזהה עובד ה־CRM נוסף בהמשך כעדות נפרדת.
 
 הפעולה הבאה בקוד: בעל העבודה על המקור הקנוני ישווה את החבילה הקפואה לשינויי provider/control/model/migration, יריץ בדיקות על גרסה משותפת מזוהה וישלים בדיקת מסלול לאחר פריסתה. אין להעתיק את החבילה על תיקיית המקור. בהמשך יש להשלים דרך בעל החשבון חיבור מצומצם, מודל/תקציב, בעלות מענה, מדיניות מידע ויעד נציג, ואז לעדכן את חבילת ההפעלה עם פרטי בדיקת המסירה המדויקים. לא הופעלה שליחה ולא מוצגת השלמה של הפרויקט החי.
