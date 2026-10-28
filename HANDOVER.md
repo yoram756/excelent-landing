@@ -214,3 +214,8 @@ F. Go live (only after explicit approval from יורם)
 PASS: atomic-intake-20261028.json: published version 60101067-81e0-4daa-b9b2-d4cfa7b9d736, 41 nodes, original 37 nodes/settings preserved; executions 61968 succeeded and 61969/61970 controlled duplicates; real HTTP [200,409,409], exactly one matching Monday item 3316200363 with event ID and person 75075191; TEST lead and both owned central-error alerts independently confirmed deleted; baseline four records preserved. No WhatsApp sends. Source e494d25; local funnel 386/386, exit 0.
 
 Whole-project go-live readiness remains false; unrelated blockers stay open. Details: [atomic intake report](docs/runtime/ATOMIC_INTAKE_20261028.md).
+
+
+## בדיקת Meta CAPI, 29.10.2026
+
+BLOCKED: נמצא Dataset 1822147178482498, אך לא נמצא חיבור CAPI מורשה לשידור. מיפוי event_id עבר מקומית ו־41 בדיקות ממוקדות עברו; לא נשלח אירוע ל־Meta. נדרש אסימון שרת לנכס, קוד Test Events וקבלה עצמאית לפני אישור המרה. לא נשלחה הודעת WhatsApp ולא שונו הגדרות n8n. [הדוח המעודכן](docs/runtime/META_CAPI_20261029.md). מוכנות כללית נשארת false.

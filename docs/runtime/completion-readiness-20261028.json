@@ -64,7 +64,7 @@
     {
       "id": "meta_capi",
       "status": "BLOCKED",
-      "evidence": "Dataset 1822147178482498 discovered; Meta shows incomplete CRM integration and no activity; no verified CAPI sender credential or Test Events receipt"
+      "evidence": "meta-capi-20261029.json: dataset 1822147178482498 read back; existing Leads Read Only credential is disconnected and no CAPI credential found; local exact event_id mapping and 41 targeted tests pass. No event sent; awaiting secure scoped token and Test Events receipt."
     },
     {
       "id": "posthog",
