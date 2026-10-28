@@ -1,0 +1,8 @@
+{
+  "projectId": "302284",
+  "region": "EU Cloud",
+  "key": "phc_zvZdJaetFoqQhLpPaGgp8PL3CgreGmTyUE59vAAHYsjV",
+  "host": "https://eu.i.posthog.com",
+  "keyType": "public write-only project token; never a personal or secret API key",
+  "verifiedFrom": "Authenticated existing office@kho.org.il project Settings > General on 2026-10-28"
+}

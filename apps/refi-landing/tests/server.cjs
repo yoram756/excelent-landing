@@ -15,7 +15,8 @@ function createServer() {
     if (url.pathname === '/__test/mode') { mode = url.searchParams.get('value') || 'ok'; requests = []; res.end('ok'); return; }
     if (url.pathname === '/__test/analytics') { analytics = url.searchParams.get('enabled') === 'true'; res.end('ok'); return; }
     if (url.pathname === '/__test/log') { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(requests)); return; }
-    if (url.pathname === '/analytics-config.json' && analytics) { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify({ key: 'phc_TEST_CRO_VERIFICATION_ONLY', host: 'https://analytics.example.invalid' })); return; }
+    // Never expose the deployed project's public binding to a local browser test.
+    if (url.pathname === '/analytics-config.json') { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify(analytics ? { key: 'phc_TEST_CRO_VERIFICATION_ONLY', host: 'https://analytics.example.invalid' } : { key: '', host: '' })); return; }
     if (url.pathname.startsWith('/api/')) {
       if (url.pathname !== '/api/lead' || req.method !== 'POST') { res.writeHead(404).end(); return; }
       let body = ''; req.on('data', chunk => { body += chunk; });

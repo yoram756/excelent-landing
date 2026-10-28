@@ -189,6 +189,24 @@ test('the same HTTP isolation check detects the original shared staging route', 
   assert.equal(f.calls.length, 3, 'negative control actually forwarded all three test requests');
 });
 
+function assertPublicAnalytics(config, csp) {
+  const expected = JSON.parse(fs.readFileSync(path.join(root, 'config/landing/posthog.public.json'), 'utf8'));
+  assert.deepEqual(config, { key: expected.key, host: expected.host });
+  assert.match(config.key, /^phc_[A-Za-z0-9_-]{8,200}$/);
+  const connect = csp.split(';').map(x => x.trim()).find(x => x.startsWith('connect-src '));
+  assert.equal(connect, "connect-src 'self' " + new URL(expected.host).origin);
+}
+
+test('analytics release check rejects empty, wrong-project and expanded network bindings', () => {
+  const { key, host } = JSON.parse(fs.readFileSync(path.join(root, 'config/landing/posthog.public.json'), 'utf8'));
+  const csp = "default-src 'self'; connect-src 'self' " + host + ';';
+  assertPublicAnalytics({ key, host }, csp);
+  for (const bad of [{ key: '', host: '' }, { key: 'phc_WRONG_PROJECT', host }, { key, host: 'https://example.invalid' }])
+    assert.throws(() => assertPublicAnalytics(bad, csp), { code: 'ERR_ASSERTION' });
+  for (const bad of ["connect-src *", "connect-src 'self'", "connect-src 'self' " + host + ' https:'])
+    assert.throws(() => assertPublicAnalytics({ key, host }, bad), { code: 'ERR_ASSERTION' });
+});
+
 async function assertCroPublished(f) {
   const home = await request(f.port, publicHost, '/');
   assert.equal(home.status, 200);
@@ -202,7 +220,7 @@ async function assertCroPublished(f) {
     const thanks = await request(f.port, publicHost, route);
     assert.equal(thanks.status, 200); assert.ok(thanks.body.includes('נשארים בקשר'));
   }
-  assert.deepEqual(JSON.parse((await request(f.port, publicHost, '/analytics-config.json')).body), { key: '', host: '' });
+  assertPublicAnalytics(JSON.parse((await request(f.port, publicHost, '/analytics-config.json')).body), home.headers['content-security-policy']);
 }
 
 test('real nginx serves the React release alongside LP1 v2 legal and partner pages', { timeout: 20000 }, async t => {

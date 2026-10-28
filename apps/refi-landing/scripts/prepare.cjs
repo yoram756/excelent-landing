@@ -43,6 +43,12 @@ if (fs.existsSync(localEnv)) for (const line of fs.readFileSync(localEnv, 'utf8'
   if (match && match[1] === 'VITE_POSTHOG_KEY' && !key) key = match[2];
   if (match && match[1] === 'VITE_POSTHOG_HOST' && !host) host = match[2];
 }
+// This is the public write-only project token shown in the SDK setup screen.
+// Local/environment overrides still take priority; secret API keys are rejected.
+if (!key && !host) {
+  const publicConfig = read('config/landing/posthog.public.json');
+  key = publicConfig.key || ''; host = publicConfig.host || '';
+}
 if (key && !/^phc_[A-Za-z0-9_-]{8,200}$/.test(key)) throw Error('Only a public PostHog project key is allowed');
 if (host && (new URL(host).protocol !== 'https:' || new URL(host).username || new URL(host).password || new URL(host).search || new URL(host).pathname !== '/')) throw Error('PostHog host must be an HTTPS origin');
 if (Boolean(key) !== Boolean(host)) throw Error('Configure both PostHog project key and host');
