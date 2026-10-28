@@ -109,6 +109,10 @@
     {
       "id": "3315998923",
       "state": "deleted"
+    },
+    {
+      "id": "3316011067",
+      "state": "deleted"
     }
   ],
   "historicalRecord": {
@@ -117,5 +121,11 @@
     "status": "BLOCKED",
     "reason": "Pre-existing historical test retained; no authorization assumed to remove an unrelated record"
   },
-  "goLiveReady": false
+  "goLiveReady": false,
+  "latestDeployedCommit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768",
+  "subsequentAnalyticsRelease": {
+    "commit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768",
+    "status": "PASS",
+    "evidence": "completion-posthog-20261028.json"
+  }
 }

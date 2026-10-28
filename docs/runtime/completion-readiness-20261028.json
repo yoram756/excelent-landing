@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-10-28T17:21:21.588Z",
+  "generatedAt": "2026-10-28T17:37:55.525Z",
   "goLiveReady": false,
   "whatsappMessagesSent": 0,
   "requirements": [
     {
       "id": "local_regression",
       "status": "PASS",
-      "evidence": "npm test exit 0: business operations 32, funnel 381, site 60, real nginx 4. tests/out/completion-20261028/regression-final.log",
+      "evidence": "npm test exit 0 after PostHog changes: business operations 32, funnel 381, site 60, real nginx 5; total 478. tests/out/completion-20261028/regression-posthog.log",
       "scope": "Local production sources; providers mocked"
     },
     {
@@ -24,7 +24,7 @@
     {
       "id": "cro_build_lint_unit_e2e",
       "status": "PASS",
-      "evidence": "npm run build/lint/test/test:e2e --prefix apps/refi-landing: each stage exit 0, 7 unit and 22 E2E. completion-e2e-20261028.json; initial combined command failed only at Lighthouse, whose failed result is preserved.",
+      "evidence": "PostHog-configured production build exit 0; lint exit 0; 8 unit tests and 22 browser scenarios pass. New isolation test was proven to fail before the test-server fix. No local test uses production analytics.",
       "scope": "Local build and mocked API/analytics transport"
     },
     {
@@ -68,8 +68,8 @@
     },
     {
       "id": "posthog",
-      "status": "BLOCKED",
-      "evidence": "Public analytics-config.json HTTP 200 with empty key and host; browser requires login; no verified project or quote_submitted receipt"
+      "status": "PASS",
+      "evidence": "completion-posthog-20261028.json; real production quote_submitted received in Excelent project 302284, event_id 64e772a1-3117-4e7a-93f4-8dea228ea8bc matches Monday item 3316011067; item deleted"
     },
     {
       "id": "calendly_live",
@@ -89,7 +89,7 @@
     {
       "id": "vps_release",
       "status": "PASS",
-      "evidence": "completion-postdeploy-20261028.json; actual VPS readback, nginx test, public byte hashes, private service 20-way race, live browser lead and deleted CRM readback"
+      "evidence": "completion-postdeploy-20261028.json and completion-posthog-20261028.json; VPS source HEAD 95e430b, disposable nginx -t successful, public verified project config and restricted CSP"
     },
     {
       "id": "lock_service_release",
@@ -99,7 +99,7 @@
     {
       "id": "postdeploy_browser_monday",
       "status": "PASS",
-      "evidence": "completion-postdeploy-20261028.json; actual VPS readback, nginx test, public byte hashes, private service 20-way race, live browser lead and deleted CRM readback"
+      "evidence": "completion-postdeploy-20261028.json; actual VPS readback, nginx test, public byte hashes, private service 20-way race, live browser lead and deleted CRM readback Second consented browser TEST 3316011067 yielded the verified PostHog event and was independently confirmed deleted."
     },
     {
       "id": "controlled_duplicate_alert",
@@ -112,5 +112,5 @@
       "evidence": "Pre-existing בדיקה CHG018c, id 3291304369, remains unchanged; requires a keep/delete decision. Current task fixtures were deleted."
     }
   ],
-  "deployedSourceCommit": "19ae97cbc4cc33dc77a96cec4d765df8a22497d2"
+  "deployedSourceCommit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768"
 }

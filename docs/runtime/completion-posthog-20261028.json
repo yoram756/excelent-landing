@@ -1,0 +1,89 @@
+{
+  "status": "PASS",
+  "scope": "Actual production browser form and authenticated PostHog event readback, synthetic contact only",
+  "sourceCommit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768",
+  "organization": "Excelent",
+  "organizationId": "01a12c95-d01d-0000-a807-e8394b5d42b4",
+  "projectId": "302284",
+  "region": "EU Cloud",
+  "host": "https://eu.i.posthog.com",
+  "publicTokenUsed": true,
+  "secretOrPersonalTokenUsed": false,
+  "productionConfig": {
+    "httpStatus": 200,
+    "matchesVerifiedProject": true,
+    "connectPolicy": "connect-src 'self' https://eu.i.posthog.com"
+  },
+  "browserConsentVerified": true,
+  "event": {
+    "name": "quote_submitted",
+    "eventId": "64e772a1-3117-4e7a-93f4-8dea228ea8bc",
+    "formId": "refi-cro",
+    "page": "/thank-you",
+    "product": "refi",
+    "libraryVersion": "1.439.2",
+    "personProfileProcessing": false,
+    "sentAt": "2026-10-28T17:31:49.219Z",
+    "receivedAtDisplayed": "2026-10-28T17:31:50.053Z",
+    "matchingEntriesObserved": 1,
+    "contactFieldsObserved": [],
+    "providerAddsGeoIpMetadata": true
+  },
+  "mondayReadback": {
+    "items": [
+      {
+        "id": "3316011067",
+        "name": "TEST PostHog 20261028 0500000074",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000074",
+            "value": "{\"phone\":\"972500000074\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "64e772a1-3117-4e7a-93f4-8dea228ea8bc",
+            "value": "\"64e772a1-3117-4e7a-93f4-8dea228ea8bc\""
+          }
+        ]
+      }
+    ]
+  },
+  "mondayCleanup": {
+    "items": [
+      {
+        "id": "3316011067",
+        "name": "TEST PostHog 20261028 0500000074",
+        "state": "deleted"
+      }
+    ]
+  },
+  "nginxPost": {
+    "timestamp": "2026-10-28T17:31:49Z",
+    "httpStatus": 200
+  },
+  "whatsappMessagesSent": 0,
+  "localValidation": {
+    "build": "PASS",
+    "lint": "PASS",
+    "unitTests": 8,
+    "e2eScenarios": 22,
+    "nginxTests": 5,
+    "secretsTests": 3,
+    "negativeControls": "Original test server exposed production analytics binding and failed the new isolation assertion; fixed server passes. Wrong project/host and expanded CSP fail assertions."
+  },
+  "liveRefreshDeduplication": {
+    "status": "NOT TESTED",
+    "reason": "Original browser test tab became unavailable after event verification; local SDK refresh/deduplication test passed"
+  },
+  "eventUrl": "https://eu.posthog.com/project/302284/activity/events"
+}

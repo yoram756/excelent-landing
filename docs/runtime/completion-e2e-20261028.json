@@ -56,7 +56,7 @@
     {
       "name": "double submission sends one webhook and dispatches within two seconds",
       "status": "PASS",
-      "dispatchMs": 2
+      "dispatchMs": 1.7000000029802322
     },
     {
       "name": "direct thank-you visit never invents a success or conversion",

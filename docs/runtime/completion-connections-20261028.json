@@ -10,11 +10,19 @@
     "deprecatedPhoneNumberId": "1350440204809114",
     "credentialId": "jkyKdDJCUBfp6BzC",
     "credentialName": "Cosend - read-only numbers - 0559881245",
-    "verifiedScopes": ["connections:read"],
+    "verifiedScopes": [
+      "connections:read"
+    ],
     "readOnlyWorkflow": "AwCquhPHa4OgjkEo",
     "verifiedExecution": "59874",
     "readback": "GET /v1/me and approved connection both HTTP 200; active coexistence connection",
-    "blockers": ["No approved scoped delivery credential bound to the funnel", "Exclusive automation ownership not verified; Cosend AI receptionist was on", "Webhook endpoints absent in observed dashboard", "WhatsApp display name approval pending / Limited by WhatsApp", "No delivery test permitted by current instruction"],
+    "blockers": [
+      "No approved scoped delivery credential bound to the funnel",
+      "Exclusive automation ownership not verified; Cosend AI receptionist was on",
+      "Webhook endpoints absent in observed dashboard",
+      "WhatsApp display name approval pending / Limited by WhatsApp",
+      "No delivery test permitted by current instruction"
+    ],
     "source": "src/services/wa-assistant/config/provider.json"
   },
   "metaCapi": {
@@ -26,17 +34,26 @@
     "datasetName": "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance",
     "settingsReadback": "Owner and linked Page verified. CRM integration incomplete. Overview states no activity received in displayed 2026-09-30 through 2026-10-27 range.",
     "credentialSearch": "CAPI: No credentials found in n8n Personal project",
-    "blockers": ["LP1 dataset association and event contract not verified", "No CAPI delivery credential or configured sender found in inspected scope", "No test-event receipt or event_id deduplication readback"],
+    "blockers": [
+      "LP1 dataset association and event contract not verified",
+      "No CAPI delivery credential or configured sender found in inspected scope",
+      "No test-event receipt or event_id deduplication readback"
+    ],
     "url": "https://eventsmanager.facebook.com/events_manager2/list/dataset/1822147178482498/settings?business_id=745355029428233"
   },
   "posthog": {
-    "productionStatus": "BLOCKED",
-    "browser": "https://eu.posthog.com/login; no authenticated project",
-    "localConfiguration": "VITE_POSTHOG_KEY and VITE_POSTHOG_HOST absent; build analyticsConfigured=false",
+    "productionStatus": "PASS",
+    "browser": "Authenticated existing office@kho.org.il account through Google SSO",
+    "localConfiguration": "Verified public write-only key and EU ingestion host in config/landing/posthog.public.json; prepare.cjs supports environment overrides",
     "credentialSearch": "PostHog: No credentials found in n8n Personal project",
     "connectedSources": "No PostHog account email found in connected yoram@kho.org.il; Drive matches were research recommendations, not project credentials",
-    "blockers": ["No verified project ID, public project key and host", "No live quote_submitted event receipt"],
-    "mockTestsAreProductionEvidence": false
+    "blockers": [],
+    "mockTestsAreProductionEvidence": false,
+    "projectId": "302284",
+    "organization": "Excelent",
+    "organizationId": "01a12c95-d01d-0000-a807-e8394b5d42b4",
+    "initialObservation": "Initially unauthenticated and public config empty. Subsequently located the existing project, deployed its binding, and verified a received event.",
+    "eventReceiptEvidence": "completion-posthog-20261028.json"
   },
   "workflowInventory": {
     "status": "PASS",
@@ -55,8 +72,9 @@
     "lockNodes": 0,
     "errorWorkflowId": "4bLJ8LvpNYnoCB8t",
     "atomicLockProductionStatus": "BLOCKED",
-    "evidence": "Fresh read-only VPS export; no Lock node; existing lock server healthy but /internal-alert/claim not yet deployed"
+    "evidence": "Production export has no Lock node. Private /internal-alert/claim endpoint is now deployed and race-tested; production Intake wiring remains blocked by the unadapted 18-node migration guard."
   },
   "whatsappMessagesSent": 0,
-  "secretsCopiedOrPrinted": false
+  "secretsCopiedOrPrinted": false,
+  "updatedAt": "2026-10-28T17:37:55.542Z"
 }
