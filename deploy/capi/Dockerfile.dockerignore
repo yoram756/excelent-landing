@@ -1,0 +1,12 @@
+**
+!src/
+!src/integrations/
+!src/integrations/meta-capi/
+!src/integrations/meta-capi/**
+!src/config/
+!src/config/campaigns/
+!src/config/campaigns/*.json
+!deploy/
+!deploy/capi/
+!deploy/capi/Dockerfile
+!deploy/capi/Dockerfile.dockerignore

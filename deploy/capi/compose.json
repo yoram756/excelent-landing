@@ -1,0 +1,29 @@
+{
+  "name": "excelent-capi",
+  "services": {
+    "worker": {
+      "build": { "context": "../..", "dockerfile": "deploy/capi/Dockerfile" },
+      "restart": "unless-stopped",
+      "init": true,
+      "read_only": true,
+      "mem_limit": "128m",
+      "cpus": "0.25",
+      "pids_limit": 64,
+      "cap_drop": ["ALL"],
+      "security_opt": ["no-new-privileges:true"],
+      "environment": {"CAMPAIGN":"refi","CAPI_MODE":"${CAPI_MODE:?explicit test or live mode required}","CAPI_DB_PATH":"/data/capi.sqlite"},
+      "volumes": ["capi_data:/data"],
+      "secrets": ["monday_token","meta_token","test_code"],
+      "stop_grace_period": "35s",
+      "labels": ["traefik.enable=false"],
+      "logging": {"driver":"json-file","options":{"max-size":"5m","max-file":"2"}},
+      "healthcheck": {"test":["CMD","node","src/integrations/meta-capi/health.js"],"interval":"30s","timeout":"5s","retries":3,"start_period":"25s"}
+    }
+  },
+  "volumes": {"capi_data":{}},
+  "secrets": {
+    "monday_token":{"file":"/docker/capi-secrets/monday_token"},
+    "meta_token":{"file":"/docker/capi-secrets/meta_token"},
+    "test_code":{"file":"/docker/capi-secrets/test_code"}
+  }
+}

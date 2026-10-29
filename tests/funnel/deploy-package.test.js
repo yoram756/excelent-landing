@@ -29,6 +29,7 @@ test('a broken campaign file is rejected',()=>{
   bad(c=>{c.identity.profile='nope';},/unknown identity profile/);
   bad(c=>{c.identity.contactPhone='yoram_050';},/contact phone not allowed/);
   bad(c=>{c.meta.campaignIds=['12a'];},/meta.campaignIds/);
+  bad(c=>{c.conversions.datasetId='invalid-dataset';},/conversions mapping/);
   bad(c=>{c.crmFields.leadTemperature.bands.pop();},/bands must end at 0/);
   assert.deepEqual(pkg.crossChecks([{id:'a',meta:{campaignIds:['1']}},{id:'b',meta:{campaignIds:['1']}}]),['Meta campaign 1 in a and b']);});
 

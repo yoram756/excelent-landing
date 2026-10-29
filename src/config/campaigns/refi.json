@@ -506,6 +506,14 @@
     "approvedAt": "2026-10-20",
     "source": "הנחיות יורם בשיחה מ 20.10.2026"
   },
+  "conversions": {
+    "datasetId": "1822147178482498",
+    "eventName": "Lead",
+    "actionSource": "system_generated",
+    "graphVersion": "v26.0",
+    "mondayApiVersion": "2026-07",
+    "sourceLabels": ["קליטת LP1", "LP1 טופס"]
+  },
   "linkTokenExamples": [
     "a1b2c3d4e5q"
   ]

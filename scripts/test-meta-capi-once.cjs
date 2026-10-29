@@ -1,6 +1,7 @@
 // Controlled synthetic CAPI probe. Not a production lead dispatcher.
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
+const {postEvent}=require('../src/integrations/meta-capi/client');
 function buildTestRequest({item,boardId,eventColumn,datasetId,graphVersion='v26.0',testCode,now=Date.now()}){
   if(!/^\d{8,20}$/.test(String(datasetId))||!/^v\d{1,3}\.\d+$/.test(graphVersion))throw Error('Invalid CAPI destination');
   if(!/^TEST[A-Z0-9]{1,80}$/.test(testCode||''))throw Error('A current Meta test event code is required');
@@ -23,14 +24,7 @@ async function sendTestOnce(options,{transport=fetch,claim}={}){
   const eventId=request.body.data[0].event_id;
   await claim({eventId,datasetId:String(options.datasetId),eventName:'Lead',attemptedAt:new Date().toISOString(),automaticRetry:false});
   const base={scope:'Meta API acceptance only; Test Events receipt must be verified separately',eventId,eventName:'Lead',automaticRetry:false,metaTestEventsStatus:'NOT TESTED'};
-  try{
-    const r=await transport(request.endpoint,{method:'POST',headers:{'content-type':'application/json',authorization:'Bearer '+token},body:JSON.stringify(request.body),redirect:'error',signal:AbortSignal.timeout(15000)});
-    let body;try{body=await r.json();}catch{return {...base,apiAccepted:false,httpStatus:r.status,malformedResponse:true,deliveryUnknown:true};}
-    // Do not persist provider messages, request headers, tokens or test codes.
-    const apiAccepted=r.status===200&&!body.error&&body.events_received===1;
-    const traceId=typeof body.fbtrace_id==='string'&&/^[A-Za-z0-9_-]{1,100}$/.test(body.fbtrace_id)&&!body.fbtrace_id.includes(token)&&!body.fbtrace_id.includes(options.testCode)&&!body.fbtrace_id.startsWith('EAA')?body.fbtrace_id:null;
-    return {...base,apiAccepted,httpStatus:r.status,eventsReceived:Number.isInteger(body.events_received)?body.events_received:null,errorCode:Number.isInteger(body.error?.code)?body.error.code:null,errorSubcode:Number.isInteger(body.error?.error_subcode)?body.error.error_subcode:null,traceId};
-  }catch{return {...base,apiAccepted:false,httpStatus:null,deliveryUnknown:true};}
+  return {...base,...await postEvent({datasetId:options.datasetId,graphVersion:options.graphVersion||'v26.0',event:request.body.data[0],testCode:options.testCode,accessToken:token,transport})};
 }
 async function main(){
   const args=process.argv.slice(2),send=args.includes('--send'),preview=args.includes('--preview');
