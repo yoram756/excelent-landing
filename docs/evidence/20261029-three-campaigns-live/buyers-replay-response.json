@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-29T19:43:20.467Z",
+  "status": "PASS",
+  "scope": "Two concurrent exact HTTP replays after browser-confirmed create; not a fresh-admission race",
+  "campaign": "campaign_buyers_south",
+  "itemId": "3318800523",
+  "eventId": "896222c3-b34d-4f55-ad18-31068db36614",
+  "automaticRetry": false,
+  "results": [
+    {
+      "index": 0,
+      "httpStatus": 200,
+      "body": "{\"request_id\":\"3318800523\"}",
+      "durationMs": 566
+    },
+    {
+      "index": 1,
+      "httpStatus": 200,
+      "body": "{\"request_id\":\"3318800523\"}",
+      "durationMs": 641
+    }
+  ]
+}

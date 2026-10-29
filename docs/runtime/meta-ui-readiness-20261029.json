@@ -15,11 +15,10 @@
   "threeCampaignAcceptance": "NOT TESTED",
   "threeCampaignSourceContract": "PASS",
   "threeCampaignMondaySchema": "PASS",
-  "threeCampaignLiveIntake": "BLOCKED",
-  "threeCampaignLiveMapping": "NOT TESTED",
-  "threeCampaignLiveDedup": "NOT TESTED",
-  "threeCampaignEvidence": "docs/runtime/THREE_CAMPAIGNS_20261029.md",
-  "threeCampaignBlocker": "Restore existing authenticated server access to verify WhatsApp send paths are disabled before live test submissions; no need to wait for Cosend",
+  "threeCampaignLiveIntake": "PASS",
+  "threeCampaignLiveMapping": "PASS",
+  "threeCampaignLiveDedup": "PASS",
+  "threeCampaignEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md",
   "stability24h": "NOT TESTED",
   "exactMetaUiEventIdEcho": "NOT TESTED",
   "productionAdsAttribution": "NOT TESTED",
@@ -39,5 +38,9 @@
   "monitoringEmailEvidence": "docs/evidence/20261029-capi-monitor/email-readback.json",
   "offHostMonitoringEvidence": "docs/runtime/VPS_OFFHOST_MONITORING_20261029.md",
   "offHostMonitoringScope": "hosted dead-man heartbeat; real missing signal and recovery emails verified",
-  "actualWholeServerShutdown": "NOT TESTED"
+  "actualWholeServerShutdown": "NOT TESTED",
+  "threeCampaignCleanup": "PASS",
+  "threeCampaignAcceptanceScope": "CRM intake, mapping and exact event replay PASS; response, delivery and campaign-specific offer remain NOT TESTED",
+  "threeCampaignFreshAdmissionRace": "NOT TESTED",
+  "threeCampaignAlteredReplayProduction": "NOT TESTED"
 }

@@ -1,0 +1,22 @@
+{
+  "body": {
+    "first_name": "TEST campaign sellers 20261029",
+    "phone": "972500000092",
+    "product": "LP1",
+    "product_slug": "refi",
+    "campaign": "refi",
+    "source": "LP1 CRO",
+    "event_id": "33c5fbff-35d0-4e03-84dd-9b2aa5927048",
+    "idempotency_key": "33c5fbff-35d0-4e03-84dd-9b2aa5927048",
+    "service_request": true,
+    "service_request_at": "2026-10-29T19:43:28.663Z",
+    "marketing_consent": false,
+    "money_included": false,
+    "answers": {},
+    "utm_source": "synthetic_campaign_acceptance_20261029",
+    "utm_campaign": "campaign_sellers_south"
+  },
+  "itemId": "3318806166",
+  "executionId": "71248",
+  "observedThrough": "n8n execution Lead webhook output"
+}

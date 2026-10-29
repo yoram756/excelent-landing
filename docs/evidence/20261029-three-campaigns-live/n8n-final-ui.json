@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-29T19:47:01.316Z",
+  "scope": "Read-only editor observation; no workflow or settings mutations",
+  "observedLines": [
+    "\t\t\t\t\t11 button (disabled) Published",
+    "\t\t\t\t\t\t\t\t\t416 text WhatsApp recipients (Deactivated)",
+    "\t\t\t\t\t\t\t\t\t419 text WhatsApp alert (Deactivated) POST: https://api.gambot.co.il/api/v1/messages/send-template",
+    "\t\t\t\t\t\t\t\t420 text Stop And Error",
+    "\t\t\t\t\t\t\t\t\t452 text Atomic lock POST: http://excelent-lock-server:8787/lock",
+    "\t\t\t\t\t\t\t\t453 text Atomic lock result",
+    "\t\t\t\t\t\t\t\t456 text Atomic lock failed?",
+    "\t\t\t\t\t\t\t\t457 text Atomic lock response"
+  ]
+}

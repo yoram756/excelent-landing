@@ -1,0 +1,22 @@
+{
+  "body": {
+    "first_name": "TEST campaign bundle 20261029",
+    "phone": "972500000093",
+    "product": "LP1",
+    "product_slug": "refi",
+    "campaign": "refi",
+    "source": "LP1 CRO",
+    "event_id": "885c0ede-fc35-4d42-b998-8f537fe2d08d",
+    "idempotency_key": "885c0ede-fc35-4d42-b998-8f537fe2d08d",
+    "service_request": true,
+    "service_request_at": "2026-10-29T19:44:12.333Z",
+    "marketing_consent": false,
+    "money_included": false,
+    "answers": {},
+    "utm_source": "synthetic_campaign_acceptance_20261029",
+    "utm_campaign": "campaign_bundle_allinone"
+  },
+  "itemId": "3318813154",
+  "executionId": "71258",
+  "observedThrough": "n8n execution Lead webhook output"
+}

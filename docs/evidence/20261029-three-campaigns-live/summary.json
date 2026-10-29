@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-10-29 19:46:44 UTC",
+  "status": "PASS",
+  "scope": "Production browser form to published n8n intake to Monday; no WhatsApp delivery",
+  "workflowId": "8W7MymUCLpPnilJs",
+  "publishedVersion": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
+  "nodes": 41,
+  "disabledWhatsAppNodes": [
+    "WhatsApp recipients",
+    "WhatsApp alert"
+  ],
+  "campaigns": [
+    {
+      "campaign": "campaign_buyers_south",
+      "itemId": "3318800523",
+      "executionId": "71236",
+      "eventId": "896222c3-b34d-4f55-ad18-31068db36614",
+      "status": "PASS",
+      "sevenFieldsVerified": true,
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "leadStage": "ליד חדש"
+    },
+    {
+      "campaign": "campaign_sellers_south",
+      "itemId": "3318806166",
+      "executionId": "71248",
+      "eventId": "33c5fbff-35d0-4e03-84dd-9b2aa5927048",
+      "status": "PASS",
+      "sevenFieldsVerified": true,
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "leadStage": "ליד חדש"
+    },
+    {
+      "campaign": "campaign_bundle_allinone",
+      "itemId": "3318813154",
+      "executionId": "71258",
+      "eventId": "885c0ede-fc35-4d42-b998-8f537fe2d08d",
+      "status": "PASS",
+      "sevenFieldsVerified": true,
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "leadStage": "ליד חדש"
+    }
+  ],
+  "browserSubmissions": 3,
+  "exactConcurrentReplays": 6,
+  "duplicateExecutions": [
+    "71244",
+    "71245",
+    "71253",
+    "71254",
+    "71270",
+    "71271"
+  ],
+  "controlledDuplicateMessage": "Duplicate lead execution stopped",
+  "duplicateResponseHttpStatus": 200,
+  "duplicateResponseSameOriginalItem": true,
+  "uniqueLeadCount": 3,
+  "centralAlertCount": 6,
+  "alertStatusColumn": "fn_status",
+  "alertStatusLabel": "נעצר / כשל",
+  "cleanup": "PASS",
+  "remainingBoardIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "noWorkflowChanges": true,
+  "generalN8nSettingsChanges": 0,
+  "whatsappSends": 0,
+  "notTested": [
+    "Fresh simultaneous first submissions for each campaign; existing shared gate race evidence is separate",
+    "Cross-campaign altered-payload replay in production",
+    "WhatsApp provider delivery and response ownership",
+    "Campaign-specific offer/content acceptance"
+  ],
+  "wholeProject": "BLOCKED",
+  "goLiveReady": false
+}

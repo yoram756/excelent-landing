@@ -1,0 +1,675 @@
+{
+  "checkedAt": "2026-10-29 19:46:11 UTC",
+  "status": "PASS",
+  "checks": [
+    {
+      "campaign": "campaign_buyers_south",
+      "itemId": "3318800523",
+      "executionId": "71236",
+      "eventId": "896222c3-b34d-4f55-ad18-31068db36614",
+      "status": "PASS",
+      "sevenFieldsVerified": true,
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "leadStage": "ליד חדש"
+    },
+    {
+      "campaign": "campaign_sellers_south",
+      "itemId": "3318806166",
+      "executionId": "71248",
+      "eventId": "33c5fbff-35d0-4e03-84dd-9b2aa5927048",
+      "status": "PASS",
+      "sevenFieldsVerified": true,
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "leadStage": "ליד חדש"
+    },
+    {
+      "campaign": "campaign_bundle_allinone",
+      "itemId": "3318813154",
+      "executionId": "71258",
+      "eventId": "885c0ede-fc35-4d42-b998-8f537fe2d08d",
+      "status": "PASS",
+      "sevenFieldsVerified": true,
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "leadStage": "ליד חדש"
+    }
+  ],
+  "baselineIds": [
+    "3291304369",
+    "3301735356",
+    "3304127965",
+    "3293511781"
+  ],
+  "readback": {
+    "boards": [
+      {
+        "id": "5106246268",
+        "items_count": 13,
+        "items_page": {
+          "cursor": null,
+          "items": [
+            {
+              "id": "3291304369"
+            },
+            {
+              "id": "3301735356"
+            },
+            {
+              "id": "3304127965"
+            },
+            {
+              "id": "3318800523"
+            },
+            {
+              "id": "3318813193"
+            },
+            {
+              "id": "3318807426"
+            },
+            {
+              "id": "3318806166"
+            },
+            {
+              "id": "3318811142"
+            },
+            {
+              "id": "3318800984"
+            },
+            {
+              "id": "3318813154"
+            },
+            {
+              "id": "3318800952"
+            },
+            {
+              "id": "3318813496"
+            },
+            {
+              "id": "3293511781"
+            }
+          ]
+        }
+      }
+    ],
+    "items": [
+      {
+        "id": "3318800523",
+        "name": "TEST campaign buyers 20261029 0500000091",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000091",
+            "value": "{\"phone\":\"972500000091\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "refi_source",
+            "text": "קליטת LP1",
+            "value": "{\"index\":6}"
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "מוצר: מחזור משכנתא (LP1)\nמידע כספי צורף: לא",
+            "value": "{\"text\":\"מוצר: מחזור משכנתא (LP1)\\nמידע כספי צורף: לא\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "v",
+            "value": "{\"checked\":true}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "896222c3-b34d-4f55-ad18-31068db36614",
+            "value": "\"896222c3-b34d-4f55-ad18-31068db36614\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "synthetic_campaign_acceptance_20261029",
+            "value": "\"synthetic_campaign_acceptance_20261029\""
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "campaign_buyers_south",
+            "value": "\"campaign_buyers_south\""
+          }
+        ]
+      },
+      {
+        "id": "3318800952",
+        "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 71271",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "refi_source",
+            "text": null,
+            "value": null
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7,\"changed_at\":\"2026-10-29T19:45:35.133Z\"}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\nמזהה התהליך: 8W7MymUCLpPnilJs\nהרכיב שנכשל: Stop And Error\nהודעת השגיאה: Duplicate lead execution stopped\nמזהה הרצה: 71271\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71271\nמזהה פריט מאומת: אין",
+            "value": "{\"text\":\"שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\\nמזהה התהליך: 8W7MymUCLpPnilJs\\nהרכיב שנכשל: Stop And Error\\nהודעת השגיאה: Duplicate lead execution stopped\\nמזהה הרצה: 71271\\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71271\\nמזהה פריט מאומת: אין\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "נעצר / כשל",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "n8n-8W7MymUCLpPnilJs-71271",
+            "value": "\"n8n-8W7MymUCLpPnilJs-71271\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3318800984",
+        "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 71253",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "refi_source",
+            "text": null,
+            "value": null
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7,\"changed_at\":\"2026-10-29T19:44:07.822Z\"}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\nמזהה התהליך: 8W7MymUCLpPnilJs\nהרכיב שנכשל: Stop And Error\nהודעת השגיאה: Duplicate lead execution stopped\nמזהה הרצה: 71253\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71253\nמזהה פריט מאומת: אין",
+            "value": "{\"text\":\"שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\\nמזהה התהליך: 8W7MymUCLpPnilJs\\nהרכיב שנכשל: Stop And Error\\nהודעת השגיאה: Duplicate lead execution stopped\\nמזהה הרצה: 71253\\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71253\\nמזהה פריט מאומת: אין\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "נעצר / כשל",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "n8n-8W7MymUCLpPnilJs-71253",
+            "value": "\"n8n-8W7MymUCLpPnilJs-71253\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3318806166",
+        "name": "TEST campaign sellers 20261029 0500000092",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000092",
+            "value": "{\"phone\":\"972500000092\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "refi_source",
+            "text": "קליטת LP1",
+            "value": "{\"index\":6}"
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "מוצר: מחזור משכנתא (LP1)\nמידע כספי צורף: לא",
+            "value": "{\"text\":\"מוצר: מחזור משכנתא (LP1)\\nמידע כספי צורף: לא\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "v",
+            "value": "{\"checked\":true}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "33c5fbff-35d0-4e03-84dd-9b2aa5927048",
+            "value": "\"33c5fbff-35d0-4e03-84dd-9b2aa5927048\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "synthetic_campaign_acceptance_20261029",
+            "value": "\"synthetic_campaign_acceptance_20261029\""
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "campaign_sellers_south",
+            "value": "\"campaign_sellers_south\""
+          }
+        ]
+      },
+      {
+        "id": "3318807426",
+        "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 71245",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "refi_source",
+            "text": null,
+            "value": null
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7,\"changed_at\":\"2026-10-29T19:43:24.383Z\"}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\nמזהה התהליך: 8W7MymUCLpPnilJs\nהרכיב שנכשל: Stop And Error\nהודעת השגיאה: Duplicate lead execution stopped\nמזהה הרצה: 71245\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71245\nמזהה פריט מאומת: אין",
+            "value": "{\"text\":\"שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\\nמזהה התהליך: 8W7MymUCLpPnilJs\\nהרכיב שנכשל: Stop And Error\\nהודעת השגיאה: Duplicate lead execution stopped\\nמזהה הרצה: 71245\\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71245\\nמזהה פריט מאומת: אין\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "נעצר / כשל",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "n8n-8W7MymUCLpPnilJs-71245",
+            "value": "\"n8n-8W7MymUCLpPnilJs-71245\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3318811142",
+        "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 71254",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "refi_source",
+            "text": null,
+            "value": null
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7,\"changed_at\":\"2026-10-29T19:44:07.775Z\"}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\nמזהה התהליך: 8W7MymUCLpPnilJs\nהרכיב שנכשל: Stop And Error\nהודעת השגיאה: Duplicate lead execution stopped\nמזהה הרצה: 71254\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71254\nמזהה פריט מאומת: אין",
+            "value": "{\"text\":\"שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\\nמזהה התהליך: 8W7MymUCLpPnilJs\\nהרכיב שנכשל: Stop And Error\\nהודעת השגיאה: Duplicate lead execution stopped\\nמזהה הרצה: 71254\\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71254\\nמזהה פריט מאומת: אין\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "נעצר / כשל",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "n8n-8W7MymUCLpPnilJs-71254",
+            "value": "\"n8n-8W7MymUCLpPnilJs-71254\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3318813154",
+        "name": "TEST campaign bundle 20261029 0500000093",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "972500000093",
+            "value": "{\"phone\":\"972500000093\",\"countryShortName\":\"IL\"}"
+          },
+          {
+            "id": "refi_source",
+            "text": "קליטת LP1",
+            "value": "{\"index\":6}"
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "מוצר: מחזור משכנתא (LP1)\nמידע כספי צורף: לא",
+            "value": "{\"text\":\"מוצר: מחזור משכנתא (LP1)\\nמידע כספי צורף: לא\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "v",
+            "value": "{\"checked\":true}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "885c0ede-fc35-4d42-b998-8f537fe2d08d",
+            "value": "\"885c0ede-fc35-4d42-b998-8f537fe2d08d\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "synthetic_campaign_acceptance_20261029",
+            "value": "\"synthetic_campaign_acceptance_20261029\""
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "campaign_bundle_allinone",
+            "value": "\"campaign_bundle_allinone\""
+          }
+        ]
+      },
+      {
+        "id": "3318813193",
+        "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 71244",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "refi_source",
+            "text": null,
+            "value": null
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7,\"changed_at\":\"2026-10-29T19:43:24.374Z\"}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\nמזהה התהליך: 8W7MymUCLpPnilJs\nהרכיב שנכשל: Stop And Error\nהודעת השגיאה: Duplicate lead execution stopped\nמזהה הרצה: 71244\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71244\nמזהה פריט מאומת: אין",
+            "value": "{\"text\":\"שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\\nמזהה התהליך: 8W7MymUCLpPnilJs\\nהרכיב שנכשל: Stop And Error\\nהודעת השגיאה: Duplicate lead execution stopped\\nמזהה הרצה: 71244\\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71244\\nמזהה פריט מאומת: אין\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "נעצר / כשל",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "n8n-8W7MymUCLpPnilJs-71244",
+            "value": "\"n8n-8W7MymUCLpPnilJs-71244\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      },
+      {
+        "id": "3318813496",
+        "name": "[n8n ERROR] קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים) 71270",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_phone",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "refi_source",
+            "text": null,
+            "value": null
+          },
+          {
+            "id": "refi_stage",
+            "text": "ליד חדש",
+            "value": "{\"index\":7,\"changed_at\":\"2026-10-29T19:45:35.452Z\"}"
+          },
+          {
+            "id": "long_text_mm88xzfe",
+            "text": "שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\nמזהה התהליך: 8W7MymUCLpPnilJs\nהרכיב שנכשל: Stop And Error\nהודעת השגיאה: Duplicate lead execution stopped\nמזהה הרצה: 71270\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71270\nמזהה פריט מאומת: אין",
+            "value": "{\"text\":\"שם התהליך: קליטת LP1: לידים מדפי נחיתה למאנדיי (כל המוצרים)\\nמזהה התהליך: 8W7MymUCLpPnilJs\\nהרכיב שנכשל: Stop And Error\\nהודעת השגיאה: Duplicate lead execution stopped\\nמזהה הרצה: 71270\\nקישור להרצה ב-n8n: https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/8W7MymUCLpPnilJs/executions/71270\\nמזהה פריט מאומת: אין\"}"
+          },
+          {
+            "id": "boolean_mm8848pn",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "boolean_mm88mzry",
+            "text": "",
+            "value": "{\"checked\":false}"
+          },
+          {
+            "id": "fn_status",
+            "text": "נעצר / כשל",
+            "value": "{\"index\":7}"
+          },
+          {
+            "id": "multiple_person_mm8c8hfp",
+            "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+            "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "n8n-8W7MymUCLpPnilJs-71270",
+            "value": "\"n8n-8W7MymUCLpPnilJs-71270\""
+          },
+          {
+            "id": "text_mm8j144k",
+            "text": "",
+            "value": null
+          },
+          {
+            "id": "text_mm8j3b0k",
+            "text": "",
+            "value": null
+          }
+        ]
+      }
+    ]
+  }
+}

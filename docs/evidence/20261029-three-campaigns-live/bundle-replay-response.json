@@ -1,0 +1,23 @@
+{
+  "completedAt": "2026-10-29T19:45:31.401Z",
+  "status": "PASS",
+  "scope": "Two concurrent exact HTTP replays after browser-confirmed create; not a fresh-admission race",
+  "campaign": "campaign_bundle_allinone",
+  "itemId": "3318813154",
+  "eventId": "885c0ede-fc35-4d42-b998-8f537fe2d08d",
+  "automaticRetry": false,
+  "results": [
+    {
+      "index": 0,
+      "httpStatus": 200,
+      "body": "{\"request_id\":\"3318813154\"}",
+      "durationMs": 600
+    },
+    {
+      "index": 1,
+      "httpStatus": 200,
+      "body": "{\"request_id\":\"3318813154\"}",
+      "durationMs": 448
+    }
+  ]
+}
