@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-10-29T10:26:42.950Z",
+  "goLiveReady": false,
+  "scope": "Owner decisions, readonly checks and preparation only",
+  "authority": {
+    "source": "Explicit user answers to request_user_input_async call_fe1a357bc41d4e80b2e95cb13dae06b7",
+    "responseOwner": "Excellent assistant via Cosend with handoff to Yoram",
+    "test": "Prepare one test and present exact details for separate approval",
+    "content": "Approve launch without video testimonials; add later"
+  },
+  "decisions": [
+    {
+      "id": "response_owner_selection",
+      "status": "PASS",
+      "evidence": "docs/decisions/20261029-launch-acceptance.md",
+      "runtimeCutoverPerformed": false
+    },
+    {
+      "id": "prepare_one_delivery_test",
+      "status": "PASS",
+      "evidence": "docs/runtime/COSEND_ACCEPTANCE_PREPARATION_20261029.md",
+      "sendApproved": false
+    },
+    {
+      "id": "no_video_launch_scope",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-launch-decisions/content-readback.json",
+      "originalVideoRequirementRequiredForLaunch": false
+    }
+  ],
+  "connection": {
+    "observedAt": "2026-10-29T10:26:42.950Z",
+    "status": "BLOCKED",
+    "host": "mcp.cosend.app",
+    "documentedEndpoint": "https://mcp.cosend.app/mcp",
+    "resolver": "1.1.1.1",
+    "command": "Resolve-DnsName mcp.cosend.app -Type A -Server 1.1.1.1 -ErrorAction Stop",
+    "exitCode": 1,
+    "result": "DNS name does not exist.",
+    "availableCosendTools": [],
+    "pluginSearch": {
+      "query": "Cosend",
+      "pluginsReturned": 0,
+      "doesNotProvePrivatePluginRemoved": true
+    },
+    "authenticatedIdentity": "NOT TESTED",
+    "grantedScopes": "NOT TESTED",
+    "providerDataReads": 0,
+    "providerMutations": 0,
+    "secretsRead": false,
+    "sourceDocumentation": "https://cosend.app/docs/mcp",
+    "pricingReference": "https://cosend.app/pricing"
+  },
+  "testDraft": {
+    "recipientPhoneKey": "yoram_050",
+    "recipientName": "יורם",
+    "recipientE164": "972502234052",
+    "senderPhoneKey": "gambot_sender",
+    "exactText": "יורם, זו הודעת בדיקה אחת של מערכת אקסלנט דרך Cosend. אין צורך להשיב.",
+    "maxOutboundMessages": 1,
+    "automaticRetry": false,
+    "copiesAllowed": false,
+    "paidModelCallsAllowed": false,
+    "costStatus": "BLOCKED",
+    "costValue": null,
+    "newBudgetApproved": false,
+    "sendApproved": false,
+    "templateAndWindowVerified": false,
+    "deliveryStatus": "NOT TESTED"
+  },
+  "productionChanges": false,
+  "whatsappMessagesSent": 0,
+  "n8nSettingsChanged": false
+}

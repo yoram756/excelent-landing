@@ -1,0 +1,8 @@
+{
+  "generatedAt": "2026-10-29T10:26:42.950Z",
+  "scope": "Owner decisions, readonly checks and preparation only",
+  "files": {
+    "content-readback.json": "9d0b8ab0028737c25ec52b30314a30cd52fb971d8abb103a792467a0cb2cf067",
+    "connection-preflight.json": "d1e53af0c0e14115ff842814ac1795743b3f807eb65ae2d84252fc94c9286904"
+  }
+}

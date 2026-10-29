@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-29T10:10:05.603Z",
+  "generatedAt": "2026-10-29T10:26:42.950Z",
   "goLiveReady": false,
   "whatsappMessagesSent": 0,
   "requirements": [
@@ -54,12 +54,12 @@
     {
       "id": "whatsapp_delivery",
       "status": "NOT TESTED",
-      "evidence": "Current instruction forbids WhatsApp sends; no delivery or callback claim"
+      "evidence": "Owner approved preparing one internal test only; exact recipient/text/count drafted in COSEND_ACCEPTANCE_PREPARATION_20261029.md. Cost/window/template and fresh send approval still required; zero sends."
     },
     {
       "id": "cosend_production_activation",
       "status": "BLOCKED",
-      "evidence": "Only connections:read verified; scoped credential, ownership, webhook and display-name readiness unverified. Live/pilot generation intentionally refuses activation."
+      "evidence": "Owner selected Excellent assistant with Yoram handoff, but has not approved runtime cutover. Official MCP DNS recheck returns DNS name does not exist; no native Cosend tools available. Connection identity, granted permissions, delivery cost and provider handoff remain unverified. docs/runtime/launch-decisions-20261029.json"
     },
     {
       "id": "meta_capi",
@@ -84,8 +84,9 @@
     },
     {
       "id": "approved_video_testimonials",
-      "status": "BLOCKED",
-      "evidence": "Build reports approvedVideos=0; authentic approved assets and captions not supplied"
+      "status": "NOT TESTED",
+      "evidence": "Owner explicitly approved launch without video testimonials on 2026-10-29; videos are not supplied or verified. Superseded launch requirement: launch_content_scope. See docs/decisions/20261029-launch-acceptance.md.",
+      "requiredForLaunch": false
     },
     {
       "id": "vps_release",
@@ -127,6 +128,17 @@
       "id": "meta_capi_exact_id_ui_readback",
       "status": "NOT TESTED",
       "evidence": "CRM Test Events does not expose event_id. Stored ID and outbound request preserve the exact string; UI correlation uses the sole processed event and timestamp."
+    },
+    {
+      "id": "launch_content_scope",
+      "status": "PASS",
+      "evidence": "Explicit owner no-video launch approval plus live readonly HTML HTTP 200, zero video elements and exact seven-section order. docs/evidence/20261029-launch-decisions/content-readback.json"
+    },
+    {
+      "id": "cosend_response_owner_selection",
+      "status": "PASS",
+      "scope": "Owner decision only; not provider assignment or activation",
+      "evidence": "User selected Excellent assistant through Cosend with Yoram handoff; docs/decisions/20261029-launch-acceptance.md"
     }
   ],
   "deployedSourceCommit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768"

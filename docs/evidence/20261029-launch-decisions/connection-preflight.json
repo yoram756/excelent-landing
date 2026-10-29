@@ -1,0 +1,23 @@
+{
+  "observedAt": "2026-10-29T10:26:42.950Z",
+  "status": "BLOCKED",
+  "host": "mcp.cosend.app",
+  "documentedEndpoint": "https://mcp.cosend.app/mcp",
+  "resolver": "1.1.1.1",
+  "command": "Resolve-DnsName mcp.cosend.app -Type A -Server 1.1.1.1 -ErrorAction Stop",
+  "exitCode": 1,
+  "result": "DNS name does not exist.",
+  "availableCosendTools": [],
+  "pluginSearch": {
+    "query": "Cosend",
+    "pluginsReturned": 0,
+    "doesNotProvePrivatePluginRemoved": true
+  },
+  "authenticatedIdentity": "NOT TESTED",
+  "grantedScopes": "NOT TESTED",
+  "providerDataReads": 0,
+  "providerMutations": 0,
+  "secretsRead": false,
+  "sourceDocumentation": "https://cosend.app/docs/mcp",
+  "pricingReference": "https://cosend.app/pricing"
+}

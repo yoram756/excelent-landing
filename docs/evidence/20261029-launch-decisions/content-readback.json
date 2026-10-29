@@ -1,0 +1,30 @@
+{
+  "observedAt": "2026-10-29T10:25:53.926Z",
+  "scope": "Readonly production HTML; no form submission or analytics execution",
+  "url": "https://refi.excelentfinance.com/",
+  "httpStatus": 200,
+  "configuredVideos": 0,
+  "videoElements": 0,
+  "expectedSections": [
+    "hero",
+    "trust",
+    "benefits",
+    "testimonials",
+    "lead-form",
+    "faq",
+    "mobile-cta"
+  ],
+  "actualSections": [
+    "hero",
+    "trust",
+    "benefits",
+    "testimonials",
+    "lead-form",
+    "faq",
+    "mobile-cta"
+  ],
+  "sectionOrderMatches": true,
+  "sha256": "de5e6d1ea3e80f5916a7351b20cc718b044fdc082144188b8d73a9cfd14ef344",
+  "whatsappMessagesSent": 0,
+  "status": "PASS"
+}
