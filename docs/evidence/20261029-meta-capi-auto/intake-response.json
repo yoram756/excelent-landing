@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Actual intake HTTP only; independent Monday and automatic worker readbacks required",
+  "httpStatus": 200,
+  "requestId": "3317059439",
+  "body": {
+    "request_id": "3317059439"
+  },
+  "eventId": "TEST-META-AUTO-20261029-001",
+  "postsAttempted": 1,
+  "automaticRetry": false
+}

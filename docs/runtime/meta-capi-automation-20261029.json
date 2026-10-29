@@ -1,44 +1,78 @@
 {
-  "generatedAt": "2026-10-29T06:41:10.179Z",
-  "status": "BLOCKED",
-  "phase": "awaiting_owner_approval_for_existing_credentials_transfer",
+  "generatedAt": "2026-10-29T10:10:05.603Z",
+  "status": "PASS",
+  "scope": "Automatic LP1 Monday to Meta API transport only; not full funnel readiness",
+  "goLiveReady": false,
   "sourceCommit": "9967fa0ba89e1eeee31236d9c01b6757ad2d31b4",
-  "productionDispatcherActivated": false,
-  "controlledMetaEventsSent": 0,
+  "productionDispatcherActivated": true,
+  "activatedAt": "2026-10-29T10:08:27.000Z",
+  "pollMs": 300000,
+  "controlledMetaEventsSent": 1,
+  "eventId": "TEST-META-AUTO-20261029-001",
+  "mondayItemId": "3317059439",
   "whatsappMessagesSent": 0,
   "n8nSettingsChanged": false,
   "requirements": [
     {
       "id": "source_and_durable_deduplication",
       "status": "PASS",
-      "scope": "Local only",
-      "evidence": "npm run test:funnel exit 0, 407/407. Two-process SQLite race, independent Monday read, persistent claim, restart, ambiguity and deliberate broken-guard negative control tested."
-    },
-    {
-      "id": "actual_monday_read_preflight",
-      "status": "PASS",
-      "scope": "Actual readonly API; no CRM write or Meta POST",
-      "evidence": "Existing credential HTTP 200 on board 5106246268, API 2026-07; actual worker --once skipped all four historical items."
+      "scope": "Local",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/funnel.log: npm run test:funnel exit 0, 407/407, including process races and deliberate broken-guard negative control."
     },
     {
       "id": "vps_preparation",
       "status": "PASS",
-      "evidence": "Hostinger authenticated terminal readback: git pull to 9967fa0ba89e1eeee31236d9c01b6757ad2d31b4, disposable nginx -t PASS, image build PASS, core container/workflow/config hashes unchanged. Parsed visible terminal result in vps-prepared.json; raw private server reports remain on VPS."
+      "evidence": "docs/evidence/20261029-meta-capi-auto/vps-prepared.json: git pull, disposable nginx test and dedicated image build; existing core unchanged."
     },
     {
       "id": "server_credential_provisioning",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/vps-credential-provisioning.json: owner-approved secure transfer; directory 0700, three files 0400 UID 1000; no values logged."
+    },
+    {
+      "id": "intake_and_exact_monday_id",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/intake-response.json and monday-before-delete.json: one public POST HTTP 200, stored event ID TEST-META-AUTO-20261029-001, owner 75075191."
+    },
+    {
+      "id": "controlled_automatic_conversion",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/automatic-acknowledgement.json: automatic worker ACKED exactly one event; Meta HTTP 200, eventsReceived 1, trace Aq3kTEYpzi0yB5DoTJplZnt; no manual Meta POST."
+    },
+    {
+      "id": "persistent_duplicate_prevention",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/post-restart-readback.json: real restart 2026-10-29T09:31:28.301538454Z; subsequent ticks acknowledged 0, duplicates 1; ledger ACKED remains 1."
+    },
+    {
+      "id": "test_cleanup",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/cleanup.json: independent Monday state deleted for 3317059439, original four active IDs preserved."
+    },
+    {
+      "id": "persistent_live_service",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/live-readback.json and live-readback.txt: live activation, 300000 ms polling, healthy, unless-stopped; first live scan acknowledged 0 and skipped 4 historical items."
+    },
+    {
+      "id": "existing_services_and_no_whatsapp",
+      "status": "PASS",
+      "evidence": "docs/evidence/20261029-meta-capi-auto/live-readback.json: core container, nginx configuration and n8n workflow/settings hashes unchanged; dedicated worker has no WhatsApp provider call."
+    },
+    {
+      "id": "new_automatic_event_meta_ui_processing",
+      "status": "NOT TESTED",
+      "evidence": "No independent processed row for this new automatic event was obtained from the Meta UI. The older 07:50:33 receipt belongs to a different manual test and is not used as proof here."
+    },
+    {
+      "id": "exact_event_id_meta_ui_readback",
+      "status": "NOT TESTED",
+      "evidence": "Meta CRM Test Events does not expose event_id in the observed view. Exact stored and outbound ID verified by Monday and the durable dispatch ledger; Meta acceptance receipt does not echo the ID."
+    },
+    {
+      "id": "full_project_readiness",
       "status": "BLOCKED",
-      "evidence": "Awaiting explicit approval to transmit the existing Monday and Meta credentials to private VPS files. No credentials have been copied to the server."
-    },
-    {
-      "id": "controlled_automatic_conversion_and_restart",
-      "status": "NOT TESTED",
-      "evidence": "Create one new TEST only after test worker starts, independently read Monday/ledger/Meta and verify no second dispatch on rescan and restart; then delete fixture."
-    },
-    {
-      "id": "persistent_live_automation",
-      "status": "NOT TESTED",
-      "evidence": "Service is built but not started. Final activation follows controlled gate and cleanup."
+      "evidence": "completion-readiness-20261028.json: WhatsApp live delivery and provider activation, Calendly live test and approved video assets remain incomplete."
     }
   ]
 }

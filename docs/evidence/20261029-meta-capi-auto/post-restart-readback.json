@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "coreUnchanged": true,
+  "worker": "true healthy unless-stopped",
+  "states": {
+    "ACKED": 1
+  },
+  "activation": {
+    "activated:test": "1793266076000"
+  },
+  "matchingRows": [
+    {
+      "eventId": "TEST-META-AUTO-20261029-001",
+      "itemId": "3317059439",
+      "state": "ACKED",
+      "receipt": {
+        "apiAccepted": true,
+        "httpStatus": 200,
+        "eventsReceived": 1,
+        "errorCode": null,
+        "errorSubcode": null,
+        "traceId": "Aq3kTEYpzi0yB5DoTJplZnt"
+      }
+    }
+  ],
+  "n8nSettingsChanged": false,
+  "whatsappMessagesSentByService": 0,
+  "restartedAt": "2026-10-29T09:31:28.301538454Z",
+  "postRestartTicks": [
+    {
+      "status": "PASS",
+      "acknowledged": 0,
+      "duplicates": 1,
+      "skipped": 4,
+      "blocked": 0
+    },
+    {
+      "status": "PASS",
+      "acknowledged": 0,
+      "duplicates": 1,
+      "skipped": 4,
+      "blocked": 0
+    },
+    {
+      "status": "PASS",
+      "acknowledged": 0,
+      "duplicates": 1,
+      "skipped": 4,
+      "blocked": 0
+    },
+    {
+      "status": "PASS",
+      "acknowledged": 0,
+      "duplicates": 1,
+      "skipped": 4,
+      "blocked": 0
+    }
+  ],
+  "rescanSuppressedDuplicate": true
+}

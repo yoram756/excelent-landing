@@ -1,0 +1,44 @@
+- textbox "Terminal input" [active]
+- generic: "Memory usage: 23% IPv4 address for eth0: 187.127.74.98"
+- generic: "Swap usage: 0% IPv6 address for eth0: 2a02:4780:79:2a10::1"
+- generic: "* Canonical Workshop gives developers fast, composable, reproducible, and"
+- generic: secure developer environments that are perfect for agentic workflows.
+- generic: https://ubuntu.com/workshop
+- generic: Expanded Security Maintenance for Applications is not enabled.
+- generic: 59 updates can be applied immediately.
+- generic: 1 of these updates is a standard security update.
+- generic: "To see these additional updates run: apt list --upgradable"
+- generic: Enable ESM Apps to receive additional future security updates.
+- generic: "See https://ubuntu.com/esm or run: sudo pro status"
+- generic: New release '26.04.1 LTS' available.
+- generic: Run 'do-release-upgrade' to upgrade to it.
+- generic: 1 updates could not be installed automatically. For more details,
+- generic: see /var/log/unattended-upgrades/unattended-upgrades.log
+- generic: "Last login: Thu Oct 29 09:23:30 2026 from 169.254.0.1"
+- generic: root@srv1604140:~# cd /docker/lp && python3 deploy/capi/inspect.py TEST-META-AUTO-20261029-001
+- generic: "{\"status\": \"PASS\", \"coreUnchanged\": true, \"worker\": \"true unhealthy unless-stopped\", \"states\": {\"ACKED\": 1}, \"ac"
+- generic: "tivation\": {\"activated:test\": \"1793266076000\"}, \"matchingRows\": [{\"eventId\": \"TEST-META-AUTO-20261029-001\", \"ite"
+- generic: "mId\": \"3317059439\", \"state\": \"ACKED\", \"receipt\": {\"apiAccepted\": true, \"httpStatus\": 200, \"eventsReceived\": 1, \""
+- generic: "errorCode\": null, \"errorSubcode\": null, \"traceId\": \"Aq3kTEYpzi0yB5DoTJplZnt\"}}], \"n8nSettingsChanged\": false, \"w"
+- generic: "hatsappMessagesSentByService\": 0}"
+- generic: root@srv1604140:/docker/lp# CAPI_MODE=live docker compose -f deploy/capi/compose.json up -d --no-deps --pull nev
+- generic: er worker
+- generic: "[+] up 1/1"
+- generic: ✔
+- generic: Container excelent-capi-worker-1
+- generic: Started
+- generic: 0.6s
+- generic: root@srv1604140:/docker/lp# python3 deploy/capi/inspect.py TEST-META-AUTO-20261029-001 && docker logs --tail 6 e
+- generic: xcelent-capi-worker-1
+- generic: "{\"status\": \"PASS\", \"coreUnchanged\": true, \"worker\": \"true healthy unless-stopped\", \"states\": {\"ACKED\": 1}, \"acti"
+- generic: "vation\": {\"activated:test\": \"1793266076000\", \"activated:live\": \"1793268507000\"}, \"matchingRows\": [{\"eventId\": \"T"
+- generic: "EST-META-AUTO-20261029-001\", \"itemId\": \"3317059439\", \"state\": \"ACKED\", \"receipt\": {\"apiAccepted\": true, \"httpSta"
+- generic: "tus\": 200, \"eventsReceived\": 1, \"errorCode\": null, \"errorSubcode\": null, \"traceId\": \"Aq3kTEYpzi0yB5DoTJplZnt\"}}]"
+- generic: ", \"n8nSettingsChanged\": false, \"whatsappMessagesSentByService\": 0}"
+- generic: "{\"service\":\"meta-capi\",\"mode\":\"live\",\"activatedAt\":\"2026-10-29T10:08:27.000Z\",\"pollMs\":300000,\"ready\":true,\"what"
+- generic: "sapp\":false}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: root@srv1604140:/docker/lp#
+- button "Agent":
+  - generic: Agent
+- generic: Close

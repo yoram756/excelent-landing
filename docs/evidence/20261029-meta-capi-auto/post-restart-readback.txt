@@ -1,0 +1,61 @@
+- textbox "Terminal input" [active]
+- generic: "{\"status\": \"PASS\", \"secretFiles\": 3, \"directoryMode\": \"0700\", \"fileMode\": \"0400\", \"fileOwnerUid\": 1000, \"secretValuesLogged\": false}"
+- generic: "root@srv1604140:/docker/lp# PYTHONPATH=deploy/capi python3 -c 'import json;from prepare import snapshot,BASE;b=json.loads((BASE/\"before.json\").read_text());assert snapshot()=={k:v for k,v in b.items() if k!=\"sourceCommit\"};print"
+- generic: ("CORE_UNCHANGED_BEFORE_TEST")' && CAPI_MODE=test docker compose -f deploy/capi/compose.json up -d --no-deps --pull never worker
+- generic: CORE_UNCHANGED_BEFORE_TEST
+- generic: "[+] up 3/3"
+- generic: ✔
+- generic: Network excelent-capi_default
+- generic: Created
+- generic: 0.1s
+- generic: ✔
+- generic: Volume excelent-capi_capi_data
+- generic: Created
+- generic: 0.0s
+- generic: ✔
+- generic: Container excelent-capi-worker-1
+- generic: Started
+- generic: 0.4s
+- generic: root@srv1604140:/docker/lp# python3 -c 'import sqlite3,json,datetime;db=sqlite3.connect("file:/var/lib/docker/volumes/n8n-qhxa_n8n_data/_data/database.sqlite?mode=ro",uri=True);wid="8W7MymUCLpPnilJs";r=db.execute("select nodes,a
+- generic: "ctive,settings from workflow_entity where id=?\",(wid,)).fetchone();nodes=json.loads(r[0]);print(json.dumps({\"observedAt\":datetime.datetime.now(datetime.timezone.utc).isoformat(),\"workflowId\":wid,\"published\":bool(r[1]),\"nodeCount"
+- generic: "\":len(nodes),\"disabledWhatsAppNodes\":[{\"name\":n[\"name\"],\"disabled\":n.get(\"disabled\",False)} for n in nodes if n[\"name\"] in [\"WhatsApp recipients\",\"WhatsApp alert\"]],\"errorWorkflow\":json.loads(r[2]).get(\"errorWorkflow\")}));db.clo"
+- generic: se()' && docker logs excelent-capi-worker-1
+- generic: "{\"observedAt\": \"2026-10-29T09:29:13.210230+00:00\", \"workflowId\": \"8W7MymUCLpPnilJs\", \"published\": true, \"nodeCount\": 41, \"disabledWhatsAppNodes\": [{\"name\": \"WhatsApp recipients\", \"disabled\": true}, {\"name\": \"WhatsApp alert\", \"di"
+- generic: "sabled\": true}], \"errorWorkflow\": \"4bLJ8LvpNYnoCB8t\"}"
+- generic: "{\"service\":\"meta-capi\",\"mode\":\"test\",\"activatedAt\":\"2026-10-29T09:27:56.000Z\",\"pollMs\":10000,\"ready\":true,\"whatsapp\":false}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: root@srv1604140:/docker/lp# python3 deploy/capi/inspect.py TEST-META-AUTO-20261029-001 && docker logs --tail 4 excelent-capi-worker-1
+- generic: "{\"status\": \"PASS\", \"coreUnchanged\": true, \"worker\": \"true healthy unless-stopped\", \"states\": {\"ACKED\": 1}, \"activation\": {\"activated:test\": \"1793266076000\"}, \"matchingRows\": [{\"eventId\": \"TEST-META-AUTO-20261029-001\", \"itemId\":"
+- generic: "\"3317059439\", \"state\": \"ACKED\", \"receipt\": {\"apiAccepted\": true, \"httpStatus\": 200, \"eventsReceived\": 1, \"errorCode\": null, \"errorSubcode\": null, \"traceId\": \"Aq3kTEYpzi0yB5DoTJplZnt\"}}], \"n8nSettingsChanged\": false, \"whatsappMes"
+- generic: "sagesSentByService\": 0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":1,\"duplicates\":0,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":1,\"skipped\":4,\"blocked\":0}"
+- generic: root@srv1604140:/docker/lp# CAPI_MODE=test docker compose -f deploy/capi/compose.json restart worker
+- generic: "[+] restart 0/1"
+- generic: ⠼
+- generic: Container excelent-capi-worker-1 Restarting
+- generic: 0.4s
+- generic: "root@srv1604140:/docker/lp# python3 deploy/capi/inspect.py TEST-META-AUTO-20261029-001 && docker inspect --format '{{.State.StartedAt}} {{.State.Running}}' excelent-capi-worker-1 && docker logs --tail 6 excelent-capi-worker-1"
+- generic: "{\"status\": \"PASS\", \"coreUnchanged\": true, \"worker\": \"true healthy unless-stopped\", \"states\": {\"ACKED\": 1}, \"activation\": {\"activated:test\": \"1793266076000\"}, \"matchingRows\": [{\"eventId\": \"TEST-META-AUTO-20261029-001\", \"itemId\":"
+- generic: "\"3317059439\", \"state\": \"ACKED\", \"receipt\": {\"apiAccepted\": true, \"httpStatus\": 200, \"eventsReceived\": 1, \"errorCode\": null, \"errorSubcode\": null, \"traceId\": \"Aq3kTEYpzi0yB5DoTJplZnt\"}}], \"n8nSettingsChanged\": false, \"whatsappMes"
+- generic: "sagesSentByService\": 0}"
+- generic: 2026-10-29T09:31:28.301538454Z true
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":1,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"service\":\"meta-capi\",\"mode\":\"test\",\"activatedAt\":\"2026-10-29T09:27:56.000Z\",\"pollMs\":10000,\"ready\":true,\"whatsapp\":false}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":1,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":1,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":1,\"skipped\":4,\"blocked\":0}"
+- generic: "{\"status\":\"PASS\",\"acknowledged\":0,\"duplicates\":1,\"skipped\":4,\"blocked\":0}"
+- generic: root@srv1604140:/docker/lp#
+- button "Agent":
+  - generic: Agent
+- generic: Close

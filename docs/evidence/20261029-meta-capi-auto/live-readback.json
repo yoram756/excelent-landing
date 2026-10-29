@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "coreUnchanged": true,
+  "worker": "true healthy unless-stopped",
+  "states": {
+    "ACKED": 1
+  },
+  "activation": {
+    "activated:test": "1793266076000",
+    "activated:live": "1793268507000"
+  },
+  "matchingRows": [
+    {
+      "eventId": "TEST-META-AUTO-20261029-001",
+      "itemId": "3317059439",
+      "state": "ACKED",
+      "receipt": {
+        "apiAccepted": true,
+        "httpStatus": 200,
+        "eventsReceived": 1,
+        "errorCode": null,
+        "errorSubcode": null,
+        "traceId": "Aq3kTEYpzi0yB5DoTJplZnt"
+      }
+    }
+  ],
+  "n8nSettingsChanged": false,
+  "whatsappMessagesSentByService": 0,
+  "observedAt": "2026-10-29T10:09:04.009Z"
+}

@@ -1,0 +1,21 @@
+{
+  "phase": "automatic-conversion-and-live-activation",
+  "generatedAt": "2026-10-29T10:10:05.603Z",
+  "sourceCommit": "9967fa0ba89e1eeee31236d9c01b6757ad2d31b4",
+  "metaPosts": 1,
+  "files": {
+    "vps-credential-provisioning.json": "b68cde397ebb67a6c7831f1da36c92a22f62e7e61faefe21aaae7e16c3923ca4",
+    "intake-no-send-readback.json": "28619cb2e8bfd4608f30749e6228a8cf8b40592e4e1fcd93b6843232b134755a",
+    "worker-startup.json": "e527cca09da42c96c19631c77792409749c09384b355c0aa3a1a10fde68b76c2",
+    "intake-response.json": "f2e8243b4ec6455e4139284f701fba0bca8682a986e8186dccfce6fb68b5276f",
+    "monday-before-delete.json": "042bb9979d84ddc901d730f6e648c395c6f03a71687bb2d902fcb7c500f353fb",
+    "automatic-acknowledgement.json": "080d43a87ed193d1cc92054b781eaac8b64d99352f9a4a450143f9e19331d745",
+    "automatic-first-readback.txt": "c73b93d33c5b592f440df72fbf2f6869f36e60b691d0bb0826f17e946eefb7af",
+    "post-restart-readback.json": "0d163e7fca5e4cbaebf31511568334587f9b8619aac584c1c780d48ae3359403",
+    "post-restart-readback.txt": "c20b86c3f17e62291ad63401e99fa725c6f6d561c152822274b241653b834609",
+    "cleanup.json": "ff63d27bef270e584b55d4c2ff42e3b49c0ec5fc9342e165bf961a5565e536af",
+    "live-readback.json": "5ce17e551e949385a0dcd2615ff34f865ebfdbae78f3df46a39b6355fe0253c3",
+    "live-readback.txt": "6e28a87ecb8a4a1a5cee120e4b35d72112ef05f9099706affffab3db4138e5ad",
+    "live-readback.png": "211503de8805b084629fad3cbd836d26f7e4dc45906144c110b31ee3a699db5d"
+  }
+}

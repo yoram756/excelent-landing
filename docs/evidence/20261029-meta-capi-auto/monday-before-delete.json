@@ -1,0 +1,30 @@
+{
+  "items": [
+    {
+      "id": "3317059439",
+      "name": "TEST Meta AUTO 20261029 0500000083",
+      "state": "active",
+      "created_at": "2026-10-29T09:30:12Z",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "TEST-META-AUTO-20261029-001",
+          "value": "\"TEST-META-AUTO-20261029-001\""
+        }
+      ]
+    }
+  ]
+}

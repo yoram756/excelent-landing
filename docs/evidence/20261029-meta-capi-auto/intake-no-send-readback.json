@@ -1,0 +1,17 @@
+{
+  "observedAt": "2026-10-29T09:29:13.210230+00:00",
+  "workflowId": "8W7MymUCLpPnilJs",
+  "published": true,
+  "nodeCount": 41,
+  "disabledWhatsAppNodes": [
+    {
+      "name": "WhatsApp recipients",
+      "disabled": true
+    },
+    {
+      "name": "WhatsApp alert",
+      "disabled": true
+    }
+  ],
+  "errorWorkflow": "4bLJ8LvpNYnoCB8t"
+}

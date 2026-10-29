@@ -1,0 +1,8 @@
+{
+  "service": "meta-capi",
+  "mode": "test",
+  "activatedAt": "2026-10-29T09:27:56.000Z",
+  "pollMs": 10000,
+  "ready": true,
+  "whatsapp": false
+}

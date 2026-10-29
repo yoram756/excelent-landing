@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-29T10:09:17.049Z",
+  "status": "PASS",
+  "itemId": "3317059439",
+  "state": "deleted",
+  "boardId": "5106246268",
+  "activeIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "baselinePreserved": true
+}

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T20:29:20.095Z",
+  "generatedAt": "2026-10-29T10:10:05.603Z",
   "goLiveReady": false,
   "whatsappMessagesSent": 0,
   "requirements": [
@@ -63,8 +63,9 @@
     },
     {
       "id": "meta_capi",
-      "status": "BLOCKED",
-      "evidence": "meta-capi-20261029.json: credential and controlled conversion PASS; Meta HTTP 200, one processed CRM Lead and deleted fixture. Full production requirement remains blocked because no automatic Monday-to-CAPI dispatcher is installed or verified."
+      "status": "PASS",
+      "evidence": "meta-capi-automation-20261029.json: one automatically acknowledged Meta event, real restart deduplication, deleted fixture, independent healthy live worker; UI processing of the new event not independently verified.",
+      "scope": "Automatic LP1 Monday to Meta API transport only; not full funnel readiness"
     },
     {
       "id": "posthog",
