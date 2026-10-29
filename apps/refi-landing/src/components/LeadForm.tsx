@@ -1,12 +1,14 @@
 import { useId, useRef, useState, type FormEvent } from 'react';
-import { content } from '../content';
+import { useContent } from '../content';
 import { createPayload, normalizeInput, submitLead, type LeadPayload, type Receipt } from '../lib/lead';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Icon } from './Icon';
+import { TrustProof } from './TrustProof';
 
 export function LeadForm({ onConfirmed }: { onConfirmed: (receipt: Receipt) => void }) {
+  const content = useContent();
   const id = useId();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -43,16 +45,18 @@ export function LeadForm({ onConfirmed }: { onConfirmed: (receipt: Receipt) => v
     <div className="page-width grid items-center gap-10 lg:grid-cols-[1fr_1.08fr] lg:gap-20">
       <div>
         <span className="eyebrow text-gold-light">השיחה הראשונה היא עלינו</span>
-        <h2 id="form-heading" className="mt-4 text-[2rem] font-extrabold md:text-[2.75rem]">מתחילים בשיחה.<br />ממשיכים כשזה נכון לכם.</h2>
-        <p className="mt-5 max-w-md text-lg text-white/75">משאירים שם וטלפון, ויורם חוזר אליכם לשיחה קצרה. בלי טופס ארוך ובלי לחפש מסמכים עכשיו.</p>
+        <h2 id="form-heading" className="mt-4 whitespace-pre-line text-[2rem] font-extrabold md:text-[2.75rem]">{content.form.title}</h2>
+        <p className="mt-5 max-w-md text-lg text-white/75">{content.form.description}</p>
         <ul className="mt-7 space-y-3 text-white/85">
           {['בדיקה ראשונית ללא עלות', 'בלי התחייבות לליווי בהמשך', 'הפנייה אינה מצרפת אתכם לדיוור'].map(text => <li key={text} className="flex items-center gap-3"><Icon name="check" className="size-5 shrink-0 text-gold-light" /><span>{text}</span></li>)}
         </ul>
         <p className="mt-8 border-s border-white/25 ps-4 text-sm text-white/65">״קודם נבין מה חשוב לכם. אחר כך נבדוק את המספרים.״<br /><span className="font-semibold text-white">{content.identity.name}</span></p>
       </div>
-      <form onSubmit={handleSubmit} noValidate aria-label="בקשה לבדיקת משכנתא" aria-busy={submitting} className="rounded-[1.5rem] bg-white p-6 text-ink shadow-xl md:p-9">
+      <form onSubmit={handleSubmit} noValidate aria-label={content.form.label} aria-busy={submitting} className="rounded-[1.5rem] bg-white p-6 text-ink shadow-xl md:p-9">
+        <img src="/cro-assets/logo.png" alt="אקסלנט משכנתאות ופיננסים" width="842" height="500" loading="lazy" className="mb-4 h-auto w-36" />
         <h3 className="text-2xl font-extrabold">נעים להכיר. איך חוזרים אליכם?</h3>
         <p className="mt-2 text-sm text-muted-foreground">שני פרטים, ואפשר להתחיל.</p>
+        <TrustProof />
         <div className="mt-6 space-y-5">
           <div className="space-y-2">
             <Label htmlFor={`${id}-name`}>שם מלא</Label>
@@ -68,9 +72,9 @@ export function LeadForm({ onConfirmed }: { onConfirmed: (receipt: Receipt) => v
             <input type="checkbox" name="analytics-consent" checked={analyticsConsent} onChange={e => setAnalyticsConsent(e.target.checked)} className="mt-1 size-4 shrink-0 accent-ink" />
             <span>אפשר למדוד את השימוש לשיפור האתר, בלי לשלוח את פרטי הקשר למדידה. לא חובה.</span>
           </label>
-          <p className="text-xs text-muted-foreground">בלחיצה אתם מבקשים שנחזור אליכם בעניין הבדיקה, ומאשרים את <a href={content.privacyUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">מדיניות הפרטיות<span className="sr-only">, נפתחת בחלון חדש</span></a>. אין הסכמה לתוכן שיווקי.</p>
+          <p className="text-xs text-muted-foreground">בלחיצה אתם מבקשים שנחזור אליכם בעניין {content.form.purpose}, ומאשרים את <a href={content.privacyUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">מדיניות הפרטיות<span className="sr-only">, נפתחת בחלון חדש</span></a>. אין הסכמה לתוכן שיווקי.</p>
           {failure ? <p role="alert" className="rounded-lg border border-destructive/25 bg-destructive/5 p-3 text-sm text-destructive">{failure}</p> : null}
-          <Button type="submit" disabled={submitting} className="min-h-14 w-full text-base">{submitting ? 'שומרים את הפנייה…' : 'כן, אשמח לבדיקה ראשונית'}<Icon name="arrow" className="size-5 rtl:rotate-180" /></Button>
+          <Button type="submit" disabled={submitting} className="min-h-14 h-auto w-full whitespace-normal py-3 text-base">{submitting ? 'שומרים את הפנייה…' : content.form.button}<Icon name="arrow" className="size-5 rtl:rotate-180" /></Button>
           <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground"><Icon name="shield" className="size-4" />הפרטים משמשים לחזרה לבקשתכם בלבד</p>
         </div>
       </form>

@@ -1,10 +1,12 @@
 import type { Receipt } from './lead';
 import { isReceipt } from './lead';
+import { pageForPath } from '../content';
 
 const pending = new Map<string, Promise<boolean>>();
 
 export function trackQuoteSubmitted(receipt: Receipt): Promise<boolean> {
-  if (!isReceipt(receipt) || !receipt.analyticsConsent || !/^\/thank-you\/?$/.test(location.pathname)) return Promise.resolve(false);
+  const page = pageForPath(location.pathname);
+  if (!isReceipt(receipt) || !receipt.analyticsConsent || location.pathname.replace(/\/$/, '') !== page.thankYouPath || (receipt.landingId || 'refi') !== page.landingId) return Promise.resolve(false);
   const marker = `excelent:conversion:v1:${receipt.eventId}`;
   try { if (sessionStorage.getItem(marker)) return Promise.resolve(false); } catch { /* UUID deduplication also travels with the event. */ }
   const existing = pending.get(receipt.eventId);
@@ -37,9 +39,10 @@ export function trackQuoteSubmitted(receipt: Receipt): Promise<boolean> {
           $lib_version: event.properties.$lib_version,
           $process_person_profile: false,
           event_id: receipt.eventId,
-          form_id: 'refi-cro',
+          form_id: page.landingId === 'refi' ? 'refi-cro' : page.landingId,
+          ...(page.attributionCampaign ? { utm_campaign: page.attributionCampaign } : {}),
           product: 'refi',
-          page: '/thank-you',
+          page: page.thankYouPath,
         };
         delete event.$set;
         delete event.$set_once;

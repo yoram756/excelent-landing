@@ -1,0 +1,94 @@
+{
+  "scope": "Local built site with mock intake and mocked PostHog transport; real browser and SDK",
+  "results": [
+    {
+      "name": "prerendered Hebrew document and exact seven-section order",
+      "status": "PASS"
+    },
+    {
+      "name": "body and heading line heights, local fonts and no positive tracking",
+      "status": "PASS"
+    },
+    {
+      "name": "all visible Latin and numeric fragments are directionally isolated",
+      "status": "PASS"
+    },
+    {
+      "name": "FAQ opens by keyboard and schema answers match the real content",
+      "status": "PASS"
+    },
+    {
+      "name": "no horizontal overflow at mobile, tablet or desktop widths",
+      "status": "PASS"
+    },
+    {
+      "name": "mobile sticky CTA stays usable and does not cover the form",
+      "status": "PASS"
+    },
+    {
+      "name": "contact validation rejects incomplete data without a request",
+      "status": "PASS"
+    },
+    {
+      "name": "HTTP 502 cannot show thank-you; unchanged retry keeps its event id",
+      "status": "PASS"
+    },
+    {
+      "name": "success receipt persists on refresh without storing contact details",
+      "status": "PASS"
+    },
+    {
+      "name": "editing a failed submission generates a new event id",
+      "status": "PASS"
+    },
+    {
+      "name": "missing response cannot record success",
+      "status": "PASS"
+    },
+    {
+      "name": "malformed response cannot record success",
+      "status": "PASS"
+    },
+    {
+      "name": "rate response cannot record success",
+      "status": "PASS"
+    },
+    {
+      "name": "double submission sends one webhook and dispatches within two seconds",
+      "status": "PASS",
+      "dispatchMs": 1.1000000014901161
+    },
+    {
+      "name": "direct thank-you visit never invents a success or conversion",
+      "status": "PASS"
+    },
+    {
+      "name": "blocked browser storage still permits a confirmed in-memory submission",
+      "status": "PASS"
+    },
+    {
+      "name": "real PostHog SDK emits a consented quote only after API confirmation",
+      "status": "PASS"
+    },
+    {
+      "name": "refresh does not emit a duplicate conversion",
+      "status": "PASS"
+    },
+    {
+      "name": "the production bot filter still rejects an automated conversion",
+      "status": "PASS"
+    },
+    {
+      "name": "no consent means no analytics request even after a confirmed lead",
+      "status": "PASS"
+    },
+    {
+      "name": "axe accessibility on landing and thank-you",
+      "status": "PASS"
+    },
+    {
+      "name": "console and CSP stay clean; desktop and mobile screenshots saved",
+      "status": "PASS"
+    }
+  ]
+}

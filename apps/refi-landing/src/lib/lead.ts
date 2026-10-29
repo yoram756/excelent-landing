@@ -5,7 +5,7 @@ export type LeadPayload = {
   service_request_at: string; marketing_consent: false; money_included: false; answers: Record<string, never>;
   utm_source?: string; utm_campaign?: string;
 };
-export type Receipt = { version: 1; requestId: string; eventId: string; acceptedAt: string; analyticsConsent: boolean };
+export type Receipt = { version: 1; requestId: string; eventId: string; acceptedAt: string; analyticsConsent: boolean; landingId?: string };
 export const receiptKey = 'excelent:quote-receipt:v1';
 
 export function normalizeInput(input: LeadInput) {
@@ -20,7 +20,7 @@ export function normalizeInput(input: LeadInput) {
   return { name, phone, errors };
 }
 
-export function createPayload(input: LeadInput, identity: { product: string; campaign: string; source: string }, eventId = crypto.randomUUID(), now = new Date(), search = typeof location === 'undefined' ? '' : location.search): LeadPayload {
+export function createPayload(input: LeadInput, identity: { product: string; campaign: string; source: string; attributionCampaign?: string }, eventId = crypto.randomUUID(), now = new Date(), search = typeof location === 'undefined' ? '' : location.search): LeadPayload {
   const normalized = normalizeInput(input);
   if (Object.keys(normalized.errors).length) throw Error('Invalid lead');
   const attribution = new URLSearchParams(search);
@@ -30,7 +30,7 @@ export function createPayload(input: LeadInput, identity: { product: string; cam
     event_id: eventId, idempotency_key: eventId, service_request: true,
     service_request_at: now.toISOString(), marketing_consent: false, money_included: false, answers: {},
     ...(attribution.get('utm_source') ? { utm_source: attribution.get('utm_source')!.slice(0, 100) } : {}),
-    ...(attribution.get('utm_campaign') ? { utm_campaign: attribution.get('utm_campaign')!.slice(0, 100) } : {}),
+    ...((identity.attributionCampaign || attribution.get('utm_campaign')) ? { utm_campaign: (identity.attributionCampaign || attribution.get('utm_campaign')!).slice(0, 100) } : {}),
   };
 }
 
@@ -54,7 +54,7 @@ export function isReceipt(value: unknown, now = Date.now()): value is Receipt {
   if (!value || typeof value !== 'object') return false;
   const r = value as Partial<Receipt>;
   const date = Date.parse(r.acceptedAt || '');
-  return r.version === 1 && typeof r.requestId === 'string' && /^[\w-]{1,100}$/.test(r.requestId) && typeof r.eventId === 'string' && /^[\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}$/i.test(r.eventId) && typeof r.analyticsConsent === 'boolean' && Number.isFinite(date) && date <= now + 60000 && now - date < 86400000;
+  return (r.landingId === undefined || (typeof r.landingId === 'string' && /^[a-z][a-z0-9_]{1,79}$/.test(r.landingId))) && r.version === 1 && typeof r.requestId === 'string' && /^[\w-]{1,100}$/.test(r.requestId) && typeof r.eventId === 'string' && /^[\da-f]{8}-(?:[\da-f]{4}-){3}[\da-f]{12}$/i.test(r.eventId) && typeof r.analyticsConsent === 'boolean' && Number.isFinite(date) && date <= now + 60000 && now - date < 86400000;
 }
 
 export function readReceipt(): Receipt | null {

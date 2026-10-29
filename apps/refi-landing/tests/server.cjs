@@ -11,6 +11,11 @@ function createServer() {
   const seen = new Map();
   return http.createServer((req, res) => {
     const url = new URL(req.url, 'http://127.0.0.1');
+    if (url.pathname === '/' || url.pathname === '/index.html') {
+      const pages = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../src/generated/variants.json'), 'utf8'));
+      const page = pages.find(page => page.attributionCampaign === url.searchParams.get('utm_campaign'));
+      if (page) { res.writeHead(302, { Location: page.route + url.search }).end(); return; }
+    }
     if (url.pathname === '/__test/axe.js') { res.setHeader('Content-Type', 'application/javascript'); res.end(fs.readFileSync(require.resolve('axe-core/axe.min.js'))); return; }
     if (url.pathname === '/__test/mode') { mode = url.searchParams.get('value') || 'ok'; requests = []; res.end('ok'); return; }
     if (url.pathname === '/__test/analytics') { analytics = url.searchParams.get('enabled') === 'true'; res.end('ok'); return; }

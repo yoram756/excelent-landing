@@ -1,0 +1,83 @@
+{
+  "sourceTests": {
+    "status": "PASS",
+    "passed": 13,
+    "exitCode": 0
+  },
+  "defaultBrowserRegression": {
+    "status": "PASS",
+    "passed": 22,
+    "scope": "Local mock intake"
+  },
+  "campaignBrowser": {
+    "status": "PASS",
+    "passed": 9,
+    "scope": "Local mock intake"
+  },
+  "negativeControl": {
+    "status": "PASS",
+    "brokenTestExitCode": 1
+  },
+  "lint": {
+    "status": "PASS",
+    "exitCode": 0
+  },
+  "typecheck": {
+    "status": "PASS",
+    "exitCode": 0
+  },
+  "secretsScan": {
+    "status": "PASS",
+    "passed": 3,
+    "exitCode": 0
+  },
+  "ratingSource": {
+    "bizreviews": {
+      "rating": "5.0",
+      "count": 74,
+      "source": "https://www.bizreviews.co.il/provider/peled-yoram",
+      "observation": "Browser profile summary"
+    },
+    "midrag": {
+      "rating": "9.89",
+      "source": "Owner statement and business-authored description on BizReviews",
+      "independentPlatformReadback": "NOT TESTED"
+    }
+  },
+  "performance": {
+    "status": "PASS",
+    "scope": "One Lighthouse mobile lab run per campaign, local build, simulated throttling; no field or live API performance claim",
+    "runs": [
+      {
+        "campaign": "campaign_bundle_allinone",
+        "lcpMs": 2346.7491,
+        "cls": 0,
+        "performance": 0.98,
+        "accessibility": 1
+      },
+      {
+        "campaign": "campaign_buyers_south",
+        "lcpMs": 2265.4391,
+        "cls": 0,
+        "performance": 0.98,
+        "accessibility": 1
+      },
+      {
+        "campaign": "campaign_sellers_south",
+        "lcpMs": 2225.404125,
+        "cls": 0,
+        "performance": 0.98,
+        "accessibility": 1
+      }
+    ]
+  },
+  "build": {
+    "status": "PASS",
+    "pages": 8,
+    "exitCode": 0
+  },
+  "production": {
+    "status": "NOT TESTED",
+    "reason": "Awaiting scoped landing deployment and live browser readback"
+  }
+}

@@ -1,0 +1,35 @@
+✔ each configured campaign has a unique route, offer, form, FAQ and thank-you (0.9615ms)
+✖ the selected page pins attribution even with a conflicting URL and preserves source (7.1429ms)
+✔ the catalog rejects missing copy, duplicate routes, unknown codes and identity overrides (23.1624ms)
+✔ new receipt scope accepts configured-shaped keys and rejects untrusted values (1.0185ms)
+✔ message packs remain drafts and rating sources are kept separate (4.9004ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 368.175
+
+✖ failing tests:
+
+test at tests\campaigns.test.cjs:18:1
+✖ the selected page pins attribution even with a conflicting URL and preserves source (7.1429ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'campaign_buyers_south'
+  - 'campaign_bundle_allinone'
+                ^
+  
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\out\deployment-20261027\release-tree\apps\refi-landing\tests\campaigns.test.cjs:23:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'campaign_buyers_south',
+    expected: 'campaign_bundle_allinone',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

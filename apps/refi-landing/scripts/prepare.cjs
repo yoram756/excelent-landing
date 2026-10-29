@@ -17,14 +17,19 @@ if (service.responseMinutes.withoutQuestionnaire !== 60) throw Error('Refresh th
 for (const video of page.testimonials.videos) {
   if (video.approved !== true || !video.src || !video.poster || !video.captions || !video.source) throw Error('Video requires approval, source, poster and captions');
 }
+const { loadCatalog } = require('./campaign-catalog.cjs');
+const pages = loadCatalog(page, campaign, path.join(root, 'config/landing/campaigns'));
 const generated = path.join(app, 'src/generated');
 fs.mkdirSync(generated, { recursive: true });
 // Deliberately select public fields. Do not import business.json into browser code.
 fs.writeFileSync(path.join(generated, 'content.json'), JSON.stringify({ ...page, identity: { brand: profile.brand, name: identity.nameInMessages, phone: phone.number, e164: phone.e164 } }, null, 2) + '\n');
+fs.writeFileSync(path.join(generated, 'variants.json'), JSON.stringify(pages.map(variant => ({ ...variant, identity: { brand: profile.brand, name: identity.nameInMessages, phone: phone.number, e164: phone.e164 } })), null, 2) + '\n');
 const assets = path.join(app, 'public/cro-assets');
 fs.mkdirSync(assets, { recursive: true });
 for (const [source, dest] of [
-  ['site/lp1v2/assets/official/logo_light_noslogan.png', 'logo.png'],
+  ['site/lp1v2/assets/official/excellent-color.png', 'logo.png'],
+  ['site/lp1v2/assets/official/excellent-white.png', 'logo-white.png'],
+  ['site/lp1v2/assets/official/midrag-owner.jpg', 'midrag.jpg'],
   ['site/lp1v2/assets/yoram/portrait.webp', 'portrait.webp'],
   ['site/lp1v2/assets/yoram/portrait-480.webp', 'portrait-480.webp'],
   ['site/lp1v2/assets/clients/c1.webp', 'clients.webp'],

@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "scope": "One Lighthouse mobile lab run per campaign, local build, simulated throttling; no field or live API performance claim",
+  "runs": [
+    {
+      "campaign": "campaign_bundle_allinone",
+      "lcpMs": 2346.7491,
+      "cls": 0,
+      "performance": 0.98,
+      "accessibility": 1
+    },
+    {
+      "campaign": "campaign_buyers_south",
+      "lcpMs": 2265.4391,
+      "cls": 0,
+      "performance": 0.98,
+      "accessibility": 1
+    },
+    {
+      "campaign": "campaign_sellers_south",
+      "lcpMs": 2225.404125,
+      "cls": 0,
+      "performance": 0.98,
+      "accessibility": 1
+    }
+  ]
+}

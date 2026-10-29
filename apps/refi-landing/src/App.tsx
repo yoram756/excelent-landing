@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import LandingPage from './LandingPage';
 import ThankYou from './ThankYou';
+import { ContentProvider, pageForPath } from './content';
 import { DirectionProvider } from './components/ui/direction';
 import { isReceipt, receiptKey, saveReceipt, type Receipt } from './lib/lead';
 
@@ -24,16 +25,19 @@ export default function App({ initialPath = '/' }: { initialPath?: string }) {
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
-  const thankYou = /^\/thank-you\/?$/.test(path);
-  useEffect(() => { document.title = thankYou ? 'נשארים בקשר | אקסלנט' : 'החיים השתנו. והמשכנתא? | אקסלנט'; }, [thankYou]);
+  const content = pageForPath(path);
+  const thankYou = path.replace(/\/$/, '') === content.thankYouPath;
+  const validReceipt = (receipt: Receipt | null) => receipt && (receipt.landingId || 'refi') === content.landingId ? receipt : null;
+  useEffect(() => { document.title = thankYou ? 'נשארים בקשר | אקסלנט' : content.meta.title; }, [thankYou, content]);
 
   function onConfirmed(receipt: Receipt) {
-    saveReceipt(receipt);
-    setLocalReceipt(receipt);
-    history.pushState(null, '', '/thank-you');
-    setPath('/thank-you');
+    const scoped = { ...receipt, landingId: content.landingId };
+    saveReceipt(scoped);
+    setLocalReceipt(scoped);
+    history.pushState(null, '', content.thankYouPath);
+    setPath(content.thankYouPath);
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
-  return <DirectionProvider dir="rtl">{thankYou ? <ThankYou ready={ready || Boolean(localReceipt)} receipt={localReceipt || storedReceipt} /> : <LandingPage onConfirmed={onConfirmed} />}</DirectionProvider>;
+  return <ContentProvider value={content}><DirectionProvider dir="rtl">{thankYou ? <ThankYou ready={ready || Boolean(localReceipt)} receipt={validReceipt(localReceipt) || validReceipt(storedReceipt)} /> : <LandingPage key={content.landingId} onConfirmed={onConfirmed} />}</DirectionProvider></ContentProvider>;
 }

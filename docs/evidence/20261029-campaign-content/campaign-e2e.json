@@ -1,0 +1,41 @@
+{
+  "scope": "Local production build, real browser and mock intake only",
+  "results": [
+    {
+      "name": "campaign_bundle_allinone has matching SSR, title, FAQ and legacy-link redirect",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_bundle_allinone is readable and accessible at mobile and desktop sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_bundle_allinone pins its code, confirms its own thank-you, and isolates another campaign receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_buyers_south has matching SSR, title, FAQ and legacy-link redirect",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_buyers_south is readable and accessible at mobile and desktop sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_buyers_south pins its code, confirms its own thank-you, and isolates another campaign receipt",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_sellers_south has matching SSR, title, FAQ and legacy-link redirect",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_sellers_south is readable and accessible at mobile and desktop sizes",
+      "status": "PASS"
+    },
+    {
+      "name": "campaign_sellers_south pins its code, confirms its own thank-you, and isolates another campaign receipt",
+      "status": "PASS"
+    }
+  ]
+}

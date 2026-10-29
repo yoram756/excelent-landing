@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
-import { content } from './content';
+import { content, useContent } from './content';
 import { Button } from './components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './components/ui/accordion';
 import { Bidi, BidiText } from './components/Bidi';
 import { Icon, type IconName } from './components/Icon';
 import { LeadForm } from './components/LeadForm';
+import { TrustProof } from './components/TrustProof';
 import type { Receipt } from './lib/lead';
 
 const whatsapp = `https://wa.me/${content.identity.e164}`;
 const tel = `tel:+${content.identity.e164}`;
 
 export function Brand({ className = '' }: { className?: string }) {
-  return <a href="/" className={`inline-flex shrink-0 ${className}`} aria-label="אקסלנט, לדף הראשי"><img src="/cro-assets/logo.png" alt="אקסלנט משכנתאות ופיננסים" width="695" height="305" fetchPriority="low" decoding="async" className="h-auto w-32 md:w-36" /></a>;
+  const content = useContent();
+  return <a href={content.route} className={`inline-flex shrink-0 ${className}`} aria-label="אקסלנט, לדף הראשי"><img src="/cro-assets/logo.png" alt="אקסלנט משכנתאות ופיננסים" width="842" height="500" fetchPriority="low" decoding="async" className="h-auto w-32 md:w-36" /></a>;
 }
 
 function Hero() {
+  const content = useContent();
   return <section data-section="hero" aria-labelledby="hero-title" className="relative overflow-hidden bg-paper">
     <header className="page-width flex min-h-24 items-center justify-between gap-4 border-b border-ink/10 py-3">
       <Brand />
@@ -29,7 +32,7 @@ function Hero() {
         <h1 id="hero-title" className="mt-4 text-[3.25rem] font-extrabold md:text-[4.4rem] lg:text-[5rem]">{content.hero.title}<br /><span className="text-accent-strong">{content.hero.accent}</span></h1>
         <p className="mt-5 max-w-lg text-lg text-ink/75 md:text-xl">{content.hero.description}</p>
         <div className="mt-8 flex flex-col items-stretch gap-4 sm:items-start">
-          <Button asChild className="min-h-14 ps-6 pe-6 text-base shadow-[0_8px_24px_#b8994a25]"><a href="#lead-form">{content.hero.cta}<Icon name="arrow" className="size-5 rtl:rotate-180" /></a></Button>
+          <Button asChild className="min-h-14 h-auto max-w-full whitespace-normal py-3 ps-6 pe-6 text-base shadow-[0_8px_24px_#b8994a25]"><a href="#lead-form">{content.hero.cta}<Icon name="arrow" className="size-5 rtl:rotate-180" /></a></Button>
           <span className="flex items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start"><Icon name="check" className="size-4" />בדיקה ראשונית ללא עלות וללא התחייבות</span>
         </div>
         <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex min-h-11 items-center gap-2 border-b border-ink/25 text-sm font-semibold hover:border-ink"><Icon name="message" className="size-4" />מעדיפים להתחיל בוואטסאפ?<span className="sr-only">נפתח בחלון חדש. ההודעה נשלחת רק אם תבחרו לשלוח אותה.</span></a>
@@ -38,7 +41,7 @@ function Hero() {
         <div className="absolute start-0 end-0 top-8 bottom-6 rounded-t-[46%] rounded-b-[1.5rem] bg-sand" aria-hidden="true" />
         <picture className="relative block overflow-hidden rounded-t-[46%] rounded-b-[1.5rem] border border-ink/10">
           <source media="(max-width: 767px)" srcSet="/cro-assets/portrait-480.webp" />
-          <img src="/cro-assets/portrait.webp" alt="יורם פלד במשרד, משוחח בטלפון" width="800" height="1000" fetchPriority="high" className="aspect-[4/5] w-full object-cover" />
+          <img src="/cro-assets/portrait.webp" alt="יורם פלד במשרד, משוחח בטלפון" width="800" height="1000" loading={content.attributionCampaign ? 'lazy' : 'eager'} fetchPriority="high" className="aspect-[4/5] w-full object-cover" />
         </picture>
         <div className="absolute -bottom-1 start-0 flex items-center gap-3 rounded-xl border border-ink/10 bg-white py-4 ps-5 pe-6 shadow-[0_8px_24px_#172f3610] md:-start-5">
           <span className="grid size-10 place-items-center rounded-full bg-paper text-accent-strong"><Icon name="shield" className="size-5" /></span>
@@ -51,9 +54,10 @@ function Hero() {
 }
 
 function TrustBar() {
+  const content = useContent();
   return <section data-section="trust" aria-label="אקסלנט במספר מילים" className="border-y border-ink/10 bg-white">
     <div className="page-width flex flex-col items-center gap-6 py-8 md:flex-row md:gap-7 md:py-10">
-      <img src="/cro-assets/logo.png" alt="אקסלנט משכנתאות ופיננסים" width="695" height="305" loading="lazy" className="h-auto w-24 shrink-0" />
+      <img src="/cro-assets/logo.png" alt="אקסלנט משכנתאות ופיננסים" width="842" height="500" loading="lazy" className="h-auto w-24 shrink-0" />
       <div className="grid w-full grid-cols-2 gap-y-6 md:grid-cols-4">
       <div className="ps-3 pe-3 text-center"><p className="text-[1.65rem] font-extrabold">מאז <Bidi>{content.since}</Bidi></p><p className="text-sm text-muted-foreground">מלווים משפחות בדרך לבית</p></div>
       <div className="border-s border-ink/10 ps-3 pe-3 text-center"><p className="text-[1.65rem] font-extrabold">ללא עלות</p><p className="text-sm text-muted-foreground">שיחה ובדיקה ראשונית</p></div>
@@ -65,9 +69,10 @@ function TrustBar() {
 }
 
 function Benefits() {
+  const content = useContent();
   return <section id="benefits" data-section="benefits" aria-labelledby="benefits-title" className="section-space bg-paper">
     <div className="page-width">
-      <div className="max-w-2xl"><span className="eyebrow">בלי לנחש. בלי להתרוצץ.</span><h2 id="benefits-title" className="mt-3 text-[2rem] font-extrabold md:text-[2.65rem]">לא רק לבדוק ריבית.<br />להבין מה נכון לכם.</h2></div>
+      <div className="max-w-2xl"><span className="eyebrow">בלי לנחש. בלי להתרוצץ.</span><h2 id="benefits-title" className="mt-3 text-[2rem] font-extrabold md:text-[2.65rem]">{content.benefitsTitle}</h2></div>
       <div className="mt-10 grid gap-5 md:grid-cols-3">
         {content.benefits.map((benefit, index) => <article key={benefit.title} className="group rounded-2xl border border-ink/10 bg-white p-6 transition-shadow hover:shadow-lg md:p-8">
           <div className="flex items-center justify-between"><span className="grid size-12 place-items-center rounded-xl bg-paper text-accent-strong"><Icon name={benefit.icon as IconName} /></span><Bidi className="text-sm font-semibold text-muted-foreground">0{index + 1}</Bidi></div>
@@ -79,6 +84,7 @@ function Benefits() {
 }
 
 function Testimonials() {
+  const content = useContent();
   const videos = content.testimonials.videos;
   return <section data-section="testimonials" aria-labelledby="testimonials-title" className="section-space bg-white">
     <div className="page-width">
@@ -87,16 +93,17 @@ function Testimonials() {
         <figure className="overflow-hidden rounded-2xl bg-paper"><img src="/cro-assets/clients.webp" alt="יורם פלד עם זוג לקוחות שליווה" width="720" height="540" loading="lazy" className="aspect-[4/3] h-full w-full object-cover" /><figcaption className="sr-only">תמונת לקוחות אמיתית מהדף הקיים, מוצגת באישורם.</figcaption></figure>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">{content.testimonials.quotes.map(quote => <figure key={quote.name} className="flex flex-col justify-between rounded-2xl bg-paper p-6 md:p-7"><Icon name="quote" className="size-6 text-accent-strong" /><blockquote className="mt-4 text-lg font-semibold">״{quote.quote}״</blockquote><figcaption className="mt-5 border-t border-ink/10 pt-4"><span className="block text-sm font-extrabold">{quote.name}</span><span className="text-xs text-muted-foreground"><Bidi>{quote.source}</Bidi> · <Bidi>{quote.date}</Bidi></span></figcaption></figure>)}</div>
       </div>}
-      <p className="mt-6 max-w-3xl text-xs text-muted-foreground">{content.testimonials.note}</p>
+      <TrustProof /><p className="mt-6 max-w-3xl text-xs text-muted-foreground">{content.testimonials.note}</p>
     </div>
   </section>;
 }
 
-export const faqSchema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: content.faq.map(item => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) };
+export const faqSchemaFor = (page: typeof content) => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: page.faq.map(item => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })) });
 
 function FAQ() {
+  const content = useContent();
   return <section id="faq" data-section="faq" aria-labelledby="faq-title" className="section-space bg-paper pb-28 md:pb-16">
-    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }} />
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaFor(content)).replace(/</g, '\\u003c') }} />
     <div className="page-width grid gap-8 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
       <div><span className="eyebrow">טוב ששאלתם</span><h2 id="faq-title" className="mt-3 text-[2rem] font-extrabold md:text-[2.65rem]">קצת יותר ברור,<br />עוד לפני השיחה.</h2><a href={tel} className="mt-5 inline-flex min-h-11 items-center gap-2 font-semibold underline decoration-accent-strong/50 underline-offset-8">יש שאלה אחרת? דברו איתנו<Icon name="arrow" className="size-4 rtl:rotate-180" /></a></div>
       <Accordion type="single" collapsible className="w-full">{content.faq.map((item, index) => <AccordionItem key={item.question} value={`faq-${index}`}><AccordionTrigger className="py-5 text-start text-base font-bold hover:no-underline">{item.question}</AccordionTrigger><AccordionContent className="text-base text-muted-foreground"><BidiText text={item.answer} /></AccordionContent></AccordionItem>)}</Accordion>
@@ -109,6 +116,7 @@ function FAQ() {
 }
 
 function MobileCTA() {
+  const content = useContent();
   const [formVisible, setFormVisible] = useState(false);
   useEffect(() => {
     const form = document.getElementById('lead-form');
@@ -117,7 +125,7 @@ function MobileCTA() {
     observer.observe(form); return () => observer.disconnect();
   }, []);
   return <aside data-section="mobile-cta" aria-label="פנייה מהירה" className={`mobile-cta fixed start-0 end-0 bottom-0 z-40 border-t border-ink/10 bg-white/95 p-3 backdrop-blur-md md:hidden ${formVisible ? 'invisible pointer-events-none' : ''}`}>
-    <div className="flex items-center gap-3"><Button asChild className="min-h-12 flex-1"><a href="#lead-form">לבדיקה ללא עלות<Icon name="arrow" className="size-4 rtl:rotate-180" /></a></Button><Button asChild variant="outline" className="min-h-12 shrink-0"><a href={tel}><Icon name="phone" className="size-4" />חיוג</a></Button></div>
+    <div className="flex items-center gap-3"><Button asChild className="min-h-12 flex-1"><a href="#lead-form">{content.mobileCta}<Icon name="arrow" className="size-4 rtl:rotate-180" /></a></Button><Button asChild variant="outline" className="min-h-12 shrink-0"><a href={tel}><Icon name="phone" className="size-4" />חיוג</a></Button></div>
   </aside>;
 }
 

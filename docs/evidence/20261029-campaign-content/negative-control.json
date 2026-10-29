@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "scope": "Local negative control only",
+  "mutation": "Campaign pin removed from ignored copy",
+  "expectedExit": 1,
+  "actualExit": 1,
+  "productionSourceChanged": false
+}

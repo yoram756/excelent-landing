@@ -1,0 +1,15 @@
+const fs = require('node:fs'), path = require('node:path'), assert = require('node:assert/strict');
+const { spawnSync } = require('node:child_process');
+const app = path.resolve(__dirname, '..'), out = path.resolve(app, '../../tests/out/campaign-content-20261029');
+fs.mkdirSync(out, { recursive: true });
+const original = fs.readFileSync(path.join(app, 'src/lib/lead.ts'), 'utf8');
+assert.equal(original.split('identity.attributionCampaign || ').length, 3);
+const mutant = path.join(out, 'unpinned-lead.ts');
+fs.writeFileSync(mutant, original.replaceAll('identity.attributionCampaign || ', ''));
+const result = spawnSync(process.execPath, ['--import', 'tsx', '--test', 'tests/campaigns.test.cjs'], { cwd: app, env: { ...process.env, CRO_LEAD_TEST_SOURCE: mutant }, encoding: 'utf8', timeout: 30000 });
+const output = (result.stdout || '') + (result.stderr || '');
+fs.writeFileSync(path.join(out, 'negative-control.log'), output);
+assert.equal(result.status, 1, 'Tests must fail when URL attribution can override the selected page');
+assert.match(output, /selected page pins attribution/);
+fs.writeFileSync(path.join(out, 'negative-control.json'), JSON.stringify({ status: 'PASS', scope: 'Local negative control only', mutation: 'Campaign pin removed from ignored copy', expectedExit: 1, actualExit: result.status, productionSourceChanged: false }, null, 2));
+console.log('PASS negative control: campaign tests reject an unpinned source copy (exit 1).');

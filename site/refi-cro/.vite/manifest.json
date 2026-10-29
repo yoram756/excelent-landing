@@ -6,7 +6,7 @@
     "isDynamicEntry": true
   },
   "index.html": {
-    "file": "cro-assets/index-D153bevu.js",
+    "file": "cro-assets/index-BpVFNxMl.js",
     "name": "index",
     "src": "index.html",
     "isEntry": true,
@@ -15,7 +15,7 @@
     ]
   },
   "src/lib/analytics.ts": {
-    "file": "cro-assets/analytics-DIDzsI3h.js",
+    "file": "cro-assets/analytics-CYx0Zxfc.js",
     "name": "analytics",
     "src": "src/lib/analytics.ts",
     "isDynamicEntry": true,
@@ -27,7 +27,7 @@
     ]
   },
   "style.css": {
-    "file": "cro-assets/style-BSRjpfHe.css",
+    "file": "cro-assets/style-N1T9WTlN.css",
     "src": "style.css"
   }
 }

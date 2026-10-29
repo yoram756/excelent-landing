@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Original owner-supplied assets copied byte-for-byte; no image editing",
+  "assets": [
+    {
+      "name": "excellent-color.png",
+      "sha256": "a663cf8a43f51f458d0c8c6f5d23ae44b63b7f5126bdca163ea417b7cb96d497"
+    },
+    {
+      "name": "excellent-white.png",
+      "sha256": "887c6cb811f826b2c8cd40976913fd83a0d5c5e57c360a97a76915ec56709913"
+    },
+    {
+      "name": "midrag-owner.jpg",
+      "sha256": "d4f3d794de97c76de92972806a35dcf412b206efc634299ce21dd7c9282a25f3"
+    }
+  ]
+}
