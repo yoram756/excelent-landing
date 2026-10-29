@@ -1,0 +1,260 @@
+- main:
+  - link "Personal":
+    - /url: /projects/LmaRyBnHRyfXp2Py
+    - generic "Personal":
+    - generic "Personal"
+  - generic: /
+  - 'generic "משפך מחזור משכנתא: פגישות מ Calendly (מצב בדיקה, בלי סריקת מייל)"':
+    - generic: "משפך מחזור משכנתא: פגישות מ Calendly (מצב בדיקה, בלי סריקת מייל)"
+  - button "More actions":
+  - button "Published" [disabled]:
+    - generic: Published
+  - button "More actions":
+  - radiogroup:
+    - radio "Editor"
+    - radio "Executions" [checked]
+    - radio "Evaluations"
+  - complementary:
+    - link:
+      - /url: /home
+    - menubar:
+      - menuitem "Add new item":
+        - button "Add new item":
+    - button "Open command palette":
+    - button "Toggle sidebar":
+    - menuitem "n8n Assistant":
+      - generic: n8n Assistant
+      - generic: Preview
+    - menuitem "Overview":
+      - generic: Overview
+    - menuitem "Templates":
+      - generic: Templates
+    - menuitem "Insights":
+      - generic: Insights
+    - menuitem "Help":
+      - generic: Help
+    - menuitem "Settings":
+      - generic: Settings
+  - main:
+    - heading "Executions" [level=2]
+    - checkbox "Auto refresh" [checked]:
+    - generic: Auto refresh
+    - button "Filters":
+    - link "Oct 29, 14:10:28 Succeeded in 1.856s":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68251
+      - generic: Oct 29, 14:10:28
+      - generic: Succeeded
+      - generic: in 1.856s
+    - link "Oct 29, 14:07:09 Succeeded in 606ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68228
+      - generic: Oct 29, 14:07:09
+      - generic: Succeeded
+      - generic: in 606ms
+    - link "Oct 29, 14:06:49 Succeeded in 1.313s":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68225
+      - generic: Oct 29, 14:06:49
+      - generic: Succeeded
+      - generic: in 1.313s
+    - link "Oct 29, 14:06:29 Succeeded in 576ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68222
+      - generic: Oct 29, 14:06:29
+      - generic: Succeeded
+      - generic: in 576ms
+    - link "Oct 29, 14:05:53 Succeeded in 1.252s":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68218
+      - generic: Oct 29, 14:05:53
+      - generic: Succeeded
+      - generic: in 1.252s
+    - link "Oct 29, 14:05:28 Succeeded in 950ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68214
+      - generic: Oct 29, 14:05:28
+      - generic: Succeeded
+      - generic: in 950ms
+    - link "Oct 29, 14:00:58 Succeeded in 12ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68184
+      - generic: Oct 29, 14:00:58
+      - generic: Succeeded
+      - generic: in 12ms
+    - link "Oct 29, 13:55:58 Succeeded in 10ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68151
+      - generic: Oct 29, 13:55:58
+      - generic: Succeeded
+      - generic: in 10ms
+    - link "Oct 29, 13:50:58 Succeeded in 10ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68118
+      - generic: Oct 29, 13:50:58
+      - generic: Succeeded
+      - generic: in 10ms
+    - link "Oct 29, 13:46:35 Succeeded in 1.348s":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68089
+      - generic: Oct 29, 13:46:35
+      - generic: Succeeded
+      - generic: in 1.348s
+    - link "Oct 29, 13:45:58 Succeeded in 9ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68084
+      - generic: Oct 29, 13:45:58
+      - generic: Succeeded
+      - generic: in 9ms
+    - link "Oct 29, 13:40:58 Succeeded in 10ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68051
+      - generic: Oct 29, 13:40:58
+      - generic: Succeeded
+      - generic: in 10ms
+    - link "Oct 29, 13:39:03 Succeeded in 1.291s":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68037
+      - generic: Oct 29, 13:39:03
+      - generic: Succeeded
+      - generic: in 1.291s
+    - link "Oct 29, 13:37:52 Error in 30ms Actions":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68029
+      - generic: Oct 29, 13:37:52
+      - generic: Error
+      - generic: in 30ms
+      - button "Actions":
+    - link "Oct 29, 13:35:58 Succeeded in 8ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68016
+      - generic: Oct 29, 13:35:58
+      - generic: Succeeded
+      - generic: in 8ms
+    - link "Oct 29, 13:34:43 Succeeded in 638ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/68006
+      - generic: Oct 29, 13:34:43
+      - generic: Succeeded
+      - generic: in 638ms
+    - link "Oct 29, 13:30:58 Succeeded in 18ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/67982
+      - generic: Oct 29, 13:30:58
+      - generic: Succeeded
+      - generic: in 18ms
+    - link "Oct 29, 13:25:58 Succeeded in 13ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/67949
+      - generic: Oct 29, 13:25:58
+      - generic: Succeeded
+      - generic: in 13ms
+    - link "Oct 29, 13:21:45 Succeeded in 1.365s":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/67921
+      - generic: Oct 29, 13:21:45
+      - generic: Succeeded
+      - generic: in 1.365s
+    - link "Oct 29, 13:20:58 Succeeded in 11ms":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/executions/67915
+      - generic: Oct 29, 13:20:58
+      - generic: Succeeded
+      - generic: in 11ms
+    - generic: Which executions is this workflow saving?
+    - generic: Oct 29, 14:10:28
+    - generic: Succeeded
+    - text: in 1.856s | 67KB | ID#68251 |
+    - 'link "Calendly: schedule, cancellation and write-confirmed ACK"':
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/history/9a536702-2ec4-4db0-a77d-c9431cd5727a
+    - link "Copy to editor":
+      - /url: /workflow/wEYSZMNU2JqeEoGZ/debug/68251
+      - button "Copy to editor":
+        - generic: Copy to editor
+    - button "Delete this execution":
+    - generic: 2 items
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - generic: 1 item
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Every 5 min
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Calendly mails
+    - generic: "getAll: message"
+    - generic: POST
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Run test
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Items
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Match bookings
+    - generic: "true"
+    - generic: "false"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Matched?
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Update lead
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Create lead
+    - generic: "POST: https://api.monday.com/v2"
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Wait for board automation
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Set meeting stage
+    - generic: "POST: https://api.monday.com/v2"
+    - generic: 1 item
+    - button "Add to chat":
+    - button "More actions":
+    - generic: Acknowledge booking
+    - button "Zoom to Fit":
+    - button "Zoom In":
+    - button "Zoom Out":
+    - generic: Logs
+    - generic: Success in 1.856s
+    - tree:
+      - treeitem "Every 5 min":
+        - generic: Every 5 min
+      - treeitem "Calendly mails":
+        - generic: Calendly mails
+      - treeitem "Items":
+        - generic: Items
+      - treeitem "Match bookings":
+        - generic: Match bookings
+      - treeitem "Matched?":
+        - generic: Matched?
+      - treeitem "Update lead":
+        - generic: Update lead
+      - treeitem "Acknowledge booking" [active] [selected]:
+        - generic: Acknowledge booking
+    - generic: Acknowledge booking
+    - generic: Success in 11ms
+    - button "Input":
+      - generic: Input
+    - button "Output":
+      - generic: Output
+    - button "Actions":
+    - button "Collapse panel":
+    - generic: Output
+    - textbox "Search (Ctrl+F)"
+    - radiogroup:
+      - radio "Schema":
+      - radio "Table" [checked]:
+      - radio "JSON":
+    - generic: 1 item
+    - table:
+      - rowgroup:
+        - row "saved Collapse rows itemId Collapse rows mailId Collapse rows":
+          - columnheader "saved Collapse rows":
+            - generic: saved
+            - button "Collapse rows":
+          - columnheader "itemId Collapse rows":
+            - generic: itemId
+            - button "Collapse rows":
+          - columnheader "mailId Collapse rows":
+            - generic: mailId
+            - button "Collapse rows":
+          - columnheader
+      - rowgroup:
+        - row "true 3317698044 1a1877933d85abda":
+          - cell "true":
+            - generic: "true"
+          - cell "3317698044":
+            - generic: "3317698044"
+          - cell "1a1877933d85abda":
+            - generic: 1a1877933d85abda
+          - cell
+- complementary

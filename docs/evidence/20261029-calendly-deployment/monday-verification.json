@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "synthetic": true,
+  "boardId": "5106246268",
+  "itemId": "3317699028",
+  "booking": {
+    "items": [
+      {
+        "id": "3317699028",
+        "name": "TEST Calendly Fix 20261029",
+        "state": "active",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה נקבעה",
+            "value": "{\"index\":6,\"changed_at\":\"2026-10-29T12:05:54.827Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "2026-10-29 18:00",
+            "value": "{\"date\":\"2026-10-29\",\"time\":\"16:00:00\",\"changed_at\":\"2026-10-29T12:05:54.828Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-CAL-FIX-20261029-001",
+            "value": "\"TEST-CAL-FIX-20261029-001\""
+          }
+        ]
+      }
+    ]
+  },
+  "bookingReplay": {
+    "items": [
+      {
+        "id": "3317699028",
+        "name": "TEST Calendly Fix 20261029",
+        "state": "active",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה נקבעה",
+            "value": "{\"index\":6,\"changed_at\":\"2026-10-29T12:05:54.827Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "2026-10-29 18:00",
+            "value": "{\"date\":\"2026-10-29\",\"time\":\"16:00:00\",\"changed_at\":\"2026-10-29T12:05:54.828Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-CAL-FIX-20261029-001",
+            "value": "\"TEST-CAL-FIX-20261029-001\""
+          }
+        ]
+      }
+    ]
+  },
+  "bookingReplayUnchanged": true,
+  "cancellation": {
+    "items": [
+      {
+        "id": "3317699028",
+        "name": "TEST Calendly Fix 20261029",
+        "state": "active",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה בוטלה",
+            "value": "{\"index\":10,\"changed_at\":\"2026-10-29T12:06:50.813Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "",
+            "value": "{\"changed_at\":\"2026-10-29T12:06:50.815Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-CAL-FIX-20261029-001",
+            "value": "\"TEST-CAL-FIX-20261029-001\""
+          }
+        ]
+      }
+    ]
+  },
+  "cancellationReplay": {
+    "items": [
+      {
+        "id": "3317699028",
+        "name": "TEST Calendly Fix 20261029",
+        "state": "active",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה בוטלה",
+            "value": "{\"index\":10,\"changed_at\":\"2026-10-29T12:06:50.813Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "",
+            "value": "{\"changed_at\":\"2026-10-29T12:06:50.815Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-CAL-FIX-20261029-001",
+            "value": "\"TEST-CAL-FIX-20261029-001\""
+          }
+        ]
+      }
+    ]
+  },
+  "cancelReplayUnchanged": true
+}

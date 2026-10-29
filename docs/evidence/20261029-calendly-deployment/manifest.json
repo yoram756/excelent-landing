@@ -1,0 +1,76 @@
+{
+  "createdAt": "2026-10-29T17:00:02.952Z",
+  "workflowId": "wEYSZMNU2JqeEoGZ",
+  "publishedVersion": "9a536702-2ec4-4db0-a77d-c9431cd5727a",
+  "codeHashes": {
+    "Match bookings": "1459b0ba60a065fd9fe239e1b5a6bd91c507023b874c0b6efc05a6dca5515afe",
+    "Acknowledge booking": "eed94fe0b9923bf7e485f8e5a4494f4982492ad7e14cb6898b36dbad54a9b05d"
+  },
+  "whatsappCalls": 0,
+  "generalN8nSettingsChanged": false,
+  "workflowSettingsNote": "Editor materialized binaryMode=separate default; prior three values preserved, raw settings hash changed",
+  "atomicParallelDuplicateGuarantee": "NOT TESTED",
+  "wholeProjectReadiness": "BLOCKED",
+  "files": [
+    {
+      "name": "draft-comparison.json",
+      "sha256": "666fed35a22280a7c1ab50cc5fe740e2517be95fca9a6c15b0601e0bbc7df721"
+    },
+    {
+      "name": "published-readback.json",
+      "sha256": "5533055a44c8eafd8c5104a2df1de3f431080da05319801dff807a58a1611239"
+    },
+    {
+      "name": "final-server-readback.json",
+      "sha256": "9943d2aa198dd5a4a728dbd1a296b7e9983ae3a20c73cb860902eaa938d693ff"
+    },
+    {
+      "name": "booking.receipt.json",
+      "sha256": "093e72723f511e3ad32695e1e5c73f8cd1f59a87dec5f81f0fed9bfeb6f4be16"
+    },
+    {
+      "name": "booking-replay.receipt.json",
+      "sha256": "4de2510bb3d0fdc25cbca7a2a6233ee577275c4126e0e762687a29fc3310ab20"
+    },
+    {
+      "name": "cancel.receipt.json",
+      "sha256": "9b3a15c16207db440eed70983b49c13bb5c5c18b7f2e3e1df573fbe259278365"
+    },
+    {
+      "name": "cancel-replay.receipt.json",
+      "sha256": "61e3b72aecde49932110453962d2bef311887d813c2b19f8ec8e8b33d99deb58"
+    },
+    {
+      "name": "monday-verification.json",
+      "sha256": "fe500592ce8c6d012dd19f95f0a644bf896cad42f949ad7c2190d30a51ea74b7"
+    },
+    {
+      "name": "real-mail-verification.json",
+      "sha256": "327f49af3678110193ca454408d1e9ccfe015b604ce0e3bc0f76d5aefe20d457"
+    },
+    {
+      "name": "real-mail-replay.json",
+      "sha256": "a9d897d7b62dbc555db359406eb244a7fb91e7d54a738c45a1dc43083a4278b8"
+    },
+    {
+      "name": "execution-proof.json",
+      "sha256": "21988c722149feb0838cd99728df4ba14387efd75a62793fb76a2ad0b335adab"
+    },
+    {
+      "name": "final-cleanup.json",
+      "sha256": "6aed45d9a83f99fa39b53f49107a02d58c5bb57fd3181990a1f70420dbc811a7"
+    },
+    {
+      "name": "real-mail-execution.txt",
+      "sha256": "eaadcfb63bce472ed783dfe16facc94984c203df6da896732e0d37210707d3f0"
+    },
+    {
+      "name": "real-mail-execution.png",
+      "sha256": "a5b1b9d4c97942f25bb250fc46ac762aebefe52839c21d84621cd26f4c5cb9fe"
+    },
+    {
+      "name": "local-tests.json",
+      "sha256": "20073186af42b05e0a58c3f5590eaec6c237029eb25ee8bd8ec10b0903111600"
+    }
+  ]
+}

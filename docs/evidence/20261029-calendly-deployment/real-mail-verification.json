@@ -1,0 +1,42 @@
+{
+  "observedAt": "2026-10-29T12:11:56.644Z",
+  "status": "PASS",
+  "syntheticItem": true,
+  "actualProviderNotification": true,
+  "executionId": 68251,
+  "workflowVersion": "9a536702-2ec4-4db0-a77d-c9431cd5727a",
+  "trigger": "Every 5 min",
+  "sourceMessageId": "1a1877933d85abda",
+  "ack": {
+    "saved": true,
+    "itemId": "3317698044",
+    "mailId": "1a1877933d85abda"
+  },
+  "mondayReadback": {
+    "items": [
+      {
+        "id": "3317698044",
+        "name": "TEST Calendly Real Mail Replay 20261029",
+        "state": "active",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה בוטלה",
+            "value": "{\"index\":10,\"changed_at\":\"2026-10-29T12:10:29.466Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "",
+            "value": "{\"changed_at\":\"2026-10-29T12:10:29.467Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-CAL-FIX-MAIL-20261029-001",
+            "value": "\"TEST-CAL-FIX-MAIL-20261029-001\""
+          }
+        ]
+      }
+    ]
+  },
+  "whatsappCalls": 0
+}

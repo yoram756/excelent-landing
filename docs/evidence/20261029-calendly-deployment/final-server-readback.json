@@ -1,0 +1,205 @@
+{
+  "active": 1,
+  "version": "9a536702-2ec4-4db0-a77d-c9431cd5727a",
+  "nodeCount": 11,
+  "nodeNames": [
+    "Every 5 min",
+    "Calendly mails",
+    "Run test",
+    "Items",
+    "Match bookings",
+    "Matched?",
+    "Update lead",
+    "Create lead",
+    "Wait for board automation",
+    "Set meeting stage",
+    "Acknowledge booking"
+  ],
+  "connections": {
+    "Calendly mails": {
+      "main": [
+        [
+          {
+            "node": "Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Run test": {
+      "main": [
+        [
+          {
+            "node": "Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Items": {
+      "main": [
+        [
+          {
+            "node": "Match bookings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Match bookings": {
+      "main": [
+        [
+          {
+            "node": "Matched?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Matched?": {
+      "main": [
+        [
+          {
+            "node": "Update lead",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create lead": {
+      "main": [
+        [
+          {
+            "node": "Wait for board automation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for board automation": {
+      "main": [
+        [
+          {
+            "node": "Set meeting stage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Every 5 min": {
+      "main": [
+        [
+          {
+            "node": "Calendly mails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update lead": {
+      "main": [
+        [
+          {
+            "node": "Acknowledge booking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set meeting stage": {
+      "main": [
+        [
+          {
+            "node": "Acknowledge booking",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settingsHash": "d6c485b77287b065f4964d8bb89e9213e4d8a400390e046d5c14a7afc6e2b8a3",
+  "codeHashes": {
+    "Match bookings": "1459b0ba60a065fd9fe239e1b5a6bd91c507023b874c0b6efc05a6dca5515afe",
+    "Acknowledge booking": "eed94fe0b9923bf7e485f8e5a4494f4982492ad7e14cb6898b36dbad54a9b05d"
+  },
+  "ackKeys": [
+    "test-CAL-FIX-BOOK-20261029-001",
+    "test-CAL-FIX-CANCEL-20261029-001"
+  ],
+  "executions": [
+    {
+      "id": 68228,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 12:07:09.041",
+      "stoppedAt": "2026-10-29 12:07:09.647"
+    },
+    {
+      "id": 68225,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 12:06:49.934",
+      "stoppedAt": "2026-10-29 12:06:51.247"
+    },
+    {
+      "id": 68222,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 12:06:29.537",
+      "stoppedAt": "2026-10-29 12:06:30.113"
+    },
+    {
+      "id": 68218,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 12:05:53.980",
+      "stoppedAt": "2026-10-29 12:05:55.232"
+    },
+    {
+      "id": 68214,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 12:05:28.020",
+      "stoppedAt": "2026-10-29 12:05:28.970"
+    },
+    {
+      "id": 68184,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 12:00:58.025",
+      "stoppedAt": "2026-10-29 12:00:58.037"
+    },
+    {
+      "id": 68151,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:55:58.019",
+      "stoppedAt": "2026-10-29 11:55:58.029"
+    },
+    {
+      "id": 68118,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:50:58.022",
+      "stoppedAt": "2026-10-29 11:50:58.032"
+    }
+  ],
+  "readOnly": true
+}

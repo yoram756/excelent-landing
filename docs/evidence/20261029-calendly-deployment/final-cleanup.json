@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "observedAt": "2026-10-29T16:59:16.160Z",
+  "deletedItems": [
+    {
+      "id": "3317698044",
+      "state": "deleted"
+    },
+    {
+      "id": "3317699028",
+      "state": "deleted"
+    }
+  ],
+  "activeBaselineIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "expectedBaselineIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "whatsappCalls": 0
+}

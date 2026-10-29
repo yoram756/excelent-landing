@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "observedAt": "2026-10-29T16:59:16.160Z",
+  "scope": "Monday readback unchanged since actual scheduled cancellation; no new write observed",
+  "itemId": "3317698044",
+  "originalExecutionId": 68251,
+  "initial": [
+    {
+      "id": "refi_stage",
+      "text": "פגישה בוטלה",
+      "value": "{\"index\":10,\"changed_at\":\"2026-10-29T12:10:29.466Z\"}"
+    },
+    {
+      "id": "refi_meeting",
+      "text": "",
+      "value": "{\"changed_at\":\"2026-10-29T12:10:29.467Z\"}"
+    }
+  ],
+  "readback": [
+    {
+      "id": "refi_stage",
+      "text": "פגישה בוטלה",
+      "value": "{\"index\":10,\"changed_at\":\"2026-10-29T12:10:29.466Z\"}"
+    },
+    {
+      "id": "refi_meeting",
+      "text": "",
+      "value": "{\"changed_at\":\"2026-10-29T12:10:29.467Z\"}"
+    }
+  ],
+  "unchanged": true
+}

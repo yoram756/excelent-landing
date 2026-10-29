@@ -1,0 +1,12 @@
+{
+  "phase": "new-lead-replay",
+  "id": "CAL-FIX-NEW-20261029-001",
+  "httpStatus": 200,
+  "response": {
+    "message": "Workflow was started"
+  },
+  "synthetic": true,
+  "attempts": 1,
+  "retries": 0,
+  "observedAt": "2026-10-29T17:01:41.494Z"
+}

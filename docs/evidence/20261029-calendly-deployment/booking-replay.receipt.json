@@ -1,0 +1,12 @@
+{
+  "phase": "booking-replay",
+  "id": "CAL-FIX-BOOK-20261029-001",
+  "httpStatus": 200,
+  "response": {
+    "message": "Workflow was started"
+  },
+  "synthetic": true,
+  "attempts": 1,
+  "retries": 0,
+  "observedAt": "2026-10-29T12:06:27.363Z"
+}

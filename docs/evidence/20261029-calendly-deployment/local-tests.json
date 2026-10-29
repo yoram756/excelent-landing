@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "command": "npm run test:funnel",
+  "exitCode": 0,
+  "passed": 415,
+  "scope": "local mocked providers and local HTTP services only",
+  "targeted": {
+    "passed": 43,
+    "exitCode": 0
+  },
+  "brokenBatchControl": {
+    "exitCode": 1,
+    "failed": 4,
+    "expectedFailure": true
+  },
+  "patcherAndSecretsRerun": {
+    "passed": 5,
+    "exitCode": 0
+  },
+  "restrictedAttempt": {
+    "exitCode": 1,
+    "cause": "local HTTP EACCES and temporary-directory permissions",
+    "resolvedBy": "rerun release-tree suite with required local permissions"
+  }
+}

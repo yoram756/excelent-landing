@@ -1,0 +1,12 @@
+{
+  "phase": "cancel",
+  "id": "CAL-FIX-CANCEL-20261029-001",
+  "httpStatus": 200,
+  "response": {
+    "message": "Workflow was started"
+  },
+  "synthetic": true,
+  "attempts": 1,
+  "retries": 0,
+  "observedAt": "2026-10-29T12:06:47.762Z"
+}

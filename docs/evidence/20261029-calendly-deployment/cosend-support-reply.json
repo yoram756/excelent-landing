@@ -1,0 +1,15 @@
+{
+  "messageId": "1a18790866bcb960",
+  "threadId": "1a18743b14a7d9dc",
+  "from": "hello@cosend.app",
+  "receivedAt": "2026-10-29T12:09:06Z",
+  "humanReply": true,
+  "claim": "MCP deployment expected in next 24 to 48 hours",
+  "estimatedWindow": {
+    "start": "2026-10-30T12:09:06Z",
+    "end": "2026-10-31T12:09:06Z"
+  },
+  "resolutionVerified": false,
+  "noResponseReminderEligible": false,
+  "dnsRecheck": "BLOCKED by local network permission; no success claimed"
+}

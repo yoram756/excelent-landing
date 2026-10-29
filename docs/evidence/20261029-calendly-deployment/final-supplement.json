@@ -1,0 +1,79 @@
+{
+  "observedAt": "2026-10-29T17:02:57.783Z",
+  "status": "PASS",
+  "newLead": {
+    "synthetic": true,
+    "executionId": 70168,
+    "ackAfter": "Set meeting stage",
+    "ack": {
+      "saved": true,
+      "itemId": "3318594256",
+      "mailId": "test-CAL-FIX-NEW-20261029-001"
+    },
+    "readback": {
+      "id": "3318594256",
+      "name": "TEST Calendly New Lead 20261029",
+      "column_values": [
+        {
+          "id": "refi_stage",
+          "text": "פגישה נקבעה",
+          "value": "{\"index\":6,\"changed_at\":\"2026-10-29T17:01:04.562Z\"}"
+        },
+        {
+          "id": "refi_meeting",
+          "text": "2026-10-29 18:15",
+          "value": "{\"date\":\"2026-10-29\",\"time\":\"16:15:00\"}"
+        }
+      ]
+    }
+  },
+  "replay": {
+    "executionId": 70175,
+    "matchingItemCount": 1,
+    "unchanged": true,
+    "writeNodesExecuted": false
+  },
+  "scheduledReplay": {
+    "executionId": 68284,
+    "writeNodesExecuted": false
+  },
+  "cleanup": {
+    "items": [
+      {
+        "id": "3317698044",
+        "state": "deleted"
+      },
+      {
+        "id": "3317699028",
+        "state": "deleted"
+      },
+      {
+        "id": "3318594256",
+        "state": "deleted"
+      }
+    ],
+    "boards": [
+      {
+        "items_page": {
+          "items": [
+            {
+              "id": "3291304369"
+            },
+            {
+              "id": "3301735356"
+            },
+            {
+              "id": "3304127965"
+            },
+            {
+              "id": "3293511781"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "whatsappCalls": 0,
+  "generalN8nSettingsChanged": false,
+  "priorApprovalReviewFailure": "Usage limit prevented initial attempt; approval review later recovered and the same guarded test completed once"
+}

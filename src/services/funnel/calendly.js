@@ -29,16 +29,26 @@ function parse(subject, text) {
 }
 const sd = $getWorkflowStaticData('global'); sd.seen = sd.seen || {};
 const mails = [];
-try { const b = $('Run test').first().json.body; if (b && b.subject) mails.push({ id: 'test-' + (b.id || Date.now()), subject: b.subject, text: b.text }); } catch (e) {}
-try { for (const m of $('Calendly mails').all()) if (m.json && m.json.id) mails.push({ id: m.json.id, subject: m.json.subject || m.json.headers?.subject || '', text: m.json.text || m.json.snippet || '' }); } catch (e) {}
+try { const b = $('Run test').first().json.body; if (b && b.subject) mails.push({ id: 'test-' + (b.id || Date.now()), subject: b.subject, text: b.text, receivedAt: b.receivedAt || Date.now() }); } catch (e) {}
+try { for (const m of $('Calendly mails').all()) if (m.json && m.json.id) mails.push({ id: m.json.id, subject: m.json.subject || m.json.headers?.subject || '', text: m.json.text || m.json.snippet || '', receivedAt: m.json.internalDate || m.json.date || m.json.headers?.date }); } catch (e) {}
+// Gmail returns newest first. Keep the latest notification for each invitee,
+// including acknowledged mail, so an older booking cannot undo its cancellation.
+const latest = new Map();
+const received = v => /^\d+$/.test(String(v)) ? Number(v) : Date.parse(v) || 0;
+for (const mail of mails) {
+  const ev = parse(mail.subject, mail.text);
+  if (!ev || (!ev.email && !ev.phone)) continue;
+  const key = ev.email || ev.phone;
+  const prev = latest.get(key);
+  if (!prev || received(mail.receivedAt) > received(prev.receivedAt)) latest.set(key, { ...mail, ev });
+}
 const items = $('Items').first().json.data.boards[0].items_page.items;
 const out = [];
 const inBatch=new Set();
-for (const mail of mails) {
+for (const mail of latest.values()) {
   if (sd.seen[mail.id]||inBatch.has(mail.id)) continue;
   inBatch.add(mail.id);
-  const ev = parse(mail.subject, mail.text);
-  if (!ev) continue;
+  const ev = mail.ev;
   const matches=[];
   for (const it of items) {
     const cv = {}; for (const c of it.column_values) cv[c.id] = c;

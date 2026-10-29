@@ -1,0 +1,39 @@
+{
+  "createdAt": "2026-10-29T17:03:16.060Z",
+  "supplements": "manifest.json",
+  "scope": "Completed new-lead branch and scheduled replay, final cleanup, vendor support ETA",
+  "files": [
+    {
+      "name": "final-supplement.json",
+      "sha256": "fd67d7e231bda1a4bba33d7d0d8ff6bd9e53b086140dc9f899c91e66ef97e34c"
+    },
+    {
+      "name": "new-lead.receipt.json",
+      "sha256": "f31fd01dc35897a8fd376981e87f4d9745efce3b021ede4459cb16a22c2057b1"
+    },
+    {
+      "name": "new-lead-replay.receipt.json",
+      "sha256": "15ce5c2cd12a50a4d7f62fd2882641df50746895e19515ca5650c5f12f1b47a1"
+    },
+    {
+      "name": "new-lead-execution.txt",
+      "sha256": "ae14a14629f43c6a548bdc20a1c7a0defe7abd8015b65188e2fadbeff7e0084a"
+    },
+    {
+      "name": "new-lead-execution.png",
+      "sha256": "0838d9a2fa9e27c38ae5193f02e0e576eb0ec3e747341318f944598a30bb139e"
+    },
+    {
+      "name": "new-lead-replay-execution.txt",
+      "sha256": "444e1c3b619892a74dd57a43cf8c1a9d1e23f4a41be1dafef3aaea672c232dba"
+    },
+    {
+      "name": "real-mail-repeat-execution.txt",
+      "sha256": "4d640d9a9ff89102f05d9b8f3ce03ef067997328021be527dd09c9ebc969126f"
+    },
+    {
+      "name": "cosend-support-reply.json",
+      "sha256": "74132a524b387c71663632e6bf3729af3032fe2f5cf35d35a1b2bff4cde81d88"
+    }
+  ]
+}
