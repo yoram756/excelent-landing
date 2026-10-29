@@ -1,0 +1,20 @@
+{
+  "observedAt": "2026-10-29T05:55:11.383Z",
+  "datasetId": "1822147178482498",
+  "eventName": "Lead",
+  "displayName": "ליד",
+  "status": "PASS",
+  "metaDisplayStatus": "עבר עיבוד",
+  "receivedLocalTime": "2026-10-29 07:50:33 Asia/Jerusalem",
+  "eventCount": 1,
+  "channel": "CRM",
+  "visibleCustomerParameterKeys": [
+    "email",
+    "external_id",
+    "pdid"
+  ],
+  "eventIdVisibleInMeta": false,
+  "eventIdReadbackStatus": "NOT TESTED",
+  "correlation": "One authorized synthetic POST, one processed CRM row at the same second; Meta UI does not expose the event_id",
+  "screenshot": "docs/evidence/20261029-meta-capi/meta-processed.png"
+}

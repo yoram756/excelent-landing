@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "command": "node --test tests/funnel/meta-capi.test.js tests/funnel/secrets.test.js",
+  "exitCode": 0,
+  "tests": 8,
+  "scope": "Local probe contracts and source/evidence secret scan; independent from real Meta receipt",
+  "logSha256": "0ebe2127e852ce05f87a7e0d4fcff68484069df824393c62a9866d01884357ec"
+}

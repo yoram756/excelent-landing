@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-10-29T05:50:06.495Z",
+  "endpoint": "https://refi.excelentfinance.com/api/lead",
+  "payload": {
+    "first_name": "TEST Meta CAPI 20261029",
+    "phone": "0500000082",
+    "email": "meta-capi-test@example.invalid",
+    "source": "LP1_v2_Meta_CAPI_Test",
+    "event_id": "TEST-META-CAPI-20261029-001",
+    "idempotency_key": "TEST-META-CAPI-20261029-001",
+    "product": "LP1",
+    "campaign": "refi",
+    "service_request": true,
+    "service_request_at": "2026-10-29T05:50:06.488Z",
+    "marketing_consent": false,
+    "marketing_channels": [],
+    "money_included": false,
+    "answers": {}
+  },
+  "postsAttempted": 1,
+  "automaticRetry": false
+}

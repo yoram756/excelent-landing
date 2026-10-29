@@ -1,0 +1,13 @@
+{
+  "scope": "Meta API acceptance only; Test Events receipt must be verified separately",
+  "eventId": "TEST-META-CAPI-20261029-001",
+  "eventName": "Lead",
+  "automaticRetry": false,
+  "metaTestEventsStatus": "NOT TESTED",
+  "apiAccepted": true,
+  "httpStatus": 200,
+  "eventsReceived": 1,
+  "errorCode": null,
+  "errorSubcode": null,
+  "traceId": "AJ3W4y2NVzYB6BUcSP-T8hR"
+}

@@ -1,0 +1,24 @@
+{
+  "items": [
+    {
+      "id": "3316551990",
+      "name": "TEST Meta CAPI 20261029 0500000082",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "TEST-META-CAPI-20261029-001",
+          "value": "\"TEST-META-CAPI-20261029-001\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "items": [
+    {
+      "id": "3316551990",
+      "name": "TEST Meta CAPI 20261029 0500000082",
+      "state": "deleted",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "text_mm8c3r4v",
+          "text": "TEST-META-CAPI-20261029-001",
+          "value": "\"TEST-META-CAPI-20261029-001\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "observedAt": "2026-10-29T05:54:16.356Z",
+  "activeIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "baselineIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "baselinePreserved": true,
+  "ownedTestItemId": "3316551990",
+  "ownedTestState": "deleted"
+}

@@ -1,0 +1,183 @@
+- link "מנהל המודעות Meta":
+  - /url: /adsmanager/
+  - generic: מנהל המודעות
+  - img "Meta"
+- button "Pressable":
+- button:
+  - generic: "0"
+- separator
+- navigation "כלים":
+  - list:
+    - link "סקירת החשבון":
+      - /url: /adsmanager/manage/accounts?business_id=745355029428233&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+    - generic: סקירת החשבון
+    - link "קמפיינים":
+      - /url: /adsmanager/manage/campaigns?business_id=745355029428233&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+    - generic: קמפיינים
+    - link "דוחות של ביצועי מודעות":
+      - /url: /adsreporting/?business_id=745355029428233&nav_entry_point=ads_ecosystem_navigation_menu
+    - generic: דוחות של ביצועי מודעות
+    - link "קהלים":
+      - /url: /adsmanager/?business_id=745355029428233&tool=AUDIENCES&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+    - generic: קהלים
+    - link "הגדרות פרסום":
+      - /url: https://eventsmanager.facebook.com/adsmanager/manage/advertising_settings/?business_id=745355029428233&nav_entry_point=ads_ecosystem_navigation_menu&nav_source=ads_manager
+    - generic: הגדרות פרסום
+    - link "חיובים ותשלומים":
+      - /url: /billing_hub/payment_settings/?placement=ads_manager&business_id=745355029428233&entrypoint=ads_ecosystem_navigation_ads_billing_tool_plugin
+    - generic: חיובים ותשלומים
+    - link "מנהל האירועים":
+      - /url: /events_manager2/?business_id=745355029428233&nav_source=ads_ecosystem_nav
+    - generic: מנהל האירועים
+    - button "כל הכלים":
+    - generic: כל הכלים
+- separator
+- link "הגדרות העסק":
+  - /url: https://business.facebook.com/settings/people?business_id=745355029428233&referring_source=ads_navigation_gear_icon
+  - generic: הגדרות העסק
+- button "חיפוש":
+  - generic: חיפוש
+- button "עזרה":
+  - generic: עזרה
+- button "דיווח על בעיה":
+  - generic: דיווח על בעיה
+- heading "ערכות נתונים" [level=1]
+- combobox "ייעוץ משכנתא אקסלנט":
+  - generic: ייעוץ משכנתא אקסלנט
+- button "Facebook":
+  - img "Facebook"
+- navigation "כלים":
+  - list:
+    - button "חיבור נתונים":
+    - generic: חיבור נתונים
+    - button "סקירה כללית":
+    - generic: סקירה כללית
+    - button "ערכות נתונים":
+    - generic: ערכות נתונים
+    - button "המרות מותאמות אישית":
+    - generic: המרות מותאמות אישית
+    - button "שילובים":
+    - generic: שילובים
+- button "צמצם":
+  - generic: צמצם
+- generic: חיפוש
+- searchbox "חיפוש"
+- grid:
+  - row "הפיקסל של ייעוץ משכנתא אקסלנט מזהה 942079746535788":
+    - gridcell "הפיקסל של ייעוץ משכנתא אקסלנט מזהה 942079746535788":
+      - generic: הפיקסל של ייעוץ משכנתא אקסלנט
+      - generic: מזהה
+      - generic: "942079746535788"
+  - row "Pixel Shoes מזהה 1624591558039856":
+    - gridcell "Pixel Shoes מזהה 1624591558039856":
+      - generic: Pixel Shoes
+      - generic: מזהה
+      - generic: "1624591558039856"
+  - row "LG - GIA DUNG DROP מזהה 468234001924266":
+    - gridcell "LG - GIA DUNG DROP מזהה 468234001924266":
+      - generic: LG - GIA DUNG DROP
+      - generic: מזהה
+      - generic: "468234001924266"
+  - row "Suc khoe pixel מזהה 1062464234387484":
+    - gridcell "Suc khoe pixel מזהה 1062464234387484":
+      - generic: Suc khoe pixel
+      - generic: מזהה
+      - generic: "1062464234387484"
+  - row "הפיקסל של ייעוץ משכנתא אקסלנט מזהה 3722395687795935":
+    - gridcell "הפיקסל של ייעוץ משכנתא אקסלנט מזהה 3722395687795935":
+      - generic: הפיקסל של ייעוץ משכנתא אקסלנט
+      - generic: מזהה
+      - generic: "3722395687795935"
+  - row "הפיקסל של אקסלנט מזהה 328469708459162":
+    - gridcell "הפיקסל של אקסלנט מזהה 328469708459162":
+      - generic: הפיקסל של אקסלנט
+      - generic: מזהה
+      - generic: "328469708459162"
+  - row "הפיקסל של ייעוץ משכנתא אקסלנט מזהה 3011733415596103":
+    - gridcell "הפיקסל של ייעוץ משכנתא אקסלנט מזהה 3011733415596103":
+      - generic: הפיקסל של ייעוץ משכנתא אקסלנט
+      - generic: מזהה
+      - generic: "3011733415596103"
+  - row "Excellent n8n Leads מזהה 1868636864296246":
+    - gridcell "Excellent n8n Leads מזהה 1868636864296246":
+      - generic: Excellent n8n Leads
+      - generic: מזהה
+      - generic: "1868636864296246"
+  - row "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance מזהה 1822147178482498":
+    - gridcell "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance מזהה 1822147178482498":
+      - generic: אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance
+      - generic: מזהה
+      - generic: "1822147178482498"
+  - row "Hermes Excellent מזהה 1110174674794905":
+    - gridcell "Hermes Excellent מזהה 1110174674794905":
+      - generic: Hermes Excellent
+      - generic: מזהה
+      - generic: "1110174674794905"
+  - row "Excellnet Messages מזהה 937807602338531":
+    - gridcell "Excellnet Messages מזהה 937807602338531":
+      - generic: Excellnet Messages
+      - generic: מזהה
+      - generic: "937807602338531"
+- generic: נמצאו 11 מקורות נתונים
+- heading "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance" [level=2]
+- link "עריכת שם מקור הנתונים":
+  - /url: "#"
+- button "יצירה":
+  - generic: יצירה
+- tablist:
+  - tab "סקירה כללית":
+    - generic: סקירה כללית
+  - tab "בדיקת אירועים" [selected]:
+    - generic: בדיקת אירועים
+  - tab "אבחון":
+    - generic: אבחון
+  - tab "היסטוריה":
+    - generic: היסטוריה
+  - tab "הגדרות":
+    - generic: הגדרות
+- heading "בדיקת האירועים שלך" [level=3]
+- generic: יש להשתמש בבדיקת האירועים כדי לאשר שאירועי האתר, האפליקציה, ה-CRM והשרת מוגדרים כראוי.
+- text: לידיעתך, התנהגות הבדיקה עשויה להיות שונה מההתנהגות בסביבות הפעילות וההגדרות האישיות של המודעות לא ישפיעו על נתוני הבדיקה.
+- link "מידע נוסף":
+  - /url: /business/help/2040882565969969
+- text: "יש לבחור ערוץ שיווקי, כדי לקבל את ההנחיות המתאימות:"
+- generic: בורר מקורות פעולה לאירועי בדיקה
+- combobox "בורר מקורות פעולה לאירועי בדיקה":
+  - generic: CRM
+- separator
+- text: דף
+- combobox "דף excellnetfinance":
+  - generic: excellnetfinance
+- heading "ניתן לחבר את excellnetfinance כדי לבדוק את ההגדרה שלך." [level=4]
+- text: עם חיבור
+- link "excellnetfinance to a CRM in Meta Business Suite":
+  - /url: /latest/instant_forms/crm_setup/?asset_id=376334888895532&business_id=745355029428233&nav_ref=bm_events_manager_instant_form_button
+- text: למערכת CRM בהגדרת Meta Business Suite, לידים יישלחו אוטומטית - אין צורך בהורדות ידניות.
+- link "להגדיר":
+  - /url: /latest/instant_forms/crm_setup/?asset_id=376334888895532&business_id=745355029428233&nav_ref=bm_events_manager_instant_form_button
+  - generic: להגדיר
+- text: טופס מיידי
+- combobox "טופס מיידי":
+- heading "אירועים" [level=4]:
+  - text: אירועים
+- generic: ליד אימות
+- button "הסרת הפעילות":
+  - generic: הסרת הפעילות
+- button "פתח תפריט נפתח" [active]:
+  - generic: פתח תפריט נפתח
+- heading "שם אירועים" [level=4]
+- heading "מקור אירועים" [level=4]
+- heading "מקור אירוע לידים" [level=4]
+- heading "פרמטרים של פרטי לקוח" [level=4]
+- heading "שעת הקבלה" [level=4]
+- list:
+  - button "ליד עבר עיבוד email,external_id,pdid היום בשעה 7:50:33" [expanded]:
+    - generic: ליד
+    - generic: עבר עיבוד
+    - status: עבר עיבוד
+    - generic: email,external_id,pdid
+    - generic: היום בשעה 7:50:33
+  - region:
+    - generic: אין פרטי אירוע להצגה עם המסננים שבחרת.
+- link "תרגומים":
+  - /url: https://www.facebook.com/translations/?ref=trans_nub

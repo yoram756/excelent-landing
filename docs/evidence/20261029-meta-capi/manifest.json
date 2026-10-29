@@ -1,0 +1,23 @@
+{
+  "generatedAt": "2026-10-29T05:55:11.383Z",
+  "status": "PASS",
+  "scope": "One controlled conversion; not automatic production dispatch",
+  "eventId": "TEST-META-CAPI-20261029-001",
+  "datasetId": "1822147178482498",
+  "filesSha256": {
+    "intake-no-send-readback.json": "5bfea6a9738db0fbc0db3259f0c271972f90ed9bd7f457d096c522d8a06f7c63",
+    "intake-execution.json": "6613a8822bca28f72a14c68c6a70eaef6d49edb85fb88948089fad4b52d33b85",
+    "intake-attempt.json": "401dee26441a65c16050aac0a82b53d7d94955699c05e16128875987bac94975",
+    "intake-response.json": "5c58e605c8f2b8330c9d45c5e5fd1bdb39c9c56602222f3925fa09730e3cd115",
+    "monday-before-delete.json": "981ba4f2656eda7a36aca8630a68bab04f37e8498ff3fb91a17ff769dab03736",
+    "monday-after-delete.json": "ec093e42513884ec1a0c6e318a387953d931280c466661e09c01de20cd397c90",
+    "cleanup.json": "0c4d7b0788fbb0e83a7c6e2d852ddd7c65dc221c500421ec27c4169d9d7e7ee1",
+    "credential-storage-check.json": "1c72854093e7b9bd21fa19a65f7b0dde0d1dca09d385bafbf6a90719f21f77dc",
+    "meta-ui-readback.json": "95398db8226fd131ae7ebf3703c4b3b70b425fc476e37d02337999a6de0e83eb",
+    "meta-ui-readback.txt": "e648f67415f2bbb552c2e5f14e5c7fc1b6b1394268e3bacd30a61a2190fe5bd6",
+    "meta-processed.png": "6cd7448e6b9ba2a8032689657d7032de7eafa436bf0416a4d53dc912763d0972",
+    "meta-api-attempt.json": "59b5a3770ef2eccd9226da50d84dbd95c34174fb10716a58e7ba4e59a02a2474",
+    "meta-api-receipt.json": "ddd4d8cd36c76dabd88d5b3fd1262ce10006ee6da4dcc855dc3f77d70d24418f"
+  },
+  "secretFilesIncluded": false
+}

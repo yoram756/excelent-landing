@@ -1,58 +1,103 @@
 {
-  "generatedAt": "2026-10-28T22:23:56.362Z",
-  "decision": "BLOCKED",
+  "generatedAt": "2026-10-29T05:55:11.383Z",
+  "decision": "PASS",
+  "scope": "Controlled synthetic conversion only",
   "goLiveReady": false,
   "datasetId": "1822147178482498",
-  "businessId": "745355029428233",
+  "eventId": "TEST-META-CAPI-20261029-001",
+  "eventName": "Lead",
+  "actionSource": "system_generated",
+  "optOut": true,
+  "intakePosts": 1,
+  "metaEventsSent": 1,
+  "automaticRetry": false,
+  "mondayTestItemId": "3316551990",
+  "mondayFixturesCreated": 1,
+  "mondayTestState": "deleted",
   "whatsappMessagesSent": 0,
-  "metaEventsSent": 0,
-  "mondayFixturesCreated": 0,
   "n8nSettingsChanged": false,
+  "apiReceipt": {
+    "scope": "Meta API acceptance only; Test Events receipt must be verified separately",
+    "eventId": "TEST-META-CAPI-20261029-001",
+    "eventName": "Lead",
+    "automaticRetry": false,
+    "metaTestEventsStatus": "NOT TESTED",
+    "apiAccepted": true,
+    "httpStatus": 200,
+    "eventsReceived": 1,
+    "errorCode": null,
+    "errorSubcode": null,
+    "traceId": "AJ3W4y2NVzYB6BUcSP-T8hR"
+  },
+  "metaUiReceipt": {
+    "observedAt": "2026-10-29T05:55:11.383Z",
+    "datasetId": "1822147178482498",
+    "eventName": "Lead",
+    "displayName": "ליד",
+    "status": "PASS",
+    "metaDisplayStatus": "עבר עיבוד",
+    "receivedLocalTime": "2026-10-29 07:50:33 Asia/Jerusalem",
+    "eventCount": 1,
+    "channel": "CRM",
+    "visibleCustomerParameterKeys": [
+      "email",
+      "external_id",
+      "pdid"
+    ],
+    "eventIdVisibleInMeta": false,
+    "eventIdReadbackStatus": "NOT TESTED",
+    "correlation": "One authorized synthetic POST, one processed CRM row at the same second; Meta UI does not expose the event_id",
+    "screenshot": "docs/evidence/20261029-meta-capi/meta-processed.png"
+  },
   "requirements": [
     {
-      "id": "connection_discovery",
+      "id": "capi_token_creation_storage",
       "status": "PASS",
-      "scope": "Authenticated Meta and n8n UI read-only",
-      "evidence": "Dataset and business read in Meta; CAPI credential search empty; credential rXUgCsAiS5wC4iRQ (Excellent Meta Leads Read Only) shows Connect your account to use this credential. No credential saved or reconnected."
+      "scope": "Actual Meta token creation after per-action owner approval; local storage verified",
+      "evidence": "docs/evidence/20261029-meta-capi/credential-storage-check.json; token and current test code saved only in ignored primary tests/out/meta-capi-20261029/private.env; NTFS access limited to current Windows user and SYSTEM. Values never logged or committed."
     },
     {
-      "id": "event_id_mapping",
+      "id": "live_intake_monday_event_mapping",
       "status": "PASS",
-      "scope": "Local expression execution and injected transport only; not a new production conversion",
-      "evidence": "mapping-verification.json: 4 mapping cases, exact configured Monday event column text_mm8c3r4v; negative control detects missing value. Targeted node --test command exit 0, 41/41.",
-      "mapping": {
-        "status": "PASS",
-        "scope": "Local expression execution only; no network, no new CRM item and no Meta delivery",
-        "workflowVersion": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
-        "boardId": "5106246268",
-        "mondayColumn": "text_mm8c3r4v",
-        "syntheticEventId": "TEST-META-CAPI-20261029-001",
-        "cases": 4,
-        "eventIdUnchanged": true,
-        "negativeControl": "Missing stored event ID is detected",
-        "capiTargetField": "event_id",
-        "capiOutboundBindingStatus": "BLOCKED: no verified sender credential"
-      }
+      "scope": "Actual public API and independent Monday readback, synthetic lead",
+      "evidence": "HTTP 200; n8n execution 65721 Succeeded in 4.329s on published version 60101067-81e0-4daa-b9b2-d4cfa7b9d736; item 3316551990, event column text_mm8c3r4v exactly TEST-META-CAPI-20261029-001, owner 75075191."
     },
     {
       "id": "controlled_meta_conversion",
-      "status": "BLOCKED",
-      "evidence": "No verified CAPI token; no /events request sent; awaiting owner secure local token provisioning and a current Test Events code. No HTTP error inferred."
+      "status": "PASS",
+      "scope": "One real synthetic CAPI POST and independent Meta UI processed receipt",
+      "evidence": "Meta HTTP 200, events_received=1, fbtrace_id AJ3W4y2NVzYB6BUcSP-T8hR; CRM Test Events shows one Lead processed at 2026-10-29 07:50:33 Asia/Jerusalem, matching the sole POST at 2026-10-29T05:50:33.327Z. Screenshot and DOM snapshot in docs/evidence/20261029-meta-capi."
+    },
+    {
+      "id": "meta_ui_event_id_readback",
+      "status": "NOT TESTED",
+      "scope": "Exact identifier readback from Meta UI only",
+      "evidence": "CRM event details expose no event identifier. Exact event_id was verified in Monday storage and sent unchanged by the source-controlled probe; Meta UI correlation uses the sole event, type, time and synthetic identifier keys. No claim of an independent Meta echo of event_id."
+    },
+    {
+      "id": "test_cleanup",
+      "status": "PASS",
+      "scope": "Independent actual Monday API readback",
+      "evidence": "Owned item 3316551990 state=deleted. Active board returned exactly the four baseline IDs; no owned TEST item or new central-error alert remains."
+    },
+    {
+      "id": "no_whatsapp_no_n8n_settings_changes",
+      "status": "PASS",
+      "evidence": "Published intake read before POST: 41 nodes, both WhatsApp nodes disabled. Actual execution 65721 uses the unchanged published version. No WhatsApp provider or n8n settings mutation called."
     },
     {
       "id": "production_automatic_dispatch",
       "status": "NOT TESTED",
-      "evidence": "No verified deployed Monday-to-Meta events sender. New script is a synthetic one-event probe, not a production dispatcher."
-    },
-    {
-      "id": "local_funnel_regression",
-      "status": "PASS",
-      "scope": "Local only; provider transports mocked",
-      "evidence": "npm run test:funnel exit 0, 391/391; includes the secret scanner. tests/out/meta-capi-20261029/funnel.log. Initial sandbox run exit 1 with EACCES on localhost is preserved as funnel-sandbox.log; unchanged suite rerun with local networking succeeds."
+      "evidence": "This is a one-shot local probe. No automatic Monday-to-CAPI sender was installed, activated or verified."
     }
   ],
-  "nextOwnerAction": "Generate a dataset-scoped server token in Meta using setup without Dataset Quality API; save only in ignored private.env after META_CAPI_ACCESS_TOKEN=. Never send secrets in chat.",
-  "privateEnvironmentIgnored": true,
-  "providerDeliveryProof": false,
-  "report": "docs/runtime/META_CAPI_20261029.md"
+  "evidence": "docs/evidence/20261029-meta-capi",
+  "validation": {
+    "status": "PASS",
+    "command": "node --test tests/funnel/meta-capi.test.js tests/funnel/secrets.test.js",
+    "exitCode": 0,
+    "tests": 8,
+    "scope": "Local probe contracts and source/evidence secret scan; independent from real Meta receipt",
+    "logSha256": "0ebe2127e852ce05f87a7e0d4fcff68484069df824393c62a9866d01884357ec"
+  }
 }

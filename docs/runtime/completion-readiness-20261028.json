@@ -64,7 +64,7 @@
     {
       "id": "meta_capi",
       "status": "BLOCKED",
-      "evidence": "meta-capi-20261029.json: dataset 1822147178482498 read back; existing Leads Read Only credential is disconnected and no CAPI credential found; local exact event_id mapping and 41 targeted tests pass. No event sent; awaiting secure scoped token and Test Events receipt."
+      "evidence": "meta-capi-20261029.json: credential and controlled conversion PASS; Meta HTTP 200, one processed CRM Lead and deleted fixture. Full production requirement remains blocked because no automatic Monday-to-CAPI dispatcher is installed or verified."
     },
     {
       "id": "posthog",
@@ -116,6 +116,16 @@
       "status": "PASS",
       "evidence": "npm run test:funnel exit 0, 386/386 after incremental migration and explicit IF serialization version 1; tests/out/atomic-intake-20261028/funnel-final.log",
       "scope": "Local providers mocked; actual concurrent SQLite/HTTP workers and negative controls"
+    },
+    {
+      "id": "meta_capi_controlled_conversion",
+      "status": "PASS",
+      "evidence": "meta-capi-20261029.json and docs/evidence/20261029-meta-capi; actual HTTP 200, events_received=1, Meta CRM processed receipt 07:50:33, Monday fixture 3316551990 independently deleted."
+    },
+    {
+      "id": "meta_capi_exact_id_ui_readback",
+      "status": "NOT TESTED",
+      "evidence": "CRM Test Events does not expose event_id. Stored ID and outbound request preserve the exact string; UI correlation uses the sole processed event and timestamp."
     }
   ],
   "deployedSourceCommit": "95e430b33237a2a8ccc77bdc0dd3afe7e7560768"

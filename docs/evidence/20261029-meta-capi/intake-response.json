@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "Live intake HTTP response only; independent CRM readback required",
+  "httpStatus": 200,
+  "requestId": "3316551990",
+  "body": {
+    "request_id": "3316551990"
+  },
+  "eventId": "TEST-META-CAPI-20261029-001",
+  "postsAttempted": 1,
+  "automaticRetry": false
+}

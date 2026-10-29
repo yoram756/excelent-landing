@@ -1,0 +1,16 @@
+✔ CAPI test derives the exact event ID from configured Monday storage and excludes CRM contacts (7.9238ms)
+✔ missing, conflicting, wrong-board, non-TEST and deleted fixtures are rejected before claim or transport (2.0719ms)
+✔ one claimed request uses a header credential and API receipt is not Test Events proof (8.8795ms)
+✔ claimed or uncertain attempts cannot be blindly repeated and never expose credentials (1.774ms)
+✔ HTTP 200 without one acknowledged event, API errors and malformed responses are never accepted (2.2572ms)
+✔ no known secret shape appears in any tracked text file (8213.0507ms)
+✔ secret variables in .env.example have no value and .env is ignored (5.2618ms)
+✔ the lock service and the Meta adapter read secrets only from env or their caller (3.5954ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8828.288

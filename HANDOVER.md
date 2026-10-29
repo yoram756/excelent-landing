@@ -219,3 +219,8 @@ Whole-project go-live readiness remains false; unrelated blockers stay open. Det
 ## בדיקת Meta CAPI, 29.10.2026
 
 BLOCKED: נמצא Dataset 1822147178482498, אך לא נמצא חיבור CAPI מורשה לשידור. מיפוי event_id עבר מקומית ו־41 בדיקות ממוקדות עברו; לא נשלח אירוע ל־Meta. נדרש אסימון שרת לנכס, קוד Test Events וקבלה עצמאית לפני אישור המרה. לא נשלחה הודעת WhatsApp ולא שונו הגדרות n8n. [הדוח המעודכן](docs/runtime/META_CAPI_20261029.md). מוכנות כללית נשארת false.
+
+
+## השלמת בדיקת Meta CAPI, 29.10.2026
+
+PASS לבדיקה המבוקרת בלבד: אסימון נוצר באישור ונשמר מקומית עם NTFS מוגבל וחריגת Git. קליטה 65721 החזירה HTTP 200, Monday 3316551990 שמרה event_id ואחראי, ו־Meta החזירה HTTP 200 ואירוע אחד והציגה CRM Lead שעבר עיבוד ב־07:50:33. הפריט נמחק וארבע רשומות הבסיס נשמרו. אין WhatsApp ואין שינוי הגדרות n8n. קריאה חוזרת של event_id עצמו ממסך Meta היא NOT TESTED כי המזהה אינו מוצג. משדר אוטומטי בייצור נשאר לא מאומת, והמוכנות הכללית false. [דוח וראיות](docs/runtime/META_CAPI_20261029.md).
