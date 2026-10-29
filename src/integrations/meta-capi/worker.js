@@ -4,7 +4,8 @@ function configuration(campaign){
   if(!c||!/^\d{8,20}$/.test(c.datasetId)||c.eventName!=='Lead'||c.actionSource!=='system_generated'||!/^v\d{1,3}\.\d+$/.test(c.graphVersion)||!c.sourceLabels?.length||c.sourceLabels.some(x=>typeof x!=='string'||!x))throw Error('Explicit conversion configuration required');
   const boardId=String(campaign.board),eventColumn=campaign.intake?.columns?.eventId,sourceColumn=campaign.columns?.source;
   if(!/^\d+$/.test(boardId)||!eventColumn||!sourceColumn)throw Error('Missing configured CRM mapping');
-  const cfg={...c,boardId,eventColumn,sourceColumn,optOutColumn:campaign.columns.status,optOutLabel:campaign.channels?.optOut?.label};return {...cfg,binding:JSON.stringify([boardId,eventColumn,sourceColumn,c.datasetId,c.eventName,c.sourceLabels,cfg.optOutColumn,cfg.optOutLabel])};
+  const crmName=c.crmName||'Monday';if(typeof crmName!=='string'||!crmName.trim()||crmName.length>100||/[\u0000-\u001f]/.test(crmName))throw Error('Invalid CRM event source');
+  const cfg={...c,crmName,boardId,eventColumn,sourceColumn,optOutColumn:campaign.columns.status,optOutLabel:campaign.channels?.optOut?.label};return {...cfg,binding:JSON.stringify([boardId,eventColumn,sourceColumn,c.datasetId,c.eventName,c.sourceLabels,cfg.optOutColumn,cfg.optOutLabel])};
 }
 function candidate(item,cfg,mode,cutoff,now){
   if(item?.state!=='active'||String(item.board?.id)!==cfg.boardId||!/^\d+$/.test(String(item.id)))return {skip:'wrong_item'};
@@ -19,7 +20,7 @@ function candidate(item,cfg,mode,cutoff,now){
   if(typeof eventId!=='string'||!/^[A-Za-z0-9_-]{8,80}$/.test(eventId)||values[0].text!==eventId||(mode==='test'&&!eventId.startsWith('TEST-')))return {invalid:'missing_or_conflicting_event_id'};
   const user_data={external_id:[hash(JSON.stringify([cfg.datasetId,cfg.boardId,String(item.id)]))]};
   if(test)user_data.em=[hash('meta-auto-'+hash(eventId).slice(0,16)+'@example.invalid')];
-  return {eventId,created,event:{event_name:cfg.eventName,event_time:Math.floor(created/1000),event_id:eventId,action_source:cfg.actionSource,opt_out:mode==='test',user_data}};
+  return {eventId,created,event:{event_name:cfg.eventName,event_time:Math.floor(created/1000),event_id:eventId,action_source:cfg.actionSource,custom_data:{event_source:'crm',lead_event_source:cfg.crmName},opt_out:mode==='test',user_data}};
 }
 class CapiWorker{
   constructor({store,cfg,mode,monday,accessToken,testCode,transport,now=Date.now}){

@@ -5,6 +5,7 @@ const fixture=()=>({item:{id:'123',name:'TEST synthetic CAPI',state:'active',boa
 test('CAPI test derives the exact event ID from configured Monday storage and excludes CRM contacts',()=>{
  const r=buildTestRequest(fixture());assert.equal(r.endpoint,'https://graph.facebook.com/v26.0/900000002/events');assert.equal(r.body.data.length,1);
  const event=r.body.data[0];assert.equal(event.event_id,id);assert.equal(event.event_name,'Lead');assert.equal(event.action_source,'system_generated');assert.equal(event.opt_out,true);
+ assert.deepEqual(event.custom_data,{event_source:'crm',lead_event_source:'Monday'});
  assert.match(event.user_data.em[0],/^[a-f0-9]{64}$/);assert.match(event.user_data.external_id[0],/^[a-f0-9]{64}$/);
  assert.doesNotMatch(JSON.stringify(r),/private-real|0551234567|never-export|access_token/);
 });

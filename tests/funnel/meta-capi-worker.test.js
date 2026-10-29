@@ -18,6 +18,15 @@ test('automatic scan reads Monday independently, preserves event_id and records 
 test('repeated scans of an acknowledged event do not post or repeat individual Monday reads',async()=>{
  const f=fixture();try{await f.worker.tick();assert.equal((await f.worker.tick()).duplicates,1);f.clock(now+8*86400000);assert.equal((await f.worker.tick()).duplicates,1);assert.equal(f.calls(),1);assert.equal(f.reads(),1);assert.equal(f.store.status().issues.length,0);}finally{f.store.close();}
 });
+
+test('CRM metadata follows the configured provider without changing durable identity',()=>{
+ const original=configuration(campaign),custom=configuration({...campaign,conversions:{...campaign.conversions,crmName:'CRM Test Provider'}});
+ assert.equal(original.binding,custom.binding);
+ const event=candidate(item(),custom,'test',now,now).event;
+ assert.deepEqual(event.custom_data,{event_source:'crm',lead_event_source:'CRM Test Provider'});
+ assert.equal(event.event_id,eventId);
+ assert.throws(()=>configuration({...campaign,conversions:{...campaign.conversions,crmName:'bad\nsource'}}),/Invalid CRM/);
+});
 test('scope rejects history, WhatsApp sources, wrong board, inactive data and real people in test mode',async()=>{
  const cfg=configuration(campaign);
  for(const mutate of [x=>x.created_at=new Date(now-1).toISOString(),x=>x.state='deleted',x=>x.board.id='other',x=>x.name='Actual lead',x=>x.column_values[1].text='WhatsApp']){const x=item();mutate(x);assert.ok(candidate(x,cfg,'test',now,now).skip);}

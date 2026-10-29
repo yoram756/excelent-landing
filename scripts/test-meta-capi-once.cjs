@@ -2,9 +2,10 @@
 const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto');
 const hash=s=>crypto.createHash('sha256').update(s).digest('hex');
 const {postEvent}=require('../src/integrations/meta-capi/client');
-function buildTestRequest({item,boardId,eventColumn,datasetId,graphVersion='v26.0',testCode,now=Date.now()}){
+function buildTestRequest({item,boardId,eventColumn,datasetId,graphVersion='v26.0',testCode,crmName='Monday',now=Date.now()}){
   if(!/^\d{8,20}$/.test(String(datasetId))||!/^v\d{1,3}\.\d+$/.test(graphVersion))throw Error('Invalid CAPI destination');
   if(!/^TEST[A-Z0-9]{1,80}$/.test(testCode||''))throw Error('A current Meta test event code is required');
+  if(typeof crmName!=='string'||!crmName.trim()||crmName.length>100||/[\u0000-\u001f]/.test(crmName))throw Error('Invalid CRM event source');
   if(!item||!/^TEST(?:\s|_|-)/.test(item.name||'')||String(item.board?.id)!==String(boardId)||item.state!=='active')throw Error('An active TEST item on the configured board is required');
   const matches=item.column_values?.filter(c=>c.id===eventColumn)||[];
   if(matches.length!==1)throw Error('One stored Monday event identifier is required');
@@ -15,7 +16,7 @@ function buildTestRequest({item,boardId,eventColumn,datasetId,graphVersion='v26.
   // fields. opt_out avoids ad-delivery optimization; it is not an attribution
   // exclusion guarantee. Test Events visibility still requires independent UI proof.
   const user_data={external_id:[hash('TEST:'+eventId)],em:[hash('meta-capi-'+hash(eventId).slice(0,16)+'@example.invalid')]};
-  return {endpoint:'https://graph.facebook.com/'+graphVersion+'/'+datasetId+'/events',body:{test_event_code:testCode,data:[{event_name:'Lead',event_time:Math.floor(now/1000),event_id:eventId,action_source:'system_generated',opt_out:true,user_data}]}};
+  return {endpoint:'https://graph.facebook.com/'+graphVersion+'/'+datasetId+'/events',body:{test_event_code:testCode,data:[{event_name:'Lead',event_time:Math.floor(now/1000),event_id:eventId,action_source:'system_generated',custom_data:{event_source:'crm',lead_event_source:crmName},opt_out:true,user_data}]}};
 }
 async function sendTestOnce(options,{transport=fetch,claim}={}){
   const request=buildTestRequest(options),token=options.accessToken;

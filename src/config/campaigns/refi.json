@@ -510,6 +510,7 @@
     "datasetId": "1822147178482498",
     "eventName": "Lead",
     "actionSource": "system_generated",
+    "crmName": "Monday",
     "graphVersion": "v26.0",
     "mondayApiVersion": "2026-07",
     "sourceLabels": ["קליטת LP1", "LP1 טופס"]
