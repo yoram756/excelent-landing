@@ -1,0 +1,44 @@
+{
+  "generatedAt": "2026-10-29T06:41:10.179Z",
+  "status": "BLOCKED",
+  "phase": "awaiting_owner_approval_for_existing_credentials_transfer",
+  "sourceCommit": "9967fa0ba89e1eeee31236d9c01b6757ad2d31b4",
+  "productionDispatcherActivated": false,
+  "controlledMetaEventsSent": 0,
+  "whatsappMessagesSent": 0,
+  "n8nSettingsChanged": false,
+  "requirements": [
+    {
+      "id": "source_and_durable_deduplication",
+      "status": "PASS",
+      "scope": "Local only",
+      "evidence": "npm run test:funnel exit 0, 407/407. Two-process SQLite race, independent Monday read, persistent claim, restart, ambiguity and deliberate broken-guard negative control tested."
+    },
+    {
+      "id": "actual_monday_read_preflight",
+      "status": "PASS",
+      "scope": "Actual readonly API; no CRM write or Meta POST",
+      "evidence": "Existing credential HTTP 200 on board 5106246268, API 2026-07; actual worker --once skipped all four historical items."
+    },
+    {
+      "id": "vps_preparation",
+      "status": "PASS",
+      "evidence": "Hostinger authenticated terminal readback: git pull to 9967fa0ba89e1eeee31236d9c01b6757ad2d31b4, disposable nginx -t PASS, image build PASS, core container/workflow/config hashes unchanged. Parsed visible terminal result in vps-prepared.json; raw private server reports remain on VPS."
+    },
+    {
+      "id": "server_credential_provisioning",
+      "status": "BLOCKED",
+      "evidence": "Awaiting explicit approval to transmit the existing Monday and Meta credentials to private VPS files. No credentials have been copied to the server."
+    },
+    {
+      "id": "controlled_automatic_conversion_and_restart",
+      "status": "NOT TESTED",
+      "evidence": "Create one new TEST only after test worker starts, independently read Monday/ledger/Meta and verify no second dispatch on rescan and restart; then delete fixture."
+    },
+    {
+      "id": "persistent_live_automation",
+      "status": "NOT TESTED",
+      "evidence": "Service is built but not started. Final activation follows controlled gate and cleanup."
+    }
+  ]
+}

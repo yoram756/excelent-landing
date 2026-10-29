@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "sourceCommit": "9967fa0ba89e1eeee31236d9c01b6757ad2d31b4",
+  "nginxTest": "PASS",
+  "imageBuild": "PASS",
+  "coreUnchanged": true,
+  "credentialsProvisioned": false
+}

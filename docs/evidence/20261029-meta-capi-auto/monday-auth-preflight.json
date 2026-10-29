@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "httpStatus": 200,
+  "boardId": "5106246268",
+  "apiVersion": "2026-07",
+  "columns": [
+    {
+      "id": "refi_source",
+      "type": "status",
+      "title": "מקור",
+      "settings_str": "{\"done_colors\":[],\"labels_descriptions\":{},\"deactivated_labels\":[],\"color_mapping\":{},\"labels\":{\"0\":\"אורגני\",\"1\":\"הפניה\",\"2\":\"טופס\",\"3\":\"LP1 טופס\",\"4\":\"LP1 וואטסאפ\",\"6\":\"קליטת LP1\",\"7\":\"וואטסאפ ממודעה\",\"8\":\"יומן\"},\"labels_positions_v2\":{\"0\":1,\"1\":2,\"2\":3,\"3\":4,\"4\":5,\"7\":0},\"labels_colors\":{\"0\":{\"color\":\"#fdab3d\",\"border\":\"#e99729\",\"var_name\":\"orange\"},\"1\":{\"color\":\"#00c875\",\"border\":\"#00b461\",\"var_name\":\"green-shadow\"},\"2\":{\"color\":\"#df2f4a\",\"border\":\"#ce3048\",\"var_name\":\"red-shadow\"},\"3\":{\"color\":\"#007eb5\",\"border\":\"#3db0df\",\"var_name\":\"blue-links\"},\"4\":{\"color\":\"#9d50dd\",\"border\":\"#9238af\",\"var_name\":\"purple\"},\"6\":{\"color\":\"#037f4c\",\"border\":\"#006b38\",\"var_name\":\"grass-green\"},\"7\":{\"color\":\"#579bfc\",\"border\":\"#4387e8\",\"var_name\":\"bright-blue\"},\"8\":{\"color\":\"#cab641\",\"border\":\"#c0ab31\",\"var_name\":\"mustered\"}}}"
+    },
+    {
+      "id": "text_mm8c3r4v",
+      "type": "text",
+      "title": "מזהה אירוע קליטה",
+      "settings_str": "{}"
+    }
+  ],
+  "secretValuesLogged": false,
+  "scope": "Actual readonly Monday credential preflight; no writes"
+}

@@ -1,0 +1,50 @@
+- textbox "Terminal input" [active]
+- generic: create mode 100644 docs/runtime/cosend-dot/validation-20261028.json
+- generic: create mode 100644 docs/runtime/meta-capi-20261029.json
+- generic: create mode 100644 docs/runtime/textme-api-20261028.json
+- generic: create mode 100644 docs/runtime/textme-dot-20261028.json
+- generic: create mode 100644 docs/runtime/textme-dot-readback-20261028.json
+- generic: create mode 100644 plugins/excellent-cosend-official/README.md
+- generic: create mode 100644 plugins/excellent-cosend-official/mcp.json
+- generic: create mode 100644 plugins/excellent-cosend-official/plugin.json
+- generic: create mode 100644 plugins/excellent-cosend-official/skills/excellent-official-conversations/SKILL.md
+- generic: create mode 100644 plugins/excellent-cosend-official/skills/excellent-official-conversations/references/activation.json
+- generic: create mode 100644 plugins/excellent-textme-management/.codex-plugin/plugin.json
+- generic: create mode 100644 plugins/excellent-textme-management/README.md
+- generic: create mode 100644 plugins/excellent-textme-management/plugin.json
+- generic: create mode 100644 plugins/excellent-textme-management/skills/excellent-textme-workflow/SKILL.md
+- generic: create mode 100644 scripts/probe-cosend-dot-dns.mjs
+- generic: create mode 100644 scripts/probe-cosend-dot.mjs
+- generic: create mode 100644 scripts/test-meta-capi-once.cjs
+- generic: create mode 100644 scripts/validate-cosend-dot-plugin.mjs
+- generic: create mode 100644 src/integrations/meta-capi/client.js
+- generic: create mode 100644 src/integrations/meta-capi/health.js
+- generic: create mode 100644 src/integrations/meta-capi/monday.js
+- generic: create mode 100644 src/integrations/meta-capi/run.js
+- generic: create mode 100644 src/integrations/meta-capi/store.js
+- generic: create mode 100644 src/integrations/meta-capi/worker.js
+- generic: create mode 100644 src/integrations/textme-dot/README.md
+- generic: create mode 100644 src/integrations/textme-dot/build-workflows.js
+- generic: create mode 100644 src/integrations/textme-dot/exports/mcp-disabled.json
+- generic: create mode 100644 src/integrations/textme-dot/exports/read-acceptance-source.json
+- generic: create mode 100644 src/integrations/textme-dot/exports/restricted-read.json
+- generic: create mode 100644 src/integrations/textme-dot/mcp-read-probe.js
+- generic: create mode 100644 src/integrations/textme-dot/plugin-connection.js
+- generic: create mode 100644 src/integrations/textme-dot/proposals.js
+- generic: create mode 100644 src/integrations/textme-dot/read-policy.js
+- generic: create mode 100644 src/webhooks/intake/atomic-export.js
+- generic: create mode 100644 src/webhooks/intake/atomic-lock-result.js
+- generic: create mode 100644 src/webhooks/intake/atomic-shape.json
+- generic: create mode 100644 tests/funnel/atomic-intake.test.js
+- generic: create mode 100644 tests/funnel/fixtures/capi-worker-child.cjs
+- generic: create mode 100644 tests/funnel/fixtures/intake-before-guards.json
+- generic: create mode 100644 tests/funnel/meta-capi-worker.test.js
+- generic: create mode 100644 tests/funnel/meta-capi.test.js
+- generic: create mode 100644 tests/textme-dot/mcp-read-probe.test.js
+- generic: create mode 100644 tests/textme-dot/plugin-connection.test.js
+- generic: create mode 100644 tests/textme-dot/policy.test.js
+- generic: "{\"status\": \"PASS\", \"sourceCommit\": \"9967fa0ba89e1eeee31236d9c01b6757ad2d31b4\", \"nginxTest\": \"PASS\", \"imageBuild\": \"PASS\", \"coreUnchanged\": true, \"credentialsProvisioned\": false}"
+- generic: root@srv1604140:/docker/lp#
+- button "Agent":
+  - generic: Agent
+- generic: Close

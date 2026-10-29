@@ -1,0 +1,15 @@
+{
+  "phase": "prepared-awaiting-secure-credential-transfer",
+  "sourceCommit": "9967fa0ba89e1eeee31236d9c01b6757ad2d31b4",
+  "productionActivation": "NOT TESTED",
+  "providerPostsInThisTask": 0,
+  "files": {
+    "funnel.log": "a2bddeea6ae5215e2f7f81f130ec81bc09efde38ea0832aa4d83c7b41084517d",
+    "funnel-before-env-fix.log": "511ce27aad3b4b6e4c844d1b6d316668fb65d2db90b1bed506780d2a660488dc",
+    "config-negative-before-fix.log": "b0d454588d42f95acd178923e0ccf7811fcd3ad845c3e64085b8bc6be1dcc6ef",
+    "monday-auth-preflight.json": "de8be0623af7d174efde068fcb289b5f4f1c1b22197331f900b38bc2dd3e671e",
+    "vps-prepared.json": "a8d026c11c79c6e543636d244cda19ecff9c29f515ebd26ecb153d7f2dcece55",
+    "vps-prepared.txt": "33fd3a3e5805ee86ca593ba52636966c03d56f72dd371ff402b757267b3a5fbf",
+    "vps-prepared.png": "9057dcc5be250724348a0393a196282bf9d12d1376f19445b40f1c52ace7f07e"
+  }
+}
