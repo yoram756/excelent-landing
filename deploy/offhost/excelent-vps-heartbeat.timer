@@ -1,0 +1,11 @@
+[Unit]
+Description=Send an external VPS heartbeat every minute
+
+[Timer]
+OnBootSec=30s
+OnUnitActiveSec=60s
+AccuracySec=1s
+Unit=excelent-vps-heartbeat.service
+
+[Install]
+WantedBy=timers.target

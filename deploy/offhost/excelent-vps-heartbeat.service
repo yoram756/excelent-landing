@@ -1,0 +1,17 @@
+[Unit]
+Description=VPS heartbeat to independent hosted Healthchecks monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+DynamicUser=yes
+LoadCredential=healthchecks_url:/docker/offhost-secrets/healthchecks_url
+ExecStart=/usr/bin/python3 /usr/local/lib/excelent-monitor/offhost-heartbeat.py --config /etc/excelent-monitor/heartbeat.json
+TimeoutStartSec=20
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6

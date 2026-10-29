@@ -5,7 +5,8 @@ const SKIP=new Set(['node_modules','.git','out']);
 const files=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>SKIP.has(e.name)?[]:e.isDirectory()?files(path.join(d,e.name)):/\.(png|webp|jpe?g|svg|ico|woff2?)$/.test(e.name)?[]:[path.join(d,e.name)]);
 const PATTERNS=[[/EAA[A-Za-z0-9]{30,}/,'Meta access token'],[/access_token=[A-Za-z0-9._-]{10,}/,'token in a URL'],[/AKIA[0-9A-Z]{16}/,'AWS key'],
   [/AIza[0-9A-Za-z_-]{35}/,'Google API key'],[/-----BEGIN [A-Z ]*PRIVATE KEY-----/,'private key'],[/xox[baprs]-[A-Za-z0-9-]{10,}/,'Slack token'],
-  [/Bearer [A-Za-z0-9._-]{32,}/,'literal bearer token'],[/sk-[A-Za-z0-9]{32,}/,'API secret key']];
+  [/Bearer [A-Za-z0-9._-]{32,}/,'literal bearer token'],[/sk-[A-Za-z0-9]{32,}/,'API secret key'],
+  [/https:\/\/hc-ping\.com\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i,'Healthchecks ping capability']];
 
 test('no known secret shape appears in any tracked text file',()=>{
   const hits=[];for(const f of files(root)){const s=fs.readFileSync(f,'utf8');for(const [re,what] of PATTERNS)if(re.test(s))hits.push(path.relative(root,f)+': '+what);}

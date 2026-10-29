@@ -1,0 +1,12 @@
+{
+  "provider": "healthchecks.io",
+  "checkName": "Excelent VPS availability",
+  "pingHost": "hc-ping.com",
+  "timeoutSeconds": 10,
+  "intervalSeconds": 60,
+  "externalPeriodSeconds": 60,
+  "externalGraceSeconds": 120,
+  "recipientConfig": "config/error-handler.json",
+  "notificationChannel": "email",
+  "plan": "Hobbyist free only"
+}
