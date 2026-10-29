@@ -1,0 +1,19 @@
+.........F
+======================================================================
+FAIL: test_unsafe_url_rejected_before_network (offhost_negative_tests.HeartbeatTests.test_unsafe_url_rejected_before_network)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\User\excelent-landing\tests\deploy\offhost_heartbeat_test.py", line 57, in test_unsafe_url_rejected_before_network
+    self.assertEqual(self.calls, [])
+AssertionError: Lists differ: [(<urllib.request.Request object at 0x0000[563 chars] 10)] != []
+
+First list contains 10 additional elements.
+First extra element 0:
+(<urllib.request.Request object at 0x000002A186A32BD0>, 10)
+
+Diff is 645 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.166s
+
+FAILED (failures=1)

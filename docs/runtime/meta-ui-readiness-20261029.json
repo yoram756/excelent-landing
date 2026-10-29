@@ -28,6 +28,9 @@
   "monitoringEvidence": "docs/runtime/CAPI_MONITORING_20261029.md",
   "monitoringScope": "independent process on same VPS; Monday bell delivery confirmed",
   "monitoringEmailDelivery": "PASS",
-  "offHostUptimeCoverage": "NOT TESTED",
-  "monitoringEmailEvidence": "docs/evidence/20261029-capi-monitor/email-readback.json"
+  "offHostUptimeCoverage": "PASS",
+  "monitoringEmailEvidence": "docs/evidence/20261029-capi-monitor/email-readback.json",
+  "offHostMonitoringEvidence": "docs/runtime/VPS_OFFHOST_MONITORING_20261029.md",
+  "offHostMonitoringScope": "hosted dead-man heartbeat; real missing signal and recovery emails verified",
+  "actualWholeServerShutdown": "NOT TESTED"
 }

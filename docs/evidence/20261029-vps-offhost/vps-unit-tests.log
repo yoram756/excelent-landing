@@ -1,0 +1,15 @@
+test_changed_delivery_or_policy_rejected_before_send (__main__.HeartbeatTests.test_changed_delivery_or_policy_rejected_before_send) ... ok
+test_cli_missing_credentials_logs_no_secret (__main__.HeartbeatTests.test_cli_missing_credentials_logs_no_secret) ... ok
+test_empty_authenticated_ping_without_other_provider_access (__main__.HeartbeatTests.test_empty_authenticated_ping_without_other_provider_access) ... ok
+test_missing_or_oversized_credential_is_no_send (__main__.HeartbeatTests.test_missing_or_oversized_credential_is_no_send) ... ok
+test_provider_failure_is_not_success (__main__.HeartbeatTests.test_provider_failure_is_not_success) ... ok
+test_redirect_not_followed (__main__.HeartbeatTests.test_redirect_not_followed) ... ok
+test_secret_response_and_exception_never_logged (__main__.HeartbeatTests.test_secret_response_and_exception_never_logged) ... ok
+test_unexpected_body_not_success (__main__.HeartbeatTests.test_unexpected_body_not_success) ... ok
+test_units_only_start_the_isolated_sender_and_load_protected_credential (__main__.HeartbeatTests.test_units_only_start_the_isolated_sender_and_load_protected_credential) ... ok
+test_unsafe_url_rejected_before_network (__main__.HeartbeatTests.test_unsafe_url_rejected_before_network) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.018s
+
+OK

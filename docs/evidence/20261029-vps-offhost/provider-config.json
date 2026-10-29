@@ -1,0 +1,17 @@
+{
+  "provider": "hosted Healthchecks.io",
+  "account": "office@kho.org.il",
+  "plan": "Hobbyist",
+  "monthlyPrice": 0,
+  "billingAdded": false,
+  "checkCount": 1,
+  "checkName": "Excelent VPS availability",
+  "periodSeconds": 60,
+  "graceSeconds": 120,
+  "channel": "email",
+  "recipient": "office@kho.org.il",
+  "senderIntervalSeconds": 60,
+  "secretUrlRecorded": false,
+  "apiManagementKeyCreated": false,
+  "source": "Authenticated account and check settings readback"
+}

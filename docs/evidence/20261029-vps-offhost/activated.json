@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "at": "2026-10-29T18:19:42.008408+00:00",
+  "serviceResult": {
+    "Result": "success",
+    "ExecMainExitTimestamp": "",
+    "ExecMainStatus": "0",
+    "User": "excelent-vps-heartbeat",
+    "DynamicUser": "yes"
+  },
+  "timerActive": true,
+  "intervalSeconds": 60,
+  "externalPeriodSeconds": 60,
+  "externalGraceSeconds": 120,
+  "payloadBytes": 0,
+  "credentialLogged": false,
+  "coreUnchanged": true
+}

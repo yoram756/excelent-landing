@@ -1,0 +1,14 @@
+{
+  "phase": "resume",
+  "status": "PASS",
+  "at": "2026-10-29T18:24:33.983463+00:00",
+  "serviceResult": {
+    "Result": "success",
+    "ExecMainExitTimestamp": "Thu 2026-10-29 18:24:33 UTC",
+    "ExecMainStatus": "0",
+    "User": "excelent-vps-heartbeat",
+    "DynamicUser": "yes"
+  },
+  "timer": "active",
+  "fallbackCancelledAfterRestore": true
+}

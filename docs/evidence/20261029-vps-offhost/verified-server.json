@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "sourceCommit": "d271d83295de5ecc5475b5cf664510d387560b9c",
+  "timerActive": "active",
+  "timerEnabled": "enabled",
+  "serviceResult": {
+    "Result": "success",
+    "ExecMainExitTimestamp": "Thu 2026-10-29 18:25:34 UTC",
+    "ExecMainStatus": "0",
+    "User": "excelent-vps-heartbeat",
+    "DynamicUser": "yes"
+  },
+  "coreUnchanged": true,
+  "n8nDefinitionsUnchanged": true,
+  "capiLedgerUnchanged": true,
+  "capiActivationUnchanged": true,
+  "capiObserverUnchanged": true,
+  "intervalSeconds": 60,
+  "externalPeriodSeconds": 60,
+  "externalGraceSeconds": 120,
+  "secretUrlInLogs": false,
+  "whatsappMessages": 0,
+  "actualServerShutdownPerformed": false,
+  "failureMode": "real missing heartbeat to hosted independent service",
+  "providerUiAndEmailAcceptance": "verify independently"
+}

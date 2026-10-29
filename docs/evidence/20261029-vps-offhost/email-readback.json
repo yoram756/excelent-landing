@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "source": "read-only Gmail search in verified office account",
+  "recipient": "office@kho.org.il",
+  "messages": [
+    {
+      "kind": "UP",
+      "id": "1a188e81c7f6db3c",
+      "subject": "UP | Excelent VPS availability",
+      "receivedAt": "2026-10-29T18:24:35+00:00",
+      "from": "\"Healthchecks.io\" healthchecks.io@healthchecks.io",
+      "to": [
+        "office@kho.org.il"
+      ],
+      "labels": [
+        "UNREAD",
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ]
+    },
+    {
+      "kind": "DOWN",
+      "id": "1a188e72d825a6d0",
+      "subject": "DOWN | Excelent VPS availability",
+      "receivedAt": "2026-10-29T18:23:33+00:00",
+      "from": "\"Healthchecks.io\" healthchecks.io@healthchecks.io",
+      "to": [
+        "office@kho.org.il"
+      ],
+      "labels": [
+        "UNREAD",
+        "IMPORTANT",
+        "CATEGORY_UPDATES",
+        "INBOX"
+      ]
+    }
+  ],
+  "readStateChanged": false,
+  "labelsChanged": false,
+  "additionalEmailSentByAgent": false
+}

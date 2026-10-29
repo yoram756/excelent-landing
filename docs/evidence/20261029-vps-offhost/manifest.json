@@ -1,0 +1,30 @@
+{
+  "algorithm": "SHA256",
+  "textRepresentation": "UTF-8 LF, trailing whitespace removed from normalized text; originals in ignored tests/out",
+  "files": {
+    "activate-and-test.py": "943e850d63b59bb7626c5729b2541d60c3e8275f0bc2f9ea148f9fddae7217db",
+    "activated.json": "dfad335e6eaba6ee9773872f30500792fddbfaeaf56bc4624dbd948538fd8183",
+    "before-summary.json": "6cd333515503bbc3d401de0303fae387d4257ab40b265aebb9b0f56d23245290",
+    "cloud-down.json": "b12dd05b30840a63e3d3a225c4418f15ac396e9235302777e4bcaf5bb82ee61c",
+    "cloud-down.png": "17d20e1135cebf0c35c18fecc19d85ba12b374df637391e9faf782c672dcdb6a",
+    "cloud-scheduled-ping.json": "7cfdca0560a49e81120fda1dd96bfc0ce49778ad555623ad32303a218b44fa09",
+    "cloud-up-after.json": "c7ae411b2b7ebe3bfc48d9b5ea77f76410535f90d29e208b3c8edd7823df96a4",
+    "cloud-up-before.json": "2ad03439c26309f884294b2e22d950dcf93fefd114cd57fc19bdeaa08e80a209",
+    "cloud-up.png": "31db4f798d79a3c99c47e4457e6f187bc5a552e8e083359406392d6722c2ec10",
+    "credential-provisioning.json": "9d706849f3489377e1da1ce8de8db5f74de31cb638c3bdfd91a3b8f7dbff99d3",
+    "email-readback.json": "31bb8c92019b5853c055c47460ef0dc851985f1aeff7e5bbf0649245b022ea43",
+    "missing-started.json": "0b51c96db66048d654e324eaf1ad0c166809a5afe6810ec9617069b6f20de861",
+    "negative-control.log": "f40f7ac1acdf8cb490830ad95a2056ef5b96f523302523cd3aaa86734b21dac4",
+    "nginx-test.json": "fa43561c3e28e473b4fcd8e7277d814a70fd6f315d730ac150abb68155e77d4b",
+    "prepare-vps.py": "60b391728ab3e1d02b5971521bc1377e8ce31bf28bd130d6958f40331cde7be6",
+    "prepared.json": "fb7da8928867a065cd90039c5890504cd98353d2ae8fa2f22abddf3f17f33b59",
+    "provider-config.json": "4632e6d508964f530841784d1408528115ab521b45c14f4abd5bbc2ff7efbaa1",
+    "provision-url.py": "a150d6f8a621f7b2b712ef22746d71d7a930cb7f86016e2c328e45af0c0db290",
+    "restored.json": "64fd9034b8e5a556104869a11d001938b9e5bf1e7871de34fbe2bf15486d3655",
+    "secret-negative-control.log": "8fde7b3b7a47a4ca7f37be7e1893fdcb0de58505ed25ae46722c371b7e9cfe0f",
+    "tests-summary.json": "4793ce018ae679a5bf22c4353214d3b2d320badd0e6c5faa0c867738ff0d6f03",
+    "tests.log": "6790b255ef3fcb979dc789c3f2d1c51ba9fc28b642a5afdbc9d3b964ef1153c0",
+    "verified-server.json": "e33b12e1fd99691d4788b63220c5c198181d6dedb2b8690e65e4c0fc65c76f9b",
+    "vps-unit-tests.log": "8656cafe8a43ff066adc4500e3c3f684e7d4631b1bf653263104acfb990d9ea1"
+  }
+}

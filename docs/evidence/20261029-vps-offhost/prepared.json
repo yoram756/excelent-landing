@@ -1,0 +1,26 @@
+{
+  "preparation": "PASS",
+  "productionMonitoring": "BLOCKED",
+  "blocker": "Owner approval of new provider/account terms and protected ping capability pending",
+  "sourceCommit": "d271d83295de5ecc5475b5cf664510d387560b9c",
+  "unitTests": 10,
+  "nginxTest": "PASS",
+  "systemdUnitValidation": "PASS",
+  "installedSourceMatches": true,
+  "installedFileSha256": {
+    "/usr/local/lib/excelent-monitor/offhost-heartbeat.py": "72a739f01aefc12f4402c1004702180bfcd218710dc4b63c3f7c43c69e98b9e0",
+    "/etc/excelent-monitor/heartbeat.json": "47912d8ba09002c1097f1a48e01021ce30b5ae5c9a50f3223d5b590944efceda",
+    "/etc/systemd/system/excelent-vps-heartbeat.service": "4fa40ba8b05ab3e4b445ba0325fbfbbc3caf1e55e43d3e05c8460eda978e62e6",
+    "/etc/systemd/system/excelent-vps-heartbeat.timer": "d0d85da3e776d9e20a6c6641986cf2056f4ecfd17b93afecfdb6ead36046a750"
+  },
+  "timerActive": "inactive",
+  "timerEnabled": "disabled",
+  "credentialProvisioned": false,
+  "pingsSent": 0,
+  "coreUnchanged": true,
+  "n8nDefinitionsUnchanged": true,
+  "capiLedgerUnchanged": true,
+  "capiObserverUnchanged": true,
+  "whatsappMessages": 0,
+  "systemdVersion": "systemd 255 (255.4-1ubuntu8.18)"
+}

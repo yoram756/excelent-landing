@@ -1,0 +1,7 @@
+{
+  "indicatorClass": "status ic-down",
+  "name": "Excelent VPS availability",
+  "observedAt": "2026-10-29T18:24:19.836Z",
+  "source": "authenticated hosted check UI after reload",
+  "trigger": "missing real VPS heartbeats; hosted check not paused"
+}

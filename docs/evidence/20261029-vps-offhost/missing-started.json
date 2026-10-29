@@ -1,0 +1,16 @@
+{
+  "phase": "missing",
+  "status": "IN_PROGRESS",
+  "stoppedAt": "2026-10-29T18:20:33.349043+00:00",
+  "lastSignalServiceResult": {
+    "Result": "success",
+    "ExecMainExitTimestamp": "Thu 2026-10-29 18:20:33 UTC",
+    "ExecMainStatus": "0",
+    "User": "excelent-vps-heartbeat",
+    "DynamicUser": "yes"
+  },
+  "configuredMissingSignalThresholdAt": "2026-10-29T18:23:33.348918+00:00",
+  "automaticRestoreAtApprox": "2026-10-29T18:25:33.348918+00:00",
+  "testScope": "only heartbeat timer stopped; applications and provider check stay active",
+  "whatsappMessages": 0
+}

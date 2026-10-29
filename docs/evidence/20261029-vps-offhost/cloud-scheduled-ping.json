@@ -1,0 +1,9 @@
+{
+  "indicatorClass": "status ic-up",
+  "name": "Excelent VPS availability",
+  "observedAt": "2026-10-29T18:25:53.485Z",
+  "visibleTiming": [
+    "18 seconds ago"
+  ],
+  "source": "hosted UI after next 60 second timer interval; no manual ping after restore"
+}

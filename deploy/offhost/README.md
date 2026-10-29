@@ -1,5 +1,7 @@
 # Independent VPS availability monitoring
 
+Production acceptance completed on 2026-10-29: a real missing-heartbeat DOWN and subsequent UP were confirmed in the hosted UI and in the office inbox. Automatic timer-originated pings continued after recovery. See [acceptance report](../../docs/runtime/VPS_OFFHOST_MONITORING_20261029.md). The VPS itself was not shut down during this test.
+
 Prepared integration: hosted Healthchecks.io Hobbyist plan, no paid subscription or card. Recipient comes from `config/error-handler.json`. Proposed check name and schedule are in `heartbeat.json`: a simple 60 second period, 120 second grace and email-only notifications. A missing heartbeat is due after one minute; the external service declares DOWN after the additional two minute grace. Provider processing and email latency are additional. This is an estimate, not a delivery SLA.
 
 ## Approval and secure setup

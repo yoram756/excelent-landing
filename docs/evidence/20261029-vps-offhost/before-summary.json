@@ -1,0 +1,7 @@
+{
+  "scope": "Full read-only baseline retained on protected VPS",
+  "coreContainerCount": 6,
+  "workflowCount": 101,
+  "baselineSha256": "22f703a1e09c6cb5def23819bec74b0be624611cdd5c508c274ce6dee7ea8f9f",
+  "capiObserver": "active"
+}

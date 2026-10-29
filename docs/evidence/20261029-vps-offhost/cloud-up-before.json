@@ -1,0 +1,9 @@
+{
+  "indicatorClass": "status ic-up",
+  "indicatorTitle": "",
+  "name": "Excelent VPS availability",
+  "rowClass": "checks-row",
+  "scheduleDisplay": "1 minute\n                    \n                \n                \n                2 minutes",
+  "source": "authenticated hosted UI; before missing-signal threshold",
+  "recordedAt": "2026-10-29T18:21:00.452Z"
+}
