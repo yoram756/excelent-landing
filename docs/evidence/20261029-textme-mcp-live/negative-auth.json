@@ -1,0 +1,18 @@
+{
+  "testedAt": "2026-10-29T05:46:28.613Z",
+  "target": "approved TextMe MCP gateway; private route withheld",
+  "results": [
+    {
+      "mode": "missing",
+      "httpStatus": 403,
+      "body": "Authorization data is wrong!",
+      "pass": true
+    },
+    {
+      "mode": "wrong",
+      "httpStatus": 403,
+      "body": "Authorization data is wrong!",
+      "pass": true
+    }
+  ]
+}

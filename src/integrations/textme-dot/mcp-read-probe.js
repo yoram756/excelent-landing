@@ -2,7 +2,8 @@
 
 function parseMcpReply(response, expectedId) {
   if(response?.statusCode!==200)throw Error('MCP_HTTP_'+(Number.isInteger(response?.statusCode)?response.statusCode:'UNKNOWN'));
-  const body=response.body;
+  // n8n's text response uses `data`; injected transports can use `body`.
+  const body=response.body ?? response.data;
   let messages=[];
   if(body && typeof body==='object')messages=[body];
   else if(typeof body==='string'&&body.length<=1000000){

@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "scope": "TextMe authenticated read-only MCP acceptance; no sending",
+  "artifacts": [
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/build.txt",
+      "bytes": 1920,
+      "sha256": "9af0a65e4636dad30be19044635f7e8c23705f96d65b756fd8dde0f4d29affa0"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/gateway-published.png",
+      "bytes": 84190,
+      "sha256": "2d9d4ebbe803cdf0efd62db5f330130052f63dcf424cd1a2c38c15f03721a16d"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/local-tests.txt",
+      "bytes": 2510,
+      "sha256": "e01133bbda30bb1e44432965fd5167b9124046df10b83d19dcb15c54144eeca1"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/mcp-success.png",
+      "bytes": 26508,
+      "sha256": "ac7fe69686cfd427376c37449fb181f03fa1b90ad9d65cfcf079fb1e4f45a249"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/mcp-success.txt",
+      "bytes": 7703,
+      "sha256": "1b93a38633bbe4cf9085247c74798a575982702526a2277506cd5e33d88f6de4"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/negative-auth.json",
+      "bytes": 385,
+      "sha256": "bd763b8d59e2190635ee349ed8c33581b739a705e72ca903eef3d5b52255b166"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/plugin-0.2.0.png",
+      "bytes": 81844,
+      "sha256": "3affa41c7adb8535de6f8045a7bd813e3617dea51845ce26521e17fcb31fe70c"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/project-tests.txt",
+      "bytes": 43152,
+      "sha256": "4fff702ad351c5a346bb9164ed8f6aae8da362a540291d05c0cb4726e6835743"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/secret-review.txt",
+      "bytes": 374,
+      "sha256": "4023439019597e21e033e41b69b10e46d818e1e2d6767a857ae32947f3b43517"
+    },
+    {
+      "path": "docs/evidence/20261029-textme-mcp-live/verification.json",
+      "bytes": 2259,
+      "sha256": "c565f6e56ddd50105d06662d50af9c3bd5c8ebf9d4c614e38b75aa39425bdd2f"
+    }
+  ]
+}

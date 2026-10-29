@@ -1,0 +1,230 @@
+Browser tab: 4, Title: "▶️ TEST TextMe authenticated MCP READ ONLY NO SEND 20261029 - n8n", URL: "https://n8n-qhxa.srv1604140.hstgr.cloud/workflow/JGdLe9l3ipq00RvK".
+0 AXWebArea ▶️ TEST TextMe authenticated MCP READ ONLY NO SEND 20261029 - n8n, URL: n8n-qhxa.srv1604140.hstgr.cloud/workflow/JGdLe9l3ipq00RvK
+	2 container n8n-app
+		3 container
+			205 container
+				206 container
+					207 link Description: Personal, Value: n8n-qhxa.srv1604140.hstgr.cloud/projects/LmaRyBnHRyfXp2Py
+					208 text /
+					209 container
+						210 text TEST TextMe authenticated MCP READ ONLY NO SEND 20261029
+					211 button More actions
+					212 button (disabled) Publish
+					213 button More actions
+				214 radio button Description: Editor, Value: 1
+				215 radio button Description: Executions, Value: 0
+				216 radio button Description: Evaluations, Value: 0
+			16 container side-menu
+				17 menu bar
+					18 (collapsed) Add new item, Secondary Actions: Expand
+						19 button Add new item
+				20 button Open command palette
+				21 button Description: Toggle sidebar, ID: toggle-sidebar-button
+				22 container
+					23 Description: n8n Assistant, ID: instance-ai
+					24 Description: Overview, ID: home
+				25 Description: Templates, ID: templates
+				26 Description: Insights, ID: insights
+				27 Description: Help, ID: help
+				28 Description: Settings, ID: settings
+			29 container content
+				30 container
+					31 container
+						32 container
+							33 image
+								34 container Edge from 4a521e6f-d4df-4f1a-be4d-529ce1227641 to 190ceb93-7509-4a83-9cf9-e8f2a1d3e921
+							35 image
+								36 container Edge from 190ceb93-7509-4a83-9cf9-e8f2a1d3e921 to fe1102af-8e67-455b-bc52-145b7a8a810e
+							37 image
+								38 container Edge from fe1102af-8e67-455b-bc52-145b7a8a810e to 5e25f1fe-770f-4696-976b-73ae0f6b172e
+							39 image
+								40 container Edge from 5e25f1fe-770f-4696-976b-73ae0f6b172e to bcccadc0-4ccd-4195-bc91-90003128cd40
+							41 image
+								42 container Edge from bcccadc0-4ccd-4195-bc91-90003128cd40 to 88492742-9e34-4968-9dab-770971f89dab
+							43 image
+								44 container Edge from 88492742-9e34-4968-9dab-770971f89dab to b7c76e7c-8e26-4dfc-b232-298b76426965
+							45 image
+								46 container Edge from b7c76e7c-8e26-4dfc-b232-298b76426965 to 57d72fe5-baaa-4306-b390-8e039cae8c09
+							224 text 1 item
+							225 text 1 item
+							226 text 1 item
+							227 text 1 item
+							228 text 1 item
+							229 text 1 item
+							230 text 1 item
+							47 container
+								48 button Execute step
+								49 button Deactivate
+								50 button Delete
+								51 button Add to chat
+								52 button More actions
+								53 text Manual MCP read verification
+								54 container
+									55 button Execute workflow
+							56 container
+								57 button Execute step
+								58 button Deactivate
+								59 button Delete
+								60 button Add to chat
+								61 button More actions
+								62 container
+							64 container
+								65 button Execute step
+								66 button Deactivate
+								67 button Delete
+								68 button Add to chat
+								69 button More actions
+								70 text Validate initialize
+							71 container
+								72 button Execute step
+								73 button Deactivate
+								74 button Delete
+								75 button Add to chat
+								76 button More actions
+								77 container
+							79 container
+								80 button Execute step
+								81 button Deactivate
+								82 button Delete
+								83 button Add to chat
+								84 button More actions
+								85 container
+							87 container
+								88 button Execute step
+								89 button Deactivate
+								90 button Delete
+								91 button Add to chat
+								92 button More actions
+								93 text Verify restricted tool surface
+							94 container
+								95 button Execute step
+								96 button Deactivate
+								97 button Delete
+								98 button Add to chat
+								99 button More actions
+								100 container
+							102 container
+								231 text 1 item
+								103 button Execute step
+								104 button Deactivate
+								105 button Delete
+								106 button Add to chat
+								107 button More actions
+								108 text Minimize MCP proof
+						109 image
+						110 image
+						111 container
+							112 button Zoom to Fit
+							113 button Zoom In
+							114 button Zoom Out
+							115 button Tidy Up
+								116 image
+					117 button Execute workflow
+					118 button Open nodes panel
+					119 button Command bar
+					120 button Add sticky note
+					121 button Open side panel
+					122 button n8n AI
+						123 image
+				124 container
+					125 container
+						126 text Logs
+						232 button Clear execution
+						233 text Success in 1.219s
+						221 outline
+							222 row (selectable, collapsed) Manual MCP read verification, Secondary Actions: Expand
+								234 text Manual MCP read verification
+							223 row (selectable, collapsed) MCP initialize, Secondary Actions: Expand
+								235 text MCP initialize
+							236 row (selectable, collapsed) Validate initialize, Secondary Actions: Expand
+								237 text Validate initialize
+							238 row (selectable, collapsed) MCP initialized notification, Secondary Actions: Expand
+								239 text MCP initialized notification
+							240 row (selectable, collapsed) MCP list tools, Secondary Actions: Expand
+								241 text MCP list tools
+							242 row (selectable, collapsed) Verify restricted tool surface, Secondary Actions: Expand
+								243 text Verify restricted tool surface
+							244 row (selectable, collapsed) MCP call balance only, Secondary Actions: Expand
+								245 text MCP call balance only
+							246 row (selected, collapsed) Minimize MCP proof, Secondary Actions: Expand
+								247 text Minimize MCP proof
+					248 container
+						249 text Minimize MCP proof Success in 9ms
+						250 button Input
+						251 button Output
+						252 button Actions
+						253 button Collapse panel
+					254 container
+						255 text OUTPUT
+						256 container
+							257 text field (settable)
+							258 radio button Description: Schema, Value: 0
+							259 radio button Description: Table, Value: 1
+							260 radio button Description: JSON, Value: 0
+						261 text 1 item
+						262 table
+							263 row
+								264 cell
+									265 container
+										266 text executionId
+										267 button Collapse rows
+								268 cell
+									269 container
+										270 text provider
+										271 button Collapse rows
+								272 cell
+									273 container
+										274 text operation
+										275 button Collapse rows
+								276 cell
+									277 container
+										278 text httpStatus
+										279 button Collapse rows
+								280 cell
+									281 container
+										282 text providerStatus
+										283 button Collapse rows
+								284 cell
+									285 container
+										286 text balancePresent
+										287 button Collapse rows
+								288 cell
+									289 container
+										290 text readOnly
+										291 button Collapse rows
+								292 cell
+									293 container
+										294 text sentMessages
+										295 button Collapse rows
+								296 cell
+									297 container
+										298 text authenticatedMcp
+										299 button Collapse rows
+								300 cell
+									301 container
+										302 text toolSurface
+										303 button Collapse rows
+							304 row
+								305 cell
+									306 text 65692
+								307 cell
+									308 text TextMe
+								309 cell
+									310 text balance
+								311 cell
+									312 text 200
+								313 cell
+									314 text 0
+								315 cell
+									316 text true
+								317 cell
+									318 text true
+								319 cell
+									320 text 0
+								321 cell
+									322 text true
+								323 cell
+									324 container
+										325 text 0 : textme_read
+
+The focused UI element is 250 button Input

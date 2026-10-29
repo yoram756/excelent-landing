@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-29",
+  "gateway": {
+    "workflowId": "iKMn0xVxqoBqrBxK",
+    "status": "PASS",
+    "published": true,
+    "source": "n8n UI Published; actual authenticated MCP round-trip"
+  },
+  "readWorkflowId": "3K6A1ipS8Qt04WVD",
+  "verification": {
+    "workflowId": "JGdLe9l3ipq00RvK",
+    "executionId": "65692",
+    "provider": "TextMe",
+    "operation": "balance",
+    "httpStatus": 200,
+    "providerStatus": 0,
+    "balancePresent": true,
+    "readOnly": true,
+    "sentMessages": 0,
+    "authenticatedMcp": true,
+    "toolSurface": [
+      "textme_read"
+    ],
+    "status": "PASS"
+  },
+  "negativeAuth": {
+    "missing": 403,
+    "wrong": 403,
+    "body": "Authorization data is wrong!",
+    "status": "PASS"
+  },
+  "plugin": {
+    "plugin_id": "plugins_6ae261b29284819185d282ac2fc068d2",
+    "name": "excellent-textme-management",
+    "description": "Excellent TextMe restricted read-only MCP through the existing n8n gateway, plus authorized browser reports and proposals. No sending, scheduling, campaigns or settings tools.",
+    "version": "0.2.0",
+    "current_release_id": "pluginrel_6ae2de14d36c8191acf342b01a4c1051",
+    "scope": "USER",
+    "discoverability": "PRIVATE",
+    "defaultPromptPreserved": true,
+    "serverNames": [
+      "excellent-textme-read"
+    ],
+    "auth": {
+      "type": "api_key",
+      "headerScheme": "bearer"
+    },
+    "status": "PASS"
+  },
+  "dotAuthentication": {
+    "status": "BLOCKED",
+    "reason": "Actual use from the existing Dot has not been attempted; a new explicitly authorized one-off Dot request is pending. No secure host credential entry has occurred."
+  },
+  "sending": {
+    "status": "NOT TESTED",
+    "reason": "No send or campaign tool exposed or called."
+  },
+  "unverifiedProviderOperations": [
+    "delivery",
+    "deliveryByDate",
+    "incoming",
+    "blacklist"
+  ],
+  "localTests": {
+    "passed": 43,
+    "failed": 0,
+    "status": "PASS"
+  },
+  "projectTests": {
+    "exitCode": 0,
+    "status": "PASS"
+  },
+  "build": {
+    "exitCode": 0,
+    "status": "PASS"
+  },
+  "rollback": "Unpublish only iKMn0xVxqoBqrBxK or disconnect the host. Previous plugin release pluginrel_6ae26d7702dc8191870e243a93883a05. Preserve existing SMS/Cosend/Blueticks workflows and credentials."
+}
