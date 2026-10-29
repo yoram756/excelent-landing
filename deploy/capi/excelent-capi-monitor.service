@@ -1,0 +1,18 @@
+[Unit]
+Description=Independent CAPI health observer and Monday notifications
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /docker/lp/src/integrations/meta-capi/monitor.py --config /docker/lp/deploy/capi/monitor.json
+TimeoutStartSec=50
+StateDirectory=excelent-capi-monitor
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/excelent-capi-monitor
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6

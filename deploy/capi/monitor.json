@@ -1,0 +1,12 @@
+{
+  "campaign": "refi",
+  "container": "excelent-capi-worker-1",
+  "root": "/docker/lp",
+  "ledger": "/var/lib/docker/volumes/excelent-capi_capi_data/_data/capi.sqlite",
+  "state": "/var/lib/excelent-capi-monitor/monitor.sqlite",
+  "tokenFile": "/docker/capi-secrets/monday_token",
+  "apiVersion": "2026-10",
+  "maxScanAgeMs": 660000,
+  "startupGraceMs": 90000,
+  "notificationPrefix": "[CAPI]"
+}

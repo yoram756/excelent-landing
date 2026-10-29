@@ -1,0 +1,11 @@
+[Unit]
+Description=Check CAPI health every minute independently of the worker
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=60s
+AccuracySec=5s
+Unit=excelent-capi-monitor.service
+
+[Install]
+WantedBy=timers.target

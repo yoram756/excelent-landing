@@ -20,4 +20,25 @@ CAPI_MODE=test docker compose -f deploy/capi/compose.json up -d --no-deps --pull
 CAPI_MODE=live docker compose -f deploy/capi/compose.json up -d --no-deps --pull never worker
 ```
 
-Use `docker compose -f deploy/capi/compose.json logs` to inspect sanitized outcomes. The health check reads the dedicated database and fails on stale scans, source failure, blocked issues, FAILED/UNKNOWN or a SENDING claim older than one minute. Docker restart-on-exit does not itself prove alert delivery. Existing intake central-error routing is preserved; automatic external alert delivery for this independent worker is not implemented. Rollback stops only the new worker and preserves its volume; do not modify existing services or remove its ledger.
+Use `docker compose -f deploy/capi/compose.json logs` to inspect sanitized outcomes. The health check reads the dedicated database and fails on stale scans, source failure, blocked issues, FAILED/UNKNOWN or a SENDING claim older than one minute. Docker restart-on-exit does not itself prove alert delivery. Existing intake central-error routing is preserved. Rollback stops only the new worker and preserves its volume; do not modify existing services or remove its ledger.
+
+## Independent observer and notifications
+
+`monitor.py` is a separate host oneshot service, scheduled every minute by `excelent-capi-monitor.timer`. It does not run inside the worker, call Meta, create leads, send WhatsApp, change n8n or restart the worker automatically. It checks only the configured Docker container state and a read-only CAPI ledger. A paused/stopped/unhealthy container, source failure, stale scan (11 minutes), blocked issues or unsettled dispatch triggers a failure notification. Initial startup has a bounded 90 second grace period. Recovery produces a separate notification after the real health checks pass.
+
+Notifications go to the configured campaign's single intake assignee and link to its board. No board or user ID is hardcoded in the monitor. The existing Monday credential must actually permit `notifications:write`; read access alone is not proof. Notification readback is scoped to the signed-in user, whose identity must match the recipient. The current acceptance target is the previously configured office account. Email is controlled by Monday preferences and is not promised by a bell notification receipt.
+
+The observer keeps its own durable database under `/var/lib/excelent-capi-monitor`, mode 0700. It claims each incident's failure/recovery notification before the API call. Repeated unhealthy checks and observer restarts do not post again. Ambiguous sends are reconciled by a read-only notification lookup, never blindly retried. FAILED/UNKNOWN notices require review and may block later notices until reconciled; inspect `journalctl -u excelent-capi-monitor.service` and the monitor database. Do not delete its state to force a resend. It never writes or restores the dispatch ledger. Its credential is read directly from the existing protected file, never copied into unit files or a command line.
+
+Install only the two named units after pulling the approved source and a disposable nginx test:
+
+```sh
+install -m 644 deploy/capi/excelent-capi-monitor.service deploy/capi/excelent-capi-monitor.timer /etc/systemd/system/
+systemctl daemon-reload
+systemctl start excelent-capi-monitor.service
+systemctl enable --now excelent-capi-monitor.timer
+```
+
+Validate a real worker pause only with a pre-scheduled automatic unpause and a finally-block restoration; verify one failure notification, suppression while still paused, one recovery notification and unchanged dispatch rows/activation/core services. A controlled pause is a real process fault; local unit tests alone do not prove notification delivery. Rollback disables only `excelent-capi-monitor.timer`, preserving both databases and the worker. Since this observer shares the VPS, total host/network failure also prevents alert transmission. Off-host uptime coverage is a separate, unimplemented gate and must not be claimed here.
+
+Local contracts: `python3 tests/deploy/capi_monitor_test.py`. Deliberately replacing health evaluation with an always-healthy result must fail the negative control.
