@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "acknowledged": {
+    "buyers": {
+      "id": "3318874956"
+    },
+    "sellers": {
+      "id": "3318875248"
+    },
+    "bundle": {
+      "id": "3318876607"
+    }
+  },
+  "readback": {
+    "fixtures": [
+      {
+        "id": "3318874956",
+        "state": "deleted"
+      },
+      {
+        "id": "3318875248",
+        "state": "deleted"
+      },
+      {
+        "id": "3318876607",
+        "state": "deleted"
+      }
+    ],
+    "activeFixtures": [],
+    "boards": [
+      {
+        "id": "5106246268",
+        "items_page": {
+          "items": [
+            {
+              "id": "3291304369"
+            },
+            {
+              "id": "3301735356"
+            },
+            {
+              "id": "3304127965"
+            },
+            {
+              "id": "3293511781"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

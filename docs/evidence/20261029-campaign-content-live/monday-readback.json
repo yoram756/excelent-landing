@@ -1,0 +1,169 @@
+{
+  "items": [
+    {
+      "id": "3318874956",
+      "name": "TEST דף רוכשים 20261029 0500000094",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000094",
+          "value": "{\"phone\":\"972500000094\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "8a329369-e1fd-4278-acea-ac2341778446",
+          "value": "\"8a329369-e1fd-4278-acea-ac2341778446\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_campaign_content_20261029",
+          "value": "\"synthetic_campaign_content_20261029\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_buyers_south",
+          "value": "\"campaign_buyers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3318875248",
+      "name": "TEST דף מוכרים 20261029 0500000095",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000095",
+          "value": "{\"phone\":\"972500000095\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "1510e7fc-a22c-4006-b131-5fd8fb216d34",
+          "value": "\"1510e7fc-a22c-4006-b131-5fd8fb216d34\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_campaign_content_20261029",
+          "value": "\"synthetic_campaign_content_20261029\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_sellers_south",
+          "value": "\"campaign_sellers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3318876607",
+      "name": "TEST דף באנדל 20261029 0500000096",
+      "state": "active",
+      "board": {
+        "id": "5106246268"
+      },
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000096",
+          "value": "{\"phone\":\"972500000096\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "d422ad66-ebb5-443f-a205-80c09a40221a",
+          "value": "\"d422ad66-ebb5-443f-a205-80c09a40221a\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_campaign_content_20261029",
+          "value": "\"synthetic_campaign_content_20261029\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_bundle_allinone",
+          "value": "\"campaign_bundle_allinone\""
+        }
+      ]
+    }
+  ]
+}

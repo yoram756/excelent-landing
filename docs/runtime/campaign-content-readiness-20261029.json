@@ -11,15 +11,18 @@
     "bizreviewsAggregateReadback": "PASS",
     "midragIndependentReadback": "NOT TESTED",
     "gitPush": "PASS",
-    "vpsDeployment": "BLOCKED",
-    "newRoutesProductionReadback": "NOT TESTED",
-    "newRoutesProductionIntake": "NOT TESTED",
+    "vpsDeployment": "PASS",
+    "newRoutesProductionReadback": "PASS",
+    "newRoutesProductionIntake": "PASS",
     "serviceMessageDrafts": "PASS",
     "cosendSecureConnection": "BLOCKED",
     "singleResponseOwnerActivation": "BLOCKED",
     "whatsappDelivery": "NOT TESTED",
     "stability24h": "NOT TESTED",
-    "fullProjectReadiness": "BLOCKED"
+    "fullProjectReadiness": "BLOCKED",
+    "productionMapping": "PASS",
+    "testCleanup": "PASS",
+    "protectedRuntimePreservation": "PASS"
   },
   "counts": {
     "source": 13,
@@ -28,10 +31,22 @@
     "adAngles": 30,
     "serviceDrafts": 9
   },
-  "productionBlocker": "Authenticated Chrome extension disconnected; IAB Hostinger still shows login. Deployment command was not invoked. Reviewed helper transfer outcome is unknown, so check existence before retry.",
+  "productionBlocker": null,
   "whatsappSends": 0,
   "n8nChanges": 0,
   "goLiveReady": false,
   "evidence": "docs/evidence/20261029-campaign-content",
-  "previousProductionIntakeEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md"
+  "previousProductionIntakeEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md",
+  "deployedSourceCommit": "94456d6f475c85085eca4baff375ed3a0fe1127c",
+  "liveEvidence": "docs/evidence/20261029-campaign-content-live",
+  "productionPosts": 3,
+  "currentReplayTest": "NOT TESTED",
+  "priorReplayEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md",
+  "productionInitialLatency": "NOT TESTED",
+  "remainingLaunchGates": [
+    "Secure Cosend connection and permissions",
+    "Approved single response owner activation with campaign-specific service drafts",
+    "Separately approved real message delivery",
+    "24-hour stability observation and final handover"
+  ]
 }

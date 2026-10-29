@@ -40,7 +40,11 @@
   "offHostMonitoringScope": "hosted dead-man heartbeat; real missing signal and recovery emails verified",
   "actualWholeServerShutdown": "NOT TESTED",
   "threeCampaignCleanup": "PASS",
-  "threeCampaignAcceptanceScope": "CRM intake, mapping and exact event replay PASS; response, delivery and campaign-specific offer remain NOT TESTED",
+  "threeCampaignAcceptanceScope": "CRM intake, mapping and prior exact-event replay PASS; campaign-specific pages and new live forms PASS; response and delivery NOT TESTED",
   "threeCampaignFreshAdmissionRace": "NOT TESTED",
-  "threeCampaignAlteredReplayProduction": "NOT TESTED"
+  "threeCampaignAlteredReplayProduction": "NOT TESTED",
+  "campaignSpecificContent": "PASS",
+  "campaignSpecificLiveDeployment": "PASS",
+  "campaignSpecificLiveForms": "PASS",
+  "campaignContentEvidence": "docs/runtime/CAMPAIGN_CONTENT_20261029.md"
 }

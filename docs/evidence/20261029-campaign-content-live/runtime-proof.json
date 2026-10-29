@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "workflowId": "8W7MymUCLpPnilJs",
+  "publishedVersion": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
+  "nodeCount": 41,
+  "disabledSendNodes": [
+    "WhatsApp recipients",
+    "WhatsApp alert"
+  ],
+  "httpResponses": [
+    {
+      "time": "2026-10-29T20:58:21Z",
+      "status": 200
+    },
+    {
+      "time": "2026-10-29T20:58:45Z",
+      "status": 200
+    },
+    {
+      "time": "2026-10-29T20:58:54Z",
+      "status": 200
+    }
+  ],
+  "intakeExecutions": [
+    {
+      "id": 71752,
+      "status": "success",
+      "startedAt": "2026-10-29T20:58:19.609Z"
+    },
+    {
+      "id": 71756,
+      "status": "success",
+      "startedAt": "2026-10-29T20:58:44.101Z"
+    },
+    {
+      "id": 71758,
+      "status": "success",
+      "startedAt": "2026-10-29T20:58:52.675Z"
+    }
+  ],
+  "whatsappSends": 0,
+  "n8nChanges": 0,
+  "scope": "Real form submissions and nginx access-log readback; no initial response latency measurement; no new replay requests"
+}

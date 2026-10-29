@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "deployedCommit": "94456d6f475c85085eca4baff375ed3a0fe1127c",
+  "previousCommit": "d271d83295de5ecc5475b5cf664510d387560b9c",
+  "helperSha256": "ce9cc64e7591f5290d215de877af27a4d1ddd16d2122358d27b5aed45903d724",
+  "nginxConfigTest": "PASS",
+  "publicPages": 8,
+  "consecutiveByteMatchingRounds": 2,
+  "legacyCampaignRedirects": 3,
+  "protectedRuntimePreservedBeforeAfterDeployment": true,
+  "protectedRuntimePreservedAfterForms": true,
+  "completedAt": "2026-10-29T20:56:46.468436+00:00",
+  "source": "Hostinger authenticated terminal readback of /docker/campaign-pages-20261029/result.json and final snapshot comparison",
+  "screenshot": "server-proof.jpg"
+}

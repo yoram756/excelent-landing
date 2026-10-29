@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "scope": "Three audience-specific live landing pages, synthetic forms and Monday readback; no WhatsApp delivery proof",
+  "campaigns": [
+    {
+      "code": "campaign_buyers_south",
+      "path": "/campaigns/buyers-south",
+      "itemId": "3318874956",
+      "eventId": "8a329369-e1fd-4278-acea-ac2341778446",
+      "mapping": "PASS",
+      "cleanup": "PASS"
+    },
+    {
+      "code": "campaign_sellers_south",
+      "path": "/campaigns/sellers-south",
+      "itemId": "3318875248",
+      "eventId": "1510e7fc-a22c-4006-b131-5fd8fb216d34",
+      "mapping": "PASS",
+      "cleanup": "PASS"
+    },
+    {
+      "code": "campaign_bundle_allinone",
+      "path": "/campaigns/bundle-allinone",
+      "itemId": "3318876607",
+      "eventId": "d422ad66-ebb5-443f-a205-80c09a40221a",
+      "mapping": "PASS",
+      "cleanup": "PASS"
+    }
+  ],
+  "baselineIds": [
+    "3291304369",
+    "3301735356",
+    "3304127965",
+    "3293511781"
+  ],
+  "currentReplayTest": "NOT TESTED",
+  "priorReplayEvidence": "docs/evidence/20261029-three-campaigns-live/summary.json",
+  "whatsappDelivery": "NOT TESTED",
+  "fullProjectReadiness": "BLOCKED"
+}
