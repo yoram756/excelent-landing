@@ -1,0 +1,74 @@
+{
+  "checkedAt": "2026-10-29 19:34:16 UTC",
+  "status": "PASS",
+  "scope": "Live Monday schema and baseline, read only; no campaign item was created",
+  "board": {
+    "id": "5106246268",
+    "items_count": 4,
+    "columns": [
+      {
+        "id": "refi_phone",
+        "title": "טלפון",
+        "type": "phone"
+      },
+      {
+        "id": "refi_source",
+        "title": "מקור",
+        "type": "status"
+      },
+      {
+        "id": "refi_stage",
+        "title": "שלב",
+        "type": "status"
+      },
+      {
+        "id": "boolean_mm8848pn",
+        "title": "בקשת חזרה בנוגע לבדיקה",
+        "type": "checkbox"
+      },
+      {
+        "id": "boolean_mm88mzry",
+        "title": "הסכמה לדיוור",
+        "type": "checkbox"
+      },
+      {
+        "id": "multiple_person_mm8c8hfp",
+        "title": "אחראי פנייה",
+        "type": "people"
+      },
+      {
+        "id": "text_mm8c3r4v",
+        "title": "מזהה אירוע קליטה",
+        "type": "text"
+      },
+      {
+        "id": "text_mm8j144k",
+        "title": "UTM Source",
+        "type": "text"
+      },
+      {
+        "id": "text_mm8j3b0k",
+        "title": "UTM Campaign",
+        "type": "text"
+      }
+    ],
+    "items_page": {
+      "cursor": null,
+      "items": [
+        {
+          "id": "3291304369"
+        },
+        {
+          "id": "3301735356"
+        },
+        {
+          "id": "3304127965"
+        },
+        {
+          "id": "3293511781"
+        }
+      ]
+    }
+  },
+  "mutationsThisRun": 0
+}

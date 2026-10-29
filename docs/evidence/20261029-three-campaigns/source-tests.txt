@@ -1,0 +1,28 @@
+✔ 37-node migration preserves every original node, error path, setting and disabled send (62.7218ms)
+✔ migration rejects changed topology, enabled WhatsApp, duplicate names and incorrect error handler without mutations (44.1737ms)
+✔ unverified admissions and transport failures reach existing controlled Stop And Error with no CRM write (19.7044ms)
+✔ incremental editor import retains 37 nodes and requires the explicit three-link rewiring plan (14.8699ms)
+✔ two real HTTP workers share a SQLite lock: 20 concurrent executions permit one simulated CRM write (484.9938ms)
+✔ the nested attribution config never prematurely terminates the n8n expression (6.3346ms)
+✔ all three campaign classifications survive validation and the actual Monday expression (46.6957ms)
+✔ malformed attribution and unknown reserved campaign ids fail closed (25.5488ms)
+✔ an event cannot be replayed as a different campaign (27.9903ms)
+✔ only a confirmed new lead prepares one alert for the configured primary phone (60.0658ms)
+✔ durable alert claim survives process restart and has no blind timeout retry (95.8865ms)
+✔ separate worker processes race to claim exactly one synthetic alert (585.1437ms)
+✔ HTTP alert claim requires auth and blocks twelve concurrent duplicates (355.5021ms)
+✔ retired Gambot workflow patch refuses all activation and preserves the input (1.4405ms)
+✔ a provider acknowledgment is never reported as Delivered and ambiguous responses fail (57.9022ms)
+✔ the retired Gambot manual probe refuses generation even when explicitly armed (2.1857ms)
+✔ every copy of norm gives the same canonical number (10.1546ms)
+✔ intake accepts every common mobile format and stores the canonical number (8.8576ms)
+✔ intake rejects letters, landlines and short numbers (4.421ms)
+✔ WhatsApp sends name no sender in the body and no hardcoded number (306.8215ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1534.1236

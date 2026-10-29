@@ -1,0 +1,15 @@
+✔ the three tables exist (6.1253ms)
+✔ a second lead with the same phone in any format inside 60 seconds is blocked; after 60 seconds it is admitted (7.0743ms)
+✔ every incoming event is stored raw, and each outcome is a lifecycle event (4.0436ms)
+✔ an invalid phone is rejected and leaves no partial record (1.0638ms)
+✔ only absolute .sqlite paths or :memory: can be opened (0.3967ms)
+✔ concurrent processes racing for the same phone: exactly one is admitted (1712.1912ms)
+✔ absolute database paths are normalized before validation and opening (25.1111ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2003.5657

@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-29T19:33:26.168Z",
+  "scope": "LOCAL SOURCE CONTRACT ONLY; no live POST or Monday mutation",
+  "status": "PASS",
+  "campaigns": [
+    {
+      "campaign": "campaign_buyers_south",
+      "status": "PASS",
+      "sevenFields": [
+        "name",
+        "phone",
+        "source",
+        "event_id",
+        "assignee",
+        "utm_source",
+        "utm_campaign"
+      ],
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "receiptReplay": "PASS",
+      "changedCampaignReplayRejected": "PASS",
+      "localAtomicLock": "PASS",
+      "productionIntake": "BLOCKED",
+      "productionMapping": "NOT TESTED",
+      "productionDedup": "NOT TESTED"
+    },
+    {
+      "campaign": "campaign_sellers_south",
+      "status": "PASS",
+      "sevenFields": [
+        "name",
+        "phone",
+        "source",
+        "event_id",
+        "assignee",
+        "utm_source",
+        "utm_campaign"
+      ],
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "receiptReplay": "PASS",
+      "changedCampaignReplayRejected": "PASS",
+      "localAtomicLock": "PASS",
+      "productionIntake": "BLOCKED",
+      "productionMapping": "NOT TESTED",
+      "productionDedup": "NOT TESTED"
+    },
+    {
+      "campaign": "campaign_bundle_allinone",
+      "status": "PASS",
+      "sevenFields": [
+        "name",
+        "phone",
+        "source",
+        "event_id",
+        "assignee",
+        "utm_source",
+        "utm_campaign"
+      ],
+      "serviceConsent": true,
+      "marketingConsent": false,
+      "receiptReplay": "PASS",
+      "changedCampaignReplayRejected": "PASS",
+      "localAtomicLock": "PASS",
+      "productionIntake": "BLOCKED",
+      "productionMapping": "NOT TESTED",
+      "productionDedup": "NOT TESTED"
+    }
+  ],
+  "sourceHashes": {
+    "apps/refi-landing/src/lib/lead.ts": "f230a5ea5acd1f6e9d948f3ddffd4a0359615d14b53c3a747408c84f23e2e83c",
+    "src/config/campaigns/refi.json": "53630a84ae2839c086b316b62be4ca8ab529f52e6456b67a85c692e0a1f53952",
+    "src/webhooks/intake/source.js": "2bdc9e329e79b72116f66f79f52d71b7623a1699628e37f489b29b13a37ea2d2",
+    "src/webhooks/intake/validate.js": "610a07e788d09765f6ec7b82e24f7ea0177198a91d19ceb7ce49c3cbc8dd68b3",
+    "src/webhooks/intake/build-mutation.js": "656e5ff81ec8ec19214d64e036fdc40d1df730c94ae334e9598d29de6b9226cc",
+    "src/webhooks/intake/monday-payload.js": "a6921e105006e560a23e300d57b9c2f2d856aab8d913fa476d7a5a2bfdbab22b",
+    "src/services/lifecycle/db.js": "195f01080434e5160b9cceba75b8784e4fc3fa37c1ebfc039971ba1854e422d6"
+  }
+}
