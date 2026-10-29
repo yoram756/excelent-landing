@@ -1,0 +1,95 @@
+{
+  "source": "Transcribed from visible authenticated web terminal; full raw results retained on VPS /docker/independent-acceptance-20261029 with mode 0600",
+  "cases": [
+    {
+      "campaign": "campaign_buyers_south",
+      "eventId": "93827ca1-379d-4e19-ba68-7b83aa729708",
+      "phone": "0500000101",
+      "itemId": "3318900393",
+      "executionId": "72003",
+      "race": [
+        {
+          "status": 200,
+          "request_id": "3318900393",
+          "seconds": 1.785
+        },
+        {
+          "status": 409,
+          "error": "duplicate_pending",
+          "seconds": 0.339
+        }
+      ],
+      "alteredReplayAfterLockExpiry": {
+        "status": 200,
+        "request_id": "3318900393",
+        "seconds": 0.169
+      }
+    },
+    {
+      "campaign": "campaign_sellers_south",
+      "eventId": "ab5d44da-5d5a-402d-94cd-56932c3ad1dc",
+      "phone": "0500000102",
+      "itemId": "3318900658",
+      "executionId": "72019",
+      "race": [
+        {
+          "status": 200,
+          "request_id": "3318900658",
+          "seconds": 2.072
+        },
+        {
+          "status": 409,
+          "error": "duplicate_pending",
+          "seconds": 0.505
+        }
+      ],
+      "alteredReplayAfterLockExpiry": {
+        "status": 200,
+        "request_id": "3318900658",
+        "seconds": 0.101
+      }
+    },
+    {
+      "campaign": "campaign_bundle_allinone",
+      "eventId": "96602e24-ca4b-4b62-b992-35dcdf85c22a",
+      "phone": "0500000103",
+      "itemId": "3318907012",
+      "executionId": "72024",
+      "race": [
+        {
+          "status": 409,
+          "error": "duplicate_pending",
+          "seconds": 0.334
+        },
+        {
+          "status": 200,
+          "request_id": "3318907012",
+          "seconds": 1.723
+        }
+      ],
+      "alteredReplayAfterLockExpiry": {
+        "status": 200,
+        "request_id": "3318907012",
+        "seconds": 0.119
+      }
+    }
+  ],
+  "firstPhaseRateLimitedAttempts": 8,
+  "alteredReplayExpected": 409,
+  "alteredReplayActual": [
+    200,
+    200,
+    200
+  ],
+  "cleanupItemCount": 11,
+  "alertExecutions": [
+    72004,
+    72006,
+    72008,
+    72020,
+    72025,
+    72034,
+    72037,
+    72040
+  ]
+}

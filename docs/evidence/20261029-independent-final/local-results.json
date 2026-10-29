@@ -1,0 +1,38 @@
+{
+  "baselineCommit": "149c005f19bdb603952a06e485bc3a005286d016",
+  "businessOps": {
+    "passed": 32,
+    "exitCode": 0
+  },
+  "funnelFinal": {
+    "passed": 419,
+    "exitCode": 0
+  },
+  "site": {
+    "passed": 60,
+    "exitCode": 0,
+    "scope": "local browser with mock API"
+  },
+  "deploy": {
+    "passed": 5,
+    "exitCode": 0,
+    "scope": "real local nginx, mocked upstream"
+  },
+  "totalDistinctCurrentSuiteCases": 516,
+  "replayTargeted": {
+    "passed": 40,
+    "exitCode": 0,
+    "subsetNotAdditional": true
+  },
+  "negativeControl": {
+    "removed": "WhatsApp disabled-node guard",
+    "expectedExitCode": 1,
+    "actualExitCode": 1
+  },
+  "initialRestrictedTargetedAttempts": {
+    "passed": 39,
+    "failed": 1,
+    "reason": "Local HTTP transport unavailable in restricted command execution. Unchanged tests passed with authorized loopback execution; no assertion weakened."
+  },
+  "productionProofSeparate": true
+}

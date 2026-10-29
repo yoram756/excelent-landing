@@ -1,0 +1,17 @@
+
+> test:deploy
+> node --test tests/deploy/routing.test.js
+
+✔ real nginx isolates all staging forms and preserves public route behavior (1191.3471ms)
+✔ the same HTTP isolation check detects the original shared staging route (229.3938ms)
+✔ analytics release check rejects empty, wrong-project and expanded network bindings (12.4654ms)
+✔ real nginx serves the React release alongside LP1 v2 legal and partner pages (365.2476ms)
+✔ release verification detects an omitted React include (210.7057ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2151.7072

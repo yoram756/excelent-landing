@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-29",
+  "scope": "Independent final checks without WhatsApp or n8n changes",
+  "requirements": {
+    "localRegression": "PASS",
+    "threeCampaignFreshAdmissionRace": "PASS",
+    "threeCampaignMondayMapping": "PASS",
+    "threeCampaignAlteredReplayProduction": "FAIL",
+    "replayUpdateSourcePreparation": "PASS",
+    "replayUpdateProductionDeployment": "BLOCKED",
+    "testCleanup": "PASS",
+    "publicPagesReadback": "PASS",
+    "capiRuntimeHealth": "PASS",
+    "monitorTimers": "PASS",
+    "publishedIntakePreservation": "PASS",
+    "allHistoricalN8nDefinitionsIdentical": "FAIL",
+    "supplierMonitoring": "PASS",
+    "cosendSecureConnection": "BLOCKED",
+    "cosendNativeIdentity": "NOT TESTED",
+    "cosendGrantedScopes": "NOT TESTED",
+    "singleResponseOwnerActivation": "BLOCKED",
+    "campaignResponseDelivery": "NOT TESTED",
+    "whatsappDelivery": "NOT TESTED",
+    "stability24h": "NOT TESTED",
+    "midragBusinessProfileAssociation": "NOT TESTED",
+    "fullProjectReadiness": "BLOCKED"
+  },
+  "localDistinctCases": 516,
+  "sourceFunnelCases": 419,
+  "whatsappSends": 0,
+  "n8nMutationsByThisTask": 0,
+  "goLiveReady": false,
+  "evidence": "docs/evidence/20261029-independent-final",
+  "report": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md",
+  "remainingLaunchGates": [
+    "Publish the paired replay-binding Code source update with protected 41-node topology, only after n8n-change prohibition is explicitly revised",
+    "Verify same replay and changed-content rejection in production after that update",
+    "Cosend official connection, native identity and granted scopes",
+    "Approved single response owner and handoff, applicable hours and limits",
+    "Separately approved real delivery and all campaign response routes",
+    "24-hour observation after final activation and final handover"
+  ],
+  "limits": [
+    "Historical comparison differs only for a separate inactive TEST draft updated at 21:44:02Z; no attribution or modification by this task",
+    "Midrag candidate profile rating observed, business association not established",
+    "Exact Meta UI event_id echo and paid attribution not tested",
+    "Actual VPS shutdown not tested; external missing-signal and recovery proof already recorded",
+    "Advanced concurrent Calendly and production write-failure injection not tested"
+  ]
+}

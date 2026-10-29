@@ -1,0 +1,157 @@
+{
+  "items": [
+    {
+      "id": "3318900393",
+      "name": "TEST final race 1 0500000101",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000101",
+          "value": "{\"phone\":\"972500000101\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "93827ca1-379d-4e19-ba68-7b83aa729708",
+          "value": "\"93827ca1-379d-4e19-ba68-7b83aa729708\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_final_20261029",
+          "value": "\"synthetic_final_20261029\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_buyers_south",
+          "value": "\"campaign_buyers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3318900658",
+      "name": "TEST final race 2 0500000102",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000102",
+          "value": "{\"phone\":\"972500000102\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "ab5d44da-5d5a-402d-94cd-56932c3ad1dc",
+          "value": "\"ab5d44da-5d5a-402d-94cd-56932c3ad1dc\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_final_20261029",
+          "value": "\"synthetic_final_20261029\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_sellers_south",
+          "value": "\"campaign_sellers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3318907012",
+      "name": "TEST final race 3 0500000103",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000103",
+          "value": "{\"phone\":\"972500000103\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "96602e24-ca4b-4b62-b992-35dcdf85c22a",
+          "value": "\"96602e24-ca4b-4b62-b992-35dcdf85c22a\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_final_20261029",
+          "value": "\"synthetic_final_20261029\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_bundle_allinone",
+          "value": "\"campaign_bundle_allinone\""
+        }
+      ]
+    }
+  ]
+}

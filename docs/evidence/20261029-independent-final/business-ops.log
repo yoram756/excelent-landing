@@ -1,0 +1,44 @@
+
+> test:business-ops
+> node --test tests/business-ops/*.test.js
+
+✔ cursor and event receipts survive restart; repeated pages cannot duplicate or rewind a checkpoint (68.122ms)
+✔ a failed page rolls back its earlier events and cursor together; no audit falsely records acceptance (5.2706ms)
+✔ account namespaces prevent native-ID collisions, including the maximum supported identifier length (5.5242ms)
+✔ a changed page replay fails and cannot change the established cursor or original event (2.4238ms)
+✔ leases exclude concurrent readers; an expired reader cannot overwrite or fail the newer lease (2.3206ms)
+✔ source failure has bounded retries and no raw secrets; another channel proceeds independently (5.2232ms)
+✔ never-connected streams are visible and a slow reader reports lease loss without crashing other sources (2.819ms)
+✔ private/real envelopes and source-granted authority are refused before any durable acceptance (4.5923ms)
+✔ a source that never responds times out, releases its lease and does not block another channel (13.5444ms)
+✔ paged call → email → WhatsApp joins the same case; only separate review completes evidence-dependent work (9.9639ms)
+✔ nested savepoints roll back only their scope and async transaction callbacks are rejected (1.2663ms)
+✔ call → email → spouse WhatsApp completes one task with proof and unblocks the next (28.6058ms)
+✔ same event id with changed content is rejected and whole invalid review rolls back (3.9788ms)
+✔ names alone, multiple cases and conflicting identifiers never merge (2.3813ms)
+✔ unknown identity requires a reasoned human resolution with audit history (2.4108ms)
+✔ reported send, unverified artifact and wrong artifact cannot complete a task (7.31ms)
+✔ duplicate commitments, dependency cycles, false completed status and missing handover are rejected (5.6938ms)
+✔ proposed deadlines stay distinct and history survives a newer correction (5.962ms)
+✔ private/school sources and unsafe source URLs are rejected (1.1903ms)
+✔ canonical Gmail message anchors and Drive sharing links remain traceable (1.943ms)
+✔ restart preserves events, evidence, task identity and replay deduplication (43.5216ms)
+✔ Monday sandbox adapter verifies independent readback and quarantines lost responses (9.863ms)
+✔ Monday sandbox rejects real case identifiers before reserving a remote write (3.6309ms)
+✔ HTTP synthetic four-channel journey: draft, separate approval, same-task update, owner handover and deduplication (194.7308ms)
+✔ draft proposals cannot certify artifacts, invent a quote or smuggle reviewer authority (3.4612ms)
+✔ invalid acceptance rolls back, rejection is audited, and competing proposals cannot both execute (5.9427ms)
+✔ unresolved identity is shown for review and cannot create tasks until a separate identity decision (4.6861ms)
+✔ negative control detects a deliberately removed source-quote guard in memory (3.4498ms)
+✔ draft plans require existing context, choose one channel and check calendar availability (1.9321ms)
+✔ owner digests suppress unchanged state, retain proposed dates as proposed, and change after new proof (19.8184ms)
+✔ real loopback HTTP: role separation, ingestion/review, source failure isolation and no send endpoint (170.0837ms)
+✔ n8n draft cannot advance a cursor without a durable receipt and cannot accept source authority (2.6366ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 352.1781

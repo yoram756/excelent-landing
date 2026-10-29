@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-29T21:46:00Z",
+  "publishedVersion": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
+  "nodeCount": 41,
+  "whatsappNodesDisabled": true,
+  "publishedIntakeDefinitionUnchangedAcrossTest": true,
+  "protectedServicesUnchangedFromDeployment": true,
+  "capiHealth": "healthy",
+  "timers": {
+    "excelent-capi-monitor.timer": "active",
+    "excelent-vps-heartbeat.timer": "active"
+  },
+  "publicPages": {
+    "count": 8,
+    "http200": 8,
+    "bytesMatch": 8,
+    "directMatch": 8
+  },
+  "allWorkflowsEqualHistoricalSnapshot": false,
+  "exception": {
+    "name": "TEST Excellent Intake 20261029 SYNTHETIC ONLY",
+    "active": false,
+    "activeVersionId": null,
+    "updatedAt": "2026-10-29T21:44:02.413Z",
+    "scope": "Historical comparison found this separate inactive test draft changed; not modified or attributed by this task. All other workflow definitions match that baseline."
+  }
+}

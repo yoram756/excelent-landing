@@ -1,0 +1,65 @@
+
+> test:site
+> node tests/site/run.js
+
+PASS goal chooser marks primary/secondary 
+PASS goal not re-asked after choosing above 
+PASS no double advance on double click 
+PASS back keeps answer 
+PASS part 2 intro shows skip-part link 
+PASS brief shows goal, missing and next 
+PASS WA message intent=call 
+PASS WA message excludes money by default 
+PASS WA message includes money when checked 
+PASS summary distinguishes skipped and unknown 
+PASS edit from summary opens question with saved answer 
+PASS goal editable from summary 
+PASS no console/CSP errors 
+PASS quick exit jumps to summary/form 
+PASS validation errors shown 
+PASS double click sends one request 
+PASS lead event_id matches the stable idempotency key 
+PASS lead preserves UTM source and campaign 
+PASS phone normalized 
+PASS marketing consent false by default 
+PASS success only after server id 
+PASS route message for monthly goal 
+PASS payment difficulty route shown 
+PASS payment difficulty → talk to Yoram 
+PASS info intent button label 
+PASS info intent opening line 
+PASS strain not in message without consent 
+PASS after WA click: explains not yet received 
+PASS network failure shows error, no success 
+PASS retry without edits reuses idempotency key 
+PASS retry event_id stays equal to the first idempotency key 
+PASS retry succeeds 
+PASS no-mortgage route 
+PASS no-mortgage next step 
+PASS club consent required 
+PASS club posts to /api/club with kind club 
+PASS club event_id matches its idempotency key 
+PASS club success message 
+PASS partner validation 
+PASS partner posts to /api/partner 
+PASS partner event_id matches its idempotency key 
+PASS partner success 
+PASS skip link first tab stop 
+PASS keyboard selects option and advances 
+PASS axe / 
+PASS axe /partners.html 
+PASS axe /privacy.html 
+PASS axe /accessibility.html 
+PASS all channel choices are unchecked 
+PASS email opt-in requires an email address 
+PASS missing email cannot send intake 
+PASS invalid email is explained 
+PASS email address is submitted 
+PASS email-only consent remains separate 
+PASS email-only callback is saved 
+PASS feedback mobile has no horizontal overflow 
+PASS feedback answers are all optional 
+PASS feedback removal does not require questionnaire 
+PASS feedback explains no automatic re-enrollment 
+PASS axe voluntary feedback 
+60/60

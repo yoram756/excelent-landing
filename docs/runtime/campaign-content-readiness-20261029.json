@@ -31,7 +31,7 @@
     "adAngles": 30,
     "serviceDrafts": 9
   },
-  "productionBlocker": null,
+  "productionBlocker": "Changed campaign on an existing event is accepted with HTTP 200; paired Code source update is prepared but n8n changes remain prohibited.",
   "whatsappSends": 0,
   "n8nChanges": 0,
   "goLiveReady": false,
@@ -40,13 +40,15 @@
   "deployedSourceCommit": "94456d6f475c85085eca4baff375ed3a0fe1127c",
   "liveEvidence": "docs/evidence/20261029-campaign-content-live",
   "productionPosts": 3,
-  "currentReplayTest": "NOT TESTED",
+  "currentReplayTest": "FAIL",
   "priorReplayEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md",
   "productionInitialLatency": "NOT TESTED",
   "remainingLaunchGates": [
+    "Publish and verify the paired replay-binding source update after explicit revision of the n8n-change prohibition",
     "Secure Cosend connection and permissions",
     "Approved single response owner activation with campaign-specific service drafts",
     "Separately approved real message delivery",
     "24-hour stability observation and final handover"
-  ]
+  ],
+  "currentReplayEvidence": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md"
 }
