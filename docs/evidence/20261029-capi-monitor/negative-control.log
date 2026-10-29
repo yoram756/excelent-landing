@@ -1,0 +1,80 @@
+....F.FF...FF.
+======================================================================
+FAIL: test_health_is_read_only_and_pause_detected_immediately (negative_monitor_tests.MonitorTests.test_health_is_read_only_and_pause_detected_immediately)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\User\excelent-landing\tests\deploy\capi_monitor_test.py", line 112, in test_health_is_read_only_and_pause_detected_immediately
+    self.assertEqual(m.health(self.ledger, self.container, self.now), (False, 'worker_paused'))
+AssertionError: Tuples differ: (True, 'healthy') != (False, 'worker_paused')
+
+First differing element 0:
+True
+False
+
+- (True, 'healthy')
++ (False, 'worker_paused')
+
+======================================================================
+FAIL: test_invalid_scan_time_and_recent_or_stale_inflight (negative_monitor_tests.MonitorTests.test_invalid_scan_time_and_recent_or_stale_inflight)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\User\excelent-landing\tests\deploy\capi_monitor_test.py", line 169, in test_invalid_scan_time_and_recent_or_stale_inflight
+    self.assertEqual(m.health(self.ledger, self.container, self.now), (False, 'scan_missing'))
+AssertionError: Tuples differ: (True, 'healthy') != (False, 'scan_missing')
+
+First differing element 0:
+True
+False
+
+- (True, 'healthy')
++ (False, 'scan_missing')
+
+======================================================================
+FAIL: test_missing_ledger_never_created (negative_monitor_tests.MonitorTests.test_missing_ledger_never_created)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\User\excelent-landing\tests\deploy\capi_monitor_test.py", line 129, in test_missing_ledger_never_created
+    self.assertEqual(m.health(missing, self.container, self.now), (False, 'ledger_unavailable'))
+AssertionError: Tuples differ: (True, 'healthy') != (False, 'ledger_unavailable')
+
+First differing element 0:
+True
+False
+
+- (True, 'healthy')
++ (False, 'ledger_unavailable')
+
+======================================================================
+FAIL: test_stale_scan_and_failure_and_unsettled_dispatch (negative_monitor_tests.MonitorTests.test_stale_scan_and_failure_and_unsettled_dispatch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\User\excelent-landing\tests\deploy\capi_monitor_test.py", line 116, in test_stale_scan_and_failure_and_unsettled_dispatch
+    self.assertEqual(m.health(self.ledger, self.container, self.now + 660001), (False, 'scan_stale'))
+AssertionError: Tuples differ: (True, 'healthy') != (False, 'scan_stale')
+
+First differing element 0:
+True
+False
+
+- (True, 'healthy')
++ (False, 'scan_stale')
+
+======================================================================
+FAIL: test_startup_grace_is_bounded (negative_monitor_tests.MonitorTests.test_startup_grace_is_bounded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\User\excelent-landing\tests\deploy\capi_monitor_test.py", line 135, in test_startup_grace_is_bounded
+    self.assertEqual(m.health(self.ledger, self.container, self.now), (None, 'startup_grace'))
+AssertionError: Tuples differ: (True, 'healthy') != (None, 'startup_grace')
+
+First differing element 0:
+True
+None
+
+- (True, 'healthy')
++ (None, 'startup_grace')
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.752s
+
+FAILED (failures=5)

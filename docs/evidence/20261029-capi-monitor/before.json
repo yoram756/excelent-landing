@@ -1,0 +1,29 @@
+{
+  "scope": "summary; full baseline retained on protected VPS",
+  "sourceCommit": "5d4b7efdc934ccc9ad8d12e50a2ea990d355ffc1",
+  "coreSha256": "9230271b90637584d708de0b03f1a02ff9a412007834a344ea0fd67214981af4",
+  "workflowCount": 101,
+  "ledger": {
+    "dispatch": [
+      [
+        "790e2ab3886087ab03525c457b011e4c9e64b9b53f4e7b98955cdab38ac837c2",
+        "TEST-META-AUTO-20261029-001",
+        "3317059439",
+        "ACKED",
+        "{\"apiAccepted\":true,\"httpStatus\":200,\"eventsReceived\":1,\"errorCode\":null,\"errorSubcode\":null,\"traceId\":\"Aq3kTEYpzi0yB5DoTJplZnt\"}"
+      ]
+    ],
+    "activation": [
+      [
+        "activated:live",
+        "1793268507000"
+      ],
+      [
+        "activated:test",
+        "1793266076000"
+      ]
+    ],
+    "binding": "[\"5106246268\",\"text_mm8c3r4v\",\"refi_source\",\"1822147178482498\",\"Lead\",[\"קליטת LP1\",\"LP1 טופס\"],\"fn_status\",\"הסר\"]"
+  },
+  "workerIdentitySha256": "2178a156ab12359b251d89635c475b0757086bf4b27598c381052014b6621e45"
+}

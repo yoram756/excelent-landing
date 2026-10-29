@@ -1,0 +1,22 @@
+{
+  "algorithm": "SHA256",
+  "textRepresentation": "UTF-8 LF; trailing whitespace removed from normalized logs; original outputs retained in ignored tests/out",
+  "files": {
+    "before.json": "ef48804da81a81da076872f560b4f4638d9a983f59f943317ade4576b7e90969",
+    "deploy-acceptance.py": "ccca375bd6944b27e1ae7e0802546f505e6700f6212771f4fedb77a6f2d2fcda",
+    "deployed.json": "a4d0612d2321465f936a284bdbd22147c00dbea2db39c8b35c23e8abd78e431f",
+    "email-readback.json": "44f4010fcd33434210dc0d815a41567357cfc3ef6d68a29685446ac0926201b6",
+    "failure.json": "28ca764af461df98e78ec0f2065c25ea5f04eab76bf13442582f530ce55f673a",
+    "monitor-proof.png": "9b977ea6e49e2c722f7ac275f8c74bbd9674ef90978f173129c2018494721daf",
+    "negative-control.log": "9b575b33f3fed2a73d34e1346e647ee77e2d5135efe4e8abfd3599b315bfad7c",
+    "nginx-test.json": "bf028f4f81227cf51631af0a5a26a90a60fef59ae0d92eea96cddfbdbf9084c0",
+    "notification-readback.json": "6140f693cf1c755973ab07bba75e52dd557656558bff9ba3ca0c8710beaed20f",
+    "recovery.json": "72ab151719127fd7c7d26c4a3c207056357903e3e7b59dc10c40202396895c77",
+    "repeated-failure.json": "befe406bfce29452ccafea078fcacbe5034a81ab4cb0a2e208958b1c18d2aa9f",
+    "restore.json": "03709e62b3e7bce797c48bf4a64c5fd29f4fc9890b2a5d8150463af649e0ad8a",
+    "tests-summary.json": "2e0cecccf5c607a352593043ab42fdcbfcfcdd52bd6ff387cbd6da8882ee8c04",
+    "tests.log": "73d0da7840df7c363e51ece4aa69046541da22dfc83f8a5bfef1c04a9259e2c9",
+    "verified.json": "1f3664ed99faf0336a2c506125772552d0300a7ea3223d959c51224d2d405e40",
+    "vps-unit-tests.log": "8b1e12c75cdb23afa79443de13f282646ea52c3bd9d3370cf9628c4ed089cbcb"
+  }
+}

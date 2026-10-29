@@ -1,0 +1,21 @@
+{
+  "workerHealthy": true,
+  "notices": [
+    {
+      "key": "CAPI-e13a5c423f314605:FAILURE",
+      "kind": "FAILURE",
+      "text": "[CAPI] FAILURE: נדרש טיפול בעובד CAPI. incident=CAPI-e13a5c423f314605; reason=worker_paused; UTC=2026-10-29T17:43:12.344000+00:00",
+      "state": "ACKED",
+      "at": 1793295792344,
+      "receipt": "api_accepted"
+    },
+    {
+      "key": "CAPI-e13a5c423f314605:RECOVERY",
+      "kind": "RECOVERY",
+      "text": "[CAPI] RECOVERY: עובד CAPI חזר לפעולה תקינה. incident=CAPI-e13a5c423f314605; reason=healthy; UTC=2026-10-29T17:43:43.630000+00:00",
+      "state": "ACKED",
+      "at": 1793295823630,
+      "receipt": "api_accepted"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "sourceCommit": "77b35d1edf4e40adac519f925090a6655755d80c",
+  "recipientId": "75075191",
+  "notificationIds": [
+    "1414737282",
+    "1414737034"
+  ],
+  "failureCount": 1,
+  "recoveryCount": 1,
+  "duplicateCount": 0,
+  "realFault": "paused CAPI process",
+  "restored": true,
+  "worker": "healthy",
+  "workerIdentityUnchanged": true,
+  "coreUnchanged": true,
+  "n8nDefinitionsUnchanged": true,
+  "ledgerUnchanged": true,
+  "activationUnchanged": true,
+  "monitorTimer": "active",
+  "intervalSeconds": 60,
+  "whatsappMessages": 0,
+  "metaPostCallsByAcceptance": 0,
+  "emailDelivery": "NOT TESTED",
+  "offHostCoverage": false
+}

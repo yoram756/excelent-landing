@@ -11,7 +11,7 @@
   "cosendSecureConnection": "BLOCKED",
   "singleResponseOwnerActivation": "BLOCKED",
   "whatsappDelivery": "NOT TESTED",
-  "capiExternalAlertAndFailureRecovery": "NOT TESTED",
+  "capiExternalAlertAndFailureRecovery": "PASS",
   "threeCampaignAcceptance": "NOT TESTED",
   "stability24h": "NOT TESTED",
   "exactMetaUiEventIdEcho": "NOT TESTED",
@@ -23,5 +23,11 @@
     "status": "PASS",
     "evidence": "docs/runtime/completion-posthog-20261028.json",
     "scope": "previous production receipt, not retested in this run"
-  }
+  },
+  "monitoringSourceCommit": "77b35d1edf4e40adac519f925090a6655755d80c",
+  "monitoringEvidence": "docs/runtime/CAPI_MONITORING_20261029.md",
+  "monitoringScope": "independent process on same VPS; Monday bell delivery confirmed",
+  "monitoringEmailDelivery": "PASS",
+  "offHostUptimeCoverage": "NOT TESTED",
+  "monitoringEmailEvidence": "docs/evidence/20261029-capi-monitor/email-readback.json"
 }

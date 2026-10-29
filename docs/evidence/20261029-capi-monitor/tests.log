@@ -1,0 +1,19 @@
+test_adapter_uses_configured_target_and_no_secret_in_payload (__main__.MonitorTests.test_adapter_uses_configured_target_and_no_secret_in_payload) ... ok
+test_ambiguous_send_never_repeated_and_readback_reconciles (__main__.MonitorTests.test_ambiguous_send_never_repeated_and_readback_reconciles) ... ok
+test_crash_after_reservation_reconciles_without_second_post (__main__.MonitorTests.test_crash_after_reservation_reconciles_without_second_post) ... ok
+test_failure_repetition_and_restart_send_once (__main__.MonitorTests.test_failure_repetition_and_restart_send_once) ... ok
+test_health_is_read_only_and_pause_detected_immediately (__main__.MonitorTests.test_health_is_read_only_and_pause_detected_immediately) ... ok
+test_initial_health_is_silent (__main__.MonitorTests.test_initial_health_is_silent) ... ok
+test_invalid_scan_time_and_recent_or_stale_inflight (__main__.MonitorTests.test_invalid_scan_time_and_recent_or_stale_inflight) ... ok
+test_missing_ledger_never_created (__main__.MonitorTests.test_missing_ledger_never_created) ... ok
+test_persistent_target_binding_rejects_changed_recipient (__main__.MonitorTests.test_persistent_target_binding_rejects_changed_recipient) ... ok
+test_recovery_once_then_new_incident (__main__.MonitorTests.test_recovery_once_then_new_incident) ... ok
+test_rejected_send_is_recorded_without_retry (__main__.MonitorTests.test_rejected_send_is_recorded_without_retry) ... ok
+test_stale_scan_and_failure_and_unsettled_dispatch (__main__.MonitorTests.test_stale_scan_and_failure_and_unsettled_dispatch) ... ok
+test_startup_grace_is_bounded (__main__.MonitorTests.test_startup_grace_is_bounded) ... ok
+test_wrong_recipient_readback_never_confirms (__main__.MonitorTests.test_wrong_recipient_readback_never_confirms) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.799s
+
+OK

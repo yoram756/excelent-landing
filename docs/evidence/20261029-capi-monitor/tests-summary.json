@@ -1,0 +1,26 @@
+{
+  "localContracts": {
+    "status": "PASS",
+    "tests": 14,
+    "exitCode": 0,
+    "command": "python tests/deploy/capi_monitor_test.py"
+  },
+  "sameContractsOnVps": {
+    "status": "PASS",
+    "tests": 14,
+    "exitCode": 0,
+    "independentAdditionalTests": false
+  },
+  "negativeControl": {
+    "status": "PASS",
+    "commandExitCode": 1,
+    "failedTests": 5,
+    "mutation": "health evaluator replaced with always healthy"
+  },
+  "secretsScan": {
+    "status": "PASS",
+    "tests": 3,
+    "exitCode": 0,
+    "command": "node --test tests/funnel/secrets.test.js"
+  }
+}

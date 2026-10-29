@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "source": "Gmail connector search in the verified business account",
+  "accountLinkId": "link_6ae22ed89154819188ea5e0bce19d6ef",
+  "query": "newer_than:1d from:monday.com \"CAPI-e13a5c423f314605\"",
+  "recipient": "office@kho.org.il",
+  "sender": "notifications@monday.com",
+  "incident": "CAPI-e13a5c423f314605",
+  "messages": [
+    {
+      "kind": "FAILURE",
+      "id": "1a188c24444dbdcd",
+      "receivedAt": "2026-10-29T17:43:13+00:00",
+      "labels": ["UNREAD", "CATEGORY_UPDATES", "INBOX"]
+    },
+    {
+      "kind": "RECOVERY",
+      "id": "1a188c2ba4f0def3",
+      "receivedAt": "2026-10-29T17:43:44+00:00",
+      "labels": ["UNREAD", "CATEGORY_UPDATES", "INBOX"]
+    }
+  ],
+  "readStateChanged": false,
+  "labelsChanged": false,
+  "additionalEmailSentByAgent": false
+}
