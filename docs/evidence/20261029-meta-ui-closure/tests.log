@@ -1,0 +1,30 @@
+✔ automatic scan reads Monday independently, preserves event_id and records one accepted event (15.2882ms)
+✔ repeated scans of an acknowledged event do not post or repeat individual Monday reads (1.9106ms)
+✔ CRM metadata follows the configured provider without changing durable identity (0.99ms)
+✔ scope rejects history, WhatsApp sources, wrong board, inactive data and real people in test mode (0.2526ms)
+✔ configured opt-out suppresses conversion and first-second activation precision cannot lose a new item (0.9144ms)
+✔ missing or conflicting stored event_id never obtains a claim or sends (1.5622ms)
+✔ fresh Monday mismatch or failure cannot fall back to scan data (1.6391ms)
+✔ live mode sends no test code, test email or customer fields and excludes TEST names (1.3702ms)
+✔ separate event/item uniqueness guards prevent changed IDs and one event on two items (1.5088ms)
+✔ transport ambiguity, rejected or malformed API receipts are durable and never automatically retried (4.5839ms)
+✔ restart preserves activation and accepted reservation without replaying Meta (21.0339ms)
+✔ two separate processes and a post-crash worker share durable duplicate prevention (109.3096ms)
+✔ crash after reservation remains SENDING and cannot send on recovery (81.1825ms)
+✔ configuration mismatch and unset mode fail closed before any network request (17.3657ms)
+✔ one process overlapping tick is rejected while the independent read remains in flight (1.4213ms)
+✔ Monday transport is read-only, paginates completely and rejects partial GraphQL data (1.4543ms)
+✔ negative control proves the repeated-delivery harness fails if duplicate guards are bypassed (5.1429ms)
+✔ CAPI test derives the exact event ID from configured Monday storage and excludes CRM contacts (5.3374ms)
+✔ missing, conflicting, wrong-board, non-TEST and deleted fixtures are rejected before claim or transport (1.3361ms)
+✔ one claimed request uses a header credential and API receipt is not Test Events proof (10.6448ms)
+✔ claimed or uncertain attempts cannot be blindly repeated and never expose credentials (0.7163ms)
+✔ HTTP 200 without one acknowledged event, API errors and malformed responses are never accepted (2.8502ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 419.5293

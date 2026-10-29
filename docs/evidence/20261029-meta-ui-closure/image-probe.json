@@ -1,0 +1,13 @@
+{
+  "crmMetadata": {
+    "event_source": "crm",
+    "lead_event_source": "Monday"
+  },
+  "eventIdUnchanged": true,
+  "mode": "live",
+  "scan": {
+    "at": 1793294274712,
+    "error": null
+  },
+  "noProviderCall": true
+}

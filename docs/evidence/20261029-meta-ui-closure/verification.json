@@ -1,0 +1,41 @@
+{
+  "sourceCommit": "5d4b7efdc934ccc9ad8d12e50a2ea990d355ffc1",
+  "requirements": {
+    "controlledMetaApi": "PASS",
+    "newControlledMetaUiProcessedRow": "PASS",
+    "exactEventIdMondayAndOutbound": "PASS",
+    "exactEventIdEchoInMetaUi": "NOT TESTED",
+    "productionWorkerDeployment": "PASS",
+    "durableLedgerAndActivationPreserved": "PASS",
+    "coreAndN8nUnchanged": "PASS",
+    "testCleanup": "PASS",
+    "fullFunnelRegression": "PASS",
+    "whatsappLiveDelivery": "NOT TESTED",
+    "productionAdsAttributionAndMatching": "NOT TESTED",
+    "fullProjectReadiness": "BLOCKED"
+  },
+  "tests": {
+    "targeted": {
+      "pass": 22,
+      "fail": 0,
+      "exitCode": 0
+    },
+    "fullFunnel": {
+      "pass": 416,
+      "fail": 0,
+      "exitCode": 0
+    },
+    "negativeControl": {
+      "pass": 20,
+      "fail": 2,
+      "exitCode": 1,
+      "expectedFailure": "remove CRM metadata from both worker and probe"
+    }
+  },
+  "metaPostCount": 1,
+  "eventIdReplayed": false,
+  "oldAutomaticEventRetroactiveUiProof": false,
+  "whatsappCount": 0,
+  "n8nGeneralSettingsChanged": false,
+  "goLiveReady": false
+}

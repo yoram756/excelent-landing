@@ -1,0 +1,82 @@
+✔ automatic scan reads Monday independently, preserves event_id and records one accepted event (19.2939ms)
+✔ repeated scans of an acknowledged event do not post or repeat individual Monday reads (1.3271ms)
+✖ CRM metadata follows the configured provider without changing durable identity (1.8452ms)
+✔ scope rejects history, WhatsApp sources, wrong board, inactive data and real people in test mode (0.3634ms)
+✔ configured opt-out suppresses conversion and first-second activation precision cannot lose a new item (1.0493ms)
+✔ missing or conflicting stored event_id never obtains a claim or sends (1.9464ms)
+✔ fresh Monday mismatch or failure cannot fall back to scan data (1.6155ms)
+✔ live mode sends no test code, test email or customer fields and excludes TEST names (2.3968ms)
+✔ separate event/item uniqueness guards prevent changed IDs and one event on two items (1.6873ms)
+✔ transport ambiguity, rejected or malformed API receipts are durable and never automatically retried (4.463ms)
+✔ restart preserves activation and accepted reservation without replaying Meta (22.6543ms)
+✔ two separate processes and a post-crash worker share durable duplicate prevention (99.5918ms)
+✔ crash after reservation remains SENDING and cannot send on recovery (85.2427ms)
+✔ configuration mismatch and unset mode fail closed before any network request (15.7438ms)
+✔ one process overlapping tick is rejected while the independent read remains in flight (0.7794ms)
+✔ Monday transport is read-only, paginates completely and rejects partial GraphQL data (0.9915ms)
+✔ negative control proves the repeated-delivery harness fails if duplicate guards are bypassed (3.9533ms)
+✖ CAPI test derives the exact event ID from configured Monday storage and excludes CRM contacts (8.3416ms)
+✔ missing, conflicting, wrong-board, non-TEST and deleted fixtures are rejected before claim or transport (1.2081ms)
+✔ one claimed request uses a header credential and API receipt is not Test Events proof (7.9104ms)
+✔ claimed or uncertain attempts cannot be blindly repeated and never expose credentials (0.774ms)
+✔ HTTP 200 without one acknowledged event, API errors and malformed responses are never accepted (2.0509ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 20
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 376.937
+
+✖ failing tests:
+
+test at tests\funnel\meta-capi-worker.test.js:22:1
+✖ CRM metadata follows the configured provider without changing durable identity (1.8452ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + undefined
+  - {
+  -   event_source: 'crm',
+  -   lead_event_source: 'CRM Test Provider'
+  - }
+
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\funnel\meta-capi-worker.test.js:26:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { event_source: 'crm', lead_event_source: 'CRM Test Provider' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at tests\funnel\meta-capi.test.js:5:1
+✖ CAPI test derives the exact event ID from configured Monday storage and excludes CRM contacts (8.3416ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+
+  + undefined
+  - {
+  -   event_source: 'crm',
+  -   lead_event_source: 'Monday'
+  - }
+
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\funnel\meta-capi.test.js:8:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: { event_source: 'crm', lead_event_source: 'Monday' },
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

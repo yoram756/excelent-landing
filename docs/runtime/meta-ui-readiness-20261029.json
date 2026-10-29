@@ -1,0 +1,27 @@
+{
+  "sourceCommit": "5d4b7efdc934ccc9ad8d12e50a2ea990d355ffc1",
+  "metaControlledUi": "PASS",
+  "capiProductionDeployment": "PASS",
+  "sourceTests": {
+    "status": "PASS",
+    "passed": 416,
+    "exitCode": 0
+  },
+  "calendlyPublished": "PASS",
+  "cosendSecureConnection": "BLOCKED",
+  "singleResponseOwnerActivation": "BLOCKED",
+  "whatsappDelivery": "NOT TESTED",
+  "capiExternalAlertAndFailureRecovery": "NOT TESTED",
+  "threeCampaignAcceptance": "NOT TESTED",
+  "stability24h": "NOT TESTED",
+  "exactMetaUiEventIdEcho": "NOT TESTED",
+  "productionAdsAttribution": "NOT TESTED",
+  "videoRequirement": "waived by owner; not a launch gate",
+  "fullProjectReadiness": "BLOCKED",
+  "goLiveReady": false,
+  "posthogExistingEvidence": {
+    "status": "PASS",
+    "evidence": "docs/runtime/completion-posthog-20261028.json",
+    "scope": "previous production receipt, not retested in this run"
+  }
+}

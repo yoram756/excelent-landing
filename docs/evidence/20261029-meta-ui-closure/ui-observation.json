@@ -1,0 +1,18 @@
+{
+  "datasetId": "1822147178482498",
+  "businessId": "745355029428233",
+  "selectedPage": "אקסלנט יועצי משכנתאות ופיננסים - ExcellnetFinance",
+  "channel": "CRM",
+  "eventName": "Lead",
+  "status": "processed",
+  "uiReceivedTimeIsrael": "2026-10-29T19:11:13+02:00",
+  "crmEventSource": "crm",
+  "leadEventSource": "Monday",
+  "oldRowTimeIsrael": "07:50:33",
+  "oldRowUsedAsProof": false,
+  "controlledEventId": "TEST-META-CRM-UI-20261029-003",
+  "exactEventIdExposedByUi": false,
+  "correlation": "single guarded POST, fresh time and new CRM metadata; API and Monday verify exact outbound event_id",
+  "expandedDetails": "No event details available with selected filters",
+  "note": "Native Meta lead validation row and existing Make/Zapier integrations were not created or changed in this run"
+}

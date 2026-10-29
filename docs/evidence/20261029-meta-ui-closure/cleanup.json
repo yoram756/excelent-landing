@@ -1,0 +1,16 @@
+{
+  "source": "independent Monday API readback after deletion",
+  "item": {
+    "id": "3318622855",
+    "state": "deleted"
+  },
+  "activeBoardItems": [
+    "3291304369",
+    "3301735356",
+    "3304127965",
+    "3293511781"
+  ],
+  "baselineRestored": true,
+  "historicalItem3291304369": "preserved",
+  "whatsappSent": false
+}

@@ -1,0 +1,20 @@
+{
+  "algorithm": "SHA256",
+  "textRepresentation": "UTF-8 with LF line endings and trailing line whitespace removed; raw test logs retained in ignored tests/out",
+  "files": {
+    "api-receipt.json": "a806b9e2456495074793bd59a92812d0a3075393f8bde38898d4d2c4e9a5c1d6",
+    "cleanup.json": "03c1e051a0954d6f6ca4e2c6d8d996d9e3e2e547c9b20ac36c47c893d123fb51",
+    "deploy-closure.py": "f68b4100d927b6a2554326a2daca0d1864eb10bceafd699a81d1a09635610c6e",
+    "funnel.log": "3e2dcfcb145295b8891e56b98bf365fa4ae3b90d6f7cd56c577c5fbcb55f6e67",
+    "image-probe.json": "091614ff13d7b543a87ff7e90f03a4f7c57517dafbe73aeab1f86259990a07cd",
+    "meta-processed.png": "a9fa89cfa3b5b588723148829bc9913989ef86edd2497154a4e6118d4b1cfff9",
+    "meta-processed.txt": "2d5b11d73de35060e1a3830923204c6106ad1c236ddfbc3a0c0224d4ff673f75",
+    "monday-item.json": "fce147e739855d92850a5a1b957f96a176f8cf5586f83a1db0c8a21d1178164b",
+    "negative-control.log": "d250a5b917f8d24a7682e3aea6e623d3bfa3af6020c911bead8a1a4845d977f4",
+    "official-guide.json": "00a4ce6072795cb6ead08d612b94d5172c8916da81c85b5e54fdfca7e874307c",
+    "tests.log": "7cfbb6b0c52bf739f092b4235d4779bb197601497db8b6e1558fc32d39b06f47",
+    "ui-observation.json": "409c64a4f0e056485f31c884ac7aa760726d4a457db6758ce39cc09bf241baf6",
+    "verification.json": "2d87e5d6d91237d5dcd1e23ba6b228ab5e335ff4aa74178a22280e1e8e278e26",
+    "vps-readback.json": "81f9b2d121e40d538285cc654f0fb52d413c4f5cf3cbadcbe052aded9f308f60"
+  }
+}

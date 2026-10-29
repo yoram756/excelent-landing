@@ -1,0 +1,48 @@
+{
+  "verified": {
+    "status": "PASS",
+    "sourceCommit": "5d4b7efdc934ccc9ad8d12e50a2ea990d355ffc1",
+    "worker": "true healthy unless-stopped",
+    "mode": "live",
+    "coreUnchanged": true,
+    "n8nWorkflowDefinitionsUnchanged": true,
+    "nginxUnchanged": true,
+    "ledgerUnchanged": true,
+    "activationUnchanged": true,
+    "states": {
+      "ACKED": 1,
+      "FAILED": 0,
+      "UNKNOWN": 0,
+      "SENDING": 0
+    },
+    "image": "sha256:569f80c58ab3adaa3364b8c06721973c4c408a7a74392c4012f531f2ef140f3f",
+    "whatsappMessagesSentByThisChange": 0
+  },
+  "beforeSourceCommit": "9967fa0ba89e1eeee31236d9c01b6757ad2d31b4",
+  "beforeCoreSha256": "7c0e22ae3c9484bcd6a5bbe1de7772e8d320735aef64cd64036f14c839837f3b",
+  "workflowCount": 101,
+  "beforeLedger": {
+    "volume": "excelent-capi_capi_data|/var/lib/docker/volumes/excelent-capi_capi_data/_data",
+    "dispatch": [
+      [
+        "TEST-META-AUTO-20261029-001",
+        "3317059439",
+        "ACKED",
+        "{\"apiAccepted\":true,\"httpStatus\":200,\"eventsReceived\":1,\"errorCode\":null,\"errorSubcode\":null,\"traceId\":\"Aq3kTEYpzi0yB5DoTJplZnt\"}"
+      ]
+    ],
+    "activation": [
+      [
+        "activated:live",
+        "1793268507000"
+      ],
+      [
+        "activated:test",
+        "1793266076000"
+      ]
+    ],
+    "binding": "[\"5106246268\",\"text_mm8c3r4v\",\"refi_source\",\"1822147178482498\",\"Lead\",[\"קליטת LP1\",\"LP1 טופס\"],\"fn_status\",\"הסר\"]"
+  },
+  "nginxTest": "PASS",
+  "serverEvidenceDirectory": "/docker/meta-ui-closure-20261029"
+}

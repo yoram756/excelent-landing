@@ -1,0 +1,18 @@
+{
+  "scope": "Meta API acceptance only; Test Events receipt must be verified separately",
+  "eventId": "TEST-META-CRM-UI-20261029-003",
+  "eventName": "Lead",
+  "automaticRetry": false,
+  "metaTestEventsStatus": "NOT TESTED",
+  "apiAccepted": true,
+  "httpStatus": 200,
+  "eventsReceived": 1,
+  "errorCode": null,
+  "errorSubcode": null,
+  "traceId": "ACaO7olu0GAMiGp3vtiI4i3",
+  "observedAt": "2026-10-29T17:11:14.485Z",
+  "crmMetadata": {
+    "event_source": "crm",
+    "lead_event_source": "Monday"
+  }
+}

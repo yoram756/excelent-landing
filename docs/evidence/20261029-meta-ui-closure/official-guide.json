@@ -1,0 +1,14 @@
+{
+  "source": "authenticated official Meta CRM Implementation Guide",
+  "url": "https://eventsmanager.facebook.com/events_manager2/crm_implementation_guide/1822147178482498?business_id=745355029428233&act=",
+  "requiredCrmMetadata": {
+    "action_source": "system_generated",
+    "custom_data": {
+      "event_source": "crm",
+      "lead_event_source": "CRM name"
+    }
+  },
+  "configuredCrmName": "Monday",
+  "leadId": "recommended, not mandatory; no invented lead_id",
+  "scope": "CRM classification requirements read from Meta account guide; UI test receipt does not prove advertising attribution or matching quality"
+}

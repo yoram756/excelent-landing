@@ -1,0 +1,24 @@
+{
+  "source": "monday_api_readback",
+  "observedAt": "2026-10-29T17:10:27.316Z",
+  "item": {
+    "id": "3318622855",
+    "name": "TEST Meta CRM UI 20261029",
+    "state": "active",
+    "board": {
+      "id": "5106246268"
+    },
+    "column_values": [
+      {
+        "id": "refi_source",
+        "text": "יומן",
+        "value": "{\"index\":8}"
+      },
+      {
+        "id": "text_mm8c3r4v",
+        "text": "TEST-META-CRM-UI-20261029-003",
+        "value": "\"TEST-META-CRM-UI-20261029-003\""
+      }
+    ]
+  }
+}
