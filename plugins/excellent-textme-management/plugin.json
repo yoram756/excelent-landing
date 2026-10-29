@@ -4,7 +4,7 @@
     "email": "office@kho.org.il",
     "name": "יורם פלד"
   },
-  "description": "Excellent TextMe restricted read-only MCP through the existing n8n gateway, plus authorized browser reports and proposals. No sending, scheduling, campaigns or settings tools.",
+  "description": "Excellent TextMe read-only backend and browser workflow. Backend MCP is verified; actual Dot tool connection requires compatible narrow OAuth or an approved private tunnel and remains blocked. No sending or campaigns.",
   "extensions": {
     "com.openai": {
       "interface": {
@@ -13,11 +13,11 @@
         "defaultPrompt": "בדוק בחשבון TextMe של אקסלנט את הדוחות ומצב הגישה, והכן פעולות מוצעות בלי לשלוח או לשנות הגדרות.",
         "developerName": "יורם פלד",
         "displayName": "אקסלנט · TextMe",
-        "longDescription": "חיבור קריאה מוגבל דרך n8n לדוחות ולמצב חשבון TextMe של אקסלנט, עם אימות Bearer נפרד. ללא כלי שליחה, קמפיינים או שינוי הגדרות. דפדפן מורשה זמין כחלופה.",
+        "longDescription": "דוחות TextMe והצעות בקריאה בלבד. שער n8n אומת; חיבור הכלי לדוט עדיין דורש התאמת OAuth מצומצמת. אין כלי שליחה או קמפיינים. התקנת החבילה לבדה אינה חיבור פעיל.",
         "shortDescription": "דוחות TextMe בקריאה בלבד"
       }
     }
   },
   "name": "excellent-textme-management",
-  "version": "0.2.0"
+  "version": "0.2.1"
 }

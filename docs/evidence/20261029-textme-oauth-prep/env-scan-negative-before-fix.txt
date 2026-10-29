@@ -1,0 +1,33 @@
+✔ campaigns validate but Cosend activation remains blocked (33.9816ms)
+✔ a broken campaign file is rejected (26.8572ms)
+✖ .env.production.example is generated, lists every env var the code reads, and holds no secret value (65.6804ms)
+✔ env scanner finds standalone application modules and excludes nested dependencies (19.5666ms)
+✔ the package validates, builds importable n8n workflows for every campaign and is deterministic (339.1518ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 651.6514
+
+✖ failing tests:
+
+test at tests\funnel\deploy-package.test.js:38:1
+✖ .env.production.example is generated, lists every env var the code reads, and holds no secret value (65.6804ms)
+  AssertionError [ERR_ASSERTION]: TEXTME_AUTH_STATE_DIR is read by src but missing from .env.production.example
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\funnel\deploy-package.test.js:47:30)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

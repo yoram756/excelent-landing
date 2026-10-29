@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-29",
+  "status": "PASS",
+  "scope": "Local preparation only; actual Dot connection and VPS publication BLOCKED",
+  "ownerApprovedPreparation": true,
+  "newPaidService": false,
+  "productionDeployment": false,
+  "oauthGrantCreated": false,
+  "newDotBalanceRead": false,
+  "providerDataReads": 0,
+  "providerMessages": 0,
+  "campaignsActivated": 0,
+  "callbackVerifiedInHost": "https://chatgpt.com/connector_platform_oauth_redirect",
+  "clientAuthentication": "none; public client with PKCE S256",
+  "sourceImage": "node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85",
+  "localSyntheticImage": "sha256:f69358268b978bd974061ee8bbc12e6f262aea41f767fc3bdcd694153b1b7a11",
+  "priorRealN8nExecution": "65692 is server-only historical proof, not reused as Dot success",
+  "runs": [
+    {
+      "command": "npm test",
+      "cwd": "src/integrations/textme-dot/oauth-bridge",
+      "exit": 0,
+      "scope": "synthetic loopback only",
+      "cases": 8,
+      "evidence": "oauth-windows.txt"
+    },
+    {
+      "command": "docker build --target synthetic-test -t excelent-textme-oauth-prep:20261029 -f oauth-bridge/Dockerfile .",
+      "cwd": "src/integrations/textme-dot",
+      "exit": 0,
+      "evidence": "docker-build.txt"
+    },
+    {
+      "command": "docker run --rm --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m --cap-drop ALL --security-opt no-new-privileges --memory 256m --cpus 1 --pids-limit 128 excelent-textme-oauth-prep:20261029",
+      "exit": 0,
+      "scope": "same eight synthetic cases in Linux, no external network or real credential",
+      "cases": 8,
+      "evidence": "oauth-linux-isolated.txt"
+    },
+    {
+      "command": "node --test tests/textme-dot/*.test.js",
+      "exit": 0,
+      "cases": 44,
+      "evidence": "textme-contracts.txt"
+    },
+    {
+      "command": "npm test",
+      "exit": 0,
+      "scope": "local project regression only",
+      "cases": {
+        "businessOperations": 32,
+        "funnel": 408,
+        "site": 60,
+        "deploy": 5
+      },
+      "evidence": "project-tests.txt"
+    },
+    {
+      "command": "node src/deploy/package.js",
+      "exit": 0,
+      "evidence": "package-build.txt"
+    },
+    {
+      "command": "npm audit --omit=dev --json",
+      "cwd": "src/integrations/textme-dot/oauth-bridge",
+      "exit": 0,
+      "evidence": "dependency-audit.json"
+    },
+    {
+      "command": "node server.mjs",
+      "cwd": "src/integrations/textme-dot/oauth-bridge",
+      "exit": 1,
+      "expected": "fail closed without configuration",
+      "evidence": "startup-missing-config.txt"
+    }
+  ],
+  "files": {
+    "dependency-audit.json": "f6ca2e6fdeae0a9bb082fab7caf7a757c338e47ea9e8e701a34d5aa7a053c5c2",
+    "docker-build.txt": "d6006e06e7cb915dcbc320fe4c2a1972a493cfa4e2030ef34c706549d03048e4",
+    "env-scan-after-fix.txt": "cc21f1bba02aa3f46447679ff95d6500c14ff1d67ff074d6973492a554c4e75d",
+    "env-scan-negative-before-fix.txt": "ceb71bdda07525356d42059e48dc5928fffc84bb8de1e254c81b01d82ac1c6ef",
+    "oauth-linux-isolated.txt": "d8f1066fc8c594af0829488da71bd594d6ea441e503f9ef18e77d0c79942ad5d",
+    "oauth-windows.txt": "c57b06f7046247e37ff591a261f157e105ecef65196eaae01d8eb80b77094f5f",
+    "package-build.txt": "9af0a65e4636dad30be19044635f7e8c23705f96d65b756fd8dde0f4d29affa0",
+    "project-tests.txt": "4d43bae3c2e8564669a9a2d80af6a3dcc741019f6a011f6e466f85066889696d",
+    "startup-missing-config.txt": "11c72be694904f1359c81c726bea0928c7f11acb116243afad20be0975175774",
+    "task-file-secret-review.json": "bfa5c3947466001f7d25b172f7b1e933f8b9ad6de8323b11bf0be1458c48ca40",
+    "textme-contracts.txt": "0d909406196a12e27e60987ef8fbd1dd1046a8f6de905385b27bfe5f7a2ed2fa",
+    "tracked-secret-scan.txt": "14101d69484e075881ab2fdbad533c8cb89003c03adef813a2b1336d4217f4f2"
+  }
+}

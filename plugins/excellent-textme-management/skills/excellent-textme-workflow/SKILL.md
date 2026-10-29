@@ -5,14 +5,32 @@ description: "Use for Excellent's TextMe account at my.textme.co.il: restricted 
 
 # Access and identity
 
-This package includes one remote MCP tool, textme_read, through the existing
-n8n gateway. It requires a separate secure API-key connection in the host.
-The owner enters the dedicated TextMe dot caller secret, without the Bearer
-prefix, in the host's secure Connect form. Never ask for it in chat, extract it
-from n8n, reuse the provider token, or copy cookies or browser storage.
-A saved plugin release does not prove installation, authentication or Dot use.
-If the tool is absent or authentication fails, report BLOCKED and use only the
-authorized browser fallback. Never change gateway authentication to fix access.
+The package declares the existing n8n MCP tool textme_read with fixed Bearer
+authentication. Backend acceptance is verified; actual Dot access is BLOCKED.
+On 29 October 2026 the Dot reported that textme_read is missing from its tool
+catalog. The ChatGPT Add custom MCP server form offers OAuth, no authentication
+or mixed OAuth, with no API-key/Bearer entry. Do not tell the owner that an
+API-key Connect form exists in that surface. The earlier instruction was wrong.
+A valid API-key declaration alone does not finish the hosted connection.
+
+OAuth discovery on the n8n origin returned the instance-wide resource
+/mcp-server/http and management scopes, including workflow:write,
+workflow:execute, credential:read, dataTable:write and project:write.
+This is NOT the dedicated TextMe MCP Server Trigger. Do not authorize that
+global connection or substitute it for the read-only tool. Never remove
+Bearer protection, embed a token in headers/URL/package, or expose a generic
+n8n management tool to make the Dot work.
+A supported narrow OAuth layer or an explicitly approved private tunnel is
+required before host registration and actual Dot acceptance. No such layer
+has been deployed by this plugin. Adding it is separate infrastructure work;
+it must preserve the single read-only tool, account binding and audit limits.
+
+Only when the intended supported host flow is verified should the owner enter
+any credential in its secure UI. Never ask for it in chat, extract it from n8n,
+reuse the TextMe provider token, or copy cookies or browser storage.
+A saved release, MCP server card or backend read does not prove Dot access.
+If the tool remains absent, report BLOCKED with the exact host/tool gap.
+Browser fallback is allowed only when requested; it never proves MCP access.
 
 The tool accepts one string field requestJson, containing a JSON object:
 {"operation":"balance"} or {"operation":"verifiedSenders"}.

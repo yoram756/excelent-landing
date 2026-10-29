@@ -1,0 +1,12 @@
+oauth-bridge/node_modules/
+oauth-bridge/.data/
+oauth-bridge/.env
+oauth-bridge/.env.*
+!oauth-bridge/.env.example
+oauth-bridge/private-config.env
+oauth-bridge/caller-key
+oauth-bridge/state/
+oauth-bridge/*.sqlite*
+oauth-bridge/*.key
+oauth-bridge/*.jwks
+exports/

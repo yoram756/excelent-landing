@@ -1,0 +1,3 @@
+Browser tab: 148911898, Title: "Plugins | ChatGPT", URL: "https://chatgpt.com/plugins".
+There has been no change in the accessibility tree.
+The focused UI element is 101 text field (settable) Resource, Value: https://n8n-qhxa.srv1604140.hstgr.cloud/mcp-server/http

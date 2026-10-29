@@ -1,0 +1,13 @@
+✔ campaigns validate but Cosend activation remains blocked (35.8728ms)
+✔ a broken campaign file is rejected (22.9384ms)
+✔ .env.production.example is generated, lists every env var the code reads, and holds no secret value (61.824ms)
+✔ env scanner finds standalone application modules and excludes nested dependencies (22.664ms)
+✔ the package validates, builds importable n8n workflows for every campaign and is deterministic (305.435ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 593.7883

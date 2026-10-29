@@ -1,0 +1,7 @@
+					80 text . Registration method
+					81 pop up button (collapsed, settable) Registration method, Value: User-Defined OAuth Client, Secondary Actions: Expand
+					178 text Callback URL
+					179 text field Callback URL Copy callback URL, Value: https://chatgpt.com/connector_platform_oauth_redirect
+					186 text Token endpoint auth method
+					187 pop up button (collapsed, settable) Token endpoint auth method, Value: none, Secondary Actions: Expand
+The focused UI element is 81 pop up button (collapsed, settable) Registration method, Value: User-Defined OAuth Client, Secondary Actions: Expand

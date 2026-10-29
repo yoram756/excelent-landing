@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-29",
+  "status": "BLOCKED",
+  "hostFormMethods": ["OAuth", "No authentication", "OAuth or no authentication"],
+  "fixedBearerEntryAvailable": false,
+  "gatewayAuthentication": "fixed Bearer; preserved",
+  "discovery": {
+    "registration": "DCR",
+    "cimd": false,
+    "issuer": "https://n8n-qhxa.srv1604140.hstgr.cloud",
+    "authorizationUrl": "https://n8n-qhxa.srv1604140.hstgr.cloud/mcp-oauth/authorize",
+    "tokenUrl": "https://n8n-qhxa.srv1604140.hstgr.cloud/mcp-oauth/token",
+    "registrationUrl": "https://n8n-qhxa.srv1604140.hstgr.cloud/mcp-oauth/register",
+    "resource": "https://n8n-qhxa.srv1604140.hstgr.cloud/mcp-server/http",
+    "initialDefaultScopes": ["workflow:read", "workflow:write", "workflow:execute", "execution:read", "credential:read", "dataTable:read", "dataTable:write", "project:read", "project:write", "tag:read"],
+    "oidcAdvertised": false,
+    "matchesTextMeTrigger": false
+  },
+  "unsubmittedFormScopesCleared": true,
+  "formClosedWithoutCreate": true,
+  "oauthGrantCreated": false,
+  "credentialsEnteredOrRead": false,
+  "newDotBalanceRead": false,
+  "providerMessagesOrCampaigns": false,
+  "plugin": {
+    "id": "plugins_6ae261b29284819185d282ac2fc068d2",
+    "version": "0.2.1",
+    "release": "pluginrel_6ae2e87624fc8191a4cb265b08206eec",
+    "defaultPromptPreserved": true,
+    "mcpAuthenticationAndEndpointPreserved": true
+  },
+  "nextStep": "Approval to prepare a narrow OAuth layer on existing infrastructure, conditional on no additional charge; no broad n8n OAuth grant. Actual Dot balance read remains pending compatible connection."
+}

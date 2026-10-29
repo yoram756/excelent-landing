@@ -1,0 +1,16 @@
+✔ synthetic loopback OAuth code + PKCE, exact read MCP, restart and revoke (613.65895ms)
+✔ wrong PKCE, callback, scope, resource and code replay fail in real OAuth HTTP flow (147.819857ms)
+✔ login rate limits survive restart and never create provider reads (109.985952ms)
+✔ durable encrypted adapter handles TTL, consumption, grant revoke and tampering (6.018204ms)
+✔ production config and upstream result guards reject broader surfaces (0.747249ms)
+✔ standalone service environment contract documents every runtime input and never provides a key (1.522955ms)
+✔ upstream preflight checks authentication and exact tool surface without reading provider data (43.945908ms)
+✔ two concurrent exchanges cannot mint two tokens from one authorization code (39.554183ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2148.342434

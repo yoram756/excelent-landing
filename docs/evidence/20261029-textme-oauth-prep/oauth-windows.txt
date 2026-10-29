@@ -1,0 +1,20 @@
+
+> excelent-textme-oauth-bridge@0.1.0 test
+> node --test --test-concurrency=1 test/*.test.mjs
+
+✔ synthetic loopback OAuth code + PKCE, exact read MCP, restart and revoke (453.5409ms)
+✔ wrong PKCE, callback, scope, resource and code replay fail in real OAuth HTTP flow (167.9936ms)
+✔ login rate limits survive restart and never create provider reads (219.9197ms)
+✔ durable encrypted adapter handles TTL, consumption, grant revoke and tampering (34.7438ms)
+✔ production config and upstream result guards reject broader surfaces (0.6835ms)
+✔ standalone service environment contract documents every runtime input and never provides a key (2.2236ms)
+✔ upstream preflight checks authentication and exact tool surface without reading provider data (73.4457ms)
+✔ two concurrent exchanges cannot mint two tokens from one authorization code (75.0342ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2008.8085

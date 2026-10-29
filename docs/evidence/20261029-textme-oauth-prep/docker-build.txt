@@ -1,0 +1,48 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 673B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85
+#2 DONE 0.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 301B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 1.52kB 0.0s done
+#4 DONE 0.0s
+
+#5 [runtime 1/7] FROM docker.io/library/node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85
+#5 resolve docker.io/library/node:24-alpine@sha256:8a32c8cf649a49915a66e81e7a609223c708d0adabf288ee3f4077d765542f85 0.0s done
+#5 DONE 0.0s
+
+#6 [runtime 4/7] COPY oauth-bridge/package.json oauth-bridge/package-lock.json ./oauth-bridge/
+#6 CACHED
+
+#7 [runtime 3/7] COPY read-policy.js mcp-read-probe.js ./
+#7 CACHED
+
+#8 [runtime 2/7] WORKDIR /opt/textme
+#8 CACHED
+
+#9 [runtime 5/7] WORKDIR /opt/textme/oauth-bridge
+#9 CACHED
+
+#10 [runtime 6/7] RUN npm ci --ignore-scripts --no-audit --no-fund && mkdir -p /var/lib/textme-auth && chown node:node /var/lib/textme-auth
+#10 CACHED
+
+#11 [runtime 7/7] COPY oauth-bridge/ ./
+#11 DONE 0.1s
+
+#12 exporting to image
+#12 exporting layers 0.1s done
+#12 exporting manifest sha256:f014add756778e8ad187f6e81f60dfad3d1c30e67bc86df935c9339dc1809735 0.0s done
+#12 exporting config sha256:bf15ec7e73225acbf2ceb82ae94681054f7ca2a3e1c4fcab4ba08055c49bcf4f 0.0s done
+#12 exporting attestation manifest sha256:d1afda89f734cd40bb55ce1052b7d9a15445d896bf7d1eafe37518296fbdbc4c 0.0s done
+#12 exporting manifest list sha256:f69358268b978bd974061ee8bbc12e6f262aea41f767fc3bdcd694153b1b7a11 0.0s done
+#12 naming to docker.io/library/excelent-textme-oauth-prep:20261029 done
+#12 unpacking to docker.io/library/excelent-textme-oauth-prep:20261029 0.1s done
+#12 DONE 0.3s

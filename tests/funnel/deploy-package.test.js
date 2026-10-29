@@ -5,6 +5,9 @@ const pkg=require(ROOT+'/src/deploy/package');
 const biz=require(ROOT+'/config/business.json');
 const load=id=>JSON.parse(fs.readFileSync(ROOT+'/src/config/campaigns/'+id+'.json','utf8'));
 const check=(c,file=c.id+'.json')=>pkg.validateCampaign(c,file,biz);
+// Root-package sources include ESM/CJS. Independent packages validate their own
+// environment contracts in their own suites; installed vendor code is not ours.
+const sourceFiles=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?(['dist','node_modules','.git'].includes(e.name)||fs.existsSync(path.join(d,e.name,'package.json'))?[]:sourceFiles(path.join(d,e.name))):/\.(?:js|cjs|mjs)$/.test(e.name)?[path.join(d,e.name)]:[]);
 
 test('campaigns validate but Cosend activation remains blocked',()=>{
   const r=check(load('refi'));assert.deepEqual(r.errors,[]);assert.equal(r.liveReady,false);
@@ -38,14 +41,18 @@ test('.env.production.example is generated, lists every env var the code reads, 
   assert.equal(committed,pkg.envFile(),'run node src/deploy/package.js after changing ENV');
   const keys=pkg.ENV.filter(e=>e.length>1).map(e=>e[0]);
   for(const k of ['LOCK_SERVER_HOST','LOCK_SERVER_TOKEN','GAMBOT_API_KEY','META_VERIFY_TOKEN'])assert.ok(keys.includes(k),k);
-  const src=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?(e.name==='dist'?[]:src(path.join(d,e.name))):e.name.endsWith('.js')?[path.join(d,e.name)]:[]);
-  const used=new Set();for(const f of src(ROOT+'/src')){const s=fs.readFileSync(f,'utf8');
+  const used=new Set();for(const f of sourceFiles(ROOT+'/src')){const s=fs.readFileSync(f,'utf8');
     for(const m of s.matchAll(/process\.env\.([A-Z_]+)/g))used.add(m[1]);
     for(const m of s.matchAll(/\{([^{}]*)\}\s*=\s*process\.env/g))for(const p of m[1].split(','))used.add(p.split(/[:=]/)[0].trim());}
   assert.ok(used.has('LOCK_SERVER_TOKEN')&&used.has('LOCK_SERVER_URL'),'scanner finds env reads');
   for(const k of used)assert.ok(keys.includes(k),k+' is read by src but missing from .env.production.example');
   for(const k of pkg.SECRET_ENV)assert.match(committed,new RegExp('^'+k+'=$','m'),k);
   assert.match(fs.readFileSync(ROOT+'/.gitignore','utf8'),/^\.env\.production$/m);});
+
+test('env scanner finds standalone application modules and excludes nested dependencies',()=>{
+  const dir=fs.mkdtempSync(path.join(require('os').tmpdir(),'excelent-env-scan-'));
+  try{fs.mkdirSync(path.join(dir,'service/node_modules/vendor'),{recursive:true});fs.mkdirSync(path.join(dir,'standalone'));fs.writeFileSync(path.join(dir,'standalone/package.json'),'{}');fs.writeFileSync(path.join(dir,'standalone/app.mjs'),'process.env.INDEPENDENT_PACKAGE');fs.writeFileSync(path.join(dir,'service/app.mjs'),'process.env.OWN_REQUIRED');fs.writeFileSync(path.join(dir,'service/adapter.cjs'),'process.env.SECOND_REQUIRED');fs.writeFileSync(path.join(dir,'service/node_modules/vendor/index.js'),'process.env.VENDOR_ONLY');const names=sourceFiles(dir).map(f=>path.basename(f)).sort();assert.deepEqual(names,['adapter.cjs','app.mjs']);const used=sourceFiles(dir).flatMap(f=>[...fs.readFileSync(f,'utf8').matchAll(/process\.env\.([A-Z_]+)/g)].map(m=>m[1]));assert.ok(used.includes('OWN_REQUIRED')&&used.includes('SECOND_REQUIRED'));assert.ok(!used.includes('VENDOR_ONLY')&&!used.includes('INDEPENDENT_PACKAGE'));}finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
 
 test('the package validates, builds importable n8n workflows for every campaign and is deterministic',()=>{
   const before=fs.readFileSync(ROOT+'/src/services/funnel/dist/consolidation/engine-test.json','utf8');

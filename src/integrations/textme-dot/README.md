@@ -10,14 +10,15 @@ send transport in this package.
 |---|---|---|
 | Existing SMS subworkflow | UyusbbjI1hgkZ76k | Preserved, unpublished on inspection |
 | Balance-only manual probe | 24CuXS88ao2olgfd | Actual provider read, execution 62442 |
-| Restricted read subworkflow | 3K6A1ipS8Qt04WVD | Saved, unpublished; real manual subworkflow read 62548 |
+| Restricted read subworkflow | 3K6A1ipS8Qt04WVD | Published 29 October; earlier direct read 62548, later authenticated MCP acceptance 65692 |
 | Manual read acceptance | Is1XtE3b6cHSiHN2 | Execution 62546 succeeded; no send/schedule node |
-| MCP gateway | iKMn0xVxqoBqrBxK | Saved, unpublished, trigger disabled, Bearer Auth, no credential |
+| MCP gateway | iKMn0xVxqoBqrBxK | Published with owner approval; dedicated Bearer binding verified, MCP acceptance 65692; Dot host compatibility remains blocked |
 | Superseded editor experiment | r1nCwSHsi6CX45ix | Archived reversibly; never published or executed |
 
 The existing `TextMe API` Header Auth credential stays inside n8n. Its ID is
 metadata, not a token. Do not inspect its value, duplicate it or use it to
-authenticate callers of the MCP gateway. A separate Bearer credential is needed.
+authenticate callers of the MCP gateway. The separate owner-created Bearer
+credential was bound and verified on 29 October without reading its value.
 
 ## Source and reproduction
 
@@ -33,7 +34,8 @@ empty editor only, or edit the already mapped draft after exporting a backup.
 n8n may auto-select an unrelated credential on import. Export/read back every
 credential binding, authentication mode, disabled flag and published state.
 In this environment switching the gateway to Bearer Auth cleared the unrelated
-auto-selected Header Auth binding; final export has no gateway credentials.
+auto-selected Header Auth binding. That initial export had no caller credential;
+the later owner-created dedicated Bearer reference was verified before acceptance.
 UI import also did not retain all supplied workflow settings. The actual
 readbacks in `exports/` are authoritative; retention must be set and verified
 before reading customer messages. Do not edit the n8n internal database.
@@ -84,10 +86,17 @@ must be reconciled before any retry; UNKNOWN cannot be re-claimed.
    required and no messaging provider webhook is registered.
 3. Verify unauthenticated/incorrect-auth rejection, MCP initialize/tools/list
    and an authenticated balance tool call. Test input/operation rejection.
-4. Once the real production MCP endpoint works, update the existing private
-   plugin with `streamable-http` and server `extensions.com.openai.auth` set to
-   `{"type":"api_key","headerScheme":"bearer"}`. Use the host's secure
-   connection screen for the separate caller secret. Do not package any key.
+4. A fixed Bearer server can declare `streamable-http` with server
+   `extensions.com.openai.auth` set to `{"type":"api_key","headerScheme":"bearer"}`.
+   This is a package declaration, not a verified hosted Dot connection. On
+   29 October 2026 the hosted custom MCP form offered OAuth, no authentication
+   and mixed OAuth only, with no fixed-token entry. Backend execution 65692
+   passed, but the actual Dot attempt at 08:14 was blocked by a missing tool.
+   First provide a supported narrow OAuth connection or approved private tunnel,
+   then register the connection and verify actual Dot tools. Never downgrade
+   authentication or put the caller token in a URL, headers file or package.
+   Discovery on the current host returns the instance-wide `/mcp-server/http`
+   resource and management scopes; those are not approval for TextMe access.
 5. Verify the tool in the actual dot. Plugin installation or backend read alone
    is not proof of the dot's API access. Keep sending absent.
 6. Before any write activation, implement and validate the approval ingress,
@@ -108,3 +117,13 @@ Contract sources: https://docs.textme.co.il/openapi.json,
 https://docs.textme.co.il/guide/authentication/,
 https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.mcptrigger/,
 https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolworkflow/.
+
+## Approved local OAuth preparation, 29 October 2026
+
+The owner approved preparation without an additional charge. See
+`oauth-bridge/README.md` and `docs/runtime/TEXTME_OAUTH_PREP_20261029.md`.
+The dedicated read-only facade is implemented and tested locally; it is not
+deployed, registered with the host or connected to Dot. The verified callback
+was copied from the host UI, but owner consent and an actual Dot balance read
+remain blocked until secure publication and connection. No provider credential,
+upstream caller key or private MCP route is included in this repository.
