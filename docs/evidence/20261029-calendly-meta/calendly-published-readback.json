@@ -1,0 +1,117 @@
+{
+  "publishedVersion": "040b7043-af33-4ae3-89c7-ad502a8ddbc5",
+  "publishedNodeCount": 10,
+  "publishedMailIncoming": [],
+  "publishedEdges": [
+    {
+      "from": "Calendly mails",
+      "to": "Items"
+    },
+    {
+      "from": "Run test",
+      "to": "Items"
+    },
+    {
+      "from": "Items",
+      "to": "Match bookings"
+    },
+    {
+      "from": "Match bookings",
+      "to": "Matched?"
+    },
+    {
+      "from": "Matched?",
+      "to": "Update lead"
+    },
+    {
+      "from": "Matched?",
+      "to": "Create lead"
+    },
+    {
+      "from": "Create lead",
+      "to": "Wait for board automation"
+    },
+    {
+      "from": "Wait for board automation",
+      "to": "Set meeting stage"
+    }
+  ],
+  "publishedHasAcknowledge": false,
+  "definitionHash": "b866a1ea16bb15b3e14d19cc769597f5a684cad7e9ff665fc6262c76886d834c",
+  "settingsHash": "c44071347ea452fba8cdbf0d77e92d03ebe22627f320506d35211d5af82103fc",
+  "latestExecutions": [
+    {
+      "id": 67921,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:21:45.725",
+      "stoppedAt": "2026-10-29 11:21:47.090"
+    },
+    {
+      "id": 67915,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:20:58.023",
+      "stoppedAt": "2026-10-29 11:20:58.034"
+    },
+    {
+      "id": 67913,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:20:49.739",
+      "stoppedAt": "2026-10-29 11:20:50.360"
+    },
+    {
+      "id": 67906,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:20:10.020",
+      "stoppedAt": "2026-10-29 11:20:11.281"
+    },
+    {
+      "id": 67880,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:15:58.022",
+      "stoppedAt": "2026-10-29 11:15:58.033"
+    },
+    {
+      "id": 67847,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:10:58.019",
+      "stoppedAt": "2026-10-29 11:10:58.029"
+    },
+    {
+      "id": 67814,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:05:58.021",
+      "stoppedAt": "2026-10-29 11:05:58.032"
+    },
+    {
+      "id": 67781,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:00:58.022",
+      "stoppedAt": "2026-10-29 11:00:58.032"
+    },
+    {
+      "id": 67748,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 10:55:58.017",
+      "stoppedAt": "2026-10-29 10:55:58.026"
+    },
+    {
+      "id": 67715,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 10:50:58.021",
+      "stoppedAt": "2026-10-29 10:50:58.034"
+    }
+  ],
+  "readOnly": true,
+  "observedAt": "2026-10-29T11:27:13.917Z",
+  "workflowDefinitionUnchanged": true
+}

@@ -1,0 +1,34 @@
+{
+  "observedAt": "2026-10-29T11:24:38.237Z",
+  "status": "PASS",
+  "scope": "Direct actual Monday API test of existing local source cancellation payload; no n8n deployment",
+  "payload": {
+    "refi_meeting": {}
+  },
+  "readback": {
+    "items": [
+      {
+        "id": "3317479530",
+        "name": "TEST Calendly Meta UI 20261029",
+        "state": "active",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה בוטלה",
+            "value": "{\"index\":10,\"changed_at\":\"2026-10-29T11:21:46.744Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "",
+            "value": "{\"changed_at\":\"2026-10-29T11:23:32.240Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-META-UI-20261029-002",
+            "value": "\"TEST-META-UI-20261029-002\""
+          }
+        ]
+      }
+    ]
+  }
+}

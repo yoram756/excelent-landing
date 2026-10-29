@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-29T11:49:12.022Z",
+  "status": "BLOCKED",
+  "datasetId": "1822147178482498",
+  "businessId": "745355029428233",
+  "eventId": "TEST-META-UI-20261029-002",
+  "apiReceiptFile": "meta-ui-api-receipt.json",
+  "uiOldRowOnly": "07:50:33",
+  "newEventVisible": false,
+  "eventIdIndependentReadback": "NOT TESTED",
+  "cause": "Unproven",
+  "attempts": 1,
+  "whatsappCalls": 0
+}

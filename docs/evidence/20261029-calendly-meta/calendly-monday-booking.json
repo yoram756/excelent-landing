@@ -1,0 +1,59 @@
+{
+  "observedAt": "2026-10-29T11:21:20.752Z",
+  "scope": "Synthetic Calendly body; real n8n and Monday",
+  "booking": {
+    "items": [
+      {
+        "id": "3317479530",
+        "name": "TEST Calendly Meta UI 20261029",
+        "state": "active",
+        "board": {
+          "id": "5106246268"
+        },
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה נקבעה",
+            "value": "{\"index\":6,\"changed_at\":\"2026-10-29T11:20:10.915Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "2026-10-29 17:30",
+            "value": "{\"date\":\"2026-10-29\",\"time\":\"15:30:00\",\"changed_at\":\"2026-10-29T11:20:10.916Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-META-UI-20261029-002",
+            "value": "\"TEST-META-UI-20261029-002\""
+          }
+        ]
+      }
+    ]
+  },
+  "replay": {
+    "items": [
+      {
+        "id": "3317479530",
+        "name": "TEST Calendly Meta UI 20261029",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה נקבעה",
+            "value": "{\"index\":6,\"changed_at\":\"2026-10-29T11:20:10.915Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "2026-10-29 17:30",
+            "value": "{\"date\":\"2026-10-29\",\"time\":\"15:30:00\",\"changed_at\":\"2026-10-29T11:20:10.916Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-META-UI-20261029-002",
+            "value": "\"TEST-META-UI-20261029-002\""
+          }
+        ]
+      }
+    ]
+  },
+  "replayLeftColumnsAndChangedAtUnchanged": true
+}

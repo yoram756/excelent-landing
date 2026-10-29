@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-29T11:37:02.356Z",
+  "status": "PASS",
+  "scope": "Actual Calendly email read by existing n8n Gmail node, manually executed",
+  "gmailMessageId": "1a1876ce745b4b26",
+  "itemCount": 1,
+  "textFieldPresent": true,
+  "htmlMime": true,
+  "recipient": "office@kho.org.il",
+  "filters": "from:notifications@calendly.com newer_than:2d",
+  "n8nSettingsChanged": false
+}

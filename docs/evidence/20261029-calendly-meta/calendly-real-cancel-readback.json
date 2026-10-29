@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-29T11:46:48.651Z",
+  "provider": {
+    "status": "PASS",
+    "eventUuid": "d8abc264-dc25-4559-ac6b-dabfa788561d",
+    "bookedAt": "2026-10-29T11:30:00Z",
+    "cancelledAt": "2026-10-29T11:43:00Z",
+    "confirmationMessageId": "1a1876ce745b4b26",
+    "cancellationMessageId": "1a1877933d85abda",
+    "inviteCancellationMessageId": "1a18779375f8533a"
+  },
+  "manualBridge": true,
+  "automaticIngress": "BLOCKED",
+  "monday": {
+    "id": "3317580513",
+    "board": "5106246268",
+    "stage": "פגישה בוטלה",
+    "stageChangedAt": "2026-10-29T11:46:36.080Z",
+    "meeting": {
+      "date": "2026-10-29",
+      "time": "15:30:00"
+    },
+    "eventId": "TEST-CAL-REAL-20261029-001"
+  },
+  "clearMeetingOnCancellation": "FAIL",
+  "whatsappCalls": 0,
+  "n8nChanges": 0
+}

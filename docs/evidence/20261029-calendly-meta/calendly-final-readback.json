@@ -1,0 +1,146 @@
+{
+  "publishedVersion": "040b7043-af33-4ae3-89c7-ad502a8ddbc5",
+  "publishedNodeCount": 10,
+  "publishedMailIncoming": [],
+  "publishedEdges": [
+    {
+      "from": "Calendly mails",
+      "to": "Items"
+    },
+    {
+      "from": "Run test",
+      "to": "Items"
+    },
+    {
+      "from": "Items",
+      "to": "Match bookings"
+    },
+    {
+      "from": "Match bookings",
+      "to": "Matched?"
+    },
+    {
+      "from": "Matched?",
+      "to": "Update lead"
+    },
+    {
+      "from": "Matched?",
+      "to": "Create lead"
+    },
+    {
+      "from": "Create lead",
+      "to": "Wait for board automation"
+    },
+    {
+      "from": "Wait for board automation",
+      "to": "Set meeting stage"
+    }
+  ],
+  "publishedHasAcknowledge": false,
+  "definitionHash": "b866a1ea16bb15b3e14d19cc769597f5a684cad7e9ff665fc6262c76886d834c",
+  "settingsHash": "c44071347ea452fba8cdbf0d77e92d03ebe22627f320506d35211d5af82103fc",
+  "latestExecutions": [
+    {
+      "id": 68089,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:46:35.141",
+      "stoppedAt": "2026-10-29 11:46:36.489"
+    },
+    {
+      "id": 68084,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:45:58.020",
+      "stoppedAt": "2026-10-29 11:45:58.029"
+    },
+    {
+      "id": 68051,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:40:58.030",
+      "stoppedAt": "2026-10-29 11:40:58.040"
+    },
+    {
+      "id": 68037,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:39:03.481",
+      "stoppedAt": "2026-10-29 11:39:04.772"
+    },
+    {
+      "id": 68029,
+      "status": "error",
+      "mode": "manual",
+      "startedAt": "2026-10-29 11:37:52.531",
+      "stoppedAt": "2026-10-29 11:37:52.561"
+    },
+    {
+      "id": 68016,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:35:58.023",
+      "stoppedAt": "2026-10-29 11:35:58.031"
+    },
+    {
+      "id": 68006,
+      "status": "success",
+      "mode": "manual",
+      "startedAt": "2026-10-29 11:34:43.653",
+      "stoppedAt": "2026-10-29 11:34:44.291"
+    },
+    {
+      "id": 67982,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:30:58.027",
+      "stoppedAt": "2026-10-29 11:30:58.045"
+    },
+    {
+      "id": 67949,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:25:58.024",
+      "stoppedAt": "2026-10-29 11:25:58.037"
+    },
+    {
+      "id": 67921,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:21:45.725",
+      "stoppedAt": "2026-10-29 11:21:47.090"
+    },
+    {
+      "id": 67915,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:20:58.023",
+      "stoppedAt": "2026-10-29 11:20:58.034"
+    },
+    {
+      "id": 67913,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:20:49.739",
+      "stoppedAt": "2026-10-29 11:20:50.360"
+    },
+    {
+      "id": 67906,
+      "status": "success",
+      "mode": "webhook",
+      "startedAt": "2026-10-29 11:20:10.020",
+      "stoppedAt": "2026-10-29 11:20:11.281"
+    },
+    {
+      "id": 67880,
+      "status": "success",
+      "mode": "trigger",
+      "startedAt": "2026-10-29 11:15:58.022",
+      "stoppedAt": "2026-10-29 11:15:58.033"
+    }
+  ],
+  "readOnly": true,
+  "observedAt": "2026-10-29T11:47:46.831Z",
+  "definitionUnchanged": true,
+  "settingsUnchanged": true
+}

@@ -1,0 +1,75 @@
+{
+  "observedAt": "2026-10-29T11:49:12.064Z",
+  "scope": "Controlled provider booking/cancellation plus manually bridged n8n and Monday checks; Meta API acceptance without new UI confirmation",
+  "localTests": {
+    "command": "node --test tests/funnel/links.test.js tests/funnel/acceptance.test.js tests/funnel/calendly-ack.test.js",
+    "exitCode": 0,
+    "passed": 32,
+    "scope": "local tests only"
+  },
+  "whatsappCalls": 0,
+  "n8nDefinitionChanged": false,
+  "n8nSettingsChanged": false,
+  "files": [
+    {
+      "name": "calendly-server-readback.json",
+      "sha256": "56420156f496cf040766931e908b04c328a2af1bc21369b6ef7be8948cb40d8d"
+    },
+    {
+      "name": "calendly-published-readback.json",
+      "sha256": "f6b0d59803bfce6d277d7eb67d846aebf1848485b189a336c4c524ce965cd1b7"
+    },
+    {
+      "name": "calendly-final-readback.json",
+      "sha256": "b250eca9910c8c5038e32d92ad301a437201feae7c0a1b789275eb36e5b017c3"
+    },
+    {
+      "name": "calendly-monday-booking.json",
+      "sha256": "4908d6dd694ca11e4363750a9bde813771c65bf07bdfbeabb688fe4c587dd26a"
+    },
+    {
+      "name": "calendly-cancel-before-fix.json",
+      "sha256": "5c453dfa16088663f98d7126ae60cbdb3dbc8326cbb4218decea8431273fa70d"
+    },
+    {
+      "name": "calendly-clear-api-contract.json",
+      "sha256": "09030ef6ede5d4dab63e88ea4bd3211b5dee20e6f992d658f8423fd6aa22d1ad"
+    },
+    {
+      "name": "calendly-native-mail.json",
+      "sha256": "1aba44d0d2afd84b2d149ea41e5794a18f01e0d36815d167c0d23082685f4c95"
+    },
+    {
+      "name": "calendly-real-monday-booking.json",
+      "sha256": "ca77f468ee5e44cf1ee511989fa51de2643cf3b6fdc743100f6726d6ae5eb0dc"
+    },
+    {
+      "name": "calendly-real-cancel-readback.json",
+      "sha256": "a6448e35191a999a5fbe3dbc41b6951b4c1ccdbce3be8235badfcf0424314e2c"
+    },
+    {
+      "name": "final-cleanup.json",
+      "sha256": "3ae06fb3564db98952591b50fed13f79c0cedf76017270fffbb0e55b2c1547fe"
+    },
+    {
+      "name": "meta-ui-api-receipt.json",
+      "sha256": "90bef68750b1b105ae96416ef06b67a107ac519638ae32752106c3f934be9e89"
+    },
+    {
+      "name": "meta-ui-final.json",
+      "sha256": "7e3f7a3553845817e58d2305b4b3ff908a7c04bd296a6ace4f1f91f8c5627258"
+    },
+    {
+      "name": "calendly-booked.png",
+      "sha256": "ecdaacaa7edd5a7601b64b788bf5ed515c2d95802d4d5a10bbface20b43e66f3"
+    },
+    {
+      "name": "calendly-cancelled.png",
+      "sha256": "4fdfe945300f5cdeabb2d124aec2c3e94cb656e8d6e7331a1a3a5fd39b590565"
+    },
+    {
+      "name": "meta-ui-final.png",
+      "sha256": "5dc9d0f57d55168171b3fd0a082bcb768a9be3e3b046963c7e0ccf50a172fe0e"
+    }
+  ]
+}

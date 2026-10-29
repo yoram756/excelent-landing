@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-10-29T11:48:06.058Z",
+  "status": "PASS",
+  "deletedItems": [
+    {
+      "id": "3317479530",
+      "name": "TEST Calendly Meta UI 20261029",
+      "state": "deleted"
+    },
+    {
+      "id": "3317580513",
+      "name": "TEST Calendly 20261029",
+      "state": "deleted"
+    }
+  ],
+  "activeBaselineIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "expectedBaselineIds": [
+    "3291304369",
+    "3293511781",
+    "3301735356",
+    "3304127965"
+  ],
+  "calendarEvent": {
+    "uuid": "d8abc264-dc25-4559-ac6b-dabfa788561d",
+    "state": "Canceled",
+    "cancelEmailMessageId": "1a1877933d85abda",
+    "inviteCancellationMessageId": "1a18779375f8533a"
+  },
+  "ownedTestsRemaining": 0,
+  "whatsappCalls": 0,
+  "n8nChanges": 0
+}

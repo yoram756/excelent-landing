@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-10-29T11:23:28.427Z",
+  "status": "FAIL",
+  "scope": "Published workflow synthetic cancellation through real n8n/Monday",
+  "expectedMeetingCleared": true,
+  "readback": {
+    "items": [
+      {
+        "id": "3317479530",
+        "name": "TEST Calendly Meta UI 20261029",
+        "column_values": [
+          {
+            "id": "refi_stage",
+            "text": "פגישה בוטלה",
+            "value": "{\"index\":10,\"changed_at\":\"2026-10-29T11:21:46.744Z\"}"
+          },
+          {
+            "id": "refi_meeting",
+            "text": "2026-10-29 17:30",
+            "value": "{\"date\":\"2026-10-29\",\"time\":\"15:30:00\",\"changed_at\":\"2026-10-29T11:20:10.916Z\"}"
+          },
+          {
+            "id": "text_mm8c3r4v",
+            "text": "TEST-META-UI-20261029-002",
+            "value": "\"TEST-META-UI-20261029-002\""
+          }
+        ]
+      }
+    ]
+  }
+}

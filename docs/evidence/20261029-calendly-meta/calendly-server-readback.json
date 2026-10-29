@@ -1,0 +1,53 @@
+{
+  "workflowId": "wEYSZMNU2JqeEoGZ",
+  "name": "משפך מחזור משכנתא: פגישות מ Calendly (מצב בדיקה, בלי סריקת מייל)",
+  "active": true,
+  "activeVersionId": "040b7043-af33-4ae3-89c7-ad502a8ddbc5",
+  "nodes": 10,
+  "edges": [
+    {
+      "from": "Calendly mails",
+      "to": "Items"
+    },
+    {
+      "from": "Run test",
+      "to": "Items"
+    },
+    {
+      "from": "Items",
+      "to": "Match bookings"
+    },
+    {
+      "from": "Match bookings",
+      "to": "Matched?"
+    },
+    {
+      "from": "Matched?",
+      "to": "Update lead"
+    },
+    {
+      "from": "Matched?",
+      "to": "Create lead"
+    },
+    {
+      "from": "Create lead",
+      "to": "Wait for board automation"
+    },
+    {
+      "from": "Wait for board automation",
+      "to": "Set meeting stage"
+    }
+  ],
+  "mailNodePresent": true,
+  "mailIncoming": [],
+  "mailOutgoing": [
+    {
+      "from": "Calendly mails",
+      "to": "Items"
+    }
+  ],
+  "definitionHash": "b866a1ea16bb15b3e14d19cc769597f5a684cad7e9ff665fc6262c76886d834c",
+  "settingsHash": "c44071347ea452fba8cdbf0d77e92d03ebe22627f320506d35211d5af82103fc",
+  "readOnly": true,
+  "observedAt": "2026-10-29T11:13:38.323Z"
+}

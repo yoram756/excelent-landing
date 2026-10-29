@@ -1,0 +1,106 @@
+- banner:
+  - generic "ייעוץ משכנתאות אקסלנט - משרד":
+    - 'button "Account menu: ייעוץ משכנתאות אקסלנט - משרד,"':
+      - generic: ייעוץ משכנתאות אקסלנט - משרד
+- button "Create":
+- link "Scheduling":
+  - /url: /app/scheduling/meeting_types/user/me
+  - generic: Scheduling
+- link "Calendar":
+  - /url: /app/calendar/user/me
+  - generic: Calendar
+- link "Notetaker":
+  - /url: /app/recaps/user/me
+  - generic: Notetaker
+- link "Contacts":
+  - /url: /app/contacts/user/me
+  - generic: Contacts
+- link "Automations":
+  - /url: /app/automations/user/me?view=integrations
+  - generic: Automations
+- button "Upgrade plan":
+  - generic: Upgrade plan
+- link "Settings":
+  - /url: /app/calendar/user/me?exit_notetaker_setup=true&period=upcoming&selected=d8abc264-dc25-4559-ac6b-dabfa788561d&meetings_preset=today&pane=meeting_details&paneState=ZXZlbnRJZD1kOGFiYzI2NC1kYzI1LTQ1NTktYWM2Yi1kYWJmYTc4ODU2MWQ%3D&settings=profile&settings_tab=general
+  - generic: Settings
+- button "Help":
+- main:
+  - heading "Calendar" [level=1]
+  - paragraph: My Calendly
+  - button "Settings":
+  - button "Export":
+  - search:
+    - textbox "Search...":
+      - /placeholder: Search meetings
+  - button "Filter":
+  - button "Thu Oct 29, 2026":
+    - generic: Thu Oct 29, 2026
+    - generic: 
+  - grid "Date range":
+    - row "Today" [selected]:
+      - gridcell "Today":
+        - text: Today
+    - row "Upcoming":
+      - gridcell "Upcoming": Upcoming
+    - row "This week":
+      - gridcell "This week": This week
+    - row "Last week":
+      - gridcell "Last week": Last week
+  - region "Main content":
+    - generic: Displaying 0 meetings
+    - paragraph: Nothing on your calendar today
+    - paragraph: You have no meetings scheduled for Thu, October 29.
+    - button "View all upcoming meetings":
+      - generic: View all upcoming meetings
+- iframe [id="seg-workerbox-1"]
+- complementary "Side panel":
+  - button "Close":
+  - generic: Canceled
+  - paragraph: שיחת אבחון משכנתא ללא עלות
+  - paragraph: Thursday, 29 October
+  - paragraph: 17:30 - 17:45 (Asia/Jerusalem)
+  - navigation:
+    - tablist:
+      - tab "Details" [selected]:
+        - generic: Details
+      - tab "Notes":
+        - generic: Notes
+  - paragraph:
+    - strong: Canceled by ייעוץ משכנתאות אקסלנט - משרד
+  - paragraph: No reason provided.
+  - paragraph: Invitees
+  - button "Export attendees":
+  - img "TEST Calendly 20261029":
+    - generic: T2
+  - generic: TEST Calendly 20261029
+  - text: office+caltest20261029@kho.org.il
+  - text: +972 50-000-0084
+  - generic: Asia/Jerusalem
+  - button "Email":
+    - text: Email
+  - button "View full profile":
+    - text: View full profile
+  - paragraph: Questions
+  - paragraph: מה מטרת הפנייה שלכם?
+  - paragraph: מיחזור משכנתא קיימת
+  - paragraph: באיזה שלב אתם נמצאים היום?
+  - paragraph: רק בודקים אפשרויות בשלב זה
+  - paragraph: Location
+  - paragraph: +972 50-000-0084
+  - paragraph: Hosts
+  - generic: י
+  - paragraph: ייעוץ משכנתאות אקסלנט - משרד
+  - paragraph: Timeline
+  - paragraph: Event booked by TEST Calendly 20261029
+  - paragraph: 29 October at 13:30 (GMT+2)
+  - paragraph: Event canceled by ייעוץ משכנתאות אקסלנט - משרד
+  - paragraph: 29 October at 13:43 (GMT+2)
+  - generic: No reason provided.
+  - paragraph:
+    - text: Based on the
+    - link "שיחת אבחון משכנתא ללא עלות":
+      - /url: /event_types/51045569/edit
+      - text: שיחת אבחון משכנתא ללא עלות
+    - text: event type.
+- iframe [id="intercom-frame"]
+- button "Open Intercom Messenger":

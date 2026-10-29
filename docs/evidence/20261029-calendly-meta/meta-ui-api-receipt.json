@@ -1,0 +1,14 @@
+{
+  "observedAt": "2026-10-29T11:15:02.896Z",
+  "scope": "Meta API acceptance only; Test Events receipt must be verified separately",
+  "eventId": "TEST-META-UI-20261029-002",
+  "eventName": "Lead",
+  "automaticRetry": false,
+  "metaTestEventsStatus": "NOT TESTED",
+  "apiAccepted": true,
+  "httpStatus": 200,
+  "eventsReceived": 1,
+  "errorCode": null,
+  "errorSubcode": null,
+  "traceId": "AF1ZMXDP50xXuPNjb_heI7o"
+}
