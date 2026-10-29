@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-29",
+  "dotReportedTime": "08:14 Asia/Jerusalem",
+  "pluginId": "plugins_6ae261b29284819185d282ac2fc068d2",
+  "pluginVersion": "0.2.0",
+  "requestCount": 1,
+  "requestScope": "one balance read from Dot; no sends, campaigns or settings changes",
+  "requestDelivered": "PASS",
+  "dotBalanceRead": "BLOCKED",
+  "blocker": "textme_read absent from Dot tool catalog; updated skill instructions present",
+  "httpStatus": null,
+  "providerStatus": null,
+  "executionId": null,
+  "balanceReadPerformed": false,
+  "cloudBrowser": "plugin page requires ChatGPT login; no TextMe connection form shown",
+  "ownerBrowser": "plugin version 0.2.0 with one MCP server and one skill verified; no Connect or credential field displayed",
+  "credentialsReadOrChanged": false,
+  "outboundMessagesOrCampaigns": false,
+  "previousBackendExecutionExcludedAsDotProof": "65692",
+  "nextStep": "Expose the packaged MCP connection to Dot through a supported host connection flow; owner completes secure bearer entry if offered. One Dot message was sent; the authorized balance read has not yet occurred."
+}
