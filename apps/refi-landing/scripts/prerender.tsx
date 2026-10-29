@@ -9,7 +9,8 @@ import { pages } from '../src/content';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const output = path.join(root, 'site/refi-cro');
-let template = fs.readFileSync(path.join(output, 'index.html'), 'utf8');
+// Normalize checkout line endings before hashing inline content for Linux.
+let template = fs.readFileSync(path.join(output, 'index.html'), 'utf8').replace(/\r/g, '');
 if (!template.includes('<!--app-html-->')) throw Error('Prerender placeholder missing');
 // A single small stylesheet is inlined to remove a render-blocking request on
 // mobile. Its exact bytes are authorized by a CSP hash, never unsafe-inline.

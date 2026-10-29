@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-29",
+  "sourceCommit": "92db79783082580fd39bc169e2e0cc60ac8042a2",
+  "scope": "Three campaign-specific pages, trust branding and draft message packs",
+  "requirements": {
+    "campaignContent": "PASS",
+    "localSourceTests": "PASS",
+    "localMockBrowserTests": "PASS",
+    "mobileLabLcp": "PASS",
+    "originalLogoIntegration": "PASS",
+    "bizreviewsAggregateReadback": "PASS",
+    "midragIndependentReadback": "NOT TESTED",
+    "gitPush": "PASS",
+    "vpsDeployment": "BLOCKED",
+    "newRoutesProductionReadback": "NOT TESTED",
+    "newRoutesProductionIntake": "NOT TESTED",
+    "serviceMessageDrafts": "PASS",
+    "cosendSecureConnection": "BLOCKED",
+    "singleResponseOwnerActivation": "BLOCKED",
+    "whatsappDelivery": "NOT TESTED",
+    "stability24h": "NOT TESTED",
+    "fullProjectReadiness": "BLOCKED"
+  },
+  "counts": {
+    "source": 13,
+    "browserRegression": 22,
+    "campaignBrowser": 9,
+    "adAngles": 30,
+    "serviceDrafts": 9
+  },
+  "productionBlocker": "Authenticated Chrome extension disconnected; IAB Hostinger still shows login. Deployment command was not invoked. Reviewed helper transfer outcome is unknown, so check existence before retry.",
+  "whatsappSends": 0,
+  "n8nChanges": 0,
+  "goLiveReady": false,
+  "evidence": "docs/evidence/20261029-campaign-content",
+  "previousProductionIntakeEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md"
+}
