@@ -1,0 +1,29 @@
+{
+  "scope": "Additional source comparison, no files changed",
+  "files": [
+    {
+      "file": "src/services/wa-assistant/config/provider.json",
+      "equalIgnoringCheckoutLineEndings": true
+    },
+    {
+      "file": "src/services/wa-assistant/src/policy.mjs",
+      "equalIgnoringCheckoutLineEndings": true
+    },
+    {
+      "file": "src/services/wa-assistant/src/broker.mjs",
+      "equalIgnoringCheckoutLineEndings": true
+    },
+    {
+      "file": "src/services/wa-assistant/src/cosend-control.mjs",
+      "equalIgnoringCheckoutLineEndings": true
+    },
+    {
+      "file": "plugins/excellent-cosend-official/mcp.json",
+      "equalIgnoringCheckoutLineEndings": true
+    },
+    {
+      "file": "config/lead-service.json",
+      "equalIgnoringCheckoutLineEndings": true
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "stage": "READ_ONLY_PREPARATION",
+  "preparedAt": "2026-10-29T21:15:17.872Z",
+  "binding": {
+    "organizationId": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+    "connectionId": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+    "phone": "+972559881245",
+    "phoneNumberId": "1138723472651617",
+    "wabaId": "848287037598986",
+    "mode": "coexistence"
+  },
+  "selectedResponseOwner": "עוזר אקסלנט",
+  "humanEscalationOwner": "יורם פלד",
+  "providerHumanAssigneeId": null,
+  "proposedHumanHours": {
+    "days": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "open": "08:15",
+    "close": "20:00",
+    "timezone": "Asia/Jerusalem",
+    "ownerApprovedForPreparation": true,
+    "approvalSource": "User answer to call_0a8a3f978f7a457aa9114ca4276acc5b",
+    "activeServicePolicyChanged": false
+  },
+  "requestedReadScopes": [
+    "messages:read",
+    "contacts:read",
+    "automations:read",
+    "templates:read"
+  ],
+  "grantedNativeScopes": null,
+  "historicalCredentialScopes": [
+    "connections:read"
+  ],
+  "historicalCredentialScopeIsFreshProof": false,
+  "writeScopesRequested": [],
+  "liveSendingApproved": false,
+  "runtimeOutboundEnabled": false,
+  "responseOwnershipChangesApproved": false,
+  "n8nChangesApproved": false,
+  "modelApiCallsApproved": false,
+  "newSpendApproved": false,
+  "webhookChangesApproved": false,
+  "allowedFuturePilot": "One reply to a newly received, existing, individual conversation only after separate approval and all provider gates",
+  "excluded": [
+    "Proactive campaigns",
+    "Groups",
+    "Imported history",
+    "Private and family contacts",
+    "New live ingress",
+    "Second responder",
+    "Provider credential extraction"
+  ],
+  "campaignDrafts": [
+    "config/campaign-messages/campaign_buyers_south.json",
+    "config/campaign-messages/campaign_sellers_south.json",
+    "config/campaign-messages/campaign_bundle_allinone.json"
+  ],
+  "humanEscalationReasons": [
+    "Explicit representative request",
+    "Complaint",
+    "Personal financial advice",
+    "Price or unverified fact",
+    "Unsupported attachment",
+    "Opt-out",
+    "Uncertain send"
+  ],
+  "gatesBeforeAnyActivation": [
+    "Official MCP DNS and secure OAuth restored",
+    "Native identity, number and read scopes verified",
+    "Existing responder and human assignee verified",
+    "Human hours reconciled in approved runtime scope",
+    "Campaign mapping, consent, templates/window and cost verified",
+    "Durable deduplication and uncertain-send reconciliation verified in intended runtime",
+    "Explicit retention, rate and spend limits approved",
+    "Separate exact-message test approval and provider delivery evidence",
+    "Single-owner cutover and rollback approved"
+  ],
+  "rollback": "Disable only the new responder; preserve ledger, unresolved sends, existing 8788 worker and unrelated services; never restore an older send ledger over new attempts",
+  "status": "DRAFT_PREPARED_NOT_ACTIVATED"
+}

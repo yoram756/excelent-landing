@@ -46,5 +46,11 @@
   "campaignSpecificContent": "PASS",
   "campaignSpecificLiveDeployment": "PASS",
   "campaignSpecificLiveForms": "PASS",
-  "campaignContentEvidence": "docs/runtime/CAMPAIGN_CONTENT_20261029.md"
+  "campaignContentEvidence": "docs/runtime/CAMPAIGN_CONTENT_20261029.md",
+  "cosendNativeIdentity": "NOT TESTED",
+  "cosendGrantedNativeScopes": "NOT TESTED",
+  "cosendLocalCutoverPreparation": "PASS",
+  "cosendHumanHoursPreparationDecision": "PASS",
+  "cosendAssistantHumanHoursPreparation": "Sunday-Thursday 08:15-20:00 Asia/Jerusalem; no active service policy change",
+  "cosendEvidence": "docs/runtime/COSEND_RECHECK_AND_CUTOVER_20261029.md"
 }

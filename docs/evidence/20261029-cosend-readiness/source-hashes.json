@@ -1,0 +1,26 @@
+[
+  {
+    "file": "src/services/wa-assistant/config/provider.json",
+    "sha256": "977a53efa3c611ae8c6daffe19ed05365603f384aa05a65c9f4dfc8e3c9d3b2d"
+  },
+  {
+    "file": "src/services/wa-assistant/src/policy.mjs",
+    "sha256": "5e32da3461e778a14404f74ca65d00e82c1eb40fcf7cf305b0df6bf8940a9334"
+  },
+  {
+    "file": "src/services/wa-assistant/src/broker.mjs",
+    "sha256": "368353aaf6ed81a9e54470d7fb067ba1276142f3383a0e7206094603bb8d7e5c"
+  },
+  {
+    "file": "src/services/wa-assistant/src/cosend-control.mjs",
+    "sha256": "bb4f8a2d63d9f442794e747bcc7a977026e35acbef0a60416201a139cc84c7ba"
+  },
+  {
+    "file": "plugins/excellent-cosend-official/mcp.json",
+    "sha256": "9c81eaa687f2fa141da1cd06e33320161ecf3e47669b3ae9e98463c74bfc25ee"
+  },
+  {
+    "file": "config/lead-service.json",
+    "sha256": "a265dfdbec2c4c7619df618bde533a1dcd1df062bdfa1791c57c563562f4aca0"
+  }
+]

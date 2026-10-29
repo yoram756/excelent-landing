@@ -1,0 +1,30 @@
+{
+  "testedWorkspace": "C:\\Users\\User\\excelent-landing",
+  "sourceFilesMatchRelease": [
+    {
+      "file": "src/services/wa-assistant/config/provider.json",
+      "matchesRelease": false
+    },
+    {
+      "file": "src/services/wa-assistant/src/policy.mjs",
+      "matchesRelease": false
+    },
+    {
+      "file": "src/services/wa-assistant/src/broker.mjs",
+      "matchesRelease": false
+    },
+    {
+      "file": "src/services/wa-assistant/src/cosend-control.mjs",
+      "matchesRelease": false
+    },
+    {
+      "file": "plugins/excellent-cosend-official/mcp.json",
+      "matchesRelease": false
+    },
+    {
+      "file": "config/lead-service.json",
+      "matchesRelease": false
+    }
+  ],
+  "scope": "Local synthetic validation only. No runtime configuration, code or provider state changed."
+}

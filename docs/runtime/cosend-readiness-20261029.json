@@ -1,0 +1,79 @@
+{
+  "checkedAt": "2026-10-29T21:15:17.872Z",
+  "requirements": {
+    "officialEndpointAvailability": "BLOCKED",
+    "privateGatewayOwnerAuthentication": "PASS",
+    "privateGatewayProviderAccess": "BLOCKED",
+    "nativeOAuthConnection": "BLOCKED",
+    "freshProviderIdentity": "NOT TESTED",
+    "freshGrantedProviderScopes": "NOT TESTED",
+    "configuredReadOnlyPlugin": "PASS",
+    "ownerResponseSelection": "PASS",
+    "humanHoursPreparationDecision": "PASS",
+    "localSafetyRegression": "PASS",
+    "cutoverPackagePreparation": "PASS",
+    "providerHumanAssignment": "NOT TESTED",
+    "messageDelivery": "NOT TESTED",
+    "exclusiveResponseOwnerActivation": "BLOCKED"
+  },
+  "dns": [
+    {
+      "resolver": "1.1.1.1",
+      "host": "mcp.cosend.app",
+      "result": "NXDOMAIN",
+      "errorId": "DNS_ERROR_RCODE_NAME_ERROR"
+    },
+    {
+      "resolver": "8.8.8.8",
+      "host": "mcp.cosend.app",
+      "result": "NXDOMAIN",
+      "errorId": "DNS_ERROR_RCODE_NAME_ERROR"
+    }
+  ],
+  "dnsControl": {
+    "resolver": "1.1.1.1",
+    "host": "cosend.app",
+    "addresses": [
+      "104.21.67.234",
+      "172.67.182.243"
+    ]
+  },
+  "gateway": {
+    "gatewayStatus": "STAGE1_LOCKED",
+    "ownerVerified": true,
+    "providerAccessEnabled": false,
+    "code": "DEPLOYMENT_APPROVAL_REQUIRED",
+    "stage2PriorApprovalRecordedButNotImplemented": true
+  },
+  "nativeCosendToolsDiscovered": [],
+  "pluginSearchReturnedNoPublicMatch": true,
+  "tests": {
+    "localSafety": {
+      "passed": 84,
+      "failed": 0,
+      "exitCode": 0,
+      "scope": "Synthetic fixtures and injected transports; no live-provider calls"
+    },
+    "pluginPackage": {
+      "status": "PASS",
+      "negativeControls": 8,
+      "writeScopesRequested": 0,
+      "liveCalls": 0,
+      "exitCode": 0
+    }
+  },
+  "latestSupportMessageId": "1a18790866bcb960",
+  "newSupportReply": false,
+  "reminderPermitted": false,
+  "n8nChanges": 0,
+  "providerChanges": 0,
+  "whatsappSends": 0,
+  "secretsExtracted": 0,
+  "productionFilesChanged": 0,
+  "goLiveReady": false,
+  "sourceReferences": [
+    "https://cosend.app/docs/mcp",
+    "https://cosend.app/mcp"
+  ],
+  "candidate": "docs/runtime/cosend-cutover-candidate-20261029.json"
+}
