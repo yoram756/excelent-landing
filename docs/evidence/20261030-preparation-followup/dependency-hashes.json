@@ -1,0 +1,11 @@
+{
+  "src/webhooks/intake/source.js": "6905bad556ba7342a1f975dc8c2e8ef3ba02f0f316f04fba01f52c53b2503d71",
+  "src/webhooks/intake/atomic-shape.json": "9436e85c9ac3fcea5fc2ab0098338887e2da2ec4e673c8550653af4323964b0f",
+  "src/webhooks/intake/validate.js": "865c515f01523da8dd1a167312baca4a59e89022bdab16722cadaae61e01a2d8",
+  "src/webhooks/intake/check-save.js": "67c41da6d07fc2dffe347f339b1fe34f6375744ac50626aec8f7346d69d6ba8b",
+  "src/config/campaigns/refi.json": "fa1c2f3986f3abda7deb8c04de83b1be10512328b3f81083d0f2afabcd76e5b9",
+  "src/config/products.json": "8b8a024e4ed76a02d59cc2739b72cfd0b9fc63b82a62110b76874b95e48f1455",
+  "config/business.json": "09f5984a8ee9ee6e466f350945481e90c64cc9a872d397b2d2efb0c95ae38216",
+  "config/error-handler.json": "995908e1ec04c7b454c4d9a001c6b9c6726078305174d7441d37e7e5d2cae692",
+  "src/services/wa-assistant/config/provider.json": "977a53efa3c611ae8c6daffe19ed05365603f384aa05a65c9f4dfc8e3c9d3b2d"
+}

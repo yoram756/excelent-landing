@@ -1,0 +1,12 @@
+{
+  "resource": "https://api.cosend.app/mcp",
+  "authorization_servers": [
+    "https://auth.cosend.app"
+  ],
+  "scopes_supported": [
+    "messages:read"
+  ],
+  "bearer_methods_supported": [
+    "header"
+  ]
+}

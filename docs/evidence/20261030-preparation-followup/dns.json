@@ -1,0 +1,20 @@
+[
+  {
+    "resolver": "1.1.1.1",
+    "name": "mcp.cosend.app",
+    "resolved": true,
+    "addresses": [
+      "104.21.67.234",
+      "172.67.182.243"
+    ]
+  },
+  {
+    "resolver": "8.8.8.8",
+    "name": "mcp.cosend.app",
+    "resolved": true,
+    "addresses": [
+      "172.67.182.243",
+      "104.21.67.234"
+    ]
+  }
+]

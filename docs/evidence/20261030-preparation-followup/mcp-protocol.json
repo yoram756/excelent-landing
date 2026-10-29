@@ -1,0 +1,9 @@
+{
+  "status": 401,
+  "contentType": "application/json; charset=utf-8",
+  "authenticate": "Bearer resource_metadata=\"https://api.cosend.app/.well-known/oauth-protected-resource/mcp\", scope=\"messages:read\"",
+  "body": "{\"jsonrpc\":\"2.0\",\"id\":null,\"error\":{\"code\":-32600,\"message\":\"This endpoint requires a Cosend MCP access token.\"}}",
+  "credentialsSent": false,
+  "accountToolCalled": false,
+  "tlsValidated": true
+}

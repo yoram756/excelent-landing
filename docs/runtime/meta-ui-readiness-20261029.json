@@ -55,5 +55,9 @@
   "cosendEvidence": "docs/runtime/COSEND_RECHECK_AND_CUTOVER_20261029.md",
   "replayBindingSourcePreparation": "PASS",
   "replayBindingProductionDeployment": "BLOCKED",
-  "latestIndependentEvidence": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md"
+  "latestIndependentEvidence": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md",
+  "cosendPublicDns": "PASS",
+  "cosendPublicHttps": "PASS",
+  "replayActualGraphCompatibilityPreparation": "PASS",
+  "overnightEvidence": "docs/runtime/OVERNIGHT_PREPARATION_20261030.md"
 }

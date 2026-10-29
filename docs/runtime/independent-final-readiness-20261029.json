@@ -46,5 +46,9 @@
     "Exact Meta UI event_id echo and paid attribution not tested",
     "Actual VPS shutdown not tested; external missing-signal and recovery proof already recorded",
     "Advanced concurrent Calendly and production write-failure injection not tested"
-  ]
+  ],
+  "cosendPublicDns": "PASS",
+  "cosendPublicHttps": "PASS",
+  "replayActualGraphCompatibilityPreparation": "PASS",
+  "overnightEvidence": "docs/runtime/OVERNIGHT_PREPARATION_20261030.md"
 }

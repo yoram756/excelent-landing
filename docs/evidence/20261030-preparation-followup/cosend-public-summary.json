@@ -1,0 +1,37 @@
+{
+  "checkedAt": "2026-10-29T22:03:00Z",
+  "dnsResolution": "PASS",
+  "publicHttpsTls": "PASS",
+  "anonymousGetStatus": 405,
+  "anonymousMcpInitializeStatus": 401,
+  "credentialsSent": false,
+  "accountToolsCalled": false,
+  "protectedResourceMetadata": {
+    "resource": "https://api.cosend.app/mcp",
+    "authorization_servers": [
+      "https://auth.cosend.app"
+    ],
+    "scopes_supported": [
+      "messages:read"
+    ],
+    "bearer_methods_supported": [
+      "header"
+    ]
+  },
+  "publicAuthorizationServerDiscovery": {
+    "url": "https://auth.cosend.app/.well-known/oauth-authorization-server",
+    "status": 401
+  },
+  "nativeCosendToolsAvailable": false,
+  "privateGateway": "STAGE1_LOCKED",
+  "providerAccessEnabled": false,
+  "secureAuthenticatedConnection": "BLOCKED",
+  "identityAndGrantedScopes": "NOT TESTED",
+  "mailThreadMessageCount": 2,
+  "lastHumanReplyId": "1a18790866bcb960",
+  "newHumanReply": false,
+  "existingMonitorActive": true,
+  "followupEligible": false,
+  "solutionVerified": false,
+  "monitorPaused": false
+}

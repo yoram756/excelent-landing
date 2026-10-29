@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-29T22:03:00Z",
+  "sourceCommit": "6d45a94189422a207f9c612be914a4d73766dde3",
+  "scope": "Read-only compatibility preparation against actual published n8n graph",
+  "compatibility": "PASS",
+  "workflowId": "8W7MymUCLpPnilJs",
+  "publishedVersion": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
+  "nodeCount": 41,
+  "targetNodes": [
+    {
+      "name": "Validate",
+      "id": "6be61f9a-f352-4779-aa9f-77d66acade9d"
+    },
+    {
+      "name": "Check save",
+      "id": "25a86aa9-2cc0-471a-a632-1761e6ad189e"
+    }
+  ],
+  "sourceDependencyFilesMatched": 9,
+  "network": "none",
+  "containerFilesystem": "read-only except private output",
+  "packetPathOnVps": "/docker/independent-replay-preparation-20261029/review.private.json",
+  "packetMode": "0600",
+  "packetSha256": "691c80fc99104a564e6970587c6f2c0501ce5d487341177c92f8ac0335d2ac8d",
+  "helperSha256": "4ab80315038154ff1dd0219d10e43762e8eec4cb12557486180a59e18ebce707",
+  "n8nDefinitionUnchanged": true,
+  "actualSourceApplication": "BLOCKED",
+  "whatsappSends": 0,
+  "note": "Published graph processed only in memory from SQLite read-only mode. No raw workflow export was copied locally. No n8n API or settings write; only a private review packet was created. Earlier timed-out public source transfer was confirmed absent before compressed paste succeeded."
+}
