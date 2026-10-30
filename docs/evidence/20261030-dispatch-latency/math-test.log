@@ -1,0 +1,16 @@
+✔ fast ingress passes even when complete CRM response takes three seconds (1.1783ms)
+✔ server clock five seconds ahead is corrected rather than called slow (0.1689ms)
+✔ known slow ingress fails (0.1572ms)
+✔ uncertainty crossing two seconds never passes (0.1376ms)
+✔ exact threshold never passes (1.1748ms)
+✔ inconsistent clock samples are rejected (0.4615ms)
+✔ wrong event cannot be correlated (0.8877ms)
+✔ missing timestamps and client clock jumps are rejected (3.4956ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 107.8876

@@ -1,0 +1,22 @@
+{
+  ".gitattributes": "f06202a408fef9b9ea69bb6b1cb8160dbb0378c5bb67a444d510d231813824c8",
+  "cleanup-readback.json": "69f7fc8887f188d0ce0c84bc4d22561af9d79b7e5d93b6a5c4a583a196255fb3",
+  "client-intent.json": "6619b12781dcf56fe430bbace7bb58ab8475dd103c75cae3159011a0092cdd0d",
+  "client-result.json": "81f5736d51fcc879a01c6a45e4a3ce17e997d2a3d99704beb3afa09e0b1ce74c",
+  "client.cjs": "f9af9995096bb1ea42b31407d0e27ee8bf49cef365995fcbbfd36026bca8f142",
+  "collector.py": "34db253cae144759dcd8a2242766bb7dac9eedba0ad14215cfa1462236af5778",
+  "final-runtime.json": "89ccf3e4cd43919bb6842dff697ea4db31274e2ca5593c035919a487822b8d1d",
+  "final-runtime.png": "8f45859f0a8df84f02b44d379d8be3ff8c0d5af76aef67930896cc28e9fd1c99",
+  "math-test.log": "673ca31fcb2d5a66023c2f6b14bd479e858774c37ac935fb7382dc042c68f83c",
+  "math.test.cjs": "6f19c8cbb2d83146fb5f8814fb08375ab84f54d679770fedf555f6e9fc14b9a2",
+  "measure.cjs": "9e28c70e73f51f296c19daf538e9dd6b271db93844fa4c8ab317e8256193ceab",
+  "measurement.json": "ef7a28a0a4258806c1a5ab951709563ffa7ff1c2a995385425746600c2852355",
+  "monday-mapping.json": "349fc0e04ab54dc85a016b8daf12743ba28e6ecbbc906c038fc004fe68d09216",
+  "negative-control.cjs": "98c4f44a3209a1bd2822a6544633cd435d74ae4142e26754226e04684fe23bbb",
+  "negative-control.json": "1ce99f2f7e516a31508a05212dfd78504fef35a3b7313a6665c902055a6e2b6a",
+  "negative-control.log": "4bc61dff8115f51ff0b1b05d7af092c05e6f3bdaf9ad3f68e60939534978ef02",
+  "preflight.json": "e776e374bb112e5f97a32af36e6c7e9dcfdb96e28529d6227eb94438a3fdd4a0",
+  "preflight.png": "15ed9c56dda2f7b7ec549ed927f4d84bf95420f48a354ffd6efa340688f644d9",
+  "server-readback.png": "64922d6586d6ad5ac781f5d0f4b24c5b281fc5b917c12fa86271faa536f441ca",
+  "server-result.json": "040520cc66e82814726073b1e726248dcf6aa1a3e942a9401b5ea850da637933"
+}

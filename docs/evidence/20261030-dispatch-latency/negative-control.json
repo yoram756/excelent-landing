@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "control": "Intentionally return PASS for slow or uncertain ingress",
+  "expectedBrokenSuiteExitCode": 1,
+  "actualBrokenSuiteExitCode": 1,
+  "originalTestsUnchanged": true,
+  "scope": "Local calculation negative control, no production requests"
+}

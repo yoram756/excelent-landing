@@ -24,7 +24,7 @@
     "stability24h": "NOT TESTED",
     "midragBusinessProfileAssociation": "NOT TESTED",
     "fullProjectReadiness": "BLOCKED",
-    "webhookDispatchUnder2s": "NOT TESTED"
+    "webhookDispatchUnder2s": "PASS"
   },
   "localDistinctCases": 516,
   "sourceFunnelCases": 419,
@@ -33,7 +33,6 @@
   "evidence": "docs/evidence/20261029-independent-final",
   "report": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md",
   "remainingLaunchGates": [
-    "Measure webhook dispatch latency separately from the complete CRM response",
     "Cosend official connection, native identity and granted scopes",
     "Approved single response owner and handoff, applicable hours and limits",
     "Separately approved real delivery and all campaign response routes",
@@ -57,5 +56,11 @@
     "evidence": "docs/evidence/20261030-replay-publication"
   },
   "updatedAt": "2026-10-30",
-  "webhookDispatchUnder2s": "NOT TESTED"
+  "webhookDispatchUnder2s": "PASS",
+  "latestDispatchEvidence": "docs/runtime/DISPATCH_LATENCY_20261030.md",
+  "dispatchUpperBoundsMs": [
+    408,
+    309,
+    304
+  ]
 }

@@ -1,0 +1,541 @@
+{
+  "status": "PASS",
+  "scope": "Three real workstation POSTs to the public form endpoint; arrival bound requires server correlation",
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "results": [
+    {
+      "eventId": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+      "campaign": "campaign_buyers_south",
+      "phone": "0500000131",
+      "payload": {
+        "first_name": "TEST dispatch timing 1",
+        "phone": "0500000131",
+        "product": "LP1",
+        "product_slug": "refi",
+        "campaign": "refi",
+        "source": "LP1 CRO",
+        "event_id": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+        "service_request": true,
+        "marketing_consent": false,
+        "money_included": false,
+        "answers": {},
+        "utm_source": "synthetic_dispatch_20261030",
+        "utm_campaign": "campaign_buyers_south",
+        "idempotency_key": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+        "service_request_at": "2026-10-30T09:16:11.726Z"
+      },
+      "startEpochMs": 1793351771735,
+      "endEpochMs": 1793351774027,
+      "fullResponseMs": 2291.5934,
+      "wallClockJumpMs": 0.40659999999979846,
+      "status": 200,
+      "response": {
+        "request_id": "3319546996"
+      },
+      "before": [
+        {
+          "sentEpochMs": 1793351768862,
+          "receivedEpochMs": 1793351769206,
+          "elapsedMs": 340.3361,
+          "date": "Fri, 30 Oct 2026 09:16:09 GMT",
+          "dateEpochMs": 1793351769000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351769324,
+          "receivedEpochMs": 1793351769549,
+          "elapsedMs": 224.49579999999992,
+          "date": "Fri, 30 Oct 2026 09:16:09 GMT",
+          "dateEpochMs": 1793351769000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351769668,
+          "receivedEpochMs": 1793351769903,
+          "elapsedMs": 234.6884,
+          "date": "Fri, 30 Oct 2026 09:16:10 GMT",
+          "dateEpochMs": 1793351770000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351770021,
+          "receivedEpochMs": 1793351770250,
+          "elapsedMs": 228.97900000000004,
+          "date": "Fri, 30 Oct 2026 09:16:10 GMT",
+          "dateEpochMs": 1793351770000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351770362,
+          "receivedEpochMs": 1793351770591,
+          "elapsedMs": 229.317,
+          "date": "Fri, 30 Oct 2026 09:16:10 GMT",
+          "dateEpochMs": 1793351770000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351770702,
+          "receivedEpochMs": 1793351770926,
+          "elapsedMs": 223.44190000000003,
+          "date": "Fri, 30 Oct 2026 09:16:11 GMT",
+          "dateEpochMs": 1793351771000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351771045,
+          "receivedEpochMs": 1793351771270,
+          "elapsedMs": 224.7117000000003,
+          "date": "Fri, 30 Oct 2026 09:16:11 GMT",
+          "dateEpochMs": 1793351771000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351771385,
+          "receivedEpochMs": 1793351771615,
+          "elapsedMs": 230.1311999999998,
+          "date": "Fri, 30 Oct 2026 09:16:11 GMT",
+          "dateEpochMs": 1793351771000,
+          "server": null,
+          "age": null
+        }
+      ],
+      "after": [
+        {
+          "sentEpochMs": 1793351774039,
+          "receivedEpochMs": 1793351774277,
+          "elapsedMs": 237.7533999999996,
+          "date": "Fri, 30 Oct 2026 09:16:14 GMT",
+          "dateEpochMs": 1793351774000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351774387,
+          "receivedEpochMs": 1793351774616,
+          "elapsedMs": 228.72239999999965,
+          "date": "Fri, 30 Oct 2026 09:16:14 GMT",
+          "dateEpochMs": 1793351774000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351774732,
+          "receivedEpochMs": 1793351774967,
+          "elapsedMs": 235.1255000000001,
+          "date": "Fri, 30 Oct 2026 09:16:15 GMT",
+          "dateEpochMs": 1793351775000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351775089,
+          "receivedEpochMs": 1793351775326,
+          "elapsedMs": 236.4384,
+          "date": "Fri, 30 Oct 2026 09:16:15 GMT",
+          "dateEpochMs": 1793351775000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351775451,
+          "receivedEpochMs": 1793351775690,
+          "elapsedMs": 239.1867000000002,
+          "date": "Fri, 30 Oct 2026 09:16:16 GMT",
+          "dateEpochMs": 1793351776000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351775807,
+          "receivedEpochMs": 1793351776039,
+          "elapsedMs": 232.6203999999998,
+          "date": "Fri, 30 Oct 2026 09:16:16 GMT",
+          "dateEpochMs": 1793351776000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351776161,
+          "receivedEpochMs": 1793351776393,
+          "elapsedMs": 232.57600000000002,
+          "date": "Fri, 30 Oct 2026 09:16:16 GMT",
+          "dateEpochMs": 1793351776000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351776518,
+          "receivedEpochMs": 1793351776742,
+          "elapsedMs": 223.28109999999924,
+          "date": "Fri, 30 Oct 2026 09:16:17 GMT",
+          "dateEpochMs": 1793351777000,
+          "server": null,
+          "age": null
+        }
+      ]
+    },
+    {
+      "eventId": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+      "campaign": "campaign_sellers_south",
+      "phone": "0500000132",
+      "payload": {
+        "first_name": "TEST dispatch timing 2",
+        "phone": "0500000132",
+        "product": "LP1",
+        "product_slug": "refi",
+        "campaign": "refi",
+        "source": "LP1 CRO",
+        "event_id": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+        "service_request": true,
+        "marketing_consent": false,
+        "money_included": false,
+        "answers": {},
+        "utm_source": "synthetic_dispatch_20261030",
+        "utm_campaign": "campaign_sellers_south",
+        "idempotency_key": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+        "service_request_at": "2026-10-30T09:16:31.654Z"
+      },
+      "startEpochMs": 1793351791656,
+      "endEpochMs": 1793351793661,
+      "fullResponseMs": 2005.3263000000006,
+      "wallClockJumpMs": -0.32630000000062864,
+      "status": 200,
+      "response": {
+        "request_id": "3319561594"
+      },
+      "before": [
+        {
+          "sentEpochMs": 1793351788877,
+          "receivedEpochMs": 1793351789119,
+          "elapsedMs": 241.7455000000009,
+          "date": "Fri, 30 Oct 2026 09:16:29 GMT",
+          "dateEpochMs": 1793351789000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351789235,
+          "receivedEpochMs": 1793351789457,
+          "elapsedMs": 221.95160000000033,
+          "date": "Fri, 30 Oct 2026 09:16:29 GMT",
+          "dateEpochMs": 1793351789000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351789575,
+          "receivedEpochMs": 1793351789808,
+          "elapsedMs": 232.6260000000002,
+          "date": "Fri, 30 Oct 2026 09:16:30 GMT",
+          "dateEpochMs": 1793351790000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351789932,
+          "receivedEpochMs": 1793351790153,
+          "elapsedMs": 220.52439999999842,
+          "date": "Fri, 30 Oct 2026 09:16:30 GMT",
+          "dateEpochMs": 1793351790000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351790275,
+          "receivedEpochMs": 1793351790506,
+          "elapsedMs": 230.5506000000023,
+          "date": "Fri, 30 Oct 2026 09:16:30 GMT",
+          "dateEpochMs": 1793351790000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351790629,
+          "receivedEpochMs": 1793351790861,
+          "elapsedMs": 231.9359000000004,
+          "date": "Fri, 30 Oct 2026 09:16:31 GMT",
+          "dateEpochMs": 1793351791000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351790971,
+          "receivedEpochMs": 1793351791193,
+          "elapsedMs": 221.46740000000136,
+          "date": "Fri, 30 Oct 2026 09:16:31 GMT",
+          "dateEpochMs": 1793351791000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351791311,
+          "receivedEpochMs": 1793351791533,
+          "elapsedMs": 221.49659999999858,
+          "date": "Fri, 30 Oct 2026 09:16:31 GMT",
+          "dateEpochMs": 1793351791000,
+          "server": null,
+          "age": null
+        }
+      ],
+      "after": [
+        {
+          "sentEpochMs": 1793351793662,
+          "receivedEpochMs": 1793351793903,
+          "elapsedMs": 241.42579999999725,
+          "date": "Fri, 30 Oct 2026 09:16:34 GMT",
+          "dateEpochMs": 1793351794000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351794016,
+          "receivedEpochMs": 1793351794238,
+          "elapsedMs": 221.5689999999995,
+          "date": "Fri, 30 Oct 2026 09:16:34 GMT",
+          "dateEpochMs": 1793351794000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351794358,
+          "receivedEpochMs": 1793351794587,
+          "elapsedMs": 228.9367999999995,
+          "date": "Fri, 30 Oct 2026 09:16:34 GMT",
+          "dateEpochMs": 1793351794000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351794699,
+          "receivedEpochMs": 1793351794962,
+          "elapsedMs": 262.7442999999985,
+          "date": "Fri, 30 Oct 2026 09:16:35 GMT",
+          "dateEpochMs": 1793351795000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351795073,
+          "receivedEpochMs": 1793351795348,
+          "elapsedMs": 275.4434000000001,
+          "date": "Fri, 30 Oct 2026 09:16:35 GMT",
+          "dateEpochMs": 1793351795000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351795462,
+          "receivedEpochMs": 1793351795692,
+          "elapsedMs": 230.2432000000008,
+          "date": "Fri, 30 Oct 2026 09:16:36 GMT",
+          "dateEpochMs": 1793351796000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351795803,
+          "receivedEpochMs": 1793351796027,
+          "elapsedMs": 223.9349000000002,
+          "date": "Fri, 30 Oct 2026 09:16:36 GMT",
+          "dateEpochMs": 1793351796000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351796145,
+          "receivedEpochMs": 1793351796381,
+          "elapsedMs": 236.1188000000002,
+          "date": "Fri, 30 Oct 2026 09:16:36 GMT",
+          "dateEpochMs": 1793351796000,
+          "server": null,
+          "age": null
+        }
+      ]
+    },
+    {
+      "eventId": "a958e585-8f20-4693-b080-433b4fc6626b",
+      "campaign": "campaign_bundle_allinone",
+      "phone": "0500000133",
+      "payload": {
+        "first_name": "TEST dispatch timing 3",
+        "phone": "0500000133",
+        "product": "LP1",
+        "product_slug": "refi",
+        "campaign": "refi",
+        "source": "LP1 CRO",
+        "event_id": "a958e585-8f20-4693-b080-433b4fc6626b",
+        "service_request": true,
+        "marketing_consent": false,
+        "money_included": false,
+        "answers": {},
+        "utm_source": "synthetic_dispatch_20261030",
+        "utm_campaign": "campaign_bundle_allinone",
+        "idempotency_key": "a958e585-8f20-4693-b080-433b4fc6626b",
+        "service_request_at": "2026-10-30T09:16:51.280Z"
+      },
+      "startEpochMs": 1793351811281,
+      "endEpochMs": 1793351813114,
+      "fullResponseMs": 1832.8876999999993,
+      "wallClockJumpMs": 0.11230000000068685,
+      "status": 200,
+      "response": {
+        "request_id": "3319564306"
+      },
+      "before": [
+        {
+          "sentEpochMs": 1793351808510,
+          "receivedEpochMs": 1793351808742,
+          "elapsedMs": 232.1267000000007,
+          "date": "Fri, 30 Oct 2026 09:16:49 GMT",
+          "dateEpochMs": 1793351809000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351808866,
+          "receivedEpochMs": 1793351809092,
+          "elapsedMs": 225.62900000000081,
+          "date": "Fri, 30 Oct 2026 09:16:49 GMT",
+          "dateEpochMs": 1793351809000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351809207,
+          "receivedEpochMs": 1793351809426,
+          "elapsedMs": 219.64419999999518,
+          "date": "Fri, 30 Oct 2026 09:16:49 GMT",
+          "dateEpochMs": 1793351809000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351809552,
+          "receivedEpochMs": 1793351809785,
+          "elapsedMs": 233.20880000000034,
+          "date": "Fri, 30 Oct 2026 09:16:50 GMT",
+          "dateEpochMs": 1793351810000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351809907,
+          "receivedEpochMs": 1793351810137,
+          "elapsedMs": 229.33550000000105,
+          "date": "Fri, 30 Oct 2026 09:16:50 GMT",
+          "dateEpochMs": 1793351810000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351810248,
+          "receivedEpochMs": 1793351810476,
+          "elapsedMs": 227.7818000000043,
+          "date": "Fri, 30 Oct 2026 09:16:50 GMT",
+          "dateEpochMs": 1793351810000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351810593,
+          "receivedEpochMs": 1793351810823,
+          "elapsedMs": 230.09679999999935,
+          "date": "Fri, 30 Oct 2026 09:16:51 GMT",
+          "dateEpochMs": 1793351811000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351810936,
+          "receivedEpochMs": 1793351811159,
+          "elapsedMs": 223.58589999999822,
+          "date": "Fri, 30 Oct 2026 09:16:51 GMT",
+          "dateEpochMs": 1793351811000,
+          "server": null,
+          "age": null
+        }
+      ],
+      "after": [
+        {
+          "sentEpochMs": 1793351813115,
+          "receivedEpochMs": 1793351813343,
+          "elapsedMs": 227.6915999999983,
+          "date": "Fri, 30 Oct 2026 09:16:53 GMT",
+          "dateEpochMs": 1793351813000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351813456,
+          "receivedEpochMs": 1793351813684,
+          "elapsedMs": 227.80619999999908,
+          "date": "Fri, 30 Oct 2026 09:16:54 GMT",
+          "dateEpochMs": 1793351814000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351813801,
+          "receivedEpochMs": 1793351814024,
+          "elapsedMs": 222.83050000000367,
+          "date": "Fri, 30 Oct 2026 09:16:54 GMT",
+          "dateEpochMs": 1793351814000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351814143,
+          "receivedEpochMs": 1793351814369,
+          "elapsedMs": 226.59180000000197,
+          "date": "Fri, 30 Oct 2026 09:16:54 GMT",
+          "dateEpochMs": 1793351814000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351814486,
+          "receivedEpochMs": 1793351814713,
+          "elapsedMs": 227.0544000000009,
+          "date": "Fri, 30 Oct 2026 09:16:55 GMT",
+          "dateEpochMs": 1793351815000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351814830,
+          "receivedEpochMs": 1793351815051,
+          "elapsedMs": 220.3443000000043,
+          "date": "Fri, 30 Oct 2026 09:16:55 GMT",
+          "dateEpochMs": 1793351815000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351815174,
+          "receivedEpochMs": 1793351815397,
+          "elapsedMs": 223.40669999999955,
+          "date": "Fri, 30 Oct 2026 09:16:55 GMT",
+          "dateEpochMs": 1793351815000,
+          "server": null,
+          "age": null
+        },
+        {
+          "sentEpochMs": 1793351815519,
+          "receivedEpochMs": 1793351815741,
+          "elapsedMs": 222.0633999999991,
+          "date": "Fri, 30 Oct 2026 09:16:56 GMT",
+          "dateEpochMs": 1793351816000,
+          "server": null,
+          "age": null
+        }
+      ]
+    }
+  ]
+}

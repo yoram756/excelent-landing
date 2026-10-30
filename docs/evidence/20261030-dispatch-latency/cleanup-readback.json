@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "source": "Connected Monday readback after three owned test deletions; board IDs match baseline",
+  "items": [
+    {
+      "id": "3319546996",
+      "state": "deleted"
+    },
+    {
+      "id": "3319561594",
+      "state": "deleted"
+    },
+    {
+      "id": "3319564306",
+      "state": "deleted"
+    }
+  ],
+  "boards": [
+    {
+      "items_page": {
+        "items": [
+          {
+            "id": "3291304369"
+          },
+          {
+            "id": "3301735356"
+          },
+          {
+            "id": "3304127965"
+          },
+          {
+            "id": "3293511781"
+          }
+        ]
+      }
+    }
+  ]
+}

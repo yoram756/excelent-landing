@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-30",
+  "requirements": {
+    "webhookDispatchUnder2s": "PASS",
+    "clockCalibrationAndStrictThreshold": "PASS",
+    "threeProductionRequests": "PASS",
+    "mondayMapping": "PASS",
+    "testCleanup": "PASS",
+    "runtimePreservation": "PASS",
+    "localCalculationTests": "PASS",
+    "negativeControl": "PASS",
+    "cosendSecureConnection": "BLOCKED",
+    "cosendNativeIdentityAndScopes": "NOT TESTED",
+    "singleResponseOwnerActivation": "BLOCKED",
+    "approvedRealDelivery": "NOT TESTED",
+    "stability24h": "NOT TESTED",
+    "fullProjectReadiness": "BLOCKED"
+  },
+  "upperBoundsMs": [
+    408,
+    309,
+    304
+  ],
+  "fullResponseMs": [
+    2291.5934,
+    2005.3263,
+    1832.8877
+  ],
+  "productionPosts": 3,
+  "localMathTests": 8,
+  "whatsappSends": 0,
+  "n8nChanges": 0,
+  "productionCodeChanges": 0,
+  "fixRequired": false,
+  "goLiveReady": false,
+  "evidence": "docs/evidence/20261030-dispatch-latency",
+  "report": "docs/runtime/DISPATCH_LATENCY_20261030.md"
+}

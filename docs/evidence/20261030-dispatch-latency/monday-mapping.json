@@ -1,0 +1,191 @@
+{
+  "status": "PASS",
+  "source": "Connected Monday readback",
+  "items": [
+    {
+      "id": "3319546996",
+      "name": "TEST dispatch timing 1 0500000131",
+      "state": "active",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000131",
+          "value": "{\"phone\":\"972500000131\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+          "value": "\"50503312-85be-4fd3-a86c-b5bdba28da0c\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_dispatch_20261030",
+          "value": "\"synthetic_dispatch_20261030\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_buyers_south",
+          "value": "\"campaign_buyers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3319561594",
+      "name": "TEST dispatch timing 2 0500000132",
+      "state": "active",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000132",
+          "value": "{\"phone\":\"972500000132\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+          "value": "\"f1a07311-9b46-4f78-8ab9-afa2002b533c\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_dispatch_20261030",
+          "value": "\"synthetic_dispatch_20261030\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_sellers_south",
+          "value": "\"campaign_sellers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3319564306",
+      "name": "TEST dispatch timing 3 0500000133",
+      "state": "active",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000133",
+          "value": "{\"phone\":\"972500000133\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "a958e585-8f20-4693-b080-433b4fc6626b",
+          "value": "\"a958e585-8f20-4693-b080-433b4fc6626b\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_dispatch_20261030",
+          "value": "\"synthetic_dispatch_20261030\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_bundle_allinone",
+          "value": "\"campaign_bundle_allinone\""
+        }
+      ]
+    }
+  ],
+  "boards": [
+    {
+      "items_page": {
+        "items": [
+          {
+            "id": "3291304369"
+          },
+          {
+            "id": "3301735356"
+          },
+          {
+            "id": "3304127965"
+          },
+          {
+            "id": "3319546996"
+          },
+          {
+            "id": "3319561594"
+          },
+          {
+            "id": "3319564306"
+          },
+          {
+            "id": "3293511781"
+          }
+        ]
+      }
+    }
+  ]
+}

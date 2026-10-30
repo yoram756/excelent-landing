@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "source": "Authenticated final-runtime.png; comparison of published graph, connections, settings, other workflows and five protected container identities/start times before and after tests and cleanup",
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "nodes": 41,
+  "runtimeUnchangedAfterCleanup": true,
+  "whatsappDisabled": true,
+  "whatsappSends": 0,
+  "n8nChanges": 0,
+  "productionCodeChanges": 0,
+  "fixRequired": false
+}

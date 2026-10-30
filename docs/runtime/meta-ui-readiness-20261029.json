@@ -67,5 +67,11 @@
     "evidence": "docs/evidence/20261030-replay-publication"
   },
   "updatedAt": "2026-10-30",
-  "webhookDispatchUnder2s": "NOT TESTED"
+  "webhookDispatchUnder2s": "PASS",
+  "latestDispatchEvidence": "docs/runtime/DISPATCH_LATENCY_20261030.md",
+  "dispatchUpperBoundsMs": [
+    408,
+    309,
+    304
+  ]
 }

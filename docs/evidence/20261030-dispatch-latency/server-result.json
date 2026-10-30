@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "protectedRuntimeUnchanged": true,
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "source": "Transcribed from authenticated terminal server-readback.png; full metadata retained on VPS /docker/dispatch-latency-20261030/server-result.json with mode 0600",
+  "results": [
+    {
+      "executionId": 76672,
+      "status": "success",
+      "startedAtUtc": "2026-10-30 09:16:12.391",
+      "stoppedAtUtc": "2026-10-30 09:16:15.517",
+      "eventId": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+      "phone": "0500000131",
+      "clientPayloadAt": "2026-10-30T09:16:11.726Z",
+      "webhookStartMs": 1793351772403,
+      "webhookDurationMs": 1
+    },
+    {
+      "executionId": 76675,
+      "status": "success",
+      "startedAtUtc": "2026-10-30 09:16:32.211",
+      "stoppedAtUtc": "2026-10-30 09:16:35.488",
+      "eventId": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+      "phone": "0500000132",
+      "clientPayloadAt": "2026-10-30T09:16:31.654Z",
+      "webhookStartMs": 1793351792223,
+      "webhookDurationMs": 0
+    },
+    {
+      "executionId": 76678,
+      "status": "success",
+      "startedAtUtc": "2026-10-30 09:16:51.837",
+      "stoppedAtUtc": "2026-10-30 09:16:54.772",
+      "eventId": "a958e585-8f20-4693-b080-433b4fc6626b",
+      "phone": "0500000133",
+      "clientPayloadAt": "2026-10-30T09:16:51.280Z",
+      "webhookStartMs": 1793351811851,
+      "webhookDurationMs": 0
+    }
+  ]
+}

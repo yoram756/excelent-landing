@@ -1,0 +1,55 @@
+{
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "origin": "https://refi.excelentfinance.com",
+  "clockOrigin": "https://n8n-qhxa.srv1604140.hstgr.cloud",
+  "cases": [
+    {
+      "first_name": "TEST dispatch timing 1",
+      "phone": "0500000131",
+      "product": "LP1",
+      "product_slug": "refi",
+      "campaign": "refi",
+      "source": "LP1 CRO",
+      "event_id": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+      "service_request": true,
+      "marketing_consent": false,
+      "money_included": false,
+      "answers": {},
+      "utm_source": "synthetic_dispatch_20261030",
+      "utm_campaign": "campaign_buyers_south",
+      "idempotency_key": "50503312-85be-4fd3-a86c-b5bdba28da0c"
+    },
+    {
+      "first_name": "TEST dispatch timing 2",
+      "phone": "0500000132",
+      "product": "LP1",
+      "product_slug": "refi",
+      "campaign": "refi",
+      "source": "LP1 CRO",
+      "event_id": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+      "service_request": true,
+      "marketing_consent": false,
+      "money_included": false,
+      "answers": {},
+      "utm_source": "synthetic_dispatch_20261030",
+      "utm_campaign": "campaign_sellers_south",
+      "idempotency_key": "f1a07311-9b46-4f78-8ab9-afa2002b533c"
+    },
+    {
+      "first_name": "TEST dispatch timing 3",
+      "phone": "0500000133",
+      "product": "LP1",
+      "product_slug": "refi",
+      "campaign": "refi",
+      "source": "LP1 CRO",
+      "event_id": "a958e585-8f20-4693-b080-433b4fc6626b",
+      "service_request": true,
+      "marketing_consent": false,
+      "money_included": false,
+      "answers": {},
+      "utm_source": "synthetic_dispatch_20261030",
+      "utm_campaign": "campaign_bundle_allinone",
+      "idempotency_key": "a958e585-8f20-4693-b080-433b4fc6626b"
+    }
+  ]
+}

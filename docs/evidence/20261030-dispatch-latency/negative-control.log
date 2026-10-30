@@ -1,0 +1,81 @@
+✔ fast ingress passes even when complete CRM response takes three seconds (1.4991ms)
+✔ server clock five seconds ahead is corrected rather than called slow (0.1844ms)
+✖ known slow ingress fails (2.4559ms)
+✖ uncertainty crossing two seconds never passes (0.4498ms)
+✖ exact threshold never passes (1.1995ms)
+✔ inconsistent clock samples are rejected (0.5666ms)
+✔ wrong event cannot be correlated (0.4666ms)
+✔ missing timestamps and client clock jumps are rejected (6.2286ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 5
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 129.5848
+
+✖ failing tests:
+
+test at tests\out\dispatch-latency-20261030\math-broken.test.cjs:6:1
+✖ known slow ingress fails (2.4559ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'PASS' !== 'FAIL'
+  
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\out\deployment-20261027\release-tree\tests\out\dispatch-latency-20261030\math-broken.test.cjs:6:44)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'PASS',
+    expected: 'FAIL',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\out\dispatch-latency-20261030\math-broken.test.cjs:7:1
+✖ uncertainty crossing two seconds never passes (0.4498ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'PASS' !== 'BLOCKED'
+  
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\out\deployment-20261027\release-tree\tests\out\dispatch-latency-20261030\math-broken.test.cjs:7:65)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'PASS',
+    expected: 'BLOCKED',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\out\dispatch-latency-20261030\math-broken.test.cjs:8:1
+✖ exact threshold never passes (1.1995ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'PASS' !== 'FAIL'
+  
+      at TestContext.<anonymous> (C:\Users\User\excelent-landing\tests\out\deployment-20261027\release-tree\tests\out\dispatch-latency-20261030\math-broken.test.cjs:8:49)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'PASS',
+    expected: 'FAIL',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

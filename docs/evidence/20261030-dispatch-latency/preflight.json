@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "nodes": 41,
+  "whatsappDisabled": true,
+  "checkedAtUtc": "2026-10-30T09:15:11.828392+00:00",
+  "source": "Read-only authenticated VPS collector; preflight.png. Canonical code, wiring and error workflow guard passed."
+}

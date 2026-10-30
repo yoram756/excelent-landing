@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "thresholdMs": 2000,
+  "strictLessThan": true,
+  "method": "Client POST start to first n8n Lead webhook node start; conservative interval includes HTTP Date one-second quantization, observed network RTT and extra 50ms clock margin. Actual ingress occurs no later than this node start. This is not full response time or a browser click-to-submit measurement.",
+  "results": [
+    {
+      "eventId": "50503312-85be-4fd3-a86c-b5bdba28da0c",
+      "campaign": "campaign_buyers_south",
+      "executionId": 76672,
+      "requestId": "3319546996",
+      "status": "PASS",
+      "lowerMs": 5,
+      "upperMs": 408,
+      "clockOffsetBoundsMs": {
+        "low": 260,
+        "high": 663,
+        "marginMs": 50
+      },
+      "fullResponseMs": 2291.5934,
+      "n8nWebhookStartMs": 1793351772403,
+      "clientStartMs": 1793351771735
+    },
+    {
+      "eventId": "f1a07311-9b46-4f78-8ab9-afa2002b533c",
+      "campaign": "campaign_sellers_south",
+      "executionId": 76675,
+      "requestId": "3319561594",
+      "status": "PASS",
+      "lowerMs": 0,
+      "upperMs": 309,
+      "clockOffsetBoundsMs": {
+        "low": 258,
+        "high": 692,
+        "marginMs": 50
+      },
+      "fullResponseMs": 2005.3263000000006,
+      "n8nWebhookStartMs": 1793351792223,
+      "clientStartMs": 1793351791656
+    },
+    {
+      "eventId": "a958e585-8f20-4693-b080-433b4fc6626b",
+      "campaign": "campaign_bundle_allinone",
+      "executionId": 76678,
+      "requestId": "3319564306",
+      "status": "PASS",
+      "lowerMs": 0,
+      "upperMs": 304,
+      "clockOffsetBoundsMs": {
+        "low": 266,
+        "high": 802,
+        "marginMs": 50
+      },
+      "fullResponseMs": 1832.8876999999993,
+      "n8nWebhookStartMs": 1793351811851,
+      "clientStartMs": 1793351811281
+    }
+  ]
+}
