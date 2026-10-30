@@ -80,7 +80,9 @@
     "nativeIdentity": "NOT TESTED",
     "nativeGrantedScopes": "NOT TESTED",
     "privatePluginInstalled": "PASS",
-    "publicAuthorizationDiscovery": "FAIL",
-    "ownerActionPending": true
+    "publicAuthorizationDiscovery": "PASS",
+    "ownerActionPending": true,
+    "publicMetadataReport": "docs/runtime/COSEND_OAUTH_DISCOVERY_20261030.md",
+    "publicMetadataCheckedAt": "2026-10-30T12:31:39.696Z"
   }
 }

@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "checkedAt": "2026-10-30T12:31:39.696Z",
+  "noCredentialsUsed": true,
+  "noClientRegistered": true,
+  "configuredReadScopesAdvertised": true,
+  "grantedScopes": "NOT TESTED",
+  "nativeIdentity": "NOT TESTED",
+  "secureConnection": "BLOCKED",
+  "rows": [
+    {
+      "url": "https://auth.cosend.app/.well-known/oauth-authorization-server",
+      "status": 200,
+      "date": "Fri, 30 Oct 2026 12:31:40 GMT",
+      "body": {
+        "issuer": "https://auth.cosend.app",
+        "authorization_endpoint": "https://auth.cosend.app/authorize",
+        "token_endpoint": "https://auth.cosend.app/token",
+        "registration_endpoint": "https://auth.cosend.app/register",
+        "jwks_uri": "https://auth.cosend.app/.well-known/jwks.json",
+        "scopes_supported": [
+          "messages:read",
+          "messages:write",
+          "contacts:read",
+          "contacts:write",
+          "templates:read",
+          "templates:write",
+          "automations:read",
+          "automations:write",
+          "runs:read",
+          "runs:write",
+          "connectors:read",
+          "connectors:write",
+          "usage:read"
+        ],
+        "response_types_supported": [
+          "code"
+        ],
+        "response_modes_supported": [
+          "query"
+        ],
+        "grant_types_supported": [
+          "authorization_code",
+          "refresh_token"
+        ],
+        "token_endpoint_auth_methods_supported": [
+          "none"
+        ],
+        "code_challenge_methods_supported": [
+          "S256"
+        ],
+        "authorization_response_iss_parameter_supported": true,
+        "client_id_metadata_document_supported": true
+      }
+    },
+    {
+      "url": "https://api.cosend.app/.well-known/oauth-protected-resource/mcp",
+      "status": 200,
+      "date": "Fri, 30 Oct 2026 12:31:40 GMT",
+      "body": {
+        "resource": "https://mcp.cosend.app/mcp",
+        "authorization_servers": [
+          "https://auth.cosend.app"
+        ],
+        "scopes_supported": [
+          "messages:read"
+        ],
+        "bearer_methods_supported": [
+          "header"
+        ],
+        "resource_documentation": "https://cosend.app/docs/mcp"
+      }
+    }
+  ]
+}
