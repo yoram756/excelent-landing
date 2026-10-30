@@ -1,0 +1,75 @@
+{
+  "checkedAtUtc": "2026-10-30T09:52:22.913Z",
+  "noCredentialsUsed": true,
+  "noProviderToolsCalled": true,
+  "dns": [
+    "172.67.182.243",
+    "104.21.67.234"
+  ],
+  "get": {
+    "url": "https://mcp.cosend.app/mcp",
+    "status": 405,
+    "date": "Fri, 30 Oct 2026 09:52:23 GMT",
+    "wwwAuthenticate": null,
+    "contentType": "application/json; charset=utf-8",
+    "json": {
+      "jsonrpc": "2.0",
+      "id": null,
+      "error": {
+        "code": -32600,
+        "message": "Only POST is accepted here. MCP 2026-07-28 removed the GET event stream and protocol-level sessions, so there is no stream to open and nothing to delete."
+      }
+    }
+  },
+  "initialize": {
+    "url": "https://mcp.cosend.app/mcp",
+    "status": 401,
+    "date": "Fri, 30 Oct 2026 09:52:24 GMT",
+    "wwwAuthenticate": "Bearer resource_metadata=\"https://api.cosend.app/.well-known/oauth-protected-resource/mcp\", scope=\"messages:read\"",
+    "contentType": "application/json; charset=utf-8",
+    "json": {
+      "jsonrpc": "2.0",
+      "id": null,
+      "error": {
+        "code": -32600,
+        "message": "This endpoint requires a Cosend MCP access token."
+      }
+    }
+  },
+  "protectedResource": {
+    "url": "https://api.cosend.app/.well-known/oauth-protected-resource/mcp",
+    "status": 200,
+    "date": "Fri, 30 Oct 2026 09:52:24 GMT",
+    "wwwAuthenticate": null,
+    "contentType": "application/json; charset=utf-8",
+    "json": {
+      "resource": "https://api.cosend.app/mcp",
+      "authorization_servers": [
+        "https://auth.cosend.app"
+      ],
+      "scopes_supported": [
+        "messages:read"
+      ],
+      "bearer_methods_supported": [
+        "header"
+      ],
+      "resource_documentation": "https://cosend.app/docs/mcp"
+    }
+  },
+  "authorizationServer": {
+    "url": "https://auth.cosend.app/.well-known/oauth-authorization-server",
+    "status": 401,
+    "date": "Fri, 30 Oct 2026 09:52:24 GMT",
+    "wwwAuthenticate": null,
+    "contentType": "application/json; charset=utf-8",
+    "json": {
+      "error": {
+        "type": "authentication",
+        "code": "missing_credential",
+        "message": "No Authorization header.",
+        "request_id": "req_01M663K3PTS33ST77AGG0PTHZJ",
+        "docs": "https://cosend.app/docs/errors#missing_credential"
+      }
+    }
+  }
+}

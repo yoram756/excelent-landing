@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "source": "Plugin Creator metadata for exact stored ID and authenticated installed-plugin UI",
+  "pluginId": "plugins_6ae25e9928508191a54aed2a1c09139a",
+  "releaseId": "pluginrel_6ae25e9ac4d8819199a6334df845e756",
+  "name": "excellent-cosend-official",
+  "displayName": "אקסלנט · WhatsApp רשמי",
+  "scope": "USER",
+  "visibility": "PRIVATE",
+  "version": "0.1.0",
+  "installedUiVerified": true,
+  "pluginUrl": "https://chatgpt.com/plugins/plugins_6ae25e9928508191a54aed2a1c09139a",
+  "observedDesktopOpenUrl": "https://chatgpt.com/codex/open-app?target=plugin&plugin_id=plugins_6ae25e9928508191a54aed2a1c09139a",
+  "webPageHasConnectButton": false,
+  "webPageOffersDesktopOpen": true,
+  "oauthCompletion": "BLOCKED",
+  "grantedProviderScopes": "NOT TESTED"
+}

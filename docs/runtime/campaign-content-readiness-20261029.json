@@ -64,5 +64,14 @@
     408,
     309,
     304
-  ]
+  ],
+  "latestCosendSecureCheck": {
+    "report": "docs/runtime/COSEND_SECURE_CONNECTION_20261030.md",
+    "nativeOAuthConnection": "BLOCKED",
+    "nativeIdentity": "NOT TESTED",
+    "nativeGrantedScopes": "NOT TESTED",
+    "privatePluginInstalled": "PASS",
+    "publicAuthorizationDiscovery": "FAIL",
+    "ownerActionPending": true
+  }
 }

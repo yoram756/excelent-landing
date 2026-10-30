@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-10-29T21:15:17.872Z",
+  "checkedAt": "2026-10-30T09:52:22.913Z",
   "requirements": {
-    "officialEndpointAvailability": "BLOCKED",
+    "officialEndpointAvailability": "PASS",
     "privateGatewayOwnerAuthentication": "PASS",
     "privateGatewayProviderAccess": "BLOCKED",
     "nativeOAuthConnection": "BLOCKED",
@@ -14,22 +14,19 @@
     "cutoverPackagePreparation": "PASS",
     "providerHumanAssignment": "NOT TESTED",
     "messageDelivery": "NOT TESTED",
-    "exclusiveResponseOwnerActivation": "BLOCKED"
+    "exclusiveResponseOwnerActivation": "BLOCKED",
+    "publicAuthorizationServerDiscovery": "FAIL",
+    "privatePluginInstalledUi": "PASS",
+    "ownerDesktopOAuthAttempt": "NOT TESTED"
   },
-  "dns": [
-    {
-      "resolver": "1.1.1.1",
-      "host": "mcp.cosend.app",
-      "result": "NXDOMAIN",
-      "errorId": "DNS_ERROR_RCODE_NAME_ERROR"
-    },
-    {
-      "resolver": "8.8.8.8",
-      "host": "mcp.cosend.app",
-      "result": "NXDOMAIN",
-      "errorId": "DNS_ERROR_RCODE_NAME_ERROR"
-    }
-  ],
+  "dns": {
+    "resolver": "system resolver",
+    "host": "mcp.cosend.app",
+    "addresses": [
+      "172.67.182.243",
+      "104.21.67.234"
+    ]
+  },
   "dnsControl": {
     "resolver": "1.1.1.1",
     "host": "cosend.app",
@@ -75,5 +72,26 @@
     "https://cosend.app/docs/mcp",
     "https://cosend.app/mcp"
   ],
-  "candidate": "docs/runtime/cosend-cutover-candidate-20261029.json"
+  "candidate": "docs/runtime/cosend-cutover-candidate-20261029.json",
+  "previousDnsObservation": {
+    "checkedAt": "2026-10-29T21:15:17.872Z",
+    "dns": [
+      {
+        "resolver": "1.1.1.1",
+        "host": "mcp.cosend.app",
+        "result": "NXDOMAIN",
+        "errorId": "DNS_ERROR_RCODE_NAME_ERROR"
+      },
+      {
+        "resolver": "8.8.8.8",
+        "host": "mcp.cosend.app",
+        "result": "NXDOMAIN",
+        "errorId": "DNS_ERROR_RCODE_NAME_ERROR"
+      }
+    ]
+  },
+  "publicProbeEvidence": "docs/evidence/20261030-cosend-secure-recheck/public-probe.json",
+  "officialEndpointAvailabilityScope": "Public DNS and TLS/HTTP response only; not authenticated MCP access",
+  "ownerConnectionActionPending": true,
+  "latestConnectionReport": "docs/runtime/COSEND_SECURE_CONNECTION_20261030.md"
 }

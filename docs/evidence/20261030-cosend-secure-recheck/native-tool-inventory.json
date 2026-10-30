@@ -1,0 +1,22 @@
+{
+  "checkedAtUtc": "2026-10-30T09:58:06Z",
+  "nativeCosendTools": [],
+  "nativeIdentity": "NOT TESTED",
+  "nativeGrantedScopes": "NOT TESTED",
+  "publicPluginSearchMatches": 0,
+  "ownedPrivatePluginFound": true,
+  "publicSearchAbsenceDoesNotMeanPrivatePluginMissing": true,
+  "privateDependencyLookupResult": "not a public global listed plugin; no inference of private-plugin access denial",
+  "configuredRequestedScopes": [
+    "messages:read",
+    "contacts:read",
+    "automations:read",
+    "templates:read"
+  ],
+  "writeScopesRequested": [],
+  "providerNativeToolCalls": 0,
+  "providerChanges": 0,
+  "whatsappSends": 0,
+  "n8nChanges": 0,
+  "secretsExtracted": 0
+}

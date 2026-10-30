@@ -1,0 +1,7 @@
+{
+  "gatewayStatus": "STAGE1_LOCKED",
+  "ownerVerified": true,
+  "providerAccessEnabled": false,
+  "code": "DEPLOYMENT_APPROVAL_REQUIRED",
+  "error_code": "INVALID_ARGUMENT"
+}

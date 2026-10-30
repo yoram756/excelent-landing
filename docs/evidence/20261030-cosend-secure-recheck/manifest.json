@@ -1,0 +1,9 @@
+{
+  ".gitattributes": "f06202a408fef9b9ea69bb6b1cb8160dbb0378c5bb67a444d510d231813824c8",
+  "gateway-status.json": "8e4a173cc0557792eeba72e2201679032addb48832a8776eb30dc602014eb63a",
+  "native-tool-inventory.json": "298d400859893ec013fe8f4de6d3b16587c3b7a63c3c44645b409ff4c8a11b78",
+  "plugin-connection-screen.png": "c972909b847e721029e8989388c1b9ab87530843f8385bcc73c0861068b81081",
+  "plugin-readback.json": "5fc90a1f6c02d08c6de777745f1659dbb9406c901c58f53902a7594dbb5baab8",
+  "public-probe.cjs": "357d465ed135a72b14c88cf27ba9b20b94beb22880b7dabf430b45a9b5620c4d",
+  "public-probe.json": "f477525dbc7a90a16806ed81fbb477d5253e488de5c81c516fcdc3e08803d2d5"
+}
