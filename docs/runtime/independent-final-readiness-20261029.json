@@ -1,13 +1,13 @@
 {
   "date": "2026-10-29",
-  "scope": "Independent final checks without WhatsApp or n8n changes",
+  "scope": "Independent checks plus the explicitly approved two-node replay publication on 2026-10-30",
   "requirements": {
     "localRegression": "PASS",
     "threeCampaignFreshAdmissionRace": "PASS",
     "threeCampaignMondayMapping": "PASS",
-    "threeCampaignAlteredReplayProduction": "FAIL",
+    "threeCampaignAlteredReplayProduction": "PASS",
     "replayUpdateSourcePreparation": "PASS",
-    "replayUpdateProductionDeployment": "BLOCKED",
+    "replayUpdateProductionDeployment": "PASS",
     "testCleanup": "PASS",
     "publicPagesReadback": "PASS",
     "capiRuntimeHealth": "PASS",
@@ -23,18 +23,17 @@
     "whatsappDelivery": "NOT TESTED",
     "stability24h": "NOT TESTED",
     "midragBusinessProfileAssociation": "NOT TESTED",
-    "fullProjectReadiness": "BLOCKED"
+    "fullProjectReadiness": "BLOCKED",
+    "webhookDispatchUnder2s": "NOT TESTED"
   },
   "localDistinctCases": 516,
   "sourceFunnelCases": 419,
   "whatsappSends": 0,
-  "n8nMutationsByThisTask": 0,
   "goLiveReady": false,
   "evidence": "docs/evidence/20261029-independent-final",
   "report": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md",
   "remainingLaunchGates": [
-    "Publish the paired replay-binding Code source update with protected 41-node topology, only after n8n-change prohibition is explicitly revised",
-    "Verify same replay and changed-content rejection in production after that update",
+    "Measure webhook dispatch latency separately from the complete CRM response",
     "Cosend official connection, native identity and granted scopes",
     "Approved single response owner and handoff, applicable hours and limits",
     "Separately approved real delivery and all campaign response routes",
@@ -50,5 +49,13 @@
   "cosendPublicDns": "PASS",
   "cosendPublicHttps": "PASS",
   "replayActualGraphCompatibilityPreparation": "PASS",
-  "overnightEvidence": "docs/runtime/OVERNIGHT_PREPARATION_20261030.md"
+  "overnightEvidence": "docs/runtime/OVERNIGHT_PREPARATION_20261030.md",
+  "latestReplayPublication": {
+    "status": "PASS",
+    "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+    "report": "docs/runtime/REPLAY_PUBLICATION_20261030.md",
+    "evidence": "docs/evidence/20261030-replay-publication"
+  },
+  "updatedAt": "2026-10-30",
+  "webhookDispatchUnder2s": "NOT TESTED"
 }

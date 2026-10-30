@@ -1,0 +1,52 @@
+
+> test:replay-update
+> node --test --test-concurrency=1 tests/funnel/replay-update.test.js tests/funnel/intake.test.js tests/funnel/atomic-intake.test.js
+
+✔ 37-node migration preserves every original node, error path, setting and disabled send (54.8589ms)
+✔ migration rejects changed topology, enabled WhatsApp, duplicate names and incorrect error handler without mutations (25.5622ms)
+✔ unverified admissions and transport failures reach existing controlled Stop And Error with no CRM write (4.8482ms)
+✔ incremental editor import retains 37 nodes and requires the explicit three-link rewiring plan (6.1562ms)
+✔ two real HTTP workers share a SQLite lock: 20 concurrent executions permit one simulated CRM write (221.9017ms)
+✔ event_id is the canonical replay key even if a sender changes its legacy key (22.0929ms)
+✔ event aliases are validated and cannot disagree (28.5379ms)
+✔ Monday create payload preserves existing fields and writes the event and configured assignee (3.6341ms)
+✔ Monday event accepts event_id and the original webhook when intermediate nodes omit metadata (8.4155ms)
+✔ Monday update does not overwrite an existing event or assignee (2.2688ms)
+✔ Monday create mapping uses campaign ids and people, not hardcoded engine settings (2.5596ms)
+✔ Monday create omits a missing event and refuses malformed event values (9.6518ms)
+✔ form source cannot impersonate a received WhatsApp message (5.8636ms)
+✔ money requires explicit boolean consent and marketing is independent (8.6696ms)
+✔ invalid dates and inherited answer names are rejected (8.599ms)
+✔ same idempotency key returns the saved id, not a new create (12.9717ms)
+✔ Monday lookup failure cannot fall back to create (30.8395ms)
+✔ partial GraphQL save failure never returns success (3.345ms)
+✔ phone lookup declares the required non-null list and sends one unformatted number (15.4267ms)
+✔ partial lookup cannot create and a normalized exact phone updates the existing item (6.4282ms)
+✔ channel receipt binds choices to recipient and server receipt time (3.8817ms)
+✔ email-only consent cannot authorize WhatsApp or SMS (3.8507ms)
+✔ empty choices preserve callback request without marketing permission (4.0904ms)
+✔ legacy generic consent never invents channel-specific proof (2.6425ms)
+✔ invalid or contradictory channel payloads are rejected (14.9279ms)
+✔ invalid email and header injection are rejected; optional email stays optional (14.6708ms)
+✔ modern consent and email persist in the mutation and clear prior WhatsApp opt-in (4.2314ms)
+✔ replayed key cannot acknowledge a different recipient (10.4583ms)
+✔ replayed key cannot silently discard changed request or consent (65.4937ms)
+✔ bound replay accepts normalized identity and reordered fields despite regenerated timestamps (8.5089ms)
+✔ legacy unbound receipt never acknowledges a request or creates a replacement (3.9765ms)
+✔ failed Monday save does not create a replay receipt (9.8108ms)
+✔ reused key cannot cross the supported product or campaign (18.5162ms)
+✔ save confirmation requires the bound validated request (8.2887ms)
+✔ malformed replay receipts fail closed without exposing the cached item (48.1808ms)
+✔ malformed Monday item identifiers never return success or prime the replay cache (43.7935ms)
+✔ expired bound receipt is pruned before accepting a fresh request (11.3841ms)
+✔ 41-node packet changes only the paired source parameters and never mutates the export (35.3938ms)
+✔ unsafe topology, enabled send, missing error handling and version drift are rejected (43.7365ms)
+✔ packet source compiles, preserves campaign injection and does not contain executable deployment (13.0755ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1530.3275

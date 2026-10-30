@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "source": "Read-only SQLite inspection via authenticated Hostinger terminal; metadata transcribed from saved screenshots",
+  "workflowId": "8W7MymUCLpPnilJs",
+  "previousVersionId": "60101067-81e0-4daa-b9b2-d4cfa7b9d736",
+  "publishedVersionId": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "publishedCheckedAtUtc": "2026-10-30T05:57:26.018273+00:00",
+  "nodeCount": 41,
+  "replacements": [
+    {
+      "name": "Validate",
+      "nodeId": "6be61f9a-f352-4779-aa9f-77d66acade9d",
+      "sha256": "29fec5cd987ce2a4fd5b305081c528495fc4103e6ad6374bc2527d6747503084"
+    },
+    {
+      "name": "Check save",
+      "nodeId": "25a86aa9-2cc0-471a-a632-1761e6ad189e",
+      "sha256": "67c41da6d07fc2dffe347f339b1fe34f6375744ac50626aec8f7346d69d6ba8b"
+    }
+  ],
+  "onlyApprovedCodeChanges": true,
+  "connectionsUnchanged": true,
+  "workflowSettingsUnchanged": true,
+  "staticDataUnchangedBeforeTests": true,
+  "otherWorkflowsUnchanged": true,
+  "protectedServicesUnchanged": true,
+  "whatsappNodesDisabled": true,
+  "errorWorkflow": "4bLJ8LvpNYnoCB8t",
+  "privateBackup": "/docker/replay-deploy-20261030/before.private.json",
+  "privateBackupMode": "0600",
+  "localTargetedTests": {
+    "command": "npm run test:replay-update",
+    "passed": 40,
+    "failed": 0,
+    "exitCode": 0,
+    "scope": "local subset; not production evidence"
+  }
+}

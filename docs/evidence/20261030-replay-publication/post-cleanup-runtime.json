@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "source": "Read-only final server inspection after Monday cleanup; post-cleanup-runtime.png",
+  "publishedVersionId": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "nodes": 41,
+  "onlyApprovedCodeChanges": true,
+  "protectedServicesUnchanged": true,
+  "otherWorkflowsUnchanged": true,
+  "executions": [
+    [
+      75341,
+      "success"
+    ],
+    [
+      75342,
+      "error"
+    ],
+    [
+      75346,
+      "error"
+    ],
+    [
+      75354,
+      "error"
+    ],
+    [
+      75361,
+      "success"
+    ],
+    [
+      75362,
+      "error"
+    ],
+    [
+      75367,
+      "error"
+    ],
+    [
+      75374,
+      "error"
+    ],
+    [
+      75378,
+      "success"
+    ],
+    [
+      75379,
+      "error"
+    ],
+    [
+      75384,
+      "error"
+    ],
+    [
+      75390,
+      "error"
+    ],
+    [
+      75396,
+      "error"
+    ]
+  ],
+  "legacy": {
+    "status": 409,
+    "error": "idempotency_unverified"
+  },
+  "whatsappSends": 0,
+  "globalN8nSettingsChanges": 0
+}

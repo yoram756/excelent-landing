@@ -22,7 +22,8 @@
     "fullProjectReadiness": "BLOCKED",
     "productionMapping": "PASS",
     "testCleanup": "PASS",
-    "protectedRuntimePreservation": "PASS"
+    "protectedRuntimePreservation": "PASS",
+    "webhookDispatchUnder2s": "NOT TESTED"
   },
   "counts": {
     "source": 13,
@@ -31,24 +32,32 @@
     "adAngles": 30,
     "serviceDrafts": 9
   },
-  "productionBlocker": "Changed campaign on an existing event is accepted with HTTP 200; paired Code source update is prepared but n8n changes remain prohibited.",
+  "productionBlocker": "Replay content-binding issue is closed. Cosend secure identity/permissions, approved response activation and delivery, separate dispatch-latency measurement and final 24-hour observation remain.",
   "whatsappSends": 0,
-  "n8nChanges": 0,
+  "n8nChanges": "Two approved jsCode parameters and one published version; no global settings or permission changes",
   "goLiveReady": false,
   "evidence": "docs/evidence/20261029-campaign-content",
   "previousProductionIntakeEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md",
   "deployedSourceCommit": "94456d6f475c85085eca4baff375ed3a0fe1127c",
   "liveEvidence": "docs/evidence/20261029-campaign-content-live",
   "productionPosts": 3,
-  "currentReplayTest": "FAIL",
+  "currentReplayTest": "PASS",
   "priorReplayEvidence": "docs/runtime/THREE_CAMPAIGNS_LIVE_20261029.md",
   "productionInitialLatency": "NOT TESTED",
   "remainingLaunchGates": [
-    "Publish and verify the paired replay-binding source update after explicit revision of the n8n-change prohibition",
+    "Measure webhook dispatch latency separately from the complete CRM response",
     "Secure Cosend connection and permissions",
     "Approved single response owner activation with campaign-specific service drafts",
     "Separately approved real message delivery",
     "24-hour stability observation and final handover"
   ],
-  "currentReplayEvidence": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md"
+  "currentReplayEvidence": "docs/runtime/REPLAY_PUBLICATION_20261030.md",
+  "latestReplayPublication": {
+    "status": "PASS",
+    "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+    "report": "docs/runtime/REPLAY_PUBLICATION_20261030.md",
+    "evidence": "docs/evidence/20261030-replay-publication"
+  },
+  "updatedAt": "2026-10-30",
+  "webhookDispatchUnder2s": "NOT TESTED"
 }

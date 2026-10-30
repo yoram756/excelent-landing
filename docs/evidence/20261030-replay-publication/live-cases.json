@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "source": "Transcribed from authenticated Hostinger terminal screenshot live-results.png; raw files mode 0600 in /docker/replay-deploy-20261030",
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "productionPosts": 12,
+  "cases": [
+    {
+      "campaign": "campaign_buyers_south",
+      "eventId": "55efb7f3-e93f-4231-9ea4-6ec44fe212bc",
+      "phone": "0500000121",
+      "itemId": "3319213762",
+      "race": [
+        {
+          "status": 200,
+          "request_id": "3319213762",
+          "seconds": 2.719
+        },
+        {
+          "status": 409,
+          "error": "duplicate_pending",
+          "seconds": 0.499
+        }
+      ],
+      "same": {
+        "status": 200,
+        "request_id": "3319213762",
+        "seconds": 0.111
+      },
+      "changedAfterLockExpiry": {
+        "status": 409,
+        "error": "idempotency_conflict",
+        "seconds": 0.15
+      }
+    },
+    {
+      "campaign": "campaign_sellers_south",
+      "eventId": "a5e6497a-e0da-48b3-8158-c1fa34ab449c",
+      "phone": "0500000122",
+      "itemId": "3319173266",
+      "race": [
+        {
+          "status": 200,
+          "request_id": "3319173266",
+          "seconds": 2.15
+        },
+        {
+          "status": 409,
+          "error": "duplicate_pending",
+          "seconds": 0.392
+        }
+      ],
+      "same": {
+        "status": 200,
+        "request_id": "3319173266",
+        "seconds": 0.138
+      },
+      "changedAfterLockExpiry": {
+        "status": 409,
+        "error": "idempotency_conflict",
+        "seconds": 0.197
+      }
+    },
+    {
+      "campaign": "campaign_bundle_allinone",
+      "eventId": "4f39ea0c-57ea-479d-a400-6ee89ef3910e",
+      "phone": "0500000123",
+      "itemId": "3319182298",
+      "race": [
+        {
+          "status": 409,
+          "error": "duplicate_pending",
+          "seconds": 0.31
+        },
+        {
+          "status": 200,
+          "request_id": "3319182298",
+          "seconds": 2.005
+        }
+      ],
+      "same": {
+        "status": 200,
+        "request_id": "3319182298",
+        "seconds": 0.116
+      },
+      "changedAfterLockExpiry": {
+        "status": 409,
+        "error": "idempotency_conflict",
+        "seconds": 0.16
+      }
+    }
+  ],
+  "harnessCorrection": "The first runner incorrectly required a duplicate flag absent from the existing public HTTP response. It stopped after the first exact replay. Continuation used saved results and required HTTP 200 plus the original Monday request_id; no submitted request was blindly retried.",
+  "latencyScope": "Initial accepted requests were 2.719s, 2.150s and 2.005s; a less-than-2-second full-response target was not achieved by this test. No new latency improvement is claimed.",
+  "whatsappSends": 0
+}

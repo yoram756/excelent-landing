@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "source": "Connected Monday API readback",
+  "items": [
+    {
+      "id": "3319173266",
+      "name": "TEST replay publish 2 0500000122",
+      "state": "active",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000122",
+          "value": "{\"phone\":\"972500000122\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "a5e6497a-e0da-48b3-8158-c1fa34ab449c",
+          "value": "\"a5e6497a-e0da-48b3-8158-c1fa34ab449c\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_replay_publish_20261030",
+          "value": "\"synthetic_replay_publish_20261030\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_sellers_south",
+          "value": "\"campaign_sellers_south\""
+        }
+      ]
+    },
+    {
+      "id": "3319182298",
+      "name": "TEST replay publish 3 0500000123",
+      "state": "active",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000123",
+          "value": "{\"phone\":\"972500000123\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "4f39ea0c-57ea-479d-a400-6ee89ef3910e",
+          "value": "\"4f39ea0c-57ea-479d-a400-6ee89ef3910e\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_replay_publish_20261030",
+          "value": "\"synthetic_replay_publish_20261030\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_bundle_allinone",
+          "value": "\"campaign_bundle_allinone\""
+        }
+      ]
+    },
+    {
+      "id": "3319213762",
+      "name": "TEST replay publish 1 0500000121",
+      "state": "active",
+      "column_values": [
+        {
+          "id": "refi_phone",
+          "text": "972500000121",
+          "value": "{\"phone\":\"972500000121\",\"countryShortName\":\"IL\"}"
+        },
+        {
+          "id": "refi_source",
+          "text": "קליטת LP1",
+          "value": "{\"index\":6}"
+        },
+        {
+          "id": "refi_stage",
+          "text": "ליד חדש",
+          "value": "{\"index\":7}"
+        },
+        {
+          "id": "boolean_mm8848pn",
+          "text": "v",
+          "value": "{\"checked\":true}"
+        },
+        {
+          "id": "boolean_mm88mzry",
+          "text": "",
+          "value": "{\"checked\":false}"
+        },
+        {
+          "id": "multiple_person_mm8c8hfp",
+          "text": "אקסלנט יועצים פיננסים ומשכנתאות",
+          "value": "{\"personsAndTeams\":[{\"id\":75075191,\"kind\":\"person\"}]}"
+        },
+        {
+          "id": "text_mm8c3r4v",
+          "text": "55efb7f3-e93f-4231-9ea4-6ec44fe212bc",
+          "value": "\"55efb7f3-e93f-4231-9ea4-6ec44fe212bc\""
+        },
+        {
+          "id": "text_mm8j144k",
+          "text": "synthetic_replay_publish_20261030",
+          "value": "\"synthetic_replay_publish_20261030\""
+        },
+        {
+          "id": "text_mm8j3b0k",
+          "text": "campaign_buyers_south",
+          "value": "\"campaign_buyers_south\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "source": "Authenticated terminal legacy-and-runtime.png and Monday central alert readback",
+  "legacy": {
+    "eventId": "93827ca1-379d-4e19-ba68-7b83aa729708",
+    "oldDeletedItemId": "3318900393",
+    "httpStatus": 409,
+    "error": "idempotency_unverified"
+  },
+  "version": "ca4089e7-049c-471d-9dca-6901cbc33144",
+  "protectedServicesUnchanged": true,
+  "otherWorkflowsUnchanged": true,
+  "createExecutions": [
+    75341,
+    75361,
+    75378
+  ],
+  "controlledErrorExecutions": [
+    75342,
+    75346,
+    75354,
+    75362,
+    75367,
+    75374,
+    75379,
+    75384,
+    75390,
+    75396
+  ],
+  "limitation": "Last legacy execution was still running in the initial database snapshot, then its central Monday alert was read back and deleted; final terminal status will be recorded separately."
+}
