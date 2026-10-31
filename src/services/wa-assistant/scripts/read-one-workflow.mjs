@@ -17,6 +17,7 @@ export function makeReadOneWorker(existing, credential) {
   const http = (id, name, url, x) => ({id, name, type: 'n8n-nodes-base.httpRequest', typeVersion: 4.2,
     position: [x, 0], parameters: {method: 'GET', url, authentication: 'genericCredentialType',
       genericAuthType: 'httpHeaderAuth', options: {timeout: 15000,
+        redirect: {redirect: {followRedirects: false}},
         response: {response: {fullResponse: true, neverError: true, responseFormat: 'json'}}}},
     credentials: {httpHeaderAuth: {...credential}}});
   const code = (id, name, tail, x) => ({id, name, type: 'n8n-nodes-base.code', typeVersion: 2,
@@ -39,7 +40,7 @@ export function makeReadOneWorker(existing, credential) {
   const connections = {};
   for (let i = 0; i < nodes.length - 1; i++) connections[nodes[i].name] = {main: [[{node: nodes[i+1].name, type: 'main', index: 0}]]};
   return {...existing, active: false, activeVersionId: null, nodes: [...nodes, ...retained], connections,
-    settings: {...existing.settings, executionOrder: 'v1', timezone: 'Asia/Jerusalem',
+    settings: {...existing.settings, executionOrder: 'v1', timezone: 'Asia/Jerusalem', availableInMCP: false,
       saveDataSuccessExecution: 'none', saveDataErrorExecution: 'none', saveManualExecutions: false,
       saveExecutionProgress: false}};
 }
@@ -48,6 +49,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   const [input, output, credentialId, credentialName] = process.argv.slice(2);
   if (!input || !output) throw Error('existing_export_and_output_paths_required');
   const parsed = JSON.parse(readFileSync(input, 'utf8'));
+  if (Array.isArray(parsed) && parsed.length !== 1) throw Error('one_existing_worker_required');
   const existing = Array.isArray(parsed) ? parsed[0] : parsed;
   const candidate = makeReadOneWorker(existing, {id: credentialId, name: credentialName});
   writeFileSync(output, JSON.stringify([candidate], null, 2));

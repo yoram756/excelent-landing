@@ -78,7 +78,7 @@ test('existing manual worker gets GET-only calls with no raw execution storage',
   const old = {id:'existingWorker123', active:false, activeVersionId:null, nodes:[
     {id:'manual', name:'Manual', type:'n8n-nodes-base.manualTrigger', parameters:{}},
     {id:'simulate', name:'Legacy simulation', type:'n8n-nodes-base.httpRequest', parameters:{method:'POST',url:'http://isolated/simulate-one'}},
-  ], connections:{Manual:{main:[[{node:'Legacy simulation',type:'main',index:0}]]}}, settings:{}};
+  ], connections:{Manual:{main:[[{node:'Legacy simulation',type:'main',index:0}]]}}, settings:{availableInMCP:true}};
   const result = makeReadOneWorker(old, {id:'existingCredential123',name:'Existing test reference'});
   assert.equal(result.id, old.id); assert.equal(result.active, false);
   assert.equal(result.nodes.find(n => n.id==='simulate').disabled, true);
@@ -86,9 +86,11 @@ test('existing manual worker gets GET-only calls with no raw execution storage',
   assert.equal(runnable.filter(n => n.type.endsWith('manualTrigger')).length, 1);
   assert.equal(runnable.some(n => /webhook|schedule|trigger/i.test(n.type) && !n.type.endsWith('manualTrigger')), false);
   assert.ok(runnable.filter(n => n.type.endsWith('httpRequest')).every(n => n.parameters.method==='GET'));
+  assert.ok(runnable.filter(n => n.type.endsWith('httpRequest')).every(n => n.parameters.options.redirect.redirect.followRedirects===false));
   for (const key of ['saveDataSuccessExecution','saveDataErrorExecution']) assert.equal(result.settings[key],'none');
   assert.equal(result.settings.saveManualExecutions,false);
   assert.equal(result.settings.saveExecutionProgress,false);
+  assert.equal(result.settings.availableInMCP,false);
   assert.equal(Object.hasOwn(result.connections,'Legacy simulation'),false);
   for (const node of runnable.filter(n => n.type.endsWith('code')))
     assert.doesNotThrow(() => new Function('$json', '$', node.parameters.jsCode));
