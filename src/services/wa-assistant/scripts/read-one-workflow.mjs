@@ -28,9 +28,11 @@ export function makeReadOneWorker(existing, credential) {
     http('read-number', 'Read fixed number', binding.apiBaseUrl + '/v1/connections/' + binding.connectionId, 660),
     code('guard-number', 'Guard read number', 'return [{json:verifyReadNumber($json,binding,' + JSON.stringify(expectedPhone) + ')}];', 880),
     http('peek-unread', 'Peek one unread conversation', binding.apiBaseUrl + '/v1/conversations?connection_id=' + binding.connectionId + '&limit=1&unread=true&order=recent', 1100),
-    code('capture-one', 'Capture one message metadata', 'return [{json:captureOneUnread($json,binding)}];', 1320),
-    http('read-state-after', 'Read same conversation state', '={{ ' + JSON.stringify(binding.apiBaseUrl + '/v1/conversations/') + ' + $json.conversationId }}', 1540),
-    code('confirm-unread', 'Confirm read without marking', "return [{json:{...confirmReadUnchanged($json,$('Capture one message metadata').first().json,binding),verifiedAt:new Date().toISOString()}}];", 1760),
+    code('capture-state', 'Capture unread state', 'return [{json:captureUnreadState($json,binding)}];', 1320),
+    http('read-one-message', 'Read one inbound message', '={{ ' + JSON.stringify(binding.apiBaseUrl + '/v1/messages?connection_id=' + binding.connectionId + '&limit=1&order=desc&direction=inbound&conversation_id=') + ' + $json.conversationId }}', 1540),
+    code('capture-one', 'Capture one message metadata', "return [{json:captureReadMessage($json,$('Capture unread state').first().json,binding)}];", 1760),
+    http('read-state-after', 'Read same conversation state', '={{ ' + JSON.stringify(binding.apiBaseUrl + '/v1/conversations/') + ' + $json.conversationId }}', 1980),
+    code('confirm-unread', 'Confirm read without marking', "return [{json:{...confirmReadUnchanged($json,$('Capture one message metadata').first().json,binding),verifiedAt:new Date().toISOString()}}];", 2200),
   ];
   // Keep the old simulation node as disabled historical context, disconnected.
   const retained = existing.nodes.filter(node => node.id !== trigger.id).map(node =>

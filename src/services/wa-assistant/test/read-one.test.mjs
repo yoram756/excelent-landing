@@ -1,14 +1,15 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {verifyReadIdentity, verifyReadNumber, captureOneUnread, confirmReadUnchanged, safeReadId} from '../src/read-one.mjs';
+import {verifyReadIdentity, verifyReadNumber, captureUnreadState, captureReadMessage, captureOneUnread, confirmReadUnchanged, safeReadId} from '../src/read-one.mjs';
 import {makeReadOneWorker} from '../scripts/read-one-workflow.mjs';
+import canonical from '../config/provider.json' with {type:'json'};
 
 const binding = {organizationId: 'org_expected', connectionId: 'conn_expected', phoneNumberId: 'pn_expected', wabaId: 'waba_expected'};
 const response = body => ({statusCode: 200, body});
 const identity = () => ({organization: {id: binding.organizationId}, credential: {kind: 'connection', is_live: true,
   connection_id: binding.connectionId, connection_ids: [binding.connectionId], scopes: ['messages:read', 'connections:read']}});
 const conversation = () => ({id: 'conv_expected', connection_id: binding.connectionId, contact_id: 'contact_expected',
-  unread_count: 2, message_count: 7, last_read_at: null, control: 'human', state: 'pending', assignee_id: null,
+  unread_count: 2, message_count: 7, last_read_at: null, last_message_at: '2026-10-31T12:00:00Z', control: 'human', state: 'pending', assignee_id: null,
   last_message: {id: 'msg_expected', connection_id: binding.connectionId, conversation_id: 'conv_expected',
     contact_id: 'contact_expected', direction: 'inbound', type: 'text', content: {text: {body: 'Synthetic text only'}}}});
 
@@ -61,6 +62,7 @@ for (const [name, change] of [
   ['missing read timestamp', x => delete x.last_read_at],
   ['concurrent message', x => x.message_count++],
   ['latest message', x => x.last_message.id = 'msg_other'],
+  ['latest timestamp', x => x.last_message_at = '2026-10-31T12:01:00Z'],
   ['response control', x => x.control = 'bot'],
   ['assignment', x => x.assignee_id = 'user_other'],
 ]) test('no-mark proof rejects changed ' + name, () => {
@@ -69,6 +71,29 @@ for (const [name, change] of [
 });
 test('resource identifiers cannot inject another URL or path', () => {
   for (const id of ['../messages/send', 'conv_x?mark_read=true', 'https://other.invalid', 'conv_x/lock']) assert.throws(() => safeReadId(id));
+});
+test('unexpanded provider conversations are metadata only; one message uses the message endpoint', () => {
+  const full = conversation(), metadata = {...full, last_message: null};
+  const before = captureUnreadState(response({data:[metadata]}), binding);
+  assert.equal(Object.hasOwn(before,'bodyRead'), false);
+  const one = captureReadMessage(response({data:[full.last_message]}), before, binding);
+  assert.equal(confirmReadUnchanged(response(metadata), one, binding).uniqueMessagesRead, 1);
+  assert.throws(() => captureReadMessage(response({data:[]}), before, binding));
+  assert.throws(() => captureReadMessage(response({data:[full.last_message,full.last_message]}), before, binding));
+  assert.throws(() => captureReadMessage(response({data:[{...full.last_message,direction:'outbound'}]}), before, binding));
+});
+test('generated worker transforms unexpanded conversation then one message without needing preview content', () => {
+  const flow=makeReadOneWorker({id:'existingWorker123',active:false,nodes:[{id:'manual',name:'Manual',type:'n8n-nodes-base.manualTrigger'}],settings:{}}, {id:'existingCredential123',name:'Existing reference'});
+  const x=conversation();x.connection_id=canonical.connectionId;x.last_message.connection_id=canonical.connectionId;
+  const metadata={...x,last_message:null};
+  const run=(name,input,cache={})=>new Function('$json','$',flow.nodes.find(n=>n.name===name).parameters.jsCode)(input,n=>({first:()=>({json:cache[n]})}))[0].json;
+  const before=run('Capture unread state',response({data:[metadata]}));
+  const read=run('Capture one message metadata',response({data:[x.last_message]}),{'Capture unread state':before});
+  const result=run('Confirm read without marking',response(metadata),{'Capture one message metadata':read});
+  assert.equal(result.uniqueMessagesRead,1);assert.equal(result.readMarkerUnchanged,true);
+  assert.doesNotMatch(JSON.stringify(result),/Synthetic text/);
+  const request=flow.nodes.find(n=>n.name==='Read one inbound message');
+  assert.match(request.parameters.url,/limit=1&order=desc&direction=inbound&conversation_id=/);
 });
 test('HTTP failures fail closed without reflecting a provider body', () => {
   assert.throws(() => verifyReadIdentity({statusCode: 403, body: {secret: 'hidden'}}, binding), /cosend_read_failed/);

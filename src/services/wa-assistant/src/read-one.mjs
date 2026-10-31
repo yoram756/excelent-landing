@@ -35,10 +35,10 @@ export function verifyReadNumber(response, binding, expectedPhone) {
   return {connectionId: body.id, numberVerified: true};
 }
 
-export function captureOneUnread(response, binding) {
+export function captureUnreadState(response, binding) {
   const body = readObject(response);
   if (!Array.isArray(body.data) || body.data.length !== 1) throw Error('one_unread_conversation_required');
-  const conversation = body.data[0], message = conversation.last_message;
+  const conversation = body.data[0];
   if (conversation.connection_id !== binding.connectionId || !Number.isInteger(conversation.unread_count) ||
       conversation.unread_count <= 0 || !Number.isInteger(conversation.message_count) ||
       !Object.hasOwn(conversation, 'last_read_at') ||
@@ -46,23 +46,38 @@ export function captureOneUnread(response, binding) {
       !['bot', 'pending_human', 'human', 'app'].includes(conversation.control) ||
       !['open', 'pending', 'snoozed', 'resolved'].includes(conversation.state) ||
       !Object.hasOwn(conversation, 'assignee_id') ||
-      !(conversation.assignee_id === null || typeof conversation.assignee_id === 'string'))
+      !(conversation.assignee_id === null || typeof conversation.assignee_id === 'string') ||
+      typeof conversation.last_message_at !== 'string')
     throw Error('unread_state_unverifiable');
   safeReadId(conversation.id);
-  if (!message || message.connection_id !== binding.connectionId || message.conversation_id !== conversation.id ||
-      message.contact_id !== conversation.contact_id || message.type !== 'text' ||
-      !['inbound', 'outbound'].includes(message.direction)) throw Error('message_binding_or_type_mismatch');
+  safeReadId(conversation.contact_id);
+  return {conversationId: conversation.id, contactId: conversation.contact_id, connectionId: binding.connectionId,
+    unreadBefore: conversation.unread_count, lastReadAtBefore: conversation.last_read_at,
+    lastMessageAtBefore: conversation.last_message_at, messageCountBefore: conversation.message_count,
+    controlBefore: conversation.control, stateBefore: conversation.state, assigneeBefore: conversation.assignee_id};
+}
+
+export function captureReadMessage(response, before, binding) {
+  const body = readObject(response);
+  if (!Array.isArray(body.data) || body.data.length !== 1) throw Error('one_inbound_message_required');
+  const message = body.data[0];
+  if (!message || before.connectionId !== binding.connectionId || message.connection_id !== binding.connectionId ||
+      message.conversation_id !== before.conversationId || message.contact_id !== before.contactId ||
+      message.type !== 'text' || message.direction !== 'inbound') throw Error('message_binding_or_type_mismatch');
   safeReadId(message.id);
   // Inspect one body in memory, then discard it. Never return names, phones or text.
   const content = message.content;
   const text = typeof content?.text === 'string' ? content.text :
     typeof content?.text?.body === 'string' ? content.text.body : content?.body;
   if (typeof text !== 'string' || !text.trim()) throw Error('text_body_unavailable');
-  return {conversationId: conversation.id, connectionId: binding.connectionId, messageId: message.id,
-    bodyRead: true, contentCharacters: [...text].length, direction: message.direction,
-    unreadBefore: conversation.unread_count, lastReadAtBefore: conversation.last_read_at,
-    messageCountBefore: conversation.message_count, controlBefore: conversation.control,
-    stateBefore: conversation.state, assigneeBefore: conversation.assignee_id};
+  return {...before, messageId: message.id,
+    bodyRead: true, contentCharacters: [...text].length, direction: message.direction};
+}
+
+export function captureOneUnread(response, binding) {
+  const before = captureUnreadState(response, binding);
+  // Also supports an explicitly expanded provider response; never requires it.
+  return captureReadMessage({statusCode: 200, body: {data: [response.body.data[0].last_message]}}, before, binding);
 }
 
 export function confirmReadUnchanged(response, before, binding) {
@@ -70,7 +85,8 @@ export function confirmReadUnchanged(response, before, binding) {
   if (after.connection_id !== binding.connectionId || after.id !== before.conversationId ||
       !Object.hasOwn(after, 'last_read_at') || after.unread_count !== before.unreadBefore ||
       after.last_read_at !== before.lastReadAtBefore || after.message_count !== before.messageCountBefore ||
-      after.last_message?.id !== before.messageId || after.control !== before.controlBefore ||
+      after.last_message_at !== before.lastMessageAtBefore ||
+      (after.last_message != null && after.last_message.id !== before.messageId) || after.control !== before.controlBefore ||
       after.state !== before.stateBefore || after.assignee_id !== before.assigneeBefore)
     throw Error('read_state_changed_or_concurrent_activity');
   return {mode: 'MANUAL_READ_ONLY_NO_SEND', status: 'PASS', connectionId: binding.connectionId,
