@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-10-30T09:52:22.913Z",
+  "checkedAt": "2026-10-31T17:22:41.900802+00:00",
   "requirements": {
     "officialEndpointAvailability": "PASS",
     "privateGatewayOwnerAuthentication": "PASS",
     "privateGatewayProviderAccess": "BLOCKED",
     "nativeOAuthConnection": "BLOCKED",
-    "freshProviderIdentity": "NOT TESTED",
-    "freshGrantedProviderScopes": "NOT TESTED",
+    "freshProviderIdentity": "PASS",
+    "freshGrantedProviderScopes": "PASS",
     "configuredReadOnlyPlugin": "PASS",
     "ownerResponseSelection": "PASS",
     "humanHoursPreparationDecision": "PASS",
@@ -17,7 +17,12 @@
     "exclusiveResponseOwnerActivation": "BLOCKED",
     "publicAuthorizationServerDiscovery": "PASS",
     "privatePluginInstalledUi": "PASS",
-    "ownerDesktopOAuthAttempt": "NOT TESTED"
+    "ownerDesktopOAuthAttempt": "NOT TESTED",
+    "serverRestConnection": "PASS",
+    "serverReadWriteAuthorization": "PASS",
+    "serverInboxCountRead": "PASS",
+    "serverMessageBodyRead": "NOT TESTED",
+    "installedAssistantLiveAccess": "BLOCKED"
   },
   "dns": {
     "resolver": "system resolver",
@@ -93,12 +98,44 @@
   "publicProbeEvidence": "docs/evidence/20261030-cosend-secure-recheck/public-probe.json",
   "officialEndpointAvailabilityScope": "Public DNS and TLS/HTTP response only; not authenticated MCP access",
   "ownerConnectionActionPending": true,
-  "latestConnectionReport": "docs/runtime/COSEND_SECURE_CONNECTION_20261030.md",
+  "latestConnectionReport": "docs/runtime/COSEND_SERVER_CONNECTION_20261031.md",
   "latestPublicOAuthDiscovery": {
     "status": "PASS",
     "checkedAt": "2026-10-30T12:31:39.696Z",
     "canonicalResource": "https://mcp.cosend.app/mcp",
     "configuredReadScopesAdvertised": true,
     "report": "docs/runtime/COSEND_OAUTH_DISCOVERY_20261030.md"
-  }
+  },
+  "freshProviderVerificationScope": "Server REST using existing n8n credential; native ChatGPT MCP still unverified",
+  "latestServerConnectionCheck": {
+    "checkedAt": "2026-10-31T17:22:41.900802+00:00",
+    "report": "docs/runtime/COSEND_SERVER_CONNECTION_20261031.md",
+    "evidence": "docs/evidence/20261031-cosend-server/server-readback.json",
+    "scope": "Server REST credential, independent from ChatGPT plugin; GET only",
+    "executionIds": [
+      89701,
+      89705,
+      89706
+    ],
+    "requirements": {
+      "serverSecureConnection": "PASS",
+      "serverIdentity": "PASS",
+      "serverGrantedReadWriteScopes": "PASS",
+      "inboxCountRead": "PASS",
+      "messageBodyRead": "NOT TESTED",
+      "actualMessageWrite": "NOT TESTED",
+      "installedAssistantLiveAccess": "BLOCKED",
+      "contactConsentPreflight": "BLOCKED"
+    },
+    "grantedScopes": [
+      "messages:read",
+      "messages:write",
+      "connections:read"
+    ],
+    "whatsappSends": 0,
+    "n8nConfigurationEdits": 0,
+    "pluginRequiredForServerConnection": false,
+    "goLiveReady": false
+  },
+  "ownerConnectionActionScope": "Optional ChatGPT plugin OAuth; not a prerequisite for verified server REST connection"
 }

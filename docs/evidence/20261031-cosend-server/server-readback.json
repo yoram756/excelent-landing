@@ -1,0 +1,204 @@
+{
+  "checkedAt": "2026-10-31T17:22:41.900802+00:00",
+  "scope": "SERVER_REST_READ_ONLY_NO_PLUGIN",
+  "executions": [
+    {
+      "id": 89701,
+      "workflowId": "A9R9vSVkNTIReM7u",
+      "status": "success",
+      "startedAt": "2026-10-31 17:20:14.595",
+      "stoppedAt": "2026-10-31 17:20:15.179",
+      "executedNodes": [
+        "Manual credential check",
+        "GET identity - no writes"
+      ],
+      "result": {
+        "httpStatus": 200,
+        "organizationId": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+        "credentialKind": "connection",
+        "credentialName": "n8n-Cosend-replies-0559881245",
+        "isLive": true,
+        "scopes": [
+          "messages:read",
+          "messages:write",
+          "connections:read"
+        ],
+        "allowedConnectionIds": [
+          "conn_01M5YC386Q2N9973TJG1M8H4DQ"
+        ],
+        "number": "+972 55-988-1245",
+        "numberState": "active",
+        "requestId": "req_01M69FKTXPJA54T9RY2DYMA0C1",
+        "v1SendEntitled": {
+          "entitled": true
+        },
+        "messageAllowance": {
+          "included": 1000,
+          "used": 12,
+          "hard_cap": 1000,
+          "basis": "period",
+          "remaining": 988,
+          "warning_level": null
+        }
+      }
+    },
+    {
+      "id": 89705,
+      "workflowId": "A9R9vSVkNTIReM7u",
+      "status": "success",
+      "startedAt": "2026-10-31 17:20:29.318",
+      "stoppedAt": "2026-10-31 17:20:29.874",
+      "executedNodes": [
+        "Manual credential check",
+        "GET identity - no writes",
+        "Validate approved credential",
+        "GET inbox counts - no message content",
+        "Verified credential - NO SEND"
+      ],
+      "result": {
+        "identityStatus": 200,
+        "scopeVerified": true,
+        "grantedScopes": [
+          "messages:read",
+          "messages:write",
+          "connections:read"
+        ],
+        "allowedConnectionIds": [
+          "conn_01M5YC386Q2N9973TJG1M8H4DQ"
+        ],
+        "workspaceVerified": true,
+        "verifiedAt": "2026-10-31T17:20:29.600Z",
+        "outboundExecuted": false,
+        "inboxReadStatus": 200,
+        "inboxReadVerified": true,
+        "counts": {
+          "waiting": 2,
+          "unread": 3,
+          "all": 3
+        },
+        "productionActivated": false,
+        "webhookRegistered": false,
+        "dotAccessVerified": false
+      }
+    },
+    {
+      "id": 89706,
+      "workflowId": "AwCquhPHa4OgjkEo",
+      "status": "success",
+      "startedAt": "2026-10-31 17:20:29.756",
+      "stoppedAt": "2026-10-31 17:20:30.343",
+      "executedNodes": [
+        "Manual read-only check",
+        "GET Cosend identity",
+        "Verify identity and scope",
+        "GET approved Cosend number",
+        "Verified read-only result"
+      ],
+      "result": {
+        "verifiedAt": "2026-10-31T17:20:30.062Z",
+        "identityStatus": 200,
+        "workspaceId": "org_01M5WPXWKXTYNDCHAJ6YTMWZ5Z",
+        "workspaceName": "אקסלנט יועצי משכנתאות ופיננסים",
+        "timezone": "Asia/Jerusalem",
+        "credentialKind": "connection",
+        "credentialName": "n8n-Cosend-acceptance-readonly-20261028",
+        "grantedScopes": [
+          "connections:read"
+        ],
+        "allowedConnectionIds": [
+          "conn_01M5YC386Q2N9973TJG1M8H4DQ"
+        ],
+        "scopeVerified": true,
+        "aiRemaining": 21,
+        "aiAllowanceBasis": "lifetime",
+        "readyForProduction": false,
+        "outboundEnabled": false,
+        "connectionStatusCode": 200,
+        "numberVerified": true,
+        "connectionId": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+        "phone": "+972559881245",
+        "phoneNumberId": "1138723472651617",
+        "metaWabaId": "848287037598986",
+        "connectionState": "active",
+        "mode": "coexistence",
+        "acceptancePassed": true,
+        "nextStep": "Read-only account and number acceptance only. No messages, contacts, webhook, schedule or automation changes authorized."
+      }
+    }
+  ],
+  "configHashes": {
+    "A9R9vSVkNTIReM7u": "bc31d49f108b5859c29355e1dc98da7216ba3ea2df6aab25047764b2c7b93d4b",
+    "AwCquhPHa4OgjkEo": "95f1c0beb4b92f48ee0d57be1b460ef2eed87f5be0b060cdbc4214d1b06e98eb",
+    "HNvsmdIDsvrHkZuw": "c02098a26b5438c7ca40b4fc20721f57dbc1c60e58cfdff32fc4e29c1d282ede",
+    "QEGe2prEvnA4i47J": "22f896c2423250f3ff14cd9c65723ea70b3f557f9ab553ebe44736fa01e3f419"
+  },
+  "repliesProbeHashMatchesBefore": true,
+  "containers": [
+    {
+      "name": "excelent-wa-isolated-20261028-resume",
+      "running": true,
+      "startedAt": "2026-10-28T17:12:15.95680208Z",
+      "network": "none",
+      "health": "healthy",
+      "portsPublished": false
+    },
+    {
+      "name": "excelent-wa-intake",
+      "running": true,
+      "startedAt": "2026-10-22T19:46:20.127611698Z",
+      "network": "n8n-qhxa_default",
+      "health": null,
+      "portsPublished": false
+    },
+    {
+      "name": "n8n-qhxa-n8n-1",
+      "running": true,
+      "startedAt": "2026-10-30T13:37:14.953367969Z",
+      "network": "n8n-qhxa_default",
+      "health": null,
+      "portsPublished": true
+    },
+    {
+      "name": "lp-lp-1",
+      "running": true,
+      "startedAt": "2026-10-29T20:56:41.748171409Z",
+      "network": "lp_default",
+      "health": null,
+      "portsPublished": false
+    }
+  ],
+  "runtime": {
+    "health": {
+      "http": 200,
+      "body": {
+        "ok": true,
+        "mode": "ISOLATED_NO_SEND",
+        "signingConfigured": true,
+        "workerConfigured": true
+      }
+    },
+    "sourceSha256": "a8e0430e989f4f45c5f4254312173ed97535eae6e88739102cbf0742594b42f2",
+    "importsTransport": false,
+    "importsModelWorker": false,
+    "sendRoutePresent": false,
+    "config": {
+      "runtimeOutboundEnabled": false,
+      "exclusiveResponderApproved": false,
+      "modelBudgetApproved": false,
+      "liveWebhookRegistrationApproved": false,
+      "currentlyVerifiedScopes": [
+        "connections:read"
+      ]
+    }
+  },
+  "safety": {
+    "providerMethodsUsed": [
+      "GET"
+    ],
+    "whatsappSends": 0,
+    "providerWrites": 0,
+    "configurationEdits": 0,
+    "secretValuesExtracted": 0,
+    "messageBodiesRead": 0
+  }
+}

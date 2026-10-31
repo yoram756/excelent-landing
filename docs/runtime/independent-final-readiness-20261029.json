@@ -15,16 +15,20 @@
     "publishedIntakePreservation": "PASS",
     "allHistoricalN8nDefinitionsIdentical": "FAIL",
     "supplierMonitoring": "PASS",
-    "cosendSecureConnection": "BLOCKED",
+    "cosendSecureConnection": "PASS",
     "cosendNativeIdentity": "NOT TESTED",
-    "cosendGrantedScopes": "NOT TESTED",
+    "cosendGrantedScopes": "PASS",
     "singleResponseOwnerActivation": "BLOCKED",
     "campaignResponseDelivery": "NOT TESTED",
     "whatsappDelivery": "NOT TESTED",
     "stability24h": "NOT TESTED",
     "midragBusinessProfileAssociation": "NOT TESTED",
     "fullProjectReadiness": "BLOCKED",
-    "webhookDispatchUnder2s": "PASS"
+    "webhookDispatchUnder2s": "PASS",
+    "cosendServerIdentity": "PASS",
+    "cosendServerInboxCountRead": "PASS",
+    "cosendMessageBodyRead": "NOT TESTED",
+    "installedAssistantLiveAccess": "BLOCKED"
   },
   "localDistinctCases": 516,
   "sourceFunnelCases": 419,
@@ -33,9 +37,10 @@
   "evidence": "docs/evidence/20261029-independent-final",
   "report": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md",
   "remainingLaunchGates": [
-    "Cosend official connection, native identity and granted scopes",
+    "Read one message body without changing read state; current production proof covers scopes and counts only",
+    "Connect the isolated assistant to the existing provider connection and consent safeguards without duplicate ingress/responders",
     "Approved single response owner and handoff, applicable hours and limits",
-    "Separately approved real delivery and all campaign response routes",
+    "Separately approved actual delivery and all campaign response routes",
     "24-hour observation after final activation and final handover"
   ],
   "limits": [
@@ -55,7 +60,7 @@
     "report": "docs/runtime/REPLAY_PUBLICATION_20261030.md",
     "evidence": "docs/evidence/20261030-replay-publication"
   },
-  "updatedAt": "2026-10-30",
+  "updatedAt": "2026-10-31",
   "webhookDispatchUnder2s": "PASS",
   "latestDispatchEvidence": "docs/runtime/DISPATCH_LATENCY_20261030.md",
   "dispatchUpperBoundsMs": [
@@ -73,5 +78,36 @@
     "ownerActionPending": true,
     "publicMetadataReport": "docs/runtime/COSEND_OAUTH_DISCOVERY_20261030.md",
     "publicMetadataCheckedAt": "2026-10-30T12:31:39.696Z"
+  },
+  "cosendSecureConnectionScope": "Existing server REST connection verified; optional native MCP remains unverified",
+  "latestCosendServerCheck": {
+    "checkedAt": "2026-10-31T17:22:41.900802+00:00",
+    "report": "docs/runtime/COSEND_SERVER_CONNECTION_20261031.md",
+    "evidence": "docs/evidence/20261031-cosend-server/server-readback.json",
+    "scope": "Server REST credential, independent from ChatGPT plugin; GET only",
+    "executionIds": [
+      89701,
+      89705,
+      89706
+    ],
+    "requirements": {
+      "serverSecureConnection": "PASS",
+      "serverIdentity": "PASS",
+      "serverGrantedReadWriteScopes": "PASS",
+      "inboxCountRead": "PASS",
+      "messageBodyRead": "NOT TESTED",
+      "actualMessageWrite": "NOT TESTED",
+      "installedAssistantLiveAccess": "BLOCKED",
+      "contactConsentPreflight": "BLOCKED"
+    },
+    "grantedScopes": [
+      "messages:read",
+      "messages:write",
+      "connections:read"
+    ],
+    "whatsappSends": 0,
+    "n8nConfigurationEdits": 0,
+    "pluginRequiredForServerConnection": false,
+    "goLiveReady": false
   }
 }

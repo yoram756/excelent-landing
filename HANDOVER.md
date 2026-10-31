@@ -1,3 +1,9 @@
+## אימות חיבור השרת ל־Cosend, 31.10.2026
+
+PASS לחיבור REST, לזהות הארגון והמספר ולהרשאות messages:read ו־messages:write בחיבור הקיים. הרצות חיות 89701, 89705 ו־89706; ספירות תיבה HTTP 200. התיאור הקודם של חיבור שרת בעל connections:read בלבד היה חסר: קיים גם Credential replies. תוסף ChatGPT אינו תנאי לחיבור שרת זה.
+
+BLOCKED לעוזר המותקן כמשיב פעיל: network=none, ISOLATED_NO_SEND, transport/model אינם מיובאים, contacts:read חסרה למתאם preflight. תוכן הודעה ושליחה אמיתית NOT TESTED. אין WhatsApp, אין שינוי n8n או הרחבת הרשאות. דוח: docs/runtime/COSEND_SERVER_CONNECTION_20261031.md. גאנט: docs/runtime/FINAL_ACCEPTANCE_GANTT_20261029.md. אין GO LIVE READY.
+
 עדכון Cosend, 30.10.2026 בשעה 14:31 בישראל: PASS לגילוי OAuth הציבורי שחזר ל־200 ולהתאמת כתובת המשאב הקנונית. ארבע הרשאות הקריאה המבוקשות מפורסמות במנפיק, אך עדיין לא ניתנו או אומתו בחיבור. הכניסה המאובטחת BLOCKED, הזהות וההרשאות בפועל NOT TESTED; ממשיכים באותו שלב כניסה אישי שכבר הוצג ליורם. לא נשלח WhatsApp, לא שונו n8n או הרשאות ולא נשלחה תזכורת תמיכה. [דוח השינוי הציבורי](docs/runtime/COSEND_OAUTH_DISCOVERY_20261030.md); [גאנט](docs/runtime/FINAL_ACCEPTANCE_GANTT_20261029.md).
 
 עדכון Cosend, 30.10.2026: התוסף הפרטי הקיים נמצא ומותקן, והשרת זמין ב־DNS וב־HTTPS. החיבור המאובטח עדיין BLOCKED; גילוי שרת ההרשאות הציבורי החזיר 401. זהות והרשאות מקוריות NOT TESTED. מסך התוסף ב־Edge הושאר פתוח להשלמת כניסת הבעלים באפליקציה, עם שאלה ללחיצה. לא נשלח WhatsApp ולא שונו n8n, הרשאות או קובצי ספק. חסמי הנעילה וזמן ההגעה נשארים PASS. [דוח החיבור](docs/runtime/COSEND_SECURE_CONNECTION_20261030.md); [גאנט](docs/runtime/FINAL_ACCEPTANCE_GANTT_20261029.md).
