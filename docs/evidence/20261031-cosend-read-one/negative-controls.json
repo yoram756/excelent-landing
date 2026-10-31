@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "scope": "Synthetic only, no network",
+  "controls": [
+    {
+      "name": "missing_read_scope_blocks",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "failedCase": "identity rejects missing read scope"
+    },
+    {
+      "name": "read_timestamp_must_stay_equal",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "failedCase": "no-mark proof rejects changed read timestamp"
+    },
+    {
+      "name": "http_requests_must_be_get",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "failedCase": "existing manual worker gets GET-only calls"
+    },
+    {
+      "name": "message_text_never_in_evidence",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "failedCase": "one text body is inspected without returning personal data or text"
+    },
+    {
+      "name": "unexpanded_provider_response_supported",
+      "expectedExit": 1,
+      "actualExit": 1,
+      "failedCase": "generated worker transforms unexpanded conversation"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "mode": "MANUAL_READ_ONLY_NO_SEND",
+  "status": "PASS",
+  "connectionId": "conn_01M5YC386Q2N9973TJG1M8H4DQ",
+  "conversationId": "cnv_01M5YC3YCCJNC9HTGTVSCZ6C0Z",
+  "messageId": "msg_01M60MKY77FHCVGCPKAHZWM8BJ",
+  "uniqueMessagesRead": 1,
+  "bodyRead": true,
+  "contentCharacters": 5,
+  "direction": "inbound",
+  "unreadBefore": 5,
+  "unreadAfter": 5,
+  "lastReadAtBefore": null,
+  "lastReadAtAfter": null,
+  "readMarkerUnchanged": true,
+  "conversationControlUnchanged": true,
+  "providerMethods": [
+    "GET"
+  ],
+  "whatsappSends": 0,
+  "replyGenerated": false,
+  "activated": false,
+  "verifiedAt": "2026-10-31T18:08:13.400Z"
+}

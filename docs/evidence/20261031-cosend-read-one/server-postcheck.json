@@ -1,0 +1,104 @@
+{
+  "checkedAt": "2026-10-31T18:09:37.056038+00:00",
+  "deployment": {
+    "checkedAt": "2026-10-31T18:08:00.497199+00:00",
+    "status": "PASS",
+    "scope": "ONE_EXISTING_INACTIVE_MANUAL_WORKER_ONLY",
+    "target": "wyMfdiAAyfhtDyrP",
+    "versionId": "ba81e7c2-a492-4369-a3f3-6a60647a2b27",
+    "active": false,
+    "activeVersionId": null,
+    "nodeCount": 13,
+    "privacySettings": {
+      "saveDataSuccessExecution": "none",
+      "saveDataErrorExecution": "none",
+      "saveManualExecutions": false,
+      "saveExecutionProgress": false,
+      "availableInMCP": false
+    },
+    "protectedWorkflowsUnchanged": {
+      "AwCquhPHa4OgjkEo": true,
+      "A9R9vSVkNTIReM7u": true,
+      "HNvsmdIDsvrHkZuw": true,
+      "QEGe2prEvnA4i47J": true,
+      "8W7MymUCLpPnilJs": true,
+      "0nesgH42OpyQdncL": true,
+      "90jZAb9ZFDOnEQ0e": true
+    },
+    "credentialUnchanged": true,
+    "protectedContainersUnchanged": {
+      "excelent-wa-isolated-20261028-resume": true,
+      "excelent-wa-intake": true,
+      "n8n-qhxa-n8n-1": true,
+      "lp-lp-1": true
+    },
+    "configurationHashAfter": "b003b784df98ef472352b3e8b64cefb013755dadd46f3c499fc1d0209bb9857d",
+    "sourceCommit": "a6796d8bc8c641e0a7078bf4f844ce6e50425178",
+    "providerCallsDuringDeployment": 0,
+    "globalN8nSettingsChanges": 0
+  },
+  "preparation": {
+    "status": "PASS",
+    "sourceCommit": "a6796d8bc8c641e0a7078bf4f844ce6e50425178",
+    "candidateSha256": "4b0a0fff20cf36b0f0023e3f9c6d4999e4a3397e2a9a68a4a61085003176abbf",
+    "build": {
+      "id": "wyMfdiAAyfhtDyrP",
+      "active": false,
+      "nodes": 13,
+      "providerRequests": 5,
+      "mode": "MANUAL_READ_ONLY_NO_SEND",
+      "rawExecutionStorage": false
+    },
+    "nginxCheckExit": 0
+  },
+  "executions": [
+    {
+      "id": 90041,
+      "current": {
+        "id": 90041,
+        "status": "running",
+        "finished": 0,
+        "startedAt": "2026-10-31 18:02:35.230",
+        "stoppedAt": null,
+        "deletedAt": "2026-10-31 18:02:36",
+        "waitTill": null
+      },
+      "rawDataRowsRemaining": 1,
+      "persistedDataBytes": 2
+    },
+    {
+      "id": 90079,
+      "current": {
+        "id": 90079,
+        "status": "running",
+        "finished": 0,
+        "startedAt": "2026-10-31 18:08:11.878",
+        "stoppedAt": null,
+        "deletedAt": "2026-10-31 18:08:13",
+        "waitTill": null
+      },
+      "rawDataRowsRemaining": 1,
+      "persistedDataBytes": 2
+    }
+  ],
+  "protectedWorkflowsUnchanged": {
+    "AwCquhPHa4OgjkEo": true,
+    "A9R9vSVkNTIReM7u": true,
+    "HNvsmdIDsvrHkZuw": true,
+    "QEGe2prEvnA4i47J": true,
+    "8W7MymUCLpPnilJs": true,
+    "0nesgH42OpyQdncL": true,
+    "90jZAb9ZFDOnEQ0e": true
+  },
+  "credentialUnchanged": true,
+  "protectedContainersUnchanged": {
+    "excelent-wa-isolated-20261028-resume": true,
+    "excelent-wa-intake": true,
+    "n8n-qhxa-n8n-1": true,
+    "lp-lp-1": true
+  },
+  "targetHashUnchanged": true,
+  "rawMessageBodyInspectedInDatabase": false,
+  "executionHistoryClassification": "EXCLUDED_FROM_HISTORY_BY_SAVE_NONE_NOT_ACTIVE_STATUS_PROOF",
+  "rawBodyPersistence": "No message body: only two-byte initial execution placeholders remain pending normal pruning; no raw data read"
+}

@@ -21,8 +21,9 @@
     "serverRestConnection": "PASS",
     "serverReadWriteAuthorization": "PASS",
     "serverInboxCountRead": "PASS",
-    "serverMessageBodyRead": "NOT TESTED",
-    "installedAssistantLiveAccess": "BLOCKED"
+    "serverMessageBodyRead": "PASS",
+    "installedAssistantLiveAccess": "BLOCKED",
+    "serverManualReadOnlyConnection": "PASS"
   },
   "dns": {
     "resolver": "system resolver",
@@ -67,7 +68,7 @@
   "latestSupportMessageId": "1a18790866bcb960",
   "newSupportReply": false,
   "reminderPermitted": false,
-  "n8nChanges": 0,
+  "n8nChanges": 1,
   "providerChanges": 0,
   "whatsappSends": 0,
   "secretsExtracted": 0,
@@ -98,7 +99,7 @@
   "publicProbeEvidence": "docs/evidence/20261030-cosend-secure-recheck/public-probe.json",
   "officialEndpointAvailabilityScope": "Public DNS and TLS/HTTP response only; not authenticated MCP access",
   "ownerConnectionActionPending": true,
-  "latestConnectionReport": "docs/runtime/COSEND_SERVER_CONNECTION_20261031.md",
+  "latestConnectionReport": "docs/runtime/COSEND_READ_ONLY_CONNECTION_20261031.md",
   "latestPublicOAuthDiscovery": {
     "status": "PASS",
     "checkedAt": "2026-10-30T12:31:39.696Z",
@@ -137,5 +138,34 @@
     "pluginRequiredForServerConnection": false,
     "goLiveReady": false
   },
-  "ownerConnectionActionScope": "Optional ChatGPT plugin OAuth; not a prerequisite for verified server REST connection"
+  "ownerConnectionActionScope": "Optional ChatGPT plugin OAuth; not a prerequisite for verified server REST connection",
+  "latestServerReadOnlyCheck": {
+    "checkedAt": "2026-10-31T18:08:13.400Z",
+    "report": "docs/runtime/COSEND_READ_ONLY_CONNECTION_20261031.md",
+    "evidence": "docs/evidence/20261031-cosend-read-one/live-read-result.json",
+    "executionId": 90079,
+    "scope": "Existing inactive manual worker only; one inbound body, GET only, unchanged read state",
+    "messageId": "msg_01M60MKY77FHCVGCPKAHZWM8BJ",
+    "requirements": {
+      "manualServerReadConnection": "PASS",
+      "oneMessageBodyRead": "PASS",
+      "readMarkerPreserved": "PASS",
+      "identityAndScopes": "PASS",
+      "productionAutomatedResponder": "BLOCKED",
+      "messageDelivery": "NOT TESTED"
+    },
+    "uniqueMessagesRead": 1,
+    "unreadBefore": 5,
+    "unreadAfter": 5,
+    "lastReadAtBefore": null,
+    "lastReadAtAfter": null,
+    "contactsReadRequiredForThisRead": false,
+    "existingWorkflowModified": 1,
+    "workflowActive": false,
+    "globalN8nSettingsChanges": 0,
+    "credentialChanges": 0,
+    "whatsappSends": 0,
+    "goLiveReady": false
+  },
+  "globalN8nSettingsChanges": 0
 }

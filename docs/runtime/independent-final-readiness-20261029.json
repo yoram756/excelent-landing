@@ -27,8 +27,9 @@
     "webhookDispatchUnder2s": "PASS",
     "cosendServerIdentity": "PASS",
     "cosendServerInboxCountRead": "PASS",
-    "cosendMessageBodyRead": "NOT TESTED",
-    "installedAssistantLiveAccess": "BLOCKED"
+    "cosendMessageBodyRead": "PASS",
+    "installedAssistantLiveAccess": "BLOCKED",
+    "serverManualReadOnlyConnection": "PASS"
   },
   "localDistinctCases": 516,
   "sourceFunnelCases": 419,
@@ -37,7 +38,6 @@
   "evidence": "docs/evidence/20261029-independent-final",
   "report": "docs/runtime/INDEPENDENT_FINAL_ACCEPTANCE_20261029.md",
   "remainingLaunchGates": [
-    "Read one message body without changing read state; current production proof covers scopes and counts only",
     "Connect the isolated assistant to the existing provider connection and consent safeguards without duplicate ingress/responders",
     "Approved single response owner and handoff, applicable hours and limits",
     "Separately approved actual delivery and all campaign response routes",
@@ -108,6 +108,34 @@
     "whatsappSends": 0,
     "n8nConfigurationEdits": 0,
     "pluginRequiredForServerConnection": false,
+    "goLiveReady": false
+  },
+  "latestServerReadOnlyCheck": {
+    "checkedAt": "2026-10-31T18:08:13.400Z",
+    "report": "docs/runtime/COSEND_READ_ONLY_CONNECTION_20261031.md",
+    "evidence": "docs/evidence/20261031-cosend-read-one/live-read-result.json",
+    "executionId": 90079,
+    "scope": "Existing inactive manual worker only; one inbound body, GET only, unchanged read state",
+    "messageId": "msg_01M60MKY77FHCVGCPKAHZWM8BJ",
+    "requirements": {
+      "manualServerReadConnection": "PASS",
+      "oneMessageBodyRead": "PASS",
+      "readMarkerPreserved": "PASS",
+      "identityAndScopes": "PASS",
+      "productionAutomatedResponder": "BLOCKED",
+      "messageDelivery": "NOT TESTED"
+    },
+    "uniqueMessagesRead": 1,
+    "unreadBefore": 5,
+    "unreadAfter": 5,
+    "lastReadAtBefore": null,
+    "lastReadAtAfter": null,
+    "contactsReadRequiredForThisRead": false,
+    "existingWorkflowModified": 1,
+    "workflowActive": false,
+    "globalN8nSettingsChanges": 0,
+    "credentialChanges": 0,
+    "whatsappSends": 0,
     "goLiveReady": false
   }
 }
